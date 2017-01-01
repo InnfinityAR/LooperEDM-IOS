@@ -79,10 +79,11 @@
         [self removeFromSuperview];
     }
     if ((tag>=0&&tag<self.cityArr.count)||tag==102) {
-        [[self.obj locationLB]setText:[NSString stringWithFormat:@"      %@",button.titleLabel.text]];
-        CGSize lblSize3 = [[self.obj locationLB].text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+        [[self.obj locationLB]setText:[NSString stringWithFormat:@"   %@",button.titleLabel.text]];
+        CGSize lblSize3 = [[self.obj locationLB].text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
         CGRect frame3=[self.obj locationLB].frame;
-        frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
+        frame3.size.width=lblSize3.width+50*DEF_Adaptation_Font*0.5;
+         frame3.origin.x=295*DEF_Adaptation_Font*0.5-lblSize3.width/2;
         [self.obj locationLB].frame=frame3;
         [self.obj reloadTableDataWithCity:button.titleLabel.text];
         [self removeFromSuperview];
