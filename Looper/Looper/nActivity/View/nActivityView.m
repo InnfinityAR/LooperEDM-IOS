@@ -171,16 +171,22 @@
     cityStr.layer.cornerRadius = 50*DEF_Adaptation_Font*0.5/2;
     cityStr.layer.masksToBounds = YES;
     
-    UIImageView *pro_logo=[LooperToolClass createImageViewReal:@"product_logo.png" andRect:CGPointMake(0*DEF_Adaptation_Font_x*0.5,0*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(488*DEF_Adaptation_Font_x*0.5, 90*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
-    
-//    [pro_logo  sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:index]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//    }];
 
     
-    [bannerView addSubview:pro_logo];
+    if ([[_commendArray objectAtIndex:index]objectForKey:@"brandlogo"]==[NSNull null]) {
+        UIImageView *pro_logo=[LooperToolClass createImageViewReal:@"product_logo.png" andRect:CGPointMake(0*DEF_Adaptation_Font_x*0.5,0*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(488*DEF_Adaptation_Font_x*0.5, 90*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
 
+        [bannerView addSubview:pro_logo];
+    }else{
+        UIImageView *pro_logo=[LooperToolClass createImageViewReal:@"product_logo.png" andRect:CGPointMake(0*DEF_Adaptation_Font_x*0.5,0*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(488*DEF_Adaptation_Font_x*0.5, 90*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
 
+        [pro_logo  sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:index]objectForKey:@"brandlogo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+          
+            
+        }];
+       [bannerView addSubview:pro_logo];
+        
+    }
     return bannerView;
 }
 
