@@ -40,6 +40,10 @@
     addMusicController *addMusicCV;
     
     NSMutableDictionary *targetDic;
+    
+    int createUserNum;
+    
+    int playIndex;
 
 }
 
@@ -53,12 +57,20 @@
 -(id)initWithController:(id)controller{
     if(self=[super init]){
         self.obj = (looperViewController*)controller;
-        
-        
-        
+
         
     }
     return  self;
+}
+
+
+
+-(void)playMusicAtIndex:(int)index{
+    playIndex= index;
+
+    [_looperV playMusicAtIndex:index];
+    [musicListV selectCellIndex:index];
+
 }
 
 
@@ -92,10 +104,7 @@
     [dic setObject:array forKey:@"fileIds"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"deleteAndUpdateMusics" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
             [looperData setObject:responseObject[@"Music"] forKey:@"Music"];
-            
-            
             [musicListV updataLoad:responseObject[@"Music"]];
             [_looperV updataData:looperData andType:1];
             
@@ -154,12 +163,9 @@
 }
 
 -(void)pushController:(NSDictionary*)dic{
-
+    createUserNum = 1;
     SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
     [simpleC chatTargetID:dic];
-    
-   // [_obj presentViewController:simpleC animated:NO completion:nil];
-    
      [[_obj navigationController]  pushViewController:simpleC animated:NO];
 
 }
@@ -291,6 +297,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getLoopById" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             
+            createUserNum = 0;
             
             [[NIMCloudMander sharedManager] joinChatRoom:responseObject[@"Loop"][@"loop_sdkid"] andObject:self];
             
@@ -364,28 +371,29 @@
 
 -(void)getLoopMusic:(int)type{
     
-    if(looperData!=nil){
-    
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:[[looperData objectForKey:@"Loop"] objectForKey:@"loopid"] forKey:@"loopId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getLoopMusic" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            
-            [looperData setObject:responseObject[@"Music"] forKey:@"Music"];
-            
-            [_looperV updataData:looperData andType:type];
-            
+    if(createUserNum!=1){
 
-            [musicListV updataLoad:responseObject[@"Music"]];
-        }else{
-            
+        if(looperData!=nil){
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+            [dic setObject:[[looperData objectForKey:@"Loop"] objectForKey:@"loopid"] forKey:@"loopId"];
+            [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getLoopMusic" parameters:dic success:^(id responseObject){
+                if([responseObject[@"status"] intValue]==0){
+                    
+                    [looperData setObject:responseObject[@"Music"] forKey:@"Music"];
+                    
+                    [_looperV updataData:looperData andType:type];
+
+                    [musicListV updataLoad:responseObject[@"Music"]];
+                }else{
+                    
+                }
+            }fail:^{
+                
+            }];
         }
-    }fail:^{
-        
-    }];
     }
+    createUserNum=0;
 }
 
 
@@ -430,6 +438,7 @@
     if(_looperV!=nil){
         [_looperV removeMusic];
     }
+    
     
     if(_looperCharV!=nil){
        
@@ -498,6 +507,8 @@
         musicV = [[MusicPlayView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andlooperData:looperData isPlay:isPlay];
         [musicV createHudView:indexLoop andisPlay:isPlay];
         [[_obj view]addSubview:musicV];
+        
+        playIndex =indexLoop;
     }
 
 }
@@ -510,6 +521,8 @@
 -(void)addMusicListView{
     musicListV = [[MusicListManage alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andLooperData:looperData];
      [[_obj view]addSubview:musicListV];
+    [musicListV selectCellIndex:playIndex];
+    
 }
 
 -(void)addChatView{
@@ -519,6 +532,8 @@
 
 -(void)updataMusicData:(NSDictionary*)dic andIndex:(int)indexPath{
     [musicV updataWithMusic:dic and:indexPath];
+    
+    playIndex = indexPath;
 }
 
 

@@ -419,28 +419,33 @@
         [cell.contentView addSubview:labelContent];
         
         
-        int start = 0;
-        int end = 0;
-        NSString *content = labelContent.text;
-        for (int i = 0; i < content.length; i ++) {
-            //这里的小技巧，每次只截取一个字符的范围
-            NSString *a = [content substringWithRange:NSMakeRange(i, 1)];
-            //判断装有0-9的字符串的数字数组是否包含截取字符串出来的单个字符，从而筛选出符合要求的数字字符的范围NSMakeRange
-            if ([a isEqualToString:@"@"]==true) {
-                start = i;
+        if([dic objectForKey:@"targetid"]!=[NSNull null]){
+            if([[dic objectForKey:@"targetid"] isEqualToString:[LocalDataMangaer sharedManager].uid]==true){
+                int start = 0;
+                int end = 0;
+                NSString *content = labelContent.text;
+                for (int i = 0; i < content.length; i ++) {
+                    //这里的小技巧，每次只截取一个字符的范围
+                    NSString *a = [content substringWithRange:NSMakeRange(i, 1)];
+                    //判断装有0-9的字符串的数字数组是否包含截取字符串出来的单个字符，从而筛选出符合要求的数字字符的范围NSMakeRange
+                    if ([a isEqualToString:@"@"]==true) {
+                        start = i;
+                    }
+                    if ([a isEqualToString:@":"]==true) {
+                        end = i;
+                    }
+                    
+                }
+                
+                NSMutableAttributedString *attributeString  = [[NSMutableAttributedString alloc]initWithString:labelContent.text];
+                [attributeString setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor],NSFontAttributeName:[UIFont systemFontOfSize:12*DEF_Adaptation_Font],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleNone]} range:NSMakeRange(start, end)];
+                //完成查找数字，最后将带有字体下划线的字符串显示在UILabel上
+                labelContent.attributedText = attributeString;
             }
-            if ([a isEqualToString:@":"]==true) {
-                end = i;
-            }
-            
+        
         }
         
-        NSMutableAttributedString *attributeString  = [[NSMutableAttributedString alloc]initWithString:labelContent.text];
-        [attributeString setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor],NSFontAttributeName:[UIFont systemFontOfSize:12*DEF_Adaptation_Font],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleNone]} range:NSMakeRange(start, end)];
-        //完成查找数字，最后将带有字体下划线的字符串显示在UILabel上
-        labelContent.attributedText = attributeString;
-        
-        
+
         UILabel *labelTime = [[UILabel alloc] initWithFrame:CGRectMake(240*0.5*DEF_Adaptation_Font, 27*0.5*DEF_Adaptation_Font, 514*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font)];
         labelTime.text =[dic objectForKey:@"yunxindate"];
         [labelTime setTextColor:[UIColor whiteColor]];
@@ -448,9 +453,6 @@
         [cell.contentView addSubview:labelTime];
         
 
-        
-        
-        
         
     }else if(indexPath.section==1){
         NSDictionary *dic = [[looperChatDicT objectForKey:@"data"] objectAtIndex:indexPath.row];
@@ -476,26 +478,31 @@
         [cell.contentView addSubview:labelContent];
         
         
-        int start = 0;
-        int end = 0;
-        NSString *content = labelContent.text;
-        for (int i = 0; i < content.length; i ++) {
-            //这里的小技巧，每次只截取一个字符的范围
-            NSString *a = [content substringWithRange:NSMakeRange(i, 1)];
-            //判断装有0-9的字符串的数字数组是否包含截取字符串出来的单个字符，从而筛选出符合要求的数字字符的范围NSMakeRange
-            if ([a isEqualToString:@"@"]==true) {
-                start = i;
-            }
-            if ([a isEqualToString:@":"]==true) {
-                end = i;
+        if([dic objectForKey:@"targetid"]!=[NSNull null]){
+            if([[dic objectForKey:@"targetid"] isEqualToString:[LocalDataMangaer sharedManager].uid]==true){
+                int start = 0;
+                int end = 0;
+                NSString *content = labelContent.text;
+                for (int i = 0; i < content.length; i ++) {
+                    //这里的小技巧，每次只截取一个字符的范围
+                    NSString *a = [content substringWithRange:NSMakeRange(i, 1)];
+                    //判断装有0-9的字符串的数字数组是否包含截取字符串出来的单个字符，从而筛选出符合要求的数字字符的范围NSMakeRange
+                    if ([a isEqualToString:@"@"]==true) {
+                        start = i;
+                    }
+                    if ([a isEqualToString:@":"]==true) {
+                        end = i;
+                    }
+                    
+                }
+                
+                NSMutableAttributedString *attributeString  = [[NSMutableAttributedString alloc]initWithString:labelContent.text];
+                [attributeString setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor],NSFontAttributeName:[UIFont systemFontOfSize:12*DEF_Adaptation_Font],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleNone]} range:NSMakeRange(start, end)];
+                //完成查找数字，最后将带有字体下划线的字符串显示在UILabel上
+                labelContent.attributedText = attributeString;
             }
             
         }
-        
-        NSMutableAttributedString *attributeString  = [[NSMutableAttributedString alloc]initWithString:labelContent.text];
-        [attributeString setAttributes:@{NSForegroundColorAttributeName:[UIColor greenColor],NSFontAttributeName:[UIFont systemFontOfSize:12*DEF_Adaptation_Font],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleNone]} range:NSMakeRange(start, end)];
-        //完成查找数字，最后将带有字体下划线的字符串显示在UILabel上
-        labelContent.attributedText = attributeString;
         
     
         UILabel *labelTime = [[UILabel alloc] initWithFrame:CGRectMake(240*0.5*DEF_Adaptation_Font, 27*0.5*DEF_Adaptation_Font, 514*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font)];

@@ -14,6 +14,7 @@
 #import "looperViewController.h"
 #import "DataHander.h"
 #import "MainViewController.h"
+#import "SimpleChatViewController.h"
 
 
 @implementation SerachViewModel{
@@ -56,7 +57,7 @@
 
         if([responseObject[@"status"] intValue]==0){
             serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
-            [_SerachV reloadTableData:serachArray];
+            [_SerachV reloadTableData:serachArray andUserArray:[responseObject[@"data"] objectForKey:@"User"]];
             
             if([serachArray count]==0){
                 
@@ -70,14 +71,22 @@
 
 }
 
+-(void)createUserView:(NSDictionary *)userData{
+
+    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+    [simpleC chatTargetID:userData];
+    [[_obj navigationController]  pushViewController:simpleC animated:NO];
+
+
+}
+
+
+
 -(void)movelooperPos:(NSDictionary *)loopData{
     //[_obj dismissViewControllerAnimated:YES completion:nil];
     looperViewController *looperV = [[looperViewController alloc] init];
     
     [looperV initWithData:loopData];
-    
-    //[_obj presentViewController:looperV animated:YES completion:nil];
-    
     
     [[_obj navigationController]  pushViewController:looperV animated:YES];
     

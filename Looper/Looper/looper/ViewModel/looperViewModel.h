@@ -71,6 +71,8 @@
 -(void)backMusic;
 -(void)getLoopMusic:(int)type;
 
+-(void)playMusicAtIndex:(int)index;
+
 
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)looperView *looperV;

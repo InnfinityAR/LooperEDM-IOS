@@ -21,6 +21,10 @@
     UIButton *addMusic;
     UIButton *removeMusic;
     UITableView *MusicTableView;
+    
+    NSMutableArray *cellArray;
+    int selectIndex;
+    
     bool isOwner;
 
 }
@@ -49,7 +53,8 @@
 
 
 -(void)createTableView{
-    
+    selectIndex = 0;
+    cellArray = [[NSMutableArray alloc] initWithCapacity:50];
 
     if(isOwner==true){
         MusicTableView =[[UITableView alloc] initWithFrame:CGRectMake(0, 98*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 949*DEF_Adaptation_Font*0.5) style:UITableViewStylePlain];
@@ -74,10 +79,38 @@
     return UITableViewCellEditingStyleNone;
 }
 
+-(void)setAllCellDefault{
+    
+    for (int i=0;i<[cellArray count];i++){
+        MusicViewCell *cell =[cellArray objectAtIndex:i];
+        
+        [cell.musicName setTextColor:[UIColor colorWithRed:189/255.0 green:188/255.0 blue:190/255.0 alpha:0.7] ];
+        [cell.musicPlayer setTextColor:[UIColor colorWithRed:124/255.0 green:123/255.0 blue:125/255.0 alpha:0.66]];
+        [cell setBackgroundColor:[UIColor clearColor]];
+    
+    }
+}
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 取消选中状态
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(isOwner==false){
+        
+        NSLog(@"%ld",(long)indexPath.row);
+        
+        [_obj playMusicAtIndex:indexPath.row];
+        [self setAllCellDefault];
+        
+        MusicViewCell* cell  = [tableView cellForRowAtIndexPath:indexPath];
+        
+        [cell.musicName setTextColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:1.0]];
+        [cell.musicPlayer setTextColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:1.0]];
+        
+        [cell setBackgroundColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:0.08]];
+    }
 }
 
 -(void)addMusicArray:(NSString*)musicId{
@@ -176,6 +209,11 @@
     }
 }
 
+-(void)selectCellIndex:(int)selIndex{
+    [self setAllCellDefault];
+    selectIndex = selIndex;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -183,13 +221,23 @@
     
     
      MusicViewCell* cell = [[MusicViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
-
+    
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     
     
       [cell init_cell_subViewsWithCell:selectSongArray refreshCell:[MusicListArray objectAtIndex:indexPath.row] isOwner:isOwner obj:self isFrist:false];
+    
+    
+    if(indexPath.row ==selectIndex){
+
+        [cell.musicName setTextColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:1.0]];
+        [cell.musicPlayer setTextColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:1.0]];
+    
+        [cell setBackgroundColor:[UIColor colorWithRed:255.0/255 green:255.0/255 blue:255.0/255 alpha:0.08]];
+    }
+    
     
 //    if(indexPath.section==1){
 //    
@@ -199,7 +247,11 @@
 //        [cell init_cell_subViewsWithCell:selectSongArray refreshCell:[MusicListArray objectAtIndex:indexPath.row] isOwner:isOwner obj:self isFrist:true];
 //    
 //    }
-//    
+//
+    
+    
+    [cellArray addObject:cell];
+    
     return cell;
 }
 
@@ -220,7 +272,6 @@
     }else if(button.tag==1001){
         [_obj updataArray:selectSongArray];
     }
-
 }
 
 
@@ -232,11 +283,10 @@
     [self addSubview:backBtn];
     
     if([[[_looperData objectForKey:@"Owner"] objectForKey:@"userid"] isEqualToString:[LocalDataMangaer sharedManager].uid]==true){
-         isOwner=true;
+        isOwner=true;
     }else{
         isOwner =false;
     }
-    
     
     MusicListArray = [[NSMutableArray alloc] initWithArray:[_looperData objectForKey:@"Music"]];
     
@@ -248,9 +298,8 @@
         
         removeMusic = [LooperToolClass createBtnImageNameReal:@"removeMusic.png" andRect:CGPointMake(295*DEF_Adaptation_Font*0.5,1065*DEF_Adaptation_Font*0.5) andTag:1001 andSelectImage:@"removeMusic.png" andClickImage:@"removeMusic.png" andTextStr:nil andSize:CGSizeMake(68*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
         [self addSubview:removeMusic];
-
+        
         [removeMusic setHidden:true];
-
     }
 }
 

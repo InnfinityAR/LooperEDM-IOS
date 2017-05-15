@@ -16,6 +16,9 @@
 
 @property(nonatomic,strong)id obj;
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andStr:(NSString*)str;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+
+-(void)initView:(CGRect)frame andStr:(NSArray*)strArray;
+
 
 @end

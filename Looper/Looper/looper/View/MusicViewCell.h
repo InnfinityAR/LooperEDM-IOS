@@ -17,6 +17,10 @@
 }
 
 
+@property(nonatomic,strong) UILabel *musicName;
+@property(nonatomic,strong) UILabel *musicPlayer;
+
+
 
 -(void)init_cell_subViewsWithCell:(NSArray*)selectArray
                       refreshCell:(NSDictionary*)dic

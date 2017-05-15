@@ -18,12 +18,13 @@
     UIImageView *headImageV;
     UIButton *selected;
     UIButton *followed;
-    UILabel *musicName;
-    UILabel *musicPlayer;
-    
+
     id _obj;
     NSDictionary *localMusicDic;
 }
+
+@synthesize musicName =_musicName;
+@synthesize musicPlayer =_musicPlayer;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -76,11 +77,11 @@
         headImageV = [[UIImageView alloc] init];
         [self addSubview:headImageV];
         
-        musicName = [LooperToolClass createLableView:CGPointMake(149*DEF_Adaptation_Font_x*0.5, 13*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(394*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font_x*0.5) andText:@"Too Hot For Pants" andFontSize:10 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
-        [self addSubview:musicName];
+        _musicName = [LooperToolClass createLableView:CGPointMake(149*DEF_Adaptation_Font_x*0.5, 13*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(394*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font_x*0.5) andText:@"Too Hot For Pants" andFontSize:10 andColor:[UIColor colorWithRed:189/255.0 green:188/255.0 blue:190/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+        [self addSubview:_musicName];
 
-        musicPlayer = [LooperToolClass createLableView:CGPointMake(149*DEF_Adaptation_Font_x*0.5, 47*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(394*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5) andText:@"MDK" andFontSize:10 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.66] andType:NSTextAlignmentLeft];
-        [self addSubview:musicPlayer];
+        _musicPlayer = [LooperToolClass createLableView:CGPointMake(149*DEF_Adaptation_Font_x*0.5, 47*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(394*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5) andText:@"MDK" andFontSize:10 andColor:[UIColor colorWithRed:124/255.0 green:123/255.0 blue:125/255.0 alpha:0.66] andType:NSTextAlignmentLeft];
+        [self addSubview:_musicPlayer];
     
     }
     return self;
@@ -104,16 +105,20 @@
                 [selected setSelected:true];
             }
         }
-        
         if(isFrist==true){
-            
               [selected setHidden:true];
         }
-        
     }else{
         [selected setHidden:true];
         if(dic!=nil){
-        
+            
+            
+            if([[dic objectForKey:@"islike"] intValue]==0){
+                 [followed setSelected:false];
+            }else{
+                [followed setSelected:true];
+            }
+            
             
             if([[dic objectForKey:@"music_cover"] isEqualToString:@""]==true){
                 headImageV = [[UIImageView alloc] initWithFrame:CGRectMake(42*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5, 55*DEF_Adaptation_Font*0.5, 55*DEF_Adaptation_Font*0.5)];
@@ -133,19 +138,8 @@
                     
                 }];
                 [self addSubview:headImageV];
-                
+            }
 
-            
-            
-            }
-            
-        [followed setSelected:false];
-            
-            for (int i=0;i<[selectArray count];i++){
-                if([[dic objectForKey:@"fileid"] isEqualToString:[selectArray objectAtIndex:i]]==true){
-                    [followed setSelected:true];
-                }
-            }
         }else{
             [headImageV setHidden:true];
         }
@@ -154,8 +148,8 @@
     
     
     if(dic!=nil){
-        [musicName setText:[dic objectForKey:@"filename"]];
-        [musicPlayer setText:[dic objectForKey:@"artist"]];
+        [_musicName setText:[dic objectForKey:@"filename"]];
+        [_musicPlayer setText:[dic objectForKey:@"artist"]];
     }
 }
 @end

@@ -22,6 +22,7 @@
 -(void)addMusicArray:(NSString*)musicId;
 -(void)removeMusicArray:(NSString*)musicId;
 -(void)updataLoad:(NSArray*)musicData;
+-(void)selectCellIndex:(int)selIndex;
 
 
 @property(nonatomic,strong)id obj;

@@ -40,7 +40,7 @@
 
 -(void)removeMusic;
 
-
+-(void)playMusicAtIndex:(int)index;
 
 -(void)updataData:(NSDictionary*)looperDataSource andType:(int)type;
 

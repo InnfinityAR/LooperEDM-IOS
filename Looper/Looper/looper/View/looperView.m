@@ -22,6 +22,9 @@
 
 #import "DBSphereView.h"
 
+#import "LooperScorllLayer.h"
+
+
 #define ARC4RANDOM_MAX  0x100000000
 
 
@@ -254,6 +257,24 @@
         
     }
     [self updataMusicView:playIndex];
+}
+
+-(void)playMusicAtIndex:(int)index{
+
+    isPlay = true;
+    [_player seekToTime:kCMTimeZero];
+    
+    [_player pause];
+    [_player setRate:0];
+    [_player replaceCurrentItemWithPlayerItem:nil];
+    _player = nil;
+    
+    playIndex=index;
+    
+    [self playMusic:[[NSNumber alloc] initWithInt:playIndex]];
+    [self updataMusicView:playIndex];
+
+
 }
 
 
@@ -963,12 +984,15 @@
     
     if([[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"]!=[NSNull null]){
     
-        sildeView *sildeV = [[sildeView alloc] initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 720*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) and:self];
+        LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 720*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:sildeV];
         
-        [sildeV initView:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","]];
-
+        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) andStr:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","]];
     }
+    
+    
+    
+    
     
     UIImageView * looperPic =[LooperToolClass createBtnImage:[[loopData objectForKey:@"Owner"] objectForKey:@"headimageurl"] andRect:CGPointMake(39, 938) andTag:1000 andSize:CGSizeMake(59, 59) andTarget:self];
     [self addSubview:looperPic];

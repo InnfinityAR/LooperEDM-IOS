@@ -20,6 +20,8 @@
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
--(void)reloadTableData:(NSMutableArray*)serachData;
+
+
+-(void)reloadTableData:(NSMutableArray*)DataLoop andUserArray:(NSMutableArray*)DataUser;
 
 @end
