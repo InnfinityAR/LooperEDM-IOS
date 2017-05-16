@@ -165,17 +165,24 @@
 
 
 -(void)initViewWith:(NSDictionary*)looperData{
-    
+    loopData = [[NSMutableDictionary alloc] initWithDictionary:looperData];
     
     isShowTextField = false;
+    NSArray *musicArray = [loopData objectForKey:@"Music"];
     playIndex = 0;
+    int indexMusic;
+    if([musicArray count]>0){
+        indexMusic = rand()%[musicArray count];
+        playIndex=indexMusic;
+    }
+   
     
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
     
-    loopData = [[NSMutableDictionary alloc] initWithDictionary:looperData];
+    
     
     [self createBackGround];
     
@@ -1047,7 +1054,7 @@
     
     NSArray *musicArray = [loopData objectForKey:@"Music"];
     if([musicArray count]!=0){
-        NSDictionary *dic = [musicArray objectAtIndex:0];
+        NSDictionary *dic = [musicArray objectAtIndex:playIndex];
         
         
         musicName = [LooperToolClass createLableView:CGPointMake(118*DEF_Adaptation_Font*0.5,1056*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font*0.5,37*DEF_Adaptation_Font*0.5) andText:[dic objectForKey:@"filename"] andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];

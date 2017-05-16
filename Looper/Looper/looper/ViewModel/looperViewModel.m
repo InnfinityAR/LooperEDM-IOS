@@ -183,7 +183,6 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
-          
         }else{
             
         }
