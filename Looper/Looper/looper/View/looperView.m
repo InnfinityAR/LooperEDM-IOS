@@ -1037,10 +1037,6 @@
             [ownerFollowBtn setSelected:true];
         }
     }
-    
-    
-    
-    
 }
 
 -(void)onClickOwn:(UITapGestureRecognizer *)tap{
