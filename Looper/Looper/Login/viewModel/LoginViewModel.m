@@ -109,9 +109,7 @@
         [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
         [[LocalDataMangaer sharedManager] setData];
         
-        [self loginSucceed];
-
-        
+        [self loginSucceed];    
     }else{
         //手机号或验证码错误
         [[DataHander sharedDataHander] showViewWithStr:@"手机号或验证码错误" andTime:2 andPos:CGPointZero ];

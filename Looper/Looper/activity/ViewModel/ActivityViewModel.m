@@ -35,8 +35,27 @@
 }
 
 
+-(void)jumpToActivityH5:(NSDictionary *)ActivityDic{
 
+    
+    
 
+}
+
+-(NSInteger)rowNumber{
+    
+    return self.dataArr.count;
+}
+-(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
+    self.refreshNumber+=1;
+//    [self pustDataForSomeString:(NSString *)string];
+    
+}
+-(void)refreshDataCompletionHandle:(CompletionHandle)completionHandle{
+    self.refreshNumber=0;
+    //    [self pustDataForSomeString:(NSString *)string];
+    
+}
 
 //加载数据
 -(void)pustDataForSomeString:(NSString *)string{
@@ -61,17 +80,6 @@
     }];
 }
 
-
--(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber+=1;
-//    [self pustDataForSomeString:(NSString *)string];
-    
-}
--(void)refreshDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber=0;
-    //    [self pustDataForSomeString:(NSString *)string];
-    
-}
 -(void)popController{
     
     
