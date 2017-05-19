@@ -86,6 +86,43 @@
         NSDictionary *dic = [barrageArray objectAtIndex:indexPath.row];
         if([[dic objectForKey:@"messagetype"] intValue]==1){
             
+            UIImageView *imageHead = [[UIImageView alloc] initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5,56*DEF_Adaptation_Font*0.5,56*DEF_Adaptation_Font*0.5)];
+            [imageHead sd_setImageWithURL:[dic objectForKey:@"userimage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+            imageHead.layer.cornerRadius =56*DEF_Adaptation_Font*0.5/2;
+            imageHead.layer.masksToBounds = YES;
+            [cell.contentView addSubview:imageHead];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(114*0.5*DEF_Adaptation_Font, 5*0.5*DEF_Adaptation_Font, 300*0.5*DEF_Adaptation_Font, 22*0.5*DEF_Adaptation_Font)];
+            label.text =[dic objectForKey:@"username"];
+            [label setTextColor:[UIColor colorWithRed:195/255.0 green:184/255.0 blue:239/255.0 alpha:1.0]];
+            [label setFont:[UIFont fontWithName:looperFont size:12]];
+            [cell.contentView addSubview:label];
+            
+            UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(114*0.5*DEF_Adaptation_Font, 35*0.5*DEF_Adaptation_Font, 500*0.5*DEF_Adaptation_Font, 22*0.5*DEF_Adaptation_Font)];
+            messageLabel.text = [dic objectForKey:@"messagecontent"];
+            [messageLabel setTextColor:[UIColor colorWithRed:189/255.0 green:191/255.0 blue:203/255.0 alpha:1.0]];
+            [messageLabel setFont:[UIFont fontWithName:looperFont size:12]];
+            [cell.contentView addSubview:messageLabel];
+            
+            UIView *bk =[[UIView alloc] initWithFrame:CGRectMake(114*0.5*DEF_Adaptation_Font, 80*0.5*DEF_Adaptation_Font, 493*0.5*DEF_Adaptation_Font, 65*0.5*DEF_Adaptation_Font)];
+            [bk setBackgroundColor:[UIColor colorWithRed:38/255.0 green:39/255.0 blue:50/255.0 alpha:1.0]];
+            [cell.contentView addSubview:bk];
+            
+            bk.layer.cornerRadius = 10*DEF_Adaptation_Font*0.5;
+            bk.layer.masksToBounds = YES;
+            
+            
+            UILabel *targetcontent = [[UILabel alloc] initWithFrame:CGRectMake(124*0.5*DEF_Adaptation_Font, 85*0.5*DEF_Adaptation_Font, 483*0.5*DEF_Adaptation_Font, 65*0.5*DEF_Adaptation_Font)];
+            targetcontent.text = [dic objectForKey:@"targetcontent"];
+            [targetcontent setTextColor:[UIColor colorWithRed:189/255.0 green:191/255.0 blue:203/255.0 alpha:1.0]];
+            [targetcontent setFont:[UIFont fontWithName:looperFont size:11]];
+            targetcontent.numberOfLines=0;
+             [targetcontent sizeToFit];
+            [targetcontent setTextAlignment:NSTextAlignmentLeft];
+            [cell.contentView addSubview:targetcontent];
+ 
         }
     }else if(selectNum==2){
         NSDictionary *dic = [notifiArray objectAtIndex:indexPath.row];
@@ -151,7 +188,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(selectNum==1){
-         return  218*DEF_Adaptation_Font*0.5;
+         return  180*DEF_Adaptation_Font*0.5;
     }else if(selectNum==2){
          return  120*DEF_Adaptation_Font*0.5;
         

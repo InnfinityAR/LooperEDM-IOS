@@ -461,7 +461,7 @@
 
 
 -(void)playerMusicEnd{
-
+    
     [_player seekToTime:kCMTimeZero];
 
 }

@@ -67,6 +67,7 @@
 		C41AC1E51E1FF714003DD049 /* icon_looper_head.png in Resources */ = {isa = PBXBuildFile; fileRef = C41AC1E11E1FF714003DD049 /* icon_looper_head.png */; };
 		C41AC1EA1E1FFEA2003DD049 /* bg_looper_bk.png in Resources */ = {isa = PBXBuildFile; fileRef = C41AC1E81E1FFEA2003DD049 /* bg_looper_bk.png */; };
 		C41AC1EB1E1FFEA2003DD049 /* icon_looper_pen.png in Resources */ = {isa = PBXBuildFile; fileRef = C41AC1E91E1FFEA2003DD049 /* icon_looper_pen.png */; };
+		C41C3CF31ECD4FEE00393C7A /* openid.json in Resources */ = {isa = PBXBuildFile; fileRef = C41C3CF21ECD4FEE00393C7A /* openid.json */; };
 		C41D20971E2E5B7100727591 /* AwesomeMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D20941E2E5B7100727591 /* AwesomeMenu.m */; };
 		C41D20981E2E5B7100727591 /* AwesomeMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C41D20961E2E5B7100727591 /* AwesomeMenuItem.m */; };
 		C41DDCDC1E7A5F3E00873CBF /* bk_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C41DDCD81E7A5F3E00873CBF /* bk_1.png */; };
@@ -582,7 +583,7 @@
 		C4057F371DF5777100AA52F9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C4057F391DF5777B00AA52F9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C407B0D91E4C99100067801F /* LooperScorllLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LooperScorllLayer.h; sourceTree = "<group>"; };
-		C407B0DA1E4C99100067801F /* LooperScorllLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LooperScorllLayer.m; sourceTree = "<group>"; };
+		C407B0DA1E4C99100067801F /* LooperScorllLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LooperScorllLayer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C409A7301E1E276700F76B5C /* looperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperViewController.h; sourceTree = "<group>"; };
 		C409A7311E1E276700F76B5C /* looperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperViewController.m; sourceTree = "<group>"; };
 		C409A7341E1E276700F76B5C /* looperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperView.h; sourceTree = "<group>"; };
@@ -621,6 +622,7 @@
 		C41AC1E11E1FF714003DD049 /* icon_looper_head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_looper_head.png; sourceTree = "<group>"; };
 		C41AC1E81E1FFEA2003DD049 /* bg_looper_bk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_bk.png; sourceTree = "<group>"; };
 		C41AC1E91E1FFEA2003DD049 /* icon_looper_pen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_looper_pen.png; sourceTree = "<group>"; };
+		C41C3CF21ECD4FEE00393C7A /* openid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = openid.json; sourceTree = "<group>"; };
 		C41D20931E2E5B7100727591 /* AwesomeMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenu.h; sourceTree = "<group>"; };
 		C41D20941E2E5B7100727591 /* AwesomeMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeMenu.m; sourceTree = "<group>"; };
 		C41D20951E2E5B7100727591 /* AwesomeMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeMenuItem.h; sourceTree = "<group>"; };
@@ -2025,6 +2027,7 @@
 			isa = PBXGroup;
 			children = (
 				C43E76801E091D8C004A5288 /* song.json */,
+				C41C3CF21ECD4FEE00393C7A /* openid.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -3441,6 +3444,7 @@
 				C4F051111EBA4B86005DA9F1 /* btn_unLoop.png in Resources */,
 				C43E76F61E091D8D004A5288 /* btn-prp.png in Resources */,
 				C42838E11E03F02100929093 /* Info.plist in Resources */,
+				C41C3CF31ECD4FEE00393C7A /* openid.json in Resources */,
 				C4F2C20A1EAF03A100BB10CA /* btn_fans.png in Resources */,
 				C43E76FD1E091D8D004A5288 /* btn_login_sel.png in Resources */,
 				C4DDB5131E28BB09005E3909 /* RCConfig.plist in Resources */,
@@ -3711,8 +3715,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tech@gewoo.cn (X35P496XZ2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tech@gewoo.cn (X35P496XZ2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiyuan Luo (TMCHXYN3UH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiyuan Luo (TMCHXYN3UH)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3759,8 +3763,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: tech@gewoo.cn (X35P496XZ2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tech@gewoo.cn (X35P496XZ2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiyuan Luo (TMCHXYN3UH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xiyuan Luo (TMCHXYN3UH)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
