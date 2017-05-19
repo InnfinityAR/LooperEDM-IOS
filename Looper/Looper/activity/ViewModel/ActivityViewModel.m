@@ -12,6 +12,7 @@
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "DataHander.h"
+#define ActivityURL @"getActivity"
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -35,30 +36,19 @@
 
 
 
--(NSInteger)rowNumber{
-    
-    return self.dataArr.count;
-}
--(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber+=1;
-//    [self pustDataForSomeString:(NSString *)string];
-    
-}
--(void)refreshDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber=0;
-    //    [self pustDataForSomeString:(NSString *)string];
-    
-}
+
+
 //加载数据
 -(void)pustDataForSomeString:(NSString *)string{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
 //    [dic setObject:string forKey:@"name"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchLoop" parameters:dic  success:^(id responseObject) {
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:ActivityURL parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            self.dataArr = [responseObject[@"data"] objectForKey:@"Loop"];
+            self.dataArr = responseObject[@"data"];
+            
 #warning -数据请求
-//            [self.activityV reloadTableData:serachArray andUserArray:[responseObject[@"data"] objectForKey:@"User"]];
+            [self.activityV reloadTableData:self.dataArr];
             
             if([self.dataArr count]==0){
                 
@@ -70,22 +60,57 @@
         
     }];
 }
--(activityDataModel*)modelForRow:(NSInteger)row{
-    return self.dataArr[row];
+
+
+-(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
+    self.refreshNumber+=1;
+//    [self pustDataForSomeString:(NSString *)string];
+    
 }
--(NSURL*)mainPhotoUrlForRow:(NSInteger)row{
-    return [NSURL URLWithString:[self modelForRow:row].mainPhotoUrl];
+-(void)refreshDataCompletionHandle:(CompletionHandle)completionHandle{
+    self.refreshNumber=0;
+    //    [self pustDataForSomeString:(NSString *)string];
+    
 }
--(NSString *)numberWithPersonForRow:(NSInteger)row{
-    return [self modelForRow:row].numberWithPerson;
+-(void)popController{
+    
+    
+    //   [_obj dismissViewControllerAnimated:YES completion:nil];
+    [[_obj navigationController] popViewControllerAnimated:NO];
+    
+    //[_obj presentViewController:serachV animated:YES completion:nil];
+    
 }
--(NSString *)themeForRow:(NSInteger)row{
-    return [self modelForRow:row].theme;
+-(void)dataForH5:(NSDictionary *)dic{
+
 }
--(NSURL *)headPhotoUrlForRow:(NSInteger)row{
-    return [NSURL URLWithString:[self modelForRow:row].headPhotoUrl];
-}
--(NSString *)commentForRow:(NSInteger)row{
-    return [self modelForRow:row].comment;
-}
+//-(NSInteger)rowNumber{
+//    
+//    return self.dataArr.count;
+//}
+//-(activityDataModel*)modelForRow:(NSInteger)row{
+//    return self.dataArr[row];
+//}
+////活动图片
+//-(NSURL*)activityimageUrlForRow:(NSInteger)row{
+//    return [NSURL URLWithString:[self modelForRow:row].activityimage];
+//}
+////头像
+//-(NSURL *)userimageUrlForRow:(NSInteger)row{
+//    return [NSURL URLWithString:[self modelForRow:row].userimage];
+//}
+////名字.id等
+//-(NSString *)useridWithPersonForRow:(NSInteger)row{
+//    return [self modelForRow:row].userid;
+//}
+//-(NSString *)usernameForRow:(NSInteger)row{
+//    return [self modelForRow:row].username;
+//}
+//
+//-(NSString *)enddateForRow:(NSInteger)row{
+//    return [self modelForRow:row].enddate;
+//}
+//-(NSString *)startdateForRow:(NSInteger)row{
+//    return [self modelForRow:row].startdate;
+//}
 @end

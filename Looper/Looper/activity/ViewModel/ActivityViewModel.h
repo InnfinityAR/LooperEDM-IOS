@@ -8,25 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "ActivityView.h"
+@class ActivityView;
 typedef void(^CompletionHandle)(NSError *error);
 @interface ActivityViewModel : NSObject
-@property(nonatomic)NSInteger rowNumber;
+
 @property(nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic)NSInteger refreshNumber;
+@property(nonatomic,strong)id obj;
+@property(nonatomic,strong)ActivityView *activityV;
 //获取更多
 - (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
 //刷新
 - (void)refreshDataCompletionHandle:(CompletionHandle)completionHandle;
 //获取数据
 -(void)pustDataForSomeString:(NSString *)string;
--(NSString*)mainPhotoUrlForRow:(NSInteger)row;
--(NSString *)numberWithPersonForRow:(NSInteger)row;
--(NSString *)themeForRow:(NSInteger)row;
--(NSString *)headPhotoUrlForRow:(NSInteger)row;
--(NSString *)commentForRow:(NSInteger)row;
 
 //陆兄style
 -(id)initWithController:(id)controller;
-@property(nonatomic,strong)id obj;
-@property(nonatomic,strong) ActivityView *activityV;
+-(void)popController;
+-(void)dataForH5:(NSDictionary *)dic;
+//@property(nonatomic)NSInteger rowNumber;
+//-(NSURL*)activityimageUrlForRow:(NSInteger)row;
+////头像
+//-(NSURL *)userimageUrlForRow:(NSInteger)row;
+//    //名字.id等
+//-(NSString *)useridWithPersonForRow:(NSInteger)row;
+//-(NSString *)usernameForRow:(NSInteger)row;
+//-(NSString *)enddateForRow:(NSInteger)row;
+//-(NSString *)startdateForRow:(NSInteger)row;
 @end

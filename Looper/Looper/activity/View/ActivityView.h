@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ActivityViewModel.h"
 @interface ActivityView : UIView<UITableViewDataSource,UITableViewDelegate>
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
--(void)reloadTableData:(NSMutableArray*)DataLoop andUserArray:(NSMutableArray*)DataUser;
+-(void)reloadTableData:(NSMutableArray*)DataLoop;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArr;
+@property(nonatomic,strong)NSDictionary *objDic;
 @end

@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *themeLB;
 @property (weak, nonatomic) IBOutlet UILabel *numberLB;
-@property (weak, nonatomic) IBOutlet UIImageView *signIV;
+@property (weak, nonatomic) IBOutlet UILabel *endTimeLB;
+@property (weak, nonatomic) IBOutlet UILabel *followCountLB;
+
 @end

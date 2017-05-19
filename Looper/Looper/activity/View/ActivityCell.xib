@@ -24,6 +24,17 @@
                             <constraint firstAttribute="height" constant="200" id="MFW-MI-XY5"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要参加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saE-Nz-5hy">
+                        <rect key="frame" x="245" y="157" width="120" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="1Mc-Ud-Z62"/>
+                            <constraint firstAttribute="width" constant="120" id="Kh4-SR-qBy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
                         <rect key="frame" x="60" y="227.5" width="297" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -43,35 +54,41 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要参加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifN-r5-LMI">
-                        <rect key="frame" x="315" y="30" width="50" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要参加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifN-r5-LMI">
+                        <rect key="frame" x="245" y="177" width="120" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="120" id="gwX-ib-2TF"/>
                             <constraint firstAttribute="height" constant="20" id="r9Q-aX-QGN"/>
-                            <constraint firstAttribute="width" constant="50" id="xMs-Zb-bEG"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i7E-Av-KhC">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要参加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5k-hD-u6a">
                         <rect key="frame" x="315" y="10" width="50" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="6W7-Eh-xVm"/>
-                            <constraint firstAttribute="height" constant="20" id="umj-g1-HKl"/>
+                            <constraint firstAttribute="width" constant="50" id="Z9o-ca-iK7"/>
+                            <constraint firstAttribute="height" constant="20" id="t5r-iK-ggR"/>
                         </constraints>
-                    </imageView>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="i7E-Av-KhC" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="topMargin" constant="2" id="4Es-Ov-bGG"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="e5k-hD-u6a" secondAttribute="trailing" constant="2" id="1H6-eM-HLJ"/>
+                    <constraint firstItem="0pG-Xj-D1l" firstAttribute="top" secondItem="ifN-r5-LMI" secondAttribute="bottom" constant="8" symbolic="YES" id="BNX-vH-kXb"/>
                     <constraint firstItem="Dw5-1Y-Drs" firstAttribute="leading" secondItem="cTH-4E-HHD" secondAttribute="trailing" constant="10" id="Gb5-Xd-HXY"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" id="Gjj-02-R4h"/>
-                    <constraint firstItem="ifN-r5-LMI" firstAttribute="top" secondItem="i7E-Av-KhC" secondAttribute="bottom" id="SiX-2C-NXC"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="i7E-Av-KhC" secondAttribute="trailing" constant="2" id="WJF-V4-8tQ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ifN-r5-LMI" secondAttribute="trailing" constant="2" id="SEY-1w-bgk"/>
                     <constraint firstAttribute="trailing" secondItem="0pG-Xj-D1l" secondAttribute="trailing" constant="10" id="XL3-kU-3fc"/>
                     <constraint firstItem="Dw5-1Y-Drs" firstAttribute="centerY" secondItem="cTH-4E-HHD" secondAttribute="centerY" id="YGy-mA-Eft"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="axR-tv-mOz"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="top" secondItem="iyV-KH-4cX" secondAttribute="bottom" constant="5" id="f8o-ao-Ehb"/>
+                    <constraint firstItem="e5k-hD-u6a" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="topMargin" constant="2" id="hP9-Pv-8pu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="saE-Nz-5hy" secondAttribute="trailing" constant="2" id="hcp-0J-8nY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Dw5-1Y-Drs" secondAttribute="trailing" constant="10" id="l9e-GG-Hod"/>
                     <constraint firstAttribute="trailing" secondItem="iyV-KH-4cX" secondAttribute="trailing" id="oZe-Pb-cv6"/>
                     <constraint firstItem="cTH-4E-HHD" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="tVc-sI-L80"/>
@@ -80,17 +97,20 @@
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" id="wLb-yN-Yse"/>
                     <constraint firstItem="cTH-4E-HHD" firstAttribute="top" secondItem="0pG-Xj-D1l" secondAttribute="bottom" constant="5" id="wx7-Tt-17c"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="10" id="xYE-rN-da0"/>
+                    <constraint firstItem="ifN-r5-LMI" firstAttribute="top" secondItem="saE-Nz-5hy" secondAttribute="bottom" id="yzA-FO-j8m"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <connections>
                 <outlet property="commentLB" destination="Dw5-1Y-Drs" id="o02-AQ-7NJ"/>
+                <outlet property="endTimeLB" destination="saE-Nz-5hy" id="mpC-y0-kg7"/>
+                <outlet property="followCountLB" destination="e5k-hD-u6a" id="Fuf-5Q-woB"/>
                 <outlet property="headPhoto" destination="cTH-4E-HHD" id="nZa-0b-qTs"/>
                 <outlet property="mainPhoto" destination="iyV-KH-4cX" id="Vdg-B6-SRA"/>
                 <outlet property="numberLB" destination="ifN-r5-LMI" id="cU2-lH-Ocw"/>
-                <outlet property="signIV" destination="i7E-Av-KhC" id="8fp-gZ-87f"/>
                 <outlet property="themeLB" destination="0pG-Xj-D1l" id="6p4-xg-qVT"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="84"/>
         </tableViewCell>
     </objects>
 </document>
