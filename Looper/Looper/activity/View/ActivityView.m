@@ -12,6 +12,7 @@
 #import "ActivityViewController.h"
 #import "UIImageView+WebCache.h"
 #import "LooperToolClass.h"
+#import "LooperConfig.h"
 @implementation ActivityView
 -(NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -26,6 +27,12 @@
         self.obj = (ActivityViewModel*)idObject;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
+        UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake((DEF_SCREEN_WIDTH/2+25)*DEF_Adaptation_Font*0.5, 43*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
+        titleLB.text=@"Looper EDM";
+        titleLB.textColor=[UIColor whiteColor];
+        titleLB.textAlignment=NSTextAlignmentCenter;
+        [titleLB setFont:[UIFont fontWithName:looperFont size:15]];
+        [self addSubview:titleLB];
         //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
