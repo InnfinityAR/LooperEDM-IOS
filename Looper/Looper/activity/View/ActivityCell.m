@@ -13,7 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mainPhoto.clipsToBounds = YES;
-    self.headPhoto.layer.cornerRadius=5;
+    self.headPhoto.layer.cornerRadius=14;
+    self.headPhoto.layer.masksToBounds=YES;
     //    cell.categoryNameLB.layer.borderColor = [UIColor greenSeaColor].CGColor;
     self.headPhoto.layer.borderWidth = 0;
 }
