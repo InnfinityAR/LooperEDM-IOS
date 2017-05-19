@@ -107,8 +107,12 @@
     
     
     
-    UILabel *musicName;
-    UILabel *musicPlayer;
+    //UILabel *musicName;
+    LooperScorllLayer *musicPlayer;
+    
+    LooperScorllLayer *musicName;
+    
+    
     UIImageView *musicPic;
     
     UIButton *followMusic;
@@ -201,7 +205,7 @@
     endBegin= true;
     selectBool = false;
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerMusicEnd) name:AVPlayerItemDidPlayToEndTimeNotification                                               object:[_player currentItem]];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerMusicEnd) name:AVPlayerItemDidPlayToEndTimeNotification  object:[_player currentItem]];
     
     [self performSelector:@selector(playMusic:) withObject:[[NSNumber alloc] initWithInt:playIndex] afterDelay:0.5];
     
@@ -210,6 +214,14 @@
 
 
 -(void)playerMusicEnd{
+    isPlay = true;
+    [_player seekToTime:kCMTimeZero];
+    
+    [_player pause];
+    [_player setRate:0];
+    [_player replaceCurrentItemWithPlayerItem:nil];
+    _player = nil;
+    
 
     NSArray *musicArray = [loopData objectForKey:@"Music"];
     if([musicArray count]!=0)
@@ -219,7 +231,7 @@
 }
 
 
--(void)playMusicFront{
+-(int)playMusicFront{
     isPlay = true;
     [_player seekToTime:kCMTimeZero];
     
@@ -237,10 +249,11 @@
         [self playMusic:[[NSNumber alloc] initWithInt:playIndex]];
     }
     [self updataMusicView:playIndex];
+    return playIndex;
 }
 
 
--(void)playMusicNext{
+-(int)playMusicNext{
      isPlay = true;
     [_player seekToTime:kCMTimeZero];
     
@@ -264,6 +277,7 @@
         
     }
     [self updataMusicView:playIndex];
+    return playIndex;
 }
 
 -(void)playMusicAtIndex:(int)index{
@@ -302,11 +316,21 @@
         [musicPic removeFromSuperview];
 
         
-        musicName = [LooperToolClass createLableView:CGPointMake(118*DEF_Adaptation_Font*0.5,1056*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font*0.5,37*DEF_Adaptation_Font*0.5) andText:[dic objectForKey:@"filename"] andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        musicName = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(118*DEF_Adaptation_Font*0.5,1056*DEF_Adaptation_Font*0.5, 370*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:musicName];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:50];
+        [array addObject:[dic objectForKey:@"filename"]];
         
-        musicPlayer = [LooperToolClass createLableView:CGPointMake(118*DEF_Adaptation_Font*0.5,1100*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(350*DEF_Adaptation_Font*0.5,25*DEF_Adaptation_Font*0.5) andText:[dic objectForKey:@"artist"] andFontSize:14 andColor:[UIColor colorWithRed:171/255.0 green:177/255.0 blue:184/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        [musicName initView:CGRectMake(0,0, 370*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5) andStr:array andType:2];
+
+        
+        musicPlayer = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(118*DEF_Adaptation_Font*0.5,1100*DEF_Adaptation_Font*0.5, 350*DEF_Adaptation_Font*0.5,25*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:musicPlayer];
+        NSMutableArray *arrayPlayer = [[NSMutableArray alloc] initWithCapacity:50];
+        [arrayPlayer addObject:[dic objectForKey:@"artist"]];
+        
+        [musicPlayer initView:CGRectMake(0,0, 350*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andStr:arrayPlayer andType:3];
+
 
         
         
@@ -352,8 +376,8 @@
         iconMusicImage.image =iconMusic;
         [self addSubview:iconMusicImage];
         
-        [musicName setText:@""];
-        [musicPlayer setText:@""];
+        [musicName removeFromSuperview];
+        [musicPlayer removeFromSuperview];
         [musicPic removeFromSuperview];
          [playMusicBtn removeFromSuperview];
         [followMusic setHidden:true];
@@ -994,7 +1018,7 @@
         LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 720*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:sildeV];
         
-        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) andStr:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","]];
+        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) andStr:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","] andType:1];
     }
     
     
@@ -1053,11 +1077,25 @@
         NSDictionary *dic = [musicArray objectAtIndex:playIndex];
         
         
-        musicName = [LooperToolClass createLableView:CGPointMake(118*DEF_Adaptation_Font*0.5,1056*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font*0.5,37*DEF_Adaptation_Font*0.5) andText:[dic objectForKey:@"filename"] andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
-        [self addSubview:musicName];
         
-        musicPlayer = [LooperToolClass createLableView:CGPointMake(118*DEF_Adaptation_Font*0.5,1100*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(350*DEF_Adaptation_Font*0.5,25*DEF_Adaptation_Font*0.5) andText:[dic objectForKey:@"artist"] andFontSize:14 andColor:[UIColor colorWithRed:171/255.0 green:177/255.0 blue:184/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        musicName = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(118*DEF_Adaptation_Font*0.5,1056*DEF_Adaptation_Font*0.5, 370*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5) and:self];
+        [self addSubview:musicName];
+        NSMutableArray *arrayName = [[NSMutableArray alloc] initWithCapacity:50];
+        [arrayName addObject:[dic objectForKey:@"filename"]];
+        
+        [musicName initView:CGRectMake(0,0, 370*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5) andStr:arrayName andType:2];
+
+        
+        
+        musicPlayer = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(118*DEF_Adaptation_Font*0.5,1100*DEF_Adaptation_Font*0.5, 350*DEF_Adaptation_Font*0.5,25*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:musicPlayer];
+        NSMutableArray *arrayPlayer = [[NSMutableArray alloc] initWithCapacity:50];
+        [arrayPlayer addObject:[dic objectForKey:@"artist"]];
+        
+        [musicPlayer initView:CGRectMake(0,0, 350*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andStr:arrayPlayer andType:3];
+        
+
+        
         
         followMusic = [LooperToolClass createBtnImageNameReal:@"btn_unfollowMusic.png" andRect:CGPointMake(480*DEF_Adaptation_Font*0.5,1050*DEF_Adaptation_Font*0.5) andTag:1000 andSelectImage:@"btn_followMusic.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(49*DEF_Adaptation_Font*0.5,70*DEF_Adaptation_Font*0.5) andTarget:self];
         [self addSubview:followMusic];

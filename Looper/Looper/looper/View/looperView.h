@@ -32,9 +32,9 @@
 
 -(void)playMusic:(NSNumber*)number;
 
--(void)playMusicFront;
+-(int)playMusicFront;
 
--(void)playMusicNext;
+-(int)playMusicNext;
 
 -(void)stopMusic;
 

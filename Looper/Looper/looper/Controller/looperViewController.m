@@ -16,7 +16,6 @@
 @interface looperViewController ()
 @property(nonatomic,strong)NSString *musicTitle;
 @property(nonatomic,strong)NSString *artist;
-@property(nonatomic,strong)NSString *musicUrl;
 @property(nonatomic,strong)NSString *photoUrl;
 @end
 
@@ -126,26 +125,11 @@
 // add background Music  hf w
 #warning-加载数据的时候引用此方法赋值
 -(void)playMusicForBackgroundWithMusicInfo:(NSDictionary*)musicInfo{
-    self.musicUrl=[musicInfo objectForKey:@"musicUrl"];
     self.musicTitle=[musicInfo objectForKey:@"musicTitle"];
-    _isPlayingNow=(NSInteger)[musicInfo objectForKey:@"isPlayingNow"];
     self.photoUrl=[musicInfo objectForKey:@"photoUrl"];
     self.artist=[musicInfo objectForKey:@"artist"];
-    if (_isPlayingNow!=0) {
-        //    设置后台播放
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        
-        //    设置播放器
-        NSURL *url = [NSURL URLWithString:self.musicUrl];
-        _player = [[AVPlayer alloc] initWithURL:url];
-        [_player play];
-        _isPlayingNow = YES;
-        
-        //后台播放显示信息设置
-        [self setPlayingInfo];
-    }
 
-
+    [self setPlayingInfo];
 
 }
 
@@ -158,21 +142,25 @@
                     [_player play];
                 }
                 _isPlayingNow = !_isPlayingNow;
+                [_looperVm parseMusic];
+                
                 break;
             case UIEventSubtypeRemoteControlPause:
                 if (_isPlayingNow) {
                     [_player pause];
                 }
                 _isPlayingNow = !_isPlayingNow;
+                 [_looperVm parseMusic];
+                
                 break;
             case UIEventSubtypeRemoteControlNextTrack:
                 NSLog(@"下一首");
 #warning-记得加入数据
-               // [self playMusicForBackgroundWithMusicInfo:]
+                 [_looperVm backMusic];
                 break;
             case UIEventSubtypeRemoteControlPreviousTrack:
                 NSLog(@"上一首 ");
-                // [self playMusicForBackgroundWithMusicInfo:]
+                 [_looperVm frontMusic];
                 break;
             default:
                 break;
@@ -183,14 +171,16 @@
 - (void)setPlayingInfo {
     //    设置后台播放时显示的东西，例如歌曲名字，图片等
     //    <MediaPlayer/MediaPlayer.h>
-    MPMediaItemArtwork *artWork = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.photoUrl]]]];
+    if([self.photoUrl length]>0){
+        MPMediaItemArtwork *artWork = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.photoUrl]]]];
+        
+        NSDictionary *dic = @{MPMediaItemPropertyTitle:self.musicTitle,
+                              MPMediaItemPropertyArtist:self.artist,
+                              MPMediaItemPropertyArtwork:artWork
+                              };
+        [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dic];
     
-    NSDictionary *dic = @{MPMediaItemPropertyTitle:self.musicTitle,
-                          MPMediaItemPropertyArtist:self.artist,
-                          MPMediaItemPropertyArtwork:artWork
-                          };
-    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:dic];
-    
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

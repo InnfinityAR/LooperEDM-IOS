@@ -303,23 +303,32 @@
     NSDictionary *dic;
     
     if(indexPath.section==0){
-    
+        
         dic = [hotChatArray objectAtIndex:indexPath.row];
     }else{
         dic = [[looperChatDicT objectForKey:@"data"] objectAtIndex:indexPath.row];
-    
+        
     }
-
+    
     
     if([[dic objectForKey:@"userid"] intValue]!=[[LocalDataMangaer sharedManager].uid intValue]){
         ReplyDic = dic;
-        text.text = [NSString stringWithFormat:@"@%@:",[dic objectForKey:@"nickname"]];
-        [text becomeFirstResponder];
+        
+        if([text.text length]==0){
+            text.text = [NSString stringWithFormat:@"@%@:",[dic objectForKey:@"nickname"]];
+            [text becomeFirstResponder];
+            
+        }else{
+            text.text = @"";
+            [self endEditing:true];
+            
+            
+        }
     }else{
         text.text = @"";
         [self endEditing:true];
     }
-
+    
 }
 
 

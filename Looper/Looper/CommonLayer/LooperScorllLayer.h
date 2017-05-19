@@ -18,7 +18,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 
--(void)initView:(CGRect)frame andStr:(NSArray*)strArray;
+-(void)initView:(CGRect)frame andStr:(NSArray*)strArray andType:(int)type;
 
 
 @end

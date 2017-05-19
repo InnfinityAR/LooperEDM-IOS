@@ -40,6 +40,7 @@
     addMusicController *addMusicCV;
     
     NSMutableDictionary *targetDic;
+
     
     int createUserNum;
     
@@ -70,7 +71,16 @@
 
     [_looperV playMusicAtIndex:index];
     [musicListV selectCellIndex:index];
+    
+    
+    NSDictionary *dic = [musicArray objectAtIndex:playIndex];
+    
+    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [tempDic setObject:[dic objectForKey:@"filename"] forKey:@"musicTitle"];
+    [tempDic setObject:[dic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+    [tempDic setObject:[dic objectForKey:@"artist"] forKey:@"artist"];
 
+   [_obj playMusicForBackgroundWithMusicInfo:tempDic];
 }
 
 
@@ -106,6 +116,7 @@
         if([responseObject[@"status"] intValue]==0){
             [looperData setObject:responseObject[@"Music"] forKey:@"Music"];
             [musicListV updataLoad:responseObject[@"Music"]];
+            musicArray =[[NSMutableArray alloc] initWithArray:responseObject[@"Music"]];
             [_looperV updataData:looperData andType:1];
             
         }else{
@@ -216,7 +227,6 @@
 
 }
 
-
 -(void)loopLeaveAction{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     NSDate *now= [NSDate date];
@@ -236,8 +246,6 @@
     }];
 }
 
-
-
 -(void)ReceiveMessage:(NSDictionary*)data{
     
     if([[[looperData objectForKey:@"Loop"] objectForKey:@"loop_sdkid"]intValue]==[[data objectForKey:@"targetId"]intValue]){
@@ -253,20 +261,15 @@
                                 andMessageText:[data objectForKey:@"text"]
                             andTargetMessageId:[dic objectForKey:@"replyMessageId"]
                           andTargetMessageText:[dic objectForKey:@"replyText"]];
-                    
-                    
+
                 }else{
                       [self sendMessage:[data objectForKey:@"messageId"] andMessageText:[data objectForKey:@"text"] andTimestamp:[data objectForKey:@"sentTime"] andData:data];
-                
                 }
-                
-              
             }
             [_looperV ReceiveMessage:1 andData:data];
         });
     }
-    
-   
+
 }
 
 
@@ -301,6 +304,8 @@
             [[NIMCloudMander sharedManager] joinChatRoom:responseObject[@"Loop"][@"loop_sdkid"] andObject:self];
             
             looperData =  [[NSMutableDictionary alloc] initWithDictionary:responseObject] ;
+             musicArray =[[NSMutableArray alloc] initWithArray:responseObject[@"Music"]];
+            
             _looperV = [[looperView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
             [_looperV initViewWith:looperData];
             [[_obj view] addSubview:_looperV];
@@ -384,6 +389,8 @@
                     [_looperV updataData:looperData andType:type];
 
                     [musicListV updataLoad:responseObject[@"Music"]];
+                    
+                     musicArray =[[NSMutableArray alloc] initWithArray:responseObject[@"Music"]];
                 }else{
                     
                 }
@@ -500,6 +507,28 @@
 }
 
 
+-(void)pushMessage:(NSString*)message andTarget:(NSString*)TargetId{
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:TargetId forKey:@"targetId"];
+    [dic setObject:message forKey:@"content"];
+
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"pushMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+  
+        
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+
+}
+
+
+
 -(void)toMusicView:(int)indexLoop andIsPlay:(bool)isPlay{
     
     if([[looperData objectForKey:@"Music"] count]!=0){
@@ -533,6 +562,14 @@
     [musicV updataWithMusic:dic and:indexPath];
     
     playIndex = indexPath;
+    
+    NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+    
+    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
+    [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+    [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
+    [_obj playMusicForBackgroundWithMusicInfo:tempDic];
 }
 
 
@@ -544,13 +581,31 @@
 
 -(void)frontMusic{
     
-    [_looperV playMusicFront];
+   playIndex= [_looperV playMusicFront];
+    NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+    
+    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
+    [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+    [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
+    
+     [_obj playMusicForBackgroundWithMusicInfo:tempDic];
 }
 
 -(void)backMusic{
-    [_looperV playMusicNext];
+   playIndex= [_looperV playMusicNext];
+    NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+    
+    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
+    [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+    [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
+    
+    [_obj playMusicForBackgroundWithMusicInfo:tempDic];
+    
+    
+    
 }
-
 
 
 -(void)removeMusicView{
@@ -631,6 +686,9 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
              [self getLoopMessage:1 and:100];
+            
+          //  [self pushMessage:messageText andTarget:[LocalDataMangaer sharedManager].uid];
+            
         }else{
             
         }

@@ -22,4 +22,6 @@
 
 
 -(void)initWithData:(NSDictionary*)localData;
+
+-(void)playMusicForBackgroundWithMusicInfo:(NSDictionary*)musicInfo;
 @end
