@@ -13,8 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentLB;
 @property (weak, nonatomic) IBOutlet UIImageView *headPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *themeLB;
-@property (weak, nonatomic) IBOutlet UILabel *numberLB;
-@property (weak, nonatomic) IBOutlet UILabel *endTimeLB;
+//@property (weak, nonatomic) IBOutlet UILabel *numberLB;
+//@property (weak, nonatomic) IBOutlet UILabel *endTimeLB;
 @property (weak, nonatomic) IBOutlet UILabel *followCountLB;
 
 @end

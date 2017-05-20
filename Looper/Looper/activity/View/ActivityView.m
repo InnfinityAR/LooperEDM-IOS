@@ -97,8 +97,8 @@
     [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
     cell.themeLB.text=@"Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验";
     cell.commentLB.text=dic[@"messagecontent"];
-    cell.endTimeLB.text=self.objDic[@"startdate"];
-    cell.numberLB.text=self.objDic[@"enddate"];
+//    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
+//    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
     if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){
         cell.followCountLB.text=@"我要参加";
     }

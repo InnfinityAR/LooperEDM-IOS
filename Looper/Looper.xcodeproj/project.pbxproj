@@ -26,6 +26,7 @@
 		B2A6EE9D1ECC4EBF004BF416 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */; };
 		B2A6EEA61ECD3498004BF416 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EEA41ECD3498004BF416 /* ActivityCell.m */; };
 		B2A6EEA71ECD3498004BF416 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2A6EEA51ECD3498004BF416 /* ActivityCell.xib */; };
+		B2A6EEB11ED0121D004BF416 /* 3.pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2A6EEB01ED0121D004BF416 /* 3.pic.jpg */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C404A7B81EBEF5AE000B9E1D /* movelineV1.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7B71EBEF5AE000B9E1D /* movelineV1.png */; };
@@ -601,6 +602,7 @@
 		B2A6EEA31ECD3498004BF416 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
 		B2A6EEA41ECD3498004BF416 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		B2A6EEA51ECD3498004BF416 /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		B2A6EEB01ED0121D004BF416 /* 3.pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.pic.jpg; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Looper.entitlements; path = Looper/Looper.entitlements; sourceTree = "<group>"; };
@@ -1399,6 +1401,7 @@
 		B2A6EE541ECAD7FF004BF416 /* activity */ = {
 			isa = PBXGroup;
 			children = (
+				B2A6EEB01ED0121D004BF416 /* 3.pic.jpg */,
 				B2A6EE931ECBE37E004BF416 /* 1.png */,
 				B2A6EE551ECAD7FF004BF416 /* Controller */,
 				B2A6EE561ECAD7FF004BF416 /* Model */,
@@ -3381,6 +3384,7 @@
 				C4C4B49D1E9CC6CD003E2705 /* btn_prase.png in Resources */,
 				C43E76E01E091D8D004A5288 /* Images.xcassets in Resources */,
 				B2A6EE941ECBE37E004BF416 /* 1.png in Resources */,
+				B2A6EEB11ED0121D004BF416 /* 3.pic.jpg in Resources */,
 				C42E80541EC332D400D9CC43 /* loading_00029.png in Resources */,
 				C45489381E9E2EDD00BB1591 /* bg_title_chat.png in Resources */,
 				C43E77021E091D8D004A5288 /* btn_serach.png in Resources */,
