@@ -63,6 +63,8 @@
     NSArray *SessionArray;
     
     
+    UIImageView *bkv ;
+    
 
 }
 @synthesize musicData = _musicData;
@@ -76,10 +78,20 @@
 -(id)initWithController:(id)controller{
     if(self=[super init]){
         self.obj = (MainViewController*)controller;
+        [self createBackView];
         [self requestData];
     }
     return  self;
 }
+
+
+-(void)createBackView{
+    bkv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    UIImage *imageV= [UIImage imageNamed:@"640-2.png"];
+    bkv.image =imageV;
+    [[_obj view] addSubview:bkv];
+}
+
 
 -(void)getSessionArray{
     SessionArray = [[NSArray alloc] initWithArray:[[NIMCloudMander sharedManager] allRecentSessions]];
@@ -188,8 +200,10 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyFavorite" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             _musicData = responseObject[@"data"];
+           
             if(_mainV ==nil){
                 [self initView];
+                 [bkv removeFromSuperview];
             }else{
                 [_mainV updataView];
                 
@@ -236,7 +250,6 @@
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
-            
             [self requestgetMyFavorite];
             
         }else{

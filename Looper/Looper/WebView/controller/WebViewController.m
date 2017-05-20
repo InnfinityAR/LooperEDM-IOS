@@ -16,6 +16,8 @@
 #import "looperViewModel.h"
 #import "ReadJsonFile.h"
 
+#import "DataHander.h"
+
 #import "LocalDataMangaer.h"
 #import "AFNetworkTool.h"
 
@@ -28,6 +30,9 @@
     int index;
     int sum;
     NSMutableArray *array;
+    
+    UIWebView *webV;
+    
 
 }
 
@@ -44,7 +49,7 @@
         //创建分享消息对象
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         //创建网页内容对象
-        NSString* thumbURL =  [_webDic objectForKey:@"activityimage"];
+        NSString* thumbURL =  @"https://looper.blob.core.chinacloudapi.cn/images/activityshare.png";
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [_webDic objectForKey:@"activityname"] descr:@"基友在哪？！快来帮我赢取免费轰趴吧！"  thumImage:thumbURL];
         //设置网页地址
         shareObject.webpageUrl = [_webDic objectForKey:@"baseurl"];
@@ -76,18 +81,28 @@
     
     if(button.tag == 101){
     
-        [[self navigationController] popViewControllerAnimated:YES];
+        if(index>0){
+            index =index-1;
+            [webV goBack];
+        }else{
+        
+             [[self navigationController] popViewControllerAnimated:YES];
+        }
+        
+       
     
     }else if(button.tag == 102){
     
         [self shareH5];
+        
+        
     }
 
 }
 
 -(void)createHudView{
     
-    
+    index = 0;
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [[self view] addSubview:backBtn];
     
@@ -102,9 +117,10 @@
     
     NSString *urlH5 = [_webDic objectForKey:@"baseurl"];
 
-    UIWebView *webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 99*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-99*DEF_Adaptation_Font*0.5)];
+    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 99*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-99*DEF_Adaptation_Font*0.5)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&userid=%@",urlH5,[LocalDataMangaer sharedManager].uid]]];
     [webV loadRequest:request];
+    webV.delegate=self;
     [self.view addSubview:webV];
     [webV setBackgroundColor:[UIColor clearColor]];
     [webV stringByEvaluatingJavaScriptFromString:@"window.location.hash"];
@@ -113,11 +129,29 @@
     webV.mediaPlaybackRequiresUserAction = NO;
     JSContext *context = [webV valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
 
-    context[@"joinActivity"] = ^() {
-  
-        
+    context[@"finishLoading"] = ^() {
+        NSLog(@"666666666");
+       
     };
 }
+
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+
+
+    [[DataHander sharedDataHander] showDlg];
+
+}
+
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+
+    index = index+1;
+    [[DataHander sharedDataHander] hideDlg];
+    
+
+}
+
 
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;

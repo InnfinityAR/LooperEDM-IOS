@@ -11,12 +11,12 @@
 #import "LooperToolClass.h"
 
 @implementation LooperScorllLayer{
-
+    
     NSMutableArray *LableArray;
     UIScrollView *scrollV;
     int scorllType;
-
-
+    
+    
 }
 
 @synthesize obj = _obj;
@@ -79,8 +79,8 @@
 -(void)updateLableMove{
     
     if(scrollV.contentOffset.x>scrollV.contentSize.width){
-           scrollV.contentOffset = CGPointMake(self.frame.size.width*-1, scrollV.contentOffset.y);
-    
+        scrollV.contentOffset = CGPointMake(self.frame.size.width*-1, scrollV.contentOffset.y);
+        
     }else{
         scrollV.contentOffset = CGPointMake(scrollV.contentOffset.x+0.3, scrollV.contentOffset.y);
     }
@@ -96,16 +96,18 @@
     [self addSubview:scrollV];
     scrollV.showsVerticalScrollIndicator = FALSE;
     scrollV.showsHorizontalScrollIndicator = FALSE;
-  
+    
     
     scrollV.bounces=NO;
     
     if(scorllType==1){
         int start_num_x=0;
         for (int i=0;i<[strArray count];i++){
-            UILabel *labelTemp=[self createLable:CGPointMake(start_num_x, 0) andStr:[strArray objectAtIndex:i] andFrameSize:CGSizeMake(120*DEF_Adaptation_Font*0.5, frame.size.height) andFont:looperFont andFontSize:12 andType:type];
-            [scrollV addSubview:labelTemp];
-            start_num_x = start_num_x+120*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5;
+            if([[strArray objectAtIndex:i] isEqualToString:@""]==false){
+                UILabel *labelTemp=[self createLable:CGPointMake(start_num_x, 0) andStr:[strArray objectAtIndex:i] andFrameSize:CGSizeMake(120*DEF_Adaptation_Font*0.5, frame.size.height) andFont:looperFont andFontSize:12 andType:type];
+                [scrollV addSubview:labelTemp];
+                start_num_x = start_num_x+120*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5;
+            }
         }
         [scrollV setContentSize:CGSizeMake(start_num_x+120*DEF_Adaptation_Font*0.5, frame.size.height)];
     }else if(scorllType==2 ||scorllType==3){
@@ -127,8 +129,8 @@
             [scrollV setContentSize:CGSizeMake(num_x,frame.size.height)];
         }
         
-       // [self performSelector:@selector(updateLableMove) withObject:nil afterDelay:0.01];
-      
+        // [self performSelector:@selector(updateLableMove) withObject:nil afterDelay:0.01];
+        
     }
 }
 

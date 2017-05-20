@@ -83,7 +83,7 @@
 -(void)dataForH5:(NSDictionary *)dic{
 
     WebViewController *webVc = [[WebViewController alloc] init];
-    [[_obj navigationController] pushViewController:webVc animated:true];
+    [[_obj navigationController] pushViewController:webVc animated:NO];
     [webVc webViewWithData:dic andObj:self];
     
 }
