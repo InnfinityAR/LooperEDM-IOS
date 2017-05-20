@@ -44,10 +44,10 @@
         //创建分享消息对象
         UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
         //创建网页内容对象
-        NSString* thumbURL =  [_webDic objectForKey:@"LoopImage"];
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [_webDic objectForKey:@"LoopName"] descr:[_webDic objectForKey:@"LoopDescription"]  thumImage:thumbURL];
+        NSString* thumbURL =  [_webDic objectForKey:@"activityimage"];
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [_webDic objectForKey:@"activityname"] descr:@"基友在哪？！快来帮我赢取免费轰趴吧！"  thumImage:thumbURL];
         //设置网页地址
-        shareObject.webpageUrl = [_webDic objectForKey:@"H5Url"];
+        shareObject.webpageUrl = [_webDic objectForKey:@"baseurl"];
         
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
@@ -100,7 +100,7 @@
 
 -(void)createWebView{
     
-    NSString *urlH5 = @"http://www.innfinityar.com/?activityid=1";
+    NSString *urlH5 = [_webDic objectForKey:@"baseurl"];
 
     UIWebView *webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 99*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-99*DEF_Adaptation_Font*0.5)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&userid=%@",urlH5,[LocalDataMangaer sharedManager].uid]]];
