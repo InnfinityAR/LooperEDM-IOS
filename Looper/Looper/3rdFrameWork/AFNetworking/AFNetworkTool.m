@@ -131,6 +131,8 @@
     
     NSData *data = [time dataUsingEncoding:NSUTF8StringEncoding];
     NSString *stringBase64 = [data base64Encoding]; // base64格式的字符串
+    
+    
 
     NSString *aes1= [time aes256_encrypt:Looperkey];
     NSLog(@"%@",aes1);
@@ -138,7 +140,7 @@
     [parameters setObject:[NSString stringWithFormat:@"%ld",nowDate] forKey:@"timestamp"];
 
     
-    if([urlStr isEqualToString:@"getFriendList"]||[urlStr isEqualToString:@"followUser"]||[urlStr isEqualToString:@"getUserById"]||[urlStr isEqualToString:@"unfollowUser"]||[urlStr isEqualToString:@"addPreferenceToComment"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getThumbUpCount"]||[urlStr isEqualToString:@"getMyMessage"]||[urlStr isEqualToString:@"leaveLoop"]||[urlStr isEqualToString:@"getLoopByCoordinates"]||[urlStr isEqualToString:@"getUserInfo"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getLoopMessage"]||[urlStr isEqualToString:@"getMyFavorite"] ){
+    if([urlStr isEqualToString:@"getFriendList"]||[urlStr isEqualToString:@"followUser"]||[urlStr isEqualToString:@"getUserById"]||[urlStr isEqualToString:@"unfollowUser"]||[urlStr isEqualToString:@"addPreferenceToComment"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getThumbUpCount"]||[urlStr isEqualToString:@"getMyMessage"]||[urlStr isEqualToString:@"leaveLoop"]||[urlStr isEqualToString:@"getLoopByCoordinates"]||[urlStr isEqualToString:@"getUserInfo"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getLoopMessage"]||[urlStr isEqualToString:@"getMyFavorite"]||[urlStr isEqualToString:@"getHome"]){
     }else{
         
           [[DataHander sharedDataHander] showDlg];

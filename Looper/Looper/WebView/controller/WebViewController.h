@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StartViewModel.h"
 
-@interface WebViewController : UIViewController
+@interface WebViewController : UIViewController <UIWebViewDelegate>
 {
     
 
