@@ -139,21 +139,21 @@ void uncaughtExceptionHandler(NSException *exception) {
 
     }else{
         
-        WebViewController *webcv = [[WebViewController alloc] init];
-        [webcv webViewWithData:nil andObj:self];
-        self.window.rootViewController = webcv;
-        [self.window makeKeyAndVisible];
-        
+//        WebViewController *webcv = [[WebViewController alloc] init];
+//        [webcv webViewWithData:nil andObj:self];
+//        self.window.rootViewController = webcv;
+//        [self.window makeKeyAndVisible];
+//        
         
 
-//        MainViewController *start = [MainViewController alloc];
-//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
-//        nav.delegate = self;
-//        nav.navigationBar.hidden = YES;
-//        nav.interactivePopGestureRecognizer.enabled = YES;
-//        self.window.rootViewController = nav;
-//
-//        [self.window makeKeyAndVisible];
+        MainViewController *start = [MainViewController alloc];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+        nav.delegate = self;
+        nav.navigationBar.hidden = YES;
+        nav.interactivePopGestureRecognizer.enabled = YES;
+        self.window.rootViewController = nav;
+
+        [self.window makeKeyAndVisible];
     }
 
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);

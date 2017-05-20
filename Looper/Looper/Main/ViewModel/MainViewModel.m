@@ -38,6 +38,7 @@
 #import "NIMCloudMander.h"
 #import "SimpleChatViewController.h"
 #import "CreateLoopController.h"
+#import "ActivityViewController.h"
 
 
 #import "HowToPlayView.h"
@@ -387,6 +388,14 @@
       [[_obj navigationController]  pushViewController:messageVc animated:YES];
 }
 
+-(void)pushActivityViewController{
+    ActivityViewController *activity = [[ActivityViewController alloc] init];
+     [[_obj navigationController]  pushViewController:activity animated:YES];
+
+
+}
+
+
 
 -(void)hudOnClick:(int)type{
 
@@ -397,6 +406,9 @@
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
         
+    }else if(type==DJBtnTag){
+        [self pushActivityViewController];
+        
     }else if(type==SearchBtnTag){
         [self createSerachView];
     }else if(type==ActivityBackBtnTag){
@@ -406,8 +418,7 @@
 
     }else if(type==ActivityLikeBtnTag){
         
-        
-        
+    
         
     }else if(type==createLoopBackTag){
         

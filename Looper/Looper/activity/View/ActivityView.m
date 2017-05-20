@@ -42,9 +42,9 @@
     
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-
+    
     if(button.tag==100){
-
+        
         [_obj popController];
     }
 }
@@ -83,13 +83,12 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return 5;
-        return self.dataArr.count;
+    return self.dataArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     ActivityCell *cell=[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        cell.accessoryType=UITableViewCellStyleDefault;
+    cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     self.objDic=[[NSDictionary alloc]initWithDictionary:self.dataArr[indexPath.row]];
     NSDictionary *dic=[[NSDictionary alloc]initWithDictionary:self.objDic[@"message"]];
@@ -100,10 +99,12 @@
 //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
 //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
     if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){
+    if ([self.objDic[@"followercount"]intValue]==0){
         cell.followCountLB.text=@"我要参加";
     }
     else{
         cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"followercount"]];
+    }
     }
     return cell;
     
@@ -114,12 +115,9 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    // 取消选中状态
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    ActivityViewModel *activityVM=(ActivityViewModel *)self.obj;
-    [activityVM dataForH5:self.dataArr[indexPath.row]];
-    //    self.vc.shareUrl=[self.storyVM shareUrlForRow:indexPath.section];
-    
+
+    [self.obj dataForH5:self.dataArr[indexPath.row]];
+
 }
 
 
