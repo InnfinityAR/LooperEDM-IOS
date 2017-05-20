@@ -12,6 +12,7 @@
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "DataHander.h"
+#import "WebViewController.h"
 #define ActivityURL @"getActivity"
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
@@ -81,6 +82,10 @@
 }
 -(void)dataForH5:(NSDictionary *)dic{
 
+    WebViewController *webVc = [[WebViewController alloc] init];
+    [[_obj navigationController] pushViewController:webVc animated:true];
+    [webVc webViewWithData:dic andObj:self];
+    
 }
 
 @end
