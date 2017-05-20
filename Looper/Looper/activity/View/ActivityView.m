@@ -27,12 +27,9 @@
         self.obj = (ActivityViewModel*)idObject;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
-        UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake((DEF_SCREEN_WIDTH/2+25)*DEF_Adaptation_Font*0.5, 43*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
-        titleLB.text=@"Looper EDM";
-        titleLB.textColor=[UIColor whiteColor];
-        titleLB.textAlignment=NSTextAlignmentCenter;
-        [titleLB setFont:[UIFont fontWithName:looperFont size:15]];
-        [self addSubview:titleLB];
+        UILabel *looperName = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font*0.5,24*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"Looper EDM" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+        [self addSubview:looperName];
+
         //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
@@ -51,7 +48,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 93*DEF_Adaptation_Font*0.5,640*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT- 93*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 97*DEF_Adaptation_Font*0.5,640*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT- 93*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
