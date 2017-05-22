@@ -117,12 +117,12 @@
     
     NSString *urlH5 = [_webDic objectForKey:@"baseurl"];
 
-    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 99*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-99*DEF_Adaptation_Font*0.5)];
+    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-110*DEF_Adaptation_Font*0.5)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&userid=%@",urlH5,[LocalDataMangaer sharedManager].uid]]];
     [webV loadRequest:request];
     webV.delegate=self;
     [self.view addSubview:webV];
-    [webV setBackgroundColor:[UIColor clearColor]];
+    [webV setBackgroundColor:[UIColor blackColor]];
     [webV stringByEvaluatingJavaScriptFromString:@"window.location.hash"];
     
     webV.allowsInlineMediaPlayback = YES;
@@ -152,15 +152,50 @@
 
 }
 
-
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;
     obj =objVm;
-    [self createHudView];
+     [self createWebView];
+     [self createHudView];
     
-    [self createWebView];
-   // [self createHudView];
     
+//    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
+//    
+//    array = [[NSMutableArray alloc] initWithArray:[[dic objectForKey:@"data"] objectForKey:@"openid"]];
+//    
+//    index = 0;
+//    sum = [array count];
+//    NSLog(@"%@",array);
+//    
+//    
+//    
+//    
+//    [self toNetWork:[array objectAtIndex:index]];
+}
+
+-(void)toNetWork:(NSString*)str{
+    
+    NSMutableDictionary *dictemp = [[NSMutableDictionary alloc] initWithCapacity:50];
+    
+    
+    [AFNetworkTool Clarence_GET_JSONDataWithUrl:str Params:dictemp success:^(id json){
+        
+        
+        NSLog(@"%@",json);
+        
+        if((sum-1)>(index+1)){
+            
+            index =index +1;
+            [self toNetWork:[array objectAtIndex:index]];
+            
+            
+            
+        }
+        
+    } fail:^{
+        
+        
+    }];
     
 }
 

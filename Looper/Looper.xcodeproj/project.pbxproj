@@ -255,6 +255,7 @@
 		C44F49601E369E5300540FBB /* btn_looper_all.png in Resources */ = {isa = PBXBuildFile; fileRef = C44F495F1E369E5300540FBB /* btn_looper_all.png */; };
 		C44F49621E369EC400540FBB /* line_looper_big.png in Resources */ = {isa = PBXBuildFile; fileRef = C44F49611E369EC400540FBB /* line_looper_big.png */; };
 		C44F49651E36A2DF00540FBB /* looperChatCellViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C44F49641E36A2DF00540FBB /* looperChatCellViewCollectionViewCell.m */; };
+		C45006031ED295530080F0EC /* nActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C45006021ED295530080F0EC /* nActivityViewController.m */; };
 		C45489331E9E073500BB1591 /* btn_user_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489311E9E073500BB1591 /* btn_user_chat.png */; };
 		C45489341E9E073500BB1591 /* btn_user_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489321E9E073500BB1591 /* btn_user_home.png */; };
 		C45489361E9E242D00BB1591 /* bg_chat_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489351E9E242D00BB1591 /* bg_chat_back.png */; };
@@ -883,6 +884,8 @@
 		C44F49611E369EC400540FBB /* line_looper_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_looper_big.png; sourceTree = "<group>"; };
 		C44F49631E36A2DF00540FBB /* looperChatCellViewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperChatCellViewCollectionViewCell.h; sourceTree = "<group>"; };
 		C44F49641E36A2DF00540FBB /* looperChatCellViewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperChatCellViewCollectionViewCell.m; sourceTree = "<group>"; };
+		C45006011ED295530080F0EC /* nActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nActivityViewController.h; sourceTree = "<group>"; };
+		C45006021ED295530080F0EC /* nActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nActivityViewController.m; sourceTree = "<group>"; };
 		C45489311E9E073500BB1591 /* btn_user_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_user_chat.png; sourceTree = "<group>"; };
 		C45489321E9E073500BB1591 /* btn_user_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_user_home.png; sourceTree = "<group>"; };
 		C45489351E9E242D00BB1591 /* bg_chat_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_chat_back.png; sourceTree = "<group>"; };
@@ -2241,6 +2244,48 @@
 			path = viewModel;
 			sourceTree = "<group>";
 		};
+		C45005FC1ED2950B0080F0EC /* nActivity */ = {
+			isa = PBXGroup;
+			children = (
+				C45005FD1ED2950B0080F0EC /* Controller */,
+				C45005FE1ED2950B0080F0EC /* Model */,
+				C45005FF1ED2950B0080F0EC /* View */,
+				C45006001ED2950B0080F0EC /* ViewModel */,
+			);
+			name = nActivity;
+			path = Looper/nActivity;
+			sourceTree = "<group>";
+		};
+		C45005FD1ED2950B0080F0EC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C45006011ED295530080F0EC /* nActivityViewController.h */,
+				C45006021ED295530080F0EC /* nActivityViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C45005FE1ED2950B0080F0EC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C45005FF1ED2950B0080F0EC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C45006001ED2950B0080F0EC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C45DC3081E4ADCEB0031EDCD /* ADScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2525,6 +2570,7 @@
 		C4B8AAC11DF16CFC0004C8C4 = {
 			isa = PBXGroup;
 			children = (
+				C45005FC1ED2950B0080F0EC /* nActivity */,
 				B2A6EE541ECAD7FF004BF416 /* activity */,
 				C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */,
 				C4F0511D1EBAC847005DA9F1 /* Video */,
@@ -3767,6 +3813,7 @@
 				C4129BE51EAB3D380010A566 /* MusicPlayView.m in Sources */,
 				C45DAF1C1EA3405A000AB5C5 /* MusicViewCell.m in Sources */,
 				C4BE5EE71E4F1B8500C8DA98 /* SimpleChatCollectionViewCell.m in Sources */,
+				C45006031ED295530080F0EC /* nActivityViewController.m in Sources */,
 				B2A6EE5E1ECAE015004BF416 /* ActivityViewController.m in Sources */,
 				C4F59A6A1EB35FC30088C815 /* addMusicViewModel.m in Sources */,
 				B2A6EE7C1ECAEEA0004BF416 /* MJProperty.m in Sources */,
@@ -3976,7 +4023,7 @@
 					"$(PROJECT_DIR)/Looper/3rdFrameWork/NIMSDK",
 				);
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4025,7 +4072,7 @@
 					"$(PROJECT_DIR)/Looper/3rdFrameWork/NIMSDK",
 				);
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

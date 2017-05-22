@@ -563,13 +563,25 @@
     
     playIndex = indexPath;
     
-    NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+    if(playIndex==nil){
     
-    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
-    [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
-    [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
-    [_obj playMusicForBackgroundWithMusicInfo:tempDic];
+        playIndex=0;
+    }
+    
+    if([musicArray count]!=0){
+        NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+        
+        NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
+        [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+        [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
+        [_obj playMusicForBackgroundWithMusicInfo:tempDic];
+
+        
+    }
+    
+    
+   
 }
 
 

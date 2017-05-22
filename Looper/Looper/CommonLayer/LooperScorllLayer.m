@@ -115,15 +115,17 @@
         float num_x = [self getXWithForContentStr:string];
         UILabel *labelTemp=[self createLable:CGPointMake(0, 0) andStr:string andFrameSize:CGSizeMake(num_x, frame.size.height) andFont:looperFont andFontSize:15 andType:type];
         [scrollV addSubview:labelTemp];
+        scrollV.userInteractionEnabled=NO;
+        scrollV.scrollEnabled=NO;
+
+        
         
         if(num_x>frame.size.width){
             UILabel *labelTwo=[self createLable:CGPointMake(num_x+20*DEF_Adaptation_Font*0.5, 0) andStr:string andFrameSize:CGSizeMake(num_x, frame.size.height) andFont:looperFont andFontSize:15 andType:type];
             [scrollV addSubview:labelTwo];
             [scrollV setContentSize:CGSizeMake(num_x+num_x+20*DEF_Adaptation_Font*0.5, frame.size.height)];
             if(scorllType==2){
-                scrollV.userInteractionEnabled=NO;
-                scrollV.scrollEnabled=false;
-                NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.005f target:self selector:@selector(updateLableMove) userInfo:nil repeats:YES];
+                                NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.005f target:self selector:@selector(updateLableMove) userInfo:nil repeats:YES];
             }
         }else{
             [scrollV setContentSize:CGSizeMake(num_x,frame.size.height)];

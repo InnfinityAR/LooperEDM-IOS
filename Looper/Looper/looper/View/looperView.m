@@ -521,7 +521,6 @@
             break;
         }
     }
-    
     if([[[LocalDataMangaer sharedManager] uid]intValue]==[[messageData objectForKey:@"senderUserId"]intValue]){
         if(touchType==5 ||touchType==3){
             

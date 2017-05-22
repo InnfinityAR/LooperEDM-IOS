@@ -203,7 +203,12 @@
            
             if(_mainV ==nil){
                 [self initView];
-                 [bkv removeFromSuperview];
+                
+                
+                [UIView animateWithDuration:1.5 animations:^{
+                
+                    bkv.alpha=0;
+                }];
             }else{
                 [_mainV updataView];
                 
