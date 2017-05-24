@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "nActivityViewModel.h"
 
 @interface nActivityViewController : UIViewController
+{
+    
+    nActivityViewModel *activityVm;
+    
+}
+@property(nonatomic)nActivityViewModel *activityVm;
+
+
 
 @end

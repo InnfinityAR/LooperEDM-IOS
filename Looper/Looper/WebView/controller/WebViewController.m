@@ -25,11 +25,18 @@
 @implementation WebViewController{
 
     NSDictionary *_webDic;
+    NSMutableArray *userArray;
     id obj;
     
     int index;
     int sum;
     NSMutableArray *array;
+    
+    
+    NSMutableArray *array1;
+    NSMutableArray *array2;
+    NSMutableArray *array3;
+    
     
     UIWebView *webV;
     
@@ -155,23 +162,177 @@
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;
     obj =objVm;
-     [self createWebView];
-     [self createHudView];
+//     [self createWebView];
+//     [self createHudView];
     
     
-//    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
-//    
-//    array = [[NSMutableArray alloc] initWithArray:[[dic objectForKey:@"data"] objectForKey:@"openid"]];
-//    
-//    index = 0;
-//    sum = [array count];
-//    NSLog(@"%@",array);
-//    
-//    
-//    
-//    
-//    [self toNetWork:[array objectAtIndex:index]];
+    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
+    
+    array = [[NSMutableArray alloc] initWithArray:[[dic objectForKey:@"data"] objectForKey:@"openid"]];
+    
+    
+    NSDictionary *dic1=[ReadJsonFile readFile:@"1.json"];
+    NSDictionary *dic2=[ReadJsonFile readFile:@"2.json"];
+    NSDictionary *dic3=[ReadJsonFile readFile:@"3.json"];
+    
+    
+    array1 = [[NSMutableArray alloc] initWithArray:[dic1 objectForKey:@"data"]];
+    array2 = [[NSMutableArray alloc] initWithArray:[dic2 objectForKey:@"data"]];
+    array3 = [[NSMutableArray alloc] initWithArray:[dic3 objectForKey:@"data"]];
+    
+    
+    index = 0;
+    sum = [array count];
+    NSLog(@"%@",array);
+    
+    
+    userArray = [[NSMutableArray alloc] initWithCapacity:50];
+    
+  //  [self toNetWork:[array objectAtIndex:index]];
 }
+
+
+
+-(void)thumbupGroup:(NSString*)groupID andUnionID:(NSString*)unionID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:groupID forKey:@"groupId"];
+    [dic setObject:unionID forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbupGroup" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            if((sum-1)>(index+1)){
+                index =index +1;
+                [self toNetWork:[array objectAtIndex:index]];
+            }
+        }else{
+            
+            
+            if((sum-1)>(index+1)){
+                index =index +1;
+                [self toNetWork:[array objectAtIndex:index]];
+            }
+
+            
+        }
+    }fail:^{
+        
+    }];
+
+}
+
+
+
+
+-(void)sendMessage:(NSString*)message andGroupID:(NSString*)groupId andUnionId:(NSString*)unionID{
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:groupId forKey:@"groupId"];
+    [dic setObject:unionID forKey:@"userId"];
+    [dic setObject:message forKey:@"message"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            [self thumbupGroup:groupId andUnionID:unionID];
+            
+        }else{
+            [self thumbupGroup:groupId andUnionID:unionID];
+            
+        }
+    }fail:^{
+        
+    }];
+
+}
+
+
+
+
+-(void)thumbActivityMessage:(NSString*)groupId andUserId:(NSString*)userId andMessageId:(NSString*)messageID{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:groupId forKey:@"groupId"];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:messageID forKey:@"messageId"];
+
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+           
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+-(void)createUser:(NSDictionary *)dicData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[dicData objectForKey:@"unionid"] forKey:@"openId"];
+    [dic setObject:@"1" forKey:@"loginType"];
+    [dic setObject:[dicData objectForKey:@"headimgurl"] forKey:@"headImageUrl"];
+    [dic setObject:[dicData objectForKey:@"nickname"] forKey:@"userName"];
+    [dic setObject:[dicData objectForKey:@"sex"] forKey:@"userSex"];
+
+    
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+
+            
+            [userArray addObject:responseObject];
+            
+            
+            
+            int rand = (arc4random()%3)+ 1;
+            
+            
+            NSLog(@"rand == %d",rand);
+            
+            
+  
+            
+//            if(rand==1){
+//                if([array1 count]!=0){
+//                    [self sendMessage:[array1 objectAtIndex:0] andGroupID:@"1" andUnionId:[dicData objectForKey:@"unionid"]];
+//                    [array1 removeObjectAtIndex:0];
+//                }
+//            }else if(rand==2){
+//                if([array2 count]!=0){
+//                
+//                  [self sendMessage:[array2 objectAtIndex:0] andGroupID:@"2" andUnionId:[dicData objectForKey:@"unionid"]];
+//                [array2 removeObjectAtIndex:0];
+//                }
+//            }else if(rand ==3){
+//                if([array3 count]!=0){
+//                  [self sendMessage:[array3 objectAtIndex:0] andGroupID:@"3" andUnionId:[dicData objectForKey:@"unionid"]];
+//                [array3 removeObjectAtIndex:0];
+//                }
+//            }else{
+//                    if((sum-1)>(index+1)){
+//                         index =index +1;
+//                          [self toNetWork:[array objectAtIndex:index]];
+//                    }
+            
+ //           }
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+
+
+}
+
+
+
 
 -(void)toNetWork:(NSString*)str{
     
@@ -179,18 +340,24 @@
     
     
     [AFNetworkTool Clarence_GET_JSONDataWithUrl:str Params:dictemp success:^(id json){
+        NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:json];
+        if([[dic objectForKey:@"subscribe_time"] intValue]>1495512000){
+            NSLog(@"%@",dic);
+            
+            [self createUser:dic];
+            
+        }else{
+            if((sum-1)>(index+1)){
+                index =index +1;
+                [self toNetWork:[array objectAtIndex:index]];
+            }
+            
+
         
         
-        NSLog(@"%@",json);
         
-        if((sum-1)>(index+1)){
-            
-            index =index +1;
-            [self toNetWork:[array objectAtIndex:index]];
-            
-            
-            
         }
+
         
     } fail:^{
         

@@ -182,25 +182,28 @@
 }
 
 -(void)createPlayerView:(NSDictionary *)dicPlayer{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:dicPlayer[@"userid"] forKey:@"targetId"];
     
-    _looperV.userInteractionEnabled=false;
-    _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
-    _playerInfoV.userInteractionEnabled=true;
-    _playerInfoV.multipleTouchEnabled=true;
-      [[_obj view] addSubview:_playerInfoV];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
-        }else{
-            
-        }
-    }fail:^{
+    if([dicPlayer[@"userid"]intValue]!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:dicPlayer[@"userid"] forKey:@"targetId"];
         
-    }];
-
+        _looperV.userInteractionEnabled=false;
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+    
 }
 
 

@@ -114,15 +114,16 @@
             bk.layer.masksToBounds = YES;
             
             
-            UILabel *targetcontent = [[UILabel alloc] initWithFrame:CGRectMake(124*0.5*DEF_Adaptation_Font, 85*0.5*DEF_Adaptation_Font, 483*0.5*DEF_Adaptation_Font, 65*0.5*DEF_Adaptation_Font)];
-            targetcontent.text = [dic objectForKey:@"targetcontent"];
-            [targetcontent setTextColor:[UIColor colorWithRed:189/255.0 green:191/255.0 blue:203/255.0 alpha:1.0]];
-            [targetcontent setFont:[UIFont fontWithName:looperFont size:11]];
-            targetcontent.numberOfLines=0;
-             [targetcontent sizeToFit];
-            [targetcontent setTextAlignment:NSTextAlignmentLeft];
-            [cell.contentView addSubview:targetcontent];
- 
+            if([dic objectForKey:@"targetcontent"]!=[NSNull null]){
+                UILabel *targetcontent = [[UILabel alloc] initWithFrame:CGRectMake(124*0.5*DEF_Adaptation_Font, 85*0.5*DEF_Adaptation_Font, 483*0.5*DEF_Adaptation_Font, 65*0.5*DEF_Adaptation_Font)];
+                targetcontent.text = [dic objectForKey:@"targetcontent"];
+                [targetcontent setTextColor:[UIColor colorWithRed:189/255.0 green:191/255.0 blue:203/255.0 alpha:1.0]];
+                [targetcontent setFont:[UIFont fontWithName:looperFont size:11]];
+                targetcontent.numberOfLines=0;
+                [targetcontent sizeToFit];
+                [targetcontent setTextAlignment:NSTextAlignmentLeft];
+                [cell.contentView addSubview:targetcontent];
+            }
         }
     }else if(selectNum==2){
         NSDictionary *dic = [notifiArray objectAtIndex:indexPath.row];

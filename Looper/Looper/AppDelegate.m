@@ -25,6 +25,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import <UMMobClick/MobClick.h>
+#import "nActivityViewController.h"
 
 #import "WebViewController.h"
 
@@ -138,14 +139,6 @@ void uncaughtExceptionHandler(NSException *exception) {
         [self.window makeKeyAndVisible];
 
     }else{
-        
-//        WebViewController *webcv = [[WebViewController alloc] init];
-//        [webcv webViewWithData:nil andObj:self];
-//        self.window.rootViewController = webcv;
-//        [self.window makeKeyAndVisible];
-//        
-        
-
         MainViewController *start = [MainViewController alloc];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
         nav.delegate = self;
