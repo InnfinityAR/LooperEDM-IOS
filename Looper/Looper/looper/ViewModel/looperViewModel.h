@@ -72,7 +72,7 @@
 -(void)getLoopMusic:(int)type;
 
 -(void)playMusicAtIndex:(int)index;
-
+-(void)jumpToAddUserInfoVC:(NSString *)userID;
 
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)looperView *looperV;

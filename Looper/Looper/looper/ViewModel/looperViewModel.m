@@ -25,7 +25,7 @@
 #import "MusicListManage.h"
 #import "NIMCloudMander.h"
 #import "addMusicController.h"
-
+#import "UserInfoViewController.h"
 
 @implementation looperViewModel{
 
@@ -769,8 +769,12 @@
     
 }
 
-
-
+//跳转到userInfo界面
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
+}
 @end
 
 

@@ -43,7 +43,7 @@
 
 
 #import "HowToPlayView.h"
-
+#import "UserInfoViewController.h"
 
 
 @implementation MainViewModel{
@@ -79,6 +79,7 @@
 -(id)initWithController:(id)controller{
     if(self=[super init]){
         self.obj = (MainViewController*)controller;
+        self.VMNumber=0;
         [self createBackView];
         [self requestData];
     }
@@ -248,7 +249,7 @@
 }
 
 -(void)requestMainData{
-    
+
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
@@ -454,21 +455,27 @@
         [_createLoopV removeFromSuperview];
         
     }else if(type==103){
+        //设置按钮
         [self jumpToSettingC];
         
     }else if(type==104){
+        //消息信箱
         [self createMessageController];
         
     }else if(type==8001){
+        //关注
         [self createCommonView:1];
         
     }else if(type==8002){
+        //粉丝
         [self createCommonView:2];
         
     }else if(type==8003){
+        //喜欢的音乐
         [self createCommonView:4];
         
     }else if(type==8004){
+        //我的loop
         [self createCommonView:3];
         
     } else if(type==ActivityShareBtnTag){

@@ -35,14 +35,6 @@
     
 }
 
-
--(void)jumpToActivityH5:(NSDictionary *)ActivityDic{
-
-    
-    
-
-}
-
 -(NSInteger)rowNumber{
     
     return self.dataArr.count;

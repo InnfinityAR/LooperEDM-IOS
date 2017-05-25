@@ -11,10 +11,11 @@
 #import "MainViewModel.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
+#import "UserInfoViewModel.h"
+@implementation commonTableView
+{
 
-@implementation commonTableView{
-
-
+    NSInteger VMNumber;
     UITableView *tableView;
     NSArray *commonArray;
 
@@ -27,6 +28,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.obj = (MainViewModel*)idObject;
+        VMNumber=[self.obj VMNumber];
         self.typeView= type;
         [self initView];
         
@@ -68,9 +70,6 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    
-    
     if(_typeView==1){
          return [[[[_obj MainData] objectForKey:@"data"] objectForKey:@"Follow"] count];
     }else if(_typeView==2){
@@ -209,12 +208,14 @@
 }
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    
+//    if (VMNumber) {
+//    UserInfoViewModel *viewModel=self.obj;
     if(button.tag==2000){
         [_obj removeCommonView];
     }else if(button.tag==201){
          [_obj toCreateLooperView];
     }
+
 }
 
 -(void)initView{
@@ -235,11 +236,17 @@
         titleStr = @"粉丝";
     }else if(_typeView==3){
          titleStr = @"我的loop";
+        if (VMNumber) {
+            titleStr=@"他的loop";
+        }
         UIButton *createLoopBtn =[LooperToolClass createBtnImageName:@"createLoopbtn.png" andRect:CGPointMake(271, 950) andTag:201 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
         [self addSubview:createLoopBtn];
         
     }else if(_typeView==4){
          titleStr = @"我喜欢的音乐";
+        if (VMNumber) {
+            titleStr=@"他的收藏";
+        }
     }
     
     UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(232*DEF_Adaptation_Font_x*0.5, 50*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(176*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font_x*0.5) andText:titleStr andFontSize:13 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
