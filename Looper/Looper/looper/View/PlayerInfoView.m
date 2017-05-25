@@ -162,6 +162,15 @@
     
     
 
+    if([[LocalDataMangaer sharedManager].uid isEqualToString:[_loopData objectForKey:@"userid"]]==true){
+
+        [chatBtn setHidden:true];
+        [followBtn setHidden:true];
+        
+    }
+
+    
+    
 
 }
 

@@ -48,7 +48,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 97*DEF_Adaptation_Font*0.5,640*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT- 93*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 110*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;

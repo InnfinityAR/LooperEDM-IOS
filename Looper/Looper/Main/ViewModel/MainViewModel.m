@@ -39,6 +39,7 @@
 #import "SimpleChatViewController.h"
 #import "CreateLoopController.h"
 #import "ActivityViewController.h"
+#import "nActivityViewController.h"
 
 
 #import "HowToPlayView.h"
@@ -204,7 +205,12 @@
            
             if(_mainV ==nil){
                 [self initView];
-                 [bkv removeFromSuperview];
+                
+                
+                [UIView animateWithDuration:1.5 animations:^{
+                
+                    bkv.alpha=0;
+                }];
             }else{
                 [_mainV updataView];
                 
@@ -406,8 +412,15 @@
     ActivityViewController *activity = [[ActivityViewController alloc] init];
      [[_obj navigationController]  pushViewController:activity animated:YES];
 
-
 }
+
+
+-(void)pushNActivityViewController{
+    nActivityViewController *activity = [[nActivityViewController alloc] init];
+    [[_obj navigationController]  pushViewController:activity animated:YES];
+    
+}
+
 
 
 
@@ -419,6 +432,9 @@
 
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
+        
+    }else if(type==ActiveBtnTag){
+        [self pushNActivityViewController];
         
     }else if(type==DJBtnTag){
         [self pushActivityViewController];

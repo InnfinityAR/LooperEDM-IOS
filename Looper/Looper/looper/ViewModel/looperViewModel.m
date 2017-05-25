@@ -182,25 +182,28 @@
 }
 
 -(void)createPlayerView:(NSDictionary *)dicPlayer{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:dicPlayer[@"userid"] forKey:@"targetId"];
     
-    _looperV.userInteractionEnabled=false;
-    _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
-    _playerInfoV.userInteractionEnabled=true;
-    _playerInfoV.multipleTouchEnabled=true;
-      [[_obj view] addSubview:_playerInfoV];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
-        }else{
-            
-        }
-    }fail:^{
+    if([dicPlayer[@"userid"]intValue]!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:dicPlayer[@"userid"] forKey:@"targetId"];
         
-    }];
-
+        _looperV.userInteractionEnabled=false;
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+    
 }
 
 
@@ -563,13 +566,25 @@
     
     playIndex = indexPath;
     
-    NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+    if(playIndex==nil){
     
-    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
-    [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
-    [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
-    [_obj playMusicForBackgroundWithMusicInfo:tempDic];
+        playIndex=0;
+    }
+    
+    if([musicArray count]!=0){
+        NSDictionary *musicDic = [musicArray objectAtIndex:playIndex];
+        
+        NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        [tempDic setObject:[musicDic objectForKey:@"filename"] forKey:@"musicTitle"];
+        [tempDic setObject:[musicDic objectForKey:@"music_cover"] forKey:@"photoUrl"];
+        [tempDic setObject:[musicDic objectForKey:@"artist"] forKey:@"artist"];
+        [_obj playMusicForBackgroundWithMusicInfo:tempDic];
+
+        
+    }
+    
+    
+   
 }
 
 

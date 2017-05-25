@@ -399,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
             endingLineNumber = "425"
-            landmarkName = "-followUser:"
+            landmarkName = "-unfollowUser:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -416,22 +416,6 @@
             startingLineNumber = "117"
             endingLineNumber = "117"
             landmarkName = "-updataLoopMusic:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/looper/ViewModel/looperViewModel.m"
-            timestampString = "517314426.830268"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-initWithData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -434,7 +434,7 @@
             num_x = image.frame.origin.x -0.7f;
             image.frame = CGRectMake(num_x, image.frame.origin.y, image.frame.size.width, image.frame.size.height);
         }
-        if(num_x<-300){
+        if(num_x<-200){
             [image removeFromSuperview];
             
             [barrageArray removeObjectAtIndex:i];
@@ -521,7 +521,6 @@
             break;
         }
     }
-    
     if([[[LocalDataMangaer sharedManager] uid]intValue]==[[messageData objectForKey:@"senderUserId"]intValue]){
         if(touchType==5 ||touchType==3){
             
