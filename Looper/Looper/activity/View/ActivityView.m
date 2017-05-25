@@ -54,7 +54,7 @@
         _tableView.delegate = self;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.separatorStyle = NO;
-        [_tableView setBackgroundColor:[UIColor clearColor]];
+        [_tableView setBackgroundColor:[UIColor blackColor]];
         _tableView.delaysContentTouches = NO;
         //禁止上拉
         _tableView.alwaysBounceVertical=NO;

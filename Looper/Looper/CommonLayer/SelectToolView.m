@@ -136,7 +136,6 @@
     
     UIButton *cannel = [LooperToolClass createBtnImageName:@"caption_cannel.png" andRect:CGPointMake(490, 473) andTag:100 andSelectImage:@"x" andClickImage:nil andTextStr:nil andSize:CGSizeZero  andTarget:self];
     [self addSubview:cannel];
-
     
     UIButton *commit = [LooperToolClass createBtnImageName:@"caption_commit.png" andRect:CGPointMake(245, 585) andTag:101 andSelectImage:@"btn_coomit.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero  andTarget:self];
     [self addSubview:commit];

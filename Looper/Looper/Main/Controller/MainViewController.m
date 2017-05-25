@@ -21,7 +21,6 @@
 
     self.view.multipleTouchEnabled=true;
     _MainVm = [[MainViewModel alloc] initWithController:self];
-
     
     // Do any additional setup after loading the view.
 }
@@ -36,9 +35,10 @@
 
     if(_MainVm !=nil){
         [_MainVm requestMainData];
-    }
+            }
 
 }
+
 - (BOOL)shouldAutorotate
 {
     return NO;

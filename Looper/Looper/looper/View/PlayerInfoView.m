@@ -12,7 +12,7 @@
 #import "looperViewModel.h"
 #import "LocalDataMangaer.h"
 #import "DataHander.h"
-
+#import "UserInfoViewController.h"
 #import "UIImageView+WebCache.h"
 
 
@@ -95,7 +95,12 @@
         [_obj followUser:userId];
         [followBtn setSelected:true];
     
-    }else if(button.tag==601){
+    }
+    else if (button.tag==602){
+        [self.obj jumpToAddUserInfoVC:[_loopData objectForKey:@"userid"]];
+    
+    }
+    else if(button.tag==601){
         
         if([[LocalDataMangaer sharedManager].uid isEqualToString:[_loopData objectForKey:@"userid"]]==true){
         

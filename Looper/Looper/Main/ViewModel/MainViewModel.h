@@ -55,7 +55,7 @@
 @property(nonatomic)CreateLoopView *createLoopV;
 @property(nonatomic)NSDictionary *MainData;
 @property(nonatomic)NSArray *musicData;
-
+@property(nonatomic)NSInteger VMNumber;
 
 -(id)initWithController:(id)controller;
 -(void)hudOnClick:(int)type;
