@@ -63,7 +63,7 @@
     // 设置请求格式
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSString* url = [NSString stringWithFormat:@"https://api.weixin.qq.com/cgi-bin/user/info?access_token=RCin6R1luKHwNFzF7nDB0M9aj7wuxjAsArD6BQtab0brT4KmhWtPvJKIzIoa9rVnrt7yEKpdl8Aczshke2rIMN07OAD4ToNy10_H_jNEI9SLpt6gN_Aqh6_Kypo2oMIJAZFcAIAVUA&openid=%@",urlStr];
+    NSString* url = [NSString stringWithFormat:@"https://api.weixin.qq.com/cgi-bin/user/info?access_token=SLGYwUxQ8FYciZIJBTjH6NaCtd5hF_VkoukQyj_N5soTplxdUMqvS6ZH2Iu8JxRbqG1kO8g9k0eJ531j_AKcsOKmrCf0VUnUxjpD5nEF4I4B9RjbCxKO7XM1fCUK5yW5JHQaAIASQZ&openid=%@",urlStr];
     NSLog(@"param == %@",params);
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

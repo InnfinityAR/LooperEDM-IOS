@@ -113,6 +113,8 @@
 		C42B47D41ED55C1C00AE4399 /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = C42B47D01ED55C1C00AE4399 /* time.png */; };
 		C42B47D51ED55C1C00AE4399 /* trip.png in Resources */ = {isa = PBXBuildFile; fileRef = C42B47D11ED55C1C00AE4399 /* trip.png */; };
 		C42B47D61ED55C1C00AE4399 /* un_trip.png in Resources */ = {isa = PBXBuildFile; fileRef = C42B47D21ED55C1C00AE4399 /* un_trip.png */; };
+		C42B47DA1ED6A2F900AE4399 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B47D91ED6A2F900AE4399 /* NewPagedFlowView.m */; };
+		C42B47DE1ED6A31500AE4399 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = C42B47DD1ED6A31500AE4399 /* PGIndexBannerSubiew.m */; };
 		C42E7FF01EC2E75900D9CC43 /* small_parse.png in Resources */ = {isa = PBXBuildFile; fileRef = C42E7FEE1EC2E75900D9CC43 /* small_parse.png */; };
 		C42E7FF11EC2E75900D9CC43 /* small_play.png in Resources */ = {isa = PBXBuildFile; fileRef = C42E7FEF1EC2E75900D9CC43 /* small_play.png */; };
 		C42E7FF41EC3050D00D9CC43 /* owenFollowed.png in Resources */ = {isa = PBXBuildFile; fileRef = C42E7FF21EC3050D00D9CC43 /* owenFollowed.png */; };
@@ -731,6 +733,10 @@
 		C42B47D01ED55C1C00AE4399 /* time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time.png; sourceTree = "<group>"; };
 		C42B47D11ED55C1C00AE4399 /* trip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trip.png; sourceTree = "<group>"; };
 		C42B47D21ED55C1C00AE4399 /* un_trip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = un_trip.png; sourceTree = "<group>"; };
+		C42B47D81ED6A2F900AE4399 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
+		C42B47D91ED6A2F900AE4399 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
+		C42B47DC1ED6A31500AE4399 /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
+		C42B47DD1ED6A31500AE4399 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
 		C42E7FEE1EC2E75900D9CC43 /* small_parse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_parse.png; sourceTree = "<group>"; };
 		C42E7FEF1EC2E75900D9CC43 /* small_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = small_play.png; sourceTree = "<group>"; };
 		C42E7FF21EC3050D00D9CC43 /* owenFollowed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owenFollowed.png; sourceTree = "<group>"; };
@@ -1843,6 +1849,24 @@
 			path = viewModel;
 			sourceTree = "<group>";
 		};
+		C42B47D71ED6A2F900AE4399 /* NewPagedFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				C42B47D81ED6A2F900AE4399 /* NewPagedFlowView.h */,
+				C42B47D91ED6A2F900AE4399 /* NewPagedFlowView.m */,
+			);
+			path = NewPagedFlowView;
+			sourceTree = "<group>";
+		};
+		C42B47DB1ED6A31500AE4399 /* CustomeView */ = {
+			isa = PBXGroup;
+			children = (
+				C42B47DC1ED6A31500AE4399 /* PGIndexBannerSubiew.h */,
+				C42B47DD1ED6A31500AE4399 /* PGIndexBannerSubiew.m */,
+			);
+			path = CustomeView;
+			sourceTree = "<group>";
+		};
 		C42E7FFF1EC332D400D9CC43 /* loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -2676,6 +2700,8 @@
 		C4BCE6351E091E710087E6C5 /* 3rdFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				C42B47DB1ED6A31500AE4399 /* CustomeView */,
+				C42B47D71ED6A2F900AE4399 /* NewPagedFlowView */,
 				B2A6EE621ECAEEA0004BF416 /* MJExtension */,
 				C404A7D91EBF8E9B000B9E1D /* RotateNavigationController.h */,
 				C404A7DA1EBF8E9B000B9E1D /* RotateNavigationController.m */,
@@ -3836,6 +3862,7 @@
 				C45DC30E1E4ADCEB0031EDCD /* AdScrollView.m in Sources */,
 				C43297081E36C74C00FA4DD8 /* XDRefreshFooter.m in Sources */,
 				B2A6EE7B1ECAEEA0004BF416 /* MJFoundation.m in Sources */,
+				C42B47DE1ED6A31500AE4399 /* PGIndexBannerSubiew.m in Sources */,
 				C46E2EBB1E0BD03500CD7A52 /* LooperToolClass.m in Sources */,
 				C409A7391E1E276700F76B5C /* looperViewController.m in Sources */,
 				C42E7FF81EC3110D00D9CC43 /* sildeView.m in Sources */,
@@ -3919,6 +3946,7 @@
 				C4B4ABB81E50799600DC000E /* WebViewController.m in Sources */,
 				C409A73B1E1E276700F76B5C /* looperViewModel.m in Sources */,
 				C42F9D641E96333D00F5450F /* LooperListView.m in Sources */,
+				C42B47DA1ED6A2F900AE4399 /* NewPagedFlowView.m in Sources */,
 				C4BCE7521E091E710087E6C5 /* SDWebImageDecoder.m in Sources */,
 				C40F89771E1CF8A600DABEAA /* SerachView.m in Sources */,
 				C4DDB5421E2900BA005E3909 /* Base64Class.m in Sources */,

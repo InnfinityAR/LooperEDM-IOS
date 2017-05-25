@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewPagedFlowView.h"
 
-@interface nActivityView : UIView
+@interface nActivityView : UIView <NewPagedFlowViewDelegate, NewPagedFlowViewDataSource>
 {
     
     
@@ -19,6 +20,6 @@
 @property(nonatomic)id obj;
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray;
 @end

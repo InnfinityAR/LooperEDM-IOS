@@ -17,4 +17,11 @@
 
 -(id)initWithController:(id)controller;
 
+-(void)popController;
+
+-(void)shareh5View:(NSDictionary*)webDic;
+
+
+-(void)addActivityDetailView:(NSDictionary*)Dic;
+
 @end
