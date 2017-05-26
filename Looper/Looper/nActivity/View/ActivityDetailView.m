@@ -9,7 +9,7 @@
 #import "ActivityDetailView.h"
 #include "nActivityViewModel.h"
 #import "LooperConfig.h"
-
+#import "LooperToolClass.h"
 @implementation ActivityDetailView{
     UIScrollView *bkScroll;
 
@@ -55,7 +55,9 @@
     bkScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT)];
     [bkScroll setBackgroundColor:[UIColor grayColor]];
     [self addSubview:bkScroll];
-    
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+    [bkScroll addSubview:backBtn];
+
     
     bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*2);
     
@@ -63,4 +65,13 @@
 
     
 }
+- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    
+    if(button.tag==101){
+        [self removeFromSuperview];
+    }else if(button.tag==102){
+        
+    }
+}
+
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CurrentActivityTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *activityImage;
+@property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UILabel *themeLB;
 @property (weak, nonatomic) IBOutlet UILabel *timeLB;
 @property (weak, nonatomic) IBOutlet UILabel *addressLB;

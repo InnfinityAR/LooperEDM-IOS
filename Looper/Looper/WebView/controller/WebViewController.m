@@ -40,6 +40,10 @@
     
     UIWebView *webV;
     
+    
+    
+    int userCount;
+    
 
 }
 
@@ -162,8 +166,8 @@
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;
     obj =objVm;
-//     [self createWebView];
-//     [self createHudView];
+     [self createWebView];
+     [self createHudView];
     
     
     NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
@@ -184,11 +188,13 @@
     index = 0;
     sum = [array count];
     NSLog(@"%@",array);
+    userCount = 0;
     
     
-    userArray = [[NSMutableArray alloc] initWithCapacity:50];
     
-  //  [self toNetWork:[array objectAtIndex:index]];
+//    userArray = [[NSMutableArray alloc] initWithCapacity:50];
+//    
+//    [self toNetWork:[array objectAtIndex:index]];
 }
 
 
@@ -297,29 +303,29 @@
             
   
             
-//            if(rand==1){
-//                if([array1 count]!=0){
-//                    [self sendMessage:[array1 objectAtIndex:0] andGroupID:@"1" andUnionId:[dicData objectForKey:@"unionid"]];
-//                    [array1 removeObjectAtIndex:0];
-//                }
-//            }else if(rand==2){
-//                if([array2 count]!=0){
-//                
-//                  [self sendMessage:[array2 objectAtIndex:0] andGroupID:@"2" andUnionId:[dicData objectForKey:@"unionid"]];
-//                [array2 removeObjectAtIndex:0];
-//                }
-//            }else if(rand ==3){
-//                if([array3 count]!=0){
-//                  [self sendMessage:[array3 objectAtIndex:0] andGroupID:@"3" andUnionId:[dicData objectForKey:@"unionid"]];
-//                [array3 removeObjectAtIndex:0];
-//                }
-//            }else{
-//                    if((sum-1)>(index+1)){
-//                         index =index +1;
-//                          [self toNetWork:[array objectAtIndex:index]];
-//                    }
+            if(rand==1){
+                if([array1 count]!=0){
+                    [self sendMessage:[array1 objectAtIndex:0] andGroupID:@"1" andUnionId:[dicData objectForKey:@"unionid"]];
+                    [array1 removeObjectAtIndex:0];
+                }
+            }else if(rand==2){
+                if([array2 count]!=0){
+                
+                  [self sendMessage:[array2 objectAtIndex:0] andGroupID:@"2" andUnionId:[dicData objectForKey:@"unionid"]];
+                [array2 removeObjectAtIndex:0];
+                }
+            }else if(rand ==3){
+                if([array3 count]!=0){
+                  [self sendMessage:[array3 objectAtIndex:0] andGroupID:@"3" andUnionId:[dicData objectForKey:@"unionid"]];
+                [array3 removeObjectAtIndex:0];
+                }
+            }else{
+                    if((sum-1)>(index+1)){
+                         index =index +1;
+                          [self toNetWork:[array objectAtIndex:index]];
+                    }
             
- //           }
+            }
         }else{
             
             
@@ -331,30 +337,41 @@
 
 }
 
+//1495512000 //
 
-
-
+//1495600000
 -(void)toNetWork:(NSString*)str{
+    
+    
+    
     
     NSMutableDictionary *dictemp = [[NSMutableDictionary alloc] initWithCapacity:50];
     
     
     [AFNetworkTool Clarence_GET_JSONDataWithUrl:str Params:dictemp success:^(id json){
         NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:json];
-        if([[dic objectForKey:@"subscribe_time"] intValue]>1495512000){
+        if([[dic objectForKey:@"subscribe_time"] intValue]>1495510000){
             NSLog(@"%@",dic);
             
-            [self createUser:dic];
+            userCount = userCount+1;
             
-        }else{
+            
+           // NSLog(@"userCount %d",userCount);
+            
+            //[self createUser:dic];
+            
             if((sum-1)>(index+1)){
                 index =index +1;
                 [self toNetWork:[array objectAtIndex:index]];
             }
             
-
-        
-        
+        }else{
+             NSLog(@"%@",dic);
+            
+            if((sum-1)>(index+1)){
+                index =index +1;
+                [self toNetWork:[array objectAtIndex:index]];
+            }
         
         }
 
