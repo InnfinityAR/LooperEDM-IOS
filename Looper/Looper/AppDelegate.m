@@ -132,22 +132,22 @@ void uncaughtExceptionHandler(NSException *exception) {
     
    // isHasData=false;
     
-    if(isHasData == false){
-
-        VideoViewController* videoVc = [[VideoViewController alloc] init];
-        self.window.rootViewController = videoVc;
-        [self.window makeKeyAndVisible];
-
-    }else{
-        MainViewController *start = [MainViewController alloc];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
-        nav.delegate = self;
-        nav.navigationBar.hidden = YES;
-        nav.interactivePopGestureRecognizer.enabled = YES;
-        self.window.rootViewController = nav;
-
-        [self.window makeKeyAndVisible];
-    }
+//    if(isHasData == false){
+//
+//        VideoViewController* videoVc = [[VideoViewController alloc] init];
+//        self.window.rootViewController = videoVc;
+//        [self.window makeKeyAndVisible];
+//
+//    }else{
+//        MainViewController *start = [MainViewController alloc];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+//        nav.delegate = self;
+//        nav.navigationBar.hidden = YES;
+//        nav.interactivePopGestureRecognizer.enabled = YES;
+//        self.window.rootViewController = nav;
+//
+//        [self.window makeKeyAndVisible];
+//    }
 
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
  

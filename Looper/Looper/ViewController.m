@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import "CurrentActivityView.h"
+#import "LooperConfig.h"
 @interface ViewController ()
 
 @end
@@ -17,12 +18,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.navigationBar setHidden:YES];
+   // self.
+   // [self.navigationBar setHidden:YES];
 
-    [self.view setBackgroundColor:[UIColor brownColor]];
-
+  //  [self.view setBackgroundColor:[UIColor brownColor]];
+    self.view.userInteractionEnabled=true;
+    
+  CurrentActivityView *view1=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andFromView:self.view andMyData:nil];
+//    self.view=view;
+  ///  [[self view] addSubview:view1];
+    [self.view addSubview:view1];
     
 }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -52,9 +52,11 @@
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        //不出现滚动条
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.separatorStyle = NO;
         [_tableView setBackgroundColor:[UIColor blackColor]];
+        //取消button点击延迟
         _tableView.delaysContentTouches = NO;
         //禁止上拉
         _tableView.alwaysBounceVertical=NO;
