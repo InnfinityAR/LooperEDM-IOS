@@ -12,8 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.edmBtn.layer.cornerRadius=7;
+    self.edmBtn.layer.cornerRadius=10;
     self.edmBtn.layer.masksToBounds=YES;
+    [self.edmBtn.titleLabel setFont:[UIFont systemFontOfSize:11]];
     [self.saleBtn.layer setBorderWidth:1.0];
     self.saleBtn.layer.borderColor=[UIColor colorWithRed:24.0/255.0 green:163.0/255.0 blue:170.0/255.0 alpha:1.0].CGColor;
 
