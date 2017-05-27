@@ -104,6 +104,9 @@
         [LocalDataMangaer sharedManager].uid = responseObject[@"data"][@"userid"];
         [LocalDataMangaer sharedManager].userData = responseObject[@"data"];
         [LocalDataMangaer sharedManager].tokenStr = responseObject[@"data"][@"sdkid"];
+        if (responseObject[@"data"][@"sdkid"]==[NSNull null]) {
+            [LocalDataMangaer sharedManager].tokenStr =@"";
+        }
         [LocalDataMangaer sharedManager].HeadImageUrl = responseObject[@"data"][@"headimageurl"];
         [LocalDataMangaer sharedManager].sex = responseObject[@"data"][@"sex"];
         [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
@@ -176,6 +179,9 @@
                     [LocalDataMangaer sharedManager].thirdId = responseObject[@"data"][@"openid"];
                     [LocalDataMangaer sharedManager].userData = responseObject[@"data"];
                     [LocalDataMangaer sharedManager].tokenStr = responseObject[@"data"][@"sdkid"];
+                        if (responseObject[@"data"][@"sdkid"]==[NSNull null]) {
+                            [LocalDataMangaer sharedManager].tokenStr =@"";
+                        }
                     [LocalDataMangaer sharedManager].HeadImageUrl = responseObject[@"data"][@"headimageurl"];
                     [LocalDataMangaer sharedManager].sex = responseObject[@"data"][@"sex"];
                     [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];

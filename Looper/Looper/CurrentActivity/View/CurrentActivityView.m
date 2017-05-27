@@ -95,6 +95,18 @@
     cell.themeLB.text=activity[@"activityname"];
     cell.timeLB.text=[NSString stringWithFormat:@"%@至\n%@",activity[@"starttime"],activity[@"endtime"]];
     cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
+    if (activity[@"price"]==[NSNull null]) {
+        [cell.ticketLB setHidden:YES];
+        [cell.saleBtn setHidden:YES];
+    }
+    else if([activity[@"price"]isEqualToString:@""]){
+        [cell.ticketLB setHidden:YES];
+        [cell.saleBtn setHidden:YES];
+    }
+    else{
+        [cell.ticketLB setHidden:NO];
+        [cell.saleBtn setHidden:NO];
+    }
     [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
     return cell;
     
