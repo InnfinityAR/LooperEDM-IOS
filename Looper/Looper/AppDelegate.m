@@ -130,7 +130,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
     
-   // isHasData=false;
+    isHasData=false;
     
     if(isHasData == false){
 

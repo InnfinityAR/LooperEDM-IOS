@@ -166,8 +166,8 @@
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;
     obj =objVm;
-//     [self createWebView];
-//     [self createHudView];
+     [self createWebView];
+     [self createHudView];
     
     
     NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];

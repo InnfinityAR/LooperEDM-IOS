@@ -1,4 +1,4 @@
-//
+ //
 //  nActivityViewModel.m
 //  Looper
 //
@@ -17,14 +17,15 @@
 
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
-
+#import "CurrentActivityView.h"
+#import "TicketCiew.h"
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
     
     NSMutableArray *recommendArray;
-
-
+    
+    ActivityDetailView *activityDetailV;
 }
 
 -(id)initWithController:(id)controller{
@@ -44,8 +45,6 @@
 
 
 
-
-
 -(void)addActivityDetailView:(NSDictionary*)ActivityDic{
 
     
@@ -55,7 +54,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             
-            ActivityDetailView *activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
+           activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
             
             [[_obj view] addSubview:activityDetailV];
 
@@ -69,6 +68,20 @@
 
 }
 
+
+-(void)removeDetailView{
+
+    [activityDetailV removeFromSuperview];
+
+
+}
+
+
+//跳转到购票
+-(void)addTicket:(NSDictionary *)dic{
+    TicketCiew *ticketView=[[TicketCiew alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDic:dic];
+    [[_obj view]addSubview:ticketView];
+}
 
 -(void)shareh5View:(NSDictionary*)webDic{
 
@@ -159,9 +172,12 @@
     [[_obj view] addSubview:activityV];
     
 
-    
-
-
 }
+
+-(void)jumpToCurrentActivity:(NSArray*)array{
+    CurrentActivityView *view=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self  andMyData:array];
+                               [[_obj view]addSubview:view];
+}
+
 
 @end

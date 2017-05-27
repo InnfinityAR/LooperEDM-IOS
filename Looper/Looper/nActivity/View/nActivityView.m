@@ -62,16 +62,25 @@
     
     
     UIImageView *bannerView1=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(0,0) andTag:100 andSize:CGSizeMake(515*DEF_Adaptation_Font*0.5, 804*DEF_Adaptation_Font*0.5) andIsRadius:false];
-    [bannerView addSubview:bannerView1];
-    
+   
     
     [bannerView1  sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:index]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
+    [bannerView addSubview:bannerView1];
+     bannerView1.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
+    bannerView1.layer.masksToBounds = YES;
+
+    
+    UIImageView *masking = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 515*DEF_Adaptation_Font*0.5,805*DEF_Adaptation_Font*0.5)];
+    masking.image =[UIImage imageNamed:@"masking.png"];
+    masking.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
+
+    [bannerView addSubview:masking];
+
 
     UILabel* titleStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 552*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(435*DEF_Adaptation_Font_x*0.5, 77*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"activityname"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:titleStr];
-    [titleStr setBackgroundColor:[UIColor blackColor]];
     titleStr.numberOfLines = 0;
     [titleStr sizeToFit];
     
@@ -81,7 +90,6 @@
     
     UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 705*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"location"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:locationStr];
-     [locationStr setBackgroundColor:[UIColor blackColor]];
     [locationStr sizeToFit];
     
     
@@ -90,7 +98,6 @@
     
     UILabel* TimeStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 653*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"starttime"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:TimeStr];
-     [TimeStr setBackgroundColor:[UIColor blackColor]];
      [TimeStr sizeToFit];
     
     return bannerView;
@@ -122,12 +129,14 @@
     NSLog(@"点击了第%ld张图",(long)subIndex + 1);
     
     [_obj addActivityDetailView:[_commendArray objectAtIndex:pageIndex]];
+
     
     
 }
 
 
 - (NSInteger)numberOfPagesInFlowView:(NewPagedFlowView *)flowView {
+    NSLog(@"在这里打印:%@",_commendArray);
     return _commendArray.count;
 }
 
@@ -162,8 +171,8 @@
         
          [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
     }else if(button.tag==103){
-        
-        
+        [self animation];
+        [_obj jumpToCurrentActivity:_commendArray];
     }else if(button.tag==104){
         
         
@@ -187,6 +196,7 @@
     effectView.alpha=1.2f;
     [self addSubview:effectView];
 }
+
 
 
 
@@ -214,8 +224,15 @@
     [self createBkView];
     [self createHudView];
     [self createCommendView];
+    
   
 }
-
+-(void)animation{
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.toValue = [NSNumber numberWithFloat:0.0];
+    scaleAnimation.duration = 0.35f;
+    scaleAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [self.layer addAnimation:scaleAnimation forKey:nil];
+}
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import "CurrentActivityView.h"
+#import "LooperConfig.h"
 @interface ViewController ()
 
 @end
@@ -17,12 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.navigationBar setHidden:YES];
-
-    [self.view setBackgroundColor:[UIColor brownColor]];
 
     
 }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {

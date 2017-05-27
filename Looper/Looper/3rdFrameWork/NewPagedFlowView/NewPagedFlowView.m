@@ -42,8 +42,8 @@ static NSString *subviewClassName;
     self.pageCount = 0;
     self.isOpenAutoScroll = YES;
     self.isCarousel = YES;
-    self.leftRightMargin = 20;
-    self.topBottomMargin = 30;
+    self.leftRightMargin = 40;
+    self.topBottomMargin = 75;
     _currentPageIndex = 0;
     
     _minimumPageAlpha = 1.0;
