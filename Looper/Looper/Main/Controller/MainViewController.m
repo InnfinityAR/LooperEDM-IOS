@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "LocalDataMangaer.h"
 
 @interface MainViewController ()
 
@@ -20,6 +21,9 @@
     
 
     self.view.multipleTouchEnabled=true;
+    
+   // [LocalDataMangaer sharedManager].uid = @"475";
+    
     _MainVm = [[MainViewModel alloc] initWithController:self];
     
     // Do any additional setup after loading the view.

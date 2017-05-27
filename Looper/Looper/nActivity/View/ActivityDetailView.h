@@ -19,6 +19,6 @@
 @property(nonatomic)id obj;
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic;
 
 @end

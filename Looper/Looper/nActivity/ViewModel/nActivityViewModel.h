@@ -21,7 +21,6 @@
 
 -(void)shareh5View:(NSDictionary*)webDic;
 
-
 -(void)addActivityDetailView:(NSDictionary*)Dic;
 
 @end

@@ -133,7 +133,7 @@
     NSString *stringBase64 = [data base64Encoding]; // base64格式的字符串
     
     
-
+    NSLog(@"%@",urlStr);
     NSString *aes1= [time aes256_encrypt:Looperkey];
     NSLog(@"%@",aes1);
     [parameters setObject:aes1 forKey:@"token"];

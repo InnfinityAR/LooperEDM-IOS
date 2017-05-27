@@ -71,6 +71,7 @@
 
     UILabel* titleStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 552*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(435*DEF_Adaptation_Font_x*0.5, 77*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"activityname"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:titleStr];
+    [titleStr setBackgroundColor:[UIColor blackColor]];
     titleStr.numberOfLines = 0;
     [titleStr sizeToFit];
     
@@ -80,6 +81,8 @@
     
     UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 705*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"location"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:locationStr];
+     [locationStr setBackgroundColor:[UIColor blackColor]];
+    [locationStr sizeToFit];
     
     
     UIImageView *time=[LooperToolClass createImageViewReal:@"time.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,653*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
@@ -87,6 +90,8 @@
     
     UILabel* TimeStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 653*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"starttime"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:TimeStr];
+     [TimeStr setBackgroundColor:[UIColor blackColor]];
+     [TimeStr sizeToFit];
     
     return bannerView;
 }

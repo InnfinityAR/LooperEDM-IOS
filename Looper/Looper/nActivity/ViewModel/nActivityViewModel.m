@@ -42,13 +42,30 @@
 
 }
 
--(void)addActivityDetailView:(NSDictionary*)Dic{
 
-    ActivityDetailView *activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+
+
+
+-(void)addActivityDetailView:(NSDictionary*)ActivityDic{
+
     
-    [[_obj view] addSubview:activityDetailV];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            ActivityDetailView *activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
+            
+            [[_obj view] addSubview:activityDetailV];
 
-
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
 
 }
 
@@ -103,10 +120,6 @@
     
     
 }
-
-
-
-
 
 -(void)requestData{
     allActivityArray = [[NSMutableArray alloc] initWithCapacity:50];

@@ -6,6 +6,9 @@
 //  Copyright © 2016 lujiawei. All rights reserved.
 //
 
+
+    
+
 #import "LocalDataMangaer.h"
 
 static LocalDataMangaer *localDataManagerM=nil;
