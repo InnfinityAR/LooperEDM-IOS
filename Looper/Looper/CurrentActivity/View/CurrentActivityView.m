@@ -25,7 +25,7 @@
         self.dataArr=myDataSource;
         UILabel *looperName = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"全部活动" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
         [self addSubview:looperName];
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 48/2) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 48/2) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(135*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5) andTarget:self];
         [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
         [self addSubview:backBtn];
         //加载懒加载
@@ -95,6 +95,7 @@
     cell.themeLB.text=activity[@"activityname"];
     cell.timeLB.text=[NSString stringWithFormat:@"%@至\n%@",activity[@"starttime"],activity[@"endtime"]];
     cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
+    [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
     return cell;
     
 }
