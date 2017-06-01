@@ -65,7 +65,8 @@
     MusicTableView.delegate = self;
     MusicTableView.separatorStyle = NO;
     [MusicTableView setBackgroundColor:[UIColor clearColor]];
-    
+    //设置音乐列表的速度
+    MusicTableView.decelerationRate=UIScrollViewDecelerationRateFast;
     if(isOwner==true){
          [MusicTableView setEditing:true animated:YES];
     }

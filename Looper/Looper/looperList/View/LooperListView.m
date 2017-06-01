@@ -31,7 +31,7 @@
     NSMutableArray *ListArray;
     
     
-    UIImageView *moveline;
+   UIImageView *moveline;
     
     int indexNum;
     
@@ -43,7 +43,7 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (LooperListViewModel*)idObject;
         [self initView];
-        
+       
         
     }
     return self;
@@ -53,9 +53,6 @@
 
 -(void)reloadData{
     ListArray =[[NSMutableArray alloc] initWithCapacity:50];
-    
-  
-    
     [UIView animateWithDuration:0.2 animations:^{
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
         [tagView setHidden:true];
@@ -262,11 +259,25 @@
 
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
-        NSLog(@"------往上滚动");
-        [self actionMoveUp];
+//        NSLog(@"------往上滚动");
+            [self actionMoveUp];
+        //如果到达顶部
+        if(scrollView.contentOffset.y ==0||scrollView.contentOffset.y==20){
+                     // 到顶部了
+            UISwipeGestureRecognizer   *recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipe:)];
+            [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+            [_collectView addGestureRecognizer:recognizer];
+            //TODO
+        }
     }else{
         [self actionMoveDown];
         NSLog(@"------往下滚动");
+    }
+}
+//滑动手势
+- (void)swipe:(UISwipeGestureRecognizer *)recognizer{
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"swipe up");
     }
 }
 
@@ -344,6 +355,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     _collectView.showsVerticalScrollIndicator = FALSE;
     _collectView.showsHorizontalScrollIndicator = FALSE;
     [_collectView setBackgroundColor:[UIColor clearColor]];
+
     [self addSubview:_collectView];
 }
 
