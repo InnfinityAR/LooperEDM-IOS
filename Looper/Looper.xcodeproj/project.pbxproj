@@ -35,6 +35,7 @@
 		B2A902231ED6A3A80022C282 /* CurrentActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A902221ED6A3A80022C282 /* CurrentActivityView.m */; };
 		B2A902261ED810750022C282 /* hotActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A902251ED810750022C282 /* hotActivity.png */; };
 		B2A902291ED824750022C282 /* TicketCiew.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A902281ED824750022C282 /* TicketCiew.m */; };
+		B2D6CEC11EE0163B004C65F2 /* UICollectionView+UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D6CEC01EE0163B004C65F2 /* UICollectionView+UITouch.m */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C404A7B81EBEF5AE000B9E1D /* movelineV1.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7B71EBEF5AE000B9E1D /* movelineV1.png */; };
@@ -643,6 +644,8 @@
 		B2A902251ED810750022C282 /* hotActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotActivity.png; sourceTree = "<group>"; };
 		B2A902271ED824750022C282 /* TicketCiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCiew.h; sourceTree = "<group>"; };
 		B2A902281ED824750022C282 /* TicketCiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCiew.m; sourceTree = "<group>"; };
+		B2D6CEBF1EE0163B004C65F2 /* UICollectionView+UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+UITouch.h"; sourceTree = "<group>"; };
+		B2D6CEC01EE0163B004C65F2 /* UICollectionView+UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+UITouch.m"; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Looper.entitlements; path = Looper/Looper.entitlements; sourceTree = "<group>"; };
@@ -2059,6 +2062,8 @@
 			children = (
 				C42F9D621E96333D00F5450F /* LooperListView.h */,
 				C42F9D631E96333D00F5450F /* LooperListView.m */,
+				B2D6CEBF1EE0163B004C65F2 /* UICollectionView+UITouch.h */,
+				B2D6CEC01EE0163B004C65F2 /* UICollectionView+UITouch.m */,
 				C4FE984E1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.h */,
 				C4FE984F1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m */,
 				C43BB00D1EAA25B300937973 /* looperListFlowLayout.h */,
@@ -3971,6 +3976,7 @@
 				C42FBFA51E0A6C5000628A78 /* AWCollectionViewDialLayout.m in Sources */,
 				B2A902291ED824750022C282 /* TicketCiew.m in Sources */,
 				C4BCE7411E091E710087E6C5 /* UIButton+AFNetworking.m in Sources */,
+				B2D6CEC11EE0163B004C65F2 /* UICollectionView+UITouch.m in Sources */,
 				C4D8B1071E1A412D009F3A23 /* PSCityPickerView.m in Sources */,
 				C4BCE73F1E091E710087E6C5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				C46E7D2A1EADE8EB00996110 /* PhoneBindView.m in Sources */,
