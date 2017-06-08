@@ -25,7 +25,7 @@
 
 
 -(int)getContentLength:(NSString*)contentStr{
-
+    
     float num_x =0;
     NSString *perchar;
     int alength = [contentStr length];
@@ -53,7 +53,7 @@
     
     int num_x=[self getContentLength:contentStr];
     
-      int num_y = num_x/(330*DEF_Adaptation_Font_x*0.5);
+    int num_y = num_x/(330*DEF_Adaptation_Font_x*0.5);
     
     if(num_x>(330*DEF_Adaptation_Font_x*0.5)){
         return num_y+1;
@@ -85,17 +85,17 @@
     int add_y=0;
     if(isHasTime ==true){
         add_y = 54*0.5*DEF_Adaptation_Font;
-    
+        
     }
-     if(isHasTime ==true){
-    NSString *timeStr =[self timeWithTimeIntervalString:[cellData objectForKey:@"sentTime"]];
-    UILabel *timeLable = [LooperToolClass createLableView:CGPointMake(220*DEF_Adaptation_Font_x*0.5, 29*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(200*DEF_Adaptation_Font_x*0.5, 16*DEF_Adaptation_Font_x*0.5) andText:timeStr andFontSize:10 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    [self addSubview:timeLable];
-     }
+    if(isHasTime ==true){
+        NSString *timeStr =[self timeWithTimeIntervalString:[cellData objectForKey:@"sentTime"]];
+        UILabel *timeLable = [LooperToolClass createLableView:CGPointMake(220*DEF_Adaptation_Font_x*0.5, 29*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(200*DEF_Adaptation_Font_x*0.5, 16*DEF_Adaptation_Font_x*0.5) andText:timeStr andFontSize:10 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+        [self addSubview:timeLable];
+    }
     
-
+    
     if([[cellData objectForKey:@"senderUserId"] intValue]!=[[[LocalDataMangaer sharedManager] uid] intValue]){
-    
+        
         UIView *headView = [LooperToolClass createViewAndRect:CGPointMake(12, 20+add_y/0.5/DEF_Adaptation_Font) andTag:100 andSize:CGSizeMake(55*0.5*DEF_Adaptation_Font,55*0.5*DEF_Adaptation_Font) andIsRadius:true andImageName:cellData[@"HeadImageUrl"]];
         [self addSubview:headView];
         
@@ -118,10 +118,9 @@
         UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(10*DEF_Adaptation_Font_x*0.5, 5*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(330*DEF_Adaptation_Font_x*0.5, num_y*45*DEF_Adaptation_Font_x*0.5) andText:[cellData objectForKey:@"text"] andFontSize:13 andColor:[UIColor colorWithRed:134/255.0 green:73/255.0 blue:170/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [frame addSubview:titleNum];
         titleNum.numberOfLines=0;
-         [titleNum sizeToFit];
- 
+        [titleNum sizeToFit];
+        
     }else{
-    
         UIView *headView = [LooperToolClass createViewAndRect:CGPointMake(573, 20+add_y/0.5/DEF_Adaptation_Font) andTag:100 andSize:CGSizeMake(55*0.5*DEF_Adaptation_Font, 55*0.5*DEF_Adaptation_Font) andIsRadius:true andImageName:cellData[@"HeadImageUrl"]];
         [self addSubview:headView];
         
@@ -143,7 +142,6 @@
         [frame addSubview:titleNum];
         titleNum.numberOfLines=0;
         [titleNum sizeToFit];
-
     }
 }
 

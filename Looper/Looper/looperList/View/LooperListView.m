@@ -29,9 +29,10 @@
     UILabel *otherLabel;
     
     NSMutableArray *ListArray;
-    
-    
     UIImageView *moveline;
+    
+    float temp_num_y;
+    
     
     int indexNum;
     
@@ -58,6 +59,8 @@
     
     [UIView animateWithDuration:0.2 animations:^{
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
+        lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+
         [tagView setHidden:true];
     }];
     ActionUp=false;
@@ -110,6 +113,7 @@
 
 
 -(void)initView{
+    temp_num_y  = 0.0f;
     ActionUp = false;
     btnArray =[[NSMutableArray alloc] initWithCapacity:50];
     [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:30/255.0 blue:43/255.0 alpha:1.0]];
@@ -257,16 +261,78 @@
 
 
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    float num_y= scrollView.frame.origin.y;
+    
+    
+    if(num_y<161*DEF_Adaptation_Font*0.5+150*DEF_Adaptation_Font*0.5){
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
+            lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+        }];
+        
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            _collectView.frame = CGRectMake(_collectView.frame.origin.x,161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
+            lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+        }];
+    }
+
+
+}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)ascrollView{
+    
+}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"%f",scrollView.contentOffset.y);
+    NSLog(@"scrollViewDidScroll %f",scrollView.contentOffset.y);
 
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
+        
+        
+        NSLog(@"%f",point.y);
         NSLog(@"------往上滚动");
-        [self actionMoveUp];
+        //&& scrollView.contentOffset.y>
+        
+        
+        
+        if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
+            
+            NSLog(@"[self updataScrollView:point.y];");
+            
+            
+          [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
+
+        }
     }else{
-        [self actionMoveDown];
+        NSLog(@"%f",point.y);
         NSLog(@"------往下滚动");
+        
+        [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
+        
+         //[tagView setHidden:true];
+    }
+
+    temp_num_y = scrollView.contentOffset.y;
+}
+
+
+-(void)updataScrollView:(float)point_Y{
+    if(161*DEF_Adaptation_Font*0.5<=_collectView.frame.origin.y+point_Y && 161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=_collectView.frame.origin.y+point_Y){
+         lableView.frame = CGRectMake(0,lableView.frame.origin.y+point_Y,lableView.frame.size.width, lableView.frame.size.height);
+        _collectView.frame = CGRectMake(_collectView.frame.origin.x, _collectView.frame.origin.y+point_Y, _collectView.frame.size.width, _collectView.frame.size.height);
+    }else if(161*DEF_Adaptation_Font*0.5>_collectView.frame.origin.y+point_Y){
+        _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
+        lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+    }else if (161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5<_collectView.frame.origin.y+point_Y){
+        _collectView.frame = CGRectMake(_collectView.frame.origin.x,161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
+        lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
     }
 }
 
