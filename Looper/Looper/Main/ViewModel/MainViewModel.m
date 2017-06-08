@@ -35,7 +35,6 @@
 #import "commonTableView.h"
 #import "LooperListViewController.h"
 #import "SettingViewController.h"
-#import "NIMCloudMander.h"
 #import "SimpleChatViewController.h"
 #import "CreateLoopController.h"
 #import "ActivityViewController.h"
@@ -96,7 +95,7 @@
 
 
 -(void)getSessionArray{
-    SessionArray = [[NSArray alloc] initWithArray:[[NIMCloudMander sharedManager] allRecentSessions]];
+  //  SessionArray = [[NSArray alloc] initWithArray:[[NIMCloudMander sharedManager] allRecentSessions]];
 }
 
 
@@ -241,8 +240,9 @@
 }
 
 -(void)requestData{
+  
     
-    [[NIMCloudMander sharedManager] initNIMSDK];
+    //[[NIMCloudMander sharedManager] initNIMSDK];
     [self requestMainData];
     
     
@@ -258,6 +258,13 @@
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
             [self requestgetMyFavorite];
+            
+            [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
+            [[LocalDataMangaer sharedManager] setData];
+            
+            [[RongCloudManger sharedManager] initRongCloudSDK];
+            [[RongCloudManger sharedManager]loginRCSdk];
+            
             
         }else{
             
@@ -541,8 +548,6 @@
     }fail:^{
         
     }];
-    
-    
 }
 
 

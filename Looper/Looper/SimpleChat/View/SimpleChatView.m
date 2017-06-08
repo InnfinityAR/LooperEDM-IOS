@@ -73,7 +73,7 @@
 
 
 -(void)addChatObjWith:(NSArray *)chatDataArray{
-
+    
     
     NSComparator cmptr = ^(id obj1, id obj2){
         if ([[obj1 objectForKey:@"sentTime"] intValue] > [[obj2 objectForKey:@"sentTime"] intValue]) {

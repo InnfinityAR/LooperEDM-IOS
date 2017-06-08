@@ -351,18 +351,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50*DEF_Adaptation_Font*0.5;
+    return 60*DEF_Adaptation_Font*0.5;
 }
 
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 40*DEF_Adaptation_Font*0.5)];
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 60*DEF_Adaptation_Font*0.5)];
     [v setBackgroundColor:[UIColor clearColor]];
-    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(22*DEF_Adaptation_Font*0.5, 10.0*DEF_Adaptation_Font*0.5, 200.0f, 20*DEF_Adaptation_Font*0.5)];
+    UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(22*DEF_Adaptation_Font*0.5, 5*DEF_Adaptation_Font*0.5, 200.0f, 20*DEF_Adaptation_Font*0.5)];
     [labelTitle setTextColor:[UIColor whiteColor]];
     [labelTitle setBackgroundColor:[UIColor clearColor]];
+    [labelTitle setFont:[UIFont fontWithName:looperFont size:13]];
     labelTitle.textAlignment = NSTextAlignmentLeft;
     if(section==0){
         labelTitle.text = @"热门弹幕";
@@ -371,6 +372,9 @@
     }
     
     [v addSubview:labelTitle];
+    UIImageView* line=[LooperToolClass createImageView:@"chatline.png" andRect:CGPointMake(0, 58*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(DEF_SCREEN_WIDTH, 2*DEF_Adaptation_Font*0.5) andIsRadius:false];
+
+    [v addSubview:line];
 
     return v;
 }

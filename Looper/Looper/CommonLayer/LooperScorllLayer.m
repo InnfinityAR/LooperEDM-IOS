@@ -104,9 +104,12 @@
         int start_num_x=0;
         for (int i=0;i<[strArray count];i++){
             if([[strArray objectAtIndex:i] isEqualToString:@""]==false){
-                UILabel *labelTemp=[self createLable:CGPointMake(start_num_x, 0) andStr:[strArray objectAtIndex:i] andFrameSize:CGSizeMake(120*DEF_Adaptation_Font*0.5, frame.size.height) andFont:looperFont andFontSize:12 andType:type];
+                UILabel *labelTemp=[self createLable:CGPointMake(start_num_x, 0) andStr:[strArray objectAtIndex:i] andFrameSize:CGSizeMake([self getXWithForContentStr:[strArray objectAtIndex:i]]+30*DEF_Adaptation_Font*0.5, frame.size.height) andFont:looperFont andFontSize:12 andType:type];
                 [scrollV addSubview:labelTemp];
-                start_num_x = start_num_x+120*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5;
+                start_num_x = start_num_x+[self getXWithForContentStr:[strArray objectAtIndex:i]]+50*DEF_Adaptation_Font*0.5;
+                
+                [labelTemp setFont:[UIFont fontWithName:@"PingFangSC-Light" size:12]];
+                
             }
         }
         [scrollV setContentSize:CGSizeMake(start_num_x+120*DEF_Adaptation_Font*0.5, frame.size.height)];

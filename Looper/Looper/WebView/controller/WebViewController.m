@@ -170,24 +170,24 @@
      [self createHudView];
     
     
-    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
-    
-    array = [[NSMutableArray alloc] initWithArray:[[dic objectForKey:@"data"] objectForKey:@"openid"]];
-    
-    
-    NSDictionary *dic1=[ReadJsonFile readFile:@"1.json"];
-    NSDictionary *dic2=[ReadJsonFile readFile:@"2.json"];
-    NSDictionary *dic3=[ReadJsonFile readFile:@"3.json"];
-    
-    
-    array1 = [[NSMutableArray alloc] initWithArray:[dic1 objectForKey:@"data"]];
-    array2 = [[NSMutableArray alloc] initWithArray:[dic2 objectForKey:@"data"]];
-    array3 = [[NSMutableArray alloc] initWithArray:[dic3 objectForKey:@"data"]];
-    
+//    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
+//    
+//    array = [[NSMutableArray alloc] initWithArray:[[dic objectForKey:@"data"] objectForKey:@"openid"]];
+//    
+//    
+//    NSDictionary *dic1=[ReadJsonFile readFile:@"1.json"];
+//    NSDictionary *dic2=[ReadJsonFile readFile:@"2.json"];
+//    NSDictionary *dic3=[ReadJsonFile readFile:@"3.json"];
+//    
+//    
+//    array1 = [[NSMutableArray alloc] initWithArray:[dic1 objectForKey:@"data"]];
+//    array2 = [[NSMutableArray alloc] initWithArray:[dic2 objectForKey:@"data"]];
+//    array3 = [[NSMutableArray alloc] initWithArray:[dic3 objectForKey:@"data"]];
+//    
     
     index = 0;
-    sum = [array count];
-    NSLog(@"%@",array);
+//    sum = [array count];
+//    NSLog(@"%@",array);
     userCount = 0;
     
     

@@ -12,8 +12,8 @@
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "RongCloudManger.h"
-#import "NIMCloudMander.h"
 #import "DataHander.h"
+#import "LocalDataMangaer.h"
 
 
 @implementation SimpleChatViewModel{
@@ -37,9 +37,9 @@
 }
 
 -(void)createSimpleChatV{
-  //  [[RongCloudManger sharedManager] joinCharRoom:self];
+    [[RongCloudManger sharedManager] joinCharRoom:self];
     
-    [[NIMCloudMander sharedManager] joinCharRoom:self];
+  //  [[NIMCloudMander sharedManager] joinCharRoom:self];
     _SimpleChatV = [[SimpleChatView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view]addSubview:_SimpleChatV];
 
@@ -66,7 +66,47 @@
 -(void)ReceiveMessageArray:(NSArray*)data{
 
     
-     [_SimpleChatV addChatObjWith:data];
+    NSMutableArray *chatArray = [[NSMutableArray alloc] initWithCapacity:50];
+    
+    
+    for (int i=0;i<[data count];i++){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        
+        [dic setValue:[[data objectAtIndex:i] objectForKey:@"creationdate"] forKey:@"sentTime"];
+       
+        [dic setValue:[[data objectAtIndex:i] objectForKey:@"messagecontent"] forKey:@"text"];
+        [dic setValue:[[data objectAtIndex:i] objectForKey:@"userid"] forKey:@"senderUserId"];
+        
+
+ 
+        [dic setValue:[[data objectAtIndex:i] objectForKey:@"userimage"] forKey:@"HeadImageUrl"];
+
+        [chatArray addObject:dic];
+    
+    }
+    
+    [_SimpleChatV addChatObjWith:chatArray];
+
+}
+
+
+
+-(void)getHistoryList{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:_targetID forKey:@"targetId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getChatMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+            [self ReceiveMessageArray:responseObject[@"data"]];
+            
+        }else{
+           
+        }
+    }fail:^{
+        
+    }];
 
 }
 
@@ -77,8 +117,12 @@
 
      [_SimpleChatV updateWithTargetView:targetDic];
 
-    [[NIMCloudMander sharedManager] fetchMessageHistory:0 andTargetId:_targetID];
-
+    
+    [self getHistoryList];
+    
+  //  [[NIMCloudMander sharedManager] fetchMessageHistory:0 andTargetId:_targetID];
+   // [[RongCloudManger sharedManager] getRomotoHistoryMessage:0 andTargetId:_targetID andRecordTime:0 andMessageCount:100];
+    
 }
 
 
@@ -87,7 +131,10 @@
     
     if([messageStr length]!=0){
 
-      [[NIMCloudMander sharedManager] sendMessage:messageStr andType:0 andTargetId:_targetID];
+     // [[NIMCloudMander sharedManager] sendMessage:messageStr andType:0 andTargetId:_targetID];
+        
+        [[RongCloudManger sharedManager] sendMessage:messageStr andType:0 andTargetId:_targetID andRealTarget:nil andReplyMessageId:nil andReplyMessageText:nil];
+        
     
     }else{
     

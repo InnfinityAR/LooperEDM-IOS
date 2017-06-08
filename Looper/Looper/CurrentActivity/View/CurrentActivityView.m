@@ -21,40 +21,62 @@
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
 #warning-如果这句话不加则没有初始化view不能触发点击事件
     if (self=[super initWithFrame:frame]) {
+        
+        
+        self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
+        self.transform = CGAffineTransformMakeScale(0.1,0.1);
+
         self.obj=(nActivityViewModel*)obj;
         self.dataArr=myDataSource;
         UILabel *looperName = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"全部活动" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
         [self addSubview:looperName];
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 48/2) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(135*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5) andTarget:self];
+        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(-20*DEF_Adaptation_Font*0.5,-10*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(188*DEF_Adaptation_Font*0.5,143*DEF_Adaptation_Font*0.5) andTarget:self];
         [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
         [self addSubview:backBtn];
         //加载懒加载
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CurrentActivityTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
         [self initView];
+        
+        [self animation];
     }
     return self;
 }
-- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    [self setHidden:YES];
+
+-(void)animation{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.transform = CGAffineTransformMakeScale(1.0,1.0);
+         self.frame = CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT);
+    } completion:^(BOOL finished) {
+        
+        
+        
+    }];
+
 }
+
+
+- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    
+    
+    if(button.tag ==100){
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.transform = CGAffineTransformMakeScale(0.1,0.1);
+            self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
+        } completion:^(BOOL finished) {
+            
+            [self removeFromSuperview];
+            
+        }];
+        
+    }
+}
+
+
 -(void)initView{
     [self setBackgroundColor:[UIColor colorWithRed:23/255.0 green:38/255.0 blue:98/255.0 alpha:1.0]];
-//动画缩放
-//    self.transform = CGAffineTransformMakeScale(0.01, 0.01);
-//    [UIView animateWithDuration:3
-//                     animations:^{
-//                         self.transform = CGAffineTransformMakeScale(1, 1);
-//                     }completion:^(BOOL finish){
-//                         
-//                        }];
 
-    /*用于进行tableView设置底图
-    UIImageView *imgView = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    imgView.image = [UIImage imageNamed:@"pic.jpg"];
-    
-    [self.tableView addSubview:imgView];
-    [self.tableView sendSubviewToBack:imgView];
-     */
 }
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -63,6 +85,8 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         //禁止上拉
+        
+        [_tableView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
         _tableView.alwaysBounceVertical=NO;
         _tableView.bounces=NO;
         //设置分割线
@@ -117,9 +141,8 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.obj addTicket:self.dataArr[indexPath.row]];
-   
-    
+    [self.obj addActivityDetailView:self.dataArr[indexPath.row]];
+
 }
 
 @end

@@ -181,13 +181,9 @@
     }
    
     
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
-    
-    
-    
+
     [self createBackGround];
     
     looperMessageData = [[NSMutableArray alloc] initWithCapacity:50];
@@ -1014,15 +1010,11 @@
     
     if([[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"]!=[NSNull null]){
     
-        LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 720*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) and:self];
+        LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 720*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) and:self];
         [self addSubview:sildeV];
         
-        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) andStr:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","] andType:1];
+        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) andStr:[[[loopData objectForKey:@"Loop"] objectForKey:@"news_tag"] componentsSeparatedByString:@","] andType:1];
     }
-    
-    
-    
-    
     
     UIImageView * looperPic =[LooperToolClass createBtnImage:[[loopData objectForKey:@"Owner"] objectForKey:@"headimageurl"] andRect:CGPointMake(39, 938) andTag:1000 andSize:CGSizeMake(59, 59) andTarget:self];
     [self addSubview:looperPic];
@@ -1092,9 +1084,6 @@
         [arrayPlayer addObject:[dic objectForKey:@"artist"]];
         
         [musicPlayer initView:CGRectMake(0,0, 350*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andStr:arrayPlayer andType:3];
-        
-
-        
         
         followMusic = [LooperToolClass createBtnImageNameReal:@"btn_unfollowMusic.png" andRect:CGPointMake(480*DEF_Adaptation_Font*0.5,1050*DEF_Adaptation_Font*0.5) andTag:1000 andSelectImage:@"btn_followMusic.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(49*DEF_Adaptation_Font*0.5,70*DEF_Adaptation_Font*0.5) andTarget:self];
         [self addSubview:followMusic];

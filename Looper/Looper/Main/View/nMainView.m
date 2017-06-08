@@ -13,7 +13,7 @@
 #import "UserInfoView.h"
 #import "MainChatView.h"
 #import "LocalDataMangaer.h"
-#import "NIMCloudMander.h"
+#import "RongCloudManger.h"
 
 @implementation nMainView{
     
@@ -93,13 +93,11 @@
 
 -(void)chatView:(NSString*)targetId{
     
-    [[NIMCloudMander sharedManager] getUserData:targetId success:^(id responseObject){
+    [[RongCloudManger sharedManager] getUserData:targetId success:^(id responseObject){
         
         [_obj pushControllerToUser:responseObject];
     
     }];
-    
-
 }
 
 -(void)toLoopView:(NSDictionary*)loopData{
@@ -219,8 +217,6 @@
     looperImage.layer.masksToBounds = YES;
     [self addSubview:looperImage];
 
-    
-    
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

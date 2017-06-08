@@ -162,8 +162,6 @@
     
     SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
     [simpleC chatTargetID:dic];
-    // [_obj presentViewController:simpleC animated:NO completion:nil];
-    
     [[_obj navigationController]  pushViewController:simpleC animated:YES];
 }
 -(void)JumpLooperView:(NSDictionary*)loopData{

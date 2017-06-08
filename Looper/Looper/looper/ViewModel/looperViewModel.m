@@ -23,7 +23,6 @@
 #import "SimpleChatViewController.h"
 #import "UserListView.h"
 #import "MusicListManage.h"
-#import "NIMCloudMander.h"
 #import "addMusicController.h"
 #import "UserInfoViewController.h"
 
@@ -278,7 +277,7 @@
 
 -(void)sendMessage:(NSString*)str andTarget:(NSString*)TargetId andReplyMessageId:(NSString*)replyMessageId andReplayMessageText:(NSString*)replyText{
     
-    [[NIMCloudMander sharedManager] sendMessage:str andType:1 andTargetId:[[looperData objectForKey:@"Loop"] objectForKey:@"loop_sdkid"]];
+   // [[NIMCloudMander sharedManager] sendMessage:str andType:1 andTargetId:[[looperData objectForKey:@"Loop"] objectForKey:@"loop_sdkid"]];
     
     
     if(TargetId!=nil){
@@ -289,7 +288,7 @@
         [targetDic setObject:dic forKey:str];
         
     }
-   // [[RongCloudManger sharedManager] sendMessage:str andType:1 andTargetId:[looperData objectForKey:@"LoopID"] andRealTarget:TargetId andReplyMessageId:replyMessageId andReplyMessageText:replyText];
+    [[RongCloudManger sharedManager] sendMessage:str andType:1 andTargetId:[[looperData objectForKey:@"Loop"] objectForKey:@"loop_sdkid"] andRealTarget:TargetId andReplyMessageId:replyMessageId andReplyMessageText:replyText];
 
 }
 
@@ -304,8 +303,8 @@
             
             createUserNum = 0;
             
-            [[NIMCloudMander sharedManager] joinChatRoom:responseObject[@"Loop"][@"loop_sdkid"] andObject:self];
-            
+            [[RongCloudManger sharedManager] joinCharRoom:self];
+
             looperData =  [[NSMutableDictionary alloc] initWithDictionary:responseObject] ;
              musicArray =[[NSMutableArray alloc] initWithArray:responseObject[@"Music"]];
             

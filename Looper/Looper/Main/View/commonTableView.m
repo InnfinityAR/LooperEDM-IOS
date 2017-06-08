@@ -12,6 +12,9 @@
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
 #import "UserInfoViewModel.h"
+
+#import "LooperScorllLayer.h"
+
 @implementation commonTableView
 {
 
@@ -64,7 +67,7 @@
     }else if(_typeView==3){
         return 162*DEF_Adaptation_Font*0.5;
     }else if(_typeView==4){
-        return 94*DEF_Adaptation_Font*0.5;
+        return 130*DEF_Adaptation_Font*0.5;
     }
     return 0;
 }
@@ -153,10 +156,18 @@
 
         UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(26, 159) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
+        
+        
+        LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(160*DEF_Adaptation_Font*0.5, 95*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) and:self];
+        [cell.contentView addSubview:sildeV];
+        
+        [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) andStr:[ [dic objectForKey:@"news_tag"] componentsSeparatedByString:@","] andType:1];
+        
+
     }else if(_typeView==4){
         NSDictionary *dic = [[_obj musicData] objectAtIndex:indexPath.row];
 
-        UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(26*0.5*DEF_Adaptation_Font,18*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font)];
+        UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(26*0.5*DEF_Adaptation_Font,18*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font)];
         [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString: [dic objectForKey:@"music_cover"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
@@ -164,14 +175,14 @@
         loopHead.layer.masksToBounds = YES;
         [cell.contentView addSubview:loopHead];
 
-        UILabel *loopName = [[UILabel alloc] initWithFrame:CGRectMake(122*0.5*DEF_Adaptation_Font, 18*0.5*DEF_Adaptation_Font, 418*0.5*DEF_Adaptation_Font, 30*0.5*DEF_Adaptation_Font)];
+        UILabel *loopName = [[UILabel alloc] initWithFrame:CGRectMake(142*0.5*DEF_Adaptation_Font, 18*0.5*DEF_Adaptation_Font, 418*0.5*DEF_Adaptation_Font, 30*0.5*DEF_Adaptation_Font)];
         loopName.text =[dic objectForKey:@"filename"];
         [loopName setTextColor:[UIColor whiteColor]];
         [loopName setTextAlignment:NSTextAlignmentLeft];
-        [loopName setFont:[UIFont fontWithName:looperFont size:13]];
+        [loopName setFont:[UIFont fontWithName:looperFont size:15]];
         [cell.contentView addSubview:loopName];
         
-        UILabel *loopartist = [[UILabel alloc] initWithFrame:CGRectMake(122*0.5*DEF_Adaptation_Font, 52*0.5*DEF_Adaptation_Font, 418*0.5*DEF_Adaptation_Font, 30*0.5*DEF_Adaptation_Font)];
+        UILabel *loopartist = [[UILabel alloc] initWithFrame:CGRectMake(142*0.5*DEF_Adaptation_Font, 62*0.5*DEF_Adaptation_Font, 418*0.5*DEF_Adaptation_Font, 30*0.5*DEF_Adaptation_Font)];
         loopartist.text =[dic objectForKey:@"artist"];
         [loopartist setTextColor:[UIColor whiteColor]];
         [loopartist setTextAlignment:NSTextAlignmentLeft];
@@ -179,7 +190,7 @@
         [cell.contentView addSubview:loopartist];
         
 
-        UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(25, 93) andTag:100 andSize:CGSizeZero andIsRadius:false];
+        UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(25, 128) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
 
     }
@@ -198,7 +209,7 @@
 
 -(void)createTableView{
 
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0*0.5*DEF_Adaptation_Font, 120*0.5*DEF_Adaptation_Font,DEF_SCREEN_WIDTH, 1080*0.5*DEF_Adaptation_Font)style:UITableViewStylePlain];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0*0.5*DEF_Adaptation_Font, 170*0.5*DEF_Adaptation_Font,DEF_SCREEN_WIDTH, 1030*0.5*DEF_Adaptation_Font)style:UITableViewStylePlain];
     tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     tableView.dataSource = self;
     tableView.delegate = self;

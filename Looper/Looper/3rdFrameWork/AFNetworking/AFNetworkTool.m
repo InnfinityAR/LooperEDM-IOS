@@ -140,7 +140,7 @@
     [parameters setObject:[NSString stringWithFormat:@"%ld",nowDate] forKey:@"timestamp"];
 
     
-    if([urlStr isEqualToString:@"getFriendList"]||[urlStr isEqualToString:@"followUser"]||[urlStr isEqualToString:@"getUserById"]||[urlStr isEqualToString:@"unfollowUser"]||[urlStr isEqualToString:@"addPreferenceToComment"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getThumbUpCount"]||[urlStr isEqualToString:@"getMyMessage"]||[urlStr isEqualToString:@"leaveLoop"]||[urlStr isEqualToString:@"getLoopByCoordinates"]||[urlStr isEqualToString:@"getUserInfo"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getLoopMessage"]||[urlStr isEqualToString:@"getMyFavorite"]||[urlStr isEqualToString:@"getHome"]){
+    if([urlStr isEqualToString:@"getFriendList"]||[urlStr isEqualToString:@"followUser"]||[urlStr isEqualToString:@"getUserById"]||[urlStr isEqualToString:@"unfollowUser"]||[urlStr isEqualToString:@"addPreferenceToComment"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getThumbUpCount"]||[urlStr isEqualToString:@"getMyMessage"]||[urlStr isEqualToString:@"leaveLoop"]||[urlStr isEqualToString:@"getLoopByCoordinates"]||[urlStr isEqualToString:@"getUserInfo"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getLoopMessage"]||[urlStr isEqualToString:@"getMyFavorite"]||[urlStr isEqualToString:@"getHome"]||[urlStr isEqualToString:@"getChatMessage"]){
     }else{
         
           [[DataHander sharedDataHander] showDlg];

@@ -14,7 +14,8 @@
 #import "MainViewModel.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
-#import "NIMCloudMander.h"
+#import "RongCloudManger.h"
+#import "LooperScorllLayer.h"
 
 @implementation MainChatView
 {
@@ -156,8 +157,11 @@
     }else if(selectIndexNum==2){
         if(self.frame.origin.x==0){
             if(isEnd==false){
-                NIMRecentSession *session = (NIMRecentSession*)[[[NIMCloudMander sharedManager]getSessionArray] objectAtIndex:indexPath.row];
-                [_obj chatView:session.session.sessionId];
+                //NIMRecentSession *session = (NIMRecentSession*)[[[NIMCloudMander sharedManager]getSessionArray] objectAtIndex:indexPath.row];
+                  RCConversation *session = (RCConversation*)[[[RongCloudManger sharedManager]getSessionArray] objectAtIndex:indexPath.row];
+                
+                
+                [_obj chatView:session.targetId];
 
             }
             
@@ -181,7 +185,7 @@
     if(selectIndexNum==1){
         return [loopArray count];
     }else if(selectIndexNum==2){
-        return [[[NIMCloudMander sharedManager] getSessionArray]count];
+        return [[[RongCloudManger sharedManager] getSessionArray]count];
     }
     return 0;
 }
@@ -242,15 +246,22 @@
         UIImageView* line=[LooperToolClass createImageView:@"chatline.png" andRect:CGPointMake(32, 150) andTag:100 andSize:CGSizeMake(626*DEF_Adaptation_Font_x*0.5, 1028*DEF_Adaptation_Font*0.5) andIsRadius:false];
         
         [cell.contentView addSubview:line];
+        if([[loopArray objectAtIndex:indexPath.row] objectForKey:@"news_tag"]!=[NSNull null]){
+            
+            LooperScorllLayer *sildeV = [[LooperScorllLayer alloc] initWithFrame:CGRectMake(160*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) and:self];
+            [cell.contentView addSubview:sildeV];
+            
+            [sildeV initView:CGRectMake(0,0, 470*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) andStr:[[[loopArray objectAtIndex:indexPath.row] objectForKey:@"news_tag"] componentsSeparatedByString:@","] andType:1];
+        }
         
     }else if(selectIndexNum==2){
         
-        NSLog(@"%@",[[NIMCloudMander sharedManager] getSessionArray]);
+        NSLog(@"%@",[[RongCloudManger sharedManager] getSessionArray]);
         
-        NIMRecentSession *session = (NIMRecentSession*)[[[NIMCloudMander sharedManager]getSessionArray] objectAtIndex:indexPath.row];
+        RCConversation *session = (RCConversation*)[[[RongCloudManger sharedManager]getSessionArray] objectAtIndex:indexPath.row];
         
 
-        [[NIMCloudMander sharedManager] getUserData:session.session.sessionId success:^(id responseObject){
+        [[RongCloudManger sharedManager] getUserData:session.targetId success:^(id responseObject){
         
             UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(20*0.5*DEF_Adaptation_Font,16*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font)];
             [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[responseObject objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -269,7 +280,10 @@
             
             UILabel *labelText = [[UILabel alloc] initWithFrame:CGRectMake(131*0.5*DEF_Adaptation_Font, 65*0.5*DEF_Adaptation_Font, 480*0.5*DEF_Adaptation_Font, 23*0.5*DEF_Adaptation_Font)];
             [labelText setTextColor:[UIColor colorWithRed:117/255.0 green:118/255.0 blue:148/255.0 alpha:1.0]];
-            labelText.text =session.lastMessage.text;
+            
+            RCTextMessage *message  =(RCTextMessage *)session.lastestMessage;
+            
+            labelText.text =message.content;
             
             [labelText setFont:[UIFont fontWithName:looperFont size:14]];
             [cell.contentView addSubview:labelText];
@@ -279,15 +293,11 @@
             
             UILabel *labelTime = [[UILabel alloc] initWithFrame:CGRectMake(460*0.5*DEF_Adaptation_Font, 30*0.5*DEF_Adaptation_Font, 200*0.5*DEF_Adaptation_Font, 25*0.5*DEF_Adaptation_Font)];
             [labelTime setTextColor:[UIColor colorWithRed:117/255.0 green:118/255.0 blue:148/255.0 alpha:1.0]];
-            labelTime.text =[self timeWithTimeIntervalString:[NSString stringWithFormat:@"%f", session.lastMessage.timestamp]];
+            labelTime.text =[self timeWithTimeIntervalString:[NSString stringWithFormat:@"%lld", session.sentTime]];
            
             
             [labelTime setFont:[UIFont fontWithName:looperFont size:11]];
             [cell.contentView addSubview:labelTime];
-
-            
-            
-            
         }];
         
         

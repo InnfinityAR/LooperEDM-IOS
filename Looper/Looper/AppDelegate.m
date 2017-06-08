@@ -115,23 +115,15 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
-    NSLog(@"didFinishLaunchingWithOptions");
-    
+
     [NSThread sleepForTimeInterval:1.5];
 
-    
-    NSLog(@"%f",DEF_SCREEN_WIDTH);
-    NSLog(@"%f",DEF_SCREEN_HEIGHT);
-    
-    
     
     [self initUmSdk];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
     
-    isHasData=false;
-    
+
     if(isHasData == false){
 
         VideoViewController* videoVc = [[VideoViewController alloc] init];

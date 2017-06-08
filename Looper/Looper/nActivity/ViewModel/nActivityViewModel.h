@@ -24,4 +24,21 @@
 -(void)jumpToCurrentActivity:(NSArray*)array;
 -(void)addTicket:(NSDictionary *)dic;
 -(void)removeDetailView;
+-(void)toLooperView:(NSDictionary*)looperData;
+
+-(void)savaCalendar:(NSDictionary*)dic;
+
+-(void)addInformationToFavorite:(NSString*)activityID andisLike:(NSString*)islike;
+
+-(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike;
+
+
+-(void)createPlayerView:(NSDictionary *)dicPlayer;
+
+-(void)removePlayerInfo;
+
+
+
+-(void)followUser:(NSString*)targetID;
+-(void)unfollowUser:(NSString*)targetID;
 @end

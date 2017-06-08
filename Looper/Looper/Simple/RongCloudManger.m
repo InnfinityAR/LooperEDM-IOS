@@ -19,7 +19,15 @@ static RongCloudManger *RongCloudMangerM=nil;
 @implementation RongCloudManger{
 
      NSObject* joinRoom;
+     NSMutableArray *sessionArray;
+    NSMutableDictionary *userData;
 
+}
+
+
+-(NSMutableArray*)getSessionArray{
+    return sessionArray;
+    
 }
 
 +(RongCloudManger *)sharedManager{
@@ -30,8 +38,8 @@ static RongCloudManger *RongCloudMangerM=nil;
 }
 
 -(void)initRongCloudSDK{
-
-     [[RCIMClient sharedRCIMClient] initWithAppKey:@"pkfcgjstpkj78"];
+      userData = [[NSMutableDictionary alloc] initWithCapacity:50];
+     [[RCIMClient sharedRCIMClient] initWithAppKey:@"c9kqb3rdc93tj"];
 }
 
 
@@ -42,9 +50,38 @@ static RongCloudManger *RongCloudMangerM=nil;
 }
 
 
+
+-(void)getUserData:(NSString*)targetId
+           success:(void (^)(id responseObject))success{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:targetId forKey:@"targetId"];
+    
+    if([userData objectForKey:targetId]!=nil){
+        success([userData objectForKey:targetId]);
+    }else{
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [userData setObject:responseObject[@"data"] forKey:targetId];
+                success(responseObject[@"data"]);
+            }
+        }fail:^{
+            
+        }];
+    }
+}
+
+
+
+
 -(void)loginRCSdk{
     
     [[RCIMClient sharedRCIMClient] connectWithToken:[LocalDataMangaer sharedManager].tokenStr success:^(NSString *userId) {
+        NSLog(@"%@",userId);
+        
+         sessionArray=[[NSMutableArray alloc]initWithArray:[self getConversationList]];
+        
         [[RCIMClient sharedRCIMClient] setReceiveMessageDelegate:self object:nil];
         
     } error:^(RCConnectErrorCode status) {
@@ -56,14 +93,53 @@ static RongCloudManger *RongCloudMangerM=nil;
 }
 
 
+
+
+-(void)getRomotoHistoryMessage:(int)typeNum andTargetId:(NSString*)targetId andRecordTime:(long)recordTime andMessageCount:(int)Count{
+    [[RCIMClient sharedRCIMClient] getRemoteHistoryMessages:ConversationType_PRIVATE targetId:targetId recordTime:recordTime count:Count success:^(NSArray *messages){
+    
+        NSLog(@"%@",messages);
+        
+    
+    } error:^(RCErrorCode status){
+        
+    }];
+}
+
+
+-(NSArray*)getConversationList{
+
+   NSArray *conversationList= [[RCIMClient sharedRCIMClient]
+     getConversationList:@[@(ConversationType_PRIVATE)]];
+    for (RCConversation *conversation in conversationList) {
+        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+    }
+    return conversationList;
+
+}
+
+
 -(void)sendMessage:(NSString*)MessageStr andType:(int)typeNum andTargetId:(NSString*)targetId andRealTarget:(NSString*)realTargetId andReplyMessageId:(NSString*)replyMessID andReplyMessageText:(NSString*)replyMessageText{
 
     int num;
     if(typeNum==1){
-        num = ConversationType_GROUP;
-    }else if(typeNum==2){
+        num = ConversationType_CHATROOM;
+    }else {
         num = ConversationType_PRIVATE;
+    
+        NSMutableDictionary *chatDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        [chatDic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [chatDic setObject:targetId forKey:@"targetId"];
+        [chatDic setObject:MessageStr forKey:@"messageText"];
+    
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendChatMessage" parameters:chatDic success:^(id responseObject){
+        }fail:^{
+            
+        }];
     }
+    
+    
+    
     RCTextMessage *testMessage = [RCTextMessage messageWithContent:MessageStr];
     // 调用RCIMClient的sendMessage方法进行发送，结果会通过回调进行反馈。
     [[RCIMClient sharedRCIMClient] sendMessage:num
@@ -101,30 +177,33 @@ static RongCloudManger *RongCloudMangerM=nil;
     if ([message.content isMemberOfClass:[RCTextMessage class]]) {
         RCTextMessage *testMessage = (RCTextMessage *)message.content;
 
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:message.senderUserId forKey:@"userId"];
-        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserById" parameters:dic success:^(id responseObject){
-            if([responseObject[@"status"] intValue]==0){
-                NSMutableDictionary *senderDic = [[NSMutableDictionary alloc] initWithCapacity:50];
-                [senderDic setObject:testMessage.content forKey:@"text"];
-                [senderDic setObject:message.targetId forKey:@"targetId"];
-                [senderDic setObject:[[NSNumber alloc] initWithLong: message.messageId] forKey:@"messageId"];
-                [senderDic setObject:message.senderUserId forKey:@"senderUserId"];
-                [senderDic setObject:[responseObject[@"data"]objectForKey:@"NickName"] forKey:@"name"];
-                [senderDic setObject:[responseObject[@"data"]objectForKey:@"HeadImageUrl"] forKey:@"HeadImageUrl"];
-                [senderDic setObject:[[NSNumber alloc] initWithLong: message.sentTime/1000] forKey:@"sentTime"];
-                [(looperViewModel*)joinRoom ReceiveMessage:senderDic];
-                
-                
-                
-            }else{
-                
-            }
-        }fail:^{
-            
-        }];
         
-       
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:message.senderUserId forKey:@"targetId"];
+        
+
+            [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+                if([responseObject[@"status"] intValue]==0){
+                  
+                    NSMutableDictionary *senderDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+                                    [senderDic setObject:testMessage.content forKey:@"text"];
+                                    [senderDic setObject:message.targetId forKey:@"targetId"];
+                                    [senderDic setObject:[[NSNumber alloc] initWithLong: message.messageId] forKey:@"messageId"];
+                                    [senderDic setObject:message.senderUserId forKey:@"senderUserId"];
+                                    [senderDic setObject:[responseObject[@"data"]objectForKey:@"nickname"] forKey:@"name"];
+                                    [senderDic setObject:[responseObject[@"data"]objectForKey:@"headimageurl"] forKey:@"HeadImageUrl"];
+                                    [senderDic setObject:[[NSNumber alloc] initWithLong: message.sentTime/1000] forKey:@"sentTime"];
+                                    [(looperViewModel*)joinRoom ReceiveMessage:senderDic];
+
+                
+                
+                
+                }
+            }fail:^{
+                
+            }];
+        
     }
 
 }

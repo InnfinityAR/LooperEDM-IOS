@@ -9,7 +9,6 @@
 #import "looperViewController.h"
 #import "looperViewModel.h"
 #import "LooperConfig.h"
-#import "NIMCloudMander.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
