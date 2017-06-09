@@ -137,9 +137,6 @@ static RongCloudManger *RongCloudMangerM=nil;
             
         }];
     }
-    
-    
-    
     RCTextMessage *testMessage = [RCTextMessage messageWithContent:MessageStr];
     // 调用RCIMClient的sendMessage方法进行发送，结果会通过回调进行反馈。
     [[RCIMClient sharedRCIMClient] sendMessage:num

@@ -21,6 +21,9 @@
     bool ActionUp;
     UICollectionView *_collectView;
     UIView *tagView;
+    
+    NSMutableArray *tabBtnArray;
+    
     UIView *lableView;
     NSMutableArray *btnArray;
 
@@ -55,13 +58,17 @@
 -(void)reloadData{
     ListArray =[[NSMutableArray alloc] initWithCapacity:50];
     
-  
+    for (int i=0;i<=15;i++){
+        UIButton *btn = [btnArray objectAtIndex:i];
+        btn.alpha=0.0;
+    }
+    
     
     [UIView animateWithDuration:0.2 animations:^{
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
         lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
 
-        [tagView setHidden:true];
+       // [tagView setHidden:true];
     }];
     ActionUp=false;
     
@@ -116,6 +123,7 @@
     temp_num_y  = 0.0f;
     ActionUp = false;
     btnArray =[[NSMutableArray alloc] initWithCapacity:50];
+
     [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:30/255.0 blue:43/255.0 alpha:1.0]];
    
     
@@ -199,7 +207,6 @@
 
     tagView = [[UIView alloc] initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 287*DEF_Adaptation_Font*0.5)];
     [self addSubview:tagView];
-    [tagView setHidden:true];
     for (int i=0;i<[[_obj tagData] count];i++){
         
         int num = i +1;
@@ -209,9 +216,12 @@
             num_x=4;
         }
         UIButton *selBtn =[LooperToolClass createBtnImageName:@"btn_unSelect.png" andRect:CGPointMake(23+(152*(num_x-1)), 0+((num_y-1)*76)) andTag:i andSelectImage:@"btn_select.png" andClickImage:nil andTextStr:[[_obj tagData]objectAtIndex:i] andSize:CGSizeZero andTarget:self];
+        [selBtn setAlpha:0.0];
         [tagView addSubview: selBtn];
         
         [btnArray addObject:selBtn];
+        
+        
     }
     
     lableView = [[UIView alloc]initWithFrame:CGRectMake(0, 100*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 64*DEF_Adaptation_Font*0.5)];
@@ -242,7 +252,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
             lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
-            [tagView setHidden:false];
+           // [tagView setHidden:false];
         }];
         ActionUp=true;
     }
@@ -253,7 +263,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
             lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
-            [tagView setHidden:true];
+            //[tagView setHidden:true];
         }];
         ActionUp=false;
     }
@@ -273,14 +283,23 @@
             lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
         }];
         
+        for (int i=0;i<=15;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=0.0;
+        }
+        
+        
     }else{
         [UIView animateWithDuration:0.2 animations:^{
             _collectView.frame = CGRectMake(_collectView.frame.origin.x,161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
             lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
         }];
+        
+        for (int i=0;i<=15;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=1.0;
+        }
     }
-
-
 }
 
 
@@ -292,34 +311,113 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     NSLog(@"scrollViewDidScroll %f",scrollView.contentOffset.y);
 
+    
+    bool isdirection=false;
+    
+    if(scrollView.contentOffset.y>temp_num_y){
+    
+        isdirection= false;
+    }else{
+    
+        isdirection= true;
+
+    }
+    
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
         
         
         NSLog(@"%f",point.y);
         NSLog(@"------往上滚动");
-        //&& scrollView.contentOffset.y>
-        
-        
-        
         if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
             
-            NSLog(@"[self updataScrollView:point.y];");
-            
-            
-          [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
-
+            [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
+            [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
         }
     }else{
         NSLog(@"%f",point.y);
         NSLog(@"------往下滚动");
-        
         [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
-        
          //[tagView setHidden:true];
+        
+        [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
     }
-
+    
     temp_num_y = scrollView.contentOffset.y;
+}
+
+
+-(void)updateTagView:(float)scroll_y andPoint:(bool)isdirection{
+    
+    if((161*DEF_Adaptation_Font*0.5+75*DEF_Adaptation_Font*0.5)>scroll_y && scroll_y>161*DEF_Adaptation_Font*0.5){
+        float alpha = (scroll_y-161*DEF_Adaptation_Font*0.5)/75*DEF_Adaptation_Font*0.5;
+        for (int i=0;i<=3;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=alpha;
+        }
+        
+        if(isdirection){
+            
+            
+        }else{
+        
+        
+        }
+        
+    }else if(((161*DEF_Adaptation_Font*0.5+150*DEF_Adaptation_Font*0.5)>scroll_y) &&( scroll_y>(161*DEF_Adaptation_Font*0.5+75*DEF_Adaptation_Font*0.5))){
+        float alpha = (scroll_y-(161*DEF_Adaptation_Font*0.5+75*DEF_Adaptation_Font*0.5))/75*DEF_Adaptation_Font*0.5;
+        for (int i=4;i<=7;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=alpha;
+        }
+        if(isdirection){
+            for (int i=0;i<=3;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=1.0;
+            }
+            
+        }else{
+            
+            
+        }
+        
+    }else if((161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5)>scroll_y && scroll_y>(161*DEF_Adaptation_Font*0.5+150*DEF_Adaptation_Font*0.5)){
+        
+        float alpha = (scroll_y-(161*DEF_Adaptation_Font*0.5+150*DEF_Adaptation_Font*0.5))/75*DEF_Adaptation_Font*0.5;
+        for (int i=8;i<=11;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=alpha;
+        }
+        
+        if(isdirection){
+            for (int i=0;i<=7;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=1.0;
+            }
+            
+        }else{
+            
+            
+        }
+    }else if((161*DEF_Adaptation_Font*0.5+280*DEF_Adaptation_Font*0.5)>scroll_y && scroll_y>(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5)){
+        float alpha = (scroll_y-(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5))/55*DEF_Adaptation_Font*0.5;
+        for (int i=12;i<=15;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=alpha;
+        }
+        
+        if(isdirection){
+            for (int i=0;i<=11;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=1.0;
+            }
+            
+        }else{
+            
+            
+        }
+        
+    }
 }
 
 
@@ -330,9 +428,19 @@
     }else if(161*DEF_Adaptation_Font*0.5>_collectView.frame.origin.y+point_Y){
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
         lableView.frame = CGRectMake(0, 100*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+        for (int i=0;i<=15;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=0.0;
+        }
     }else if (161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5<_collectView.frame.origin.y+point_Y){
         _collectView.frame = CGRectMake(_collectView.frame.origin.x,161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
         lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
+
+        for (int i=0;i<=15;i++){
+            UIButton *btn = [btnArray objectAtIndex:i];
+            btn.alpha=1.0;
+        }
+        
     }
 }
 
@@ -465,16 +573,10 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
         
         if([[dic objectForKey:@"n_id"] intValue]==tap.view.tag){
         
-        
              [_obj toLooperView:dic];
-            
             return;
-            
         }
-        
-    
     }
-
 }
 
 

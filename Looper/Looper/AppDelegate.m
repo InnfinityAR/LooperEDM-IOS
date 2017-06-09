@@ -221,6 +221,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 +(UIBackgroundTaskIdentifier)backgroundPlayerID:(UIBackgroundTaskIdentifier)backTaskId
 {
+    
     //设置并激活音频会话类别
     AVAudioSession *session=[AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
