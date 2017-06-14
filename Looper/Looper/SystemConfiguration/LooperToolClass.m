@@ -211,7 +211,7 @@
         lable.text = TStr;
         lable.textAlignment = NSTextAlignmentCenter;
         [lable setTextColor:[UIColor whiteColor]];
-        lable.font = [UIFont fontWithName:looperFont size:10*DEF_Adaptation_Font];
+        lable.font = [UIFont fontWithName:looperFont size:9*DEF_Adaptation_Font];
         lable.tag = 1000;
         [btn addSubview:lable];
         

@@ -216,6 +216,8 @@
 		C432970E1E36CA0B00FA4DD8 /* bg_looper_chatText6.png in Resources */ = {isa = PBXBuildFile; fileRef = C432970B1E36CA0B00FA4DD8 /* bg_looper_chatText6.png */; };
 		C432970F1E36CA0B00FA4DD8 /* bg_looper_chatText6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C432970C1E36CA0B00FA4DD8 /* bg_looper_chatText6p.png */; };
 		C43297121E36CA6500FA4DD8 /* FeaturedListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C43297111E36CA6500FA4DD8 /* FeaturedListView.m */; };
+		C43437591EF0E89000739040 /* btn_looper_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = C43437571EF0E89000739040 /* btn_looper_sel.png */; };
+		C434375A1EF0E89000739040 /* btn_looper_select.png in Resources */ = {isa = PBXBuildFile; fileRef = C43437581EF0E89000739040 /* btn_looper_select.png */; };
 		C43BB00F1EAA25B300937973 /* looperListFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BB00E1EAA25B300937973 /* looperListFlowLayout.m */; };
 		C43E31E71E0F865A001921DD /* bk_home1.png in Resources */ = {isa = PBXBuildFile; fileRef = C43E31E61E0F865A001921DD /* bk_home1.png */; };
 		C43E31E91E0F8ECD001921DD /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43E31E81E0F8ECD001921DD /* UMMobClick.framework */; };
@@ -880,6 +882,8 @@
 		C432970C1E36CA0B00FA4DD8 /* bg_looper_chatText6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_chatText6p.png; sourceTree = "<group>"; };
 		C43297101E36CA6500FA4DD8 /* FeaturedListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedListView.h; sourceTree = "<group>"; };
 		C43297111E36CA6500FA4DD8 /* FeaturedListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedListView.m; sourceTree = "<group>"; };
+		C43437571EF0E89000739040 /* btn_looper_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_sel.png; sourceTree = "<group>"; };
+		C43437581EF0E89000739040 /* btn_looper_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_select.png; sourceTree = "<group>"; };
 		C43BB00D1EAA25B300937973 /* looperListFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperListFlowLayout.h; sourceTree = "<group>"; };
 		C43BB00E1EAA25B300937973 /* looperListFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperListFlowLayout.m; sourceTree = "<group>"; };
 		C43E31E61E0F865A001921DD /* bk_home1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk_home1.png; sourceTree = "<group>"; };
@@ -2582,6 +2586,8 @@
 		C47180F81E9A4A12000CD17C /* nlooper */ = {
 			isa = PBXGroup;
 			children = (
+				C43437571EF0E89000739040 /* btn_looper_sel.png */,
+				C43437581EF0E89000739040 /* btn_looper_select.png */,
 				C42E7FFB1EC326BC00D9CC43 /* icon_looper_followA1.png */,
 				C42E7FFC1EC326BC00D9CC43 /* icon_looper_goodA1.png */,
 				C42E7FF91EC3128000D9CC43 /* icon_music.png */,
@@ -3659,6 +3665,7 @@
 				B2A6EE941ECBE37E004BF416 /* 1.png in Resources */,
 				B2A6EEB11ED0121D004BF416 /* 3.pic.jpg in Resources */,
 				C42E80541EC332D400D9CC43 /* loading_00029.png in Resources */,
+				C434375A1EF0E89000739040 /* btn_looper_select.png in Resources */,
 				C45489381E9E2EDD00BB1591 /* bg_title_chat.png in Resources */,
 				C43E77021E091D8D004A5288 /* btn_serach.png in Resources */,
 				C4D8B1091E1A413A009F3A23 /* city.plist in Resources */,
@@ -3861,6 +3868,7 @@
 				C46E7D3B1EAE174200996110 /* text_opinion.png in Resources */,
 				C49FA0821E204493009111C7 /* icon_calendar_location.png in Resources */,
 				C4AE24751E1FA123009D5851 /* icon_looper_home.png in Resources */,
+				C43437591EF0E89000739040 /* btn_looper_sel.png in Resources */,
 				C4DA323B1E8B7DBB00CD8305 /* icon_remind.png in Resources */,
 				C42E805F1EC332D400D9CC43 /* loading_00040.png in Resources */,
 				C404A7CB1EBF5DD6000B9E1D /* turn_right.png in Resources */,

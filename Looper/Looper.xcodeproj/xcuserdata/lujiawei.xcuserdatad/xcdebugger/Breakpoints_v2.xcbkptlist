@@ -1286,11 +1286,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518690702.454773"
+            timestampString = "519103002.007606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-scrollViewDidEndDecelerating:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1302,11 +1302,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518690702.454773"
+            timestampString = "519103002.007606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1318,11 +1318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518690702.454773"
+            timestampString = "519103002.007606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1334,11 +1334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518690702.454773"
+            timestampString = "519103002.007606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "293"
-            endingLineNumber = "293"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "7">
             <Locations>
@@ -1382,11 +1382,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518691175.142454"
+            timestampString = "519104509.526618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "-updateTagView:andPoint:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1398,11 +1398,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518691175.142454"
+            timestampString = "519104509.526618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "-updateTagView:andPoint:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1414,27 +1414,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518691175.142454"
+            timestampString = "519104509.526618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
-            landmarkName = "-updateTagView:andPoint:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518691175.142454"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "-updateTagView:andPoint:"
             landmarkType = "7">
          </BreakpointContent>

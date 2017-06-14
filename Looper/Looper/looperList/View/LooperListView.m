@@ -113,7 +113,6 @@
         [UIView animateWithDuration:0.5 animations:^{
             moveline.frame =CGRectMake(265*0.5*DEF_Adaptation_Font, moveline.frame.origin.y, 45*DEF_Adaptation_Font*0.5*2, moveline.frame.size.height);
         }];
-        
     }
 }
 
@@ -126,7 +125,6 @@
 
     [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:30/255.0 blue:43/255.0 alpha:1.0]];
    
-    
     [self createCollectionView];
     
     UIButton *back =[LooperToolClass createBtnImageName:@"btn_infoBack.png" andRect:CGPointMake(1, 34) andTag:200 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
@@ -136,8 +134,6 @@
     [self addSubview:title];
     [self createMoveTag];
     
-    
-
 }
 
 -(void)setDefaultLableColor{
@@ -205,7 +201,7 @@
 
 -(void)createMoveTag{
 
-    tagView = [[UIView alloc] initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 287*DEF_Adaptation_Font*0.5)];
+    tagView = [[UIView alloc] initWithFrame:CGRectMake(0, 80*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 287*DEF_Adaptation_Font*0.5)];
     [self addSubview:tagView];
     for (int i=0;i<[[_obj tagData] count];i++){
         
@@ -215,7 +211,7 @@
         if(num_x==0){
             num_x=4;
         }
-        UIButton *selBtn =[LooperToolClass createBtnImageName:@"btn_unSelect.png" andRect:CGPointMake(23+(152*(num_x-1)), 0+((num_y-1)*76)) andTag:i andSelectImage:@"btn_select.png" andClickImage:nil andTextStr:[[_obj tagData]objectAtIndex:i] andSize:CGSizeZero andTarget:self];
+        UIButton *selBtn =[LooperToolClass createBtnImageName:@"btn_looper_sel.png" andRect:CGPointMake(23+(162*(num_x-1)), 0+((num_y-1)*72)) andTag:i andSelectImage:@"btn_looper_select.png" andClickImage:nil andTextStr:[[_obj tagData]objectAtIndex:i] andSize:CGSizeZero andTarget:self];
         [selBtn setAlpha:0.0];
         [tagView addSubview: selBtn];
         
@@ -268,8 +264,6 @@
         ActionUp=false;
     }
 }
-
-
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -325,26 +319,31 @@
     
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
-        
-        
-        NSLog(@"%f",point.y);
-        NSLog(@"------往上滚动");
         if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
-            
             [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
             [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
         }
     }else{
-        NSLog(@"%f",point.y);
-        NSLog(@"------往下滚动");
         [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
-         //[tagView setHidden:true];
-        
         [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
     }
     
     temp_num_y = scrollView.contentOffset.y;
+    
+    
+    [self updataTabViewAlpha:isdirection];
 }
+
+-(void)updataTabViewAlpha:(bool)isdirection{
+
+    float scrollOffSet_Y = _collectView.frame.origin.y - 116*DEF_Adaptation_Font*0.5;
+
+    float num_y = scrollOffSet_Y/(300*DEF_Adaptation_Font*0.5);
+
+        tagView.frame= CGRectMake(tagView.frame.origin.x, 80*DEF_Adaptation_Font*0.5 +(45*DEF_Adaptation_Font*0.5*num_y), tagView.frame.size.width, tagView.frame.size.height);
+
+}
+
 
 
 -(void)updateTagView:(float)scroll_y andPoint:(bool)isdirection{
@@ -360,7 +359,10 @@
             
             
         }else{
-        
+            for (int i=4;i<=15;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=0.0;
+            }
         
         }
         
@@ -377,7 +379,10 @@
             }
             
         }else{
-            
+            for (int i=8;i<=15;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=0.0;
+            }
             
         }
         
@@ -394,29 +399,32 @@
                 UIButton *btn = [btnArray objectAtIndex:i];
                 btn.alpha=1.0;
             }
-            
         }else{
-            
+            for (int i=12;i<=15;i++){
+                UIButton *btn = [btnArray objectAtIndex:i];
+                btn.alpha=0.0;
+            }
             
         }
     }else if((161*DEF_Adaptation_Font*0.5+280*DEF_Adaptation_Font*0.5)>scroll_y && scroll_y>(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5)){
-        float alpha = (scroll_y-(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5))/55*DEF_Adaptation_Font*0.5;
+        float alpha = (scroll_y-(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5))/40*DEF_Adaptation_Font*0.5;
+        
+        if(40*DEF_Adaptation_Font*0.5<(scroll_y-(161*DEF_Adaptation_Font*0.5+225*DEF_Adaptation_Font*0.5))){
+            alpha = 1.0;
+        }
         for (int i=12;i<=15;i++){
             UIButton *btn = [btnArray objectAtIndex:i];
             btn.alpha=alpha;
         }
-        
         if(isdirection){
             for (int i=0;i<=11;i++){
                 UIButton *btn = [btnArray objectAtIndex:i];
                 btn.alpha=1.0;
             }
-            
         }else{
             
             
         }
-        
     }
 }
 
