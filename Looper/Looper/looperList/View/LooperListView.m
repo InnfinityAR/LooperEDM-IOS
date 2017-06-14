@@ -35,7 +35,7 @@
     UIImageView *moveline;
     
     float temp_num_y;
-    
+
     
     int indexNum;
     
@@ -47,7 +47,7 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (LooperListViewModel*)idObject;
         [self initView];
-        
+       
         
     }
     return self;
@@ -57,12 +57,11 @@
 
 -(void)reloadData{
     ListArray =[[NSMutableArray alloc] initWithCapacity:50];
-    
+
     for (int i=0;i<=15;i++){
         UIButton *btn = [btnArray objectAtIndex:i];
         btn.alpha=0.0;
     }
-    
     
     [UIView animateWithDuration:0.2 animations:^{
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, 161*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
@@ -319,6 +318,7 @@
     
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
+
         if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
             [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
             [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
@@ -451,6 +451,12 @@
         
     }
 }
+//滑动手势
+- (void)swipe:(UISwipeGestureRecognizer *)recognizer{
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
+        NSLog(@"swipe up");
+    }
+}
 
 -(void)integratingData{
     [ListArray removeAllObjects];
@@ -526,6 +532,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
     _collectView.showsVerticalScrollIndicator = FALSE;
     _collectView.showsHorizontalScrollIndicator = FALSE;
     [_collectView setBackgroundColor:[UIColor clearColor]];
+
     [self addSubview:_collectView];
 }
 

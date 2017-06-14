@@ -117,7 +117,7 @@
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
     cell.addressLB.text=activity[@"location"];
     cell.themeLB.text=activity[@"activityname"];
-    cell.timeLB.text=[NSString stringWithFormat:@"%@至\n%@",activity[@"starttime"],activity[@"endtime"]];
+    cell.timeLB.text=[NSString stringWithFormat:@"%@~\n%@",[self timeChange:activity[@"starttime"]],[self timeChange:activity[@"endtime"]]];
     cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
     if (activity[@"price"]==[NSNull null]) {
         [cell.ticketLB setHidden:YES];
@@ -134,6 +134,26 @@
     [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
     return cell;
     
+}
+//时间戳转换
+-(NSString *)timeChange:(NSString *)timeDate{
+    NSString*str=timeDate;//时间戳
+    
+    NSTimeInterval time=[str doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    
+    NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    //实例化一个NSDateFormatter对象
+    
+    NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
+    
+    //设定时间格式,这里可以设置成自己需要的格式
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString*currentDateStr = [dateFormatter stringFromDate:detaildate];
+    return currentDateStr;
+
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{

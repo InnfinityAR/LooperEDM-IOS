@@ -1238,7 +1238,9 @@
         _player = nil;
         
         [_obj popController];
-    }else if(button.tag==1000){
+    }
+#warning-用于添加收藏按钮
+    else if(button.tag==1000){
         NSArray *musicArray = [loopData objectForKey:@"Music"];
         if([button isSelected]==true){
         
@@ -1309,7 +1311,9 @@
         
     }else if(button.tag ==902){
         [_obj createLooperChatV];
-    }else if(button.tag ==909){
+    }
+    //用于跳转音乐列表
+    else if(button.tag ==909){
         [_obj addMusicListView];
     }else if(button.tag ==1009){
         if([ownerFollowBtn isSelected]==true){

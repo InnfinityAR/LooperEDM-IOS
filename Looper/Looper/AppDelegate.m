@@ -122,7 +122,6 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self initUmSdk];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
-    
 
     if(isHasData == false){
 

@@ -303,7 +303,7 @@
 
 -(void)updateWithTargetView:(NSDictionary*)targetDic{
     
-    UILabel *targetName = [LooperToolClass createLableView:CGPointMake(294*DEF_Adaptation_Font_x*0.5, 56*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(233*DEF_Adaptation_Font_x*0.5, 29*DEF_Adaptation_Font_x*0.5) andText:@"聊天" andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel *targetName = [LooperToolClass createLableView:CGPointMake(DEF_SCREEN_WIDTH/2-115*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(230*DEF_Adaptation_Font_x*0.5, 29*DEF_Adaptation_Font_x*0.5) andText:[targetDic objectForKey:@"nickname"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:targetName];
 }
 
@@ -346,9 +346,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
     
-    
-    
-    
+
     UIImageView *downBk=[LooperToolClass createImageView:@"bk_chat.png" andRect:CGPointMake(0, 1053) andTag:100 andSize:CGSizeMake(632*DEF_Adaptation_Font_x*0.5, 2*DEF_Adaptation_Font*0.5) andIsRadius:false];
     
     [self addSubview:downBk];

@@ -126,9 +126,13 @@
         if(num_x>frame.size.width){
             UILabel *labelTwo=[self createLable:CGPointMake(num_x+20*DEF_Adaptation_Font*0.5, 0) andStr:string andFrameSize:CGSizeMake(num_x, frame.size.height) andFont:looperFont andFontSize:15 andType:type];
             [scrollV addSubview:labelTwo];
+
             [scrollV setContentSize:CGSizeMake(num_x+num_x+20*DEF_Adaptation_Font*0.5, frame.size.height)];
             if(scorllType==2){
-                  NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.005f target:self selector:@selector(updateLableMove) userInfo:nil repeats:YES];
+                //加入阴影
+                [self addShadeView:frame];
+                
+                  NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLableMove) userInfo:nil repeats:YES];
             }
         }else{
             [scrollV setContentSize:CGSizeMake(num_x,frame.size.height)];
@@ -138,7 +142,45 @@
         
     }
 }
+-(void)addShadeView:(CGRect)frame{
+    UIView *addView=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 10, 20)];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = addView.bounds;
+    
+    //将CAGradientlayer对象添加在我们要设置背景色的视图的layer层
+    [addView.layer addSublayer:gradientLayer];
+    
+    //设置渐变区域的起始和终止位置（范围为0-1）
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 0);
+    
+    //设置颜色数组
+    gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor,
+                             (__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor];
+    
+    //设置颜色分割点（范围：0-1）
+    gradientLayer.locations = @[@(0.1f), @(1.0f)];
+    [self addSubview:addView];
 
+    UIView *addView2=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+frame.size.width-20, frame.origin.y, 20, 20)];
+    CAGradientLayer *gradientLayer2 = [CAGradientLayer layer];
+    gradientLayer2.frame = addView2.bounds;
+    
+    //将CAGradientlayer对象添加在我们要设置背景色的视图的layer层
+    [addView2.layer addSublayer:gradientLayer2];
+    
+    //设置渐变区域的起始和终止位置（范围为0-1）
+    gradientLayer2.startPoint = CGPointMake(0, 0);
+    gradientLayer2.endPoint = CGPointMake(1, 0);
+    
+    //设置颜色数组
+    gradientLayer2.colors = @[(__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
+                             (__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0].CGColor];
+    
+    //设置颜色分割点（范围：0-1）
+    gradientLayer2.locations = @[@(0.1f), @(1.0f)];
+    [self addSubview:addView2];
+}
 
 
 @end
