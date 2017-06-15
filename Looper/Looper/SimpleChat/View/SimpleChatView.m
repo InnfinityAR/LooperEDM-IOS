@@ -398,7 +398,8 @@
     textField.textColor = [UIColor colorWithRed:195/255.0 green:119/255.0 blue:211/255.0 alpha:1.0];
     textField.font =[UIFont fontWithName:looperFont size:12*DEF_Adaptation_Font];
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    
+
+    textField.keyboardType = UIKeyboardTypeDefault;
     
     textField.enablesReturnKeyAutomatically = YES;
     textField.returnKeyType = UIReturnKeySend;

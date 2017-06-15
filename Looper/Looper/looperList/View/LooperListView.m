@@ -668,13 +668,13 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
             NSDictionary *dic = [array objectAtIndex:i];
             
             if(i==0){
-                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( cell.frame.size.width/2,  cell.frame.size.height-2) andPoint:CGPointMake(0, 0)]];
+                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( cell.frame.size.width/2,  cell.frame.size.height) andPoint:CGPointMake(0, 0)]];
                 
                 [cell.contentView addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(29, 408) andSize:CGSizeMake(260, 80) andFontSize:15]];
                 
                 
             }else if(i==1){
-                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( cell.frame.size.width/2,  cell.frame.size.height-2) andPoint:CGPointMake(322*DEF_Adaptation_Font*0.5, 0)]];
+                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( cell.frame.size.width/2,  cell.frame.size.height) andPoint:CGPointMake(cell.frame.size.width/2, 0)]];
                 
                 [cell.contentView addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(350, 408) andSize:CGSizeMake(260, 80)  andFontSize:15]];
                 
@@ -687,15 +687,17 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
         for (int i =0;i<[array count]-1;i++){
             NSDictionary *dic = [array objectAtIndex:i];
             if(i==0){
-                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake(427*DEF_Adaptation_Font*0.5, cell.frame.size.height-2) andPoint:CGPointMake(0,0)]];
+                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake(427*DEF_Adaptation_Font*0.5, cell.frame.size.height) andPoint:CGPointMake(0,0)]];
                 
                    [cell.contentView addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(29, 585) andSize:CGSizeMake(386, 72)  andFontSize:18]];
             }else if(i==1){
-                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( 211*DEF_Adaptation_Font*0.5, cell.frame.size.height/2) andPoint:CGPointMake(429*DEF_Adaptation_Font*0.5,0)]];
+                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( 211*DEF_Adaptation_Font*0.5, cell.frame.size.height/2) andPoint:CGPointMake(427*DEF_Adaptation_Font*0.5,0)]];
+                
                  [cell.contentView addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(446, 250) andSize:CGSizeMake(176, 70) andFontSize:13]];
                 
             }else if(i==2){
-                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( 211*DEF_Adaptation_Font*0.5, cell.frame.size.height/2-2) andPoint:CGPointMake(429*DEF_Adaptation_Font*0.5,356*DEF_Adaptation_Font*0.5)]];
+                [cell.contentView addSubview:[self createImageBtn:[dic objectForKey:@"news_img2"] andTag:[[dic objectForKey:@"n_id"] intValue] andSize:CGSizeMake( 211*DEF_Adaptation_Font*0.5, cell.frame.size.height/2) andPoint:CGPointMake(427*DEF_Adaptation_Font*0.5,cell.frame.size.height/2)]];
+                
                  [cell.contentView addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(446, 606) andSize:CGSizeMake(176, 70) andFontSize:13]];
             }
         }
