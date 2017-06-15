@@ -99,17 +99,21 @@
 
     if(_looperVm!=nil){
     
-        [_looperVm getLoopMusic:1];
+        [_looperVm getLoopMusic:3];
     }
 
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewDidDisappear:(BOOL)animated{
     if (! [ [ self.navigationController viewControllers ] containsObject:self ]) {
-        [_looperVm removeAction];
+       
         // [self.liveplayer stop];
+            [_looperVm removeAction];
     }
+    [self resignFirstResponder];
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [super viewWillDisappear:animated];
 }
 
@@ -187,14 +191,6 @@
     [self becomeFirstResponder];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
 }
-
-- (void)viewDidDisappear:(BOOL)animated {
-    //    取消远程控制
-    [self resignFirstResponder];
-    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-}
-
-
 
 
 

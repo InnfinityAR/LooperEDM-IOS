@@ -13,6 +13,7 @@
 #import "LooperToolClass.h"
 #import "DataHander.h"
 
+
 @implementation ActivityDetailView{
     UIScrollView *bkScroll;
 
@@ -27,6 +28,8 @@
     UIButton *ticketBtn;
     
     UIButton *touchView;
+    
+    KYGooeyMenu *gooeyMenu;
     
     UIButton *ownerFollowBtn;
     
@@ -51,8 +54,15 @@
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
 
-    UIButton *addBtn = [LooperToolClass createBtnImageNameReal:@"btn_add.png" andRect:CGPointMake(550*DEF_Adaptation_Font*0.5,1045*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_add.png" andClickImage:@"btn_add.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5,65*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:addBtn];
+//    UIButton *addBtn = [LooperToolClass createBtnImageNameReal:@"btn_add.png" andRect:CGPointMake(550*DEF_Adaptation_Font*0.5,1045*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_add.png" andClickImage:@"btn_add.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5,65*DEF_Adaptation_Font*0.5) andTarget:self];
+//    [self addSubview:addBtn];
+    
+    gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,1025*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor blueColor]];
+    gooeyMenu.menuDelegate = self;
+    gooeyMenu.radius = 20;//大圆的1/4
+    gooeyMenu.extraDistance = 45;
+    gooeyMenu.MenuCount = 3;
+    
 }
 
 
@@ -234,9 +244,6 @@
     
     [bkScroll addSubview:activityName];
     
-    
-    
-    
     UILabel *lableTime = [LooperToolClass createLableView:CGPointMake(70*DEF_Adaptation_Font_x*0.5, 1080*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 25*DEF_Adaptation_Font_x*0.5) andText:@"活动时间" andFontSize:11 andColor:[UIColor colorWithRed:57/255.0 green:61/255.0 blue:71/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [lableTime sizeToFit];
     [bkScroll addSubview:lableTime];
@@ -305,8 +312,6 @@
     [self createActivityBtn];
     isShowBtn=0;
     
-    
-    
     ownerFollowBtn = [LooperToolClass createBtnImageNameReal:@"ownerFollow.png" andRect:CGPointMake(475*DEF_Adaptation_Font*0.5,936*DEF_Adaptation_Font*0.5) andTag:1009 andSelectImage:@"owenFollowed.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(144*DEF_Adaptation_Font*0.5,63*DEF_Adaptation_Font*0.5) andTarget:self];
     [bkScroll addSubview:ownerFollowBtn];
     
@@ -317,10 +322,6 @@
         [ownerFollowBtn setSelected:true];
     }
 }
-
-
-
-
 
 
 -(void)initView{
@@ -338,9 +339,10 @@
 
 -(void)closeTouchView{
 
-    [self moveActivityBtn];
-
-
+   // [self moveActivityBtn];
+    
+    
+    //[gooeyMenu tapToSwitchOpenOrClose];
 }
 
 
@@ -392,6 +394,30 @@
     }
 }
 		
+-(void)menuDidSelected:(NSInteger)index{
+    NSLog(@"选中第%ld",(long)index);
+    
+    if(index==1){
+        [self addTicketView];
+    }else if(index==2){
+         [_obj savaCalendar:[activityDic objectForKey:@"data"]];
+    }else if(index==3){
+        NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
+        NSDictionary *dic =[loopArray objectAtIndex:0];
+        [_obj toLooperView:dic];
+    }else if(index==100){
+        if(isShowBtn==0){
+             touchView.hidden = false;
+            isShowBtn=1;
+        }else{
+            touchView.hidden = true;
+            isShowBtn=0;
+        }
+       
+    }
+    
+}
+
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
@@ -401,7 +427,7 @@
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];
     }else if(button.tag==103){
-        [self moveActivityBtn];
+        //[self moveActivityBtn];
     }else if(button.tag==106){
         [self addTicketView];
     }else if(button.tag==107){

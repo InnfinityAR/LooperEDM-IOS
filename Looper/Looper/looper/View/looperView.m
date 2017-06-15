@@ -131,6 +131,9 @@
     NSMutableArray *hotChatArray;
     
     
+    UIView *moveView;
+    
+    
 }
 @synthesize obj = _obj;
 
@@ -178,8 +181,12 @@
     if([musicArray count]>0){
         indexMusic = rand()%[musicArray count];
         playIndex=indexMusic;
+    }else{
+        playIndex=-1;
+    
     }
    
+  
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
@@ -204,6 +211,10 @@
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerMusicEnd) name:AVPlayerItemDidPlayToEndTimeNotification  object:[_player currentItem]];
     
     [self performSelector:@selector(playMusic:) withObject:[[NSNumber alloc] initWithInt:playIndex] afterDelay:0.5];
+    
+    moveView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, 600*DEF_Adaptation_Font*0.5)];
+    moveView.userInteractionEnabled=NO;
+    [self addSubview:moveView];
     
 }
 
@@ -327,12 +338,7 @@
         
         [musicPlayer initView:CGRectMake(0,0, 350*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andStr:arrayPlayer andType:3];
 
-
-        
-        
         [followMusic setHidden:false];
-        
-        
         if([[dic objectForKey:@"islike"] intValue]==1){
             [followMusic setSelected:true];
         }else{
@@ -367,6 +373,7 @@
         
     }else{
         
+        playIndex = -1;
         UIImage *iconMusic =[UIImage imageNamed:@"icon_music.png"];
         iconMusicImage = [[UIImageView alloc] initWithFrame:CGRectMake(39*DEF_Adaptation_Font*0.5,1062*DEF_Adaptation_Font*0.5,54*DEF_Adaptation_Font*0.5, 54*DEF_Adaptation_Font*0.5)];
         iconMusicImage.image =iconMusic;
@@ -505,8 +512,6 @@
     
     [self checkMessageisLocalUser];
 }
-
-
 
 
 -(void)checkMessageisLocalUser{
@@ -666,7 +671,7 @@
     }
     
     touchType=nil;
-    
+
     
     
 }
@@ -763,10 +768,6 @@
     
 }
 
-
-
-
-
 -(void)updataData:(NSDictionary*)looperDataSource andType:(int)type{
 
     loopData = [[NSMutableDictionary alloc] initWithDictionary:looperDataSource];
@@ -785,6 +786,35 @@
         
         [self playMusic:[[NSNumber alloc] initWithInt:playIndex]];
     
+    }else if(type==3){
+        if(playIndex==-1){
+            
+             NSArray *musicArray = [loopData objectForKey:@"Music"];
+            if([musicArray count]>0){
+            
+                playIndex=0;
+                isPlay = false;
+                [_player seekToTime:kCMTimeZero];
+                [_player pause];
+                [_player setRate:0];
+                [_player replaceCurrentItemWithPlayerItem:nil];
+                _player = nil;
+                playIndex=0;
+                [self updataMusicView:playIndex];
+                
+                [self playMusic:[[NSNumber alloc] initWithInt:playIndex]];
+                
+                
+            }else{
+            
+            
+            }
+        
+           
+        }
+        
+        
+       
     }
     
 }
@@ -821,15 +851,11 @@
         }
         
         UIImageView *yellowV;
-        
-     
         yellowV = [[UIImageView alloc] initWithFrame:CGRectMake(800*DEF_Adaptation_Font*0.5, num_y*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5)];
         [yellowV setBackgroundColor:[UIColor clearColor]];
-        
         yellowV.layer.cornerRadius =59*DEF_Adaptation_Font*0.5*0.5;
         yellowV.tag = [[data objectForKey:@"messageId"] intValue];
-
-        [self addSubview:yellowV];
+        [moveView addSubview:yellowV];
         
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(3*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
         imageV.layer.cornerRadius =53*DEF_Adaptation_Font*0.5*0.5;
@@ -853,9 +879,6 @@
         label.text =[data objectForKey:@"text"];
         label.textAlignment = NSTextAlignmentLeft;
         label.font  = [UIFont fontWithName:looperFont size:15*DEF_Adaptation_Font];
-        
-
-        
         label.textColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0];
         
         int start = 0;

@@ -219,6 +219,8 @@
 		C43297121E36CA6500FA4DD8 /* FeaturedListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C43297111E36CA6500FA4DD8 /* FeaturedListView.m */; };
 		C43437591EF0E89000739040 /* btn_looper_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = C43437571EF0E89000739040 /* btn_looper_sel.png */; };
 		C434375A1EF0E89000739040 /* btn_looper_select.png in Resources */ = {isa = PBXBuildFile; fileRef = C43437581EF0E89000739040 /* btn_looper_select.png */; };
+		C43437601EF11D6B00739040 /* Cross.m in Sources */ = {isa = PBXBuildFile; fileRef = C434375D1EF11D6B00739040 /* Cross.m */; };
+		C43437611EF11D6B00739040 /* KYGooeyMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C434375F1EF11D6B00739040 /* KYGooeyMenu.m */; };
 		C43BB00F1EAA25B300937973 /* looperListFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BB00E1EAA25B300937973 /* looperListFlowLayout.m */; };
 		C43E31E71E0F865A001921DD /* bk_home1.png in Resources */ = {isa = PBXBuildFile; fileRef = C43E31E61E0F865A001921DD /* bk_home1.png */; };
 		C43E31E91E0F8ECD001921DD /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43E31E81E0F8ECD001921DD /* UMMobClick.framework */; };
@@ -887,6 +889,10 @@
 		C43297111E36CA6500FA4DD8 /* FeaturedListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedListView.m; sourceTree = "<group>"; };
 		C43437571EF0E89000739040 /* btn_looper_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_sel.png; sourceTree = "<group>"; };
 		C43437581EF0E89000739040 /* btn_looper_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_select.png; sourceTree = "<group>"; };
+		C434375C1EF11D6B00739040 /* Cross.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cross.h; sourceTree = "<group>"; };
+		C434375D1EF11D6B00739040 /* Cross.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cross.m; sourceTree = "<group>"; };
+		C434375E1EF11D6B00739040 /* KYGooeyMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KYGooeyMenu.h; sourceTree = "<group>"; };
+		C434375F1EF11D6B00739040 /* KYGooeyMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYGooeyMenu.m; sourceTree = "<group>"; };
 		C43BB00D1EAA25B300937973 /* looperListFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperListFlowLayout.h; sourceTree = "<group>"; };
 		C43BB00E1EAA25B300937973 /* looperListFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperListFlowLayout.m; sourceTree = "<group>"; };
 		C43E31E61E0F865A001921DD /* bk_home1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk_home1.png; sourceTree = "<group>"; };
@@ -2169,6 +2175,17 @@
 			path = Refresh;
 			sourceTree = "<group>";
 		};
+		C434375B1EF11D6B00739040 /* KYGooeyMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C434375C1EF11D6B00739040 /* Cross.h */,
+				C434375D1EF11D6B00739040 /* Cross.m */,
+				C434375E1EF11D6B00739040 /* KYGooeyMenu.h */,
+				C434375F1EF11D6B00739040 /* KYGooeyMenu.m */,
+			);
+			path = KYGooeyMenu;
+			sourceTree = "<group>";
+		};
 		C43E3D181EA616E400EA4A6E /* createLoopAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -2853,6 +2870,7 @@
 		C4BCE6351E091E710087E6C5 /* 3rdFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				C434375B1EF11D6B00739040 /* KYGooeyMenu */,
 				C4C535DB1EE7DB160059BCE5 /* Jpush */,
 				C40BACC01EDED6F200BC41C0 /* RongCloud */,
 				C40BACB31EDE6F8400BC41C0 /* GALActionOnCalendar.h */,
@@ -4113,6 +4131,7 @@
 				C45DC3151E4AF44F0031EDCD /* aboutView.m in Sources */,
 				C426015E1E14F91A00BE5CE2 /* SettingView.m in Sources */,
 				C4CCFCE61EB3B78F00114711 /* messageViewController.m in Sources */,
+				C43437601EF11D6B00739040 /* Cross.m in Sources */,
 				C468F8C61E0D190D0044EB5C /* HomeViewModel.m in Sources */,
 				C4BCE73A1E091E710087E6C5 /* AFURLRequestSerialization.m in Sources */,
 				C4B4ABB81E50799600DC000E /* WebViewController.m in Sources */,
@@ -4137,6 +4156,7 @@
 				C4BCE7591E091E710087E6C5 /* UIImage+MultiFormat.m in Sources */,
 				C4BCE7501E091E710087E6C5 /* SDImageCache.m in Sources */,
 				C41D20971E2E5B7100727591 /* AwesomeMenu.m in Sources */,
+				C43437611EF11D6B00739040 /* KYGooeyMenu.m in Sources */,
 				C4A157AE1E16225B00797B8B /* ZJSwitch.m in Sources */,
 				C4A157B11E16477E00797B8B /* MineView.m in Sources */,
 				C40F89741E1CF87F00DABEAA /* SerachViewModel.m in Sources */,
