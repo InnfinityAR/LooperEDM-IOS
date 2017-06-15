@@ -143,7 +143,7 @@
     }
 }
 -(void)addShadeView:(CGRect)frame{
-    UIView *addView=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 10, 20)];
+    UIView *addView=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, 30, 20)];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = addView.bounds;
     
@@ -155,14 +155,14 @@
     gradientLayer.endPoint = CGPointMake(1, 0);
     
     //设置颜色数组
-    gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8].CGColor,
-                             (__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor];
+    gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:16/255.0 green:17/255.0 blue:31/255.0 alpha:1.0].CGColor,
+                             (__bridge id)[UIColor colorWithRed:16/255.0 green:17/255.0 blue:31/255.0 alpha:0].CGColor];
     
     //设置颜色分割点（范围：0-1）
     gradientLayer.locations = @[@(0.1f), @(1.0f)];
     [self addSubview:addView];
 
-    UIView *addView2=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+frame.size.width-20, frame.origin.y, 20, 20)];
+    UIView *addView2=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+frame.size.width-30, frame.origin.y, 30, 20)];
     CAGradientLayer *gradientLayer2 = [CAGradientLayer layer];
     gradientLayer2.frame = addView2.bounds;
     
@@ -174,8 +174,8 @@
     gradientLayer2.endPoint = CGPointMake(1, 0);
     
     //设置颜色数组
-    gradientLayer2.colors = @[(__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
-                             (__bridge id)[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0].CGColor];
+    gradientLayer2.colors = @[(__bridge id)[UIColor colorWithRed:16/255.0 green:17/255.0 blue:31/255.0 alpha:0].CGColor,
+                             (__bridge id)[UIColor colorWithRed:16/255.0 green:17/255.0 blue:31/255.0 alpha:1.0].CGColor];
     
     //设置颜色分割点（范围：0-1）
     gradientLayer2.locations = @[@(0.1f), @(1.0f)];
