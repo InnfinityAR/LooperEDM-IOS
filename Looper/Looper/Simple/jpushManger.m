@@ -23,6 +23,4 @@ static jpushManger *jpushMangerM=nil;
 
 
 
-
-
 @end

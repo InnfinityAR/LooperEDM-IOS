@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SimpleChat/View/SimpleCellView.m"
-            timestampString = "519198052.706925"
+            timestampString = "519212158.159082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-createWithData:and:and:"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SimpleChat/View/SimpleCellView.m"
-            timestampString = "519210407.275769"
+            timestampString = "519212158.159082"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-getYWithForContentStr:"
             landmarkType = "7">
          </BreakpointContent>

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "LooperConfig.h"
 #import "UIImageView+WebCache.h"
+#import "KKClickEffectImageView.h"
 
 @implementation LooperToolClass
 
@@ -135,12 +136,9 @@
 +(UIImageView*)createBtnImage:(NSString*)imagePath andRect:(CGPoint)point andTag:(int)Tag andSize:(CGSize)FrameSize andTarget:(id)obj{
     
     
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(point.x*0.5*DEF_Adaptation_Font, point.y*0.5*DEF_Adaptation_Font, FrameSize.width*0.5*DEF_Adaptation_Font,FrameSize.height*0.5*DEF_Adaptation_Font)];
+    KKClickEffectImageView *imageV = [[KKClickEffectImageView alloc] initWithFrame:CGRectMake(point.x*0.5*DEF_Adaptation_Font, point.y*0.5*DEF_Adaptation_Font, FrameSize.width*0.5*DEF_Adaptation_Font,FrameSize.height*0.5*DEF_Adaptation_Font)];
     imageV.tag=Tag;
-    
-    
-    
-    
+
     [imageV sd_setImageWithURL:[[NSURL alloc] initWithString:imagePath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 
     }];
