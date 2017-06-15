@@ -300,6 +300,8 @@
 		C45DC3121E4AF28B0031EDCD /* active_undetail.png in Resources */ = {isa = PBXBuildFile; fileRef = C45DC3101E4AF28B0031EDCD /* active_undetail.png */; };
 		C45DC3151E4AF44F0031EDCD /* aboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DC3141E4AF44F0031EDCD /* aboutView.m */; };
 		C45DF3E61EF23D7F00AA64C6 /* KKClickEffectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DF3E51EF23D7F00AA64C6 /* KKClickEffectImageView.m */; };
+		C45DF3EB1EF2694900AA64C6 /* jcore-ios-1.1.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DF3E81EF2694900AA64C6 /* jcore-ios-1.1.3.a */; };
+		C45DF3EC1EF2694900AA64C6 /* jpush-ios-3.0.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DF3E91EF2694900AA64C6 /* jpush-ios-3.0.5.a */; };
 		C45F674B1E8663CF00FB92A8 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F674A1E8663CF00FB92A8 /* UserInfoView.m */; };
 		C460ED0C1ED417D300AE6A90 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = C460ED0B1ED417D300AE6A90 /* 1.json */; };
 		C460ED0E1ED417DD00AE6A90 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = C460ED0D1ED417DD00AE6A90 /* 2.json */; };
@@ -500,8 +502,6 @@
 		C4C4B49E1E9CC6CD003E2705 /* btn_userList.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C4B49B1E9CC6CD003E2705 /* btn_userList.png */; };
 		C4C4B4A01E9CD90D003E2705 /* btn_addLoop.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C4B49F1E9CD90D003E2705 /* btn_addLoop.png */; };
 		C4C4B4A31E9CE046003E2705 /* UserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C4B4A21E9CE046003E2705 /* UserListView.m */; };
-		C4C535DE1EE7DB160059BCE5 /* jcore-ios-1.1.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C535DC1EE7DB160059BCE5 /* jcore-ios-1.1.3.a */; };
-		C4C535DF1EE7DB160059BCE5 /* jpush-ios-3.0.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C535DD1EE7DB160059BCE5 /* jpush-ios-3.0.5.a */; };
 		C4C535E11EE7DD1B0059BCE5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C535E01EE7DD1B0059BCE5 /* AdSupport.framework */; };
 		C4C535E31EE7DD260059BCE5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C535E21EE7DD260059BCE5 /* UserNotifications.framework */; };
 		C4C535E51EE7DD400059BCE5 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C535E41EE7DD400059BCE5 /* libresolv.tbd */; };
@@ -553,9 +553,6 @@
 		C4DD32561EB9B8A5008CA240 /* notify.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DD32521EB9B8A5008CA240 /* notify.png */; };
 		C4DD32571EB9B8A5008CA240 /* unbarrage.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DD32531EB9B8A5008CA240 /* unbarrage.png */; };
 		C4DD32581EB9B8A5008CA240 /* unNotify.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DD32541EB9B8A5008CA240 /* unNotify.png */; };
-		C4DDB5121E28BB09005E3909 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DDB50F1E28BB09005E3909 /* libopencore-amrnb.a */; };
-		C4DDB5131E28BB09005E3909 /* RCConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4DDB5101E28BB09005E3909 /* RCConfig.plist */; };
-		C4DDB5141E28BB09005E3909 /* RongIMLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DDB5111E28BB09005E3909 /* RongIMLib.framework */; };
 		C4DDB5161E28BB32005E3909 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DDB5151E28BB32005E3909 /* AssetsLibrary.framework */; };
 		C4DDB5181E28BB45005E3909 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DDB5171E28BB45005E3909 /* CFNetwork.framework */; };
 		C4DDB51E1E28BB6F005E3909 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4DDB5191E28BB6F005E3909 /* CoreAudio.framework */; };
@@ -997,6 +994,9 @@
 		C45DC3141E4AF44F0031EDCD /* aboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutView.m; sourceTree = "<group>"; };
 		C45DF3E41EF23D7F00AA64C6 /* KKClickEffectImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKClickEffectImageView.h; sourceTree = "<group>"; };
 		C45DF3E51EF23D7F00AA64C6 /* KKClickEffectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKClickEffectImageView.m; sourceTree = "<group>"; };
+		C45DF3E81EF2694900AA64C6 /* jcore-ios-1.1.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.3.a"; sourceTree = "<group>"; };
+		C45DF3E91EF2694900AA64C6 /* jpush-ios-3.0.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.5.a"; sourceTree = "<group>"; };
+		C45DF3EA1EF2694900AA64C6 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		C45F67491E8663CF00FB92A8 /* UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoView.h; sourceTree = "<group>"; };
 		C45F674A1E8663CF00FB92A8 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
 		C460ED0B1ED417D300AE6A90 /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
@@ -1307,14 +1307,11 @@
 		C4C4B49F1E9CD90D003E2705 /* btn_addLoop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_addLoop.png; sourceTree = "<group>"; };
 		C4C4B4A11E9CE046003E2705 /* UserListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListView.h; sourceTree = "<group>"; };
 		C4C4B4A21E9CE046003E2705 /* UserListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListView.m; sourceTree = "<group>"; };
-		C4C535DC1EE7DB160059BCE5 /* jcore-ios-1.1.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.3.a"; sourceTree = "<group>"; };
-		C4C535DD1EE7DB160059BCE5 /* jpush-ios-3.0.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.5.a"; sourceTree = "<group>"; };
 		C4C535E01EE7DD1B0059BCE5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		C4C535E21EE7DD260059BCE5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		C4C535E41EE7DD400059BCE5 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		C4C535E61EE7E06A0059BCE5 /* jpushManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jpushManger.h; sourceTree = "<group>"; };
 		C4C535E71EE7E06A0059BCE5 /* jpushManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jpushManger.m; sourceTree = "<group>"; };
-		C4C535E91EE7F0330059BCE5 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		C4C7249F1E2F6D71008E39D1 /* JKRBubbleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRBubbleDelegate.h; sourceTree = "<group>"; };
 		C4C724A01E2F6D71008E39D1 /* JKRBubbleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKRBubbleDelegate.m; sourceTree = "<group>"; };
 		C4C724A11E2F6D71008E39D1 /* JKRBubbleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRBubbleViewController.h; sourceTree = "<group>"; };
@@ -1378,9 +1375,6 @@
 		C4DD32521EB9B8A5008CA240 /* notify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notify.png; sourceTree = "<group>"; };
 		C4DD32531EB9B8A5008CA240 /* unbarrage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unbarrage.png; sourceTree = "<group>"; };
 		C4DD32541EB9B8A5008CA240 /* unNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unNotify.png; sourceTree = "<group>"; };
-		C4DDB50F1E28BB09005E3909 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
-		C4DDB5101E28BB09005E3909 /* RCConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RCConfig.plist; sourceTree = "<group>"; };
-		C4DDB5111E28BB09005E3909 /* RongIMLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RongIMLib.framework; sourceTree = "<group>"; };
 		C4DDB5151E28BB32005E3909 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		C4DDB5171E28BB45005E3909 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		C4DDB5191E28BB6F005E3909 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -1460,10 +1454,8 @@
 				C4F59A781EB36D370088C815 /* MediaPlayer.framework in Frameworks */,
 				C4057F381DF5777100AA52F9 /* libz.tbd in Frameworks */,
 				C40DDE181E0915E500137082 /* libc++.tbd in Frameworks */,
-				C4C535DE1EE7DB160059BCE5 /* jcore-ios-1.1.3.a in Frameworks */,
 				C4DDB5211E28BB6F005E3909 /* CoreMedia.framework in Frameworks */,
 				C4F28FFB1EB0A39500EEB15E /* MobileCoreServices.framework in Frameworks */,
-				C4C535DF1EE7DB160059BCE5 /* jpush-ios-3.0.5.a in Frameworks */,
 				C40BACC61EDED6F200BC41C0 /* RongIMLib.framework in Frameworks */,
 				C4DDB5301E28BBC6005E3909 /* UIKit.framework in Frameworks */,
 				C4057EF31DF5450000AA52F9 /* AudioToolbox.framework in Frameworks */,
@@ -1477,8 +1469,10 @@
 				C4DDB52C1E28BBB4005E3909 /* OpenGLES.framework in Frameworks */,
 				C4057EEF1DF544E800AA52F9 /* CoreTelephony.framework in Frameworks */,
 				C4F2C2351EAF674500BB10CA /* libiconv.tbd in Frameworks */,
+				C45DF3EC1EF2694900AA64C6 /* jpush-ios-3.0.5.a in Frameworks */,
 				C4F2C2331EAF673200BB10CA /* libbz2.tbd in Frameworks */,
 				C4DDB5341E28BBD2005E3909 /* SafariServices.framework in Frameworks */,
+				C45DF3EB1EF2694900AA64C6 /* jcore-ios-1.1.3.a in Frameworks */,
 				C4DDB5321E28BBCC005E3909 /* Photos.framework in Frameworks */,
 				C4DDB52A1E28BBA9005E3909 /* MapKit.framework in Frameworks */,
 				C4DDB5281E28BB99005E3909 /* libxml2.tbd in Frameworks */,
@@ -1494,7 +1488,6 @@
 				C4057F341DF5776200AA52F9 /* libsqlite3.tbd in Frameworks */,
 				C4BCE7621E091E710087E6C5 /* libSocialSina.a in Frameworks */,
 				C4BCE7691E091E710087E6C5 /* UMSocialCore.framework in Frameworks */,
-				C4DDB5121E28BB09005E3909 /* libopencore-amrnb.a in Frameworks */,
 				C4BCE7651E091E710087E6C5 /* libSocialWeChat.a in Frameworks */,
 				C4057EFB1DF5496C00AA52F9 /* libstdc++.6.0.9.tbd in Frameworks */,
 				C4057EF91DF5496000AA52F9 /* libstdc++.6.tbd in Frameworks */,
@@ -1503,7 +1496,6 @@
 				C4BCE7631E091E710087E6C5 /* libWeiboSDK.a in Frameworks */,
 				C4BCE76A1E091E710087E6C5 /* UMSocialNetwork.framework in Frameworks */,
 				C4057EED1DF544DE00AA52F9 /* AddressBook.framework in Frameworks */,
-				C4DDB5141E28BB09005E3909 /* RongIMLib.framework in Frameworks */,
 				C43E31E91E0F8ECD001921DD /* UMMobClick.framework in Frameworks */,
 				C4BCE75F1E091E710087E6C5 /* libSocialQQ.a in Frameworks */,
 				C4BCE76C1E091E710087E6C5 /* UShareUI.framework in Frameworks */,
@@ -2525,6 +2517,16 @@
 			path = ADScrollView;
 			sourceTree = "<group>";
 		};
+		C45DF3E71EF2694900AA64C6 /* Jpush */ = {
+			isa = PBXGroup;
+			children = (
+				C45DF3E81EF2694900AA64C6 /* jcore-ios-1.1.3.a */,
+				C45DF3E91EF2694900AA64C6 /* jpush-ios-3.0.5.a */,
+				C45DF3EA1EF2694900AA64C6 /* JPUSHService.h */,
+			);
+			path = Jpush;
+			sourceTree = "<group>";
+		};
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -2875,8 +2877,8 @@
 		C4BCE6351E091E710087E6C5 /* 3rdFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				C45DF3E71EF2694900AA64C6 /* Jpush */,
 				C434375B1EF11D6B00739040 /* KYGooeyMenu */,
-				C4C535DB1EE7DB160059BCE5 /* Jpush */,
 				C40BACC01EDED6F200BC41C0 /* RongCloud */,
 				C40BACB31EDE6F8400BC41C0 /* GALActionOnCalendar.h */,
 				C40BACB41EDE6F8400BC41C0 /* GALActionOnCalendar.m */,
@@ -2899,7 +2901,6 @@
 				C4C7249E1E2F6D71008E39D1 /* JKR */,
 				C41D20921E2E5B7100727591 /* AwesomeMenu */,
 				C4DDB53B1E290076005E3909 /* Base64 */,
-				C4DDB50E1E28BB09005E3909 /* IM */,
 				C4664A261E20086E005755C6 /* GFCalendar */,
 				C4AE24761E1FB8E2009D5851 /* DBSphereTagCloud */,
 				C4D8B1081E1A413A009F3A23 /* city.plist */,
@@ -3330,16 +3331,6 @@
 			path = playMusic;
 			sourceTree = "<group>";
 		};
-		C4C535DB1EE7DB160059BCE5 /* Jpush */ = {
-			isa = PBXGroup;
-			children = (
-				C4C535E91EE7F0330059BCE5 /* JPUSHService.h */,
-				C4C535DC1EE7DB160059BCE5 /* jcore-ios-1.1.3.a */,
-				C4C535DD1EE7DB160059BCE5 /* jpush-ios-3.0.5.a */,
-			);
-			path = Jpush;
-			sourceTree = "<group>";
-		};
 		C4C7249E1E2F6D71008E39D1 /* JKR */ = {
 			isa = PBXGroup;
 			children = (
@@ -3511,17 +3502,6 @@
 			);
 			path = message;
 			sourceTree = "<group>";
-		};
-		C4DDB50E1E28BB09005E3909 /* IM */ = {
-			isa = PBXGroup;
-			children = (
-				C4DDB50F1E28BB09005E3909 /* libopencore-amrnb.a */,
-				C4DDB5101E28BB09005E3909 /* RCConfig.plist */,
-				C4DDB5111E28BB09005E3909 /* RongIMLib.framework */,
-			);
-			name = IM;
-			path = Looper/IM;
-			sourceTree = SOURCE_ROOT;
 		};
 		C4DDB53B1E290076005E3909 /* Base64 */ = {
 			isa = PBXGroup;
@@ -3922,7 +3902,6 @@
 				C41C3CF31ECD4FEE00393C7A /* openid.json in Resources */,
 				C4F2C20A1EAF03A100BB10CA /* btn_fans.png in Resources */,
 				C43E76FD1E091D8D004A5288 /* btn_login_sel.png in Resources */,
-				C4DDB5131E28BB09005E3909 /* RCConfig.plist in Resources */,
 				C404A7D61EBF772D000B9E1D /* loopshade.png in Resources */,
 				C409A7481E1E359400F76B5C /* btn_looper_back.png in Resources */,
 				C46A69301EB38C0200FCD5EB /* un_musiclibrary.png in Resources */,
