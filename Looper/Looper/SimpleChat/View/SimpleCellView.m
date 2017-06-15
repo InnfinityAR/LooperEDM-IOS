@@ -36,9 +36,9 @@
         if (3==strlen(u8Temp)){
             num_x = num_x+26*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>64)&&(commitChar<91)){
-            num_x = num_x +23*DEF_Adaptation_Font_x*0.5;
+            num_x = num_x +22*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>96)&&(commitChar<123)){
-            num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+            num_x = num_x +13*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>47)&&(commitChar<58)){
             num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
         }else{
@@ -47,12 +47,9 @@
     }
     return num_x;
 }
-
 -(int)getYWithForContentStr:(NSString*)contentStr{
-    
-    
     int num_x=[self getContentLength:contentStr];
-    
+    int num_z=330*DEF_Adaptation_Font_x*0.5;
     int num_y = num_x/(330*DEF_Adaptation_Font_x*0.5);
     
     if(num_x>(330*DEF_Adaptation_Font_x*0.5)){
@@ -132,13 +129,13 @@
             width = 330*0.5*DEF_Adaptation_Font+15*0.5*DEF_Adaptation_Font;
         }
         
-        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake(573*DEF_Adaptation_Font_x*0.5-width-16*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font+add_y,width, (num_y*32+20)*0.5*DEF_Adaptation_Font)];
+        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake(573*DEF_Adaptation_Font_x*0.5-width-16*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font+add_y,width, (num_y*35+20)*0.5*DEF_Adaptation_Font)];
         [frame setBackgroundColor:[UIColor colorWithRed:195/255.0 green:119/255.0 blue:221/255.0 alpha:1.0]];
         frame.layer.cornerRadius = 20*0.5*DEF_Adaptation_Font;
         frame.layer.masksToBounds = YES;
         [self addSubview:frame];
         
-        UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(12*DEF_Adaptation_Font_x*0.5, 5*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(330*DEF_Adaptation_Font_x*0.5, num_y*45*DEF_Adaptation_Font_x*0.5) andText:[cellData objectForKey:@"text"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(12*DEF_Adaptation_Font_x*0.5, 5*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(330*DEF_Adaptation_Font_x*0.5, num_y*45*DEF_Adaptation_Font*0.5) andText:[cellData objectForKey:@"text"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [frame addSubview:titleNum];
         titleNum.numberOfLines=0;
         [titleNum sizeToFit];

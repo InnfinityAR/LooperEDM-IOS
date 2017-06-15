@@ -39,7 +39,7 @@ static DataHander* dataHander = nil;
         
          UILabel* lable = [LooperToolClass createLableView:CGPointMake(0,0) andSize:CGSizeMake(390*DEF_Adaptation_Font*0.5,92*DEF_Adaptation_Font*0.5) andText:labelStr andFontSize:11 andColor:[UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
         [showViewLable addSubview:lable];
-
+//runloop
         [self performSelector:@selector(removeShowLableV) withObject:nil afterDelay:Time];
 
     }

@@ -9,13 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/looperList/View/LooperListView.m"
-            timestampString = "518072980.453417"
+            filePath = "Looper/SimpleChat/View/SimpleCellView.m"
+            timestampString = "519198052.706925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
-            landmarkName = "-touchesMoved:withEvent:"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-createWithData:and:and:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SimpleChat/View/SimpleCellView.m"
+            timestampString = "519210407.275769"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-getYWithForContentStr:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

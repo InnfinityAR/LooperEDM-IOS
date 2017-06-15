@@ -198,11 +198,11 @@
         NSString *temp = [contentStr substringWithRange:NSMakeRange(i,1)];
         const char *u8Temp = [temp UTF8String];
         if (3==strlen(u8Temp)){
-            num_x = num_x+26*DEF_Adaptation_Font_x*0.5;
+          num_x = num_x+26*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>64)&&(commitChar<91)){
-            num_x = num_x +23*DEF_Adaptation_Font_x*0.5;
+            num_x = num_x +22*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>96)&&(commitChar<123)){
-            num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+            num_x = num_x +13*DEF_Adaptation_Font_x*0.5;
         }else if((commitChar>47)&&(commitChar<58)){
             num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
         }else{
@@ -242,9 +242,9 @@
     int num_y = [self getYWithForContentStr:[dic objectForKey:@"text"]];
 
     if(isHasTime==true){
-         return CGSizeMake(DEF_SCREEN_WIDTH,(80+32*num_y)*DEF_Adaptation_Font*0.5+54*DEF_Adaptation_Font*0.5);
+         return CGSizeMake(DEF_SCREEN_WIDTH,(80+35*num_y)*DEF_Adaptation_Font*0.5+54*DEF_Adaptation_Font*0.5);
     }else{
-         return CGSizeMake(DEF_SCREEN_WIDTH,(80+32*num_y)*DEF_Adaptation_Font*0.5);
+         return CGSizeMake(DEF_SCREEN_WIDTH,(80+35*num_y)*DEF_Adaptation_Font*0.5);
     }
 }
 
@@ -381,7 +381,7 @@
     return YES;
 }
 
-
+//输入框
 -(UITextField*)createTextField:(NSString*)string andImg:(NSString*)image andRect:(CGRect)rect andTag:(int)num{
     
     
@@ -401,8 +401,8 @@
     
     
     textField.enablesReturnKeyAutomatically = YES;
-    textField.returnKeyType = UIReturnKeySend;
-    
+    textField.returnKeyType = UIReturnKeyDefault;
+    textField.autocorrectionType = UITextAutocorrectionTypeYes;
     
     textField.delegate = self;
     [bgView  addSubview:textField];
