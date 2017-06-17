@@ -106,7 +106,7 @@
     }
     }
     return cell;
-    
+  
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{

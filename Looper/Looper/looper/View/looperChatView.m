@@ -44,6 +44,7 @@
     
     int currentPage;
     int maxPage;
+    //点赞按钮
     
 }
 
@@ -91,7 +92,6 @@
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    
     if(button.tag == 600){
         [self removeAction];
         [_obj removeLoopChat];
@@ -100,12 +100,39 @@
         if(followBtn.selected==true){
             [_obj unfollowLoop];
             [followBtn setSelected:false];
-        }else{
+        }
+    }
+        else if (button.tag<=10000+hotChatArray.count-1&&button.tag>=10000){
+        //在这返回islike和thumbupcount的参数
+            NSDictionary *dic = [hotChatArray objectAtIndex:button.tag-10000];
+            if (!button.selected) {
+                [button setSelected:YES];
+                [self.obj addPreferenceToCommentMessageId:[dic objectForKey:@"yunxinid"] andlike:1 andTarget:[dic objectForKey:@"userid"] andMessageText:[dic objectForKey:@"messagecontent"]];
+                NSLog(@"push的数据message:%@,targetId:%@,messageText:%@",[dic objectForKey:@"yunxinid"],[dic objectForKey:@"userid"],[dic objectForKey:@"messagecontent"]);
+            }
+            else{
+                [button setSelected:NO];
+                [self.obj addPreferenceToCommentMessageId:[dic objectForKey:@"yunxinid"] andlike:0 andTarget:[dic objectForKey:@"userid"] andMessageText:[dic objectForKey:@"messagecontent"]];
+                 NSLog(@"push的数据%@,%@,%@",[dic objectForKey:@"yunxinid"],[dic objectForKey:@"userid"],[dic objectForKey:@"messagecontent"]);
+            }
+        }
+        else if (button.tag<=20000+[[looperChatDicT objectForKey:@"data"] count]-1&&button.tag>=20000){
+        NSDictionary *dic = [[looperChatDicT objectForKey:@"data"] objectAtIndex:button.tag-20000];
+            if (!button.selected) {
+                [button setSelected:YES];
+                [self.obj addPreferenceToCommentMessageId:[dic objectForKey:@"yunxinid"] andlike:1 andTarget:[dic objectForKey:@"userid"] andMessageText:[dic objectForKey:@"messagecontent"]];
+            }
+            else{
+                [button setSelected:NO];
+                [self.obj addPreferenceToCommentMessageId:[dic objectForKey:@"yunxinid"] andlike:0 andTarget:[dic objectForKey:@"userid"] andMessageText:[dic objectForKey:@"messagecontent"]];
+            }
+        
+        }
+        else{
             [_obj followLoop];
             [followBtn setSelected:true];
         }
-        
-    }
+    
 }
 
 
@@ -256,7 +283,7 @@
     [chatTableView reloadData];
 }
 
-
+//用于评论的数据
 -(void)initWithData:(NSDictionary *)looperCharDic andLooperData:(NSDictionary*)looperData{
     
     looperChatDicT =looperCharDic;
@@ -406,10 +433,23 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
- 
+    
     if(indexPath.section==0){
     
         NSDictionary *dic = [hotChatArray objectAtIndex:indexPath.row];
+        //点赞
+        UIButton *likeBtn=[LooperToolClass createBtnImageNameReal:@"btn_unfollowMusic.png" andRect:CGPointMake(DEF_WIDTH(tableView)-69*0.5*DEF_Adaptation_Font, 19*0.5*DEF_Adaptation_Font) andTag:10000+(int)indexPath.row andSelectImage:@"btn_followMusic.png" andClickImage:@"btn_followMusic.png" andTextStr:nil andSize:CGSizeMake(50*0.5*DEF_Adaptation_Font, 60*0.5*DEF_Adaptation_Font) andTarget:self];
+        [cell.contentView addSubview:likeBtn];
+        if ([[dic objectForKey:@"islike"]intValue]!=0) {
+            [likeBtn setSelected:YES];
+        }
+        UILabel *likeLB=[[UILabel alloc] initWithFrame:CGRectMake(DEF_WIDTH(tableView)-175*0.5*DEF_Adaptation_Font, 35*0.5*DEF_Adaptation_Font, 100*0.5*DEF_Adaptation_Font, 23*0.5*DEF_Adaptation_Font)];
+        likeLB.text =[dic objectForKey:@"thumbupcount"];
+        likeLB.textAlignment=NSTextAlignmentRight;
+        [likeLB setTextColor:[UIColor whiteColor]];
+        [likeLB  setFont:[UIFont boldSystemFontOfSize:14]];
+        [cell.contentView addSubview:likeLB];
+
         
         UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(23*0.5*DEF_Adaptation_Font,19*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font)];
         [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -469,6 +509,19 @@
         
     }else if(indexPath.section==1){
         NSDictionary *dic = [[looperChatDicT objectForKey:@"data"] objectAtIndex:indexPath.row];
+        //点赞
+        UIButton *likeBtn=[LooperToolClass createBtnImageNameReal:@"btn_unfollowMusic.png" andRect:CGPointMake(DEF_WIDTH(tableView)-69*0.5*DEF_Adaptation_Font, 19*0.5*DEF_Adaptation_Font) andTag:20000+(int)indexPath.row andSelectImage:@"btn_followMusic.png" andClickImage:@"btn_followMusic.png" andTextStr:nil andSize:CGSizeMake(50*0.5*DEF_Adaptation_Font, 60*0.5*DEF_Adaptation_Font) andTarget:self];
+        [cell.contentView addSubview:likeBtn];
+        if ([[dic objectForKey:@"islike"]intValue]!=0) {
+            [likeBtn setSelected:YES];
+        }
+        UILabel *likeLB=[[UILabel alloc] initWithFrame:CGRectMake(DEF_WIDTH(tableView)-175*0.5*DEF_Adaptation_Font, 35*0.5*DEF_Adaptation_Font, 100*0.5*DEF_Adaptation_Font, 23*0.5*DEF_Adaptation_Font)];
+        likeLB.text =[dic objectForKey:@"thumbupcount"];
+        likeLB.textAlignment=NSTextAlignmentRight;
+        [likeLB setTextColor:[UIColor whiteColor]];
+        [likeLB  setFont:[UIFont boldSystemFontOfSize:14]];
+        [cell.contentView addSubview:likeLB];
+    
         
         UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(23*0.5*DEF_Adaptation_Font,19*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font, 54*0.5*DEF_Adaptation_Font)];
         [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
