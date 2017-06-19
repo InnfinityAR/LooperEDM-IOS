@@ -14,6 +14,7 @@
 #import "DataHander.h"
 #import "WebViewController.h"
 #define ActivityURL @"getActivity"
+#import "LocalDataMangaer.h"
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -49,6 +50,59 @@
     //    [self pustDataForSomeString:(NSString *)string];
     
 }
+
+
+
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:messageID forKey:@"messageId"];
+    [dic setObject:like forKey:@"like"];
+
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:activityId forKey:@"activityId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:message forKey:@"message"];
+    [dic setObject:images forKey:@"images"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+-(void)getActivityInfoById:(NSString *)activityId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:activityId forKey:@"activityId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
+        
+        if([responseObject[@"status"] intValue]==0){
+
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
 
 //加载数据
 -(void)pustDataForSomeString:(NSString *)string{

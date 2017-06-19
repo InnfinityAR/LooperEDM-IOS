@@ -27,6 +27,11 @@
 #import <UMMobClick/MobClick.h>
 #import "nActivityViewController.h"
 
+
+
+#import <Foundation/Foundation.h>
+
+
 #import "WebViewController.h"
 
 
@@ -36,7 +41,6 @@
 @end
 
 @implementation AppDelegate
-
 @synthesize allowRotation = _allowRotation;
 
 -(void)ViewDidLoad{
@@ -71,6 +75,85 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdaa59db9c810d5d6" appSecret:@"7bb14bcdca4245d777895baba432f7d5" redirectURL:@"http://mobile.umeng.com/social"];
     
 }
+
+
+-(void)initJpush:(NSDictionary*)launchOptions{
+
+    
+    JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+    entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+       
+        
+        
+    
+    
+    
+    }
+    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+
+    
+    
+    
+    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+
+    [JPUSHService setupWithOption:launchOptions appKey:@"46ec314e43813bc79d201335"
+                          channel:@"App Store"
+                 apsForProduction:YES
+            advertisingIdentifier:nil];
+
+
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    /// Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
+
+
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+    // Required
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+}
+
+// iOS 10 Support
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    // Required
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [JPUSHService handleRemoteNotification:userInfo];
+    }
+    completionHandler();  // 系统要求执行这个方法
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // Required, iOS 7 Support
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required,For systems with less than or equal to iOS6
+    [JPUSHService handleRemoteNotification:userInfo];
+}
+
+
+
 
 
 
@@ -120,6 +203,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
     
     [self initUmSdk];
+    [self initJpush:launchOptions];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 
@@ -141,6 +225,9 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
 
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
  
     return YES;
 }
@@ -156,8 +243,6 @@ void uncaughtExceptionHandler(NSException *exception) {
         return (UIInterfaceOrientationMaskPortrait);
     }
 }
-
-
 
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
@@ -176,12 +261,6 @@ void uncaughtExceptionHandler(NSException *exception) {
         
     }
 }
-
-
-
-
-
-
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.

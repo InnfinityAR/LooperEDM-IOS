@@ -27,13 +27,8 @@ typedef void(^CompletionHandle)(NSError *error);
 -(id)initWithController:(id)controller;
 -(void)popController;
 -(void)dataForH5:(NSDictionary *)dic;
-//@property(nonatomic)NSInteger rowNumber;
-//-(NSURL*)activityimageUrlForRow:(NSInteger)row;
-////头像
-//-(NSURL *)userimageUrlForRow:(NSInteger)row;
-//    //名字.id等
-//-(NSString *)useridWithPersonForRow:(NSInteger)row;
-//-(NSString *)usernameForRow:(NSInteger)row;
-//-(NSString *)enddateForRow:(NSInteger)row;
-//-(NSString *)startdateForRow:(NSInteger)row;
+
+-(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
+-(void)getActivityInfoById:(NSString *)activityId;
+
 @end
