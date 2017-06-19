@@ -652,7 +652,7 @@
 }
 
 
--(void)addPreferenceToCommentMessageId:(NSString*)messageId andlike:(int)islike andTarget:(NSString*)targetID andMessageText:(NSString*)messageText{
+-(void)addPreferenceToCommentMessageId:(NSString*)messageId andlike:(int)islike andTarget:(NSString*)targetID andMessageText:(NSString*)messageText {
     
     
     if(islike==1){
@@ -666,20 +666,21 @@
     [dic setObject:[[looperData objectForKey:@"Loop"] objectForKey:@"loopid"] forKey:@"loopId"];
     [dic setObject:messageId forKey:@"targetMessageId"];
     [dic setObject:targetID forKey:@"targetId"];
-    [dic setObject:[[NSNumber alloc] initWithInt:islike] forKey:@"like"];
+    [dic setObject:@(islike) forKey:@"like"];
     [dic setObject:messageText forKey:@"targetMessageText"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addPreferenceToComment" parameters:dic success:^(id responseObject){
+    NSLog(@"开始push：%@",dic);
+       [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addPreferenceToComment" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-        
+             [self getLoopMessage:1 and:100];
         }else{
             
         }
     }fail:^{
         
     }];
-     
-    
+   
 }
+
 
 
 -(void)sendMessageReply:(NSString*)targetID

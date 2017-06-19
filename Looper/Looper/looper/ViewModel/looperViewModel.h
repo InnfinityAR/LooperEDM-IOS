@@ -12,7 +12,6 @@
 #import "PlayerInfoView.h"
 #import "looperChatView.h"
 
-
 @interface looperViewModel : NSObject{
     
     id obj;
