@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JPUSHService.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+#import <AdSupport/AdSupport.h>
+
+
+
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ActivityView.h"
+#import "sendMessageActivityView.h"
+#import "ActivityBarrageView.h"
+@class sendMessageActivityView;
 @class ActivityView;
 typedef void(^CompletionHandle)(NSError *error);
 @interface ActivityViewModel : NSObject
@@ -16,6 +19,9 @@ typedef void(^CompletionHandle)(NSError *error);
 @property(nonatomic)NSInteger refreshNumber;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)ActivityView *activityV;
+@property(nonatomic,strong)sendMessageActivityView *sendView;
+@property(nonatomic,strong)id barrageView;
+@property(nonatomic,strong)NSArray *barrageArr;
 //获取更多
 - (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
 //刷新
@@ -27,13 +33,11 @@ typedef void(^CompletionHandle)(NSError *error);
 -(id)initWithController:(id)controller;
 -(void)popController;
 -(void)dataForH5:(NSDictionary *)dic;
-//@property(nonatomic)NSInteger rowNumber;
-//-(NSURL*)activityimageUrlForRow:(NSInteger)row;
-////头像
-//-(NSURL *)userimageUrlForRow:(NSInteger)row;
-//    //名字.id等
-//-(NSString *)useridWithPersonForRow:(NSInteger)row;
-//-(NSString *)usernameForRow:(NSInteger)row;
-//-(NSString *)enddateForRow:(NSInteger)row;
-//-(NSString *)startdateForRow:(NSInteger)row;
+
+-(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
+-(void)getActivityInfoById:(NSString *)activityId;
+
+
+-(void)LocalPhoto;
+
 @end

@@ -12,9 +12,11 @@
 #import "UIImageView+WebCache.h"
 #import "LooperConfig.h"
 #import "looperlistCellCollectionViewCell.h"
+#import "sendMessageActivityView.h"
+#import "ActivityViewModel.h"
+#import "LocalDataMangaer.h"
 @implementation ActivityBarrageView{
     float labelHeight;
-
 }
 -(NSMutableArray *)allShowTags{
     if (!_allShowTags) {
@@ -22,18 +24,34 @@
     }
     return _allShowTags;
 }
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject{
+-(NSMutableArray *)buddleArr{
+    if (!_buddleArr) {
+        _buddleArr=[NSMutableArray new];
+    }
+    return _buddleArr;
+}
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)viewModel{
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityView*)idObject;
+        self.viewModel=viewModel;
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
+//         [self.viewModel getActivityInfoById:self.activityID];
         labelHeight=85.0;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
     }
     return self;
 
+}
+
+-(void)addImageArray:(NSArray *)imageArray{
+    self.barrageInfo=imageArray;
+    for (NSDictionary *buddleDic in imageArray) {
+   [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
+    }
+    [_collectView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -43,8 +61,14 @@
     }
     if (button.tag==101) {
         NSLog(@"这是一个发表评论button");
+        sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self];
+        view.obj=self.viewModel;
+        view.barrageView=self;
+        [self.viewModel setSendView:view];
+        [self.viewModel setBarrageView:self];
+        [self addSubview:view];
     }
-    if (button.tag==102) {
+    if (button.tag>=2000&&button.tag<3000) {
         NSLog(@"这是一个分享button");
     }
     if (button.tag>=3000&&button.tag<4000) {
@@ -87,7 +111,34 @@
 //添加弹幕
 -(void)initDate
 {
-    NSArray *danmakus = @[@"1",@"1edfsf",@"1fdsfsf",@"1rtyjty45",@"1weqr3r3r3r",@"33333331",@"oooooooooo1",@"sdfgs1",@"1fgdsgf",@"1dsfsdg"];
+    NSArray *danmakus = @[@"我去",
+                          @"路见不平",
+                          @"拔刀相助",
+                          @"额，就是负伤啊",
+                          @"错了，那是勇猛无敌",
+                          @"哈？！英雄救美呢！！！！！",
+                          @"哈哈哈哈。。。",
+                          @"你们说错啦，那个坑货！",
+                          @"这是一个故事啊！",
+                          @"不懂不要乱说",
+                          @"额。。。",
+                          @"什么情况",
+                          @"hello meizi",
+                          @"天理难容啊～",
+                          @"放开它，让我来",
+                          @"nb",
+                          @"这样都可以？！",
+                          @"看不懂",
+                          @"不错不错，有大酱风范～",
+                          @"如果有一天。。。",
+                          @"我去，天掉下来了",
+                          @"都挺好的",
+                          @"你们看到后面了吗，貌似有背景呢，哈哈哈哈哈。。。",
+                          @"真是，额，强",
+                          @"可以可以"];
+    if (self.buddleArr.count!=0) {
+        danmakus=_buddleArr;
+    }
     NSString *str = [danmakus objectAtIndex:rand()%danmakus.count];
     UILabel *label = [[UILabel alloc]init];
     if (40 - self.collectView.contentOffset.y>50) {
@@ -140,7 +191,6 @@
     _collectView.delegate = self;
     _collectView.dataSource = self;
      _collectView.alwaysBounceVertical = YES;
-    
     //偏移量（预留出顶部图片的位置）
     _collectView.contentInset = UIEdgeInsetsMake(450*DEF_Adaptation_Font*0.5, 0, 0, 0 );
     [_collectView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0]];
@@ -159,7 +209,7 @@
     if (section==0) {
         return 1;
     }
-    return 20;
+return self.barrageInfo.count+1;
     
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -196,20 +246,24 @@
             return cell;
         }
     //赋值
+        if (self.barrageInfo.count) {
+            NSDictionary *imageDic=self.barrageInfo[self.barrageInfo.count-indexPath.row];
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-        imageView.image=[UIImage imageNamed:@"1.png"];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
         imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
         imageView.layer.masksToBounds=YES;
     [cell.contentView addSubview:imageView];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(80*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)-90)*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
         label.font=[UIFont boldSystemFontOfSize:14];
          label.textColor=[UIColor whiteColor];
-    label.text=[NSString stringWithFormat:@"%ld",indexPath.row];
+    label.text=[imageDic objectForKey:@"username"];
     [cell.contentView addSubview:label];
     cell.backgroundColor = [UIColor redColor];
         UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 50*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-100*DEF_Adaptation_Font*0.5)];
         label2.textAlignment=NSTextAlignmentCenter;
-        label2.text=[NSString stringWithFormat:@"说点什么...这好似一串很长很长的字符串。。。我也不知道要说啥。就先这样测试一下.还不够长，这TM写的竟然还不够长，非叫我我合reifhwe  wfkwejfnewkfkfwnfew"];
+      
+               label2.text=imageDic[@"messagecontent"];
+//        label2.text=[NSString stringWithFormat:@"说点什么...这好似一串很长很长的字符串。。。我也不知道要说啥。就先这样测试一下.还不够长，这TM写的竟然还不够长，非叫我我合reifhwe  wfkwejfnewkfkfwnfew"];
       float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-20) andText:label2];
         label2.font=[UIFont boldSystemFontOfSize:14];
          label2.textColor=[UIColor whiteColor];
@@ -218,7 +272,7 @@
         if (label2Height>85.0) {
              label2.numberOfLines=5;
         }
-        UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"1.png" andRect:CGPointMake(cell.frame.size.width/2-5-20*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(3000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
+        UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"backView.png" andRect:CGPointMake(cell.frame.size.width/2-5-20*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(3000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
         allShowBtn.alpha=label2Height;
                 [cell.contentView addSubview:allShowBtn];
         //用于消除allShowBtn
@@ -236,7 +290,7 @@
     if (label2Height<=85.0) {
             [allShowBtn removeFromSuperview];
         }
-        UIButton *button= [LooperToolClass createBtnImageNameReal:@"1.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
+        UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
         [cell.contentView addSubview:button];
         UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
         [cell.contentView addSubview:commendBtn];
@@ -245,7 +299,10 @@
         commendLB.textColor=[UIColor whiteColor];
        commendLB.text=[NSString stringWithFormat:@"%ld赞",indexPath.row];
         [cell.contentView addSubview:commendLB];
+        }
     return cell;
+        
+        //下面是section：0
     }else{
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
         label.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始，说说你心目中的抖腿大神。大家一起嗨起来！！！"];
@@ -260,7 +317,7 @@
         label2.numberOfLines=2;
         [cell.contentView addSubview:label2];
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,  240*DEF_Adaptation_Font*0.5-4, DEF_WIDTH(self), 4)];
-        imageView.image=[UIImage imageNamed:@"cutoffLine.png"];
+        imageView.image=[UIImage imageNamed:@"btn_line.png"];
         [cell.contentView addSubview:imageView];
         cell.backgroundColor=[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0];
         return cell;

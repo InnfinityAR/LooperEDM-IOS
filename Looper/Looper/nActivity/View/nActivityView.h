@@ -22,4 +22,5 @@
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray;
+
 @end

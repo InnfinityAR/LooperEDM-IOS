@@ -9,11 +9,15 @@
 #import "ActivityViewModel.h"
 #import "activityModel.h"
 #import "ActivityViewController.h"
+
+#import "sendMessageActivityView.h"
+
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "DataHander.h"
 #import "WebViewController.h"
 #define ActivityURL @"getActivity"
+#import "LocalDataMangaer.h"
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -35,6 +39,83 @@
     
 }
 
+
+-(void)LocalPhoto
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        //设置选择后的图片可被编辑
+        picker.allowsEditing = YES;
+        [_obj presentViewController:picker animated:YES completion:nil];
+        
+    });
+}
+
+
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil)
+        {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        }
+        else
+        {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        //图片保存的路径
+        //这里将图片放在沙盒的documents文件夹中
+        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        
+        //文件管理器
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        NSDate *now= [NSDate date];
+        long int nowDate = (long int)([now timeIntervalSince1970]);
+        NSString *time = [NSString stringWithFormat:@"%ldcs",nowDate];
+
+        
+        NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@%@%@",DocumentsPath, @"/image",time,@".png"];
+
+        
+        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileManager createFileAtPath:filePath contents:data attributes:nil];
+        
+        
+        
+        
+        //得到选择后沙盒中图片的完整路径
+        
+        NSLog(@"%@",filePath);
+        
+        //关闭相册界面
+        [picker dismissModalViewControllerAnimated:YES];
+        
+        
+        
+       [self.sendView showSelectImage:filePath];
+    }
+    
+}
+
+
+
 -(NSInteger)rowNumber{
     
     return self.dataArr.count;
@@ -49,6 +130,56 @@
     //    [self pustDataForSomeString:(NSString *)string];
     
 }
+
+
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:messageID forKey:@"messageId"];
+    [dic setObject:like forKey:@"like"];
+
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:activityId forKey:@"activityId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:message forKey:@"message"];
+    [dic setObject:images forKey:@"images"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [self getActivityInfoById:activityId];
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+-(void)getActivityInfoById:(NSString *)activityId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:activityId forKey:@"activityId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+      self.barrageArr= responseObject[@"message"];
+            [self.barrageView addImageArray:self.barrageArr];
+        }
+    }fail:^{
+        
+    }];
+}
+
 
 //加载数据
 -(void)pustDataForSomeString:(NSString *)string{
