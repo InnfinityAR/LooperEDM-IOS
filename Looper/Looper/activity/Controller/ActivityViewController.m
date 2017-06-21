@@ -14,15 +14,17 @@
 @end
 
 @implementation ActivityViewController
--(ActivityViewModel *)activityVM{
-    if (!_activityVM) {
-        _activityVM=[[ActivityViewModel alloc]initWithController:self];
-    }
-    return _activityVM;
-}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.activityVM pustDataForSomeString:NULL];
+    
+    
+     _activityVM=[[ActivityViewModel alloc]initWithController:self];
+    
+    
+  //  [self.activityVM pustDataForSomeString:NULL];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.title=@"Looper EDM";

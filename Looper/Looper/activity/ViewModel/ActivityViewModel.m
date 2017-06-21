@@ -9,6 +9,9 @@
 #import "ActivityViewModel.h"
 #import "activityModel.h"
 #import "ActivityViewController.h"
+
+#import "sendMessageActivityView.h"
+
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "DataHander.h"
@@ -31,10 +34,87 @@
     return  self;
 }
 -(void)initView{
-    self.activityV = [[ActivityView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+    self.activityV = [[sendMessageActivityView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:self.activityV];
     
 }
+
+
+-(void)LocalPhoto
+{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        //设置选择后的图片可被编辑
+        picker.allowsEditing = YES;
+        [_obj presentViewController:picker animated:YES completion:nil];
+        
+    });
+}
+
+
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil)
+        {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        }
+        else
+        {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        //图片保存的路径
+        //这里将图片放在沙盒的documents文件夹中
+        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        
+        //文件管理器
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        NSDate *now= [NSDate date];
+        long int nowDate = (long int)([now timeIntervalSince1970]);
+        NSString *time = [NSString stringWithFormat:@"%ldcs",nowDate];
+
+        
+        NSString *filePath = [[NSString alloc]initWithFormat:@"%@%@%@%@",DocumentsPath, @"/image",time,@".png"];
+
+        
+        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileManager createFileAtPath:filePath contents:data attributes:nil];
+        
+        
+        
+        
+        //得到选择后沙盒中图片的完整路径
+        
+        NSLog(@"%@",filePath);
+        
+        //关闭相册界面
+        [picker dismissModalViewControllerAnimated:YES];
+        
+        
+        
+        [self.activityV showSelectImage:filePath];
+    }
+    
+}
+
+
 
 -(NSInteger)rowNumber{
     
@@ -50,7 +130,6 @@
     //    [self pustDataForSomeString:(NSString *)string];
     
 }
-
 
 
 -(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID{
@@ -93,7 +172,6 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
-        
         if([responseObject[@"status"] intValue]==0){
 
             
@@ -112,7 +190,7 @@
         if([responseObject[@"status"] intValue]==0){
             self.dataArr = responseObject[@"data"];
 
-            [self.activityV reloadTableData:self.dataArr];
+            //[self.activityV reloadTableData:self.dataArr];
  
         }
     }fail:^{

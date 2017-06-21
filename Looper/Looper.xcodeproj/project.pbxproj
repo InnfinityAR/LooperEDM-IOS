@@ -301,6 +301,10 @@
 		C45DF3E61EF23D7F00AA64C6 /* KKClickEffectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DF3E51EF23D7F00AA64C6 /* KKClickEffectImageView.m */; };
 		C45DF3EB1EF2694900AA64C6 /* jcore-ios-1.1.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DF3E81EF2694900AA64C6 /* jcore-ios-1.1.3.a */; };
 		C45DF3EC1EF2694900AA64C6 /* jpush-ios-3.0.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DF3E91EF2694900AA64C6 /* jpush-ios-3.0.5.a */; };
+		C45E2D7A1EF8D45C00BD03E3 /* sendMessageActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */; };
+		C45E2D7E1EF8F16700BD03E3 /* label_Comment.png in Resources */ = {isa = PBXBuildFile; fileRef = C45E2D7B1EF8F16700BD03E3 /* label_Comment.png */; };
+		C45E2D7F1EF8F16700BD03E3 /* send_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = C45E2D7C1EF8F16700BD03E3 /* send_comment.png */; };
+		C45E2D801EF8F16700BD03E3 /* send_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = C45E2D7D1EF8F16700BD03E3 /* send_picture.png */; };
 		C45F674B1E8663CF00FB92A8 /* UserInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C45F674A1E8663CF00FB92A8 /* UserInfoView.m */; };
 		C460ED0C1ED417D300AE6A90 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = C460ED0B1ED417D300AE6A90 /* 1.json */; };
 		C460ED0E1ED417DD00AE6A90 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = C460ED0D1ED417DD00AE6A90 /* 2.json */; };
@@ -513,6 +517,7 @@
 		C4C7AABB1EACBB5F00D36D88 /* SettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C7AABA1EACBB5F00D36D88 /* SettingViewModel.m */; };
 		C4C921321E31D27200738A23 /* looperChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C921311E31D27200738A23 /* looperChatView.m */; };
 		C4C921351E323B1600738A23 /* UIScrollView+TwitterCover.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C921341E323B1600738A23 /* UIScrollView+TwitterCover.m */; };
+		C4CB0B3D1EFA44C700225614 /* close_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = C4CB0B3C1EFA44C700225614 /* close_comment.png */; };
 		C4CCFCE61EB3B78F00114711 /* messageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CCFCE51EB3B78F00114711 /* messageViewController.m */; };
 		C4CCFCE91EB3B7A300114711 /* nMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CCFCE81EB3B7A300114711 /* nMessageView.m */; };
 		C4CCFCEC1EB3B7B500114711 /* MessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CCFCEB1EB3B7B500114711 /* MessageViewModel.m */; };
@@ -994,6 +999,11 @@
 		C45DF3E81EF2694900AA64C6 /* jcore-ios-1.1.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.3.a"; sourceTree = "<group>"; };
 		C45DF3E91EF2694900AA64C6 /* jpush-ios-3.0.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.5.a"; sourceTree = "<group>"; };
 		C45DF3EA1EF2694900AA64C6 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sendMessageActivityView.h; sourceTree = "<group>"; };
+		C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sendMessageActivityView.m; sourceTree = "<group>"; };
+		C45E2D7B1EF8F16700BD03E3 /* label_Comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_Comment.png; sourceTree = "<group>"; };
+		C45E2D7C1EF8F16700BD03E3 /* send_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_comment.png; sourceTree = "<group>"; };
+		C45E2D7D1EF8F16700BD03E3 /* send_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_picture.png; sourceTree = "<group>"; };
 		C45F67491E8663CF00FB92A8 /* UserInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoView.h; sourceTree = "<group>"; };
 		C45F674A1E8663CF00FB92A8 /* UserInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoView.m; sourceTree = "<group>"; };
 		C460ED0B1ED417D300AE6A90 /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
@@ -1324,6 +1334,7 @@
 		C4C921311E31D27200738A23 /* looperChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperChatView.m; sourceTree = "<group>"; };
 		C4C921331E323B1600738A23 /* UIScrollView+TwitterCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TwitterCover.h"; sourceTree = "<group>"; };
 		C4C921341E323B1600738A23 /* UIScrollView+TwitterCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TwitterCover.m"; sourceTree = "<group>"; };
+		C4CB0B3C1EFA44C700225614 /* close_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_comment.png; sourceTree = "<group>"; };
 		C4CCFCE41EB3B78F00114711 /* messageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messageViewController.h; sourceTree = "<group>"; };
 		C4CCFCE51EB3B78F00114711 /* messageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = messageViewController.m; sourceTree = "<group>"; };
 		C4CCFCE71EB3B7A300114711 /* nMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nMessageView.h; sourceTree = "<group>"; };
@@ -1590,6 +1601,8 @@
 				B2A6EEA51ECD3498004BF416 /* ActivityCell.xib */,
 				B2A6EE9B1ECC4EBF004BF416 /* ActivityView.h */,
 				B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */,
+				C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */,
+				C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2525,6 +2538,10 @@
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
+				C4CB0B3C1EFA44C700225614 /* close_comment.png */,
+				C45E2D7B1EF8F16700BD03E3 /* label_Comment.png */,
+				C45E2D7C1EF8F16700BD03E3 /* send_comment.png */,
+				C45E2D7D1EF8F16700BD03E3 /* send_picture.png */,
 				C4D77C321EE55A9500A3D097 /* buy_ticket.png */,
 				C4D77C301EE5310900A3D097 /* product_logo.png */,
 				C40BACBE1EDE9A9200BC41C0 /* btn_activity_looper.png */,
@@ -3667,6 +3684,7 @@
 				C43E76E01E091D8D004A5288 /* Images.xcassets in Resources */,
 				B2A6EE941ECBE37E004BF416 /* 1.png in Resources */,
 				B2A6EEB11ED0121D004BF416 /* 3.pic.jpg in Resources */,
+				C45E2D7E1EF8F16700BD03E3 /* label_Comment.png in Resources */,
 				C42E80541EC332D400D9CC43 /* loading_00029.png in Resources */,
 				C434375A1EF0E89000739040 /* btn_looper_select.png in Resources */,
 				C45489381E9E2EDD00BB1591 /* bg_title_chat.png in Resources */,
@@ -3675,6 +3693,7 @@
 				C404A7D11EBF6D78000B9E1D /* loop_3.png in Resources */,
 				C4BE5EE21E4F124200C8DA98 /* ling_simple.png in Resources */,
 				C4DA32371E8B7DBB00CD8305 /* btn_InfoMessage.png in Resources */,
+				C4CB0B3D1EFA44C700225614 /* close_comment.png in Resources */,
 				C409A7461E1E359400F76B5C /* bg_looper_line.png in Resources */,
 				C4654E041E79702A00D910F2 /* btn_active.png in Resources */,
 				C43E76FE1E091D8D004A5288 /* btn_looper.png in Resources */,
@@ -3758,6 +3777,7 @@
 				C46E7D391EAE130A00996110 /* icon_upPic.png in Resources */,
 				C4F290031EB0F70C00EEB15E /* reUpLoadPic.png in Resources */,
 				C42E7FFD1EC326BC00D9CC43 /* icon_looper_followA1.png in Resources */,
+				C45E2D801EF8F16700BD03E3 /* send_picture.png in Resources */,
 				C42E7FF51EC3050D00D9CC43 /* ownerFollow.png in Resources */,
 				C42E80451EC332D400D9CC43 /* loading_00014.png in Resources */,
 				C42E803C1EC332D400D9CC43 /* loading_00005.png in Resources */,
@@ -3896,6 +3916,7 @@
 				C42838E11E03F02100929093 /* Info.plist in Resources */,
 				C41C3CF31ECD4FEE00393C7A /* openid.json in Resources */,
 				C4F2C20A1EAF03A100BB10CA /* btn_fans.png in Resources */,
+				C45E2D7F1EF8F16700BD03E3 /* send_comment.png in Resources */,
 				C43E76FD1E091D8D004A5288 /* btn_login_sel.png in Resources */,
 				C404A7D61EBF772D000B9E1D /* loopshade.png in Resources */,
 				C409A7481E1E359400F76B5C /* btn_looper_back.png in Resources */,
@@ -3965,6 +3986,7 @@
 				B2A9021F1ED6A3910022C282 /* CurrentActivityTableViewCell.m in Sources */,
 				C46E2EA31E0BC17300CD7A52 /* LooperChatLayer.m in Sources */,
 				C4492ECB1E2615000080D8CE /* CreateLoopView.m in Sources */,
+				C45E2D7A1EF8D45C00BD03E3 /* sendMessageActivityView.m in Sources */,
 				C4A4D0BD1E79192A002519F2 /* nMainView.m in Sources */,
 				C40F896F1E1CEA2300DABEAA /* SerachViewController.m in Sources */,
 				B2A6EE831ECAEEA0004BF416 /* NSString+MJExtension.m in Sources */,

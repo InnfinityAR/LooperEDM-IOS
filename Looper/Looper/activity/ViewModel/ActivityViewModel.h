@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ActivityView.h"
+#import "sendMessageActivityView.h"
+
+@class sendMessageActivityView;
 @class ActivityView;
 typedef void(^CompletionHandle)(NSError *error);
 @interface ActivityViewModel : NSObject
@@ -15,7 +18,7 @@ typedef void(^CompletionHandle)(NSError *error);
 @property(nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic)NSInteger refreshNumber;
 @property(nonatomic,strong)id obj;
-@property(nonatomic,strong)ActivityView *activityV;
+@property(nonatomic)sendMessageActivityView *activityV;
 //获取更多
 - (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
 //刷新
@@ -30,5 +33,8 @@ typedef void(^CompletionHandle)(NSError *error);
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
 -(void)getActivityInfoById:(NSString *)activityId;
+
+
+-(void)LocalPhoto;
 
 @end
