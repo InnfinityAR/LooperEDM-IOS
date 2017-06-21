@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityViewModel.h"
+#import "ActivityBarrageView.h"
 @interface ActivityView : UIView<UITableViewDataSource,UITableViewDelegate>
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 -(void)reloadTableData:(NSMutableArray*)DataLoop;

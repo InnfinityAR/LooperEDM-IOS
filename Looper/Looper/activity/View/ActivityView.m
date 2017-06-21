@@ -115,8 +115,10 @@
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    [self.obj dataForH5:self.dataArr[indexPath.row]];
-
+//    [self.obj dataForH5:self.dataArr[indexPath.row]];
+    ActivityBarrageView *view=[[ActivityBarrageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self),DEF_HEIGHT(self)) and:self];
+    view.obj=self;
+    [self addSubview:view];
 }
 
 
