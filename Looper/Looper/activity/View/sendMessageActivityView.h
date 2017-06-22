@@ -18,9 +18,9 @@
     
 }
 @property(nonatomic)id obj;
+@property(nonatomic)id barrageView;
 
-
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView;
 -(void)showSelectImage:(NSString*)selectImage;
 
 @end

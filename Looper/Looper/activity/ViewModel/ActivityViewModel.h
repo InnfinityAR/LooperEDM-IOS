@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ActivityView.h"
 #import "sendMessageActivityView.h"
-
+#import "ActivityBarrageView.h"
 @class sendMessageActivityView;
 @class ActivityView;
 typedef void(^CompletionHandle)(NSError *error);
@@ -18,7 +18,10 @@ typedef void(^CompletionHandle)(NSError *error);
 @property(nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic)NSInteger refreshNumber;
 @property(nonatomic,strong)id obj;
-@property(nonatomic)sendMessageActivityView *activityV;
+@property(nonatomic,strong)ActivityView *activityV;
+@property(nonatomic,strong)sendMessageActivityView *sendView;
+@property(nonatomic,strong)id barrageView;
+@property(nonatomic,strong)NSArray *barrageArr;
 //获取更多
 - (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
 //刷新

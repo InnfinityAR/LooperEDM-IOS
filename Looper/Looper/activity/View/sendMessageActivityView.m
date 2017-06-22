@@ -9,7 +9,7 @@
 #import "sendMessageActivityView.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
-
+#import "ActivityBarrageView.h"
 @implementation sendMessageActivityView{
 
     UIButton* sendBtn;
@@ -20,12 +20,12 @@
 
 }
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView{
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityViewModel*)idObject;
-
-    
+        self.barrageView=self.barrageView;
+        
         [self initView];
     }
     return self;
@@ -35,16 +35,18 @@
 
 
     if(button.tag==101){
-        
-        
+        NSLog(@"我是send按钮");
+        [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:ImageArray];
+        [self removeFromSuperview];
+       
     }else if(button.tag==102){
         [_obj LocalPhoto];
     
     }else if(button.tag==103){
-        
+         [self removeFromSuperview];
         
     }
-    NSLog(@"%d",button.tag);
+
 }
 
 -(void)createHudView{

@@ -34,7 +34,7 @@
     return  self;
 }
 -(void)initView{
-    self.activityV = [[sendMessageActivityView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+    self.activityV = [[ActivityView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:self.activityV];
     
 }
@@ -109,7 +109,7 @@
         
         
         
-        [self.activityV showSelectImage:filePath];
+       [self.sendView showSelectImage:filePath];
     }
     
 }
@@ -159,8 +159,7 @@
     [dic setObject:images forKey:@"images"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            
+            [self getActivityInfoById:activityId];
             
         }
     }fail:^{
@@ -173,8 +172,8 @@
     [dic setObject:activityId forKey:@"activityId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-
-            
+      self.barrageArr= responseObject[@"message"];
+            [self.barrageView addImageArray:self.barrageArr];
         }
     }fail:^{
         
@@ -190,7 +189,7 @@
         if([responseObject[@"status"] intValue]==0){
             self.dataArr = responseObject[@"data"];
 
-            //[self.activityV reloadTableData:self.dataArr];
+            [self.activityV reloadTableData:self.dataArr];
  
         }
     }fail:^{
