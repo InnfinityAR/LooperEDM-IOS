@@ -168,7 +168,7 @@
         label.layer.cornerRadius=25*DEF_Adaptation_Font*0.5;
         label.layer.masksToBounds=YES;
     label.textColor =[UIColor whiteColor];
-    label.backgroundColor=[self randomColor];
+    label.backgroundColor=[self randomColorAndIndex:arc4random_uniform(6) %5];
     //将label加入本视图中去。
     [self.buddleView addSubview:label];
     [self move:label];
@@ -190,13 +190,22 @@
      ];
     
 }
--(UIColor *)randomColor
+-(NSMutableArray *)colorArr{
+    if (!_colorArr) {
+        _colorArr=[NSMutableArray new];
+       [_colorArr addObject:[UIColor colorWithRed:76/255.0 green:206/255.0 blue:130/255.0 alpha:1.0]];
+         [_colorArr addObject:[UIColor colorWithRed:240/255.0 green:139/255.0 blue:158/255.0 alpha:1.0]];
+         [_colorArr addObject:[UIColor colorWithRed:211/255.0 green:138/255.0 blue:212/255.0 alpha:1.0]];
+         [_colorArr addObject:[UIColor colorWithRed:236/255.0 green:190/255.0 blue:130/255.0 alpha:1.0]];
+         [_colorArr addObject:[UIColor colorWithRed:66/255.0 green:188/255.0 blue:197/255.0 alpha:1.0]];
+        
+    }
+    return  _colorArr;
+}
+-(UIColor *)randomColorAndIndex:(int)index
 {
-    CGFloat r = arc4random_uniform(256) / 255.0;
-    CGFloat g = arc4random_uniform(256) / 255.0;
-    CGFloat b = arc4random_uniform(256) / 255.0;
     
-    return [UIColor colorWithRed:r green:g blue:b alpha:1];
+    return self.colorArr[index];
 }
 
 
@@ -288,7 +297,7 @@ return self.barrageInfo.count+1;
          label.textColor=[UIColor whiteColor];
     label.text=[imageDic objectForKey:@"username"];
     [cell.contentView addSubview:label];
-    cell.backgroundColor = [UIColor redColor];
+    cell.backgroundColor =[self randomColorAndIndex:indexPath.row%5];
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
             [cell.contentView addSubview:button];
             UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];

@@ -22,4 +22,5 @@
 -(void)addImageArray:(NSArray *)imageArray;
 @property(nonatomic,strong)NSArray *barrageInfo;
 @property(nonatomic,strong)NSMutableArray *buddleArr;
+@property(nonatomic,strong)NSMutableArray *colorArr;
 @end
