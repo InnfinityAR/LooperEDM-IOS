@@ -36,7 +36,7 @@ typedef void(^CompletionHandle)(NSError *error);
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
 -(void)getActivityInfoById:(NSString *)activityId;
-
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID;
 
 -(void)LocalPhoto;
 

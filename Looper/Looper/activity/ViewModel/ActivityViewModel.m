@@ -133,7 +133,7 @@
 }
 
 
--(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID{
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:userId forKey:@"userId"];
     [dic setObject:messageID forKey:@"messageId"];
@@ -141,8 +141,8 @@
 
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
-            
+        
+            [self getActivityInfoById:activityID];
         }else{
             
         }
