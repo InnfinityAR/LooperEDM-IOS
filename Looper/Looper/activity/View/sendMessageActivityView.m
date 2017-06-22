@@ -36,7 +36,7 @@
 
     if(button.tag==101){
         NSLog(@"我是send按钮");
-        [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:ImageArray];
+        [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];
        
     }else if(button.tag==102){
@@ -66,7 +66,6 @@
     
     [self addSubview:labelComment];
 
-    
     textview = [[UITextView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font_x*0.5, 122*DEF_Adaptation_Font_x*0.5, 572*DEF_Adaptation_Font_x*0.5, 368*DEF_Adaptation_Font*0.5)];
     textview.backgroundColor=[UIColor clearColor]; //背景色
     textview.scrollEnabled = YES;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
@@ -78,7 +77,7 @@
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
     textview.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
     textview.textColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0];
-    textview.text = @"11111111";//设置显示的文本内容
+    textview.text = @"";//设置显示的文本内容
     [self addSubview:textview];
     
     [textview becomeFirstResponder];

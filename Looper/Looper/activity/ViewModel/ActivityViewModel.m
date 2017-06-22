@@ -11,6 +11,7 @@
 #import "ActivityViewController.h"
 
 #import "sendMessageActivityView.h"
+#import "Base64Class.h"
 
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
@@ -152,11 +153,23 @@
 
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images{
+    
+    NSMutableArray *imageDataArray= [[NSMutableArray alloc] initWithCapacity:50];
+    
+    for (int i=0;i<[images count];i++){
+    
+        NSLog(@"%@",[images objectAtIndex:i]);
+        UIImage *imagePhoto2 = [UIImage imageNamed:[images objectAtIndex:i]];
+        NSData *imageDataP2 = UIImagePNGRepresentation(imagePhoto2);
+        [imageDataArray addObject:[Base64Class encodeBase64Data:imageDataP2]];
+    }
+    
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:message forKey:@"message"];
-    [dic setObject:images forKey:@"images"];
+    [dic setObject:imageDataArray forKey:@"images"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [self getActivityInfoById:activityId];
