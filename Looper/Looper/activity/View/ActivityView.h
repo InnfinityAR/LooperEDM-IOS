@@ -16,4 +16,5 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,strong)NSDictionary *objDic;
+@property(nonatomic,strong)NSString *activityID;
 @end

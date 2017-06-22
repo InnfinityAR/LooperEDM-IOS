@@ -37,7 +37,9 @@
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
-//         [self.viewModel getActivityInfoById:self.activityID];
+        self.activityID=[self.obj activityID];
+         [self.viewModel setBarrageView:self];
+         [self.viewModel getActivityInfoById:self.activityID];
         labelHeight=85.0;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
@@ -247,7 +249,7 @@ return self.barrageInfo.count+1;
         }
     //赋值
         if (self.barrageInfo.count) {
-            NSDictionary *imageDic=self.barrageInfo[self.barrageInfo.count-indexPath.row];
+            NSDictionary *imageDic=self.barrageInfo[indexPath.row+1];
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
             [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
         imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
