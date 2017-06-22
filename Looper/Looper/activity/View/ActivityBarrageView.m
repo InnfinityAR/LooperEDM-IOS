@@ -15,6 +15,7 @@
 #import "sendMessageActivityView.h"
 #import "ActivityViewModel.h"
 #import "LocalDataMangaer.h"
+
 @implementation ActivityBarrageView{
     float labelHeight;
 }
@@ -23,6 +24,12 @@
         _allShowTags=[[NSMutableArray alloc]init];
     }
     return _allShowTags;
+}
+-(NSMutableArray *)allShowImageTags{
+    if (!_allShowImageTags) {
+        _allShowImageTags=[NSMutableArray new];
+    }
+    return _allShowImageTags;
 }
 -(NSMutableArray *)buddleArr{
     if (!_buddleArr) {
@@ -73,6 +80,13 @@
     if (button.tag>=2000&&button.tag<3000) {
         NSLog(@"这是一个分享button");
     }
+    if (button.tag>=5000&&button.tag<6000) {
+        NSLog(@"这是修改cell的高度的button");
+        [self.allShowImageTags addObject:@(button.tag)];
+        labelHeight=button.alpha;
+        [self.collectView reloadData];
+    }
+
     if (button.tag>=3000&&button.tag<4000) {
         NSLog(@"这是修改cell的高度的button");
         [self.allShowTags addObject:@(button.tag)];
@@ -83,11 +97,12 @@
             //在这返回islike和thumbupcount的参数
             if (!button.selected) {
                 [button setSelected:YES];
-               
+               //从第二个cell开始算的
+                [self.viewModel thumbActivityMessage:@"1" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
             else{
                 [button setSelected:NO];
-               
+                [self.viewModel thumbActivityMessage:@"0" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
 
         NSLog(@"这是一个点赞按钮");
@@ -168,7 +183,7 @@
 -(void)move:(UILabel*)_label
 {
     [UIView animateWithDuration:8 animations:^{
-        _label.frame = CGRectMake(-250, _label.frame.origin.y, _label.frame.size.width, _label.frame.size.height);
+        _label.frame = CGRectMake(- _label.frame.size.width, _label.frame.origin.y, _label.frame.size.width, _label.frame.size.height);
     } completion:^(BOOL finished) {
         [_label removeFromSuperview];
     }
@@ -187,7 +202,10 @@
 
 -(void)createCollectionView{
     
-    UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
+//    looperListFlowLayout * flowLayout = [[looperListFlowLayout alloc]init];
+//    flowLayout.delegate = self;
+//    flowLayout.numberOfColumn = 2;
     _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout];
     _collectView.backgroundColor = [UIColor whiteColor];
     _collectView.delegate = self;
@@ -199,6 +217,16 @@
     [_collectView registerClass:[looperlistCellCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCellView"];
     [self addSubview:_collectView];
 }
+////得到 item之间的间隙大小
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+//    return 10;
+//}
+////最小行间距
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+//    return 10;
+//}
+
+
 
 #pragma mark-<UICollectionViewDelegate>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -249,7 +277,7 @@ return self.barrageInfo.count+1;
         }
     //赋值
         if (self.barrageInfo.count) {
-            NSDictionary *imageDic=self.barrageInfo[indexPath.row+1];
+            NSDictionary *imageDic=self.barrageInfo[indexPath.row-1];
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
             [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
         imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
@@ -261,12 +289,26 @@ return self.barrageInfo.count+1;
     label.text=[imageDic objectForKey:@"username"];
     [cell.contentView addSubview:label];
     cell.backgroundColor = [UIColor redColor];
+            UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
+            [cell.contentView addSubview:button];
+            UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
+            if ([imageDic[@"like"]intValue]==1) {
+                [commendBtn setSelected:YES];
+            }
+            [cell.contentView addSubview:commendBtn];
+            UILabel *commendLB=[[UILabel alloc]initWithFrame:CGRectMake(10+30*DEF_Adaptation_Font*0.5,cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+            commendLB.font=[UIFont boldSystemFontOfSize:13];
+            commendLB.textColor=[UIColor whiteColor];
+            commendLB.text=[NSString stringWithFormat:@"%@赞",imageDic[@"thumbupcount"]];
+            [cell.contentView addSubview:commendLB];
+
+           //在这边判断是否有图片
+            if ([imageDic objectForKey:@"messagePicture"]==[NSNull null]||[[imageDic objectForKey:@"messagePicture"]isEqualToString:@""]) {
         UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 50*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-100*DEF_Adaptation_Font*0.5)];
         label2.textAlignment=NSTextAlignmentCenter;
-      
                label2.text=imageDic[@"messagecontent"];
 //        label2.text=[NSString stringWithFormat:@"说点什么...这好似一串很长很长的字符串。。。我也不知道要说啥。就先这样测试一下.还不够长，这TM写的竟然还不够长，非叫我我合reifhwe  wfkwejfnewkfkfwnfew"];
-      float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-20) andText:label2];
+      float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:label2];
         label2.font=[UIFont boldSystemFontOfSize:14];
          label2.textColor=[UIColor whiteColor];
         [cell.contentView addSubview:label2];
@@ -292,16 +334,45 @@ return self.barrageInfo.count+1;
     if (label2Height<=85.0) {
             [allShowBtn removeFromSuperview];
         }
-        UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
-        [cell.contentView addSubview:button];
-        UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
-        [cell.contentView addSubview:commendBtn];
-        UILabel *commendLB=[[UILabel alloc]initWithFrame:CGRectMake(10+30*DEF_Adaptation_Font*0.5,cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
-        commendLB.font=[UIFont boldSystemFontOfSize:13];
-        commendLB.textColor=[UIColor whiteColor];
-       commendLB.text=[NSString stringWithFormat:@"%ld赞",indexPath.row];
-        [cell.contentView addSubview:commendLB];
-        }
+            }else{
+            //在这里添加有imageView的情况
+                UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(5, 50*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), 80*DEF_Adaptation_Font*0.5)];
+                [imageV sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"messagePicture"]]];
+                imageV.contentMode =  UIViewContentModeScaleAspectFill;
+                imageV.clipsToBounds  = YES;
+                [cell.contentView addSubview:imageV];
+                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 135*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-185*DEF_Adaptation_Font*0.5)];
+                label2.textAlignment=NSTextAlignmentCenter;
+                label2.text=imageDic[@"messagecontent"];
+                float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:label2];
+                label2.font=[UIFont boldSystemFontOfSize:14];
+                label2.textColor=[UIColor whiteColor];
+                [cell.contentView addSubview:label2];
+                label2.numberOfLines=0;
+                if (label2Height>45.0) {
+                    label2.numberOfLines=3;
+                }
+                UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"backView.png" andRect:CGPointMake(cell.frame.size.width/2-5-20*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(5000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
+                    allShowBtn.alpha=label2Height;
+                [cell.contentView addSubview:allShowBtn];
+                //用于修改image和label的frame
+                for (NSNumber *tag in self.allShowImageTags) {
+                    if ([tag intValue]==indexPath.row+5000) {
+                        [allShowBtn removeFromSuperview];
+                        CGRect frame=label2.frame;
+                        frame.size.height=label2Height+20*DEF_Adaptation_Font*0.5;
+                        frame.origin.y=55*DEF_Adaptation_Font*0.5+ (DEF_WIDTH(self)/2-20);
+                        label2.frame=frame;
+                        label2.numberOfLines=0;
+                        CGRect frame2=imageV.frame;
+                        frame2.size.height=(DEF_WIDTH(self)/2-20);
+                        imageV.frame=frame2;
+                        [cell layoutIfNeeded];
+                    }
+                }
+
+            }
+}
     return cell;
         
         //下面是section：0
@@ -313,7 +384,7 @@ return self.barrageInfo.count+1;
         label.numberOfLines=2;
         [cell.contentView addSubview:label];
         UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
-        label2.text=[NSString stringWithFormat:@"%ld个人已经进入战场，Let me lang",indexPath.row];
+        label2.text=[NSString stringWithFormat:@"%ld个人已经进入战场，Let me lang",indexPath.row+2548];
         label2.font=[UIFont systemFontOfSize:13];
         label2.textColor=[UIColor whiteColor];
         label2.numberOfLines=2;
@@ -362,6 +433,11 @@ return self.barrageInfo.count+1;
     for (NSNumber *tag in self.allShowTags) {
         if ([tag intValue]==indexPath.row+3000) {
            return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20);
+        }
+    }
+    for (NSNumber *tag in self.allShowImageTags) {
+        if ([tag intValue]==indexPath.row+5000) {
+            return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20));
         }
     }
     return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10);

@@ -1621,10 +1621,8 @@
 				B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */,
 				B22171211EF778FA00B3CBC3 /* ActivityBarrageView.h */,
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
-
 				C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */,
 				C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */,
-
 			);
 			path = View;
 			sourceTree = "<group>";
