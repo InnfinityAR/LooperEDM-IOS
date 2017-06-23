@@ -36,7 +36,7 @@
 
     if(button.tag==101){
         NSLog(@"我是send按钮");
-        [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:ImageArray];
+        [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];
        
     }else if(button.tag==102){
@@ -48,7 +48,9 @@
     }
 
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [textview resignFirstResponder];
+}
 -(void)createHudView{
     
     

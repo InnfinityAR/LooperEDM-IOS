@@ -46,7 +46,7 @@
         [self initailBuddleView];
         self.activityID=[self.obj activityID];
          [self.viewModel setBarrageView:self];
-         [self.viewModel getActivityInfoById:self.activityID];
+         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
         labelHeight=85.0;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
@@ -57,10 +57,11 @@
 
 -(void)addImageArray:(NSArray *)imageArray{
     self.barrageInfo=imageArray;
+    [self.buddleArr removeAllObjects];
     for (NSDictionary *buddleDic in imageArray) {
    [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
     }
-    [_collectView reloadData];
+    [self.collectView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -98,11 +99,11 @@
             if (!button.selected) {
                 [button setSelected:YES];
                //从第二个cell开始算的
-                [self.viewModel thumbActivityMessage:@"1" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
+                [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
             else{
                 [button setSelected:NO];
-                [self.viewModel thumbActivityMessage:@"0" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
+                [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
 
         NSLog(@"这是一个点赞按钮");
@@ -212,9 +213,10 @@
 -(void)createCollectionView{
     
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
-//    looperListFlowLayout * flowLayout = [[looperListFlowLayout alloc]init];
+    // 创建布局
+//    LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
 //    flowLayout.delegate = self;
-//    flowLayout.numberOfColumn = 2;
+    // 创建collecView
     _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout];
     _collectView.backgroundColor = [UIColor whiteColor];
     _collectView.delegate = self;
@@ -248,8 +250,9 @@
     if (section==0) {
         return 1;
     }
+    NSLog(@"%ld",self.barrageInfo.count);
 return self.barrageInfo.count+1;
-    
+//    return self.barrageInfo.count+2;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -301,7 +304,7 @@ return self.barrageInfo.count+1;
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
             [cell.contentView addSubview:button];
             UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
-            if ([imageDic[@"like"]intValue]==1) {
+            if ([imageDic[@"isthumb"]intValue]==1) {
                 [commendBtn setSelected:YES];
             }
             [cell.contentView addSubview:commendBtn];
@@ -451,6 +454,23 @@ return self.barrageInfo.count+1;
     }
     return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10);
 }
+//#pragma mark -- LFWaterfallLayoutDelegate --
+//- (CGFloat)waterflowLayout:(LFWaterfallLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth{
+//    for (NSNumber *tag in self.allShowTags) {
+//        if ([tag intValue]==index+3000) {
+//            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20;
+//        }
+//    }
+//    for (NSNumber *tag in self.allShowImageTags) {
+//        if ([tag intValue]==index+5000) {
+//            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20);
+//        }
+//    }
+//    NSLog(@"index %ld",index);
+//    return DEF_WIDTH(self)/2-10;
+//
+//}
+
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {

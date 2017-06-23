@@ -137,11 +137,11 @@
     [dic setObject:userId forKey:@"userId"];
     [dic setObject:messageID forKey:@"messageId"];
     [dic setObject:like forKey:@"like"];
-
+NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
         
-            [self getActivityInfoById:activityID];
+            [self getActivityInfoById:activityID andUserId:userId];
         }else{
             
         }
@@ -157,9 +157,10 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:message forKey:@"message"];
     [dic setObject:images forKey:@"images"];
+    NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            [self getActivityInfoById:activityId];
+            [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid];
             
         }
     }fail:^{
@@ -167,9 +168,11 @@
     }];
 }
 
--(void)getActivityInfoById:(NSString *)activityId{
+-(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
+    [dic setObject:userId forKey:@"userId"];
+       NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
       self.barrageArr= responseObject[@"message"];
