@@ -1,7 +1,10 @@
 
 
 #import <UIKit/UIKit.h>
+<<<<<<< HEAD
 #import "LooperConfig.h"
+=======
+>>>>>>> f4d45b43d49275aeba6cf8d791d4b9a2c4a24abc
 @class LFWaterfallLayout;
 
 @protocol LFWaterfallLayoutDelegate <NSObject>
@@ -19,7 +22,11 @@
 - (UIEdgeInsets)edgeInsetsInWaterflowLayout:(LFWaterfallLayout *)waterflowLayout;
 @end
 
+<<<<<<< HEAD
 @interface LFWaterfallLayout : UICollectionViewFlowLayout
+=======
+@interface LFWaterfallLayout : UICollectionViewLayout
+>>>>>>> f4d45b43d49275aeba6cf8d791d4b9a2c4a24abc
 
 @property (nonatomic , weak) id<LFWaterfallLayoutDelegate> delegate;
 

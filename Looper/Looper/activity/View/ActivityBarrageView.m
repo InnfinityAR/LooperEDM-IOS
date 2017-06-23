@@ -211,6 +211,7 @@
 
 
 -(void)createCollectionView{
+<<<<<<< HEAD
 //    UICollectionViewFlowLayout *viewlayout=[[UICollectionViewFlowLayout alloc]init];
 //    viewlayout.headerReferenceSize=CGSizeMake(1, 1);
     // 创建布局
@@ -221,6 +222,15 @@
     //注册头视图
     [_collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderViewID"];
 //     flowLayout.headerReferenceSize=CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
+=======
+    
+    UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
+    // 创建布局
+//    LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
+//    flowLayout.delegate = self;
+    // 创建collecView
+    _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout];
+>>>>>>> f4d45b43d49275aeba6cf8d791d4b9a2c4a24abc
     _collectView.backgroundColor = [UIColor whiteColor];
     _collectView.delegate = self;
     _collectView.dataSource = self;
@@ -284,8 +294,17 @@ return nil;
 //item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+<<<<<<< HEAD
   
     return self.barrageInfo.count+1;
+=======
+    if (section==0) {
+        return 1;
+    }
+    NSLog(@"%ld",self.barrageInfo.count);
+return self.barrageInfo.count+1;
+//    return self.barrageInfo.count+2;
+>>>>>>> f4d45b43d49275aeba6cf8d791d4b9a2c4a24abc
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -487,6 +506,25 @@ return nil;
     return DEF_WIDTH(self)/2-10;
 
 }
+<<<<<<< HEAD
+=======
+//#pragma mark -- LFWaterfallLayoutDelegate --
+//- (CGFloat)waterflowLayout:(LFWaterfallLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth{
+//    for (NSNumber *tag in self.allShowTags) {
+//        if ([tag intValue]==index+3000) {
+//            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20;
+//        }
+//    }
+//    for (NSNumber *tag in self.allShowImageTags) {
+//        if ([tag intValue]==index+5000) {
+//            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20);
+//        }
+//    }
+//    NSLog(@"index %ld",index);
+//    return DEF_WIDTH(self)/2-10;
+//
+//}
+>>>>>>> f4d45b43d49275aeba6cf8d791d4b9a2c4a24abc
 
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
