@@ -35,7 +35,7 @@ typedef void(^CompletionHandle)(NSError *error);
 -(void)dataForH5:(NSDictionary *)dic;
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
--(void)getActivityInfoById:(NSString *)activityId;
+-(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId;
 -(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID;
 
 -(void)LocalPhoto;

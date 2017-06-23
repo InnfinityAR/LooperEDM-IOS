@@ -46,7 +46,7 @@
         [self initailBuddleView];
         self.activityID=[self.obj activityID];
          [self.viewModel setBarrageView:self];
-         [self.viewModel getActivityInfoById:self.activityID];
+         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
         labelHeight=85.0;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
@@ -57,10 +57,11 @@
 
 -(void)addImageArray:(NSArray *)imageArray{
     self.barrageInfo=imageArray;
+    [self.buddleArr removeAllObjects];
     for (NSDictionary *buddleDic in imageArray) {
    [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
     }
-    [_collectView reloadData];
+    [self.collectView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -98,11 +99,11 @@
             if (!button.selected) {
                 [button setSelected:YES];
                //从第二个cell开始算的
-                [self.viewModel thumbActivityMessage:@"1" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
+                [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
             else{
                 [button setSelected:NO];
-                [self.viewModel thumbActivityMessage:@"0" andUserId: [self.barrageInfo[button.tag-4000-1]objectForKey:@"userid"] andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
+                [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4000-1]objectForKey:@"messageid"] andActivityID:self.activityID];
             }
 
         NSLog(@"这是一个点赞按钮");
@@ -210,12 +211,16 @@
 
 
 -(void)createCollectionView{
-    
-    UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
-//    looperListFlowLayout * flowLayout = [[looperListFlowLayout alloc]init];
-//    flowLayout.delegate = self;
-//    flowLayout.numberOfColumn = 2;
-    _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout];
+//    UICollectionViewFlowLayout *viewlayout=[[UICollectionViewFlowLayout alloc]init];
+//    viewlayout.headerReferenceSize=CGSizeMake(1, 1);
+    // 创建布局
+    LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
+    flowLayout.delegate = self;
+       // 创建collecView
+    _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout ];
+    //注册头视图
+    [_collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderViewID"];
+//     flowLayout.headerReferenceSize=CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
     _collectView.backgroundColor = [UIColor whiteColor];
     _collectView.delegate = self;
     _collectView.dataSource = self;
@@ -226,30 +231,61 @@
     [_collectView registerClass:[looperlistCellCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCellView"];
     [self addSubview:_collectView];
 }
-////得到 item之间的间隙大小
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-//    return 10;
-//}
-////最小行间距
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-//    return 10;
-//}
+//  返回头视图
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    //如果是头视图
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        UICollectionReusableView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderViewID" forIndexPath:indexPath];
+        //添加头视图的内容
+        [self addContent];
+        //头视图添加view
+        [header addSubview:self.collectHeaderView];
+        return header;
+    }
+return nil;
+}
+/*
+ *  补充头部内容
+ */
+-(void)addContent
+{
+    self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
+    label.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始，说说你心目中的抖腿大神。大家一起嗨起来！！！"];
+    label.font=[UIFont boldSystemFontOfSize:13];
+    label.textColor=[UIColor whiteColor];
+    label.numberOfLines=2;
+    [self.collectHeaderView addSubview:label];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
+    label2.text=[NSString stringWithFormat:@"2048个人已经进入战场，Let me lang"];
+    label2.font=[UIFont systemFontOfSize:13];
+    label2.textColor=[UIColor whiteColor];
+    label2.numberOfLines=2;
+    [self.collectHeaderView addSubview:label2];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,  240*DEF_Adaptation_Font*0.5-4, DEF_WIDTH(self), 4)];
+    imageView.image=[UIImage imageNamed:@"btn_line.png"];
+    [self.collectHeaderView addSubview:imageView];
+    self.collectHeaderView.backgroundColor=[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0];
 
-
+}
+//返回头headerView的大小
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    return  CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
+    
+    
+}
 
 #pragma mark-<UICollectionViewDelegate>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 1;
 }
 //item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section==0) {
-        return 1;
-    }
-return self.barrageInfo.count+1;
-    
+  
+    return self.barrageInfo.count+1;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -268,7 +304,7 @@ return self.barrageInfo.count+1;
     }
     cell.layer.cornerRadius=4.0;
     cell.layer.masksToBounds=YES;
-    if (indexPath.section==1) {
+    if (indexPath.section==0) {
         if (indexPath.row==0) {
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"writeBuddle.png" andRect:CGPointMake(0, 0) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(DEF_WIDTH(self)/2-10, DEF_WIDTH(self)/2-10) andTarget:self];
             [cell.contentView addSubview:button];
@@ -301,7 +337,7 @@ return self.barrageInfo.count+1;
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
             [cell.contentView addSubview:button];
             UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
-            if ([imageDic[@"like"]intValue]==1) {
+            if ([imageDic[@"isthumb"]intValue]==1) {
                 [commendBtn setSelected:YES];
             }
             [cell.contentView addSubview:commendBtn];
@@ -384,25 +420,9 @@ return self.barrageInfo.count+1;
 }
     return cell;
         
-        //下面是section：0
+        //下面是section：1
     }else{
-        UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
-        label.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始，说说你心目中的抖腿大神。大家一起嗨起来！！！"];
-        label.font=[UIFont boldSystemFontOfSize:13];
-        label.textColor=[UIColor whiteColor];
-        label.numberOfLines=2;
-        [cell.contentView addSubview:label];
-        UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
-        label2.text=[NSString stringWithFormat:@"%ld个人已经进入战场，Let me lang",indexPath.row+2548];
-        label2.font=[UIFont systemFontOfSize:13];
-        label2.textColor=[UIColor whiteColor];
-        label2.numberOfLines=2;
-        [cell.contentView addSubview:label2];
-        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,  240*DEF_Adaptation_Font*0.5-4, DEF_WIDTH(self), 4)];
-        imageView.image=[UIImage imageNamed:@"btn_line.png"];
-        [cell.contentView addSubview:imageView];
-        cell.backgroundColor=[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0];
-        return cell;
+                return cell;
     }
 }
 - (float) heightForString:(NSString *)value andWidth:(float)width andText:(UILabel *)label{
@@ -434,34 +454,46 @@ return self.barrageInfo.count+1;
     return sizeToFit.width;
 }
 //定义每个UICollectionViewCell 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section==0) {
-        return CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
-    }
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.section==0) {
+//        return CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
+//    }
+//    for (NSNumber *tag in self.allShowTags) {
+//        if ([tag intValue]==indexPath.row+3000) {
+//           return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20);
+//        }
+//    }
+//    for (NSNumber *tag in self.allShowImageTags) {
+//        if ([tag intValue]==indexPath.row+5000) {
+//            return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20));
+//        }
+//    }
+//    return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10);
+//}
+#pragma mark -- LFWaterfallLayoutDelegate --
+- (CGFloat)waterflowLayout:(LFWaterfallLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth{
     for (NSNumber *tag in self.allShowTags) {
-        if ([tag intValue]==indexPath.row+3000) {
-           return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20);
+        if ([tag intValue]==index+3000) {
+            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20;
         }
     }
     for (NSNumber *tag in self.allShowImageTags) {
-        if ([tag intValue]==indexPath.row+5000) {
-            return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20));
+        if ([tag intValue]==index+5000) {
+            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20+ (DEF_WIDTH(self)/2-20);
         }
     }
-    return CGSizeMake(DEF_WIDTH(self)/2-10,DEF_WIDTH(self)/2-10);
+    NSLog(@"index %ld",index);
+    return DEF_WIDTH(self)/2-10;
+
 }
+
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(5, 5, 5, 5);//分别为上、左、下、右
 }
-//返回头headerView的大小
-//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-//    CGSize size={320,45};
-//    return size;
-//    
-//}
+
 //这个cell的contentView改变没有用
 - (void)layoutSubviewsandCell:(looperlistCellCollectionViewCell*)cell  AndLabelHeight:(float)label2Height{
     [super layoutSubviews];
@@ -469,20 +501,6 @@ return self.barrageInfo.count+1;
 //    cellFrame.size.height=DEF_WIDTH(self)/2-10+label2Height-85.0;
 //    cell.contentView.frame=cellFrame;
     cell.backgroundColor=[UIColor greenColor];
-}
-
-#pragma mark - < UITableViewDatasource >
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 20;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell * settingCell = [tableView dequeueReusableCellWithIdentifier:@"cellID" forIndexPath:indexPath];
-    settingCell.textLabel.text = @"随意";
-    return settingCell;
 }
 
 #pragma mark - < UITableViewDelegate >
