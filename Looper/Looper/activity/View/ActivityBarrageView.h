@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityViewModel.h"
-#import "looperListFlowLayout.h"
-@interface ActivityBarrageView : UIView<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,WaterFlowLayoutDelegate>
+@interface ActivityBarrageView : UIView<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)viewModel;
 @property(nonatomic,strong)UIImageView  *headerView;
 @property(nonatomic,strong)UICollectionView *collectView;

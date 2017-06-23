@@ -33,6 +33,7 @@ typedef void(^CompletionHandle)(NSError *error);
 -(id)initWithController:(id)controller;
 -(void)popController;
 -(void)dataForH5:(NSDictionary *)dic;
+-(void)shareH5:(NSDictionary*)dic;
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
 -(void)getActivityInfoById:(NSString *)activityId;

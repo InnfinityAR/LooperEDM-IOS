@@ -79,6 +79,11 @@
     }
     if (button.tag>=2000&&button.tag<3000) {
         NSLog(@"这是一个分享button");
+        
+        NSLog(@"%@",self.barrageInfo[button.tag-2000-1]);
+        NSLog(@"%@", [self.barrageInfo[button.tag-2000-1]objectForKey:@"userid"]);
+        
+        [self.viewModel shareH5:self.barrageInfo[button.tag-2000-1]];
     }
     if (button.tag>=5000&&button.tag<6000) {
         NSLog(@"这是修改cell的高度的button");
@@ -226,6 +231,8 @@
     [_collectView registerClass:[looperlistCellCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCellView"];
     [self addSubview:_collectView];
 }
+
+
 ////得到 item之间的间隙大小
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
 //    return 10;
@@ -234,8 +241,6 @@
 //- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(looperListFlowLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
 //    return 10;
 //}
-
-
 
 #pragma mark-<UICollectionViewDelegate>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
