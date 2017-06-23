@@ -48,7 +48,9 @@
     }
 
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [textview resignFirstResponder];
+}
 -(void)createHudView{
     
     

@@ -13,6 +13,7 @@
 		B221712B1EFA326400B3CBC3 /* writeBuddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B22171261EFA326400B3CBC3 /* writeBuddle.png */; };
 		B221712C1EFA326400B3CBC3 /* commendNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B22171271EFA326400B3CBC3 /* commendNO.png */; };
 		B221712D1EFA326400B3CBC3 /* commendYes.png in Resources */ = {isa = PBXBuildFile; fileRef = B22171281EFA326400B3CBC3 /* commendYes.png */; };
+		B22171301EFBDD0B00B3CBC3 /* LFWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
 		B2A6EE5E1ECAE015004BF416 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */; };
 		B2A6EE791ECAEEA0004BF416 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2A6EE631ECAEEA0004BF416 /* Info.plist */; };
@@ -627,6 +628,8 @@
 		B22171261EFA326400B3CBC3 /* writeBuddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeBuddle.png; sourceTree = "<group>"; };
 		B22171271EFA326400B3CBC3 /* commendNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendNO.png; sourceTree = "<group>"; };
 		B22171281EFA326400B3CBC3 /* commendYes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendYes.png; sourceTree = "<group>"; };
+		B221712E1EFBDD0B00B3CBC3 /* LFWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFWaterfallLayout.h; sourceTree = "<group>"; };
+		B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFWaterfallLayout.m; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
 		B2A6EE5A1ECADFE4004BF416 /* activityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = activityModel.m; sourceTree = "<group>"; };
 		B2A6EE5C1ECAE015004BF416 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -1623,6 +1626,8 @@
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
 				C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */,
 				C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */,
+				B221712E1EFBDD0B00B3CBC3 /* LFWaterfallLayout.h */,
+				B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4076,6 +4081,7 @@
 				C43297081E36C74C00FA4DD8 /* XDRefreshFooter.m in Sources */,
 				B2A6EE7B1ECAEEA0004BF416 /* MJFoundation.m in Sources */,
 				C42B47DE1ED6A31500AE4399 /* PGIndexBannerSubiew.m in Sources */,
+				B22171301EFBDD0B00B3CBC3 /* LFWaterfallLayout.m in Sources */,
 				C46E2EBB1E0BD03500CD7A52 /* LooperToolClass.m in Sources */,
 				C409A7391E1E276700F76B5C /* looperViewController.m in Sources */,
 				C42E7FF81EC3110D00D9CC43 /* sildeView.m in Sources */,
