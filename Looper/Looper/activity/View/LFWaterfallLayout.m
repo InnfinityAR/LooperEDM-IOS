@@ -137,7 +137,7 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     
     if(isHead==false && indexPath.row==0){
         
-        minColumnHeight = [self.columnHeights[0] doubleValue]+50*DEF_Adaptation_Font*0.5;
+        minColumnHeight = [self.columnHeights[0] doubleValue]+240*DEF_Adaptation_Font*0.5;
         
         isHead=true;
     }else if(indexPath.row==0 && isHead==true){
@@ -152,12 +152,7 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
         
         
     }
-    
-    
-    
-    
-    
-    
+
     for (NSInteger i = 1 ; i < self.columnCount; i++) {
         // 取出第i列的高度
         CGFloat columnHeight = [self.columnHeights[i] doubleValue];

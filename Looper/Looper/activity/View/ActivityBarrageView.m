@@ -82,9 +82,7 @@
         NSLog(@"这是一个分享button");
         
          [self.viewModel shareH5:self.barrageInfo[button.tag-2000-1]];
-        
-        
-        
+
     }
     if (button.tag>=5000&&button.tag<6000) {
         NSLog(@"这是修改cell的高度的button");
