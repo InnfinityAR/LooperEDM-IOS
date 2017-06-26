@@ -15,6 +15,7 @@
 #import "sendMessageActivityView.h"
 #import "ActivityViewModel.h"
 #import "LocalDataMangaer.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ActivityBarrageView{
     float labelHeight;
@@ -228,6 +229,11 @@
     _collectView.delegate = self;
     _collectView.dataSource = self;
     _collectView.alwaysBounceVertical = YES;
+    _collectView.scrollsToTop = YES;
+    
+    
+    
+    
     //偏移量（预留出顶部图片的位置）
     _collectView.contentInset = UIEdgeInsetsMake(450*DEF_Adaptation_Font*0.5, 0, 0, 0 );
     [_collectView setBackgroundColor:[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0]];
@@ -256,7 +262,8 @@
     self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-10, 80*DEF_Adaptation_Font*0.5)];
     label.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始，说说你心目中的抖腿大神。大家一起嗨起来！！！"];
-    label.font=[UIFont boldSystemFontOfSize:13];
+    label.font=[UIFont boldSystemFontOfSize:15];
+    [label setTextAlignment:NSTextAlignmentLeft];
     label.textColor=[UIColor whiteColor];
     label.numberOfLines=2;
     [self.collectHeaderView addSubview:label];
@@ -311,15 +318,19 @@
         if (indexPath.row==0) {
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"writeBuddle.png" andRect:CGPointMake(0, 0) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(DEF_WIDTH(self)/2-10, DEF_WIDTH(self)/2-10) andTarget:self];
             [cell.contentView addSubview:button];
-            UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-            imageView.image=[UIImage imageNamed:@"1.png"];
+            UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+            [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:[LocalDataMangaer sharedManager].HeadImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+            
             imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
             imageView.layer.masksToBounds=YES;
             [cell.contentView addSubview:imageView];
-            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(80*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-            label.text=[NSString stringWithFormat:@"%ld",indexPath.row];
+            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(80*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 170*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+            label.text=[NSString stringWithFormat:@"%@",[LocalDataMangaer sharedManager].NickName];
             label.font=[UIFont boldSystemFontOfSize:14];
             [cell.contentView addSubview:label];
+            label.textColor=[UIColor whiteColor];
             cell.backgroundColor=[UIColor colorWithRed:45/255.0 green:20/255.0 blue:53/255.0 alpha:1.0];
             return cell;
         }
@@ -339,7 +350,7 @@
             cell.backgroundColor =[self randomColorAndIndex:indexPath.row%5];
             UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-40*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-40*DEF_Adaptation_Font*0.5) andTag:(int)(2000+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
             [cell.contentView addSubview:button];
-            UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
+            UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5, cell.frame.size.height-45*DEF_Adaptation_Font*0.5) andTag:(int)(4000+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(35*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) andTarget:self];
             if ([imageDic[@"isthumb"]intValue]==1) {
                 [commendBtn setSelected:YES];
             }
@@ -503,7 +514,7 @@
     //    CGRect cellFrame=cell.contentView.frame;
     //    cellFrame.size.height=DEF_WIDTH(self)/2-10+label2Height-85.0;
     //    cell.contentView.frame=cellFrame;
-    cell.backgroundColor=[UIColor greenColor];
+   //cell.backgroundColor=[UIColor greenColor];
 }
 
 #pragma mark - < UITableViewDelegate >

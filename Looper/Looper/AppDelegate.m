@@ -84,25 +84,31 @@
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
        
-        
-        
-    
-    
-    
     }
     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
 
-    
-    
-    
+
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
-
     [JPUSHService setupWithOption:launchOptions appKey:@"46ec314e43813bc79d201335"
                           channel:@"App Store"
                  apsForProduction:YES
             advertisingIdentifier:nil];
 
+    
+    
+    
+    for (int i=0 ;i<100;i++){
+    
+        NSLog(@"usedid  ");
+    
+    
+    
+    }
+    
+    
+    
+    
 
 }
 

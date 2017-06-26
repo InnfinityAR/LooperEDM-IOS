@@ -174,6 +174,17 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     // x坐标
     CGFloat x = self.endgeInsets.left + shortestColumn * (width + self.columnMargin);
     // y坐标
+    if(indexPath.row==0 && isHead==true){
+        
+        x = 5;
+    }else if(indexPath.row==1 ){
+        
+        x =  192;
+    }
+    
+    
+    
+    
     CGFloat y = minColumnHeight;
     if (y != self.endgeInsets.top) {
         y += self.rowMargin;
