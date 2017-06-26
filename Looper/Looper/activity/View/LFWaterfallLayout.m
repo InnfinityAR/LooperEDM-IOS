@@ -179,7 +179,7 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
         x = 5;
     }else if(indexPath.row==1 ){
         
-        x =  192;
+        x =  [UIScreen mainScreen].bounds.size.width/2+5;
     }
     
     

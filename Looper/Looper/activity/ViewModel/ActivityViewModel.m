@@ -21,7 +21,7 @@
 #import "LocalDataMangaer.h"
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
-
+#import "UserInfoViewController.h"
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -274,6 +274,12 @@ NSLog(@"%@",dic);
     [[_obj navigationController] pushViewController:webVc animated:NO];
     [webVc webViewWithData:dic andObj:self];
     
+}
+//跳转到userInfo界面
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
 }
 
 @end
