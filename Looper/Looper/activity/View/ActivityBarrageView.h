@@ -22,6 +22,8 @@
 -(void)addImageArray:(NSArray *)imageArray;
 @property(nonatomic,strong)NSArray *barrageInfo;
 @property(nonatomic,strong)NSMutableArray *buddleArr;
+@property(nonatomic,strong)NSMutableArray *userImageArr;
 @property(nonatomic,strong)NSMutableArray *colorArr;
 @property(nonatomic,strong)UIView *collectHeaderView;
+@property(nonatomic,strong)UIView *showHiddenBuddleView;
 @end

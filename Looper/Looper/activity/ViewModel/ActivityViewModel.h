@@ -40,5 +40,5 @@ typedef void(^CompletionHandle)(NSError *error);
 -(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID;
 
 -(void)LocalPhoto;
-
+-(void)jumpToAddUserInfoVC:(NSString *)userID;
 @end
