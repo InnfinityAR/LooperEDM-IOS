@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ActivityDetailView.h"
+#import "DJDetailView.h"
 @interface nActivityViewModel : NSObject
 {
     id obj;

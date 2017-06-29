@@ -188,9 +188,6 @@
     }];
 }
 
-
-
-
 -(void)createPlayerView:(NSDictionary *)dicPlayer{
     
     if([dicPlayer[@"userid"]intValue]!=[[LocalDataMangaer sharedManager].uid intValue]){
@@ -349,9 +346,14 @@
 
 -(void)createActivityView{
 
-    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
-    [[_obj view] addSubview:activityV];
+    DJDetailView *djDetailV = [[DJDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self];
+    [[_obj view]addSubview:djDetailV];
     
+    
+    
+//    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
+//    [[_obj view] addSubview:activityV];
+//    
 
 }
 

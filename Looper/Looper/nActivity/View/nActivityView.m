@@ -9,12 +9,13 @@
 #import "nActivityView.h"
 #import "nActivityViewModel.h"
 #import "LooperToolClass.h"
-#include "LooperConfig.h"
+#import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "LocalDataMangaer.h"
 #import "UIImageView+WebCache.h"
 #import "PGIndexBannerSubiew.h"
 #import "NewPagedFlowView.h"
+
 
 
 @implementation nActivityView {
@@ -113,14 +114,21 @@
     titleStr.numberOfLines=0;
     [titleStr sizeToFit];
     
-    UIImageView *location=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,705*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+    UIImageView *location=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
     [bannerView addSubview:location];
     
-    UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 705*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"location"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0]  andType:NSTextAlignmentLeft];
+    UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"location"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0]  andType:NSTextAlignmentLeft];
     [bannerView addSubview:locationStr];
     [locationStr sizeToFit];
     
     
+    UIImageView *ticket_icon =[LooperToolClass createImageViewReal:@"icon_ticket2.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,735 *DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+    [bannerView addSubview:ticket_icon];
+
+    UILabel* ticketStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 735*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"price"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    [bannerView addSubview:ticketStr];
+    [ticketStr sizeToFit];
+
     UIImageView *time=[LooperToolClass createImageViewReal:@"time.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,653*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
     
     [bannerView addSubview:time];
@@ -129,16 +137,11 @@
     [bannerView addSubview:TimeStr];
      [TimeStr sizeToFit];
     
-    
-    
     UILabel* tagStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 560*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake([self getContentLength:[[_commendArray objectAtIndex:index]objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"tag"] andFontSize:9 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [bannerView addSubview:tagStr];
     [tagStr setBackgroundColor:[UIColor colorWithRed:92/255.0 green:118/255.0 blue:148/255.0 alpha:1.0]];
     tagStr.layer.cornerRadius = 28*DEF_Adaptation_Font*0.5/2;
     tagStr.layer.masksToBounds = YES;
-    
-    
-    
     
     UILabel* followStr = [LooperToolClass createLableView:CGPointMake(0*DEF_Adaptation_Font_x*0.5, 114*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(139*DEF_Adaptation_Font_x*0.5, 41*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"   %@人 参加",[[_commendArray objectAtIndex:index]objectForKey:@"followcount"]] andFontSize:10 andColor:[UIColor colorWithRed:146/255.0 green:177/255.0 blue:178/255.0 alpha:0.9] andType:NSTextAlignmentLeft];
     [bannerView addSubview:followStr];
@@ -223,8 +226,6 @@
     return _commendArray.count;
 }
 
-
-
 -(void)createCommendView{
     NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 834*DEF_Adaptation_Font*0.5)];
     pageFlowView.delegate = self;
@@ -240,7 +241,6 @@
     [pageFlowView reloadData];
     
     [self addSubview:bottomScrollView];
-    
 }
 
 
@@ -289,16 +289,12 @@
         
     }];
     [self addSubview:backImageV];
-    
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     effectView.frame = CGRectMake(0, 0,DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT);
     effectView.alpha=1.2f;
     [self addSubview:effectView];
 }
-
-
-
 
 -(void)createHudView{
     
