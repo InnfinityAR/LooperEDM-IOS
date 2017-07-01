@@ -93,7 +93,7 @@
     NSDictionary *dic=[[NSDictionary alloc]initWithDictionary:self.objDic[@"message"]];
     [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
-    cell.themeLB.text=@"Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验";
+    cell.themeLB.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始,大家一起嗨起来！！！%@",self.objDic[@"activityname"]];
     cell.commentLB.text=dic[@"messagecontent"];
 //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
 //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;

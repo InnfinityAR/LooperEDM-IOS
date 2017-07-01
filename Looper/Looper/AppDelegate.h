@@ -20,8 +20,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+@property(nonatomic,strong)NSThread *thread;
+@property(nonatomic,strong)NSTimer *timer;
 @property (nonatomic) int allowRotation;
 
 @end
