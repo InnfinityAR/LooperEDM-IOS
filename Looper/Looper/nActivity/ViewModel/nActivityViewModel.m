@@ -91,6 +91,42 @@
 }
 
 
+-(void)getDataById:(NSString*)typeId andId:(NSString*)ID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:typeId forKey:@"type"];
+    [dic setObject:ID forKey:@"id"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getDjById" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            if([typeId intValue]==1){
+            
+                DJDetailView *djDetailV = [[DJDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
+                [[_obj view]addSubview:djDetailV];
+                
+            }else if([typeId intValue]==2){
+            
+            
+            }else if([typeId intValue]==3){
+            
+            
+            }
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+
+
+
+
 -(void)addActivityDetailView:(NSDictionary*)ActivityDic{
 
     
@@ -346,14 +382,12 @@
 
 -(void)createActivityView{
 
-    DJDetailView *djDetailV = [[DJDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self];
-    [[_obj view]addSubview:djDetailV];
+
     
     
+    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
+    [[_obj view] addSubview:activityV];
     
-//    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
-//    [[_obj view] addSubview:activityV];
-//    
 
 }
 

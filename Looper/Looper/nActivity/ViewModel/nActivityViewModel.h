@@ -38,6 +38,8 @@
 
 -(void)removePlayerInfo;
 
+-(void)getDataById:(NSString*)typeId andId:(NSString*)ID;
+
 
 
 -(void)followUser:(NSString*)targetID;

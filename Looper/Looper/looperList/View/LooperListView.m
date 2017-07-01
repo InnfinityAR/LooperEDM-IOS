@@ -319,7 +319,7 @@
     CGPoint point =  [scrollView.panGestureRecognizer translationInView:self];
     if (point.y > 0 ) {
 
-        if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
+        if(161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>scrollView.frame.origin.y && scrollView.contentOffset.y<=0){
             [self updataScrollView:temp_num_y-scrollView.contentOffset.y];
             [self updateTagView:scrollView.frame.origin.y andPoint:isdirection];
         }
@@ -430,7 +430,8 @@
 
 
 -(void)updataScrollView:(float)point_Y{
-    if(161*DEF_Adaptation_Font*0.5<=_collectView.frame.origin.y+point_Y && 161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>=_collectView.frame.origin.y+point_Y){
+    NSLog(@"%f",_collectView.frame.origin.y);
+    if(161*DEF_Adaptation_Font*0.5<_collectView.frame.origin.y+point_Y && 161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5>_collectView.frame.origin.y+point_Y){
          lableView.frame = CGRectMake(0,lableView.frame.origin.y+point_Y,lableView.frame.size.width, lableView.frame.size.height);
         _collectView.frame = CGRectMake(_collectView.frame.origin.x, _collectView.frame.origin.y+point_Y, _collectView.frame.size.width, _collectView.frame.size.height);
     }else if(161*DEF_Adaptation_Font*0.5>_collectView.frame.origin.y+point_Y){
@@ -440,7 +441,7 @@
             UIButton *btn = [btnArray objectAtIndex:i];
             btn.alpha=0.0;
         }
-    }else if (161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5<_collectView.frame.origin.y+point_Y){
+    }else if (161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5<=_collectView.frame.origin.y+point_Y){
         _collectView.frame = CGRectMake(_collectView.frame.origin.x,161*DEF_Adaptation_Font*0.5+300*DEF_Adaptation_Font*0.5, _collectView.frame.size.width, _collectView.frame.size.height);
         lableView.frame = CGRectMake(0, 397*DEF_Adaptation_Font*0.5, lableView.frame.size.width, lableView.frame.size.height);
 
@@ -449,12 +450,6 @@
             btn.alpha=1.0;
         }
         
-    }
-}
-//滑动手势
-- (void)swipe:(UISwipeGestureRecognizer *)recognizer{
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
-        NSLog(@"swipe up");
     }
 }
 

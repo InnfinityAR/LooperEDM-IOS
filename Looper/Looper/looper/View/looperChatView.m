@@ -138,8 +138,6 @@
 
 -(void)createHudView{
     
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
 
@@ -206,7 +204,6 @@
     
     textField.delegate = self;
     [bgView  addSubview:textField];
-    
     return textField;
 }
 
@@ -214,15 +211,12 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     
-    
 }
 
 -(void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect frame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.frame = CGRectMake(0, -frame.size.height, self.frame.size.width, self.frame.size.height);
-    
-    
 }
 
 -(void)keyboardWillHidden:(NSNotification *)notification
@@ -241,8 +235,6 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
     
-    
-    
     return YES;
 }
 
@@ -254,9 +246,6 @@
     NSString *TargetId;
     NSString *MessageId;
     NSString *MessageText;
-    
-    
-    
     
     if(ReplyDic!=nil){
         TargetId = [ReplyDic objectForKey:@"userid"];
@@ -279,7 +268,6 @@
             [hotChatArray addObject:dic];
         }
     }
-
     [chatTableView reloadData];
 }
 
@@ -504,7 +492,6 @@
         [labelTime setTextColor:[UIColor whiteColor]];
         [labelTime setFont:[UIFont fontWithName:looperFont size:8]];
         [cell.contentView addSubview:labelTime];
-        
 
         
     }else if(indexPath.section==1){

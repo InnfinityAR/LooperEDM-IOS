@@ -53,7 +53,7 @@
 }
 -(void)createHudView{
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:103 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [self addSubview:backBtn];
     
@@ -62,7 +62,6 @@
     
     sendPicBtn =[LooperToolClass createBtnImageName:@"send_picture.png" andRect:CGPointMake(538, 619) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: sendPicBtn];
-    
     
     UIImageView* labelComment=[LooperToolClass createImageView:@"label_Comment.png" andRect:CGPointMake(294, 56) andTag:100 andSize:CGSizeZero andIsRadius:false];
     
@@ -77,7 +76,7 @@
     textview.returnKeyType = UIReturnKeyDefault;//return键的类型
     textview.keyboardType = UIKeyboardTypeDefault;//键盘类型
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
-    textview.dataDetectorTypes = UIDataDetectorTypeAll; //显示数据类型的连接模式（如电话号码、网址、地址等）
+    textview.dataDetectorTypes = UIDataDetectorTypeAll;
     textview.textColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0];
     textview.text = @"";//设置显示的文本内容
     [self addSubview:textview];
@@ -104,7 +103,7 @@
         }else{
         
         }
-        UIImageView *imagev=[LooperToolClass createImageViewReal:[tempImageArray objectAtIndex:i] andRect:CGPointMake(num_x*DEF_Adaptation_Font*0.5,466*DEF_Adaptation_Font*0.5) andTag:i andSize:CGSizeMake(128*DEF_Adaptation_Font*0.5, 128*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        UIImageView *imagev=[LooperToolClass createImageViewReal:[tempImageArray objectAtIndex:i] andRect:CGPointMake(num_x*DEF_Adaptation_Font*0.5,400*DEF_Adaptation_Font*0.5) andTag:i andSize:CGSizeMake(128*DEF_Adaptation_Font*0.5, 128*DEF_Adaptation_Font*0.5) andIsRadius:false];
         imagev.layer.cornerRadius = 8*DEF_Adaptation_Font*0.5;
         imagev.layer.masksToBounds = YES;
         [imagev setBackgroundColor:[UIColor redColor]];
@@ -124,9 +123,19 @@
 {
 
     
-    
-    
 }
+
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    //这样就拿到了键盘的位置大小信息frame，然后根据frame进行高度处理之类的信息
+    
+    CGRect frame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    sendBtn.frame = CGRectMake(sendBtn.frame.origin.x, DEF_SCREEN_HEIGHT- frame.size.height-sendBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendBtn.frame.size.width, sendBtn.frame.size.height);
+    
+    sendPicBtn.frame = CGRectMake(sendPicBtn.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-sendPicBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendPicBtn.frame.size.width, sendPicBtn.frame.size.height);
+}
+
 
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -154,7 +163,6 @@
     ImageArray = [[NSMutableArray alloc] initWithCapacity:50];
     [self setBackgroundColor:[UIColor colorWithRed:35.0/255.0 green:33.0/255.0 blue:57.0/255.0 alpha:1.0]];
     [self createHudView];
-    
 }
 
 
