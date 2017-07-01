@@ -94,22 +94,6 @@
                           channel:@"App Store"
                  apsForProduction:YES
             advertisingIdentifier:nil];
-
-    
-    
-    
-    for (int i=0 ;i<100;i++){
-    
-        NSLog(@"usedid  ");
-    
-    
-    
-    }
-    
-    
-    
-    
-
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -157,11 +141,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
 }
-
-
-
-
-
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > 100000
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options

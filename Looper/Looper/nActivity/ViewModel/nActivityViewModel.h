@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ActivityDetailView.h"
+#import "DJDetailView.h"
 @interface nActivityViewModel : NSObject
 {
     id obj;
@@ -36,6 +37,8 @@
 -(void)createPlayerView:(NSDictionary *)dicPlayer;
 
 -(void)removePlayerInfo;
+
+-(void)getDataById:(NSString*)typeId andId:(NSString*)ID;
 
 
 
