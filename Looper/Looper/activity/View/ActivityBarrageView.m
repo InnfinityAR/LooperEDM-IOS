@@ -579,7 +579,7 @@
                 [imageView addGestureRecognizer:singleTap];
                 [cell.contentView addSubview:imageView];
                 UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-110*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-                label.font=[UIFont boldSystemFontOfSize:14];
+                label.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
                 label.textColor=[UIColor whiteColor];
                 label.text=[imageDic objectForKey:@"username"];
                 [cell.contentView addSubview:label];
@@ -633,7 +633,7 @@
                 [imageView addGestureRecognizer:singleTap];
                 [cell.contentView addSubview:imageView];
                 UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-110*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-                label.font=[UIFont boldSystemFontOfSize:14];
+                 label.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
                 label.textColor=[UIColor whiteColor];
                 label.text=[imageDic objectForKey:@"username"];
                 [cell.contentView addSubview:label];
