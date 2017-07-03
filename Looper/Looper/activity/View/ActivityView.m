@@ -93,7 +93,8 @@
     NSDictionary *dic=self.objDic[@"message"];
     if (![dic isKindOfClass:[NSNull class]]) {
         [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
-        cell.commentLB.text=dic[@"messagecontent"];
+//        cell.commentLB.text=self.objDic[@"activitydes"];
+        cell.commentLB.text=[NSString stringWithFormat:@"%@\n",self.objDic[@"activityname"]];
     }
     else{
         cell.headPhoto.image=[UIImage imageNamed:@"bk_front_login.png"];
@@ -105,8 +106,8 @@
     else{
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
-    cell.themeLB.text=@"Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验";
-    
+//    cell.themeLB.text=[NSString stringWithFormat:@"【Looper 】%@\n",self.objDic[@"activityname"]];
+    cell.themeLB.text=self.objDic[@"activitydes"];
     //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
     //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
     if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){
@@ -130,6 +131,7 @@
 //    [self.obj dataForH5:self.dataArr[indexPath.row]];
       NSDictionary *dic=self.dataArr[indexPath.row];
     self.activityID=[dic objectForKey:@"activityid"];
+    self.activityDic=dic;
     ActivityBarrageView *view=[[ActivityBarrageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self),DEF_HEIGHT(self)) and:self and:self.obj];
     view.obj=self;
     view.viewModel=self.obj;

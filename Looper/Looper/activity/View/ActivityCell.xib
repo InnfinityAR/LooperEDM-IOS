@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="260" id="vP8-hQ-EZc" userLabel="Activity Cell" customClass="ActivityCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="vP8-hQ-EZc" userLabel="Activity Cell" customClass="ActivityCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vP8-hQ-EZc" id="oCK-oc-hUj">
@@ -25,8 +25,8 @@
                             <constraint firstAttribute="height" constant="200" id="MFW-MI-XY5"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
-                        <rect key="frame" x="55" y="232.5" width="302" height="9"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
+                        <rect key="frame" x="55" y="224.5" width="302" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.58813685178756714" green="0.56975072622299194" blue="0.70641767978668213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -69,8 +69,8 @@
                     <constraint firstItem="e5k-hD-u6a" firstAttribute="top" secondItem="jLK-9E-XR0" secondAttribute="bottom" id="339-U0-UVv"/>
                     <constraint firstItem="Dw5-1Y-Drs" firstAttribute="leading" secondItem="cTH-4E-HHD" secondAttribute="trailing" constant="10" id="Gb5-Xd-HXY"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" id="Gjj-02-R4h"/>
+                    <constraint firstItem="Dw5-1Y-Drs" firstAttribute="top" secondItem="0pG-Xj-D1l" secondAttribute="bottom" constant="5" id="Tcd-Eg-p3t"/>
                     <constraint firstAttribute="trailing" secondItem="0pG-Xj-D1l" secondAttribute="trailing" constant="10" id="XL3-kU-3fc"/>
-                    <constraint firstItem="Dw5-1Y-Drs" firstAttribute="centerY" secondItem="cTH-4E-HHD" secondAttribute="centerY" id="YGy-mA-Eft"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="axR-tv-mOz"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="top" secondItem="iyV-KH-4cX" secondAttribute="bottom" constant="5" id="f8o-ao-Ehb"/>
                     <constraint firstAttribute="trailing" secondItem="jLK-9E-XR0" secondAttribute="trailing" constant="10" id="hkz-Ns-lvv"/>
@@ -78,10 +78,10 @@
                     <constraint firstAttribute="trailing" secondItem="iyV-KH-4cX" secondAttribute="trailing" id="oZe-Pb-cv6"/>
                     <constraint firstItem="cTH-4E-HHD" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="tVc-sI-L80"/>
                     <constraint firstAttribute="bottom" secondItem="cTH-4E-HHD" secondAttribute="bottom" constant="10" id="uLX-T8-1g4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="5" id="v0S-O9-CO9"/>
                     <constraint firstItem="jLK-9E-XR0" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" constant="18" id="vHB-ko-vAI"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" constant="-5" id="wLb-yN-Yse"/>
                     <constraint firstItem="cTH-4E-HHD" firstAttribute="top" secondItem="0pG-Xj-D1l" secondAttribute="bottom" constant="5" id="wx7-Tt-17c"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="10" id="xYE-rN-da0"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.14087384939193726" green="0.13484308123588562" blue="0.23431688547134399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

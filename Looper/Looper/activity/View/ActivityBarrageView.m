@@ -80,6 +80,9 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityView*)idObject;
         self.viewModel=viewModel;
+         self.activityID=[self.obj activityID];
+        self.activityDIc=[self.obj activityDic];
+         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
 //       [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
     NSThread  *thread=[[NSThread alloc]initWithTarget:self selector:@selector(startTimer) object:nil];
         [thread start];
@@ -89,10 +92,9 @@
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
-        self.activityID=[self.obj activityID];
+       
         [self.viewModel setBarrageView:self];
-        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
-        
+       
         labelHeight=85.0;
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [self addSubview:backBtn];
@@ -170,7 +172,13 @@
   
     self.headerView.frame = CGRectMake(0, -450*DEF_Adaptation_Font*0.5, [UIScreen mainScreen].bounds.size.width, 530*DEF_Adaptation_Font*0.5);
     self.headerView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.headerView sd_setImageWithURL:[NSURL URLWithString:[self.obj objDic][@"activityimage"]]];
+    self.headerView.clipsToBounds=YES;
+    if ([self.activityDIc[@"activityimage"]isKindOfClass:[NSNull class]]) {
+        self.headerView.image=[UIImage imageNamed:@"bk_front_login.png"];
+    }else{
+    [self.headerView sd_setImageWithURL:[NSURL URLWithString:self.activityDIc[@"activityimage"]]];
+        
+    }
     //加入播放视频
     if (0) {
         [self addAVPlayer];
@@ -473,10 +481,10 @@
  */
 -(void)addContent
 {
-    NSDictionary *message=[self.obj objDic][@"message"] ;
+    NSDictionary *message=self.activityDIc[@"message"] ;
     self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(15, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    label.text=[NSString stringWithFormat:@"【LooperEDM】抖腿大战即将开始,大家一起嗨起来！！！%@",[self.obj objDic][@"activityname"]];
+    label.text=[NSString stringWithFormat:@"【LooperEDM】嗨起来！！！%@",self.activityDIc[@"activityname"]];
     label.font=[UIFont systemFontOfSize:15];
     [label setTextAlignment:NSTextAlignmentLeft];
     label.textColor=[UIColor whiteColor];
@@ -484,7 +492,7 @@
     [self.collectHeaderView addSubview:label];
   
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(15, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    label2.text=[NSString stringWithFormat:@"%@",[message objectForKey:@"messagecontent"]];
+    label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
      float headerViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-10) andText:label2];
     NSLog(@"这是多少高%f,%f",headerViewHeight,80*DEF_Adaptation_Font*0.5);
     label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
