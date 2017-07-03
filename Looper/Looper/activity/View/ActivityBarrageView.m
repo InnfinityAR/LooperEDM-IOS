@@ -170,7 +170,12 @@
   
     self.headerView.frame = CGRectMake(0, -450*DEF_Adaptation_Font*0.5, [UIScreen mainScreen].bounds.size.width, 530*DEF_Adaptation_Font*0.5);
     self.headerView.contentMode = UIViewContentModeScaleAspectFill;
+    if ([[self.obj objDic][@"activityimage"]isKindOfClass:[NSNull class]]) {
+        self.headerView.image=[UIImage imageNamed:@"bk_front_login.png"];
+    }else{
     [self.headerView sd_setImageWithURL:[NSURL URLWithString:[self.obj objDic][@"activityimage"]]];
+        
+    }
     //加入播放视频
     if (0) {
         [self addAVPlayer];
