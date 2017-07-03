@@ -107,8 +107,6 @@
     
     [self addSubview:icon_songer];
     
-    
-    
 }
 
 -(void)createScrollView{
@@ -142,8 +140,6 @@
         }
     }else {
         
-        
-        
     }
     
 }
@@ -152,13 +148,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat yOffset  = scrollView.contentOffset.y;
-    NSLog(@"%f",yOffset);
-    
     if(scrollView.tag==100){
-        CGFloat y= scrollView.contentOffset.y;
-        
-        CGRect imgViewF =headImageView.frame;
-        
         CGPoint offset = scrollView.contentOffset;
         if (offset.y < 0) {
             CGRect rect = headImageView.frame;
@@ -168,11 +158,9 @@
             rect.size.width = DEF_SCREEN_WIDTH - offset.y*2;
             headImageView.frame = rect;
         }
-        
         ScrollNum_y =yOffset;
     }
 }
-
 
 -(void)createHorizontalScroll{
     
@@ -219,6 +207,29 @@
     djDetail.text = [[_djData objectForKey:@"data"]objectForKey:@"djdes"];
     [HorizontalScroll addSubview:djDetail];
     [djDetail sizeToFit];
+    
+    for (int i=0;i<[[_djData objectForKey:@"information"] count] ;i++){
+        
+        
+        int num_x =0;
+        if((i+1)%2==1){
+            num_x =37*DEF_Adaptation_Font*0.5;
+        }else if((i+1)%2==0){
+             num_x =328*DEF_Adaptation_Font*0.5;
+        }
+      //  int num_y =
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(num_x,0, 268*DEF_Adaptation_Font*0.5, 268*DEF_Adaptation_Font*0.5)];
+        [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
+        imageV.layer.masksToBounds = YES;
+        
+        [HorizontalScroll addSubview:imageV];
+    }
+    
+    
+    
 
 }
 
