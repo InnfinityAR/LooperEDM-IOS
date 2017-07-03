@@ -17,4 +17,5 @@
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @property(nonatomic,strong)NSDictionary *objDic;
 @property(nonatomic,strong)NSString *activityID;
+@property(nonatomic,strong)NSDictionary *activityDic;
 @end

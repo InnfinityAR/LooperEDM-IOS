@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UIImageView *buddleView;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSString *activityID;
+@property(nonatomic,strong)NSDictionary *activityDIc;
 @property(nonatomic,strong)id viewModel;
 @property(nonatomic,strong)NSMutableArray  *allShowTags;
 @property(nonatomic,strong)NSMutableArray *allShowImageTags;
