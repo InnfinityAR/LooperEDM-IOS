@@ -289,6 +289,7 @@
     view.backgroundColor=[UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:0.5];
 //        view.backgroundColor=[self randomColorAndIndex:arc4random_uniform(6) %5];
 // 弹幕点赞
+    if (self.barrageInfo.count) {
         if ([self.barrageInfo[count][@"isthumb"]intValue]==1) {
         UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(view1)/2-20, 5*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                     view.tag=count;
@@ -304,6 +305,7 @@
             imageV.tag=-count-BUTTONTAG;
             [view1 addSubview:imageV];
         }
+    }
         CGRect frame=label.frame;
         frame.size.width=[self widthForString:str andHeight: 200*DEF_Adaptation_Font*0.5 andText:label]*1.5;
         label.frame=frame;
@@ -399,14 +401,15 @@
                 [self.buddleCountArr addObject:@((int)view.alpha-2)];
                 view.alpha=1;
             }
-            if (view.center.x<-DEF_WIDTH(view)-DEF_WIDTH(self)) {
-                        [self.barrageArr removeObject:view];
-                        [view removeFromSuperview];
-            }
             //用于移动弹幕
             CGPoint center = view.center;
             center.x=center.x-0.5;
             view.center = center;
+            if (view.center.x<-DEF_WIDTH(view)-DEF_WIDTH(self)) {
+                        [self.barrageArr removeObject:view];
+                        [view removeFromSuperview];
+            }
+          
         }
        }
 }
@@ -543,7 +546,7 @@
             [cell.contentView addSubview:imageView];
             UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(80*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 170*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
             label.text=[NSString stringWithFormat:@"%@",[LocalDataMangaer sharedManager].NickName];
-            label.font=[UIFont boldSystemFontOfSize:14];
+            label.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
             [cell.contentView addSubview:label];
             label.textColor=[UIColor whiteColor];
             cell.backgroundColor=[UIColor colorWithRed:30/255.0 green:31/255.0 blue:54/255.0 alpha:1.0];
