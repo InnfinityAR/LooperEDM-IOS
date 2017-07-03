@@ -34,6 +34,8 @@
     
     float ScrollNum_y;
     
+    
+    UIButton *followBtn;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)djData{
@@ -65,6 +67,8 @@
         [UIView animateWithDuration:0.3 animations:^{
             [HorizontalScroll setContentOffset:CGPointMake(DEF_SCREEN_WIDTH, HorizontalScroll.contentOffset.y) animated:true];
         }];
+    }else if(button.tag==107){
+       [followBtn setSelected:true];
     }
 }
 
@@ -96,7 +100,7 @@
     
     [self addSubview:headImageView];
     
-    UILabel *songer = [[UILabel alloc] initWithFrame:CGRectMake(219*DEF_Adaptation_Font*0.5, 323*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    UILabel *songer = [[UILabel alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, 323*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     songer.text=[[_djData objectForKey:@"data"]objectForKey:@"djname"];
     [songer setTextColor:[UIColor whiteColor]];
     [songer setTextAlignment:NSTextAlignmentCenter];
@@ -108,6 +112,8 @@
     [self addSubview:icon_songer];
     
     
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(246*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(149*DEF_Adaptation_Font*0.5,45*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:followBtn];
     
 }
 
@@ -142,8 +148,6 @@
         }
     }else {
         
-        
-        
     }
     
 }
@@ -152,13 +156,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat yOffset  = scrollView.contentOffset.y;
-    NSLog(@"%f",yOffset);
-    
     if(scrollView.tag==100){
-        CGFloat y= scrollView.contentOffset.y;
-        
-        CGRect imgViewF =headImageView.frame;
-        
         CGPoint offset = scrollView.contentOffset;
         if (offset.y < 0) {
             CGRect rect = headImageView.frame;
@@ -168,11 +166,9 @@
             rect.size.width = DEF_SCREEN_WIDTH - offset.y*2;
             headImageView.frame = rect;
         }
-        
         ScrollNum_y =yOffset;
     }
 }
-
 
 -(void)createHorizontalScroll{
     
@@ -206,6 +202,24 @@
 }
 
 
+-(void)createActiveView:(UITapGestureRecognizer *)tap{
+    
+    NSLog(@"%d",tap.view.tag);
+
+    for (int i=0;i<[[_djData objectForKey:@"information"] count] ;i++){
+        
+        
+        if([[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue] ==tap.view.tag){
+            [_obj addActivityDetailView:[[_djData objectForKey:@"information"] objectAtIndex:i]];
+
+            break;
+        }
+        
+        
+    }
+}
+
+
 -(void)createScrollDataView{
     
     UILabel *djName =[[UILabel alloc] initWithFrame:CGRectMake(DEF_SCREEN_WIDTH+33*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 583*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
@@ -219,6 +233,37 @@
     djDetail.text = [[_djData objectForKey:@"data"]objectForKey:@"djdes"];
     [HorizontalScroll addSubview:djDetail];
     [djDetail sizeToFit];
+    
+    for (int i=0;i<[[_djData objectForKey:@"information"] count] ;i++){
+        
+        
+        int num_x =0;
+        if((i+1)%2==1){
+            num_x =37*DEF_Adaptation_Font*0.5;
+        }else if((i+1)%2==0){
+             num_x =328*DEF_Adaptation_Font*0.5;
+        }
+      //  int num_y =
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(num_x,0, 268*DEF_Adaptation_Font*0.5, 268*DEF_Adaptation_Font*0.5)];
+        [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        imageV.tag = [[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue];
+        
+        
+        imageV.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createActiveView:)];
+        [imageV addGestureRecognizer:singleTap];
+
+        
+        imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
+        imageV.layer.masksToBounds = YES;
+        
+        [HorizontalScroll addSubview:imageV];
+    }
+    
+    
+    
 
 }
 
