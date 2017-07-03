@@ -34,6 +34,8 @@
     
     float ScrollNum_y;
     
+    
+    UIButton *followBtn;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)djData{
@@ -65,6 +67,8 @@
         [UIView animateWithDuration:0.3 animations:^{
             [HorizontalScroll setContentOffset:CGPointMake(DEF_SCREEN_WIDTH, HorizontalScroll.contentOffset.y) animated:true];
         }];
+    }else if(button.tag==107){
+       [followBtn setSelected:true];
     }
 }
 
@@ -96,7 +100,7 @@
     
     [self addSubview:headImageView];
     
-    UILabel *songer = [[UILabel alloc] initWithFrame:CGRectMake(219*DEF_Adaptation_Font*0.5, 323*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    UILabel *songer = [[UILabel alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, 323*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     songer.text=[[_djData objectForKey:@"data"]objectForKey:@"djname"];
     [songer setTextColor:[UIColor whiteColor]];
     [songer setTextAlignment:NSTextAlignmentCenter];
@@ -106,6 +110,10 @@
     [icon_songer setImage:[UIImage imageNamed:@"icon_songer.png"]];
     
     [self addSubview:icon_songer];
+    
+    
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(246*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(149*DEF_Adaptation_Font*0.5,45*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:followBtn];
     
 }
 
@@ -194,6 +202,24 @@
 }
 
 
+-(void)createActiveView:(UITapGestureRecognizer *)tap{
+    
+    NSLog(@"%d",tap.view.tag);
+
+    for (int i=0;i<[[_djData objectForKey:@"information"] count] ;i++){
+        
+        
+        if([[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue] ==tap.view.tag){
+            [_obj addActivityDetailView:[[_djData objectForKey:@"information"] objectAtIndex:i]];
+
+            break;
+        }
+        
+        
+    }
+}
+
+
 -(void)createScrollDataView{
     
     UILabel *djName =[[UILabel alloc] initWithFrame:CGRectMake(DEF_SCREEN_WIDTH+33*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 583*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
@@ -222,6 +248,14 @@
         [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        imageV.tag = [[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue];
+        
+        
+        imageV.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createActiveView:)];
+        [imageV addGestureRecognizer:singleTap];
+
+        
         imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
         imageV.layer.masksToBounds = YES;
         

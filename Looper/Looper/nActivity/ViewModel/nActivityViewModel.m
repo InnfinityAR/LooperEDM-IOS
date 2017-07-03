@@ -27,6 +27,10 @@
 #import "SimpleChatViewController.h"
 
 
+
+#import "ClubDetailView.h"
+#import "BrandDetailView.h"
+
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
@@ -106,11 +110,17 @@
                 [[_obj view]addSubview:djDetailV];
                 
             }else if([typeId intValue]==2){
-            
-            
-            }else if([typeId intValue]==3){
-            
-            
+                ClubDetailView *clubDetailV = [[ClubDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
+                [[_obj view]addSubview:clubDetailV];
+
+                
+            }else if([typeId intValue]==4){
+                
+                
+                NSLog(@"%@",responseObject);
+                BrandDetailView *brandDetailV = [[BrandDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
+                [[_obj view]addSubview:brandDetailV];
+
             }
         }else{
             

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BrandDetailView : UIView
+@interface BrandDetailView : UIView <UICollectionViewDataSource,UICollectionViewDelegate>
 {
     
     
@@ -17,6 +17,6 @@
     
 }
 @property(nonatomic)id obj;
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)clubData;
 
 @end

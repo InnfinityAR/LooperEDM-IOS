@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ClubDetailView : UIView
+@interface ClubDetailView : UIView <UICollectionViewDataSource,UICollectionViewDelegate>
 {
     
     
@@ -17,5 +17,5 @@
     
 }
 @property(nonatomic)id obj;
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)clubData;
 @end

@@ -106,12 +106,9 @@
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     
-    NSLog(@"%d",tap.view.tag);
-    
-     NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
+    NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
     NSDictionary *dic =[loopArray objectAtIndex:tap.view.tag];
-    
-    NSLog(@"%@",dic);
+
     [_obj toLooperView:dic];
     
 }
@@ -354,13 +351,13 @@
 }
 
 -(void)SpaceView{
-    [_obj getDataById:@"3" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
+    [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
     
 }
 
 
 -(void)addbrandView{
-    [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+    [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
 }
 
 
