@@ -17,11 +17,11 @@
 #import "LocalDataMangaer.h"
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
-#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+
 #define BUTTONTAG  10000
 @interface ActivityBarrageView()
-@property(nonatomic,strong)AVPlayer *player;
-@property(nonatomic,strong)AVPlayerLayer *AVLayer;
+@property(nonatomic,retain) MPMoviePlayerController *movieController;
 @end
 @implementation ActivityBarrageView{
     float labelHeight;
@@ -187,14 +187,16 @@
     [self.collectView addSubview:self.headerView];
 }
 -(void)addAVPlayer {
-    [self.headerView.layer removeFromSuperlayer];
     NSString *videoPath=@"http://flv2.bn.netease.com/videolib3/1510/25/bIHxK3719/SD/bIHxK3719-mobile.mp4";
-    self.player=[AVPlayer playerWithURL:[NSURL URLWithString:videoPath]];
-    self.AVLayer=[AVPlayerLayer playerLayerWithPlayer:self.player];
-    self.AVLayer.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 530*DEF_Adaptation_Font*0.5);
-    [self.headerView.layer addSublayer:self.AVLayer];
-    [self.player play];
-//    [self.player pause];
+//    NSURL *videoUrl = [[NSBundle mainBundle]URLForResource:@"clear" withExtension:@"mp4"];//定位资源clear.mp4
+      self.movieController = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL URLWithString:videoPath]];//初始化movieController
+    [self.movieController.view setFrame:CGRectMake(0, 0, DEF_WIDTH(self), 530*DEF_Adaptation_Font*0.5)];//movieController视图的大小
+    [self.movieController setRepeatMode:MPMovieRepeatModeOne];//重复方式
+    [self.movieController setScalingMode:MPMovieScalingModeAspectFill];//缩放方式满屏
+    [self.movieController play];//播放
+    [self.headerView addSubview:self.movieController.view];//添加
+
+    
 }
 - (void)initailBuddleView {
     
@@ -291,7 +293,6 @@
     UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
     //设置轻扫的方向
     swipeGesture.direction = UISwipeGestureRecognizerDirectionUp; //默认向上
-    view1.tag=count;
     [view1 addGestureRecognizer:swipeGesture];
 
     view.backgroundColor=[UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:0.5];
@@ -301,6 +302,7 @@
         if ([self.barrageInfo[count][@"isthumb"]intValue]==1) {
         UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(view1)/2-20, 5*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                     view.tag=count;
+            view1.tag=count-1;
             imageV.tag=count-BUTTONTAG;
             imageV.image=[UIImage imageNamed:@"commendYes2.png"];
         [view1 addSubview:imageV];
@@ -310,6 +312,7 @@
             UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(5*DEF_Adaptation_Font*0.5, 55*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
             imageV.image=[UIImage imageNamed:@"commendYes2.png"];
             view.tag=-count;
+            view1.tag=-count-1;
             imageV.tag=-count-BUTTONTAG;
             [view1 addSubview:imageV];
         }
@@ -342,8 +345,27 @@
 }
 //轻扫手势
 -(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
-//    UIView *view=(UIView *)[swipe.view viewWithTag:swipe.view.tag];
-//    NSLog(@"view1:%ld, view: %ld",swipe.view.tag,view.tag);
+     UIImageView *imageV=  (UIImageView *)[swipe.view viewWithTag:(swipe.view.tag-BUTTONTAG+1)];
+    UIView *view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag+1)];
+    NSLog(@"view1:%ld, view: %ld ,imageV :%ld",swipe.view.tag,view.tag,imageV.tag);
+     [view setBackgroundColor:[UIColor colorWithRed:193/255.0 green:216/255.0 blue:76/255.0 alpha:1.0]];
+    if (view.tag<0) {
+     [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+    }
+    view.tag=-view.tag;
+    imageV.tag=view.tag-BUTTONTAG;
+    //点赞按钮向上运动的动画
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-40*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+    [self.buddleView addSubview:imageView];
+    imageView.image=[UIImage imageNamed:@"icon_looper_goodA1"];
+        [UIView animateWithDuration:2 animations:^{
+            CGRect frame=imageView.frame;
+            frame = CGRectMake(DEF_WIDTH(self)/2-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5);
+            imageView.frame=frame;
+        } completion:^(BOOL finished) {
+            [imageView removeFromSuperview];
+        }
+         ];
 }
 
 //弹幕的点击事件
@@ -775,6 +797,7 @@
 }
 
 #pragma mark - < UITableViewDelegate >
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    CGRect newFrame = self.headerView.frame;
 //    CGFloat settingViewOffsetY = 50 - scrollView.contentOffset.y;
@@ -805,12 +828,14 @@
         //double fabs(double i); //处理double类型的取绝对值
         //float fabsf(float i); //处理float类型的取绝对值
         f.size.width=DEF_WIDTH(self) + fabs(xOffset)*2;
-        
         self.headerView.frame= f;
-       
+        //修改视频的拉伸效果
+        CGRect f3=self.movieController.view.frame;
+//        f3.size.height=  -yOffset+480*DEF_Adaptation_Font*0.5;
+        f3.size.width=DEF_WIDTH(self) + fabs(xOffset)*2;
+        self.movieController.view.frame= f3;
     }
     else{
-//        self.collectView.contentInset = UIEdgeInsetsMake(-yOffset, 0, 0, 0);
      CGRect f2 =self.buddleView.frame;
         f2.size.height=-yOffset+80*DEF_Adaptation_Font*0.5;
         if (-yOffset<=-30) {

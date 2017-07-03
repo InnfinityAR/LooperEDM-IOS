@@ -100,23 +100,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "520751191.772316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "-initDate"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "520751191.772316"
+            timestampString = "520768636.166631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
@@ -131,13 +115,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/activity/ViewModel/ActivityViewModel.m"
-            timestampString = "520746493.018489"
+            filePath = "Looper/activity/View/LFWaterfallLayout.m"
+            timestampString = "520771149.846445"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "-thumbActivityMessage:andUserId:andMessageId:andActivityID:"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-prepareLayout"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -147,13 +131,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/activity/View/ActivityView.m"
-            timestampString = "520753447.090681"
+            filePath = "Looper/activity/View/LFWaterfallLayout.m"
+            timestampString = "520771152.935171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-layoutAttributesForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -163,29 +147,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "520751191.772316"
+            filePath = "Looper/activity/View/LFWaterfallLayout.m"
+            timestampString = "520771157.48625"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-initailHeaderView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "520753866.014368"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
-            landmarkName = "-addContent"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-collectionViewContentSize"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
