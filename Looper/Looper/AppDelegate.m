@@ -183,7 +183,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-
+   
     [NSThread sleepForTimeInterval:1.5];
 
     
@@ -248,13 +248,13 @@ void uncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self.timer setFireDate:[NSDate distantFuture]];
+    [self.thread cancel];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+ [self.timer setFireDate:[NSDate date]];
 }
 
 

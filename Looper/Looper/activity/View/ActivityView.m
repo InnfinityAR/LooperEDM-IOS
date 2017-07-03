@@ -90,20 +90,32 @@
     cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     self.objDic=[[NSDictionary alloc]initWithDictionary:self.dataArr[indexPath.row]];
-    NSDictionary *dic=[[NSDictionary alloc]initWithDictionary:self.objDic[@"message"]];
-    [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
-    [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
-    cell.themeLB.text=@"Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验";
-    cell.commentLB.text=dic[@"messagecontent"];
-//    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
-//    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
-    if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){
-    if ([self.objDic[@"followercount"]intValue]==0){
-        cell.followCountLB.text=@"我要参加";
+    NSDictionary *dic=self.objDic[@"message"];
+    if (![dic isKindOfClass:[NSNull class]]) {
+        [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
+        cell.commentLB.text=dic[@"messagecontent"];
     }
     else{
-        cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"followercount"]];
+        cell.headPhoto.image=[UIImage imageNamed:@"bk_front_login.png"];
+        cell.commentLB.text=@"战斗之夜，燃烧吧，我的青春";
     }
+    if (self.objDic[@"activityimage"]==[NSNull null]) {
+        cell.mainPhoto.image=[UIImage imageNamed:@"bk_front_login.png"];
+    }
+    else{
+        [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
+    }
+    cell.themeLB.text=@"Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验";
+    
+    //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
+    //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
+    if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){
+        if ([self.objDic[@"followercount"]intValue]==0){
+            cell.followCountLB.text=@"我要参加";
+        }
+        else{
+            cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"followercount"]];
+        }
     }
     return cell;
   

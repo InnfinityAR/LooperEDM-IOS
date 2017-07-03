@@ -115,21 +115,33 @@
     NSDictionary *activity=self.dataArr[indexPath.row];
     
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
-    cell.addressLB.text=activity[@"location"];
-    cell.themeLB.text=activity[@"activityname"];
+    if (activity[@"location"]==[NSNull null]) {
+        
+    }
+    else{
+     cell.addressLB.text=activity[@"location"];
+    }
+    if (activity[@"activityname"]==[NSNull null]) {
+        
+    }
+    else{
+        cell.addressLB.text=activity[@"activityname"];
+    }
     cell.timeLB.text=[NSString stringWithFormat:@"%@~\n%@",[self timeChange:activity[@"starttime"]],[self timeChange:activity[@"endtime"]]];
     cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
     if (activity[@"price"]==[NSNull null]) {
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
     }
-    else if([activity[@"price"]isEqualToString:@""]){
+    else{
+     if([activity[@"price"]isEqualToString:@""]){
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
     }
     else{
         [cell.ticketLB setHidden:NO];
         [cell.saleBtn setHidden:NO];
+    }
     }
     [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
     return cell;

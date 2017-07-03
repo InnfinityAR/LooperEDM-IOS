@@ -26,4 +26,8 @@
 @property(nonatomic,strong)NSMutableArray *colorArr;
 @property(nonatomic,strong)UIView *collectHeaderView;
 @property(nonatomic,strong)UIView *showHiddenBuddleView;
+//用于添加实时弹幕
+@property(nonatomic,strong)NSMutableArray *barrageArr;
+//用于弹幕轨道
+@property(nonatomic,strong)NSMutableArray *buddleCountArr;
 @end
