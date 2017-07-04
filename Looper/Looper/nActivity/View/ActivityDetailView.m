@@ -48,16 +48,21 @@
 
 -(void)createHudView{
     isHeight = false;
+    
+    UIImageView *shadowV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 176*DEF_Adaptation_Font*0.5)];
+    [shadowV setImage:[UIImage imageNamed:@"top_shadow.png"]];
+    [self addSubview:shadowV];
+    
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [self addSubview:backBtn];
     
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
-
+    
 //    UIButton *addBtn = [LooperToolClass createBtnImageNameReal:@"btn_add.png" andRect:CGPointMake(550*DEF_Adaptation_Font*0.5,1045*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_add.png" andClickImage:@"btn_add.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5,65*DEF_Adaptation_Font*0.5) andTarget:self];
 //    [self addSubview:addBtn];
     
-    gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,1025*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor blueColor]];
+    gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,1025*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor colorWithRed:47/255.0 green:168/255.0 blue:255.0/255.0 alpha:1.0]];
     gooeyMenu.menuDelegate = self;
     gooeyMenu.radius = 20;//大圆的1/4
     gooeyMenu.extraDistance = 45;
@@ -96,9 +101,9 @@
 //       
 //    }
     
-    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+1960*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
+    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
     
-    [webView setFrame:CGRectMake(0,1960*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height)];
+    [webView setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height)];
     
     [self createLoopView:webView.scrollView.contentSize.height];
 }
@@ -188,6 +193,13 @@
 }
 
 
+-(void)addcalendarView{
+
+     [_obj savaCalendar:[activityDic objectForKey:@"data"]];
+
+}
+
+
 -(void)createBkView{
 
     
@@ -228,11 +240,9 @@
     UILabel *ownerName = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 978*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"owner"]objectForKey:@"nickname"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bkScroll addSubview:ownerName];
     
-    
-    
     UILabel *ownerLable = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 939*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:@"发起人" andFontSize:12 andColor:[UIColor colorWithRed:145/255.0 green:185/255.0 blue:197/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [bkScroll addSubview:ownerLable];
-    
+
     
     UILabel *activityName = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 723*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 90*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"data"]objectForKey:@"activityname"] andFontSize:17 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     activityName.numberOfLines=0;
@@ -262,6 +272,12 @@
     [bkScroll addSubview:brandTicket];
     
     
+    UIButton *calendarBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1055*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
+    [calendarBtn1 addTarget:self action:@selector(addcalendarView) forControlEvents:UIControlEventTouchDown];
+    [bkScroll addSubview:calendarBtn1];
+    
+    
+    
     UIButton *ticketBtn = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1316*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [ticketBtn addTarget:self action:@selector(addTicketView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:ticketBtn];
@@ -282,8 +298,6 @@
     UIButton *SpaceBtn = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1256*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [SpaceBtn addTarget:self action:@selector(SpaceView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:SpaceBtn];
-
-    
     
     
     UILabel *ticketStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1343*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:@"去购票" andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
@@ -313,7 +327,7 @@
 
     
     
-    UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1900*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1960*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     
     [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
     [bkScroll addSubview:activityStr];
@@ -334,6 +348,17 @@
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1313*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1401*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1489*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
+    
+    
+    [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1914*DEF_Adaptation_Font*0.5, 640*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
+    
+    
+    [self createImage:CGRectMake(590*DEF_Adaptation_Font*0.5, 1070*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5, 39*DEF_Adaptation_Font*0.5) andImageStr:@"tirp.png"];
+    [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1258*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
+    [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1345*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
+    [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1431*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
+    
+    
     
     [self createActivityBtn];
     isShowBtn=0;
@@ -367,14 +392,14 @@
 
 -(void)createDjView{
 
-    UIScrollView *DjView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 1590*DEF_Adaptation_Font_x*0.5, DEF_SCREEN_WIDTH, 251*DEF_Adaptation_Font*0.5)];
+    UIScrollView *DjView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 1590*DEF_Adaptation_Font_x*0.5, DEF_SCREEN_WIDTH, 281*DEF_Adaptation_Font*0.5)];
     DjView.showsVerticalScrollIndicator = NO;
     DjView.showsHorizontalScrollIndicator = NO;
     [bkScroll addSubview:DjView];
 
     for (int i=0;i<[[activityDic objectForKey:@"dj"] count];i++)
     {
-        UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 10*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
+        UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
         [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
@@ -384,13 +409,13 @@
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(djViewJump:)];
         [djViewHead addGestureRecognizer:singleTap];
 
-        UILabel *ticketStr = [LooperToolClass createLableView:CGPointMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5),210*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(192*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        UILabel *ticketStr = [LooperToolClass createLableView:CGPointMake(43*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5),245*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(192*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [ticketStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
         [DjView addSubview:ticketStr];
         
     }
     
-     DjView.contentSize = CGSizeMake(28*DEF_Adaptation_Font*0.5 +[[activityDic objectForKey:@"dj"] count]*238*DEF_Adaptation_Font*0.5, 251*DEF_Adaptation_Font*0.5);
+     DjView.contentSize = CGSizeMake(28*DEF_Adaptation_Font*0.5 +[[activityDic objectForKey:@"dj"] count]*238*DEF_Adaptation_Font*0.5, 281*DEF_Adaptation_Font*0.5);
 
 }
 
