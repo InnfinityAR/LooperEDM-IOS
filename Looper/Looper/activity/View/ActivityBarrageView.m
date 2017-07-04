@@ -442,9 +442,9 @@
                 view.alpha=1;
             }
             //用于移动弹幕
-            CGPoint center = view.center;
-            center.x=center.x-0.5;
-            view.center = center;
+            CGRect frame = view.frame;
+            frame.origin.x-=0.5;
+            view.frame = frame;
             if (view.center.x<-DEF_WIDTH(view)-DEF_WIDTH(self)) {
                         [self.barrageArr removeObject:view];
                         [view removeFromSuperview];
