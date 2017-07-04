@@ -18,15 +18,25 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
-
+#import "YWCarouseView.h"
 #define BUTTONTAG  10000
 @interface ActivityBarrageView()
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
+@property (nonatomic, strong) YWCarouseView * carouseView;
+@property(nonatomic,strong)NSMutableArray * imageNameArray;
+@property(nonatomic,strong)NSMutableArray *viewArr;
+//当viewArr只有
 @end
 @implementation ActivityBarrageView{
     float labelHeight;
     //多线程
     NSThread *_thread;
+}
+-(NSMutableArray *)viewArr{
+    if (!_viewArr) {
+        _viewArr=[NSMutableArray array];
+    }
+    return _viewArr;
 }
 -(NSMutableArray *)barrageArr{
     if (!_barrageArr) {
@@ -651,9 +661,16 @@
             }else{
                 //在这里添加有imageView的情况
                 UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
-                [imageV sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"messagePicture"]]];
+                NSString *string=[imageDic objectForKey:@"messagePicture"];
+                NSArray *array = [string componentsSeparatedByString:@";"];
+                [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]];
                 imageV.contentMode =  UIViewContentModeScaleAspectFill;
                 imageV.clipsToBounds  = YES;
+                imageV.userInteractionEnabled=YES;
+                //加入点击事件
+                UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPhoto:)];
+                imageV.tag=indexPath.row-1+BUTTONTAG;
+                [imageV addGestureRecognizer:singleTap1];
                 [cell.contentView addSubview:imageV];
                 UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
@@ -709,6 +726,40 @@
     }else{
         return cell;
     }
+}
+-(void)onClickPhoto:(UITapGestureRecognizer *)tap{
+    [self.viewArr removeAllObjects];
+    //点击头像跳转
+    NSDictionary *imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG];
+    NSString *string=[imageDic objectForKey:@"messagePicture"];
+    NSArray *array = [string componentsSeparatedByString:@";"];
+    NSLog(@"%@",array);
+    self.imageNameArray=[[NSMutableArray alloc]initWithArray:array];
+    if (array.count==1) {
+        
+    }
+  else  if (array.count==2) {
+      for (int i=0; i<2; i++) {
+          [self.imageNameArray addObject:array[i]];
+      }
+  }
+    //使用自动循环
+    for (int i=0; i<self.imageNameArray.count; i++)
+        
+    {
+        UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), DEF_HEIGHT(self))];
+        imageView.contentMode=2;
+        imageView.clipsToBounds=YES;
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]];
+        [self.viewArr addObject:imageView];
+        
+    }
+    NSArray <UIView *> * views = self.viewArr;
+    
+    self.carouseView = [[YWCarouseView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) withViews:views withPageControl:YES];
+    
+    [self addSubview:self.carouseView];
+    
 }
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     //点击头像跳转
