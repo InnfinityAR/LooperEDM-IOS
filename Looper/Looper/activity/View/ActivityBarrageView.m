@@ -749,7 +749,7 @@
         
     {
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), DEF_HEIGHT(self))];
-        imageView.contentMode=2;
+        imageView.contentMode=1;
         imageView.clipsToBounds=YES;
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]];
         [self.viewArr addObject:imageView];

@@ -76,6 +76,7 @@ NS_ASSUME_NONNULL_END
     if (_views.count==1) {
         [self addSubview:_views[0]];
         _views.firstObject.userInteractionEnabled=YES;
+        _views.firstObject.backgroundColor=[UIColor blackColor];
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
         [_views.firstObject addSubview:backBtn];
     }
