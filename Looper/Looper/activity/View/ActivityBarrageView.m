@@ -25,7 +25,7 @@
 @property (nonatomic, strong) YWCarouseView * carouseView;
 @property(nonatomic,strong)NSMutableArray * imageNameArray;
 @property(nonatomic,strong)NSMutableArray *viewArr;
-//当viewArr只有
+//当viewArr只有2
 @end
 @implementation ActivityBarrageView{
     float labelHeight;
@@ -729,6 +729,7 @@
 }
 -(void)onClickPhoto:(UITapGestureRecognizer *)tap{
     [self.viewArr removeAllObjects];
+    BOOL viewArrIsTwo=NO;
     //点击头像跳转
     NSDictionary *imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG];
     NSString *string=[imageDic objectForKey:@"messagePicture"];
@@ -742,6 +743,7 @@
       for (int i=0; i<2; i++) {
           [self.imageNameArray addObject:array[i]];
       }
+      viewArrIsTwo=YES;
   }
     //使用自动循环
     for (int i=0; i<self.imageNameArray.count; i++)
@@ -756,7 +758,7 @@
     }
     NSArray <UIView *> * views = self.viewArr;
     
-    self.carouseView = [[YWCarouseView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) withViews:views withPageControl:YES];
+    self.carouseView = [[YWCarouseView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) withTwo:viewArrIsTwo withViews:views withPageControl:NO];
     
     [self addSubview:self.carouseView];
     

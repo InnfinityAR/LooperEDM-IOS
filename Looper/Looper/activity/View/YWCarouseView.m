@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_END
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
-    if (self = [self initWithFrame:frame withViews:nil withPageControl:NO])
+    if (self = [self initWithFrame:frame withTwo:NO withViews:nil withPageControl:NO])
     {
         
     }
@@ -46,13 +46,14 @@ NS_ASSUME_NONNULL_END
 
 
 
--(instancetype)initWithFrame:(CGRect)frame withViews:(NSArray<UIView *> *)views withPageControl:(BOOL)isHidden
+-(instancetype)initWithFrame:(CGRect)frame withTwo:(BOOL)isTwo withViews:(NSArray<UIView *> *)views withPageControl:(BOOL)isHidden
 {
     if (self = [super initWithFrame:frame])
     {
         _timeInteval = 2.0;
         _isPageHidden = isHidden;
         _views = views;
+        _isTwo=isTwo;
         [self ywCarousViewLoad];
     }
     
@@ -79,6 +80,7 @@ NS_ASSUME_NONNULL_END
         [_views.firstObject addSubview:backBtn];
     }
     else{
+    
     [self loadScrollView];
     
     if (_isPageHidden == NO)
@@ -87,7 +89,7 @@ NS_ASSUME_NONNULL_END
     }
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInteval target:self selector:@selector(changeView) userInfo:nil repeats:YES];
-//      [_timer invalidate];
+      [_timer invalidate];
     }
 }
 
@@ -132,6 +134,9 @@ NS_ASSUME_NONNULL_END
     //初始化pageControl
     _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_scrollView.frame) - 25, ScrollWidth, 20)];
     _pageControl.numberOfPages = _views.count;
+    if (self.isTwo==YES) {
+        _pageControl.numberOfPages=2;
+    }
     _pageControl.currentPage = 0;//初始化当前的页码为0(与数组小标很类似，以0为开始)
     [self addSubview:_pageControl];
 }
@@ -203,6 +208,9 @@ NS_ASSUME_NONNULL_END
     //设置pageControl的点数
     NSInteger pageNumber = [self pageIndexWithContentOffset:scrollView.contentOffset];//自定义方法，根据偏移量设置当前页码
     self.pageControl.currentPage = pageNumber;
+    if (self.isTwo==YES) {
+        self.pageControl.currentPage=pageNumber%2;
+    }
 }
 
 
@@ -215,7 +223,7 @@ NS_ASSUME_NONNULL_END
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     _timer = [NSTimer scheduledTimerWithTimeInterval:_timeInteval target:self selector:@selector(changeView) userInfo:nil repeats:YES];
-//    [_timer invalidate];
+    [_timer invalidate];
 }
 
 
