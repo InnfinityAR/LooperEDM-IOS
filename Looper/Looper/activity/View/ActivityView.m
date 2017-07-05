@@ -41,7 +41,7 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==100){
-        
+        [self removeFromSuperview];
         [_obj popController];
     }
 }
