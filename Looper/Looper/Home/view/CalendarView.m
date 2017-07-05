@@ -45,8 +45,6 @@
 {
 
      [_obj removeCalendar];
-    
-    
 }
 
 

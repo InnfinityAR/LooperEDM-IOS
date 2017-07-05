@@ -57,6 +57,7 @@
 
 -(void)initUmSdk{
     
+    
     UMConfigInstance.appKey = @"58453e873eae257110001202";
     UMConfigInstance.channelId = @"App Store";
 
@@ -72,7 +73,7 @@
     NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
     
     
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdaa59db9c810d5d6" appSecret:@"7bb14bcdca4245d777895baba432f7d5" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdaa59db9c810d5d6" appSecret:@"b18344bcba1200518a859848a7f8e9ed" redirectURL:@"http://mobile.umeng.com/social"];
     
 }
 
@@ -91,7 +92,7 @@
     NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     [JPUSHService setupWithOption:launchOptions appKey:@"46ec314e43813bc79d201335"
-                          channel:@"App Store"
+                          channel:@"App Store1"
                  apsForProduction:YES
             advertisingIdentifier:nil];
 }
@@ -183,12 +184,12 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-   
+    [self initJpush:launchOptions];
     [NSThread sleepForTimeInterval:1.5];
 
     
     [self initUmSdk];
-    [self initJpush:launchOptions];
+
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 

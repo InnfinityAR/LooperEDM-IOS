@@ -104,12 +104,12 @@
     [songer setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:songer];
     
-    UIImageView *icon_songer = [[UIImageView alloc] initWithFrame:CGRectMake(220*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
+    UIImageView *icon_songer = [[UIImageView alloc] initWithFrame:CGRectMake(220*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
     [icon_songer setImage:[UIImage imageNamed:@"icon_club.png"]];
     
     [self addSubview:icon_songer];
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:followBtn];
 
     
@@ -122,14 +122,14 @@
     
     [ShowselectView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 
-    activeBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unActive1.png" andRect:CGPointMake(180*DEF_Adaptation_Font*0.5,14*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"btn_Active1.png" andClickImage:@"btn_Active1.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5,41*DEF_Adaptation_Font*0.5) andTarget:self];
+    activeBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unActive1.png" andRect:CGPointMake(180*DEF_Adaptation_Font*0.5,0*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"btn_Active1.png" andClickImage:@"btn_Active1.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5,41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:activeBtn1];
-    [activeBtn setSelected:true];
+    [activeBtn1 setSelected:true];
     
-    detailBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unDetail.png" andRect:CGPointMake(389*DEF_Adaptation_Font*0.5, 14*DEF_Adaptation_Font*0.5) andTag:105 andSelectImage:@"btn_Detail.png" andClickImage:@"btn_Detail.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+    detailBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unDetail.png" andRect:CGPointMake(389*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5) andTag:105 andSelectImage:@"btn_Detail.png" andClickImage:@"btn_Detail.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:detailBtn1];
     
-    phtotBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unPhoto.png" andRect:CGPointMake(285*DEF_Adaptation_Font*0.5, 14*DEF_Adaptation_Font*0.5) andTag:106 andSelectImage:@"btn_Photo.png" andClickImage:@"btn_Photo.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+    phtotBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unPhoto.png" andRect:CGPointMake(285*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5) andTag:106 andSelectImage:@"btn_Photo.png" andClickImage:@"btn_Photo.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:phtotBtn1];
     
     
