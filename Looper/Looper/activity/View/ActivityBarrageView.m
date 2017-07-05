@@ -18,15 +18,25 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
-
+#import "YWCarouseView.h"
 #define BUTTONTAG  10000
 @interface ActivityBarrageView()
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
+@property (nonatomic, strong) YWCarouseView * carouseView;
+@property(nonatomic,strong)NSMutableArray * imageNameArray;
+@property(nonatomic,strong)NSMutableArray *viewArr;
+//当viewArr只有2
 @end
 @implementation ActivityBarrageView{
     float labelHeight;
     //多线程
     NSThread *_thread;
+}
+-(NSMutableArray *)viewArr{
+    if (!_viewArr) {
+        _viewArr=[NSMutableArray array];
+    }
+    return _viewArr;
 }
 -(NSMutableArray *)barrageArr{
     if (!_barrageArr) {
@@ -116,7 +126,6 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
-        
         [self removeFromSuperview];
     }
     if (button.tag==101) {
@@ -432,9 +441,9 @@
                 view.alpha=1;
             }
             //用于移动弹幕
-            CGPoint center = view.center;
-            center.x=center.x-0.5;
-            view.center = center;
+            CGRect frame = view.frame;
+            frame.origin.x-=0.5;
+            view.frame = frame;
             if (view.center.x<-DEF_WIDTH(view)-DEF_WIDTH(self)) {
                         [self.barrageArr removeObject:view];
                         [view removeFromSuperview];
@@ -588,7 +597,7 @@
             cell.backgroundColor =[self randomColorAndIndex:indexPath.row%5];
 //            UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-30*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(2*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
 //            [cell.contentView addSubview:button];
-            UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5*DEF_Adaptation_Font*0.5, cell.frame.size.height-75*DEF_Adaptation_Font*0.5) andTag:(int)(4*BUTTONTAG+indexPath.row) andSelectImage:@"commendYes.png" andClickImage:@"commendYes.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5) andTarget:self];
+            UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5*DEF_Adaptation_Font*0.5, cell.frame.size.height-75*DEF_Adaptation_Font*0.5) andTag:(int)(4*BUTTONTAG+indexPath.row) andSelectImage:@"commendYES.png" andClickImage:@"commendYES.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5) andTarget:self];
             if ([imageDic[@"isthumb"]intValue]==1) {
                 [commendBtn setSelected:YES];
             }
@@ -651,9 +660,16 @@
             }else{
                 //在这里添加有imageView的情况
                 UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
-                [imageV sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"messagePicture"]]];
+                NSString *string=[imageDic objectForKey:@"messagePicture"];
+                NSArray *array = [string componentsSeparatedByString:@";"];
+                [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]];
                 imageV.contentMode =  UIViewContentModeScaleAspectFill;
                 imageV.clipsToBounds  = YES;
+                imageV.userInteractionEnabled=YES;
+                //加入点击事件
+                UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPhoto:)];
+                imageV.tag=indexPath.row-1+BUTTONTAG;
+                [imageV addGestureRecognizer:singleTap1];
                 [cell.contentView addSubview:imageV];
                 UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
@@ -709,6 +725,42 @@
     }else{
         return cell;
     }
+}
+-(void)onClickPhoto:(UITapGestureRecognizer *)tap{
+    [self.viewArr removeAllObjects];
+    BOOL viewArrIsTwo=NO;
+    //点击头像跳转
+    NSDictionary *imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG];
+    NSString *string=[imageDic objectForKey:@"messagePicture"];
+    NSArray *array = [string componentsSeparatedByString:@";"];
+    NSLog(@"%@",array);
+    self.imageNameArray=[[NSMutableArray alloc]initWithArray:array];
+    if (array.count==1) {
+        
+    }
+  else  if (array.count==2) {
+      for (int i=0; i<2; i++) {
+          [self.imageNameArray addObject:array[i]];
+      }
+      viewArrIsTwo=YES;
+  }
+    //使用自动循环
+    for (int i=0; i<self.imageNameArray.count; i++)
+        
+    {
+        UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), DEF_HEIGHT(self))];
+        imageView.contentMode=2;
+        imageView.clipsToBounds=YES;
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]];
+        [self.viewArr addObject:imageView];
+        
+    }
+    NSArray <UIView *> * views = self.viewArr;
+    
+    self.carouseView = [[YWCarouseView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) withTwo:viewArrIsTwo withViews:views withPageControl:NO];
+    
+    [self addSubview:self.carouseView];
+    
 }
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     //点击头像跳转

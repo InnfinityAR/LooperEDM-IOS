@@ -48,6 +48,7 @@
 		B2A902231ED6A3A80022C282 /* CurrentActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A902221ED6A3A80022C282 /* CurrentActivityView.m */; };
 		B2A902261ED810750022C282 /* hotActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A902251ED810750022C282 /* hotActivity.png */; };
 		B2A902291ED824750022C282 /* TicketCiew.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A902281ED824750022C282 /* TicketCiew.m */; };
+		B2C00FE21F0B8AF500E369B6 /* YWCarouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C404A7B81EBEF5AE000B9E1D /* movelineV1.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7B71EBEF5AE000B9E1D /* movelineV1.png */; };
@@ -717,6 +718,8 @@
 		B2A902251ED810750022C282 /* hotActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotActivity.png; sourceTree = "<group>"; };
 		B2A902271ED824750022C282 /* TicketCiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketCiew.h; sourceTree = "<group>"; };
 		B2A902281ED824750022C282 /* TicketCiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCiew.m; sourceTree = "<group>"; };
+		B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCarouseView.h; sourceTree = "<group>"; };
+		B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWCarouseView.m; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Looper.entitlements; path = Looper/Looper.entitlements; sourceTree = "<group>"; };
@@ -1693,6 +1696,8 @@
 				B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */,
 				B22171211EF778FA00B3CBC3 /* ActivityBarrageView.h */,
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
+				B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */,
+				B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */,
 				C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */,
 				C45E2D791EF8D45C00BD03E3 /* sendMessageActivityView.m */,
 				B221712E1EFBDD0B00B3CBC3 /* LFWaterfallLayout.h */,
@@ -4323,6 +4328,7 @@
 				C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */,
 				C4AE247B1E1FB8E2009D5851 /* DBSphereView.m in Sources */,
 				C42D882D1F022C4100CE8F01 /* BrandDetailView.m in Sources */,
+				B2C00FE21F0B8AF500E369B6 /* YWCarouseView.m in Sources */,
 				C43E76E71E091D8D004A5288 /* SelectLooperView.m in Sources */,
 				C4664A251E20080C005755C6 /* CalendarView.m in Sources */,
 				C426016E1E150EAC00BE5CE2 /* AccountView.m in Sources */,
