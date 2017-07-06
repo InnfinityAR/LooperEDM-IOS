@@ -22,7 +22,7 @@
 @interface LFWaterfallLayout : UICollectionViewFlowLayout
 
 @property (nonatomic , weak) id<LFWaterfallLayoutDelegate> delegate;
-
+@property(nonatomic)float height;
 @end
 
 
