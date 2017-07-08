@@ -91,7 +91,6 @@
     
     [self addSubview:headImageView];
     
-    
     shadowV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
     [shadowV setImage:[UIImage imageNamed:@"shadowTopDown.png"]];
     [self addSubview:shadowV];
@@ -506,17 +505,13 @@
         
         [HorizontalScroll addSubview:bgView];
         
-        
         bgView.tag = [[[[_clubData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue];
         bgView.userInteractionEnabled=YES;
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createActiveView:)];
         [bgView addGestureRecognizer:singleTap];
         
-        
         [self createActiveCellView:[[_clubData objectForKey:@"information"] objectAtIndex:i] andBgView:bgView];
-        
     }
-
     
     for (int i=0;i<[[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count] ;i++){
         int num_x = 0;
