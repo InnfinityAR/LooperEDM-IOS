@@ -93,8 +93,8 @@
     NSDictionary *dic=self.objDic[@"message"];
     if (![dic isKindOfClass:[NSNull class]]) {
         [cell.headPhoto sd_setImageWithURL:[NSURL URLWithString:dic[@"userimage"]]];
-//        cell.commentLB.text=self.objDic[@"activitydes"];
-        cell.commentLB.text=[NSString stringWithFormat:@"%@\n",self.objDic[@"activityname"]];
+        cell.commentLB.text=self.objDic[@"activitydes"];
+//        cell.commentLB.text=[NSString stringWithFormat:@"%@\n",self.objDic[@"activityname"]];
     }
     else{
         cell.headPhoto.image=[UIImage imageNamed:@"bk_front_login.png"];
@@ -106,8 +106,8 @@
     else{
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
-//    cell.themeLB.text=[NSString stringWithFormat:@"【Looper 】%@\n",self.objDic[@"activityname"]];
-    cell.themeLB.text=self.objDic[@"activitydes"];
+   cell.themeLB.text=[NSString stringWithFormat:@"Looper燃烧的战斗之夜!\n %@",self.objDic[@"activityname"]];
+//    cell.themeLB.text=self.objDic[@"activitydes"];
     //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
     //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
     if ([self.objDic[@"followercount"] isEqualToString:@"0"] ){

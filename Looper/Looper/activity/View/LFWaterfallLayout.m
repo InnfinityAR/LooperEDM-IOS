@@ -136,16 +136,15 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     CGFloat minColumnHeight ;
     
     if(isHead==false && indexPath.row==0){
-        
-        minColumnHeight = [self.columnHeights[0] doubleValue]+240*DEF_Adaptation_Font*0.5;
-        
+        minColumnHeight = [self.columnHeights[0] doubleValue]+self.height;
+
         isHead=true;
     }else if(indexPath.row==0 && isHead==true){
         
-        minColumnHeight = [self.columnHeights[0] doubleValue]+240*DEF_Adaptation_Font*0.5;
+        minColumnHeight = [self.columnHeights[0] doubleValue]+self.height;
     }else{
         if(indexPath.row==1||indexPath.row==2){
-            minColumnHeight = [self.columnHeights[0] doubleValue]+240*DEF_Adaptation_Font*0.5;
+            minColumnHeight = [self.columnHeights[0] doubleValue]+self.height;
         }else{
             minColumnHeight = [self.columnHeights[0] doubleValue];
         }
