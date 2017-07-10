@@ -129,6 +129,7 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
+        [self.movieController stop];
         [self removeFromSuperview];
     }
     if (button.tag==101) {
@@ -192,7 +193,7 @@
         
     }
     //加入播放视频
-    if (1) {
+    if (0) {
         [self addAVPlayer];
     }
     self.headerView.userInteractionEnabled=YES;
