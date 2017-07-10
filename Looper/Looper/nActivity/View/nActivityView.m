@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "PGIndexBannerSubiew.h"
 #import "NewPagedFlowView.h"
-
+#import "CarlendarView.h"
 
 
 @implementation nActivityView {
@@ -277,8 +277,8 @@
         }
         
     } if(button.tag==119){
-        
-        NSLog(@"000000000");
+        CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:_commendArray andObj:self.obj];
+        [self addSubview:carlendarV];
     }
 }
 
