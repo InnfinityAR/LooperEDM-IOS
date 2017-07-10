@@ -310,6 +310,16 @@
     UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(508*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:calendarBtn];
     
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    NSInteger day = [dateComponent day];
+    
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(516*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:11  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    [self addSubview:dayLabel];
+    
+    
     
     tripBtn = [LooperToolClass createBtnImageNameReal:@"un_trip.png" andRect:CGPointMake(349*DEF_Adaptation_Font*0.5,991*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"trip.png" andClickImage:@"trip.png" andTextStr:nil andSize:CGSizeMake(78*DEF_Adaptation_Font*0.5,72*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:tripBtn];
@@ -319,8 +329,6 @@
     
     
     NSDictionary *dic =[_commendArray objectAtIndex:0];
-    
-    
     if([[dic objectForKey:@"isfollow"] intValue]==1){
         [activityFollowBtn setSelected:true];
     }else{
