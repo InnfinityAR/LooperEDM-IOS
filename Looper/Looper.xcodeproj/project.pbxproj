@@ -404,6 +404,10 @@
 		C46E7D3B1EAE174200996110 /* text_opinion.png in Resources */ = {isa = PBXBuildFile; fileRef = C46E7D3A1EAE174200996110 /* text_opinion.png */; };
 		C46E7D3E1EAE235600996110 /* commonTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C46E7D3D1EAE235600996110 /* commonTableView.m */; };
 		C47180FA1E9A4A61000CD17C /* bg_looper_down.png in Resources */ = {isa = PBXBuildFile; fileRef = C47180F91E9A4A61000CD17C /* bg_looper_down.png */; };
+		C4796A711F13615B00414AFD /* PhotoWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4796A701F13615B00414AFD /* PhotoWallViewController.m */; };
+		C4796A751F1361A100414AFD /* PhotoWallViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4796A741F1361A100414AFD /* PhotoWallViewModel.m */; };
+		C4796A781F1361E100414AFD /* PhotoWallView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4796A771F1361E100414AFD /* PhotoWallView.m */; };
+		C4796A7A1F1375AE00414AFD /* btn_calendar_s.png in Resources */ = {isa = PBXBuildFile; fileRef = C4796A791F1375AE00414AFD /* btn_calendar_s.png */; };
 		C484E7C81E452D15005DE67F /* FirstWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C51E452D15005DE67F /* FirstWaves.m */; };
 		C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C71E452D15005DE67F /* SecondWaves.m */; };
 		C489F0721E4722F400A0EE79 /* nLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C489F0711E4722F400A0EE79 /* nLoginView.m */; };
@@ -1165,6 +1169,13 @@
 		C46E7D3C1EAE235600996110 /* commonTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commonTableView.h; sourceTree = "<group>"; };
 		C46E7D3D1EAE235600996110 /* commonTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commonTableView.m; sourceTree = "<group>"; };
 		C47180F91E9A4A61000CD17C /* bg_looper_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_down.png; sourceTree = "<group>"; };
+		C4796A6F1F13615B00414AFD /* PhotoWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallViewController.h; sourceTree = "<group>"; };
+		C4796A701F13615B00414AFD /* PhotoWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallViewController.m; sourceTree = "<group>"; };
+		C4796A731F1361A100414AFD /* PhotoWallViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallViewModel.h; sourceTree = "<group>"; };
+		C4796A741F1361A100414AFD /* PhotoWallViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallViewModel.m; sourceTree = "<group>"; };
+		C4796A761F1361E100414AFD /* PhotoWallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallView.h; sourceTree = "<group>"; };
+		C4796A771F1361E100414AFD /* PhotoWallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallView.m; sourceTree = "<group>"; };
+		C4796A791F1375AE00414AFD /* btn_calendar_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_calendar_s.png; sourceTree = "<group>"; };
 		C484E7C41E452D15005DE67F /* FirstWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstWaves.h; sourceTree = "<group>"; };
 		C484E7C51E452D15005DE67F /* FirstWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstWaves.m; sourceTree = "<group>"; };
 		C484E7C61E452D15005DE67F /* SecondWaves.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondWaves.h; sourceTree = "<group>"; };
@@ -2643,6 +2654,7 @@
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
+				C4796A791F1375AE00414AFD /* btn_calendar_s.png */,
 				C40B0FF91F0A5C9F008F7C41 /* tirp.png */,
 				C40B0FF71F0A5440008F7C41 /* top_shadow.png */,
 				C40B0FF51F0A512E008F7C41 /* shadowTopDown.png */,
@@ -2793,6 +2805,52 @@
 				C47180F91E9A4A61000CD17C /* bg_looper_down.png */,
 			);
 			path = nlooper;
+			sourceTree = "<group>";
+		};
+		C4796A6A1F13612A00414AFD /* PhotoWall */ = {
+			isa = PBXGroup;
+			children = (
+				C4796A6B1F13612A00414AFD /* controller */,
+				C4796A6C1F13612A00414AFD /* Model */,
+				C4796A6D1F13612A00414AFD /* view */,
+				C4796A6E1F13612A00414AFD /* viewModel */,
+			);
+			name = PhotoWall;
+			path = Looper/PhotoWall;
+			sourceTree = "<group>";
+		};
+		C4796A6B1F13612A00414AFD /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4796A6F1F13615B00414AFD /* PhotoWallViewController.h */,
+				C4796A701F13615B00414AFD /* PhotoWallViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		C4796A6C1F13612A00414AFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4796A6D1F13612A00414AFD /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C4796A761F1361E100414AFD /* PhotoWallView.h */,
+				C4796A771F1361E100414AFD /* PhotoWallView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		C4796A6E1F13612A00414AFD /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4796A731F1361A100414AFD /* PhotoWallViewModel.h */,
+				C4796A741F1361A100414AFD /* PhotoWallViewModel.m */,
+			);
+			path = viewModel;
 			sourceTree = "<group>";
 		};
 		C484E7C31E452D15005DE67F /* Waves */ = {
@@ -2966,6 +3024,7 @@
 		C4B8AAC11DF16CFC0004C8C4 = {
 			isa = PBXGroup;
 			children = (
+				C4796A6A1F13612A00414AFD /* PhotoWall */,
 				B26DE7EF1ED3F4E30040D059 /* UserInfo */,
 				C45005FC1ED2950B0080F0EC /* nActivity */,
 				B2A6EE541ECAD7FF004BF416 /* activity */,
@@ -3920,6 +3979,7 @@
 				C42E80451EC332D400D9CC43 /* loading_00014.png in Resources */,
 				C42E803C1EC332D400D9CC43 /* loading_00005.png in Resources */,
 				C46E7D221EADE20900996110 /* icon_phone.png in Resources */,
+				C4796A7A1F1375AE00414AFD /* btn_calendar_s.png in Resources */,
 				C43E77091E091D8D004A5288 /* img_disk.png in Resources */,
 				C404A7D81EBF84D3000B9E1D /* sendCode.png in Resources */,
 				C42E80601EC332D400D9CC43 /* loading_00041.png in Resources */,
@@ -4196,6 +4256,7 @@
 				B2A6EE7E1ECAEEA0004BF416 /* MJPropertyType.m in Sources */,
 				C4BCE7BD1E0920180087E6C5 /* StartView.m in Sources */,
 				C4312BC71E1257CC00C6380B /* meView.m in Sources */,
+				C4796A711F13615B00414AFD /* PhotoWallViewController.m in Sources */,
 				C4BCE73E1E091E710087E6C5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				C4664A361E20086E005755C6 /* NSDate+GFCalendar.m in Sources */,
 				C4BE5EDA1E4EEDD800C8DA98 /* SimpleChatViewModel.m in Sources */,
@@ -4297,6 +4358,7 @@
 				C43437601EF11D6B00739040 /* Cross.m in Sources */,
 				C468F8C61E0D190D0044EB5C /* HomeViewModel.m in Sources */,
 				C4BCE73A1E091E710087E6C5 /* AFURLRequestSerialization.m in Sources */,
+				C4796A751F1361A100414AFD /* PhotoWallViewModel.m in Sources */,
 				C4B4ABB81E50799600DC000E /* WebViewController.m in Sources */,
 				C409A73B1E1E276700F76B5C /* looperViewModel.m in Sources */,
 				C42F9D641E96333D00F5450F /* LooperListView.m in Sources */,
@@ -4319,6 +4381,7 @@
 				C4BCE7591E091E710087E6C5 /* UIImage+MultiFormat.m in Sources */,
 				C4BCE7501E091E710087E6C5 /* SDImageCache.m in Sources */,
 				C41D20971E2E5B7100727591 /* AwesomeMenu.m in Sources */,
+				C4796A781F1361E100414AFD /* PhotoWallView.m in Sources */,
 				C43437611EF11D6B00739040 /* KYGooeyMenu.m in Sources */,
 				C4A157AE1E16225B00797B8B /* ZJSwitch.m in Sources */,
 				C4A157B11E16477E00797B8B /* MineView.m in Sources */,

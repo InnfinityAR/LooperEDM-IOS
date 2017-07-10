@@ -405,6 +405,19 @@
         UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
         [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
+            if (image != nil) {
+                if (image.size.height>image.size.width) {//图片的高要大于与宽
+                    CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                    CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                    djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                    CGImageRelease(cgimg);
+                }else{
+                    CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                    CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                    djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                    CGImageRelease(cgimg);
+                }
+            }
         }];
         djViewHead.tag = [[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djid"] intValue];
         [DjView addSubview:djViewHead];

@@ -196,10 +196,6 @@
             [phtotBtn1 setSelected:true];
             [activeBtn1 setSelected:false];
             [detailBtn1 setSelected:false];
-            
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(302*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -213,11 +209,6 @@
             [phtotBtn1 setSelected:false];
             [detailBtn1 setSelected:false];
             [activeBtn1 setSelected:true];
-            
-            
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(198*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -229,10 +220,6 @@
             [detailBtn1 setSelected:true];
             [phtotBtn1 setSelected:false];
             [activeBtn1 setSelected:false];
-
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(406*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -242,10 +229,6 @@
     }
     
 }
-
-
-
-
 
 
 -(void)createHorizontalScroll{
@@ -526,8 +509,26 @@
 
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_SCREEN_WIDTH+num_x,0+(num_y*302*DEF_Adaptation_Font*0.5), 274*DEF_Adaptation_Font*0.5, 274*DEF_Adaptation_Font*0.5)];
         [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] objectAtIndex:i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image != nil) {
+                    if (image.size.height>image.size.width) {//图片的高要大于与宽
+                        CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        imageV.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }else{
+                        CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        imageV.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }
+                }
             
         }];
+        
+        
+        
+        
+        
  
         imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
         imageV.layer.masksToBounds = YES;

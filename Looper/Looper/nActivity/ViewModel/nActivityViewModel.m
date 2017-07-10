@@ -62,28 +62,33 @@
 
 -(void)savaCalendar:(NSDictionary*)dic{
     
-    
-    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setAMSymbol:@"AM"];
-    [dateFormatter setPMSymbol:@"PM"];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mmaaa"];
-    NSDate *date = [NSDate date];
-    NSString * s = [dateFormatter stringFromDate:date];
+    if([[dic objectForKey:@"issave"] intValue]==0){
+        
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setAMSymbol:@"AM"];
+        [dateFormatter setPMSymbol:@"PM"];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mmaaa"];
+        NSDate *date = [NSDate date];
+        NSString * s = [dateFormatter stringFromDate:date];
+        
+        
+        //开始时间(必须传)
+        NSDate * startDate = [date dateByAddingTimeInterval:60 * 2];
+        //结束时间(必须传)
+        NSDate * endDate   = [date dateByAddingTimeInterval:60 * 5 * 24];
+        
+        float alarmFloat   = -500;
+        NSString *eventTitle  = [dic objectForKey:@"activityname"];
+        NSString *location = [dic objectForKey:@"city"];
+        NSString *notes = @"";
+        
+        //isReminder 是否写入提醒事项
+        [GALActionOnCalendar saveEventStartDate:[[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"starttime"]doubleValue]]  endDate: [[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"endtime"]doubleValue]] alarm:alarmFloat eventTitle:eventTitle location:location notes:notes];
 
-    //开始时间(必须传)
-    NSDate * startDate = [date dateByAddingTimeInterval:60 * 2];
-    //结束时间(必须传)
-    NSDate * endDate   = [date dateByAddingTimeInterval:60 * 5 * 24];
-    
-    float alarmFloat   = -500;
-    NSString *eventTitle  = [dic objectForKey:@"activityname"];
-    NSString *location = [dic objectForKey:@"city"];
-    NSString *notes = @"";
-
-    //isReminder 是否写入提醒事项
-    [GALActionOnCalendar saveEventStartDate:[[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"starttime"]doubleValue]]  endDate: [[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"endtime"]doubleValue]] alarm:alarmFloat eventTitle:eventTitle location:location notes:notes];
-
- [[DataHander sharedDataHander] showViewWithStr:@"已添加至日历" andTime:1 andPos:CGPointZero];
+        [[DataHander sharedDataHander] showViewWithStr:@"已添加至日历" andTime:1 andPos:CGPointZero];
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"您之前已经成功添加过活动" andTime:1 andPos:CGPointZero];
+    }
 }
 
 
@@ -105,22 +110,14 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getDjById" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             if([typeId intValue]==1){
-            
                 DJDetailView *djDetailV = [[DJDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
                 [[_obj view]addSubview:djDetailV];
-                
             }else if([typeId intValue]==2){
                 ClubDetailView *clubDetailV = [[ClubDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
                 [[_obj view]addSubview:clubDetailV];
-
-                
             }else if([typeId intValue]==4){
-                
-                
-                NSLog(@"%@",responseObject);
                 BrandDetailView *brandDetailV = [[BrandDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
                 [[_obj view]addSubview:brandDetailV];
-
             }
         }else{
             
@@ -132,14 +129,7 @@
 }
 
 
-
-
-
-
-
 -(void)addActivityDetailView:(NSDictionary*)ActivityDic{
-
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
      [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
@@ -169,27 +159,18 @@
     
     [[_obj navigationController]  pushViewController:looperV animated:NO];
 }
-
-
-
 -(void)removeDetailView{
 
     [activityDetailV removeFromSuperview];
-
-
 }
-
 
 //跳转到购票
 -(void)addTicket:(NSDictionary *)dic{
     TicketCiew *ticketView=[[TicketCiew alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDic:dic];
     [[_obj view]addSubview:ticketView];
-    
-    
+
    
 }
-
-
 -(void)removePlayerInfo{
     [_playerInfoV removeFromSuperview];
     
@@ -216,7 +197,6 @@
         
     }];
 }
-
 
 -(void)followUser:(NSString*)targetID{
     
@@ -255,10 +235,7 @@
             
         }];
     }
-    
 }
-
-
 
 -(void)shareh5View:(NSDictionary*)webDic{
 
@@ -294,7 +271,6 @@
                 }
             }];
         }];
-
 }
 
 -(void)saveTrip{
@@ -311,8 +287,6 @@
     
 }
 
-
-
 -(void)addInformationToFavorite:(NSString*)activityID andisLike:(NSString*)islike{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -324,16 +298,13 @@
         if([responseObject[@"status"] intValue]==0){
             
             
-            
         }else{
-            
             
         }
     }fail:^{
         
     }];
 }
-
 
 
 -(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
@@ -345,9 +316,7 @@
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFollow" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
-           
-        
+
         }else{
             
             
@@ -385,19 +354,9 @@
     }];
 }
 
-
-
-
-
-
 -(void)createActivityView{
-
-
-    
-    
     nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
     [[_obj view] addSubview:activityV];
-    
 
 }
 
