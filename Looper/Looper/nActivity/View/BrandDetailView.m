@@ -127,7 +127,7 @@
     [self addSubview:icon_songer];
 
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(246*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(149*DEF_Adaptation_Font*0.5,45*DEF_Adaptation_Font*0.5) andTarget:self];
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(246*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(149*DEF_Adaptation_Font*0.5,45*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:followBtn];
     
 }

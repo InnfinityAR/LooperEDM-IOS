@@ -33,6 +33,9 @@
     
     UIButton *ownerFollowBtn;
     
+    UIView *colorView;
+    
+    UILabel *titleLabel;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic{
@@ -44,6 +47,24 @@
     }
     return self;
 }
+
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat yOffset  = scrollView.contentOffset.y;
+    if(scrollView.tag==100){
+        NSLog(@"%f",scrollView.contentOffset.y);
+        
+        if(scrollView.contentOffset.y>452){
+        
+            titleLabel.hidden=false;
+        }else{
+            titleLabel.hidden=true;
+        }
+    }
+}
+
 
 
 -(void)createHudView{
@@ -59,8 +80,14 @@
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
     
-//    UIButton *addBtn = [LooperToolClass createBtnImageNameReal:@"btn_add.png" andRect:CGPointMake(550*DEF_Adaptation_Font*0.5,1045*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_add.png" andClickImage:@"btn_add.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5,65*DEF_Adaptation_Font*0.5) andTarget:self];
-//    [self addSubview:addBtn];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    titleLabel.text =[[activityDic objectForKey:@"data"]objectForKey:@"activityname"];
+    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:titleLabel];
+    
+    titleLabel.hidden=true;
     
     gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,1025*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor colorWithRed:47/255.0 green:168/255.0 blue:255.0/255.0 alpha:1.0]];
     gooeyMenu.menuDelegate = self;
@@ -91,15 +118,6 @@
     
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
-//    if(webView.scrollView.contentSize.height==DEF_SCREEN_HEIGHT){
-//    
-//        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,1461*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
-//        
-//        [webView setFrame:CGRectMake(0, 1461*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,0)];
-//
-//    }else{
-//       
-//    }
     
     bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
     
@@ -123,7 +141,11 @@
     if(scrollHeight!=DEF_SCREEN_HEIGHT){
         if(isHeight ==false){
             
-            UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, ((scrollHeight/DEF_Adaptation_Font/0.5)+1568)*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"推荐loop" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+            
+            UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+            [writeView1 setBackgroundColor:[UIColor whiteColor]];
+            [bkScroll addSubview:writeView1];
+            UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, ((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"推荐loop" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
              [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
             
             [bkScroll addSubview:activityStr];
@@ -132,7 +154,7 @@
             for(int i=0;i<[loopArray count];i++){
                 NSDictionary *dic =[loopArray objectAtIndex:i];
                 if(i%2==0){
-                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(26, ((scrollHeight/DEF_Adaptation_Font/0.5)+1630)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
+                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(26, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
                     [bkScroll addSubview:loopImage];
                     loopImage.layer.cornerRadius =  4*DEF_Adaptation_Font_x*0.5;
                     loopImage.layer.masksToBounds = YES;
@@ -140,7 +162,7 @@
                       [loopImage addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(20, 250) andSize:CGSizeMake(176, 70) andFontSize:13]];
                     
                 }else{
-                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(334, ((scrollHeight/DEF_Adaptation_Font/0.5)+1630)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
+                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(334, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
                     [bkScroll addSubview:loopImage];
                     loopImage.layer.cornerRadius =  4*DEF_Adaptation_Font_x*0.5;
                     loopImage.layer.masksToBounds = YES;
@@ -172,10 +194,8 @@
 }
 
 -(void)onClickHead{
-    
 
     [_obj createPlayerView: [activityDic objectForKey:@"owner"]];
-
 }
 
 
@@ -196,44 +216,31 @@
 -(void)addcalendarView{
 
      [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-
 }
 
 
 -(void)createBkView{
-
     
-    UIImageView *bkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
-    
-    [bkView sd_setImageWithURL:[[NSURL alloc] initWithString:[[activityDic objectForKey:@"data"]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    [bkScroll addSubview:bkView];
-    
-    UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 363*DEF_Adaptation_Font*0.5)];
+    colorView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 363*DEF_Adaptation_Font*0.5)];
     [colorView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [bkScroll addSubview:colorView];
     
-    UIView *writeView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5+363*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-684*DEF_Adaptation_Font*0.5-363*DEF_Adaptation_Font*0.5)];
+    UIView *writeView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5+363*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-150*DEF_Adaptation_Font*0.5)];
     [writeView setBackgroundColor:[UIColor whiteColor]];
     [bkScroll addSubview:writeView];
     
     
-    
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font*0.5, 943*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
-    
     [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[[activityDic objectForKey:@"owner"]objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-    headView.layer.cornerRadius =  62*DEF_Adaptation_Font_x*0.5/2;
+    headView.layer.cornerRadius = 62*DEF_Adaptation_Font_x*0.5/2;
     headView.layer.masksToBounds = YES;
     
     
     headView.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickHead)];
     [headView addGestureRecognizer:singleTap];
-    
-    
     
     [bkScroll addSubview:headView];
     
@@ -275,8 +282,7 @@
     UIButton *calendarBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1055*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [calendarBtn1 addTarget:self action:@selector(addcalendarView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:calendarBtn1];
-    
-    
+
     
     UIButton *ticketBtn = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1316*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [ticketBtn addTarget:self action:@selector(addTicketView) forControlEvents:UIControlEventTouchDown];
@@ -326,7 +332,6 @@
     [bkScroll addSubview:DjStr];
 
     
-    
     UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1960*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     
     [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
@@ -334,7 +339,6 @@
     
     title.layer.cornerRadius =  46*DEF_Adaptation_Font_x*0.5/2;
     title.layer.masksToBounds = YES;
-    
     
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1163*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"locaton1.png"];
@@ -377,7 +381,6 @@
 
 -(void)SpaceView{
     [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
-    
 }
 
 
@@ -402,6 +405,19 @@
         UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
         [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
+            if (image != nil) {
+                if (image.size.height>image.size.width) {//图片的高要大于与宽
+                    CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                    CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                    djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                    CGImageRelease(cgimg);
+                }else{
+                    CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                    CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                    djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                    CGImageRelease(cgimg);
+                }
+            }
         }];
         djViewHead.tag = [[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djid"] intValue];
         [DjView addSubview:djViewHead];
@@ -416,14 +432,24 @@
     }
     
      DjView.contentSize = CGSizeMake(28*DEF_Adaptation_Font*0.5 +[[activityDic objectForKey:@"dj"] count]*238*DEF_Adaptation_Font*0.5, 281*DEF_Adaptation_Font*0.5);
-
 }
 
 -(void)initView{
+    
+    
+    UIImageView *bkView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    
+    [bkView sd_setImageWithURL:[[NSURL alloc] initWithString:[[activityDic objectForKey:@"data"]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    [self addSubview:bkView];
+    
     bkScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT)];
     
    // [UIColor colorWithRed:18/255.0 green:19/255.0 blue:78/255.0 alpha:1.0]
-    [bkScroll setBackgroundColor:[UIColor whiteColor]];
+    [bkScroll setBackgroundColor:[UIColor clearColor]];
+    bkScroll.tag = 100;
+    bkScroll.delegate=self;
     [self addSubview:bkScroll];
 
     bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*2);
@@ -544,10 +570,6 @@
             [ownerFollowBtn setSelected:true];
         }
     }
-    
-
-    
-    
 }
 
 @end

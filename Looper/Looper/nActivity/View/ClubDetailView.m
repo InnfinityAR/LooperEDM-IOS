@@ -91,7 +91,6 @@
     
     [self addSubview:headImageView];
     
-    
     shadowV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
     [shadowV setImage:[UIImage imageNamed:@"shadowTopDown.png"]];
     [self addSubview:shadowV];
@@ -104,12 +103,12 @@
     [songer setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:songer];
     
-    UIImageView *icon_songer = [[UIImageView alloc] initWithFrame:CGRectMake(220*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
+    UIImageView *icon_songer = [[UIImageView alloc] initWithFrame:CGRectMake(220*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
     [icon_songer setImage:[UIImage imageNamed:@"icon_club.png"]];
     
     [self addSubview:icon_songer];
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:followBtn];
 
     
@@ -122,14 +121,14 @@
     
     [ShowselectView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 
-    activeBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unActive1.png" andRect:CGPointMake(180*DEF_Adaptation_Font*0.5,14*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"btn_Active1.png" andClickImage:@"btn_Active1.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5,41*DEF_Adaptation_Font*0.5) andTarget:self];
+    activeBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unActive1.png" andRect:CGPointMake(180*DEF_Adaptation_Font*0.5,0*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"btn_Active1.png" andClickImage:@"btn_Active1.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5,41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:activeBtn1];
-    [activeBtn setSelected:true];
+    [activeBtn1 setSelected:true];
     
-    detailBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unDetail.png" andRect:CGPointMake(389*DEF_Adaptation_Font*0.5, 14*DEF_Adaptation_Font*0.5) andTag:105 andSelectImage:@"btn_Detail.png" andClickImage:@"btn_Detail.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+    detailBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unDetail.png" andRect:CGPointMake(389*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5) andTag:105 andSelectImage:@"btn_Detail.png" andClickImage:@"btn_Detail.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:detailBtn1];
     
-    phtotBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unPhoto.png" andRect:CGPointMake(285*DEF_Adaptation_Font*0.5, 14*DEF_Adaptation_Font*0.5) andTag:106 andSelectImage:@"btn_Photo.png" andClickImage:@"btn_Photo.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+    phtotBtn1 = [LooperToolClass createBtnImageNameReal:@"btn_unPhoto.png" andRect:CGPointMake(285*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5) andTag:106 andSelectImage:@"btn_Photo.png" andClickImage:@"btn_Photo.png" andTextStr:nil andSize:CGSizeMake(71*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
     [ShowselectView addSubview:phtotBtn1];
     
     
@@ -197,10 +196,6 @@
             [phtotBtn1 setSelected:true];
             [activeBtn1 setSelected:false];
             [detailBtn1 setSelected:false];
-            
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(302*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -214,11 +209,6 @@
             [phtotBtn1 setSelected:false];
             [detailBtn1 setSelected:false];
             [activeBtn1 setSelected:true];
-            
-            
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(198*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -230,10 +220,6 @@
             [detailBtn1 setSelected:true];
             [phtotBtn1 setSelected:false];
             [activeBtn1 setSelected:false];
-
-            
-            
-            
             [UIView animateWithDuration:0.3 animations:^{
                 [lineImage setFrame:CGRectMake(406*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
             }];
@@ -243,10 +229,6 @@
     }
     
 }
-
-
-
-
 
 
 -(void)createHorizontalScroll{
@@ -506,17 +488,13 @@
         
         [HorizontalScroll addSubview:bgView];
         
-        
         bgView.tag = [[[[_clubData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue];
         bgView.userInteractionEnabled=YES;
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createActiveView:)];
         [bgView addGestureRecognizer:singleTap];
         
-        
         [self createActiveCellView:[[_clubData objectForKey:@"information"] objectAtIndex:i] andBgView:bgView];
-        
     }
-
     
     for (int i=0;i<[[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count] ;i++){
         int num_x = 0;
@@ -531,8 +509,26 @@
 
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_SCREEN_WIDTH+num_x,0+(num_y*302*DEF_Adaptation_Font*0.5), 274*DEF_Adaptation_Font*0.5, 274*DEF_Adaptation_Font*0.5)];
         [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] objectAtIndex:i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image != nil) {
+                    if (image.size.height>image.size.width) {//图片的高要大于与宽
+                        CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        imageV.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }else{
+                        CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        imageV.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }
+                }
             
         }];
+        
+        
+        
+        
+        
  
         imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
         imageV.layer.masksToBounds = YES;

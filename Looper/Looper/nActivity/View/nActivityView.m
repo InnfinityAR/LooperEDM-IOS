@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "PGIndexBannerSubiew.h"
 #import "NewPagedFlowView.h"
-
+#import "CarlendarView.h"
 
 
 @implementation nActivityView {
@@ -109,35 +109,34 @@
     [bannerView1 addSubview:masking];
     
  
-    UILabel* titleStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 552*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(435*DEF_Adaptation_Font_x*0.5, 79*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"activityname"] andFontSize:16 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel* titleStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 552*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(435*DEF_Adaptation_Font_x*0.5, 79*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"activityname"] andFontSize:16 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     [bannerView addSubview:titleStr];
     titleStr.numberOfLines=0;
     [titleStr sizeToFit];
     
-    UIImageView *location=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+    UIImageView *location=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
     [bannerView addSubview:location];
     
-    UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"location"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0]  andType:NSTextAlignmentLeft];
+    UILabel* locationStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 695*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"place"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0]  andType:NSTextAlignmentLeft];
     [bannerView addSubview:locationStr];
     [locationStr sizeToFit];
     
-    
-    UIImageView *ticket_icon =[LooperToolClass createImageViewReal:@"icon_ticket2.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,735 *DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+    UIImageView *ticket_icon =[LooperToolClass createImageViewReal:@"icon_ticket2.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,735 *DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
     [bannerView addSubview:ticket_icon];
 
-    UILabel* ticketStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 735*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"price"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    UILabel* ticketStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 735*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"price"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [bannerView addSubview:ticketStr];
     [ticketStr sizeToFit];
 
-    UIImageView *time=[LooperToolClass createImageViewReal:@"time.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,653*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+    UIImageView *time=[LooperToolClass createImageViewReal:@"time.png" andRect:CGPointMake(21*DEF_Adaptation_Font_x*0.5,653*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(31*DEF_Adaptation_Font_x*0.5, 31*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
     
     [bannerView addSubview:time];
     
-    UILabel* TimeStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 653*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"timetag"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    UILabel* TimeStr = [LooperToolClass createLableView:CGPointMake(62*DEF_Adaptation_Font_x*0.5, 653*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(370*DEF_Adaptation_Font_x*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"timetag"] andFontSize:12 andColor:[UIColor colorWithRed:223/255.0 green:219/255.0 blue:234/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [bannerView addSubview:TimeStr];
      [TimeStr sizeToFit];
     
-    UILabel* tagStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 560*DEF_Adaptation_Font*0.5+30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake([self getContentLength:[[_commendArray objectAtIndex:index]objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"tag"] andFontSize:9 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* tagStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 560*DEF_Adaptation_Font*0.5) andSize:CGSizeMake([self getContentLength:[[_commendArray objectAtIndex:index]objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"tag"] andFontSize:9 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [bannerView addSubview:tagStr];
     [tagStr setBackgroundColor:[UIColor colorWithRed:92/255.0 green:118/255.0 blue:148/255.0 alpha:1.0]];
     tagStr.layer.cornerRadius = 28*DEF_Adaptation_Font*0.5/2;
@@ -277,6 +276,9 @@
             [activityFollowBtn setSelected:true];
         }
         
+    } if(button.tag==119){
+        CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:_commendArray andObj:self.obj];
+        [self addSubview:carlendarV];
     }
 }
 
@@ -305,6 +307,20 @@
     UIButton *AllActivityBtn = [LooperToolClass createBtnImageNameReal:@"btn_allActivity.png" andRect:CGPointMake(480*DEF_Adaptation_Font*0.5,1013*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_allActivity.png" andClickImage:@"btn_allActivity.png" andTextStr:nil andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,123*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:AllActivityBtn];
     
+    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(508*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:calendarBtn];
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    NSInteger day = [dateComponent day];
+    
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(516*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:11  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    [self addSubview:dayLabel];
+    
+    
+    
     tripBtn = [LooperToolClass createBtnImageNameReal:@"un_trip.png" andRect:CGPointMake(349*DEF_Adaptation_Font*0.5,991*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"trip.png" andClickImage:@"trip.png" andTextStr:nil andSize:CGSizeMake(78*DEF_Adaptation_Font*0.5,72*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:tripBtn];
     
@@ -313,8 +329,6 @@
     
     
     NSDictionary *dic =[_commendArray objectAtIndex:0];
-    
-    
     if([[dic objectForKey:@"isfollow"] intValue]==1){
         [activityFollowBtn setSelected:true];
     }else{

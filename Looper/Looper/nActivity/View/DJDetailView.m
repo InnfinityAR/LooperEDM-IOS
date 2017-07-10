@@ -131,16 +131,29 @@
     [self addSubview:ShowselectView];
     
     [ShowselectView setHidden:true];
-
-
 }
+
+
+
 
 
 -(void)createImageViewHud{
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
     [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[_djData objectForKey:@"data"]objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
+        if (image != nil) {
+            if (image.size.height>image.size.width) {//图片的高要大于与宽
+                CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                headImageView.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }else{
+                CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                headImageView.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }
+        }
     }];
     
     [self addSubview:headImageView];
@@ -161,7 +174,7 @@
     [self addSubview:icon_songer];
     
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_follow.png" andClickImage:@"btn_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:followBtn];
     
 }

@@ -302,8 +302,8 @@
     [chatTableView setBackgroundColor:[UIColor clearColor]];
     
     
-   // UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
-   // [chatTableView addGestureRecognizer:myTap];
+    UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
+    [chatTableView addGestureRecognizer:myTap];
 
     
     // [chatTableView setEditing:true animated:YES];
@@ -628,9 +628,9 @@
     _collectView.showsHorizontalScrollIndicator = FALSE;
     [_collectView setBackgroundColor:[UIColor clearColor]];
     [self addSubview:_collectView];
-    UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
-    [_collectView addGestureRecognizer:myTap];
-    myTap.cancelsTouchesInView =NO;
+    //UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
+    //[_collectView addGestureRecognizer:myTap];
+   // myTap.cancelsTouchesInView =NO;
   
     //[self addFooterAndHeader];
 }
