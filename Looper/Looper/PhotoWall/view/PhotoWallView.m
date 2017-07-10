@@ -25,10 +25,21 @@
 
 }
 
+
+-(void)createHudView{
+    
+    
+
+
+
+}
+
+
 -(void)initView{
 
-
     
+    
+
 
 
 }
