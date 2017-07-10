@@ -75,7 +75,7 @@
 
 
 -(void)initView{
-    [self setBackgroundColor:[UIColor colorWithRed:23/255.0 green:38/255.0 blue:98/255.0 alpha:1.0]];
+    [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 
 }
 -(UITableView *)tableView{
@@ -125,7 +125,7 @@
         
     }
     else{
-        cell.addressLB.text=activity[@"activityname"];
+        cell.themeLB.text=activity[@"activityname"];
     }
     cell.timeLB.text=[NSString stringWithFormat:@"%@~\n%@",[self timeChange:activity[@"starttime"]],[self timeChange:activity[@"endtime"]]];
     cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];

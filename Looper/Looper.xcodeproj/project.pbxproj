@@ -49,6 +49,7 @@
 		B2A902261ED810750022C282 /* hotActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A902251ED810750022C282 /* hotActivity.png */; };
 		B2A902291ED824750022C282 /* TicketCiew.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A902281ED824750022C282 /* TicketCiew.m */; };
 		B2C00FE21F0B8AF500E369B6 /* YWCarouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */; };
+		B2C90E731F0F7223000E127A /* ActivityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90E721F0F7223000E127A /* ActivityCollectionViewCell.m */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C404A7B81EBEF5AE000B9E1D /* movelineV1.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7B71EBEF5AE000B9E1D /* movelineV1.png */; };
@@ -720,6 +721,8 @@
 		B2A902281ED824750022C282 /* TicketCiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketCiew.m; sourceTree = "<group>"; };
 		B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWCarouseView.h; sourceTree = "<group>"; };
 		B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWCarouseView.m; sourceTree = "<group>"; };
+		B2C90E711F0F7223000E127A /* ActivityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCollectionViewCell.h; sourceTree = "<group>"; };
+		B2C90E721F0F7223000E127A /* ActivityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCollectionViewCell.m; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Looper.entitlements; path = Looper/Looper.entitlements; sourceTree = "<group>"; };
@@ -1696,6 +1699,8 @@
 				B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */,
 				B22171211EF778FA00B3CBC3 /* ActivityBarrageView.h */,
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
+				B2C90E711F0F7223000E127A /* ActivityCollectionViewCell.h */,
+				B2C90E721F0F7223000E127A /* ActivityCollectionViewCell.m */,
 				B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */,
 				B2C00FE11F0B8AF500E369B6 /* YWCarouseView.m */,
 				C45E2D781EF8D45C00BD03E3 /* sendMessageActivityView.h */,
@@ -4249,6 +4254,7 @@
 				C4C0B6101E8A569100B32214 /* MainChatView.m in Sources */,
 				B2A902101ED6A20C0022C282 /* UserInfoViewController.m in Sources */,
 				C4CCFCEF1EB3CB3500114711 /* NSArray+index.m in Sources */,
+				B2C90E731F0F7223000E127A /* ActivityCollectionViewCell.m in Sources */,
 				C4BCE7431E091E710087E6C5 /* UIProgressView+AFNetworking.m in Sources */,
 				C404A7DE1EBF9279000B9E1D /* textViewController.m in Sources */,
 				C43E76E41E091D8D004A5288 /* MainViewController.m in Sources */,
