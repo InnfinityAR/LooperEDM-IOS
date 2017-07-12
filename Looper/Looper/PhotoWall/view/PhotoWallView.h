@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoWallView : UIView
+@interface PhotoWallView : UIView <UICollectionViewDataSource,UICollectionViewDelegate>
 
 
 {
