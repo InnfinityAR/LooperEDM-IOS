@@ -78,8 +78,6 @@
     lineView.backgroundColor=[UIColor colorWithRed:107/255.0 green:104/255.0 blue:222/255.0 alpha:1.0];
     [self addSubview:lineView];
    
- 
-    
 }
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==1) {
