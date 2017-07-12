@@ -25,21 +25,21 @@
                             <constraint firstAttribute="height" constant="200" id="MFW-MI-XY5"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
-                        <rect key="frame" x="55" y="271" width="343" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
+                        <rect key="frame" x="55" y="266" width="343" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.58813685178756714" green="0.56975072622299194" blue="0.70641767978668213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTH-4E-HHD">
-                        <rect key="frame" x="20" y="266" width="25" height="25"/>
+                        <rect key="frame" x="20" y="261" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="cox-wp-d5y"/>
                             <constraint firstAttribute="width" constant="25" id="oNR-bB-kgx"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-Xj-D1l">
-                        <rect key="frame" x="20" y="200" width="386" height="66"/>
+                        <rect key="frame" x="20" y="200" width="386" height="61"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                     <constraint firstAttribute="trailing" secondItem="iyV-KH-4cX" secondAttribute="trailing" id="oZe-Pb-cv6"/>
                     <constraint firstItem="Dw5-1Y-Drs" firstAttribute="centerY" secondItem="cTH-4E-HHD" secondAttribute="centerY" id="t8r-Rz-KDo"/>
                     <constraint firstItem="cTH-4E-HHD" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="tVc-sI-L80"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="5" id="v0S-O9-CO9"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="10" id="v0S-O9-CO9"/>
                     <constraint firstItem="jLK-9E-XR0" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" constant="18" id="vHB-ko-vAI"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" constant="-5" id="wLb-yN-Yse"/>
                 </constraints>

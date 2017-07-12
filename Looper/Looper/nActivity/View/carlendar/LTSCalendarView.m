@@ -178,9 +178,9 @@
 //滚回到 只显示 一周 的 位置
 - (void)showSingleWeekView:(BOOL)animate{
     
-    [self.tableView setContentOffset:CGPointMake(0, self.calendar.calendarAppearance.weekDayHeight*5-20) animated:animate];
+    [self.tableView setContentOffset:CGPointMake(0, self.calendar.calendarAppearance.weekDayHeight*5) animated:animate];
     CGRect frame=self.tableView.frame;
-    frame=CGRectMake(0, 20, CGRectGetWidth(self.containerView.frame), CGRectGetHeight(self.containerView.frame)-20);
+    frame=CGRectMake(0, 20, CGRectGetWidth(self.containerView.frame), CGRectGetHeight(self.containerView.frame));
     self.tableView .frame=frame;
     
 }

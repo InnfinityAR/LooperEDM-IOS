@@ -253,7 +253,6 @@ NSLog(@"%@",dic);
         
         if([responseObject[@"status"] intValue]==0){
             self.dataArr = responseObject[@"data"];
-
             [self.activityV reloadTableData:self.dataArr];
  
         }
@@ -261,6 +260,32 @@ NSLog(@"%@",dic);
         
     }];
 }
+
+-(void)requestData{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformation" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            for (int i=0;i<[responseObject[@"data"] count];i++){
+                NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
+                if([[dic objectForKey:@"recommendation"] intValue]==1){
+                    self.dataArr = responseObject[@"data"];
+                    [self.activityV reloadCollectData:self.dataArr];
+
+                }
+            }
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 
 -(void)popController{
     

@@ -117,7 +117,7 @@
     UIButton *btnFans =[LooperToolClass createBtnImageName:@"btn_fans.png" andRect:CGPointMake(320, 477) andTag:8002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: btnFans];
     
-    UIButton *btnFollow =[LooperToolClass createBtnImageName:@"btn_follow.png" andRect:CGPointMake(68, 477) andTag:8001 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *btnFollow =[LooperToolClass createBtnImageName:@"btn_follow1.png" andRect:CGPointMake(68, 477) andTag:8001 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: btnFollow];
 
     
