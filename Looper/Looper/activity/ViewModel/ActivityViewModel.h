@@ -41,4 +41,5 @@ typedef void(^CompletionHandle)(NSError *error);
 
 -(void)LocalPhoto;
 -(void)jumpToAddUserInfoVC:(NSString *)userID;
+-(void)requestData;
 @end

@@ -13,6 +13,14 @@
 #import "UIImageView+WebCache.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
+#import "ActivityCollectionViewCell.h"
+@interface ActivityView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+{
+    UILabel *daoBdaoLB;
+    UILabel *onlineLB;
+    UIView *lineView;
+}
+@end
 @implementation ActivityView
 -(NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -20,17 +28,18 @@
     }
     return _dataArr;
 }
-
+-(NSMutableArray *)selectDataArr{
+    if (!_selectDataArr) {
+        _selectDataArr=[[NSMutableArray alloc]init];
+    }
+    return _selectDataArr;
+}
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject
 {
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityViewModel*)idObject;
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
-        [self addSubview:backBtn];
-        UILabel *looperName = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font*0.5,24*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"Looper EDM" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-        [self addSubview:looperName];
-
-        //加载懒加载
+        [self initHeadView];
+               //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
         [self initView];
@@ -38,17 +47,83 @@
     return self;
     
 }
+-(void)initHeadView{
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 66*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+    [self addSubview:backBtn];
+    
+    daoBdaoLB = [LooperToolClass createLableView:CGPointMake(85*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(500*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"叨Bi叨" andFontSize:12 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    [self addSubview:daoBdaoLB];
+    daoBdaoLB.tag=1;
+    daoBdaoLB.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [daoBdaoLB addGestureRecognizer:singleTap];
+    onlineLB = [LooperToolClass createLableView:CGPointMake(55*DEF_Adaptation_Font*0.5+500*DEF_Adaptation_Font*0.5/2,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"在现场" andFontSize:12 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    [self addSubview:onlineLB];
+    onlineLB.tag=2;
+    onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+    onlineLB.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [onlineLB addGestureRecognizer:singleTap2];
+    UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 129*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
+    view.image=[UIImage imageNamed:@"activityS.png"];
+    [self addSubview:view];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(187*DEF_Adaptation_Font*0.5, 131*DEF_Adaptation_Font*0.5, (500/2-204)*DEF_Adaptation_Font*0.5, 2)];
+    
+    lineView.backgroundColor=[UIColor colorWithRed:107/255.0 green:104/255.0 blue:222/255.0 alpha:1.0];
+    [self addSubview:lineView];
+   
+ 
+    
+}
+-(void)onClickView:(UITapGestureRecognizer *)tap{
+    if (tap.view.tag==1) {
+        onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+         [self.obj pustDataForSomeString:@""];
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=187*DEF_Adaptation_Font*0.5;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    if (tap.view.tag==2) {
+        onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        self.dataArr=[[NSMutableArray alloc]init];
+        [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [self.obj requestData];
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=157*DEF_Adaptation_Font*0.5+530*DEF_Adaptation_Font*0.5/2;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+
+}
+//用于储存线下数据
+-(void)reloadCollectData:(NSMutableArray*)DataLoop{
+    self.dataArr=DataLoop;
+    [self.tableView removeFromSuperview];
+    self.tableView=nil;
+    [self.collectView reloadData];
+}
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==100){
         [self removeFromSuperview];
         [_obj popController];
     }
+    if (button.tag==101) {
+    }
 }
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 110*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 180*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 180*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -65,17 +140,120 @@
     }
     return _tableView;
 }
+-(UICollectionView *)collectView{
+    if (!_collectView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        // 设置每个item的大小，
+        flowLayout.itemSize = CGSizeMake(DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*1.8);
+        //    flowLayout.itemSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+        // 设置列的最小间距
+        flowLayout.minimumInteritemSpacing = 5;
+        // 设置最小行间距
+        flowLayout.minimumLineSpacing = 5;
+        // 设置布局的内边距
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        // 滚动方向
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 180*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 180*DEF_Adaptation_Font*0.5) collectionViewLayout:flowLayout];
+        _collectView.backgroundColor = [UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
+        // 设置代理
+        _collectView.delegate = self;
+        _collectView.dataSource = self;
+        [self addSubview:_collectView];
+        
+    }
+    return _collectView;
+}
 -(void)initView{
-    
     self.dataArr = [[NSMutableArray alloc] initWithCapacity:50];
-    [self setBackgroundColor:[UIColor colorWithRed:37/255.0 green:36/255.0 blue:42/255.0 alpha:1.0]];
+    [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0]];
     [self.obj pustDataForSomeString:@""];
 }
 -(void)reloadTableData:(NSMutableArray*)DataLoop{
     self.dataArr=DataLoop;
+    [self.collectView removeFromSuperview];
+    self.collectView=nil;
     [self.tableView reloadData];
 }
+#pragma -UICollectionView
+// 返回分区数
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    
+    return 1;
+}
 
+// 每个分区多少个item
+- (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
+    return self.dataArr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    ActivityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    for (UIView *view in cell.contentView.subviews) {
+        [view removeFromSuperview];
+    }
+    // 取出每个item所需要的数据
+    NSDictionary *dic = [self.dataArr objectAtIndex:indexPath.item];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*1.3)];
+    imageView.layer.cornerRadius=5.0;
+    imageView.layer.masksToBounds=YES;
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"photo"]]];
+    [cell.contentView addSubview:imageView];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.3, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
+    label.text=[dic objectForKey:@"activityname"];
+    label.textColor=[UIColor whiteColor];
+    label.numberOfLines=2;
+    [cell.contentView addSubview:label];
+        UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.6-10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
+    [cell.contentView addSubview:bottomV];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(20,  0, DEF_WIDTH(self)/2-10, 40*DEF_Adaptation_Font*0.5)];
+    label2.text=[NSString stringWithFormat:@"%@人参加",[dic objectForKey:@"followcount"]];
+    label2.textColor=[UIColor colorWithRed:169/255.0 green:167/255.0 blue:183/255.0 alpha:1.0];
+    label2.font=[UIFont systemFontOfSize:12];
+    [bottomV addSubview:label2];
+    UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, 15, 12)];
+    imageview.image=[UIImage imageNamed:@"sun.png"];
+    [bottomV addSubview:imageview];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
+    CGRect frame=label3.frame;
+    frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-10)*0.1);
+    NSString *string=[[self getAStringOfChineseWord:[dic objectForKey:@"city"]]componentsJoinedByString:@","];
+    string = [string stringByReplacingOccurrencesOfString:@"," withString:@""];
+    label3.text=[NSString stringWithFormat:@"%@",string];
+    label3.textColor=[UIColor whiteColor];
+    label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
+    label3.layer.cornerRadius=1.0;
+    label3.layer.masksToBounds=YES;
+
+    label3.font=[UIFont systemFontOfSize:14];
+    label3.textAlignment=NSTextAlignmentCenter;
+    [cell.contentView addSubview:label3];
+
+    return cell;
+}
+//取出字符串中中文
+- (NSArray *)getAStringOfChineseWord:(NSString *)string
+{
+    if (string == nil || [string isEqual:@""])
+    {
+        return nil;
+    }
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    for (int i=0; i<[string length]; i++)
+    {
+        int a = [string characterAtIndex:i];
+        if (a < 0x9fff && a > 0x4e00)
+        {
+            [arr addObject:[string substringWithRange:NSMakeRange(i, 1)]];
+        }
+    }
+    return arr;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%ld",indexPath.row);
+}
 #pragma-UITableView的代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
