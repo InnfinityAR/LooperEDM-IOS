@@ -21,9 +21,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _photoWallVm = [[PhotoWallViewModel alloc] initWithController:self];
+  
     
 }
+
+
+-(void)initWithActivityID:(NSString*)ActivityId{
+
+      _photoWallVm = [[PhotoWallViewModel alloc] initWithController:self andActivityId:ActivityId];
+    
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

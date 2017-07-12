@@ -15,5 +15,7 @@
 }
 
 @property (nonatomic )id obj;
--(id)initWithController:(id)controller;
+
+-(id)initWithController:(id)controller andActivityId:(NSString*)activityId;
+
 @end

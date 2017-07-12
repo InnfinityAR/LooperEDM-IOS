@@ -16,5 +16,7 @@
 }
 @property(nonatomic)PhotoWallViewModel *photoWallVm;
 
+-(void)initWithActivityID:(NSString*)ActivityId;
+
 
 @end

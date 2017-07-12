@@ -25,6 +25,7 @@
 #import "DataHander.h"
 #import "UserInfoViewController.h"
 #import "SimpleChatViewController.h"
+#import "PhotoWallViewController.h"
 
 
 
@@ -198,6 +199,14 @@
     }];
 }
 
+
+-(void)createPhotoWallController{
+    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
+    [photoWallVC initWithActivityID:@"22222"];
+    [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
+}
+
+
 -(void)followUser:(NSString*)targetID{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -328,6 +337,11 @@
 
 #warning-线下数据
 -(void)requestData{
+    
+    
+    [self createPhotoWallController];
+    
+    /*
     allActivityArray = [[NSMutableArray alloc] initWithCapacity:50];
     recommendArray = [[NSMutableArray alloc] initWithCapacity:50];
     
@@ -352,6 +366,8 @@
     }fail:^{
         
     }];
+     
+     */
 }
 
 -(void)createActivityView{

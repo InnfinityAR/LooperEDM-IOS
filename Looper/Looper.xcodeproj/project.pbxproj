@@ -637,6 +637,7 @@
 		C4DF01121ED951C0002447EE /* activity_line.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01111ED951C0002447EE /* activity_line.png */; };
 		C4DF01151ED957F0002447EE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01131ED957F0002447EE /* home.png */; };
 		C4DF01161ED957F0002447EE /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01141ED957F0002447EE /* ticket.png */; };
+		C4EB3D661F14AE7200045EE1 /* PhotoWallCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EB3D651F14AE7200045EE1 /* PhotoWallCollectionViewCell.m */; };
 		C4EC38881E366EB700102B47 /* looperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EC38871E366EB700102B47 /* looperCellView.m */; };
 		C4F051091EB9F086005DA9F1 /* btn_share.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F051081EB9F086005DA9F1 /* btn_share.png */; };
 		C4F0510E1EBA4B86005DA9F1 /* btn_selchat.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F0510A1EBA4B86005DA9F1 /* btn_selchat.png */; };
@@ -1547,6 +1548,8 @@
 		C4DF01111ED951C0002447EE /* activity_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity_line.png; sourceTree = "<group>"; };
 		C4DF01131ED957F0002447EE /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C4DF01141ED957F0002447EE /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
+		C4EB3D641F14AE7200045EE1 /* PhotoWallCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallCollectionViewCell.h; sourceTree = "<group>"; };
+		C4EB3D651F14AE7200045EE1 /* PhotoWallCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallCollectionViewCell.m; sourceTree = "<group>"; };
 		C4EC38861E366EB700102B47 /* looperCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperCellView.h; sourceTree = "<group>"; };
 		C4EC38871E366EB700102B47 /* looperCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperCellView.m; sourceTree = "<group>"; };
 		C4F051081EB9F086005DA9F1 /* btn_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_share.png; sourceTree = "<group>"; };
@@ -2921,6 +2924,8 @@
 			children = (
 				C4796A761F1361E100414AFD /* PhotoWallView.h */,
 				C4796A771F1361E100414AFD /* PhotoWallView.m */,
+				C4EB3D641F14AE7200045EE1 /* PhotoWallCollectionViewCell.h */,
+				C4EB3D651F14AE7200045EE1 /* PhotoWallCollectionViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4398,6 +4403,7 @@
 				C43E3D251EA61FEB00EA4A6E /* nCreateLoopView.m in Sources */,
 				C4C0B6101E8A569100B32214 /* MainChatView.m in Sources */,
 				B2A902101ED6A20C0022C282 /* UserInfoViewController.m in Sources */,
+				C4EB3D661F14AE7200045EE1 /* PhotoWallCollectionViewCell.m in Sources */,
 				C4CCFCEF1EB3CB3500114711 /* NSArray+index.m in Sources */,
 				B2C90E731F0F7223000E127A /* ActivityCollectionViewCell.m in Sources */,
 				C4BCE7431E091E710087E6C5 /* UIProgressView+AFNetworking.m in Sources */,
