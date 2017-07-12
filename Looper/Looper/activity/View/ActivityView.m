@@ -226,7 +226,6 @@
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
     label3.layer.cornerRadius=1.0;
     label3.layer.masksToBounds=YES;
-
     label3.font=[UIFont systemFontOfSize:14];
     label3.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:label3];
@@ -252,7 +251,8 @@
     return arr;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
+    NSDictionary *dic = [self.dataArr objectAtIndex:indexPath.item];
+    NSString *activityID=[dic objectForKey:@"activityid"];
 }
 #pragma-UITableView的代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
