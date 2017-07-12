@@ -259,8 +259,9 @@ NSLog(@"%@",dic);
     }fail:^{
         
     }];
+    
 }
-
+//加载activity CollectionView数据
 -(void)requestData{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];

@@ -19,6 +19,8 @@
     UILabel *daoBdaoLB;
     UILabel *onlineLB;
     UIView *lineView;
+    //是否已经加载collectionView的数据
+    BOOL isReloadSelectData;
 }
 @end
 @implementation ActivityView
@@ -38,6 +40,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityViewModel*)idObject;
+        isReloadSelectData=NO;
         [self initHeadView];
                //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -79,7 +82,7 @@
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-         [self.obj pustDataForSomeString:@""];
+        [self reloadTableData:self.dataArr];
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
             frame.origin.x=187*DEF_Adaptation_Font*0.5;
@@ -90,9 +93,14 @@
     if (tap.view.tag==2) {
         onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
-        self.dataArr=[[NSMutableArray alloc]init];
         [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-        [self.obj requestData];
+        if (isReloadSelectData==NO) {
+             [self.obj requestData];
+            isReloadSelectData=YES;
+        }
+        else{
+            [self  reloadCollectData:self.selectDataArr];
+        }
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
             frame.origin.x=157*DEF_Adaptation_Font*0.5+530*DEF_Adaptation_Font*0.5/2;
@@ -104,7 +112,7 @@
 }
 //用于储存线下数据
 -(void)reloadCollectData:(NSMutableArray*)DataLoop{
-    self.dataArr=DataLoop;
+    self.selectDataArr=DataLoop;
     [self.tableView removeFromSuperview];
     self.tableView=nil;
     [self.collectView reloadData];
@@ -164,7 +172,6 @@
     return _collectView;
 }
 -(void)initView{
-    self.dataArr = [[NSMutableArray alloc] initWithCapacity:50];
     [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0]];
     [self.obj pustDataForSomeString:@""];
 }
@@ -184,7 +191,7 @@
 // 每个分区多少个item
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.dataArr.count;
+    return self.selectDataArr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -193,7 +200,7 @@
         [view removeFromSuperview];
     }
     // 取出每个item所需要的数据
-    NSDictionary *dic = [self.dataArr objectAtIndex:indexPath.item];
+    NSDictionary *dic = [self.selectDataArr objectAtIndex:indexPath.item];
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*1.3)];
     imageView.layer.cornerRadius=5.0;
     imageView.layer.masksToBounds=YES;
@@ -224,7 +231,6 @@
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
     label3.layer.cornerRadius=1.0;
     label3.layer.masksToBounds=YES;
-
     label3.font=[UIFont systemFontOfSize:14];
     label3.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:label3];
@@ -250,7 +256,8 @@
     return arr;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld",indexPath.row);
+    NSDictionary *dic = [self.selectDataArr objectAtIndex:indexPath.item];
+    NSString *activityID=[dic objectForKey:@"activityid"];
 }
 #pragma-UITableView的代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
