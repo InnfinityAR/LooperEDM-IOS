@@ -21,6 +21,8 @@
     UIView *lineView;
     //是否已经加载collectionView的数据
     BOOL isReloadSelectData;
+    //判断选择的是tableView还是collectionView
+    BOOL isTableView;
 }
 @end
 @implementation ActivityView
@@ -41,6 +43,7 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityViewModel*)idObject;
         isReloadSelectData=NO;
+        isTableView=YES;
         [self initHeadView];
                //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -54,13 +57,13 @@
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 66*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [self addSubview:backBtn];
     
-    daoBdaoLB = [LooperToolClass createLableView:CGPointMake(85*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(500*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"叨Bi叨" andFontSize:12 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    daoBdaoLB = [LooperToolClass createLableView:CGPointMake(85*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(500*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"叨Bi叨" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [self addSubview:daoBdaoLB];
     daoBdaoLB.tag=1;
     daoBdaoLB.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [daoBdaoLB addGestureRecognizer:singleTap];
-    onlineLB = [LooperToolClass createLableView:CGPointMake(55*DEF_Adaptation_Font*0.5+500*DEF_Adaptation_Font*0.5/2,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"在现场" andFontSize:12 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    onlineLB = [LooperToolClass createLableView:CGPointMake(55*DEF_Adaptation_Font*0.5+500*DEF_Adaptation_Font*0.5/2,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"在现场" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [self addSubview:onlineLB];
     onlineLB.tag=2;
     onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
@@ -68,7 +71,7 @@
     UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [onlineLB addGestureRecognizer:singleTap2];
     UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 129*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
-    view.image=[UIImage imageNamed:@"activityS.png"];
+    view.image=[UIImage imageNamed:@"AcitivitySeg.png"];
     [self addSubview:view];
     lineView=[[UIView alloc]initWithFrame:CGRectMake(187*DEF_Adaptation_Font*0.5, 131*DEF_Adaptation_Font*0.5, (500/2-204)*DEF_Adaptation_Font*0.5, 2)];
     
@@ -80,6 +83,7 @@
 }
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==1) {
+        isTableView=YES;
         onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -93,6 +97,7 @@
         }];
     }
     if (tap.view.tag==2) {
+        isTableView=NO;
         onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
@@ -131,7 +136,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 180*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 180*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -163,7 +168,7 @@
         // 滚动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 180*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 180*DEF_Adaptation_Font*0.5) collectionViewLayout:flowLayout];
+        _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5) collectionViewLayout:flowLayout];
         _collectView.backgroundColor = [UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
         // 设置代理
         _collectView.delegate = self;
@@ -291,7 +296,13 @@
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
     cell.commentLB.text=self.objDic[@"activitydes"];
-    cell.themeLB.text=[NSString stringWithFormat:@"Looper燃烧的战斗之夜!\n %@",self.objDic[@"activityname"]];
+    cell.themeLB.text=[NSString stringWithFormat:@"Looper燃烧的战斗之夜!\n%@",self.objDic[@"activityname"]];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.themeLB.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:10*DEF_Adaptation_Font*0.5];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cell.themeLB.text length])];
+   cell.themeLB.attributedText = attributedString;
+
     //    cell.themeLB.text=self.objDic[@"activitydes"];
     //    cell.endTimeLB.text=[self.objDic[@"startdate"]substringToIndex:10];
     //    cell.numberLB.text=[self.objDic[@"enddate"]substringToIndex:10];;
@@ -322,6 +333,33 @@
     view.viewModel=self.obj;
     [self addSubview:view];
 }
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat yOffset  = scrollView.contentOffset.y;
+    CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
+    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
+    if (moveY<0) {
+        if (isTableView) {
+        CGRect frame=self.tableView.frame;
+        frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
+        self.tableView.frame=frame;
+        }
+        else{
+            CGRect frame=self.collectView.frame;
+            frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
+            self.collectView.frame=frame;
+        }
+    }
+    if (moveY>0) {
+        if (isTableView) {
+        CGRect frame=self.tableView.frame;
+        frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
+        self.tableView.frame=frame;
+        }else{
+            CGRect frame=self.collectView.frame;
+            frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
+            self.collectView.frame=frame;
+        }
+    }
+}
 
 @end

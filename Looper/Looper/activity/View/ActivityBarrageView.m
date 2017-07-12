@@ -487,7 +487,7 @@
     self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(15, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label.text=[NSString stringWithFormat:@"【LooperEDM】嗨起来！！！%@",self.activityDIc[@"activityname"]];
-    label.font=[UIFont systemFontOfSize:15];
+    label.font=[UIFont systemFontOfSize:16];
     [label setTextAlignment:NSTextAlignmentLeft];
     label.textColor=[UIColor whiteColor];
     label.numberOfLines=2;
@@ -501,10 +501,11 @@
     frame.size.height=headerViewHeight;
     label2.frame=frame;
     label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
-    label2.textColor=[UIColor whiteColor];
+    label2.textColor=[UIColor colorWithRed:150/255.0 green:145/255.0 blue:180/255.0 alpha:1.0];
     label2.numberOfLines=0;
     [self.collectHeaderView addSubview:label2];
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,  160*DEF_Adaptation_Font*0.5+headerViewHeight, DEF_WIDTH(self), 4)];
+    imageView.alpha=0.6;
     imageView.image=[UIImage imageNamed:@"cutoffLine.png"];
     [self.collectHeaderView addSubview:imageView];
 }
