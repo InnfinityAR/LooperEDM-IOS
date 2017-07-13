@@ -337,25 +337,34 @@
     NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
     if (moveY<0) {
         if (isTableView) {
-        CGRect frame=self.tableView.frame;
+            [UIView animateWithDuration:0.1 animations:^{
+                CGRect frame=self.tableView.frame;
         frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
         self.tableView.frame=frame;
-        }
+
+            }];
+                }
         else{
+             [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=self.collectView.frame;
             frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
             self.collectView.frame=frame;
+             }];
         }
     }
     if (moveY>0) {
         if (isTableView) {
+             [UIView animateWithDuration:0.1 animations:^{
         CGRect frame=self.tableView.frame;
         frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
         self.tableView.frame=frame;
+             }];
         }else{
+             [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=self.collectView.frame;
             frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
             self.collectView.frame=frame;
+             }];
         }
     }
 }

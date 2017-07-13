@@ -26,18 +26,11 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此处是一条评论此处是一条评论" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw5-1Y-Drs">
-                        <rect key="frame" x="50" y="273" width="348" height="14.5"/>
+                        <rect key="frame" x="23" y="273" width="375" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.58813685178756714" green="0.56975072622299194" blue="0.70641767978668213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cTH-4E-HHD">
-                        <rect key="frame" x="20" y="270.5" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="cox-wp-d5y"/>
-                            <constraint firstAttribute="width" constant="20" id="oNR-bB-kgx"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Looper星球送票啦  在音乐界或者现场的时候是怎么样的体验" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pG-Xj-D1l">
                         <rect key="frame" x="20" y="215" width="386" height="48"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -80,16 +73,14 @@
                     <constraint firstAttribute="trailingMargin" secondItem="e5k-hD-u6a" secondAttribute="trailing" constant="2" id="1H6-eM-HLJ"/>
                     <constraint firstItem="Dw5-1Y-Drs" firstAttribute="top" secondItem="0pG-Xj-D1l" secondAttribute="bottom" constant="10" id="2F8-cn-UbM"/>
                     <constraint firstItem="O4a-HJ-kzD" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="topMargin" constant="18" id="EDM-nC-nAc"/>
-                    <constraint firstItem="Dw5-1Y-Drs" firstAttribute="leading" secondItem="cTH-4E-HHD" secondAttribute="trailing" constant="10" id="Gb5-Xd-HXY"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" id="Gjj-02-R4h"/>
                     <constraint firstAttribute="trailing" secondItem="0pG-Xj-D1l" secondAttribute="trailing" constant="10" id="XL3-kU-3fc"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="axR-tv-mOz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="O4a-HJ-kzD" secondAttribute="trailing" constant="2" id="eg1-Eg-QaS"/>
                     <constraint firstItem="0pG-Xj-D1l" firstAttribute="top" secondItem="iyV-KH-4cX" secondAttribute="bottom" constant="15" id="f8o-ao-Ehb"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Dw5-1Y-Drs" secondAttribute="trailing" constant="10" id="l9e-GG-Hod"/>
+                    <constraint firstItem="Dw5-1Y-Drs" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leadingMargin" constant="15" id="lBn-Go-ZiN"/>
                     <constraint firstAttribute="trailing" secondItem="iyV-KH-4cX" secondAttribute="trailing" id="oZe-Pb-cv6"/>
-                    <constraint firstItem="Dw5-1Y-Drs" firstAttribute="centerY" secondItem="cTH-4E-HHD" secondAttribute="centerY" id="t8r-Rz-KDo"/>
-                    <constraint firstItem="cTH-4E-HHD" firstAttribute="leading" secondItem="oCK-oc-hUj" secondAttribute="leading" constant="20" id="tVc-sI-L80"/>
                     <constraint firstItem="e5k-hD-u6a" firstAttribute="top" secondItem="O4a-HJ-kzD" secondAttribute="bottom" id="uCr-0l-c5C"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Dw5-1Y-Drs" secondAttribute="bottom" constant="30" id="v0S-O9-CO9"/>
                     <constraint firstItem="iyV-KH-4cX" firstAttribute="top" secondItem="oCK-oc-hUj" secondAttribute="top" id="wLb-yN-Yse"/>
@@ -99,7 +90,6 @@
             <connections>
                 <outlet property="commentLB" destination="Dw5-1Y-Drs" id="o02-AQ-7NJ"/>
                 <outlet property="followCountLB" destination="e5k-hD-u6a" id="Fuf-5Q-woB"/>
-                <outlet property="headPhoto" destination="cTH-4E-HHD" id="nZa-0b-qTs"/>
                 <outlet property="mainPhoto" destination="iyV-KH-4cX" id="Vdg-B6-SRA"/>
                 <outlet property="themeLB" destination="0pG-Xj-D1l" id="6p4-xg-qVT"/>
             </connections>

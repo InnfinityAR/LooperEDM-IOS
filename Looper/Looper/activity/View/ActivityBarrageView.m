@@ -23,6 +23,7 @@
 @interface ActivityBarrageView()
 {
     float headViewHeight;
+    LFWaterfallLayout *waterLayout;
 }
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
 @property (nonatomic, strong) YWCarouseView * carouseView;
@@ -34,6 +35,12 @@
     float labelHeight;
     //多线程
     NSThread *_thread;
+}
+-(NSMutableDictionary *)heightDic{
+    if (!_heightDic) {
+        _heightDic=[NSMutableDictionary dictionary];
+    }
+    return _heightDic;
 }
 -(NSMutableArray *)viewArr{
     if (!_viewArr) {
@@ -95,13 +102,7 @@
         self.viewModel=viewModel;
         self.activityID=[self.obj activityID];
         self.activityDIc=[self.obj activityDic];
-        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
-        //       [NSThread detachNewThreadSelector:@selector(startTimer) toTarget:self withObject:nil];
-        NSThread  *thread=[[NSThread alloc]initWithTarget:self selector:@selector(startTimer) object:nil];
-        [thread start];
-        //尝试一下能不能关
-        AppDelegate *delegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
-        delegate.thread=thread;
+        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];        
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
@@ -115,8 +116,9 @@
     return self;
 }
 -(void)startTimer{
-    [NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(initDateBarrage) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] run];
+  NSTimer *timer=[NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(initDateBarrage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//    [[NSRunLoop currentRunLoop] run];
 }
 -(void)addImageArray:(NSArray *)imageArray{
     self.barrageInfo=imageArray;
@@ -151,6 +153,10 @@
         NSLog(@"这是修改cell的高度的button");
         [self.allShowImageTags addObject:@(button.tag)];
         labelHeight=button.alpha;
+        [self.heightDic setObject:@(labelHeight) forKey:@(button.tag-5*BUTTONTAG)];
+        if (button.tag-5*BUTTONTAG==1) {
+            waterLayout.secondCellHeight= DEF_WIDTH(self)/2-10+(labelHeight-85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5;
+        }
         [self.collectView reloadData];
     }
     
@@ -158,6 +164,10 @@
         NSLog(@"这是修改cell的高度的button");
         [self.allShowTags addObject:@(button.tag)];
         labelHeight=button.alpha;
+         [self.heightDic setObject:@(labelHeight) forKey:@(button.tag-3*BUTTONTAG)];
+        if (button.tag-3*BUTTONTAG==1) {
+            waterLayout.secondCellHeight=DEF_WIDTH(self)/2-10+labelHeight-85.0+20*DEF_Adaptation_Font*0.5;;
+        }
         [self.collectView reloadData];
     }
     if (button.tag<4*BUTTONTAG+self.barrageInfo.count+10&&button.tag>=4*BUTTONTAG) {
@@ -220,7 +230,7 @@
     NSTimer *timer=  [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(initDate) userInfo:nil repeats:YES];
     AppDelegate *delegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
     delegate.timer=timer;
-    
+            [self startTimer];
     self.buddleView.userInteractionEnabled=YES;
     [self addSubview:self.buddleView];
 }
@@ -446,6 +456,7 @@
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(15, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
     headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-15) andText:label2];
+    waterLayout=flowLayout;
     flowLayout.height=headViewHeight+160*DEF_Adaptation_Font*0.5+4;
     flowLayout.delegate = self;
     // 创建collecView
@@ -590,13 +601,18 @@
     if (!cell) {cell = [[ActivityCollectionViewCell alloc]init];}else{  }
     cell.layer.cornerRadius=4.0;
     cell.layer.masksToBounds=YES;
-        if (indexPath.row==0) {
+        if (indexPath.row==1) {
             [self firstCellForUpdateData:cell];
             return cell;
         }
         //赋值
         if (self.barrageInfo.count) {
-            NSDictionary *imageDic=self.barrageInfo[indexPath.row-1];
+            NSDictionary *imageDic=[NSDictionary dictionary];
+            if (indexPath.row==0) {
+                 imageDic =self.barrageInfo[indexPath.row];
+            }else{
+             imageDic=self.barrageInfo[indexPath.row-1];
+            }
             [self originViewForCell:cell andIndexpath:indexPath andImageDic:imageDic];
             //在这边判断是否有图片
             if ([imageDic objectForKey:@"messagePicture"]==[NSNull null]||[[imageDic objectForKey:@"messagePicture"]isEqualToString:@""]) {
@@ -758,12 +774,12 @@
 - (CGFloat)waterflowLayout:(LFWaterfallLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth{
     for (NSNumber *tag in self.allShowTags) {
         if ([tag intValue]==index+3*BUTTONTAG) {
-            return DEF_WIDTH(self)/2-10+labelHeight-85.0+20*DEF_Adaptation_Font*0.5;
+            return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-3*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+20*DEF_Adaptation_Font*0.5;
         }
     }
     for (NSNumber *tag in self.allShowImageTags) {
         if ([tag intValue]==index+5*BUTTONTAG) {
-            return DEF_WIDTH(self)/2-10+(labelHeight-85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5;//因为头像的50像素重合了
+        return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-5*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5;//因为头像的50像素重合了
         }
     }
     NSLog(@"index %ld",index);
