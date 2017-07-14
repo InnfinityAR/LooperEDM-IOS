@@ -63,8 +63,10 @@
     // 设置请求格式
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSString* url = [NSString stringWithFormat:@"https://api.weixin.qq.com/cgi-bin/user/info?access_token=SLGYwUxQ8FYciZIJBTjH6NaCtd5hF_VkoukQyj_N5soTplxdUMqvS6ZH2Iu8JxRbqG1kO8g9k0eJ531j_AKcsOKmrCf0VUnUxjpD5nEF4I4B9RjbCxKO7XM1fCUK5yW5JHQaAIASQZ&openid=%@",urlStr];
+    NSString* url = [NSString stringWithFormat:@"https://api.weixin.qq.com/cgi-bin/user/info?access_token=2qXR3ng3e4FhkgEz5daqOiG5kfoWsUyoasoHKk7mps8Nx-KxezqgADSuGCtE_suR_gPzXOW84BkRhFPofoMnCzsEDz-3WkziZARq4IOmsUOCjMkG2ykVOXrYFV2DfCAmWEUbABACKA&openid=%@",urlStr];
     NSLog(@"param == %@",params);
+    
+    
     // 网络访问是异步的,回调是主线程的,因此程序员不用管在主线程更新UI的事情
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -213,7 +215,7 @@
 
 #pragma mark - 文件上传 自己定义文件名
 + (void)Clarence_Post_UploadWithUrl:(NSString *)urlStr
-                           Params:(NSDictionary*)params
+                           Params:(NSMutableDictionary*)params
                           fileUrl:(NSURL *)fileURL
                          fileName:(NSString *)fileName
                          fileType:(NSString *)fileTye
@@ -222,18 +224,41 @@
 {
     // 本地上传给服务器时,没有确定的URL,不好用MD5的方式处理
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    // 设置请求格式
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    
     NSString* url = [NSString stringWithFormat:@"%@%@",URL_STR,urlStr];
-
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileURL:fileURL name:@"uploadFile" fileName:fileName mimeType:fileTye error:NULL];
+    
+    
+    NSDate *now= [NSDate date];
+    long int nowDate = (long int)([now timeIntervalSince1970]);
+    NSString *time = [NSString stringWithFormat:@"%ldcs",nowDate];
+    
+    NSData *data = [time dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *stringBase64 = [data base64Encoding]; // base64格式的字符串
+    
+    NSString *aes1= [time aes256_encrypt:Looperkey];
+    
+    [params setObject:aes1 forKey:@"token"];
+    [params setObject:[NSString stringWithFormat:@"%ld",nowDate] forKey:@"timestamp"];
+    
+    [[DataHander sharedDataHander] showDlg];
+    
+    
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
+        [formData appendPartWithFileURL:fileURL name:@"video" error:NULL];
+   
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
+            NSLog(@"%@",responseObject);
+             [[DataHander sharedDataHander] hideDlg];
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (fail) {
+             [[DataHander sharedDataHander] hideDlg];
             fail();
         }
     }];
@@ -255,9 +280,6 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString* url = [NSString stringWithFormat:@"%@%@",URL_STR,urlStr];
-    
-    
-    
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         //name 为服务器规定的图片字段 mimeType 为图片类型

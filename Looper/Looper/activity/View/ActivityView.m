@@ -258,6 +258,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = [self.selectDataArr objectAtIndex:indexPath.item];
     NSString *activityID=[dic objectForKey:@"activityid"];
+    
+    [_obj createPhotoWallController:activityID];
+    
 }
 #pragma-UITableView的代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

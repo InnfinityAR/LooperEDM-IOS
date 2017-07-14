@@ -338,10 +338,6 @@
 #warning-线下数据
 -(void)requestData{
     
-    
-    [self createPhotoWallController];
-    
-    /*
     allActivityArray = [[NSMutableArray alloc] initWithCapacity:50];
     recommendArray = [[NSMutableArray alloc] initWithCapacity:50];
     
@@ -367,7 +363,7 @@
         
     }];
      
-     */
+     
 }
 
 -(void)createActivityView{

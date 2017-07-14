@@ -166,8 +166,8 @@
 -(void)webViewWithData:(NSDictionary*)dataDic andObj:(id)objVm{
     _webDic = dataDic;
     obj =objVm;
-     [self createWebView];
-     [self createHudView];
+     //[self createWebView];
+     //[self createHudView];
     
     
 //    NSDictionary *dic=[ReadJsonFile readFile:@"openid.json"];
@@ -176,22 +176,22 @@
 //    
 //    
 //    NSDictionary *dic1=[ReadJsonFile readFile:@"1.json"];
-//    NSDictionary *dic2=[ReadJsonFile readFile:@"2.json"];
-//    NSDictionary *dic3=[ReadJsonFile readFile:@"3.json"];
+//   // NSDictionary *dic2=[ReadJsonFile readFile:@"2.json"];
+//   // NSDictionary *dic3=[ReadJsonFile readFile:@"3.json"];
 //    
 //    
 //    array1 = [[NSMutableArray alloc] initWithArray:[dic1 objectForKey:@"data"]];
-//    array2 = [[NSMutableArray alloc] initWithArray:[dic2 objectForKey:@"data"]];
-//    array3 = [[NSMutableArray alloc] initWithArray:[dic3 objectForKey:@"data"]];
+//   // array2 = [[NSMutableArray alloc] initWithArray:[dic2 objectForKey:@"data"]];
+//    //array3 = [[NSMutableArray alloc] initWithArray:[dic3 objectForKey:@"data"]];
 //    
-    
-    index = 0;
+//    
+//    index = 0;
 //    sum = [array count];
-//    NSLog(@"%@",array);
-    userCount = 0;
-    
-    
-    
+////    NSLog(@"%@",array);
+//    userCount = 0;
+//    
+//    
+//    
 //    userArray = [[NSMutableArray alloc] initWithCapacity:50];
 //    
 //    [self toNetWork:[array objectAtIndex:index]];
@@ -232,23 +232,41 @@
 
 -(void)sendMessage:(NSString*)message andGroupID:(NSString*)groupId andUnionId:(NSString*)unionID{
 
+    
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    [dic setObject:groupId forKey:@"groupId"];
+    [dic setObject:@"3" forKey:@"activityId"];
     [dic setObject:unionID forKey:@"userId"];
     [dic setObject:message forKey:@"message"];
-    
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic success:^(id responseObject){
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            [self thumbupGroup:groupId andUnionID:unionID];
-            
-        }else{
-            [self thumbupGroup:groupId andUnionID:unionID];
             
         }
     }fail:^{
         
     }];
 
+    
+    
+    
+    
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+//    [dic setObject:groupId forKey:@"groupId"];
+//    [dic setObject:unionID forKey:@"userId"];
+//    [dic setObject:message forKey:@"message"];
+//    
+//    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic success:^(id responseObject){
+//        if([responseObject[@"status"] intValue]==0){
+//            [self thumbupGroup:groupId andUnionID:unionID];
+//            
+//        }else{
+//            [self thumbupGroup:groupId andUnionID:unionID];
+//            
+//        }
+//    }fail:^{
+//        
+//    }];
+//
 }
 
 
@@ -295,7 +313,7 @@
             
             
             
-            int rand = (arc4random()%3)+ 1;
+            int rand = 1;
             
             
             NSLog(@"rand == %d",rand);
@@ -305,7 +323,7 @@
             
             if(rand==1){
                 if([array1 count]!=0){
-                    [self sendMessage:[array1 objectAtIndex:0] andGroupID:@"1" andUnionId:[dicData objectForKey:@"unionid"]];
+                    [self sendMessage:[array1 objectAtIndex:0] andGroupID:@"1" andUnionId:[[responseObject objectForKey:@"data"] objectForKey:@"userid"]];
                     [array1 removeObjectAtIndex:0];
                 }
             }else if(rand==2){
@@ -358,7 +376,7 @@
             
            // NSLog(@"userCount %d",userCount);
             
-            //[self createUser:dic];
+            [self createUser:dic];
             
             if((sum-1)>(index+1)){
                 index =index +1;
