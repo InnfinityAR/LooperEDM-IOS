@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface PhotoWallViewModel : NSObject
+#import "PKRecordShortVideoViewController.h"
+@interface PhotoWallViewModel : NSObject <PKRecordShortVideoDelegate>
 {
     id obj;
     
@@ -18,4 +18,10 @@
 
 -(id)initWithController:(id)controller andActivityId:(NSString*)activityId;
 
+-(void)getImageBoard:(NSString*)activityID;
+-(void)popController;
+-(void)createSendPhotoWall;
+-(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath;
+-(void)createRecordVideo;
+-(void)playVideoFile:(NSString*)videoFile;
 @end

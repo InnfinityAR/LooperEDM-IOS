@@ -122,6 +122,17 @@
                           success:(void (^)(id responseObject))success
                              fail:(void (^)())fail;
 
+
+
++ (void)Clarence_Post_UploadWithUrl:(NSString *)urlStr
+                             Params:(NSDictionary*)params
+                            fileUrl:(NSURL *)fileURL
+                           fileName:(NSString *)fileName
+                           fileType:(NSString *)fileTye
+                            success:(void (^)(id responseObject))success
+                               fail:(void (^)())fail;
+
+
 /**
  *  post 上传文件! 图片  常用
  *

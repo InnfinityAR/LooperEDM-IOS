@@ -14,6 +14,9 @@
 
     UIButton* sendBtn;
     UIButton* sendPicBtn;
+
+    
+    
     UITextView *textview;
     NSMutableArray *tempImageArray;
     NSMutableArray *ImageArray;
@@ -82,6 +85,11 @@
     [self addSubview:textview];
     
     [textview becomeFirstResponder];
+    
+
+    
+    
+    
 }
 
 -(void)removeAllImage{

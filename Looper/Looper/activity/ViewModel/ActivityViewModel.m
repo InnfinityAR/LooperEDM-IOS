@@ -22,6 +22,9 @@
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import "UserInfoViewController.h"
+#import "PhotoWallViewController.h"
+
+
 @implementation ActivityViewModel
 - (NSMutableArray *)dataArr{
     if (!_dataArr) {
@@ -286,6 +289,14 @@ NSLog(@"%@",dic);
     }];
 }
 
+
+
+
+-(void)createPhotoWallController:(NSString*)activityId{
+    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
+    [photoWallVC initWithActivityID:activityId];
+    [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
+}
 
 
 -(void)popController{

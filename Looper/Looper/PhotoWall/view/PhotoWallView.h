@@ -22,6 +22,6 @@
 
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)dataSource;
 
 @end
