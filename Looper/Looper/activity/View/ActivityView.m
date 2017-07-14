@@ -339,7 +339,7 @@
         if (isTableView) {
             [UIView animateWithDuration:0.1 animations:^{
                 CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
+        frame=CGRectMake(0, 135*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 135*DEF_Adaptation_Font*0.5);
         self.tableView.frame=frame;
 
             }];
@@ -347,7 +347,7 @@
         else{
              [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=self.collectView.frame;
-            frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
+            frame=CGRectMake(0, 135*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 135*DEF_Adaptation_Font*0.5);
             self.collectView.frame=frame;
              }];
         }
