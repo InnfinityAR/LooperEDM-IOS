@@ -19,10 +19,10 @@
     UILabel *daoBdaoLB;
     UILabel *onlineLB;
     UIView *lineView;
-    //是否已经加载collectionView的数据
-    BOOL isReloadSelectData;
-    //判断选择的是tableView还是collectionView
-    BOOL isTableView;
+    //如果是左右滑动的话，不能执行scroll中的改变scrollV的frame的方法
+    BOOL isScrollViewScrollForLeftOrRight;
+    //用于界面的轻扫切换
+    UIScrollView *scrollV;
 }
 @end
 @implementation ActivityView
@@ -41,13 +41,13 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject
 {
     if (self = [super initWithFrame:frame]) {
+        isScrollViewScrollForLeftOrRight=NO;
         self.obj = (ActivityViewModel*)idObject;
-        isReloadSelectData=NO;
-        isTableView=YES;
-        [self initHeadView];
+                [self initHeadView];
                //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
+        [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
         [self initView];
     }
     return self;
@@ -77,16 +77,21 @@
     
     lineView.backgroundColor=[UIColor colorWithRed:107/255.0 green:104/255.0 blue:222/255.0 alpha:1.0];
     [self addSubview:lineView];
+    scrollV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 137*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-137*DEF_Adaptation_Font*0.5)];
+    scrollV.contentSize=CGSizeMake(DEF_WIDTH(scrollV)*2, DEF_HEIGHT(scrollV));
+    scrollV.backgroundColor=[UIColor clearColor];
+    scrollV.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
+    scrollV.pagingEnabled=YES;
+    scrollV.bounces=NO;
+    scrollV.delegate=self;
+    [self addSubview:scrollV];
    
 }
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==1) {
-        isTableView=YES;
         onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
-        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-        [self reloadTableData:self.dataArr];
+        scrollV.contentOffset=CGPointMake(0, 0);
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
             frame.origin.x=187*DEF_Adaptation_Font*0.5;
@@ -95,17 +100,9 @@
         }];
     }
     if (tap.view.tag==2) {
-        isTableView=NO;
         onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
-        [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-        if (isReloadSelectData==NO) {
-             [self.obj requestData];
-            isReloadSelectData=YES;
-        }
-        else{
-            [self  reloadCollectData:self.selectDataArr];
-        }
+        scrollV.contentOffset=CGPointMake(DEF_WIDTH(self),0);
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
             frame.origin.x=157*DEF_Adaptation_Font*0.5+530*DEF_Adaptation_Font*0.5/2;
@@ -118,8 +115,8 @@
 //用于储存线下数据
 -(void)reloadCollectData:(NSMutableArray*)DataLoop{
     self.selectDataArr=DataLoop;
-    [self.tableView removeFromSuperview];
-    self.tableView=nil;
+//    [self.tableView removeFromSuperview];
+//    self.tableView=nil;
     [self.collectView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
@@ -134,20 +131,19 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
-        [self addSubview:_tableView];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,30*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), DEF_HEIGHT(scrollV))style:UITableViewStylePlain];
+        [scrollV addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         //不出现滚动条
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.separatorStyle = NO;
-        [_tableView setBackgroundColor:[UIColor blackColor]];
+        [_tableView setBackgroundColor:[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0]];
         //取消button点击延迟
         _tableView.delaysContentTouches = NO;
         //禁止上拉
         _tableView.alwaysBounceVertical=NO;
         _tableView.bounces=NO;
-        
     }
     return _tableView;
 }
@@ -166,24 +162,24 @@
         // 滚动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5) collectionViewLayout:flowLayout];
+        _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self), 30*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_HEIGHT(scrollV)) collectionViewLayout:flowLayout];
         _collectView.backgroundColor = [UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
         // 设置代理
         _collectView.delegate = self;
         _collectView.dataSource = self;
-        [self addSubview:_collectView];
-        
+        [scrollV addSubview:_collectView];
     }
     return _collectView;
 }
 -(void)initView{
     [self setBackgroundColor:[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0]];
     [self.obj pustDataForSomeString:@""];
+    [self.obj requestData];
 }
 -(void)reloadTableData:(NSMutableArray*)DataLoop{
     self.dataArr=DataLoop;
-    [self.collectView removeFromSuperview];
-    self.collectView=nil;
+//    [self.collectView removeFromSuperview];
+//    self.collectView=nil;
     [self.tableView reloadData];
 }
 #pragma -UICollectionView
@@ -336,40 +332,61 @@
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yOffset  = scrollView.contentOffset.y;
+    CGFloat xOffset=scrollView.contentOffset.x;
     CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
-    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
-    if (moveY<0) {
-        if (isTableView) {
-            [UIView animateWithDuration:0.1 animations:^{
-                CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
-        self.tableView.frame=frame;
+//    NSLog(@"%f", scrollView.contentOffset.x);
+//    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
+    if (xOffset>50*DEF_Adaptation_Font*0.5&&xOffset<640*DEF_Adaptation_Font*0.5) {
+        isScrollViewScrollForLeftOrRight=YES;
+        //只有在这种情况下才去改变x
+    if (xOffset<200*DEF_Adaptation_Font*0.5&&xOffset>50*DEF_Adaptation_Font*0.5) {
+        onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=187*DEF_Adaptation_Font*0.5;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    if (xOffset>500*DEF_Adaptation_Font*0.5&&xOffset<640*DEF_Adaptation_Font*0.5) {
+        onlineLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        daoBdaoLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=157*DEF_Adaptation_Font*0.5+530*DEF_Adaptation_Font*0.5/2;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
 
-            }];
-                }
-        else{
-             [UIView animateWithDuration:0.1 animations:^{
-            CGRect frame=self.collectView.frame;
-            frame=CGRectMake(0, 133*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 133*DEF_Adaptation_Font*0.5);
-            self.collectView.frame=frame;
-             }];
-        }
     }
-    if (moveY>0) {
-        if (isTableView) {
-             [UIView animateWithDuration:0.1 animations:^{
+    }
+    if (isScrollViewScrollForLeftOrRight==NO) {
+    if (moveY<0) {
+        //往上滑
         CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
+        frame=CGRectMake(0, 3, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
         self.tableView.frame=frame;
-             }];
-        }else{
-             [UIView animateWithDuration:0.1 animations:^{
-            CGRect frame=self.collectView.frame;
-            frame=CGRectMake(0, 170*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 170*DEF_Adaptation_Font*0.5);
-            self.collectView.frame=frame;
-             }];
+        CGRect frame1=self.collectView.frame;
+        frame1=CGRectMake(DEF_WIDTH(self), 3, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        self.collectView.frame=frame1;
+
+            }
+    if (moveY>0) {
+        //往下滑
+        CGRect frame=self.tableView.frame;
+        frame=CGRectMake(0, 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        self.tableView.frame=frame;
+        CGRect frame1=self.collectView.frame;
+        frame1=CGRectMake(DEF_WIDTH(self), 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        self.collectView.frame=frame1;
         }
     }
+    
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    isScrollViewScrollForLeftOrRight=NO;
+}
 @end
