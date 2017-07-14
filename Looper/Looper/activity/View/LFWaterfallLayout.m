@@ -94,7 +94,8 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     
     // 开始创建每一个cell对应的布局属性
     NSInteger count = [self.collectionView numberOfItemsInSection:0];
-    
+    //尝试交换0，1cell的位置
+    // 创建位置
     for (NSInteger i = 0 ;i < count;i++) {
         // 创建位置
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
@@ -143,9 +144,10 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
         
         minColumnHeight = [self.columnHeights[0] doubleValue]+self.height;
     }else{
-        if(indexPath.row==1||indexPath.row==2){
+        if(indexPath.row==1){
             minColumnHeight = [self.columnHeights[0] doubleValue]+self.height;
-        }else{
+        }
+        else{
             minColumnHeight = [self.columnHeights[0] doubleValue];
         }
         
@@ -173,13 +175,13 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     // x坐标
     CGFloat x = self.endgeInsets.left + shortestColumn * (width + self.columnMargin);
     // y坐标
-    if(indexPath.row==0 && isHead==true){
-        
-        x = 5;
-    }else if(indexPath.row==1 ){
-        
-        x =  [UIScreen mainScreen].bounds.size.width/2+5;
-    }
+//    if(indexPath.row==0 && isHead==true){
+//        
+//        x = 5;
+//    }else if(indexPath.row==1 ){
+//        
+//        x =  [UIScreen mainScreen].bounds.size.width/2+5;
+//    }
     
     
     
@@ -193,7 +195,6 @@ static const UIEdgeInsets LFDefaultEdgeInsets = {5,5,5,5};//边缘间距
     CGFloat height = [self.delegate waterflowLayout:self heightForItemAtIndex:indexPath.item itemWidth:width];
     //设置布局属性的frame
     attributes.frame = CGRectMake(x,y, width, height);
-    
     NSLog(@"%f %f",x,y);
     
     

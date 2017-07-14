@@ -250,7 +250,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [self.timer setFireDate:[NSDate distantFuture]];
-    [self.thread cancel];
+//    [self.thread cancel];
 }
 
 

@@ -23,6 +23,8 @@
 
 @property (nonatomic , weak) id<LFWaterfallLayoutDelegate> delegate;
 @property(nonatomic)float height;
+//用于设置点击第二个cell的点击事件,修改第二个cell的长度
+@property(nonatomic)float secondCellHeight;
 @end
 
 

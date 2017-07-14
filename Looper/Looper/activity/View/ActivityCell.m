@@ -13,11 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mainPhoto.clipsToBounds = YES;
-    self.headPhoto.layer.cornerRadius=12;
+    self.headPhoto.layer.cornerRadius=10;
     self.headPhoto.layer.masksToBounds=YES;
     //    cell.categoryNameLB.layer.borderColor = [UIColor greenSeaColor].CGColor;
     self.headPhoto.layer.borderWidth = 0;
-}
+    }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
