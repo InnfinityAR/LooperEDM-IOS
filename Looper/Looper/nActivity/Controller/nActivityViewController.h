@@ -17,6 +17,6 @@
 }
 @property(nonatomic)nActivityViewModel *activityVm;
 
-
+-(void)jumpToActivityId:(NSString*)activityId;
 
 @end

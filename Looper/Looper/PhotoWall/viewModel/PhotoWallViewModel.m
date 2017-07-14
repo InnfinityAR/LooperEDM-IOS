@@ -18,12 +18,17 @@
 #import "PKFullScreenPlayerViewController.h"
 #import "UIImage+PKShortVideoPlayer.h"
 #import "DataHander.h"
+#import "nActivityViewController.h"
+
+#import "PlayVideoView.h"
 
 
 @implementation PhotoWallViewModel{
 
     sendPhotoWall *sendPhotoV;
     NSString *_activityId;
+    PhotoWallView *PhotoWallV;
+    nActivityViewController *activity;
 
 }
 -(id)initWithController:(id)controller andActivityId:(NSString*)activityId{
@@ -56,8 +61,15 @@
     PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:videoFile previewImage:image];
     [_obj presentViewController:vc animated:NO completion:NULL];
 
+}
+
+-(void)playNetWorkVideo:(NSString*)videoUrl{
+
+    PlayVideoView *playVideoV  = [[PlayVideoView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andUrlStr:videoUrl];
+    [[_obj view] addSubview:playVideoV];
 
 }
+
 
 
 -(void)createRecordVideo{
@@ -84,6 +96,24 @@
     [sendPhotoV videoFileSave:outputFilePath];
 }
 
+
+-(void)createActivityView{
+
+    activity = [[nActivityViewController alloc] init];
+    
+    [[_obj navigationController]  pushViewController:activity animated:YES];
+    
+    [self performSelector:@selector(showActivityView) withObject:nil afterDelay:0.1];
+    
+    
+
+}
+
+-(void)showActivityView{
+
+
+    [activity jumpToActivityId:_activityId];
+}
 
 
 
@@ -116,22 +146,40 @@
         
          [dic setObject:imageDataArray forKey:@"images"];
     }
-    [AFNetworkTool Clarence_Post_UploadWithUrl:@"createImageBoard" Params:dic fileUrl:[NSURL fileURLWithPath:videoPath] fileName:@"video" fileType:@"mp4" success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            
-            [sendPhotoV removeFromSuperview];
-            
-              [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
-        }else{
-            
-            
-        }
-    }fail:^{
-        
-    }];
     
-
+    if(videoPath!=nil){
+        [AFNetworkTool Clarence_Post_UploadWithUrl:@"createImageBoard" Params:dic fileUrl:[NSURL fileURLWithPath:videoPath] fileName:@"video" fileType:@"mp4" success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                
+                [sendPhotoV removeFromSuperview];
+                
+                [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
+                
+                [self getImageBoard:_activityId];
+            }else{
+                
+                
+            }
+        }fail:^{
+            
+        }];
+    }else{
     
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createImageBoard" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [sendPhotoV removeFromSuperview];
+                
+                [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
+                  [self getImageBoard:_activityId];
+            }else{
+                
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+ 
 }
 
 
@@ -143,10 +191,20 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getImageBoard" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            PhotoWallView *PhotoWallV =[[PhotoWallView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:responseObject];
             
-            [[_obj view] addSubview:PhotoWallV];
-        
+            if(PhotoWallV!=nil){
+                [PhotoWallV reloadData:responseObject];
+            
+            }else{
+                PhotoWallV =[[PhotoWallView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:responseObject];
+                
+                [[_obj view] addSubview:PhotoWallV];
+
+            
+            }
+            
+            
+            
         }else{
             
             

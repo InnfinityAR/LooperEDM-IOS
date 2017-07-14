@@ -13,11 +13,14 @@
 #import "PKRecordShortVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UIImage+PKShortVideoPlayer.h"
+#import "DataHander.h"
+
 @implementation sendPhotoWall{
 
     UITextView *textview;
     UIButton* addPicVideo;
     NSString *videoStr;
+    UILabel *locationStr;
 
 
 }
@@ -73,38 +76,43 @@
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
-    
     if(button.tag==106){
         
-        
-        
     }else if (button.tag==101){
-        
-        
         [self removeFromSuperview];
     }else if (button.tag==102){
-    
-        
-        [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr];
-        
+        if(videoStr==nil){
+              [[DataHander sharedDataHander] showViewWithStr:@"请上传图片" andTime:1 andPos:CGPointZero];
+        }else{
+             [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr];
+        }
     }else if(button.tag == 900){
         
         [_obj createRecordVideo];
     }else if(button.tag == 109){
         [_obj playVideoFile:videoStr];
+    }else if(button.tag == 119){
+         [[DataHander sharedDataHander] showViewWithStr:@"coming soon....." andTime:1 andPos:CGPointZero];
     }
 }
 
-
-
 -(void)createHudView{
+    
+    UILabel* titleStr = [LooperToolClass createLableView:CGPointMake(280*DEF_Adaptation_Font*0.5,54*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(80*DEF_Adaptation_Font_x*0.5, 24*DEF_Adaptation_Font_x*0.5) andText:@"发动态" andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    [self addSubview:titleStr];
+
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [self addSubview:backBtn];
 
-    UIButton *selLocationBtn = [LooperToolClass createBtnImageNameReal:@"selLocation.png" andRect:CGPointMake(38*DEF_Adaptation_Font*0.5,624*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"selLocation.png" andClickImage:@"selLocation.png" andTextStr:nil andSize:CGSizeMake(605*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *selLocationBtn = [LooperToolClass createBtnImageNameReal:@"selLocation.png" andRect:CGPointMake(38*DEF_Adaptation_Font*0.5,624*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"selLocation.png" andClickImage:@"selLocation.png" andTextStr:nil andSize:CGSizeMake(605*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:selLocationBtn];
     
-    UIButton *sendBtn = [LooperToolClass createBtnImageNameReal:@"btn_sendPhoto.png" andRect:CGPointMake(552*DEF_Adaptation_Font*0.5,49*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_sendPhoto.png" andClickImage:@"btn_sendPhoto.png" andTextStr:nil andSize:CGSizeMake(49*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5) andTarget:self];
+    locationStr = [LooperToolClass createLableView:CGPointMake(106*DEF_Adaptation_Font*0.5,660*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(180*DEF_Adaptation_Font_x*0.5, 22*DEF_Adaptation_Font_x*0.5) andText:@"选择所在现场" andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+    
+    [self addSubview:locationStr];
+    
+    
+    UIButton *sendBtn = [LooperToolClass createBtnImageNameReal:@"btn_sendPhoto.png" andRect:CGPointMake(528*DEF_Adaptation_Font*0.5,34*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_sendPhoto.png" andClickImage:@"btn_sendPhoto.png" andTextStr:nil andSize:CGSizeMake(97*DEF_Adaptation_Font*0.5, 72*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:sendBtn];
     
     UIImageView *text_bg = [[UIImageView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 562*DEF_Adaptation_Font*0.5, 230*DEF_Adaptation_Font*0.5)];
@@ -112,12 +120,12 @@
     [self addSubview:text_bg];
     
     
-    textview = [[UITextView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font_x*0.5, 150*DEF_Adaptation_Font_x*0.5, 562*DEF_Adaptation_Font_x*0.5, 230*DEF_Adaptation_Font*0.5)];
+    textview = [[UITextView alloc] initWithFrame:CGRectMake(48*DEF_Adaptation_Font_x*0.5, 150*DEF_Adaptation_Font_x*0.5, 562*DEF_Adaptation_Font_x*0.5, 220*DEF_Adaptation_Font*0.5)];
     textview.backgroundColor=[UIColor clearColor]; //背景色
     textview.scrollEnabled = YES;    //当文字超过视图的边框时是否允许滑动，默认为“YES”
     textview.editable = YES;        //是否允许编辑内容，默认为“YES”
     textview.delegate = self;       //设置代理方法的实现类
-    textview.font=[UIFont fontWithName:looperFont size:10*DEF_Adaptation_Font]; //设置字体名字和字体大小;
+    textview.font=[UIFont fontWithName:looperFont size:12*DEF_Adaptation_Font]; //设置字体名字和字体大小;
     textview.returnKeyType = UIReturnKeyDefault;//return键的类型
     textview.keyboardType = UIKeyboardTypeDefault;//键盘类型
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
@@ -144,6 +152,9 @@
     if([textView.text isEqualToString:@"说说 现场如何"]){
     
          textview.text = @"";
+        
+       
+         textview.textColor = [UIColor colorWithRed:218/255.0 green:228/255.0 blue:238/255.0 alpha:1.0];
     }
      return true;
 
@@ -154,6 +165,7 @@
     
         
          textview.text = @"说说 现场如何";
+        textview.textColor = [UIColor colorWithRed:161/255.0 green:171/255.0 blue:181/255.0 alpha:1.0];
     
     }
     return true;

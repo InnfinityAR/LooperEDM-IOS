@@ -24,4 +24,6 @@
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)dataSource;
 
+-(void)reloadData:(NSDictionary*)dataSource;
+
 @end

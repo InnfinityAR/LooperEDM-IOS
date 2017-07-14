@@ -24,4 +24,6 @@
 -(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath;
 -(void)createRecordVideo;
 -(void)playVideoFile:(NSString*)videoFile;
+-(void)playNetWorkVideo:(NSString*)videoUrl;
+-(void)createActivityView;
 @end

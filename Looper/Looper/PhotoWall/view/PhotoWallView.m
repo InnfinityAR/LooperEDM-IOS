@@ -22,6 +22,9 @@
     UICollectionView *photoWallCollectionV;
 
     NSMutableDictionary *_dataSource;
+    
+    
+    UIButton *sendPhoto;
 
 }
 
@@ -38,6 +41,33 @@
     
 
 }
+
+-(void)reloadData:(NSDictionary*)dataSource{
+
+    _dataSource = [[NSMutableDictionary alloc] initWithDictionary:dataSource];
+    
+    
+    [photoWallCollectionV reloadData];
+
+}
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat yOffset  = scrollView.contentOffset.y;
+    
+    if(scrollView.tag==200){
+    
+        NSLog(@"%f",yOffset);
+        
+        if(yOffset>370){
+            sendPhoto.hidden=false;
+        }else{
+            sendPhoto.hidden=true;
+        }
+    }
+}
+
 
 -(void)createColloectionView{
     
@@ -57,6 +87,7 @@
     photoWallCollectionV.showsVerticalScrollIndicator = FALSE;
     photoWallCollectionV.showsHorizontalScrollIndicator = FALSE;
     [photoWallCollectionV setBackgroundColor:[UIColor clearColor]];
+    photoWallCollectionV.tag = 200;
     [self addSubview:photoWallCollectionV];
 }
 
@@ -66,7 +97,7 @@
 
     if(button.tag==106){
     
-    
+        [_obj createActivityView];
         
     }else if (button.tag==101){
     
@@ -78,7 +109,14 @@
         [_obj createSendPhotoWall];
         
         
+    }else if (button.tag==125){
+        
+        
+        [_obj createSendPhotoWall];
+        
+        
     }
+
 }
 
 
@@ -97,7 +135,7 @@
     headView.layer.masksToBounds = YES;
     [view addSubview:headView];
 
-    UILabel *activityName = [LooperToolClass createLableView:CGPointMake(212*DEF_Adaptation_Font_x*0.5, 136*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(386*DEF_Adaptation_Font_x*0.5, 68*DEF_Adaptation_Font_x*0.5) andText:[[_dataSource objectForKey:@"activity"]objectForKey:@"activityname"] andFontSize:17 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel *activityName = [LooperToolClass createLableView:CGPointMake(212*DEF_Adaptation_Font_x*0.5, 136*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(386*DEF_Adaptation_Font_x*0.5, 68*DEF_Adaptation_Font_x*0.5) andText:[[_dataSource objectForKey:@"activity"]objectForKey:@"activityname"] andFontSize:18 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     activityName.numberOfLines=0;
     [activityName sizeToFit];
     [view addSubview:activityName];
@@ -107,9 +145,33 @@
     [view addSubview:spaceName];
     
     
+    UIImageView *timeFrame = [[UIImageView alloc] initWithFrame:CGRectMake(8*DEF_Adaptation_Font*0.5, 526*DEF_Adaptation_Font*0.5, 94*DEF_Adaptation_Font*0.5, 54*DEF_Adaptation_Font*0.5)];
+    timeFrame.image=[UIImage imageNamed:@"timeFrame.png"];
+    [view addSubview:timeFrame];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"MM月dd日"];
+    
+    // 毫秒值转化为秒
+    
+    NSDate *now= [NSDate date];
+    long int nowDate = (long int)([now timeIntervalSince1970]);
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:nowDate];
+    NSString* dateString = [formatter stringFromDate:date];
+    
+    UILabel *nowTimeLable = [LooperToolClass createLableView:CGPointMake(18*DEF_Adaptation_Font_x*0.5, 542*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(76*DEF_Adaptation_Font_x*0.5, 22*DEF_Adaptation_Font_x*0.5) andText:dateString andFontSize:8 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    [view addSubview:nowTimeLable];
+    
+    [nowTimeLable setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:9]];
+    
     UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(43*DEF_Adaptation_Font*0.5, 316*DEF_Adaptation_Font*0.5, 554*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     line.image=[UIImage imageNamed:@"bg_now.png"];
     [view addSubview:line];
+    
     
     UIImageView *location = [[UIImageView alloc] initWithFrame:CGRectMake(214*DEF_Adaptation_Font*0.5, 227*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5, 19*DEF_Adaptation_Font*0.5)];
     location.image=[UIImage imageNamed:@"locaton1.png"];
@@ -118,7 +180,7 @@
     UIButton* activityBtn = [LooperToolClass createBtnImageNameReal:@"moveDetail.png" andRect:CGPointMake(490*DEF_Adaptation_Font*0.5,222*DEF_Adaptation_Font*0.5) andTag:106 andSelectImage:@"moveDetail.png" andClickImage:@"moveDetail.png" andTextStr:nil andSize:CGSizeMake(108*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andTarget:self];
     [view addSubview:activityBtn];
 
-    UIButton* sendActivityBtn = [LooperToolClass createBtnImageNameReal:@"sendActive.png" andRect:CGPointMake(120*DEF_Adaptation_Font*0.5,526*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"sendActive.png" andClickImage:@"sendActive.png" andTextStr:nil andSize:CGSizeMake(476*DEF_Adaptation_Font*0.5,54*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton* sendActivityBtn = [LooperToolClass createBtnImageNameReal:@"sendActive.png" andRect:CGPointMake(128*DEF_Adaptation_Font*0.5,526*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"sendActive.png" andClickImage:@"sendActive.png" andTextStr:nil andSize:CGSizeMake(476*DEF_Adaptation_Font*0.5,54*DEF_Adaptation_Font*0.5) andTarget:self];
     [view addSubview:sendActivityBtn];
     
     UIScrollView *userScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(43*DEF_Adaptation_Font*0.5, 374*DEF_Adaptation_Font*0.5, 554*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
@@ -156,7 +218,7 @@
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return  CGSizeMake(DEF_SCREEN_WIDTH, 590*DEF_Adaptation_Font*0.5);
+    return  CGSizeMake(DEF_SCREEN_WIDTH, 612*DEF_Adaptation_Font*0.5);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -166,7 +228,12 @@
     
     
     if([dic objectForKey:@"boardvideo"]!=[NSNull null]){
-         return  CGSizeMake(DEF_SCREEN_WIDTH, 618*DEF_Adaptation_Font*0.5);
+        
+        UILabel *boardText = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+        boardText.numberOfLines=0;
+        [boardText sizeToFit];
+
+         return  CGSizeMake(DEF_SCREEN_WIDTH, 503*DEF_Adaptation_Font*0.5+boardText.frame.size.height);
     }else if([[dic objectForKey:@"boardimage"] count]==1){
          return  CGSizeMake(DEF_SCREEN_WIDTH, 618*DEF_Adaptation_Font*0.5);
     }else if([[dic objectForKey:@"boardimage"] count]>1){
@@ -200,7 +267,7 @@
 
     NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[[_dataSource objectForKey:@"data"] objectAtIndex:indexPath.row]];
     
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(45*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5)];
+    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(25*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5)];
     [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"userimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
@@ -209,43 +276,110 @@
     [cell.contentView addSubview:headView];
     
     
-    UILabel *userName = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 10*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 30*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"username"] andFontSize:11 andColor:[UIColor colorWithRed:35/255.0 green:208/255.0 blue:215/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    UILabel *userName = [LooperToolClass createLableView:CGPointMake(119*DEF_Adaptation_Font_x*0.5, 10*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 30*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"username"] andFontSize:14 andColor:[UIColor colorWithRed:35/255.0 green:208/255.0 blue:215/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [cell.contentView addSubview:userName];
     
-    UILabel *boardText = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel *boardText = [LooperToolClass createLableView:CGPointMake(119*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:16 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    
+     [boardText setFont:[UIFont fontWithName:@"PingFangSC-Light" size:16]];
+    
     boardText.numberOfLines=0;
     [boardText sizeToFit];
     [cell.contentView addSubview:boardText];
     
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"HH:mm"];
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"creationdate"] doubleValue]];
+    NSString* dateString = [formatter stringFromDate:date];
+    
+    UILabel *timeText = [LooperToolClass createLableView:CGPointMake(34*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(58*DEF_Adaptation_Font_x*0.5, 25*DEF_Adaptation_Font_x*0.5) andText:dateString andFontSize:10 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+
+    [cell.contentView addSubview:timeText];
+    
+    NSDateFormatter* formatter1 = [[NSDateFormatter alloc] init];
+    formatter1.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    [formatter1 setDateStyle:NSDateFormatterMediumStyle];
+    [formatter1 setTimeStyle:NSDateFormatterShortStyle];
+    [formatter1 setDateFormat:@"MM-dd"];
+    
+    // 毫秒值转化为秒
+    NSDate* date1 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"creationdate"] doubleValue]];
+    NSString* dateString1 = [formatter1 stringFromDate:date1];
+    
+    UILabel *dayText = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font_x*0.5, 135*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(50*DEF_Adaptation_Font_x*0.5, 14*DEF_Adaptation_Font_x*0.5) andText:dateString1 andFontSize:8 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentCenter];
+    
+    [cell.contentView addSubview:dayText];
     
     if([dic objectForKey:@"boardvideo"]!=[NSNull null]){
-        
-//        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[[NSURL alloc ]initWithString:[dic objectForKey:@"boardvideo"]] options:nil];
-//        
-//        AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-//        
-//        gen.appliesPreferredTrackTransform = YES;
-//        
-//        CMTime time = CMTimeMakeWithSeconds(0.0, 600);
-//        
-//        NSError *error = nil;
-//        
-//        CMTime actualTime;
-//        
-//        CGImageRef image = [gen copyCGImageAtTime:time actualTime:&actualTime error:&error];
-//        
-//        UIImage *thumb = [[UIImage alloc] initWithCGImage:image];
-//        
-//        CGImageRelease(image);
-        
-        UIImageView *videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(137*DEF_Adaptation_Font*0.5, 195*DEF_Adaptation_Font*0.5, 423*DEF_Adaptation_Font*0.5, 277*DEF_Adaptation_Font*0.5)];
-        //videoImg.image = thumb;
+
+        UIImageView *videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5, 478*DEF_Adaptation_Font*0.5,318*DEF_Adaptation_Font*0.5)];
         [videoImg setBackgroundColor:[UIColor redColor]];
         [cell.contentView addSubview:videoImg];
+        videoImg.userInteractionEnabled=YES;
+        
+        
+        UIButton *videoPlay = [LooperToolClass createBtnImageNameReal:@"icon_play.png" andRect:CGPointMake(201*DEF_Adaptation_Font*0.5,120*DEF_Adaptation_Font*0.5) andTag:[[dic objectForKey:@"boardid"] intValue] andSelectImage:@"icon_play.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(68*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5) andTarget:self];
+        [videoImg addSubview:videoPlay];
+        [videoPlay removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+        [videoPlay addTarget:self action:@selector(videoOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *commend = [LooperToolClass createBtnImageNameReal:@"btn_un_commend.png" andRect:CGPointMake(119*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+318*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5) andTag:[[dic objectForKey:@"boardid"] intValue] andSelectImage:@"btn_commend.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(58*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
+        [cell.contentView addSubview:commend];
+        [commend removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+        [commend addTarget:self action:@selector(commendOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+318*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:@"10 人" andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+        
+        [cell.contentView addSubview:personNum];
+
+
+
     }
   
 
 }
+
+-(IBAction)commendOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+
+    
+
+
+
+}
+
+
+-(IBAction)videoOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    
+    NSLog(@"video");
+    
+    for (int i=0;i<[[_dataSource objectForKey:@"data"] count];i++){
+    
+        
+        NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[[_dataSource objectForKey:@"data"] objectAtIndex:i]];
+        if([[dic objectForKey:@"boardid"] intValue]==button.tag){
+            
+            
+            [_obj playNetWorkVideo:[dic objectForKey:@"boardvideo"]];
+            
+
+            break;
+        }
+    
+    
+    }
+    
+    //for ()
+    
+    
+}
+
+
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -275,6 +409,13 @@
 -(void)createHudView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
     [self addSubview:backBtn];
+    
+    
+    sendPhoto = [LooperToolClass createBtnImageNameReal:@"btn_sendPhoto_Small.png" andRect:CGPointMake(512*DEF_Adaptation_Font*0.5,982*DEF_Adaptation_Font*0.5) andTag:125 andSelectImage:@"btn_sendPhoto_Small.png" andClickImage:@"btn_sendPhoto_Small.png" andTextStr:nil andSize:CGSizeMake(104*DEF_Adaptation_Font*0.5,104*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:sendPhoto];
+    
+    sendPhoto.hidden=true;
+
 }
 
 
