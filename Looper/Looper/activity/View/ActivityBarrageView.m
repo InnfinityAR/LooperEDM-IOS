@@ -459,7 +459,7 @@
     LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(15, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
-    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-15) andText:label2]+30*DEF_Adaptation_Font*0.5;
+    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-15) andText:label2]+50*DEF_Adaptation_Font*0.5;
     waterLayout=flowLayout;
     flowLayout.height=headViewHeight+170*DEF_Adaptation_Font*0.5+4;
     flowLayout.delegate = self;
@@ -507,18 +507,18 @@
     label.textColor=[UIColor whiteColor];
     label.numberOfLines=2;
     [self.collectHeaderView addSubview:label];
-    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(15, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 110*DEF_Adaptation_Font*0.5)];
+    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(15, 170*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 120*DEF_Adaptation_Font*0.5)];
     [self.collectHeaderView addSubview:contentView];
     UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(0, 5*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 25*DEF_Adaptation_Font*0.5)];
-    label3.text=@"· 活动详情";
+    label3.text=@"· 活动说明";
     label3.textColor=[UIColor yellowColor];
     label3.font=[UIFont boldSystemFontOfSize:14];
     [contentView addSubview:label3];
-    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
     //自动适配
     CGRect frame=label2.frame;
-    frame.size.height=headViewHeight-30*DEF_Adaptation_Font*0.5;
+    frame.size.height=headViewHeight-50*DEF_Adaptation_Font*0.5;
     label2.frame=frame;
     label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     label2.textColor=[UIColor colorWithRed:150/255.0 green:145/255.0 blue:180/255.0 alpha:1.0];
@@ -532,8 +532,6 @@
 //返回头headerView的大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     return  CGSizeMake(DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5);
-    
-    
 }
 
 #pragma mark-<UICollectionViewDelegate>
@@ -711,7 +709,12 @@
     [self.viewArr removeAllObjects];
     BOOL viewArrIsTwo=NO;
     //点击头像跳转
-    NSDictionary *imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG];
+    NSDictionary *imageDic=[NSDictionary dictionary];
+    if (tap.view.tag-BUTTONTAG<=0) {
+        imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG+1];
+    }else{
+    imageDic=self.barrageInfo[tap.view.tag-BUTTONTAG];
+    }
     NSString *string=[imageDic objectForKey:@"messagePicture"];
     NSArray *array = [string componentsSeparatedByString:@";"];
     NSLog(@"%@",array);
