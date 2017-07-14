@@ -459,7 +459,7 @@
     LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(15, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
-    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-15) andText:label2]+50*DEF_Adaptation_Font*0.5;
+    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-62*DEF_Adaptation_Font*0.5) andText:label2]+50*DEF_Adaptation_Font*0.5;
     waterLayout=flowLayout;
     flowLayout.height=headViewHeight+170*DEF_Adaptation_Font*0.5+4;
     flowLayout.delegate = self;
