@@ -36,6 +36,15 @@
     //多线程
     NSThread *_thread;
 }
+-(NSMutableArray *)buddleSubscriptArr{
+    if (!_buddleSubscriptArr) {
+        _buddleSubscriptArr=[[NSMutableArray alloc]init];
+        for (int i=0; i<self.buddleArr.count; i++) {
+            [_buddleSubscriptArr addObject:@(i)];
+        }
+    }
+    return _buddleSubscriptArr;
+}
 -(NSMutableDictionary *)heightDic{
     if (!_heightDic) {
         _heightDic=[NSMutableDictionary dictionary];
@@ -246,24 +255,9 @@
 //添加弹幕
 -(void)initDate
 {
-    NSArray *danmakus = @[@"我去",
-                          @"路见不平",
-                          @"拔刀相助",
-                          @"额，就是负伤啊",
-                          @"错了，那是勇猛无敌",
-                          @"哈？！英雄救美呢！！！！！",
-                          @"不错不错，有大酱风范～",
-                          @"如果有一天。。。",
-                          @"我去，天掉下来了",
-                          @"都挺好的",
-                          @"你们看到后面了吗，貌似有背景呢，哈哈哈哈哈。。。",
-                          @"真是，额，强",
-                          @"可以可以"];
     if (self.buddleArr.count!=0) {
-        danmakus=_buddleArr;
-    }
-    int count=rand()%danmakus.count;
-    NSString *str = [danmakus objectAtIndex:count];
+    int count=rand()%self.buddleArr.count;
+    NSString *str = [self.buddleArr objectAtIndex:count];
     UILabel *label = [[UILabel alloc]init];
     int randomCount=[self addGuiDao];
     UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self), [self.buddleCountArr[randomCount]intValue]*55*DEF_Adaptation_Font*0.5, 240, 100*DEF_Adaptation_Font*0.5)];
@@ -356,7 +350,7 @@
     //        [self move:view1 andHeight:viewFrame.size.width];
     [self.barrageArr addObject:view1];
     
-    
+    }
 }
 //轻扫手势
 -(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
