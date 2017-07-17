@@ -99,6 +99,7 @@
     [_player seekToTime:kCMTimeZero];
     
     [_player pause];
+    
     [_player setRate:0];
     [_player replaceCurrentItemWithPlayerItem:nil];
     _player = nil;

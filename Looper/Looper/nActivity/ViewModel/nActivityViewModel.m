@@ -72,7 +72,6 @@
         NSDate *date = [NSDate date];
         NSString * s = [dateFormatter stringFromDate:date];
         
-        
         //开始时间(必须传)
         NSDate * startDate = [date dateByAddingTimeInterval:60 * 2];
         //结束时间(必须传)
@@ -342,6 +341,24 @@
     }];
 }
 
+
+-(long int)getTime:(NSString*)time{
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [formatter setTimeZone:timeZone];
+    
+    NSDate* date = [formatter dateFromString:time];
+    long int nowDate = (long int)([date timeIntervalSince1970]);
+    return nowDate;
+}
+
+
+
 #warning-线下数据
 -(void)requestData{
     
@@ -357,8 +374,18 @@
             for (int i=0;i<[responseObject[@"data"] count];i++){
                 NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
                 if([[dic objectForKey:@"recommendation"] intValue]==1){
+                    NSDate *now= [NSDate date];
+                    long int nowDate = (long int)([now timeIntervalSince1970]);
+
                     
-                    [recommendArray addObject:dic];
+                    if([[dic objectForKey:@"endtime"] intValue]>nowDate){
+                        
+                        [recommendArray addObject:dic];
+                    
+                    }
+                    
+                    
+                    
                 }
                 [allActivityArray addObject:dic];
             }

@@ -126,6 +126,9 @@
     [self addSubview:bk];
     
     UIButton *backBtn =[LooperToolClass createBtnImageName:@"btn_looper_back.png" andRect:CGPointMake(15, 65) andTag:3000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    
+    
+    
     [self addSubview: backBtn];
     
     UIImageView * title=[LooperToolClass createImageView:@"myInfo_Title.png" andRect:CGPointMake(266, 54) andTag:100 andSize:CGSizeZero andIsRadius:false];

@@ -123,7 +123,11 @@
         [self.viewModel setBarrageView:self];
         
         labelHeight=85.0;
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+
+        
+        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+
+        
         [self addSubview:backBtn];
     }
     return self;
@@ -597,7 +601,6 @@
 //item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
     return self.barrageInfo.count+1;
 }
 //第一个cell
@@ -643,7 +646,14 @@
     //加入点击事件
     imageView.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
-    imageView.tag=indexPath.row-1;
+    
+    if(indexPath.row==0){
+        imageView.tag=0;
+    }else{
+        imageView.tag =indexPath.row-1;
+    
+    }
+
     [imageView addGestureRecognizer:singleTap];
     [cell.contentView addSubview:imageView];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-110*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];

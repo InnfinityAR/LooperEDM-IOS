@@ -11,6 +11,7 @@
 #define ScrollHeight (_scrollView.bounds.size.height)
 #define ScrollWidth (_scrollView.bounds.size.width)
 #import "UIImageView+WebCache.h"
+#import "LooperConfig.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -77,8 +78,11 @@ NS_ASSUME_NONNULL_END
         [self addSubview:_views[0]];
         _views.firstObject.userInteractionEnabled=YES;
         _views.firstObject.backgroundColor=[UIColor blackColor];
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+
+        
+        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
         [_views.firstObject addSubview:backBtn];
+        
     }
     else{
     
@@ -106,8 +110,12 @@ NS_ASSUME_NONNULL_END
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.pagingEnabled = YES;
     [self addSubview:_scrollView];//在父视图上添加
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
-    [self addSubview:backBtn];
+    
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+     [self addSubview:backBtn];
+
+    
+    
     [self bringDataToScrollView];
 }
 
