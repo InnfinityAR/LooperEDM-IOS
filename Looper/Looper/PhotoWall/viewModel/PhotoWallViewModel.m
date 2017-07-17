@@ -18,12 +18,18 @@
 #import "PKFullScreenPlayerViewController.h"
 #import "UIImage+PKShortVideoPlayer.h"
 #import "DataHander.h"
+#import "nActivityViewController.h"
+#import "selectActivityView.h"
+#import "PlayVideoView.h"
 
 
 @implementation PhotoWallViewModel{
 
     sendPhotoWall *sendPhotoV;
     NSString *_activityId;
+    PhotoWallView *PhotoWallV;
+    nActivityViewController *activity;
+    NSDictionary *_photoWallData;
 
 }
 -(id)initWithController:(id)controller andActivityId:(NSString*)activityId{
@@ -47,8 +53,14 @@
     
     [[_obj view] addSubview:sendPhotoV];
 
-
+    
+    [sendPhotoV setLocationStr:[[_photoWallData objectForKey:@"activity"] objectForKey:@"activityname"]];
+    
 }
+
+
+
+
 
 -(void)playVideoFile:(NSString*)videoFile{
     
@@ -56,8 +68,15 @@
     PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:videoFile previewImage:image];
     [_obj presentViewController:vc animated:NO completion:NULL];
 
+}
+
+-(void)playNetWorkVideo:(NSString*)videoUrl{
+
+    PlayVideoView *playVideoV  = [[PlayVideoView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andUrlStr:videoUrl];
+    [[_obj view] addSubview:playVideoV];
 
 }
+
 
 
 -(void)createRecordVideo{
@@ -85,6 +104,24 @@
 }
 
 
+-(void)createActivityView{
+
+    activity = [[nActivityViewController alloc] init];
+    
+    [[_obj navigationController]  pushViewController:activity animated:YES];
+    
+    [self performSelector:@selector(showActivityView) withObject:nil afterDelay:0.1];
+    
+    
+
+}
+
+-(void)showActivityView{
+
+
+    [activity jumpToActivityId:_activityId];
+}
+
 
 
 -(void)popController{
@@ -93,7 +130,7 @@
 }
 
 
--(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath{
+-(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath andVideoImage:(UIImage*)imageV{
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -116,12 +153,66 @@
         
          [dic setObject:imageDataArray forKey:@"images"];
     }
-    [AFNetworkTool Clarence_Post_UploadWithUrl:@"createImageBoard" Params:dic fileUrl:[NSURL fileURLWithPath:videoPath] fileName:@"video" fileType:@"mp4" success:^(id responseObject){
+    
+    if(videoPath!=nil){
+        NSData *imageData = UIImagePNGRepresentation(imageV);
+        
+        [dic setObject:[Base64Class encodeBase64Data:imageData] forKey:@"videoThumb"];
+
+        [AFNetworkTool Clarence_Post_UploadWithUrl:@"createImageBoard" Params:dic fileUrl:[NSURL fileURLWithPath:videoPath] fileName:@"video" fileType:@"mp4" success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                
+                [sendPhotoV removeFromSuperview];
+                
+                [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
+                
+                [self getImageBoard:_activityId];
+            }else{
+                
+                
+            }
+        }fail:^{
+            
+        }];
+    }else{
+    
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createImageBoard" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [sendPhotoV removeFromSuperview];
+                
+                [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
+                  [self getImageBoard:_activityId];
+            }else{
+                
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+ 
+}
+
+-(void)setActivityID:(NSDictionary*)dic{
+
+    _activityId = [dic objectForKey:@"activityid"];
+    
+    [sendPhotoV setLocationStr:[dic objectForKey:@"activityname"]];
+    [self getImageBoard:_activityId];
+    
+
+}
+
+
+-(void)getOfflineInformationByIP{
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationByIP" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
+            selectActivityView *selectActivityV = [[selectActivityView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDic:responseObject];
+            [[_obj view] addSubview:selectActivityV];
             
-            [sendPhotoV removeFromSuperview];
-            
-              [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
         }else{
             
             
@@ -129,10 +220,32 @@
     }fail:^{
         
     }];
-    
-
-    
 }
+
+
+
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike{
+
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:boardId forKey:@"boardId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:[NSString stringWithFormat:@"%d",isLike] forKey:@"like"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbBoardMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+              [self getImageBoard:_activityId];
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 
 
 
@@ -143,10 +256,22 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getImageBoard" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            PhotoWallView *PhotoWallV =[[PhotoWallView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:responseObject];
             
-            [[_obj view] addSubview:PhotoWallV];
-        
+             _photoWallData =  [[NSDictionary alloc] initWithDictionary:responseObject];
+            
+            if(PhotoWallV!=nil){
+                [PhotoWallV reloadData:responseObject];
+            
+            }else{
+                PhotoWallV =[[PhotoWallView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:responseObject];
+                
+                [[_obj view] addSubview:PhotoWallV];
+               
+            
+            }
+            
+            
+            
         }else{
             
             

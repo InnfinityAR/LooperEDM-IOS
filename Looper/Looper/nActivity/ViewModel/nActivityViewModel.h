@@ -40,7 +40,7 @@
 
 -(void)getDataById:(NSString*)typeId andId:(NSString*)ID;
 
-
+-(void)addActivityDetailView:(NSDictionary*)ActivityDic;
 
 -(void)followUser:(NSString*)targetID;
 -(void)unfollowUser:(NSString*)targetID;

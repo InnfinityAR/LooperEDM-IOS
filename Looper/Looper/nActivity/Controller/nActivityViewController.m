@@ -25,6 +25,19 @@
     
 }
 
+-(void)jumpToActivityId:(NSString*)activityId{
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    
+    [dic setObject:activityId forKey:@"activityid"];
+    
+    
+    [_activityVm addActivityDetailView:dic];
+
+
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
