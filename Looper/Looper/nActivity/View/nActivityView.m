@@ -154,7 +154,10 @@
 //    [bannerView addSubview:cirle];
     
     UILabel* cityStr = [LooperToolClass createLableView:CGPointMake(-18*DEF_Adaptation_Font_x*0.5, 65*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(230*DEF_Adaptation_Font_x*0.5, 50*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"    %@",[[_commendArray objectAtIndex:index]objectForKey:@"city"]] andFontSize:11 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(-18*DEF_Adaptation_Font_x*0.5, 65*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5, 230*DEF_Adaptation_Font_x*0.5, 50*DEF_Adaptation_Font_x*0.5)];
+    label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
     [bannerView addSubview:cityStr];
+    [bannerView addSubview:label3Shadow];
     cityStr.shadowColor =[UIColor colorWithRed:25/255.0 green:91/255.0 blue:70/255.0 alpha:0.66];    //设置文本的阴影色彩和透明度。
     cityStr.shadowOffset = CGSizeMake(0.5f, 1.5f);
 

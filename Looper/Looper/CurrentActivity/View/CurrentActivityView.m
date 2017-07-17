@@ -67,7 +67,7 @@
         isHistory=NO;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
-            frame=CGRectMake(230*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5);
+            frame=CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame;
         }];
         [self.tableView reloadData];
@@ -78,7 +78,7 @@
         isHistory=YES;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame=lineView.frame;
-            frame=CGRectMake(380*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5);
+            frame=CGRectMake(390*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame;
         }];
         [self.tableView reloadData];
@@ -129,7 +129,7 @@
     looperName .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ looperName addGestureRecognizer:singleTap];
-    lineView=[[UIView alloc]initWithFrame:CGRectMake(230*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5)];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
     lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
     [self addSubview:lineView];
     looperName2 = [LooperToolClass createLableView:CGPointMake(350*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(152*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"历史活动" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
@@ -142,7 +142,7 @@
     [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
     [self addSubview:backBtn];
 
-    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(518*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(508*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(35*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:calendarBtn];
     
     NSDate *now = [NSDate date];
@@ -151,7 +151,7 @@
     NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
     NSInteger day = [dateComponent day];
     
-    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(526*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:11  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(514*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:10  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:dayLabel];
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 
@@ -168,7 +168,7 @@
         _tableView.alwaysBounceVertical=NO;
         _tableView.bounces=NO;
         //设置分割线
-        _tableView.separatorColor = [UIColor colorWithRed:64/255.0 green:62/255.0 blue:162/255.0 alpha:1.0];
+        _tableView.separatorColor = [UIColor colorWithRed:64/255.0 green:62/255.0 blue:162/255.0 alpha:0.4];
         _tableView.separatorInset = UIEdgeInsetsMake(0,0, 0, 0);        // 设置端距，这里表示separator离左边和右边均1像素
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
