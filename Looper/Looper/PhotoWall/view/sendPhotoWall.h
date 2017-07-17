@@ -24,4 +24,6 @@
 
 -(void)videoFileSave:(NSString*)videoFile;
 
+-(void)setLocationStr:(NSString*)str;
+
 @end

@@ -21,9 +21,13 @@
 -(void)getImageBoard:(NSString*)activityID;
 -(void)popController;
 -(void)createSendPhotoWall;
--(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath;
+-(void)createImageBoardText:(NSString*)text and:(NSArray*)images andVideoPath:(NSString*)videoPath andVideoImage:(UIImage*)imageV;
 -(void)createRecordVideo;
 -(void)playVideoFile:(NSString*)videoFile;
 -(void)playNetWorkVideo:(NSString*)videoUrl;
 -(void)createActivityView;
+-(void)setActivityID:(NSDictionary*)dic;
+-(void)getOfflineInformationByIP;
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
+
 @end

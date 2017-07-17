@@ -21,7 +21,7 @@
     UIButton* addPicVideo;
     NSString *videoStr;
     UILabel *locationStr;
-
+    UIImageView *videoImg;
 
 }
 
@@ -48,6 +48,13 @@
 
 }
 
+-(void)setLocationStr:(NSString*)str{
+    locationStr.text= str;
+
+
+}
+
+
 -(void)videoFileSave:(NSString*)videoFile{
 
     NSLog(@"%@",videoFile);
@@ -62,7 +69,7 @@
     
     [addPicVideo removeFromSuperview];
  
-    UIImageView *videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font*0.5,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
+    videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font*0.5,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
     videoImg.image=[UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:videoFile]];
     videoImg.layer.cornerRadius = 15*DEF_Adaptation_Font_x*0.5;
     videoImg.layer.masksToBounds = YES;
@@ -84,7 +91,7 @@
         if(videoStr==nil){
               [[DataHander sharedDataHander] showViewWithStr:@"请上传图片" andTime:1 andPos:CGPointZero];
         }else{
-             [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr];
+             [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr andVideoImage:videoImg.image];
         }
     }else if(button.tag == 900){
         
@@ -92,7 +99,10 @@
     }else if(button.tag == 109){
         [_obj playVideoFile:videoStr];
     }else if(button.tag == 119){
-         [[DataHander sharedDataHander] showViewWithStr:@"coming soon....." andTime:1 andPos:CGPointZero];
+        
+        [_obj getOfflineInformationByIP];
+        
+        // [[DataHander sharedDataHander] showViewWithStr:@"coming soon....." andTime:1 andPos:CGPointZero];
     }
 }
 
@@ -107,7 +117,7 @@
     UIButton *selLocationBtn = [LooperToolClass createBtnImageNameReal:@"selLocation.png" andRect:CGPointMake(38*DEF_Adaptation_Font*0.5,624*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"selLocation.png" andClickImage:@"selLocation.png" andTextStr:nil andSize:CGSizeMake(605*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:selLocationBtn];
     
-    locationStr = [LooperToolClass createLableView:CGPointMake(106*DEF_Adaptation_Font*0.5,660*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(180*DEF_Adaptation_Font_x*0.5, 22*DEF_Adaptation_Font_x*0.5) andText:@"选择所在现场" andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+    locationStr = [LooperToolClass createLableView:CGPointMake(106*DEF_Adaptation_Font*0.5,660*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(280*DEF_Adaptation_Font_x*0.5, 22*DEF_Adaptation_Font_x*0.5) andText:@"选择所在现场" andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
     
     [self addSubview:locationStr];
     
@@ -164,7 +174,7 @@
     if([textView.text length]==0){
     
         
-         textview.text = @"说说 现场如何";
+        textview.text = @"说说 现场如何";
         textview.textColor = [UIColor colorWithRed:161/255.0 green:171/255.0 blue:181/255.0 alpha:1.0];
     
     }

@@ -208,6 +208,12 @@
         UICollectionReusableView *header=[collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderViewID" forIndexPath:indexPath];
         //添加头视图的内容
         
+        for (UIView *view in [header subviews]){
+            
+            [view removeFromSuperview];
+        }
+        
+        
         [self createHeaderView:header];
         
         
@@ -318,10 +324,15 @@
     if([dic objectForKey:@"boardvideo"]!=[NSNull null]){
 
         UIImageView *videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5, 478*DEF_Adaptation_Font*0.5,318*DEF_Adaptation_Font*0.5)];
-        [videoImg setBackgroundColor:[UIColor redColor]];
+        if([dic objectForKey:@"videothumb"]!=[NSNull null]){
+        
+            [videoImg sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"videothumb"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+        }];
+        }
+        
         [cell.contentView addSubview:videoImg];
         videoImg.userInteractionEnabled=YES;
-        
         
         UIButton *videoPlay = [LooperToolClass createBtnImageNameReal:@"icon_play.png" andRect:CGPointMake(201*DEF_Adaptation_Font*0.5,120*DEF_Adaptation_Font*0.5) andTag:[[dic objectForKey:@"boardid"] intValue] andSelectImage:@"icon_play.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(68*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5) andTarget:self];
         [videoImg addSubview:videoPlay];
@@ -330,15 +341,19 @@
         
         UIButton *commend = [LooperToolClass createBtnImageNameReal:@"btn_un_commend.png" andRect:CGPointMake(119*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+318*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5) andTag:[[dic objectForKey:@"boardid"] intValue] andSelectImage:@"btn_commend.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(58*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
         [cell.contentView addSubview:commend];
+        
         [commend removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
         [commend addTarget:self action:@selector(commendOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
         
+        if([[dic objectForKey:@"islike"] intValue]==1){
+            
+            [commend setSelected:true];
+        }
         
-        UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+318*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:@"10 人" andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+        
+        UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+318*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"%@ 人",[dic objectForKey:@"thumbcount"]] andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
         
         [cell.contentView addSubview:personNum];
-
-
 
     }
   
@@ -347,12 +362,16 @@
 
 -(IBAction)commendOnClick:(UIButton *)button withEvent:(UIEvent *)event{
 
-    
-
-
+    if([button isSelected]==true){
+        [button setSelected:false];
+        [_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:0];
+    }else{
+      [button setSelected:true];
+         [_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:1];
+        
+    }
 
 }
-
 
 -(IBAction)videoOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -373,14 +392,7 @@
     
     
     }
-    
-    //for ()
-    
-    
 }
-
-
-
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {

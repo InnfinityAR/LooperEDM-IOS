@@ -1128,11 +1128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-            timestampString = "521621345.394398"
+            timestampString = "521953034.400488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "+Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1144,11 +1144,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-            timestampString = "521621345.394398"
+            timestampString = "521953034.400488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "+Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1288,11 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-            timestampString = "521621345.394398"
+            timestampString = "521953034.400488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "+Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:"
             landmarkType = "7">
             <Locations>
@@ -1336,11 +1336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-            timestampString = "521621345.394398"
+            timestampString = "521953034.400488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "+Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:"
             landmarkType = "7">
             <Locations>
@@ -1605,11 +1605,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "521706307.927612"
+            timestampString = "521952938.764055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "-videoOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1621,11 +1621,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "521706307.927612"
+            timestampString = "521952938.764055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "-videoOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
