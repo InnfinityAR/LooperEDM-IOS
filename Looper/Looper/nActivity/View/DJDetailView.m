@@ -304,7 +304,7 @@
 
     for (int i=0;i<[[_djData objectForKey:@"information"] count] ;i++){
         if([[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue] ==tap.view.tag){
-            [_obj addActivityDetailView:[[_djData objectForKey:@"information"] objectAtIndex:i]];
+            [_obj addActivityDetailView:[[_djData objectForKey:@"information"] objectAtIndex:i] andPhotoWall:0];
 
             break;
         }

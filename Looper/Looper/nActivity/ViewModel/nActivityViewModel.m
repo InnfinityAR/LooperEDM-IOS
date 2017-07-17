@@ -40,7 +40,7 @@
     
     ActivityDetailView *activityDetailV;
 
-
+    int _isPhoto;
     PlayerInfoView * _playerInfoV;
 
 }
@@ -130,16 +130,15 @@
 }
 
 
--(void)addActivityDetailView:(NSDictionary*)ActivityDic{
+-(void)addActivityDetailView:(NSDictionary*)ActivityDic andPhotoWall:(int)isPhoto{
+    _isPhoto = isPhoto;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
      [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
            activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
-            
             [[_obj view] addSubview:activityDetailV];
 
         }else{
@@ -161,8 +160,17 @@
     [[_obj navigationController]  pushViewController:looperV animated:NO];
 }
 -(void)removeDetailView{
-
-    [activityDetailV removeFromSuperview];
+    
+    if(_isPhoto==1){
+         [activityDetailV removeFromSuperview];
+         [[_obj navigationController]popViewControllerAnimated:true];
+        _isPhoto=0;
+    }else{
+         [activityDetailV removeFromSuperview];
+    
+    }
+    
+   
 }
 
 //跳转到购票
@@ -315,7 +323,6 @@
     }];
 }
 
-
 -(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -350,6 +357,7 @@
             for (int i=0;i<[responseObject[@"data"] count];i++){
                 NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
                 if([[dic objectForKey:@"recommendation"] intValue]==1){
+                    
                     [recommendArray addObject:dic];
                 }
                 [allActivityArray addObject:dic];

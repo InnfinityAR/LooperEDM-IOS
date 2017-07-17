@@ -82,6 +82,7 @@
 		C404A7D81EBF84D3000B9E1D /* sendCode.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7D71EBF84D3000B9E1D /* sendCode.png */; };
 		C404A7DB1EBF8E9B000B9E1D /* RotateNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C404A7DA1EBF8E9B000B9E1D /* RotateNavigationController.m */; };
 		C404A7DE1EBF9279000B9E1D /* textViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C404A7DD1EBF9279000B9E1D /* textViewController.m */; };
+		C4050A391F1C8C8D00BE3419 /* 720.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C4050A381F1C8C8D00BE3419 /* 720.mp4 */; };
 		C4057EEB1DF544D600AA52F9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057EEA1DF544D600AA52F9 /* CoreLocation.framework */; };
 		C4057EED1DF544DE00AA52F9 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057EEC1DF544DE00AA52F9 /* AddressBook.framework */; };
 		C4057EEF1DF544E800AA52F9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057EEE1DF544E800AA52F9 /* CoreTelephony.framework */; };
@@ -826,6 +827,7 @@
 		C404A7DA1EBF8E9B000B9E1D /* RotateNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateNavigationController.m; sourceTree = "<group>"; };
 		C404A7DC1EBF9279000B9E1D /* textViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textViewController.h; sourceTree = "<group>"; };
 		C404A7DD1EBF9279000B9E1D /* textViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textViewController.m; sourceTree = "<group>"; };
+		C4050A381F1C8C8D00BE3419 /* 720.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 720.mp4; sourceTree = "<group>"; };
 		C4057EEA1DF544D600AA52F9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C4057EEC1DF544DE00AA52F9 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		C4057EEE1DF544E800AA52F9 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -4011,6 +4013,7 @@
 		C4F051211EBACA0D005DA9F1 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				C4050A381F1C8C8D00BE3419 /* 720.mp4 */,
 				C4E86FB91F166D0D00D9658D /* f1.mp4 */,
 			);
 			path = Video;
@@ -4434,6 +4437,7 @@
 				B28BD82F1F078238004931AF /* commendNO.png in Resources */,
 				C46A69301EB38C0200FCD5EB /* un_musiclibrary.png in Resources */,
 				C42E804F1EC332D400D9CC43 /* loading_00024.png in Resources */,
+				C4050A391F1C8C8D00BE3419 /* 720.mp4 in Resources */,
 				C46E7D0C1EADA92900996110 /* btn_about.png in Resources */,
 				C46E7D2F1EADF37600996110 /* btn_commit.png in Resources */,
 				C43E76E91E091D8D004A5288 /* bg_frame.png in Resources */,

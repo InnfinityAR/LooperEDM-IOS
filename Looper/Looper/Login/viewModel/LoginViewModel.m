@@ -185,8 +185,7 @@
                     [LocalDataMangaer sharedManager].HeadImageUrl = responseObject[@"data"][@"headimageurl"];
                     [LocalDataMangaer sharedManager].sex = responseObject[@"data"][@"sex"];
                     [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
-                    
-                    
+
                     [[LocalDataMangaer sharedManager] setData];
 
                     [self loginSucceed];

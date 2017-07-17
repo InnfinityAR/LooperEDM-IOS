@@ -233,7 +233,7 @@
 
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.obj addActivityDetailView:self.events[indexPath.row]];
+    [self.obj addActivityDetailView:self.events[indexPath.row]andPhotoWall:0];
     
 }
 

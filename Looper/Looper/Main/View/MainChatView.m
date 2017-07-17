@@ -125,7 +125,6 @@
     [loopBtn setSelected:true];
     
     moveline=[LooperToolClass createImageView:@"moveline.png" andRect:CGPointMake(205, 148) andTag:100 andSize:CGSizeMake(626*DEF_Adaptation_Font_x*0.5, 1028*DEF_Adaptation_Font*0.5) andIsRadius:false];
-    
     [self addSubview:moveline];
 }
 
