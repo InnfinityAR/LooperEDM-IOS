@@ -23,6 +23,9 @@
 -(void)addImageArray:(NSArray *)imageArray;
 @property(nonatomic,strong)NSArray *barrageInfo;
 @property(nonatomic,strong)NSMutableArray *buddleArr;
+//为了保证弹幕不重复取到，将buddleArr的下标存入到数组中
+@property(nonatomic,strong)NSMutableArray *buddleSubscriptArr;
+
 @property(nonatomic,strong)NSMutableArray *userImageArr;
 @property(nonatomic,strong)NSMutableArray *colorArr;
 @property(nonatomic,strong)UIView *collectHeaderView;

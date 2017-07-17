@@ -230,12 +230,14 @@
     label3.text=[NSString stringWithFormat:@"%@",string];
     label3.textColor=[UIColor whiteColor];
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
+    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
+    label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
     label3.layer.cornerRadius=1.0;
     label3.layer.masksToBounds=YES;
     label3.font=[UIFont systemFontOfSize:14];
     label3.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:label3];
-
+    [cell.contentView addSubview:label3Shadow];
     return cell;
 }
 //取出字符串中中文

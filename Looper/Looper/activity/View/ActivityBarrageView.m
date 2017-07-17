@@ -19,7 +19,7 @@
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "YWCarouseView.h"
-#define BUTTONTAG  10000
+#define BUTTONTAG  100000
 @interface ActivityBarrageView()
 {
     float headViewHeight;
@@ -35,6 +35,18 @@
     float labelHeight;
     //多线程
     NSThread *_thread;
+    
+    //是否重置BuddleSubscriptArr
+    BOOL  isAddBuddleSubscriptArr;
+}
+-(NSMutableArray *)buddleSubscriptArr{
+    if (!_buddleSubscriptArr) {
+        _buddleSubscriptArr=[[NSMutableArray alloc]init];
+        for (int i=0; i<self.buddleArr.count; i++) {
+            [_buddleSubscriptArr addObject:@(i)];
+        }
+    }
+    return _buddleSubscriptArr;
 }
 -(NSMutableDictionary *)heightDic{
     if (!_heightDic) {
@@ -98,6 +110,7 @@
 }
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)viewModel{
     if (self = [super initWithFrame:frame]) {
+        isAddBuddleSubscriptArr=NO;
         self.obj = (ActivityView*)idObject;
         self.viewModel=viewModel;
         self.activityID=[self.obj activityID];
@@ -246,24 +259,12 @@
 //添加弹幕
 -(void)initDate
 {
-    NSArray *danmakus = @[@"我去",
-                          @"路见不平",
-                          @"拔刀相助",
-                          @"额，就是负伤啊",
-                          @"错了，那是勇猛无敌",
-                          @"哈？！英雄救美呢！！！！！",
-                          @"不错不错，有大酱风范～",
-                          @"如果有一天。。。",
-                          @"我去，天掉下来了",
-                          @"都挺好的",
-                          @"你们看到后面了吗，貌似有背景呢，哈哈哈哈哈。。。",
-                          @"真是，额，强",
-                          @"可以可以"];
-    if (self.buddleArr.count!=0) {
-        danmakus=_buddleArr;
-    }
-    int count=rand()%danmakus.count;
-    NSString *str = [danmakus objectAtIndex:count];
+    if (self.buddleSubscriptArr.count!=0) {
+    int subscript=rand()%self.buddleSubscriptArr.count;
+     int   count=[self.buddleSubscriptArr[subscript]intValue];
+    NSString *str = [self.buddleArr objectAtIndex:[self.buddleSubscriptArr[subscript]intValue]];
+        //把用过的下标移除
+        [self.buddleSubscriptArr removeObjectAtIndex:subscript];
     UILabel *label = [[UILabel alloc]init];
     int randomCount=[self addGuiDao];
     UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self), [self.buddleCountArr[randomCount]intValue]*55*DEF_Adaptation_Font*0.5, 240, 100*DEF_Adaptation_Font*0.5)];
@@ -317,8 +318,14 @@
         if ([self.barrageInfo[count][@"isthumb"]intValue]==1) {
             UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(view1)/2-20, 5*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
             view.tag=count;
-            view1.tag=count-1;
+              view1.tag=count-1;
             imageV.tag=count-BUTTONTAG;
+            if (count==0) {
+                view.tag=BUTTONTAG;
+                imageV.tag=-BUTTONTAG;
+                view1.tag=2*BUTTONTAG;
+            }
+          
             imageV.image=[UIImage imageNamed:@"commendYes2.png"];
             [view1 addSubview:imageV];
             view.backgroundColor=[UIColor colorWithRed:193/255.0 green:216/255.0 blue:76/255.0 alpha:1.0];
@@ -329,6 +336,12 @@
             view.tag=-count;
             view1.tag=-count-1;
             imageV.tag=-count-BUTTONTAG;
+            if (count==0) {
+                view.tag=-BUTTONTAG;
+                 imageV.tag=BUTTONTAG;
+                view1.tag=-2*BUTTONTAG;
+            }
+            
             [view1 addSubview:imageV];
         }
     }
@@ -356,19 +369,45 @@
     //        [self move:view1 andHeight:viewFrame.size.width];
     [self.barrageArr addObject:view1];
     
-    
+    }
+    else{
+        if (isAddBuddleSubscriptArr==NO) {
+        [self performSelector:@selector(addBuddleSubscriptArr) withObject:nil/*可传任意类型参数*/ afterDelay:8.0];
+            isAddBuddleSubscriptArr=YES;
+        }
+    }
+}
+-(void)addBuddleSubscriptArr{
+    self.buddleSubscriptArr=nil;
+    isAddBuddleSubscriptArr=NO;
 }
 //轻扫手势
 -(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
+    int count=0;
+    if (swipe.view.tag!=2*BUTTONTAG&&swipe.view.tag!=-BUTTONTAG*2) {
+        count=(int)swipe.view.tag+1;
+    }
+         if ([self.barrageInfo[count][@"isthumb"]intValue]==0) {
     UIImageView *imageV=  (UIImageView *)[swipe.view viewWithTag:(swipe.view.tag-BUTTONTAG+1)];
-    UIView *view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag+1)];
+              UIView *view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag+1)];
+    if (swipe.view.tag==BUTTONTAG-1||swipe.view.tag==-BUTTONTAG-1) {
+        imageV=  (UIImageView *)[swipe.view viewWithTag:(-(swipe.view.tag)/2)];
+        view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag/2)];
+    }
     NSLog(@"view1:%ld, view: %ld ,imageV :%ld",swipe.view.tag,view.tag,imageV.tag);
     [view setBackgroundColor:[UIColor colorWithRed:193/255.0 green:216/255.0 blue:76/255.0 alpha:1.0]];
-    if (view.tag<0) {
-        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+             if (swipe.view.tag==BUTTONTAG*2||swipe.view.tag==-BUTTONTAG*2) {
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+    }else{
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-swipe.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
     }
     view.tag=-view.tag;
     imageV.tag=view.tag-BUTTONTAG;
+    if (view.tag==-BUTTONTAG||view.tag==BUTTONTAG) {
+        imageV.tag=-view.tag;
+    }
+         }
+    
     //点赞按钮向上运动的动画
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-40*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     [self.buddleView addSubview:imageView];
@@ -381,12 +420,17 @@
         [imageView removeFromSuperview];
     }
      ];
+             
+             
 }
 
 //弹幕的点击事件
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     UIImageView *imageV=  (UIImageView *)[self viewWithTag:(tap.view.tag-BUTTONTAG)];
-    NSLog(@"打印一下imageView %ld view %ld的tag值",(long)imageV.tag,tap.view.tag);
+    if (tap.view.tag==-BUTTONTAG||tap.view.tag==BUTTONTAG) {
+        imageV=  (UIImageView *)[self viewWithTag:(-tap.view.tag)];
+    }
+      NSLog(@"打印一下imageView %ld view %ld的tag值",(long)imageV.tag,tap.view.tag);
     if (tap.view.tag<0) {
         [tap.view setBackgroundColor:[UIColor colorWithRed:193/255.0 green:216/255.0 blue:76/255.0 alpha:1.0]];
         [UIView animateWithDuration:0.1 animations:^{
@@ -394,8 +438,11 @@
         } completion:^(BOOL finished) {
         }
          ];
+        if (tap.view.tag==-BUTTONTAG) {
+             [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+        }else{
         [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
-        
+        }
     }
     //已经点赞
     if (tap.view.tag>0) {
@@ -406,10 +453,18 @@
          ];
         //        [tap.view setBackgroundColor:[self randomColorAndIndex:arc4random_uniform(6) %5]];
         tap.view.backgroundColor=[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0.4];
+        //当view.tag=0时
+        if (tap.view.tag==BUTTONTAG) {
+            [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+        }else{
         [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+        }
     }
     tap.view.tag=-tap.view.tag;
     imageV.tag=tap.view.tag-BUTTONTAG;
+    if (tap.view.tag==-BUTTONTAG||tap.view.tag==BUTTONTAG) {
+       imageV.tag=-tap.view.tag;
+    }
     [self.collectView reloadData];
     
 }
