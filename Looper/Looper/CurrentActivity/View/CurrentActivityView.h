@@ -10,6 +10,8 @@
 
 @interface CurrentActivityView : UIView<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray* dataArr;
+//用于记录历史记录
+@property(nonatomic,strong)NSMutableArray *historyActivityArr;
 @property(nonatomic,strong)id obj;
 -(void)reloadTableData:(NSMutableArray*)DataLoop;
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource;

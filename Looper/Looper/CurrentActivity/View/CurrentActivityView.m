@@ -12,28 +12,47 @@
 #import "CurrentActivityTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "nActivityViewModel.h"
+#import "CarlendarView.h"
+@interface CurrentActivityView()
+{
+    UILabel *looperName;
+    UILabel *looperName2;
+    UIView *lineView;
+    //用于判断是否点击了历史活动的按钮
+    BOOL isHistory;
+}
+@end
 @implementation CurrentActivityView
 //更新tableview
 -(void)reloadTableData:(NSMutableArray*)DataLoop{
     self.dataArr=DataLoop;
     [self.tableView reloadData];
 }
+-(NSMutableArray *)historyActivityArr{
+    if (!_historyActivityArr) {
+        _historyActivityArr=[[NSMutableArray alloc]init];
+        for (int i=0; i<self.dataArr.count; i++) {
+            NSDictionary *activity=self.dataArr[i];
+            //当前时间的时间戳
+            NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+            NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+            if (timeNow>[activity[@"endtime"]integerValue]) {
+                [_historyActivityArr addObject:activity];
+            }
+        }
+    }
+    return _historyActivityArr;
+}
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
 #warning-如果这句话不加则没有初始化view不能触发点击事件
     if (self=[super initWithFrame:frame]) {
-        
-        
+        self.obj=(nActivityViewModel*)obj;
+        self.dataArr=myDataSource;
+        isHistory=NO;
         self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
         self.transform = CGAffineTransformMakeScale(0.1,0.1);
 
-        self.obj=(nActivityViewModel*)obj;
-        self.dataArr=myDataSource;
-        UILabel *looperName = [LooperToolClass createLableView:CGPointMake(38*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(563*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"全部活动" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-        [self addSubview:looperName];
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(-20*DEF_Adaptation_Font*0.5,-10*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(188*DEF_Adaptation_Font*0.5,143*DEF_Adaptation_Font*0.5) andTarget:self];
-        [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
-        [self addSubview:backBtn];
-        //加载懒加载
+               //加载懒加载
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CurrentActivityTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
         [self initView];
         
@@ -41,7 +60,31 @@
     }
     return self;
 }
+-(void)onClickView:(UITapGestureRecognizer *)tap{
+    if (tap.view.tag==1) {
+        looperName.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+        looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        isHistory=NO;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame=CGRectMake(230*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5);
+            lineView.frame=frame;
+        }];
+        [self.tableView reloadData];
+    }
+    if (tap.view.tag==2) {
+        looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+        looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        isHistory=YES;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame=CGRectMake(380*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5);
+            lineView.frame=frame;
+        }];
+        [self.tableView reloadData];
+    }
 
+}
 -(void)animation{
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -71,16 +114,51 @@
         }];
         
     }
+    if(button.tag==119){
+        CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:self.dataArr andObj:self.obj];
+        [self addSubview:carlendarV];
+    }
 }
 
 
 -(void)initView{
+    looperName = [LooperToolClass createLableView:CGPointMake(200*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"全部活动" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    looperName.font=[UIFont boldSystemFontOfSize:15];
+    [self addSubview:looperName];
+    looperName.tag=1;
+    looperName .userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [ looperName addGestureRecognizer:singleTap];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(230*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5)];
+    lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
+    [self addSubview:lineView];
+    looperName2 = [LooperToolClass createLableView:CGPointMake(350*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(152*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"历史活动" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    [self addSubview:looperName2];
+    looperName2.tag=2;
+    looperName2 .userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [ looperName2 addGestureRecognizer:singleTap2];
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(-20*DEF_Adaptation_Font*0.5,-10*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(188*DEF_Adaptation_Font*0.5,143*DEF_Adaptation_Font*0.5) andTarget:self];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
+    [self addSubview:backBtn];
+
+    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(518*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:calendarBtn];
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    NSInteger day = [dateComponent day];
+    
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(526*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:11  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    [self addSubview:dayLabel];
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 140*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 140*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 142*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 140*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -103,8 +181,11 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (isHistory) {
+        return self.historyActivityArr.count;
+    }
     return self.dataArr.count;
-//    return 5;
+    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -113,7 +194,9 @@
     //cell不能被选中
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDictionary *activity=self.dataArr[indexPath.row];
-    
+    if (isHistory) {
+        activity=self.historyActivityArr[indexPath.row];
+    }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
     if (activity[@"location"]==[NSNull null]) {
         
@@ -127,8 +210,17 @@
     else{
         cell.themeLB.text=activity[@"activityname"];
     }
-    cell.timeLB.text=[NSString stringWithFormat:@"%@~\n%@",[self timeChange:activity[@"starttime"]],[self timeChange:activity[@"endtime"]]];
-    cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
+    NSString *starttime=[[self timeChange:activity[@"starttime"]]substringToIndex:10];
+    NSString *endtime=[[self timeChange:activity[@"endtime"]]substringToIndex:10];
+    NSString *dateTime=nil;
+    if ([[starttime substringFromIndex:8]integerValue]==[[endtime substringFromIndex:8]integerValue]) {
+        dateTime=starttime;
+        cell.timeLB.text=dateTime;
+    }
+    else{
+    cell.timeLB.text=[NSString stringWithFormat:@"%@~%@",starttime,[endtime substringFromIndex:5]];
+    }
+       cell.ticketLB.text=[NSString stringWithFormat:@"%@",activity[@"price"]];
     if (activity[@"price"]==[NSNull null]) {
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
@@ -143,7 +235,7 @@
         [cell.saleBtn setHidden:NO];
     }
     }
-    [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
+    [cell.edmBtn setTitle:[NSString stringWithFormat:@"    %@    " ,activity[@"tag"] ]forState:(UIControlStateNormal)];
     return cell;
     
 }

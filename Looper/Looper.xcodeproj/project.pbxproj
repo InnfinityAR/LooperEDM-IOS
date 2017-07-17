@@ -20,6 +20,7 @@
 		B28BD8291F076636004931AF /* bottomIV.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8281F076636004931AF /* bottomIV.png */; };
 		B28BD82F1F078238004931AF /* commendNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD82E1F078238004931AF /* commendNO.png */; };
 		B28BD8311F078240004931AF /* commendYES.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8301F078240004931AF /* commendYES.png */; };
+		B2A1E7E71F1CDFCD006270E3 /* cityShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
@@ -719,6 +720,7 @@
 		B28BD8281F076636004931AF /* bottomIV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottomIV.png; sourceTree = "<group>"; };
 		B28BD82E1F078238004931AF /* commendNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendNO.png; sourceTree = "<group>"; };
 		B28BD8301F078240004931AF /* commendYES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendYES.png; sourceTree = "<group>"; };
+		B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cityShadow.png; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = View/AcitivitySeg.png; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
@@ -1832,6 +1834,7 @@
 		B2A6EE571ECAD7FF004BF416 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */,
 				B2A6EEA31ECD3498004BF416 /* ActivityCell.h */,
 				B2A6EEA41ECD3498004BF416 /* ActivityCell.m */,
 				B2A6EEA51ECD3498004BF416 /* ActivityCell.xib */,
@@ -4236,6 +4239,7 @@
 				C42B47D51ED55C1C00AE4399 /* trip.png in Resources */,
 				C469F8721EC432940076E371 /* loginOut.png in Resources */,
 				C41AC1E21E1FF714003DD049 /* icon_looper_default.png in Resources */,
+				B2A1E7E71F1CDFCD006270E3 /* cityShadow.png in Resources */,
 				C45489361E9E242D00BB1591 /* bg_chat_back.png in Resources */,
 				C42E80521EC332D400D9CC43 /* loading_00027.png in Resources */,
 				C4E86F6E1F163C0A00D9658D /* icon_play.png in Resources */,

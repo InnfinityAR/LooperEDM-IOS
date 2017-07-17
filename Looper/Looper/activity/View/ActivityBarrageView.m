@@ -19,7 +19,7 @@
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "YWCarouseView.h"
-#define BUTTONTAG  10000
+#define BUTTONTAG  100000
 @interface ActivityBarrageView()
 {
     float headViewHeight;
