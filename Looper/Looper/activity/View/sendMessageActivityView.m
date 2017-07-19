@@ -39,8 +39,12 @@
 
     if(button.tag==101){
         NSLog(@"我是send按钮");
+        if ([textview.text isEqualToString:@""]) {
+            
+        }else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];
+        }
        
     }else if(button.tag==102){
         [_obj LocalPhoto];

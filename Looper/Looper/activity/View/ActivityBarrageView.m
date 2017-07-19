@@ -129,6 +129,7 @@
 }
 -(void)addImageArray:(NSArray *)imageArray{
     self.barrageInfo=imageArray;
+    [self.userImageArr removeAllObjects];
     [self.buddleArr removeAllObjects];
     for (NSDictionary *buddleDic in imageArray) {
         [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
