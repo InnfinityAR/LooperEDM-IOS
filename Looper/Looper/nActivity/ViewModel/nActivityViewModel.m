@@ -371,18 +371,7 @@
             for (int i=0;i<[responseObject[@"data"] count];i++){
                 NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
                 if([[dic objectForKey:@"recommendation"] intValue]==1){
-                    NSDate *now= [NSDate date];
-                    long int nowDate = (long int)([now timeIntervalSince1970]);
-
-                    
-                    if([[dic objectForKey:@"endtime"] intValue]>nowDate){
-                        
-                        [recommendArray addObject:dic];
-                    
-                    }
-                    
-                    
-                    
+                    [recommendArray addObject:dic];
                 }
                 [allActivityArray addObject:dic];
             }
@@ -394,8 +383,8 @@
     }fail:^{
         
     }];
-     
-     
+    
+    
 }
 
 -(void)createActivityView{

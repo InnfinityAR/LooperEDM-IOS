@@ -56,7 +56,7 @@
 -(void)initHeadView{
 
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
     daoBdaoLB = [LooperToolClass createLableView:CGPointMake(85*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(500*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"叨Bi叨" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
@@ -224,7 +224,7 @@
     UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, 15, 12)];
     imageview.image=[UIImage imageNamed:@"sun.png"];
     [bottomV addSubview:imageview];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-10)*0.1, 200*DEF_Adaptation_Font*0.5, 24)];
     CGRect frame=label3.frame;
     frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-10)*0.1);
     NSString *string=[[self getAStringOfChineseWord:[dic objectForKey:@"city"]]componentsJoinedByString:@","];
@@ -234,11 +234,12 @@
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
     UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
     label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
-    label3.layer.cornerRadius=1.0;
+    label3.layer.cornerRadius=12;
     label3.layer.masksToBounds=YES;
     label3.font=[UIFont systemFontOfSize:14];
     label3.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:label3];
+    cell.contentView.layer.masksToBounds=YES;
     [cell.contentView addSubview:label3Shadow];
     return cell;
 }
