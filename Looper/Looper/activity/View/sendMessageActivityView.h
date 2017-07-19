@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityViewModel.h"
-
 @interface sendMessageActivityView : UIView <UITextViewDelegate,UITextFieldDelegate>
 {
     

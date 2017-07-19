@@ -25,25 +25,25 @@
         // 获取各时间字段的数值
         [self createRandomEvents];
         [self lts_InitUI];
-        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@月",[self currentMonth]];
+        NSCalendar *gregorian = [[NSCalendar alloc]
+                                 initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        // 获取当前日期
+        NSDate* dt = [NSDate date];
+        // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
+        unsigned unitFlags = NSCalendarUnitYear |
+        NSCalendarUnitMonth |  NSCalendarUnitDay |
+        NSCalendarUnitHour |  NSCalendarUnitMinute |
+        NSCalendarUnitSecond | NSCalendarUnitWeekday;
+        // 获取不同时间字段的信息
+        NSDateComponents* comp = [gregorian components: unitFlags
+                                              fromDate:dt];
+        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@月",[self currentMonth:comp.month]];
     }
     return self;
 }
--(NSString*)currentMonth{
+-(NSString*)currentMonth:(NSInteger)month{
     
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    // 获取当前日期
-    NSDate* dt = [NSDate date];
-    // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
-    unsigned unitFlags = NSCalendarUnitYear |
-    NSCalendarUnitMonth |  NSCalendarUnitDay |
-    NSCalendarUnitHour |  NSCalendarUnitMinute |
-    NSCalendarUnitSecond | NSCalendarUnitWeekday;
-    // 获取不同时间字段的信息
-    NSDateComponents* comp = [gregorian components: unitFlags
-                                          fromDate:dt];
-    switch (comp.month) {
+    switch (month) {
         case 1:
             return @"一";
             break;
@@ -92,15 +92,25 @@
     for(int i = 0; i < self.dataArray.count; ++i){
         // Generate 30 random dates between now and 60 days later
         NSDictionary *dictionary=self.dataArray[i];
-        NSDate *Date =[self timeWithTimeIntervalString:[dictionary objectForKey:@"starttime"]];
-        NSString *key = [[self dateFormatter] stringFromDate:Date];
+        NSDate *startDate =[self timeWithTimeIntervalString:[dictionary objectForKey:@"starttime"]];
+        NSDate *endDate=[self timeWithTimeIntervalString:[dictionary objectForKey:@"endtime"]];
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        unsigned int unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|
+        NSDayCalendarUnit;//这句是说你要获取日期的元素有哪些。获取年就要写NSYearCalendarUnit，获取小时就要写NSHourCalendarUnit，中间用|隔开；
+        NSInteger startDay= [[cal components:unitFlags fromDate:startDate] day];//把要从date中获取的unitFlags标示的日期元素存放在NSDateComponents类型的d里面；
+        NSInteger endDay= [[cal components:unitFlags fromDate:endDate] day];
+        NSString *key = [[self dateFormatter] stringFromDate:startDate];
+        //日历中活动的所有时间都要加点
+        for (NSInteger i=0; i<endDay-startDay; i++) {
+            NSDate *newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([startDate timeIntervalSinceReferenceDate] + i*24*3600)];
+            key = [[self dateFormatter] stringFromDate:newDate];
         if(!self.eventsByDate[key]){
             self.eventsByDate[key] = [NSMutableArray new];
         }
         //        [self.eventsByDate[key] addObject:Date];
         [self.eventsByDate[key]addObject:dictionary];
     }
-    
+    }
 }
 
 - (NSDate *)timeWithTimeIntervalString:(NSString *)timeString
@@ -139,7 +149,7 @@
 
 #pragma mark -- LTSCalendarEventSource --
 - (void)calendarDidLoadPage:(LTSCalendarManager *)calendar{
-    self.calendarView.topLabel.text=[NSString stringWithFormat:@"%ld月",calendar.monthForSelectedDay];
+    self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@月",[self currentMonth:calendar.monthForSelectedDay]];
 }
 // 该日期是否有事件
 - (BOOL)calendarHaveEvent:(LTSCalendarManager *)calendar date:(NSDate *)date
@@ -194,6 +204,10 @@
         NSDictionary *activity=self.events[indexPath.row];
         [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
         if (activity[@"location"]==[NSNull null]) {
+            
+        }
+        else if ([activity[@"location"] isEqualToString:@""]){
+        cell.addressLB.text=activity[@"city"];
         }
         else{
             cell.addressLB.text=activity[@"location"];
@@ -204,12 +218,17 @@
         else{
             cell.themeLB.text=activity[@"activityname"];
         }
-        NSDate *Date =[self timeWithTimeIntervalString:[activity objectForKey:@"starttime"]];
-        NSString *key = [[self dateFormatter] stringFromDate:Date];
-        NSDate *Date2 =[self timeWithTimeIntervalString:[activity objectForKey:@"endtime"]];
-        NSString *key2 = [[self dateFormatter] stringFromDate:Date2];
-        cell.timeLB.text=[NSString stringWithFormat:@"%@~\n%@",key,key2];
-        cell.ticketLB.text=[NSString stringWithFormat:@"票价%@",activity[@"price"]];
+        NSString *starttime=[[self timeChange:activity[@"starttime"]]substringToIndex:10];
+        NSString *endtime=[[self timeChange:activity[@"endtime"]]substringToIndex:10];
+        NSString *dateTime=nil;
+        if ([[starttime substringFromIndex:8]integerValue]==[[endtime substringFromIndex:8]integerValue]) {
+            dateTime=starttime;
+            cell.timeLB.text=dateTime;
+        }
+        else{
+            cell.timeLB.text=[NSString stringWithFormat:@"%@~%@",starttime,[endtime substringFromIndex:5]];
+        }
+        cell.ticketLB.text=[NSString stringWithFormat:@"%@",activity[@"price"]];
         if (activity[@"price"]==[NSNull null]) {
             [cell.ticketLB setHidden:YES];
             [cell.saleBtn setHidden:YES];
@@ -224,7 +243,7 @@
                 [cell.saleBtn setHidden:NO];
             }
         }
-        [cell.edmBtn setTitle:activity[@"tag"] forState:(UIControlStateNormal)];
+        [cell.edmBtn setTitle:[NSString stringWithFormat:@"    %@    " ,activity[@"tag"] ]forState:(UIControlStateNormal)];
         //设置空cell的隐藏
         cell.contentView.hidden=NO;
         cell.backgroundColor=[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0];
@@ -232,6 +251,27 @@
     return cell;
     
 }
+//时间戳转换
+-(NSString *)timeChange:(NSString *)timeDate{
+    NSString*str=timeDate;//时间戳
+    
+    NSTimeInterval time=[str doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    
+    NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    //实例化一个NSDateFormatter对象
+    
+    NSDateFormatter*dateFormatter = [[NSDateFormatter alloc]init];
+    
+    //设定时间格式,这里可以设置成自己需要的格式
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString*currentDateStr = [dateFormatter stringFromDate:detaildate];
+    return currentDateStr;
+    
+}
+
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewAutomaticDimension;
 }

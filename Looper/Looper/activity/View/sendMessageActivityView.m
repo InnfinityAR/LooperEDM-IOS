@@ -10,6 +10,8 @@
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 #import "ActivityBarrageView.h"
+#import "MBProgressHUD.h"
+#import "DataHander.h"
 @implementation sendMessageActivityView{
 
     UIButton* sendBtn;
@@ -40,7 +42,7 @@
     if(button.tag==101){
         NSLog(@"我是send按钮");
         if ([textview.text isEqualToString:@""]) {
-            
+            [[DataHander sharedDataHander] showViewWithStr:@"地球人你确定不写评论吗" andTime:2 andPos:CGPointZero];
         }else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];

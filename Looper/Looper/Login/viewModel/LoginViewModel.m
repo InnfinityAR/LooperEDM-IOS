@@ -249,7 +249,13 @@
             _accountV.transform = CGAffineTransformScale(_accountV.transform,100,1.0);
         }];
     }else if(DataType ==joinBtnTag){
-        [self login:iphoneNum andCode:codeNum];
+        if (codeNum.length==6) {
+             [self login:iphoneNum andCode:codeNum];
+        }
+        else{
+            [[DataHander sharedDataHander] showViewWithStr:@"验证码输入错误" andTime:1 andPos:CGPointZero];
+        }
+       
         
         
         
