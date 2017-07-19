@@ -153,7 +153,9 @@
     UIImageView *chatbK=[LooperToolClass createImageViewReal:@"bg_chat_bk.png" andRect:CGPointMake(0,DEF_SCREEN_HEIGHT-67*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(DEF_SCREEN_WIDTH, 67*DEF_Adaptation_Font*0.5) andIsRadius:false];
     [self addSubview:chatbK];
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:600 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:600 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+
     [self addSubview:backBtn];
     
     followBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_follow.png" andRect:CGPointMake(DEF_SCREEN_WIDTH-186/2, 59/2) andTag:601 andSelectImage:@"btn_looper_followed.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(104/2, 45/2) andTarget:self];

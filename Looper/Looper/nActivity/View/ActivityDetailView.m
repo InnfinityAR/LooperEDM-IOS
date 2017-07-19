@@ -18,7 +18,7 @@
     UIScrollView *bkScroll;
 
 
-    NSDictionary *activityDic;
+    NSMutableDictionary *activityDic;
     
     bool isHeight;
     bool isShowBtn;
@@ -42,7 +42,7 @@
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (nActivityViewModel*)idObject;
-        activityDic = detailDic;
+        activityDic = [[NSMutableDictionary alloc] initWithDictionary:detailDic];
         [self initView];
     }
     return self;
@@ -74,7 +74,11 @@
     [shadowV setImage:[UIImage imageNamed:@"top_shadow.png"]];
     [self addSubview:shadowV];
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    
+   
+    
+    
     [self addSubview:backBtn];
     
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
@@ -216,6 +220,9 @@
 -(void)addcalendarView{
 
      [_obj savaCalendar:[activityDic objectForKey:@"data"]];
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
+    [data setObject:@"1" forKey:@"issave"];
+    [activityDic setObject:data forKey:@"data"];
 }
 
 
@@ -517,15 +524,26 @@
 		
 -(void)menuDidSelected:(NSInteger)index{
     NSLog(@"选中第%ld",(long)index);
-    
+     
     if(index==1){
         [self addTicketView];
     }else if(index==2){
+        
+       
          [_obj savaCalendar:[activityDic objectForKey:@"data"]];
+        
+        
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
+        [data setObject:@"1" forKey:@"issave"];
+        [activityDic setObject:data forKey:@"data"];
+        
+        
     }else if(index==3){
-        NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
-        NSDictionary *dic =[loopArray objectAtIndex:0];
-        [_obj toLooperView:dic];
+        
+        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+//        NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
+//        NSDictionary *dic =[loopArray objectAtIndex:0];
+//        [_obj toLooperView:dic];
     }else if(index==100){
         if(isShowBtn==0){
              touchView.hidden = false;
@@ -552,12 +570,17 @@
     }else if(button.tag==106){
         [self addTicketView];
     }else if(button.tag==107){
+       
+        
         NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
         NSDictionary *dic =[loopArray objectAtIndex:0];
         [_obj toLooperView:dic];
 
     }else if(button.tag==108){
         [_obj savaCalendar:[activityDic objectForKey:@"data"]];
+        NSMutableDictionary *data = [activityDic objectForKey:@"data"];
+        [data setObject:@"1" forKey:@"issave"];
+        [activityDic setObject:data forKey:@"data"];
     }else if(button.tag==1009){
         
         if([ownerFollowBtn isSelected]==true){

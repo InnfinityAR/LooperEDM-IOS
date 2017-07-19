@@ -53,9 +53,6 @@
 }
 
 
-
-
-
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
 
     if(button.tag==102){
@@ -74,7 +71,7 @@
 
 -(void)playVideo{
    // [self clickToRotate];
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
 
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"720.mp4" withExtension:nil];
     _player=[AVPlayer playerWithURL:url];
@@ -99,6 +96,7 @@
     [_player seekToTime:kCMTimeZero];
     
     [_player pause];
+    
     [_player setRate:0];
     [_player replaceCurrentItemWithPlayerItem:nil];
     _player = nil;

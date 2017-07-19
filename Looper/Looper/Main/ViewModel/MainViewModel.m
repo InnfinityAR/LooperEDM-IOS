@@ -435,13 +435,14 @@
 
     if(type==LopperBtnTag){
         
-        [self pushLooperListController];
+       //[self pushLooperListController];
+         [self pushNActivityViewController];
 
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
         
     }else if(type==ActiveBtnTag){
-        [self pushNActivityViewController];
+       
         
     }else if(type==DJBtnTag){
         [self pushActivityViewController];

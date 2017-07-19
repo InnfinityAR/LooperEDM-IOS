@@ -143,8 +143,8 @@
     
     if([urlStr isEqualToString:@"getFriendList"]||[urlStr isEqualToString:@"followUser"]||[urlStr isEqualToString:@"getUserById"]||[urlStr isEqualToString:@"unfollowUser"]||[urlStr isEqualToString:@"addPreferenceToComment"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getThumbUpCount"]||[urlStr isEqualToString:@"getMyMessage"]||[urlStr isEqualToString:@"leaveLoop"]||[urlStr isEqualToString:@"getLoopByCoordinates"]||[urlStr isEqualToString:@"getUserInfo"]||[urlStr isEqualToString:@"sendYunXinMessage"]||[urlStr isEqualToString:@"getLoopMessage"]||[urlStr isEqualToString:@"getMyFavorite"]||[urlStr isEqualToString:@"getHome"]||[urlStr isEqualToString:@"getChatMessage"]||[urlStr isEqualToString:@"thumbActivityMessage"]||[urlStr isEqualToString:@"getActivityInfo"]||[urlStr isEqualToString:@"thumbBoardMessage"]){
     }else{
-          [[DataHander sharedDataHander] showDlg];
     
+          [[DataHander sharedDataHander] showDlg];
     }
 
     [manager POST:url parameters:parameters constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

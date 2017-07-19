@@ -21,7 +21,6 @@
 
 -(void)shareh5View:(NSDictionary*)webDic;
 
--(void)addActivityDetailView:(NSDictionary*)Dic;
 -(void)jumpToCurrentActivity:(NSArray*)array;
 -(void)addTicket:(NSDictionary *)dic;
 -(void)removeDetailView;
@@ -40,7 +39,7 @@
 
 -(void)getDataById:(NSString*)typeId andId:(NSString*)ID;
 
--(void)addActivityDetailView:(NSDictionary*)ActivityDic;
+-(void)addActivityDetailView:(NSDictionary*)ActivityDic andPhotoWall:(int)isPhoto;
 
 -(void)followUser:(NSString*)targetID;
 -(void)unfollowUser:(NSString*)targetID;

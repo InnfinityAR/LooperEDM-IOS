@@ -40,7 +40,7 @@
     
     ActivityDetailView *activityDetailV;
 
-
+    int _isPhoto;
     PlayerInfoView * _playerInfoV;
 
 }
@@ -71,7 +71,6 @@
         [dateFormatter setDateFormat:@"yyyy/MM/dd hh:mmaaa"];
         NSDate *date = [NSDate date];
         NSString * s = [dateFormatter stringFromDate:date];
-        
         
         //开始时间(必须传)
         NSDate * startDate = [date dateByAddingTimeInterval:60 * 2];
@@ -122,7 +121,6 @@
             }
         }else{
             
-            
         }
     }fail:^{
         
@@ -130,16 +128,15 @@
 }
 
 
--(void)addActivityDetailView:(NSDictionary*)ActivityDic{
+-(void)addActivityDetailView:(NSDictionary*)ActivityDic andPhotoWall:(int)isPhoto{
+    _isPhoto = isPhoto;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
      [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
            activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
-            
             [[_obj view] addSubview:activityDetailV];
 
         }else{
@@ -161,8 +158,15 @@
     [[_obj navigationController]  pushViewController:looperV animated:NO];
 }
 -(void)removeDetailView{
-
-    [activityDetailV removeFromSuperview];
+    
+    if(_isPhoto==1){
+         [activityDetailV removeFromSuperview];
+         [[_obj navigationController]popViewControllerAnimated:true];
+        _isPhoto=0;
+    }else{
+         [activityDetailV removeFromSuperview];
+    
+    }
 }
 
 //跳转到购票
@@ -315,7 +319,6 @@
     }];
 }
 
-
 -(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -335,6 +338,24 @@
     }];
 }
 
+
+-(long int)getTime:(NSString*)time{
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [formatter setTimeZone:timeZone];
+    
+    NSDate* date = [formatter dateFromString:time];
+    long int nowDate = (long int)([date timeIntervalSince1970]);
+    return nowDate;
+}
+
+
+
 #warning-线下数据
 -(void)requestData{
     
@@ -350,7 +371,18 @@
             for (int i=0;i<[responseObject[@"data"] count];i++){
                 NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
                 if([[dic objectForKey:@"recommendation"] intValue]==1){
-                    [recommendArray addObject:dic];
+                    NSDate *now= [NSDate date];
+                    long int nowDate = (long int)([now timeIntervalSince1970]);
+
+                    
+                    if([[dic objectForKey:@"endtime"] intValue]>nowDate){
+                        
+                        [recommendArray addObject:dic];
+                    
+                    }
+                    
+                    
+                    
                 }
                 [allActivityArray addObject:dic];
             }

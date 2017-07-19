@@ -117,8 +117,6 @@
 }
 
 -(void)showActivityView{
-
-
     [activity jumpToActivityId:_activityId];
 }
 

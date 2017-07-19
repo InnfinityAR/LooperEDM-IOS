@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     _activityVm = [[nActivityViewModel alloc] initWithController:self];
     
 }
@@ -31,10 +31,7 @@
     
     [dic setObject:activityId forKey:@"activityid"];
     
-    
-    [_activityVm addActivityDetailView:dic];
-
-
+    [_activityVm addActivityDetailView:dic andPhotoWall:1];
 }
 
 

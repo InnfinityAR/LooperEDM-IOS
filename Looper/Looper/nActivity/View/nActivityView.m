@@ -22,7 +22,7 @@
     
     UIImageView *backImageV;
     
-    NSArray *_commendArray;
+    NSMutableArray *_commendArray;
     
     UIButton * tripBtn;
     UIButton *activityFollowBtn;
@@ -217,7 +217,7 @@
 
 - (void)didSelectCell:(UIView *)subView withSubViewIndex:(NSInteger)subIndex {
     
-    [_obj addActivityDetailView:[_commendArray objectAtIndex:pageIndex]];
+    [_obj addActivityDetailView:[_commendArray objectAtIndex:pageIndex] andPhotoWall:0];
 }
 
 
@@ -257,26 +257,35 @@
         //[self animation];
         [_obj jumpToCurrentActivity:_commendArray];
     }else if(button.tag==104){
-        NSDictionary *dic =[_commendArray objectAtIndex:pageIndex];
+        NSMutableDictionary *dic =[[NSMutableDictionary alloc] initWithDictionary:[_commendArray objectAtIndex:pageIndex]];
 
         if([[dic objectForKey:@"issave"] intValue]==1){
-              [tripBtn setSelected:false];
+            [tripBtn setSelected:false];
             [_obj addInformationToFollow:[dic objectForKey:@"activityid"] andisLike:@"0"];
+             [dic setObject:@"0" forKey:@"issave"];
+             [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }else{
             [_obj savaCalendar:[_commendArray objectAtIndex:pageIndex]];
             [_obj addInformationToFollow:[dic objectForKey:@"activityid"] andisLike:@"1"];
+            [dic setObject:@"1" forKey:@"issave"];
+            
             [tripBtn setSelected:true];
+             [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }
 
     }else if(button.tag==105){
-        NSDictionary *dic =[_commendArray objectAtIndex:pageIndex];
+        NSMutableDictionary *dic =[[NSMutableDictionary alloc] initWithDictionary:[_commendArray objectAtIndex:pageIndex]];
         
         if([[dic objectForKey:@"isfollow"] intValue]==1){
             [activityFollowBtn setSelected:false];
             [_obj addInformationToFavorite:[dic objectForKey:@"activityid"] andisLike:@"0"];
+            [dic setObject:@"0" forKey:@"isfollow"];
+            [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }else{
             [_obj addInformationToFavorite:[dic objectForKey:@"activityid"] andisLike:@"1"];
             [activityFollowBtn setSelected:true];
+            [dic setObject:@"1" forKey:@"isfollow"];
+            [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }
         
     } if(button.tag==119){
@@ -301,7 +310,7 @@
 
 -(void)createHudView{
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(21/2, 48/2) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(44/2, 62/2) andTarget:self];
+     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
@@ -322,8 +331,6 @@
     UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(516*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:11  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:dayLabel];
     
-    
-    
     tripBtn = [LooperToolClass createBtnImageNameReal:@"un_trip.png" andRect:CGPointMake(349*DEF_Adaptation_Font*0.5,991*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"trip.png" andClickImage:@"trip.png" andTextStr:nil andSize:CGSizeMake(78*DEF_Adaptation_Font*0.5,72*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:tripBtn];
     
@@ -337,7 +344,6 @@
     }else{
         [activityFollowBtn setSelected:false];
     }
-    
     
     if([[dic objectForKey:@"issave"] intValue]==1){
         [tripBtn setSelected:true];

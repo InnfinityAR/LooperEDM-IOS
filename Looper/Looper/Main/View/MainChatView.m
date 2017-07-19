@@ -104,7 +104,7 @@
 
 
 -(void)initView:(NSDictionary*)loopData{
-    selectIndexNum=1;
+    selectIndexNum=2;
    
     UIView *bkV = [[UIView alloc] initWithFrame:CGRectMake(0, 101*0.5*DEF_Adaptation_Font, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     bkV.layer.cornerRadius = 16*DEF_Adaptation_Font*0.5;
@@ -122,11 +122,20 @@
     
     loopBtn =[LooperToolClass createBtnImageName:@"btn_selLoop.png" andRect:CGPointMake(167, 101) andTag:901 andSelectImage:@"btn_unLoop.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview:loopBtn];
-    [loopBtn setSelected:true];
+    [chatBtn setSelected:true];
     
-    moveline=[LooperToolClass createImageView:@"moveline.png" andRect:CGPointMake(205, 148) andTag:100 andSize:CGSizeMake(626*DEF_Adaptation_Font_x*0.5, 1028*DEF_Adaptation_Font*0.5) andIsRadius:false];
-    
+    moveline=[LooperToolClass createImageView:@"moveline.png" andRect:CGPointMake(393, 148) andTag:100 andSize:CGSizeMake(626*DEF_Adaptation_Font_x*0.5, 1028*DEF_Adaptation_Font*0.5) andIsRadius:false];
     [self addSubview:moveline];
+    
+    
+    if([[[RongCloudManger sharedManager] getSessionArray]count]==0){
+    
+
+    
+    }
+    
+    
+    
 }
 
 -(void)createListView{
