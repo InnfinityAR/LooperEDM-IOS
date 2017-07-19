@@ -30,6 +30,7 @@
 #import "RongCloudManger.h"
 
 #import "nMainView.h"
+#import "DataHander.h"
 
 #import "UserInfoView.h"
 #import "commonTableView.h"
@@ -442,7 +443,7 @@
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
         
     }else if(type==ActiveBtnTag){
-       
+        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
         
     }else if(type==DJBtnTag){
         [self pushActivityViewController];
