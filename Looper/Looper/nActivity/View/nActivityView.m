@@ -23,7 +23,7 @@
     UIImageView *backImageV;
     
     NSMutableArray *_commendArray;
-    
+    NSArray *_allArray;
     UIButton * tripBtn;
     UIButton *activityFollowBtn;
     
@@ -32,12 +32,12 @@
     
 }
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray andAllArray:(NSArray *)allArray{
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (nActivityViewModel*)idObject;
         _commendArray =commendArray;
-        
+        _allArray=allArray;
         
         [self initView];
     }
@@ -255,7 +255,7 @@
          [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
     }else if(button.tag==103){
         //[self animation];
-        [_obj jumpToCurrentActivity:_commendArray];
+        [_obj jumpToCurrentActivity:_allArray];
     }else if(button.tag==104){
         NSMutableDictionary *dic =[[NSMutableDictionary alloc] initWithDictionary:[_commendArray objectAtIndex:pageIndex]];
 

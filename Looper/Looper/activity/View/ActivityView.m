@@ -13,7 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
-#import "ActivityCollectionViewCell.h"
+//#import "ActivityCollectionViewCell.h"
 @interface ActivityView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     UILabel *daoBdaoLB;
@@ -47,7 +47,7 @@
                //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-        [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
         [self initView];
     }
     return self;
@@ -56,7 +56,7 @@
 -(void)initHeadView{
 
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
     daoBdaoLB = [LooperToolClass createLableView:CGPointMake(85*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(500*DEF_Adaptation_Font*0.5/2,97*DEF_Adaptation_Font*0.5) andText:@"叨Bi叨" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
@@ -198,7 +198,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    ActivityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
@@ -224,7 +224,7 @@
     UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, 15, 12)];
     imageview.image=[UIImage imageNamed:@"sun.png"];
     [bottomV addSubview:imageview];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-10)*0.1, 200*DEF_Adaptation_Font*0.5, 24)];
     CGRect frame=label3.frame;
     frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-10)*0.1);
     NSString *string=[[self getAStringOfChineseWord:[dic objectForKey:@"city"]]componentsJoinedByString:@","];
@@ -234,11 +234,12 @@
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
     UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
     label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
-    label3.layer.cornerRadius=1.0;
+    label3.layer.cornerRadius=12;
     label3.layer.masksToBounds=YES;
     label3.font=[UIFont systemFontOfSize:14];
     label3.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:label3];
+    cell.contentView.layer.masksToBounds=YES;
     [cell.contentView addSubview:label3Shadow];
     return cell;
 }
@@ -297,7 +298,7 @@
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
     cell.commentLB.text=self.objDic[@"activitydes"];
-    cell.themeLB.text=[NSString stringWithFormat:@"Looper燃烧的战斗之夜!\n%@",self.objDic[@"activityname"]];
+    cell.themeLB.text=[NSString stringWithFormat:@"%@",self.objDic[@"activityname"]];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.themeLB.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:10*DEF_Adaptation_Font*0.5];

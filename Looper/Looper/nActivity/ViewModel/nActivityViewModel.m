@@ -399,7 +399,7 @@
 }
 
 -(void)createActivityView{
-    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray];
+    nActivityView *activityV= [[nActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:recommendArray andAllArray:allActivityArray];
     [[_obj view] addSubview:activityV];
 
 }

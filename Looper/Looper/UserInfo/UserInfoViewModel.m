@@ -80,11 +80,11 @@
         [self createCommonView:(int)type];
         
     }else if(type==8003){
-        //喜欢的音乐
+        //他的loop
        [self createCommonView:(int)type];
         
     }else if(type==8004){
-        //我的loop
+        //喜欢的音乐
         [self createCommonView:(int)type];
         
     }

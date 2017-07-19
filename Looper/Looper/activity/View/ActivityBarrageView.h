@@ -21,7 +21,9 @@
 @property(nonatomic,strong)NSMutableArray  *allShowTags;
 @property(nonatomic,strong)NSMutableArray *allShowImageTags;
 -(void)addImageArray:(NSArray *)imageArray;
+//完整的数据
 @property(nonatomic,strong)NSArray *barrageInfo;
+//从数据中获取到的所有弹幕
 @property(nonatomic,strong)NSMutableArray *buddleArr;
 //为了保证弹幕不重复取到，将buddleArr的下标存入到数组中
 @property(nonatomic,strong)NSMutableArray *buddleSubscriptArr;
@@ -29,7 +31,6 @@
 @property(nonatomic,strong)NSMutableArray *userImageArr;
 @property(nonatomic,strong)NSMutableArray *colorArr;
 @property(nonatomic,strong)UIView *collectHeaderView;
-@property(nonatomic,strong)UIView *showHiddenBuddleView;
 //用于添加实时弹幕
 @property(nonatomic,strong)NSMutableArray *barrageArr;
 //用于弹幕轨道

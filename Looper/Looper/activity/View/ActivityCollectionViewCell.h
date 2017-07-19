@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface ActivityCollectionViewCell : UICollectionViewCell
-
+@property(nonatomic,strong)  UILabel *commendLB;
+@property(nonatomic,strong)UIButton *commendBtn;
+@property(nonatomic,strong)void (^commendBtnClick)();
+@property(nonatomic,strong)UILabel *userNameLB;
+@property(nonatomic,strong)UIImageView *userImageView;
+@property(nonatomic,strong)UIButton *shareBtn;
+@property(nonatomic,strong)void (^shareBtnClick)();
+-(void)updateCell;
+-(void)updateContentLBHeight;
+@property(nonatomic,strong)UILabel *contentLB;
 @end

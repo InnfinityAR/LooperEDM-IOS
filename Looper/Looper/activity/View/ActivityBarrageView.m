@@ -26,6 +26,7 @@
     LFWaterfallLayout *waterLayout;
 }
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
+//三个属性都是用于循环展示上传的照片
 @property (nonatomic, strong) YWCarouseView * carouseView;
 @property(nonatomic,strong)NSMutableArray * imageNameArray;
 @property(nonatomic,strong)NSMutableArray *viewArr;
@@ -33,8 +34,6 @@
 @end
 @implementation ActivityBarrageView{
     float labelHeight;
-    //多线程
-    NSThread *_thread;
     
     //是否重置BuddleSubscriptArr
     BOOL  isAddBuddleSubscriptArr;
@@ -80,15 +79,6 @@
         _userImageArr=[NSMutableArray new];
     }
     return _userImageArr;
-}
--(UIView *)showHiddenBuddleView{
-    [_showHiddenBuddleView removeFromSuperview];
-    if (!_showHiddenBuddleView) {
-        _showHiddenBuddleView=[[UIView alloc]init];
-        _showHiddenBuddleView.backgroundColor=[UIColor redColor];
-        
-    }
-    return _showHiddenBuddleView;
 }
 -(NSMutableArray *)allShowTags{
     if (!_allShowTags) {
@@ -139,6 +129,7 @@
 }
 -(void)addImageArray:(NSArray *)imageArray{
     self.barrageInfo=imageArray;
+    [self.userImageArr removeAllObjects];
     [self.buddleArr removeAllObjects];
     for (NSDictionary *buddleDic in imageArray) {
         [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
@@ -160,12 +151,6 @@
         [self.viewModel setBarrageView:self];
         [self addSubview:view];
     }
-    if (button.tag>=2*BUTTONTAG&&button.tag<2*BUTTONTAG+self.barrageInfo.count+10) {
-        NSLog(@"这是一个分享button");
-        
-        [self.viewModel shareH5:self.barrageInfo[button.tag-2*BUTTONTAG-1]];
-        
-    }
     if (button.tag>=5*BUTTONTAG&&button.tag<5*BUTTONTAG+self.barrageInfo.count+10) {
         NSLog(@"这是修改cell的高度的button");
         [self.allShowImageTags addObject:@(button.tag)];
@@ -180,34 +165,6 @@
         labelHeight=button.alpha;
          [self.heightDic setObject:@(labelHeight) forKey:@(button.tag-3*BUTTONTAG)];
         [self.collectView reloadData];
-    }
-    if (button.tag<4*BUTTONTAG+self.barrageInfo.count+10&&button.tag>=4*BUTTONTAG) {
-        //在这返回islike和thumbupcount的参数
-        if (!button.selected) {
-            [button setSelected:YES];
-            //从第二个cell开始算的
-            if (button.tag-4*BUTTONTAG==0) {
-                [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4*BUTTONTAG]objectForKey:@"messageid"] andActivityID:self.activityID];
-            }
-            else{
-            [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4*BUTTONTAG-1]objectForKey:@"messageid"] andActivityID:self.activityID];
-            }
-            [self.allShowTags removeAllObjects];
-            [self.allShowImageTags removeAllObjects];
-        }
-        else{
-            [button setSelected:NO];
-            if (button.tag-4*BUTTONTAG==0) {
-                [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4*BUTTONTAG]objectForKey:@"messageid"] andActivityID:self.activityID];
-            }
-            else{
-                [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[button.tag-4*BUTTONTAG-1]objectForKey:@"messageid"] andActivityID:self.activityID];
-            }
-            [self.allShowTags removeAllObjects];
-            [self.allShowImageTags removeAllObjects];
-        }
-        
-        NSLog(@"这是一个点赞按钮");
     }
 }
 - (void)initailHeaderView {
@@ -224,9 +181,9 @@
         
     }
     //加入播放视频
-    if (0) {
-        [self addAVPlayer];
-    }
+//    if (0) {
+//        [self addAVPlayer];
+//    }
     self.headerView.userInteractionEnabled=YES;
     [self.collectView addSubview:self.headerView];
 }
@@ -239,8 +196,6 @@
     [self.movieController setScalingMode:MPMovieScalingModeAspectFill];//缩放方式满屏
     [self.movieController play];//播放
     [self.headerView addSubview:self.movieController.view];//添加
-    
-    
 }
 - (void)initailBuddleView {
     
@@ -264,12 +219,21 @@
 -(void)initDate
 {
     if (self.buddleSubscriptArr.count!=0) {
+//**防止弹幕重复出现
     int subscript=rand()%self.buddleSubscriptArr.count;
      int   count=[self.buddleSubscriptArr[subscript]intValue];
     NSString *str = [self.buddleArr objectAtIndex:[self.buddleSubscriptArr[subscript]intValue]];
         //把用过的下标移除
         [self.buddleSubscriptArr removeObjectAtIndex:subscript];
-    UILabel *label = [[UILabel alloc]init];
+//**设置弹幕的长度
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(55*DEF_Adaptation_Font*0.5, 0, 240, 50*DEF_Adaptation_Font*0.5)];
+        label.text = str;
+        CGRect frame=label.frame;
+        frame.size.width=[self widthForString:str andHeight: 200*DEF_Adaptation_Font*0.5 andText:label]*1.5;
+        label.frame=frame;
+        label.textAlignment=NSTextAlignmentLeft;
+        label.textColor =[UIColor whiteColor];
+//**设置弹幕的轨道
     int randomCount=[self addGuiDao];
     UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self), [self.buddleCountArr[randomCount]intValue]*55*DEF_Adaptation_Font*0.5, 240, 100*DEF_Adaptation_Font*0.5)];
     CGRect viewFrame1=view1.frame;
@@ -283,7 +247,12 @@
     
     view1.frame=viewFrame1;
     view1.userInteractionEnabled=YES;
-    //尝试判断view1在哪个轨迹
+        //给view1添加swipe手势
+        UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
+        //设置轻扫的方向
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionUp; //默认向上
+        [view1 addGestureRecognizer:swipeGesture];
+//**判断view1在哪个轨迹,轨迹总共0~7
     view1.alpha=[self.buddleCountArr[randomCount]intValue]+2;
     if (self.buddleCountArr.count==1) {
         //防止数组没有元素,同时清除后台数据
@@ -297,26 +266,17 @@
         [self.buddleCountArr removeObjectAtIndex:randomCount];
     }
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 50*DEF_Adaptation_Font*0.5, DEF_WIDTH(view1), 50*DEF_Adaptation_Font*0.5)];
-    label.frame=CGRectMake(55*DEF_Adaptation_Font*0.5, 0, 240, 50*DEF_Adaptation_Font*0.5);
-    //        label.frame =CGRectMake(DEF_WIDTH(self), rand()%(int)(40 - self.collectView.contentOffset.y-160*DEF_Adaptation_Font*0.5)+80*DEF_Adaptation_Font*0.5, 240, 50*DEF_Adaptation_Font*0.5);
-    label.text = str;
-    CGRect viewFrame=view.frame;
-    viewFrame.size.width=view1.frame.size.width;
-    view.frame=viewFrame;
-    
-    //给view添加pan手势
-    view.userInteractionEnabled=YES;
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
-    [view addGestureRecognizer:singleTap];
-    
-    //给view1添加swipe手势
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
-    //设置轻扫的方向
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionUp; //默认向上
-    [view1 addGestureRecognizer:swipeGesture];
-    
-    view.backgroundColor=[UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:0.5];
-    //        view.backgroundColor=[self randomColorAndIndex:arc4random_uniform(6) %5];
+        CGRect viewFrame=view.frame;
+        viewFrame.size.width=view1.frame.size.width;
+        view.frame=viewFrame;
+        view.layer.cornerRadius=25*DEF_Adaptation_Font*0.5;
+        view.layer.masksToBounds=YES;
+        //给view添加pan手势
+        view.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+        [view addGestureRecognizer:singleTap];
+        view.backgroundColor=[UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:0.5];
+        
     // 弹幕点赞
     if (self.barrageInfo.count) {
         if ([self.barrageInfo[count][@"isthumb"]intValue]==1) {
@@ -349,14 +309,7 @@
             [view1 addSubview:imageV];
         }
     }
-    CGRect frame=label.frame;
-    frame.size.width=[self widthForString:str andHeight: 200*DEF_Adaptation_Font*0.5 andText:label]*1.5;
-    label.frame=frame;
-    label.textAlignment=NSTextAlignmentLeft;
-    view.layer.cornerRadius=25*DEF_Adaptation_Font*0.5;
-    view.layer.masksToBounds=YES;
-    label.textColor =[UIColor whiteColor];
-    
+       
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5*DEF_Adaptation_Font*0.5, 5*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     if (self.userImageArr.count) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.userImageArr[count]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -369,11 +322,9 @@
     //将label加入本视图中去。
     [view1 addSubview:view];
     [self.buddleView addSubview:view1];
-    //    self.buddleView.alpha=0.9;
-    //        [self move:view1 andHeight:viewFrame.size.width];
     [self.barrageArr addObject:view1];
-    
     }
+//**弹幕下标使用完后暂停8秒重新生成下标
     else{
         if (isAddBuddleSubscriptArr==NO) {
         [self performSelector:@selector(addBuddleSubscriptArr) withObject:nil/*可传任意类型参数*/ afterDelay:8.0];
@@ -391,10 +342,12 @@
     if (swipe.view.tag!=2*BUTTONTAG&&swipe.view.tag!=-BUTTONTAG*2) {
         count=(int)swipe.view.tag+1;
     }
-         if ([self.barrageInfo[count][@"isthumb"]intValue]==0) {
+    if (count<=0) {
+//说明还未被点赞
+         if ([self.barrageInfo[-count][@"isthumb"]intValue]==0) {
     UIImageView *imageV=  (UIImageView *)[swipe.view viewWithTag:(swipe.view.tag-BUTTONTAG+1)];
               UIView *view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag+1)];
-    if (swipe.view.tag==BUTTONTAG-1||swipe.view.tag==-BUTTONTAG-1) {
+    if (swipe.view.tag==BUTTONTAG*2||swipe.view.tag==-BUTTONTAG*2) {
         imageV=  (UIImageView *)[swipe.view viewWithTag:(-(swipe.view.tag)/2)];
         view=(UIView *)[swipe.view viewWithTag:(swipe.view.tag/2)];
     }
@@ -403,7 +356,7 @@
              if (swipe.view.tag==BUTTONTAG*2||swipe.view.tag==-BUTTONTAG*2) {
         [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
     }else{
-        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-swipe.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-swipe.view.tag-1]objectForKey:@"messageid"] andActivityID:self.activityID];
     }
     view.tag=-view.tag;
     imageV.tag=view.tag-BUTTONTAG;
@@ -411,8 +364,9 @@
         imageV.tag=-view.tag;
     }
          }
+    }
     
-    //点赞按钮向上运动的动画
+//**点赞按钮向上运动的动画
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-40*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     [self.buddleView addSubview:imageView];
     imageView.image=[UIImage imageNamed:@"icon_looper_goodA1"];
@@ -560,7 +514,7 @@
     NSDictionary *message=self.activityDIc[@"message"] ;
     self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(15, 85*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    label.text=[NSString stringWithFormat:@"【LooperEDM】嗨起来！！！%@",self.activityDIc[@"activityname"]];
+    label.text=[NSString stringWithFormat:@"%@",self.activityDIc[@"activityname"]];
     label.font=[UIFont systemFontOfSize:16];
     [label setTextAlignment:NSTextAlignmentLeft];
     label.textColor=[UIColor whiteColor];
@@ -594,13 +548,12 @@
 }
 
 #pragma mark-<UICollectionViewDelegate>
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-//item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+
+    if (self.barrageInfo.count==0) {
+        return 2;
+    }
     return self.barrageInfo.count+1;
 }
 //第一个cell
@@ -609,9 +562,7 @@
     [cell.contentView addSubview:button];
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:[LocalDataMangaer sharedManager].HeadImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
     }];
-    
     imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
     imageView.layer.masksToBounds=YES;
     [cell.contentView addSubview:imageView];
@@ -621,62 +572,150 @@
     [cell.contentView addSubview:label];
     label.textColor=[UIColor whiteColor];
     cell.backgroundColor=[UIColor colorWithRed:30/255.0 green:31/255.0 blue:54/255.0 alpha:1.0];
+     cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
 }
 -(void)originViewForCell:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
     cell.backgroundColor =[self randomColorAndIndex:indexPath.row%5];
-    //            UIButton *button= [LooperToolClass createBtnImageNameReal:@"btn_looper_share.png" andRect:CGPointMake(cell.frame.size.width-5-30*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5) andTag:(int)(2*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTarget:self];
-    //            [cell.contentView addSubview:button];
-    UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO.png" andRect:CGPointMake(5*DEF_Adaptation_Font*0.5, cell.frame.size.height-75*DEF_Adaptation_Font*0.5) andTag:(int)(4*BUTTONTAG+indexPath.row) andSelectImage:@"commendYES.png" andClickImage:@"commendYES.png" andTextStr:nil andSize:CGSizeMake(65*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5) andTarget:self];
+   __block NSDictionary *messageDic=[NSDictionary dictionary];
     if ([imageDic[@"isthumb"]intValue]==1) {
-        [commendBtn setSelected:YES];
+        [cell.commendBtn setSelected:YES];
     }
-    [cell.contentView addSubview:commendBtn];
-    UILabel *commendLB=[[UILabel alloc]initWithFrame:CGRectMake(8+35*DEF_Adaptation_Font*0.5,cell.frame.size.height-5-30*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
-    commendLB.font=[UIFont boldSystemFontOfSize:13];
-    commendLB.textColor=[UIColor whiteColor];
-    commendLB.text=[NSString stringWithFormat:@"%@赞",imageDic[@"thumbupcount"]];
-    [cell.contentView addSubview:commendLB];
+    else{
+     [cell.commendBtn setSelected:NO];
+    }
+    //从第二个cell开始算的
+    if (indexPath.row==0) {
+        messageDic=self.barrageInfo[0];
+    }
+    else{
+        messageDic=self.barrageInfo[indexPath.row-1];
+    }
+    //点赞按钮的点击事件
+    cell.commendBtnClick = ^{
+        //在这返回islike和thumbupcount的参数
+        if (!cell.commendBtn.selected) {
+            [cell.commendBtn setSelected:YES];
+            [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID];
+            [self.allShowTags removeAllObjects];
+            [self.allShowImageTags removeAllObjects];
+        }
+        else{
+            [cell.commendBtn setSelected:NO];
+            [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID];
+            [self.allShowTags removeAllObjects];
+            [self.allShowImageTags removeAllObjects];
+        }
+        NSLog(@"这是一个点赞按钮");
+    };
+    //分享按钮
+//    cell.shareBtnClick = ^{
+//        [self.viewModel shareH5:messageDic];
+//    };
+    //点赞人数赋值
+    cell.commendLB.text=[NSString stringWithFormat:@"%@赞",imageDic[@"thumbupcount"]];
 }
 //不管是否cell有图片都会使用的view
 -(void)AllUseViewForCellIfHaveImage:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
-    UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
-    imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
-    imageView.layer.masksToBounds=YES;
-    //加入点击事件
-    imageView.userInteractionEnabled=YES;
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
-    
-    if(indexPath.row==0){
-        imageView.tag=0;
-    }else{
-        imageView.tag =indexPath.row-1;
-    
-    }
-
-    [imageView addGestureRecognizer:singleTap];
-    [cell.contentView addSubview:imageView];
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-110*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-    label.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    label.textColor=[UIColor whiteColor];
-    label.text=[imageDic objectForKey:@"username"];
-    [cell.contentView addSubview:label];
+    cell.userImageView.tag=indexPath.row;
+    [cell.userImageView addGestureRecognizer:singleTap];
+    cell.userNameLB.text=[imageDic objectForKey:@"username"];
 }
+-(void)hiddenCellUIForOther:(ActivityCollectionViewCell *)cell andIs:(BOOL)yes{
+    [cell.commendLB setHidden:yes];
+    [cell.commendBtn setHidden:yes];
+    [cell.userImageView setHidden:yes];
+    [cell.userNameLB setHidden:yes];
+    [cell.contentLB setHidden:yes];
+}
+-(void)cellUIWhenNoPhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
+    [cell.contentLB setHidden:NO];
+    cell.contentLB.text=imageDic[@"messagecontent"];
+    float  label2Height= [self heightForString:cell.contentLB.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:cell.contentLB];
+    cell.contentLB.font=[UIFont boldSystemFontOfSize:14];
+    if (label2Height<30) {
+        cell.contentLB.font=[UIFont boldSystemFontOfSize:18];}
+    cell.contentLB.numberOfLines=0;
+    if (label2Height>85.0) {
+        cell.contentLB.numberOfLines=5;}
+    UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(3*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+    allShowBtn.alpha=label2Height;
+    [cell.contentView addSubview:allShowBtn];
+    //用于消除allShowBtn
+    for (NSNumber *tag in self.allShowTags) {
+        if ([tag intValue]==indexPath.row+3*BUTTONTAG) {
+            [allShowBtn removeFromSuperview];
+            CGRect frame=cell.contentLB.frame;
+            frame.size.height=label2Height+20*DEF_Adaptation_Font*0.5;
+            cell.contentLB.frame=frame;
+            cell.contentLB.numberOfLines=0;
+            [cell layoutIfNeeded];
+        }
+    }
+    if (label2Height<=85.0) {
+        [allShowBtn removeFromSuperview];
+    }
+}
+-(void)cellUIWhenHavePhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
+    NSString *string=[imageDic objectForKey:@"messagePicture"];
+    NSArray *array = [string componentsSeparatedByString:@";"];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]];
+    imageV.contentMode =  UIViewContentModeScaleAspectFill;
+    imageV.clipsToBounds  = YES;
+    imageV.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPhoto:)];
+    imageV.tag=indexPath.row-1+BUTTONTAG;
+    [imageV addGestureRecognizer:singleTap1];
+    [cell.contentView addSubview:imageV];
+    
+    [cell.contentLB setHidden:YES];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 135*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-185*DEF_Adaptation_Font*0.5)];
+    label2.textAlignment=NSTextAlignmentCenter;
+    label2.text=imageDic[@"messagecontent"];
+    float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:label2];
+    label2.font=[UIFont boldSystemFontOfSize:14];
+    label2.textColor=[UIColor whiteColor];
+    [cell.contentView addSubview:label2];
+    label2.numberOfLines=0;
+    if (label2Height>45.0) {
+        label2.numberOfLines=3;
+    }
+    UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(5*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+    allShowBtn.alpha=label2Height;
+    [cell.contentView addSubview:allShowBtn];
+    //用于修改image和label的frame
+    for (NSNumber *tag in self.allShowImageTags) {
+        if ([tag intValue]==indexPath.row+5*BUTTONTAG) {
+            [allShowBtn removeFromSuperview];
+            CGRect frame=label2.frame;
+            frame.size.height=label2Height+20*DEF_Adaptation_Font*0.5;
+            frame.origin.y=5*DEF_Adaptation_Font*0.5+ (DEF_WIDTH(self)/2-10);
+            label2.frame=frame;
+            label2.numberOfLines=0;
+            CGRect frame2=imageV.frame;
+            frame2.size.height=(DEF_WIDTH(self)/2-10);
+            imageV.frame=frame2;
+            [cell layoutIfNeeded];
+        }}
+  }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+   
     //重用cell
    ActivityCollectionViewCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCellView" forIndexPath:indexPath] ;
-    
+    [cell updateCell];
     for (UIView *view in [cell.contentView subviews]){
         [view removeFromSuperview];
     }
     if (!cell) {cell = [[ActivityCollectionViewCell alloc]init];}else{  }
-    cell.layer.cornerRadius=4.0;
-    cell.layer.masksToBounds=YES;
-        if (indexPath.row==1) {
-            [self firstCellForUpdateData:cell];
-            return cell;
-        }
+           if (indexPath.row==1) {
+               [self hiddenCellUIForOther:cell andIs:YES];
+    [self firstCellForUpdateData:cell];
+        return cell;}
+           else{
+               [self hiddenCellUIForOther:cell andIs:NO];}
         //赋值
         if (self.barrageInfo.count) {
             NSDictionary *imageDic=[NSDictionary dictionary];
@@ -689,84 +728,13 @@
             //在这边判断是否有图片
             if ([imageDic objectForKey:@"messagePicture"]==[NSNull null]||[[imageDic objectForKey:@"messagePicture"]isEqualToString:@""]) {
                 [self AllUseViewForCellIfHaveImage:cell andIndexpath:indexPath andImageDic:imageDic];
-                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 50*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-100*DEF_Adaptation_Font*0.5)];
-                label2.textAlignment=NSTextAlignmentCenter;
-                label2.text=imageDic[@"messagecontent"];
-                float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:label2];
-                label2.font=[UIFont boldSystemFontOfSize:14];
-                if (label2Height<30) {
-                    label2.font=[UIFont boldSystemFontOfSize:18];
-                }
-                label2.textColor=[UIColor whiteColor];
-                [cell.contentView addSubview:label2];
-                label2.numberOfLines=0;
-                if (label2Height>85.0) {
-                    label2.numberOfLines=5;
-                }
-                UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(3*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
-                allShowBtn.alpha=label2Height;
-                [cell.contentView addSubview:allShowBtn];
-                //用于消除allShowBtn
-                for (NSNumber *tag in self.allShowTags) {
-                    if ([tag intValue]==indexPath.row+3*BUTTONTAG) {
-                        [allShowBtn removeFromSuperview];
-                        CGRect frame=label2.frame;
-                        frame.size.height=label2Height+20*DEF_Adaptation_Font*0.5;
-                        label2.frame=frame;
-                        label2.numberOfLines=0;
-                        [cell layoutIfNeeded];
-                    }
-                }
-                if (label2Height<=85.0) {
-                    [allShowBtn removeFromSuperview];
-                }
+                [self cellUIWhenNoPhoto:cell andIndexpath:indexPath andImageDic:imageDic];
+            
             }else{
                 //在这里添加有imageView的情况
-                UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
-                NSString *string=[imageDic objectForKey:@"messagePicture"];
-                NSArray *array = [string componentsSeparatedByString:@";"];
-                [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]];
-                imageV.contentMode =  UIViewContentModeScaleAspectFill;
-                imageV.clipsToBounds  = YES;
-                imageV.userInteractionEnabled=YES;
-                //加入点击事件
-                UITapGestureRecognizer *singleTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPhoto:)];
-                imageV.tag=indexPath.row-1+BUTTONTAG;
-                [imageV addGestureRecognizer:singleTap1];
-                [cell.contentView addSubview:imageV];
+                [self cellUIWhenHavePhoto:cell andIndexpath:indexPath andImageDic:imageDic];
                 [self AllUseViewForCellIfHaveImage:cell andIndexpath:indexPath andImageDic:imageDic];
-                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(5, 135*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)/2-20), DEF_WIDTH(self)/2-10-185*DEF_Adaptation_Font*0.5)];
-                label2.textAlignment=NSTextAlignmentCenter;
-                label2.text=imageDic[@"messagecontent"];
-                float  label2Height= [self heightForString:label2.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:label2];
-                label2.font=[UIFont boldSystemFontOfSize:14];
-                label2.textColor=[UIColor whiteColor];
-                [cell.contentView addSubview:label2];
-                label2.numberOfLines=0;
-                if (label2Height>45.0) {
-                    label2.numberOfLines=3;
-                }
-                UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(5*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
-                allShowBtn.alpha=label2Height;
-                [cell.contentView addSubview:allShowBtn];
-                //用于修改image和label的frame
-                for (NSNumber *tag in self.allShowImageTags) {
-                    if ([tag intValue]==indexPath.row+5*BUTTONTAG) {
-                        [allShowBtn removeFromSuperview];
-                        CGRect frame=label2.frame;
-                        frame.size.height=label2Height+20*DEF_Adaptation_Font*0.5;
-                        frame.origin.y=5*DEF_Adaptation_Font*0.5+ (DEF_WIDTH(self)/2-10);
-                        label2.frame=frame;
-                        label2.numberOfLines=0;
-                        CGRect frame2=imageV.frame;
-                        frame2.size.height=(DEF_WIDTH(self)/2-10);
-                        imageV.frame=frame2;
-                        [cell layoutIfNeeded];
-                    }
-                }
-                
-            }
-        }
+}}
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
         return cell;
 }
@@ -784,10 +752,7 @@
     NSArray *array = [string componentsSeparatedByString:@";"];
     NSLog(@"%@",array);
     self.imageNameArray=[[NSMutableArray alloc]initWithArray:array];
-    if (array.count==1) {
-        
-    }
-    else  if (array.count==2) {
+     if (array.count==2) {
         for (int i=0; i<2; i++) {
             [self.imageNameArray addObject:array[i]];
         }
@@ -795,25 +760,26 @@
     }
     //使用自动循环
     for (int i=0; i<self.imageNameArray.count; i++)
-        
     {
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), DEF_HEIGHT(self))];
         imageView.contentMode=1;
         imageView.clipsToBounds=YES;
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]];
         [self.viewArr addObject:imageView];
-        
     }
     NSArray <UIView *> * views = self.viewArr;
-    
     self.carouseView = [[YWCarouseView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) withTwo:viewArrIsTwo withViews:views withPageControl:NO];
-    
     [self addSubview:self.carouseView];
-    
 }
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     //点击头像跳转
-    NSDictionary *imageDic=self.barrageInfo[tap.view.tag];
+    NSDictionary *imageDic=nil;
+    if (tap.view.tag==0) {
+        imageDic=self.barrageInfo[0];
+    }
+    else{
+    imageDic= self.barrageInfo[tap.view.tag-1];
+    }
     NSString *userid=[imageDic objectForKey:@"userid"];
     [self.viewModel jumpToAddUserInfoVC:userid];
     NSLog(@"%ld",tap.view.tag);
@@ -861,9 +827,7 @@
     }
     NSLog(@"index %ld",index);
     return DEF_WIDTH(self)/2-10;
-    
 }
-
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
@@ -919,7 +883,6 @@
         }else{
             [self.buddleView setHidden:NO];
         }
-        
     }
     //    NSLog(@"总长度:%f,加上的长度:%f", 40 - self.collectView.contentOffset.y-160*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5);
 }

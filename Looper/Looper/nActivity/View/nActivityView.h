@@ -21,6 +21,6 @@
 
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSArray*)commendArray andAllArray:(NSArray *)allArray;
 
 @end
