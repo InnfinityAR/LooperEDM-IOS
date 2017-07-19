@@ -26,8 +26,25 @@
 
     AVPlayer *_player;
     AVPlayerLayer *playerLayer;
+    
+    int num_video;
 
 
+}
+
+
+-(void)stop{
+    
+    [_player pause];
+    
+    [_player setRate:0];
+
+
+}
+
+-(void)resume{
+
+    [_player play];
 }
 
 - (void)viewDidLoad {
@@ -35,6 +52,10 @@
     // Do any additional setup after loading the view.
     //[self LocalPhoto];
   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stop) name:@"videoStop" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resume) name:@"videoResume" object:nil];
+    
+    
     
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.allowRotation = 1;
@@ -53,6 +74,9 @@
 }
 
 
+
+
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
 
     if(button.tag==102){
@@ -66,6 +90,13 @@
 
 - (BOOL)shouldAutorotate {
     return YES;
+}
+
+
+-(void)setVideo:(int)videoType{
+
+    num_video=videoType;
+
 }
 
 
@@ -110,12 +141,23 @@
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
     
     
-    LoginViewController* login = [[LoginViewController alloc] init];
+    
+    if(num_video==1){
+        LoginViewController* login = [[LoginViewController alloc] init];
+        
+        self.view.window.rootViewController = login;
+        [self.view.window makeKeyAndVisible];
+    
+    }else if(num_video==2){
+        
+    
+        [self.navigationController popViewControllerAnimated:true];
+    }
+    
+    
+    
+   
 
-    self.view.window.rootViewController = login;
-    [self.view.window makeKeyAndVisible];
-    
-    
     //[login jumpToMain];
 }
 

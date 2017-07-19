@@ -149,7 +149,7 @@
             UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
             [writeView1 setBackgroundColor:[UIColor whiteColor]];
             [bkScroll addSubview:writeView1];
-            UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, ((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"推荐loop" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+            UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"推荐loop" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
              [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
             
             [bkScroll addSubview:activityStr];
@@ -158,7 +158,7 @@
             for(int i=0;i<[loopArray count];i++){
                 NSDictionary *dic =[loopArray objectAtIndex:i];
                 if(i%2==0){
-                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(26, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
+                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(26, ((scrollHeight/DEF_Adaptation_Font/0.5)+2220)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
                     [bkScroll addSubview:loopImage];
                     loopImage.layer.cornerRadius =  4*DEF_Adaptation_Font_x*0.5;
                     loopImage.layer.masksToBounds = YES;
@@ -166,7 +166,7 @@
                       [loopImage addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(20, 250) andSize:CGSizeMake(176, 70) andFontSize:13]];
                     
                 }else{
-                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(334, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
+                    UIImageView* loopImage =[LooperToolClass createBtnImage:[dic objectForKey:@"news_img"] andRect:CGPointMake(334, ((scrollHeight/DEF_Adaptation_Font/0.5)+2220)) andTag:i andSize:CGSizeMake(275, 415) andTarget:self];
                     [bkScroll addSubview:loopImage];
                     loopImage.layer.cornerRadius =  4*DEF_Adaptation_Font_x*0.5;
                     loopImage.layer.masksToBounds = YES;
@@ -562,7 +562,7 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
-        [_obj removeDetailView];
+        [self removeFromSuperview];
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];
     }else if(button.tag==103){

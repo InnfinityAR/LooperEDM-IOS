@@ -41,7 +41,11 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 @end
 
-@implementation PKRecordShortVideoViewController
+@implementation PKRecordShortVideoViewController{
+
+    int show_lable;
+
+}
 
 #pragma mark - Init 
 
@@ -67,7 +71,7 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    show_lable = 1;
     PKPreviewLayerHeight = ceilf(3/4.0 * kScreenWidth);
     CGFloat spaceHeight = ceilf( (kScreenHeight - 44 - PKPreviewLayerHeight)/3 );
     PKRecordButtonVarticalHeight = ceilf( kScreenHeight - 2 * spaceHeight );
@@ -136,6 +140,7 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 - (void)cancelShoot {
     [self.recorder stopRunning];
+      [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -228,7 +233,6 @@ static CGFloat const PKRecordButtonWidth = 90;
     }
 }
 
-
 #pragma mark - PKShortVideoRecorderDelegate
 
 ///录制开始回调
@@ -243,7 +247,22 @@ static CGFloat const PKRecordButtonWidth = 90;
 - (void)recorderDidEndRecording:(PKShortVideoRecorder *)recorder {
     //停止进度条
     [self.progressBar stop];
+    
 }
+
+- (void)recorderDidErrorRecording:(PKShortVideoRecorder *)recorder{
+    
+    
+    [self cancelShoot];
+    
+    if(show_lable==1){
+        show_lable=2;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请打开照片和录音权限" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+}
+
 
 //视频录制结束回调
 - (void)recorder:(PKShortVideoRecorder *)recorder didFinishRecordingToOutputFilePath:(NSString *)outputFilePath error:(NSError *)error {

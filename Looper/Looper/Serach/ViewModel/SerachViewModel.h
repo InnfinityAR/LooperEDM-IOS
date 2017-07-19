@@ -20,7 +20,7 @@
 
 
 -(id)initWithController:(id)controller;
-
+-(void)updateData;
 -(void)serachStr:(NSString*)setachStr;
 -(void)popController;
 -(void)movelooperPos:(NSDictionary *)loopData;

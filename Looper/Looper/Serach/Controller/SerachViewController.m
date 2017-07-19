@@ -21,6 +21,7 @@
     // Do any additional setup after loading the view.
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+      _SerachVm=[[SerachViewModel alloc] initWithController:self];
     
 }
 
@@ -38,8 +39,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
 
-       _SerachVm=[[SerachViewModel alloc] initWithController:self];
-
+    
+   // [_SerachVm updateData];
 }
 
 

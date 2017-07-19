@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)recorderDidBeginRecording:(PKShortVideoRecorder *)recorder;
 - (void)recorderDidEndRecording:(PKShortVideoRecorder *)recorder;
+- (void)recorderDidErrorRecording:(PKShortVideoRecorder *)recorder;
+
+
 - (void)recorder:(PKShortVideoRecorder *)recorder didFinishRecordingToOutputFilePath:(nullable NSString *)outputFilePath error:(nullable NSError *)error;
 
 @end

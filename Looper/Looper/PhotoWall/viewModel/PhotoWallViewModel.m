@@ -36,6 +36,8 @@
     if(self=[super init]){
         self.obj = (PhotoWallViewController*)controller;
         [self getImageBoard:activityId];
+        
+        
     }
     return  self;
     
@@ -63,7 +65,7 @@
 
 
 -(void)playVideoFile:(NSString*)videoFile{
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:videoFile]];
     PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:videoFile previewImage:image];
     [_obj presentViewController:vc animated:NO completion:NULL];
@@ -80,7 +82,7 @@
 
 
 -(void)createRecordVideo{
-
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *fileName = [NSProcessInfo processInfo].globallyUniqueString;
     NSString *path = [paths[0] stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"mp4"]];

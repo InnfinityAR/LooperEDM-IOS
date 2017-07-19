@@ -77,5 +77,6 @@
 -(void)createMessageController;
 -(void)requestgetMyFavorite;
 -(void)requestMainData;
+-(void)createActivityView:(NSString*)activityId;
 
 @end

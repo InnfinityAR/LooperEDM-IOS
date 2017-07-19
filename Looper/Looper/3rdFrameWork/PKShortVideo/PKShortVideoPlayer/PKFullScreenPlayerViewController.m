@@ -102,6 +102,7 @@
     [self.navigationController.view.layer addAnimation:animation forKey:nil];
     
     if (self.navigationController) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
         [self.navigationController popViewControllerAnimated:NO];
     } else {
         [self dismissViewControllerAnimated:NO completion:NULL];
