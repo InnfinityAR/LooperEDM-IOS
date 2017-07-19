@@ -55,12 +55,9 @@
     
     [[_obj view] addSubview:sendPhotoV];
 
-    
     [sendPhotoV setLocationStr:[[_photoWallData objectForKey:@"activity"] objectForKey:@"activityname"]];
     
 }
-
-
 
 
 
@@ -79,6 +76,12 @@
 
 }
 
+
+- (void)didFinishImageToOutputFilePath:(UIImage *)imagePath{
+
+     [sendPhotoV ImageFileSave:imagePath];
+
+}
 
 
 -(void)createRecordVideo{

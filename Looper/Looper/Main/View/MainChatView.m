@@ -101,9 +101,7 @@
 
 -(void)initView:(NSDictionary*)loopData{
     selectIndexNum=2;
-   
-   
-    
+
     UIView *bkV = [[UIView alloc] initWithFrame:CGRectMake(0, 101*0.5*DEF_Adaptation_Font, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     bkV.layer.cornerRadius = 16*DEF_Adaptation_Font*0.5;
     [bkV setBackgroundColor:[UIColor colorWithRed:56/255.0 green:49/255.0 blue:82/255.0 alpha:1.0]];
@@ -124,7 +122,6 @@
     
     moveline=[LooperToolClass createImageView:@"moveline.png" andRect:CGPointMake(393, 148) andTag:100 andSize:CGSizeMake(626*DEF_Adaptation_Font_x*0.5, 1028*DEF_Adaptation_Font*0.5) andIsRadius:false];
     [self addSubview:moveline];
-    
     
     [self createListView];
     [self updataLoopFollowData:loopData];
@@ -150,9 +147,6 @@
 }
 
 
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(selectIndexNum==1){
@@ -168,8 +162,6 @@
             if(isEnd==false){
                 //NIMRecentSession *session = (NIMRecentSession*)[[[NIMCloudMander sharedManager]getSessionArray] objectAtIndex:indexPath.row];
                   RCConversation *session = (RCConversation*)[[[RongCloudManger sharedManager]getSessionArray] objectAtIndex:indexPath.row];
-                
-                
                 [_obj chatView:session.targetId];
 
             }

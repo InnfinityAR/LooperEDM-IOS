@@ -12,6 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "PKFullScreenPlayerViewController.h"
 #import "UIImage+PKShortVideoPlayer.h"
+#import "LooperConfig.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -57,6 +58,8 @@ static CGFloat const PKRecordButtonWidth = 90;
         _outputSize = outputSize;
         _videoMaximumDuration = 6;
         _videoMinimumDuration = 1;
+        
+        ;
     }
     return self;
 }
@@ -197,8 +200,18 @@ static CGFloat const PKRecordButtonWidth = 90;
 
 - (void)buttonStopRecording {
     //停止录制
-    [self.recorder stopRecording];
+    
+    
+    [self performSelector:@selector(stopRecording) withObject:nil afterDelay:0.05];
 }
+
+-(void)stopRecording{
+
+    [self.recorder stopRecording];
+
+}
+
+
 
 - (void)sendVideo {
     [self dismissViewControllerAnimated:YES completion:^{
@@ -278,7 +291,16 @@ static CGFloat const PKRecordButtonWidth = 90;
         //当前时间
         CFAbsoluteTime nowTime = CACurrentMediaTime();
         if (self.beginRecordTime != 0 && nowTime - self.beginRecordTime < self.videoMinimumDuration) {
-            [self endRecordingWithPath:outputFilePath failture:NO];
+            
+//            UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
+//
+//            [self dismissViewControllerAnimated:YES completion:^{
+//                [self.delegate didFinishImageToOutputFilePath:image];
+//            }];
+            
+            
+             [self endRecordingWithPath:outputFilePath failture:NO];
+            
         } else {
             self.outputFilePath = outputFilePath;
             [self.recordButton setTitle:@"发送" forState:UIControlStateNormal];

@@ -22,6 +22,7 @@
     NSString *videoStr;
     UILabel *locationStr;
     UIImageView *videoImg;
+    NSMutableArray *_photoArray;
 
 }
 
@@ -52,6 +53,20 @@
     locationStr.text= str;
 
 
+}
+
+
+-(void)ImageFileSave:(UIImage*)imageFile{
+
+    
+    [_photoArray addObject:imageFile];
+    
+    videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font*0.5,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
+    videoImg.image=imageFile;
+    videoImg.layer.cornerRadius = 15*DEF_Adaptation_Font_x*0.5;
+    videoImg.layer.masksToBounds = YES;
+    [self addSubview:videoImg];
+  
 }
 
 
@@ -209,6 +224,7 @@
 
 
 -(void)initView{
+      _photoArray = [[NSMutableArray alloc] initWithCapacity:50];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [self setBackgroundColor: [UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [self createHudView];

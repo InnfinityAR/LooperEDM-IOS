@@ -12,6 +12,9 @@
 
 - (void)didFinishRecordingToOutputFilePath:(NSString *)outputFilePath;
 
+
+- (void)didFinishImageToOutputFilePath:(UIImage *)imagePath;
+
 @end
 
 @interface PKRecordShortVideoViewController : UIViewController
