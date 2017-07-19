@@ -43,7 +43,11 @@
         NSLog(@"我是send按钮");
         if ([textview.text isEqualToString:@""]) {
             [[DataHander sharedDataHander] showViewWithStr:@"地球人你确定不写评论吗" andTime:2 andPos:CGPointZero];
-        }else{
+        }
+        else if(textview.text.length>=100){
+        [[DataHander sharedDataHander] showViewWithStr:@"地球人你评论超过100字了" andTime:2 andPos:CGPointZero];
+        }
+        else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];
         }

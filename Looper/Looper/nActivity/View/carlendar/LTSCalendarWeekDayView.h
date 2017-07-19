@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 @class  LTSCalendarManager;
 @interface LTSCalendarWeekDayView : UIView
-
 @property (weak, nonatomic) LTSCalendarManager *calendarManager;
 
 
