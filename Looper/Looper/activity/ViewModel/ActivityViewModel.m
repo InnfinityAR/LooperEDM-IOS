@@ -226,10 +226,13 @@ NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid];
-            
+              [self.barrageView showHUDWithString:@"评论成功"];
+        }
+        else{
+         [self.barrageView showHUDWithString:@"你真会玩，可惜发不出来，哈哈"];
         }
     }fail:^{
-        
+       
     }];
 }
 

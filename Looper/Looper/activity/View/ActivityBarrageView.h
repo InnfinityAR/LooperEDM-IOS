@@ -37,4 +37,7 @@
 @property(nonatomic,strong)NSMutableArray *buddleCountArr;
 //用于储存cell的变化高度
 @property(nonatomic,strong)NSMutableDictionary *heightDic;
+
+
+-(void)showHUDWithString:(NSString*)commend;
 @end

@@ -199,7 +199,9 @@
     }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
     if (activity[@"location"]==[NSNull null]) {
-        
+    }
+    else if ([activity[@"location"] isEqualToString:@""]){
+        cell.addressLB.text=activity[@"city"];
     }
     else{
      cell.addressLB.text=activity[@"location"];

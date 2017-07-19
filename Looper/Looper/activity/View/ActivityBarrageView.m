@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "YWCarouseView.h"
+#import "DataHander.h"
 #define BUTTONTAG  100000
 @interface ActivityBarrageView()
 {
@@ -97,6 +98,9 @@
         _buddleArr=[NSMutableArray new];
     }
     return _buddleArr;
+}
+-(void)showHUDWithString:(NSString*)commend{
+ [[DataHander sharedDataHander] showViewWithStr:commend andTime:3 andPos:CGPointZero];
 }
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)viewModel{
     if (self = [super initWithFrame:frame]) {

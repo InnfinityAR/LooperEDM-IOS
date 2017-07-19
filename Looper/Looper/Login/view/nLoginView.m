@@ -16,7 +16,7 @@
 #import <UMSocialNetwork/UMSocialNetwork.h>
 #import <UShareUI/UShareUI.h>
 #import "LooperToolClass.h"
-
+#import "DataHander.h"
 
 @implementation nLoginView{
 
@@ -224,11 +224,8 @@
     }
     
     if(textField.tag == 1002){
-    
          [_obj login:textFieldIphone.text andCode:textFieldCode.text];
-        
         [self endEditing:YES];
-    
     }
     
     return YES;
