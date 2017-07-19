@@ -13,6 +13,7 @@
 @interface CarlendarView : UIView<UITableViewDataSource,UITableViewDelegate,LTSCalendarEventSource>
 {
     BOOL cellCountIsOne;
+    BOOL firstUpdate;
 }
 @property(nonatomic,strong) NSMutableDictionary *eventsByDate;
 @property(nonatomic,strong)NSArray *dataArray;

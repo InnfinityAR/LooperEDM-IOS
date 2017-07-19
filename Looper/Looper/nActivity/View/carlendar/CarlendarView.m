@@ -10,6 +10,11 @@
 #import "LooperToolClass.h"
 #import "nActivityViewModel.h"
 #import "LooperConfig.h"
+@interface CarlendarView()
+{
+    NSInteger _year;
+}
+@end
 @implementation CarlendarView
 
 -(NSMutableDictionary *)eventsByDate{
@@ -22,6 +27,7 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(nActivityViewModel *)obj;
         self.dataArray =dataArr;
+        firstUpdate=NO;
         // 获取各时间字段的数值
         [self createRandomEvents];
         [self lts_InitUI];
@@ -37,9 +43,31 @@
         // 获取不同时间字段的信息
         NSDateComponents* comp = [gregorian components: unitFlags
                                               fromDate:dt];
-        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@月",[self currentMonth:comp.month]];
+        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:comp.year],[self currentMonth:comp.month]];
     }
     return self;
+}
+-(NSString *)currentYear:(NSInteger)year{
+    switch (year) {
+        case 2015:
+            return @"二零一五";
+            break;
+        case 2016:
+            return @"二零一六";
+            break;
+        case 2017:
+            return @"二零一七";
+            break;
+        case 2018:
+            return @"二零一八";
+            break;
+        case 2019:
+            return @"二零一九";
+            break;
+        default:
+            break;
+    }
+            return nil;
 }
 -(NSString*)currentMonth:(NSInteger)month{
     
@@ -149,7 +177,11 @@
 
 #pragma mark -- LTSCalendarEventSource --
 - (void)calendarDidLoadPage:(LTSCalendarManager *)calendar{
-    self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@月",[self currentMonth:calendar.monthForSelectedDay]];
+   
+    if (firstUpdate==NO) {
+     self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:_year],[self currentMonth:calendar.monthForSelectedDay]];
+         firstUpdate=YES;
+    }
 }
 // 该日期是否有事件
 - (BOOL)calendarHaveEvent:(LTSCalendarManager *)calendar date:(NSDate *)date
@@ -164,7 +196,11 @@
 //当前 选中的日期  执行的方法
 - (void)calendarDidDateSelected:(LTSCalendarManager *)calendar date:(NSDate *)date
 {
-    NSString *key = [[self dateFormatter] stringFromDate:date];
+     NSString *key = [[self dateFormatter] stringFromDate:date];
+    _year=[[key substringToIndex:4]integerValue];
+    if (firstUpdate==YES) {
+        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:_year],[self currentMonth:calendar.monthForSelectedDay]];
+    }
     //    self.label.text =  key;
     NSArray *events = self.eventsByDate[key];
     if (events.count>0) {

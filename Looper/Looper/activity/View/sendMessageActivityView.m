@@ -43,7 +43,11 @@
         NSLog(@"我是send按钮");
         if ([textview.text isEqualToString:@""]) {
             [[DataHander sharedDataHander] showViewWithStr:@"地球人你确定不写评论吗" andTime:2 andPos:CGPointZero];
-        }else{
+        }
+        else if(textview.text.length>=100){
+        [[DataHander sharedDataHander] showViewWithStr:@"地球人你评论超过100字了" andTime:2 andPos:CGPointZero];
+        }
+        else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
         [self removeFromSuperview];
         }
@@ -63,6 +67,8 @@
 -(void)createHudView{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
@@ -152,8 +158,13 @@
     
     sendPicBtn.frame = CGRectMake(sendPicBtn.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-sendPicBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendPicBtn.frame.size.width, sendPicBtn.frame.size.height);
 }
+-(void)keyboardWillHide:(NSNotification *)notification{
+    
+    sendBtn.frame = CGRectMake(sendBtn.frame.origin.x, DEF_SCREEN_HEIGHT-sendBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendBtn.frame.size.width, sendBtn.frame.size.height);
+    
+    sendPicBtn.frame = CGRectMake(sendPicBtn.frame.origin.x, DEF_SCREEN_HEIGHT -sendPicBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendPicBtn.frame.size.width, sendPicBtn.frame.size.height);
 
-
+}
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
