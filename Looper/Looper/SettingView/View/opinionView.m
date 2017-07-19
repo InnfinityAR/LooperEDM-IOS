@@ -10,6 +10,7 @@
 #import "SettingViewModel.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
+#import "DataHander.h"
 
 @implementation opinionView{
     UITextView *textview;
@@ -33,6 +34,20 @@
 }
 
 
+- (BOOL) isBlankString:(NSString *)string {
+    if (string == nil || string == NULL) {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        return YES;
+    }
+    return NO;
+}
+
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==3000){
         
@@ -42,8 +57,18 @@
     }else if(button.tag==3001){
     
          NSLog(@"%@",textview.text);
-        [_obj bugReport:textview.text and:bugPath];
         
+        
+        if([self isBlankString:textview.text]==false){
+        
+             [_obj bugReport:textview.text and:bugPath];
+            
+        
+        }else{
+        
+            [[DataHander sharedDataHander] showViewWithStr:@"请输入意见后 重试" andTime:1 andPos:CGPointZero];
+        }
+
     
     }else if(button.tag==3002){
         

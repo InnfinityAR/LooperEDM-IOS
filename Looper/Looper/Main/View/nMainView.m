@@ -14,6 +14,7 @@
 #import "MainChatView.h"
 #import "LocalDataMangaer.h"
 #import "RongCloudManger.h"
+#import "UIImageView+WebCache.h"
 
 @implementation nMainView{
     
@@ -56,6 +57,8 @@
     
     UserInfoView *userInfoView;
     MainChatView *mainChatV;
+    
+    UIImageView *looperImage;
     
 }
 
@@ -129,7 +132,17 @@
 }
 
 
+-(void)updataHeadImage{
+    [looperImage  sd_setImageWithURL:[NSURL URLWithString:[LocalDataMangaer sharedManager].HeadImageUrl]];
+    
+
+}
+
+
 -(void)createBackGround{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updataHeadImage) name:@"updateHeadImage" object:nil];
+    
     
     UIImage *mainBk = [UIImage imageNamed:@"mainBk.png"];
     imageOne = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mainBk.size.width*0.3*DEF_Adaptation_Font, mainBk.size.height*0.3*DEF_Adaptation_Font)];
@@ -212,7 +225,7 @@
     [self addSubview:serachBtn];
     
 
-    UIImageView *looperImage = [LooperToolClass createBtnImage:[LocalDataMangaer sharedManager].HeadImageUrl andRect:CGPointMake(532, 52) andTag:200 andSize:CGSizeMake(64, 64) andTarget:self];
+    looperImage = [LooperToolClass createBtnImage:[LocalDataMangaer sharedManager].HeadImageUrl andRect:CGPointMake(532, 52) andTag:200 andSize:CGSizeMake(64, 64) andTarget:self];
     looperImage.layer.cornerRadius = 64*DEF_Adaptation_Font*0.5/2;
     looperImage.layer.masksToBounds = YES;
     [self addSubview:looperImage];

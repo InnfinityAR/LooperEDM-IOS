@@ -132,6 +132,8 @@
             [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
              [[LocalDataMangaer sharedManager] setData];
             
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"updateHeadImage" object:nil];
+            
         }
     }fail:^{
         

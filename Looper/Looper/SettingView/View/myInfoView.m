@@ -47,11 +47,11 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==3000){
-        int sexNum = 0;
+        int sexNum = [[LocalDataMangaer sharedManager].sex intValue];
         if([sexText.text isEqualToString:@"男"]){
             sexNum = 1;
         }else if([sexText.text isEqualToString:@"女"]){
-            sexNum = 2;
+            sexNum = 0;
         }
             if(_headUrl==nil){
                 [_obj updateUserInfo:nickNameText.text andSex:sexNum andHeadImage:nil];
@@ -181,6 +181,10 @@
     
     bornText = [self createTextField:@"18" andRect:CGRectMake(154*DEF_Adaptation_Font*0.5, 506*DEF_Adaptation_Font*0.5, 452*DEF_Adaptation_Font*0.5, 42*DEF_Adaptation_Font*0.5) andTag:100];
     [self addSubview:bornText];
+    
+    bornText.keyboardType=UIKeyboardTypeNumberPad;
+    
+    
   
 }
 

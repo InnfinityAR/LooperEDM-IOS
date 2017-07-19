@@ -75,6 +75,12 @@
     
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdaa59db9c810d5d6" appSecret:@"b18344bcba1200518a859848a7f8e9ed" redirectURL:@"http://mobile.umeng.com/social"];
     
+    
+  //  -(void) removePlatformProviderWithPlatformType:(UMSocialPlatformType)platformType;
+    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_Sina];
+    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_QQ];
+    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformType:UMSocialPlatformType_Qzone];
+    
 }
 
 
