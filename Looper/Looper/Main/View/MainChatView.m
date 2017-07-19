@@ -36,7 +36,9 @@
     
     UIButton *chatBtn;
     UIButton *loopBtn;
+    UIButton *communityBtn;
     UIImageView* moveline;
+    UIImageView* communityImage;
     
     BOOL isEnd;
 
@@ -48,10 +50,10 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.obj = (nMainView*)idObject;
-        
         [self initView:loopData];
-        [self createListView];
-        
+       
+       
+
     }
     return self;
 }
@@ -68,44 +70,40 @@
         [chatBtn setSelected:true];
         selectIndexNum =2;
         [tableView1 reloadData];
-        
+        [communityBtn setHidden:false];
+        [communityImage setHidden:false];
         [UIView animateWithDuration:0.5 animations:^{
             
             moveline.frame =CGRectMake(393*0.5*DEF_Adaptation_Font, 148*0.5*DEF_Adaptation_Font, moveline.frame.size.width, moveline.frame.size.height);
         }];
-
-        
-        
     }else if(button.tag==901){
         [chatBtn setSelected:false];
         [loopBtn setSelected:true];
         selectIndexNum =1;
         [tableView1 reloadData];
-        
+        [communityBtn setHidden:true];
+        [communityImage setHidden:true];
         [UIView animateWithDuration:0.5 animations:^{
             
             moveline.frame =CGRectMake(206*0.5*DEF_Adaptation_Font, 148*0.5*DEF_Adaptation_Font, moveline.frame.size.width, moveline.frame.size.height);
         }];
         
     }
-    
     [_obj MainChatEvent:button.tag];
-    
 }
 
 -(void)updataLoopFollowData:(NSDictionary *)loopData{
 
-     loopArray = [[NSArray alloc] initWithArray:[loopData objectForKey:@"FollowLoop"]];
-    
-    
+    loopArray = [[NSArray alloc] initWithArray:[loopData objectForKey:@"FollowLoop"]];
     [tableView1 reloadData];
 }
-
 
 
 -(void)initView:(NSDictionary*)loopData{
     selectIndexNum=2;
    
+   
+    
     UIView *bkV = [[UIView alloc] initWithFrame:CGRectMake(0, 101*0.5*DEF_Adaptation_Font, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     bkV.layer.cornerRadius = 16*DEF_Adaptation_Font*0.5;
     [bkV setBackgroundColor:[UIColor colorWithRed:56/255.0 green:49/255.0 blue:82/255.0 alpha:1.0]];
@@ -128,14 +126,16 @@
     [self addSubview:moveline];
     
     
+    [self createListView];
+    [self updataLoopFollowData:loopData];
+    
     if([[[RongCloudManger sharedManager] getSessionArray]count]==0){
-    
+        communityImage=[LooperToolClass createImageView:@"bg_Text.png" andRect:CGPointMake(134, 377) andTag:100 andSize:CGSizeMake(382*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        [self addSubview:communityImage];
 
-    
+        communityBtn =[LooperToolClass createBtnImageName:@"btn_community.png" andRect:CGPointMake(160, 612) andTag:9008 andSelectImage:@"btn_community.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+        [self addSubview: communityBtn];
     }
-    
-    
-    
 }
 
 -(void)createListView{

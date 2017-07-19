@@ -126,17 +126,13 @@
             _effectView.alpha=0.0f;
         }];
     }
-    
      [_obj hudOnClick:EventTag];
-    
 }
 
 
 -(void)updataHeadImage{
     [looperImage  sd_setImageWithURL:[NSURL URLWithString:[LocalDataMangaer sharedManager].HeadImageUrl]];
-    
-
-}
+    }
 
 
 -(void)createBackGround{

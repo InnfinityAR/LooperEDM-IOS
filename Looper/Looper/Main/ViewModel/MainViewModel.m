@@ -468,6 +468,9 @@
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
         
+    }else if(type==9008){
+       [self pushActivityViewController];
+        
     }else if(type==ActiveBtnTag){
         [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
         
