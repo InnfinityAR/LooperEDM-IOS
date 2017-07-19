@@ -193,28 +193,28 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 
-//    if(isHasData == false){
+    if(isHasData == false){
 
         VideoViewController* videoVc = [[VideoViewController alloc] init];
         self.window.rootViewController = videoVc;
         [self.window makeKeyAndVisible];
 
-//    }else{
-//        MainViewController *start = [MainViewController alloc];
-//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
-//        nav.delegate = self;
-//        nav.navigationBar.hidden = YES;
-//        nav.interactivePopGestureRecognizer.enabled = YES;
-//        self.window.rootViewController = nav;
-//
-//        [self.window makeKeyAndVisible];
-//    }
-//
-//     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-//    
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-// 
+    }else{
+        MainViewController *start = [MainViewController alloc];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+        nav.delegate = self;
+        nav.navigationBar.hidden = YES;
+        nav.interactivePopGestureRecognizer.enabled = YES;
+        self.window.rootViewController = nav;
+
+        [self.window makeKeyAndVisible];
+    }
+
+     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+ 
    return YES;
 }
 
