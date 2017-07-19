@@ -107,7 +107,6 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:[NSNumber numberWithInt:type] forKey:@"type"];
     
-    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getFriendList" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             if(type==1){
@@ -129,19 +128,16 @@
 }
 
 
+
 -(void)removePlayerInfo{
     [_playerInfoV removeFromSuperview];
     
 }
 
-
 -(void)pushController:(NSDictionary*)dic{
-    
     SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
     [simpleC chatTargetID:dic];
     [[_obj navigationController] pushViewController:simpleC animated:NO];
-    
-    
 }
 
 -(void)JumpToSimpleChat:(NSDictionary*)TargetDic{

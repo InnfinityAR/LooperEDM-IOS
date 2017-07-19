@@ -100,7 +100,6 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"checkVerificationCode" parameters:dic  success:^(id responseObject) {
         NSLog(@"%@",responseObject);
     if([responseObject[@"status"] intValue]==0){
-        
         [LocalDataMangaer sharedManager].uid = responseObject[@"data"][@"userid"];
         [LocalDataMangaer sharedManager].userData = responseObject[@"data"];
         [LocalDataMangaer sharedManager].tokenStr = responseObject[@"data"][@"sdkid"];

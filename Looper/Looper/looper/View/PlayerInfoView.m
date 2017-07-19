@@ -110,9 +110,6 @@
         
              [_obj pushController:_loopData];
         }
-        
-        
-       
     }
 
 }

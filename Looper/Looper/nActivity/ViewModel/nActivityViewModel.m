@@ -121,7 +121,6 @@
             }
         }else{
             
-            
         }
     }fail:^{
         
@@ -168,8 +167,6 @@
          [activityDetailV removeFromSuperview];
     
     }
-    
-   
 }
 
 //跳转到购票

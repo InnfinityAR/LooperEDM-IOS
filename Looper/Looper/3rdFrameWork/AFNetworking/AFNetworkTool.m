@@ -145,7 +145,6 @@
     }else{
     
           [[DataHander sharedDataHander] showDlg];
-    
     }
 
     [manager POST:url parameters:parameters constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
