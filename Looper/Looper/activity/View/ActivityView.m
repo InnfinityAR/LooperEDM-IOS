@@ -13,7 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
-#import "ActivityCollectionViewCell.h"
+//#import "ActivityCollectionViewCell.h"
 @interface ActivityView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     UILabel *daoBdaoLB;
@@ -47,7 +47,7 @@
                //加载懒加载
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ActivityCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
-        [self.collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
         [self initView];
     }
     return self;
@@ -196,7 +196,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    ActivityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
@@ -295,7 +295,7 @@
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
     cell.commentLB.text=self.objDic[@"activitydes"];
-    cell.themeLB.text=[NSString stringWithFormat:@"Looper燃烧的战斗之夜!\n%@",self.objDic[@"activityname"]];
+    cell.themeLB.text=[NSString stringWithFormat:@"%@",self.objDic[@"activityname"]];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.themeLB.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:10*DEF_Adaptation_Font*0.5];
