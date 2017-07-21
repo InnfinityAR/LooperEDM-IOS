@@ -46,6 +46,9 @@
     UIButton *activeBtn1;
     UIButton *detailBtn1;
     UIButton *phtotBtn1;
+    
+    
+    NSString *_localId;
 
 }
 
@@ -62,6 +65,8 @@
 
 -(void)initView:(NSDictionary*)data{
     _clubData = data;
+    _localId =[[data objectForKey:@"data"] objectForKey: @"clubid"];
+
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [self createImageViewHud];
     [self createScrollView];
@@ -186,6 +191,13 @@
     followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,284*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [scrollV addSubview:followBtn];
 
+    if([[_clubData objectForKey:@"islike"]intValue]==1){
+        [followBtn setSelected:true];
+    }
+    
+
+    
+    
     [self createHorizontalScroll];
     
    
@@ -343,7 +355,15 @@
             [lineImage setFrame:CGRectMake(302*DEF_Adaptation_Font*0.5, lineImage.frame.origin.y, lineImage.frame.size.width, lineImage.frame.size.height)];
         }];
     }else if(button.tag==107){
-        [followBtn setSelected:true];
+        if([followBtn isSelected]==true){
+            
+            [followBtn setSelected:false];
+            [_obj followBrand:_localId andisLike:0 andType:2];
+        }else{
+            [followBtn setSelected:true];
+            [_obj followBrand:_localId andisLike:1 andType:2];
+            
+        }
     }
 
 }

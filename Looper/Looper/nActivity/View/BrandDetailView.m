@@ -212,6 +212,12 @@
     followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,284*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [scrollV addSubview:followBtn];
     
+    if([[_BrandData objectForKey:@"islike"]intValue]==1){
+        [followBtn setSelected:true];
+    
+    }
+    
+    
 
     [self createHorizontalScroll];
     
