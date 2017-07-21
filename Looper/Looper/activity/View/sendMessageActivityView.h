@@ -18,8 +18,9 @@
 }
 @property(nonatomic)id obj;
 @property(nonatomic)id barrageView;
-
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView;
+@property(nonatomic,strong)UILabel *commentLB;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView andIndexPath:(NSInteger)indexPath;
 -(void)showSelectImage:(NSString*)selectImage;
 
+@property(nonatomic)NSInteger cellIndexPath;
 @end

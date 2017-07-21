@@ -25,17 +25,16 @@
 
 }
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(id)barrageView andIndexPath:(NSInteger)indexPath{
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (ActivityViewModel*)idObject;
         self.barrageView=self.barrageView;
-        
+        self.cellIndexPath=indexPath;
         [self initView];
     }
     return self;
 }
-
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
 
 
@@ -48,7 +47,13 @@
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你评论超过100字了" andTime:2 andPos:CGPointZero];
         }
         else{
+            if (self.cellIndexPath>=0) {
+//给涛哥发送消息
+                NSLog(@"发送信息%ld",self.cellIndexPath);
+            }
+            else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
+            }
         [self removeFromSuperview];
         }
        
@@ -80,11 +85,19 @@
     
     sendPicBtn =[LooperToolClass createBtnImageName:@"send_picture.png" andRect:CGPointMake(538, 619) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: sendPicBtn];
-    
-    UIImageView* labelComment=[LooperToolClass createImageView:@"label_Comment.png" andRect:CGPointMake(294, 56) andTag:100 andSize:CGSizeZero andIsRadius:false];
-    
-    [self addSubview:labelComment];
+    self.commentLB=[LooperToolClass createLableView:CGPointMake(DEF_WIDTH(self)/2-80*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5, 40) andText:@"评论" andFontSize:16 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter ];
+    [self addSubview:self.commentLB];
 
+    if (self.cellIndexPath>=0) {
+        [sendPicBtn setHidden:YES];
+        self.commentLB.text=@"回复评论";
+        CGRect frame=sendBtn.frame;
+        frame.origin.x=80*DEF_Adaptation_Font*0.5;
+        sendBtn.frame=frame;
+    }else{
+        [sendPicBtn setHidden:NO];
+    }
+    
     textview = [[UITextView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font_x*0.5, 122*DEF_Adaptation_Font_x*0.5, 572*DEF_Adaptation_Font_x*0.5, 368*DEF_Adaptation_Font*0.5)];
     textview.backgroundColor=[UIColor clearColor]; //背景色
     textview.scrollEnabled = YES;    //当文字超过视图的边框时是否允许滑动，默认为“YES”

@@ -21,6 +21,8 @@
 		B28BD82F1F078238004931AF /* commendNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD82E1F078238004931AF /* commendNO.png */; };
 		B28BD8311F078240004931AF /* commendYES.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8301F078240004931AF /* commendYES.png */; };
 		B2A1E7E71F1CDFCD006270E3 /* cityShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */; };
+		B2A1E7EA1F21F96F006270E3 /* barrageReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */; };
+		B2A1E7EC1F221827006270E3 /* replyBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7EB1F221827006270E3 /* replyBtn.png */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
@@ -727,6 +729,9 @@
 		B28BD82E1F078238004931AF /* commendNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendNO.png; sourceTree = "<group>"; };
 		B28BD8301F078240004931AF /* commendYES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commendYES.png; sourceTree = "<group>"; };
 		B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cityShadow.png; sourceTree = "<group>"; };
+		B2A1E7E81F21F96F006270E3 /* barrageReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrageReplyView.h; sourceTree = "<group>"; };
+		B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = barrageReplyView.m; sourceTree = "<group>"; };
+		B2A1E7EB1F221827006270E3 /* replyBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replyBtn.png; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = View/AcitivitySeg.png; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
@@ -1815,6 +1820,7 @@
 				B28BD8261F075FE4004931AF /* commendYes2.png */,
 				B2A902251ED810750022C282 /* hotActivity.png */,
 				B2A6EEB01ED0121D004BF416 /* hot.jpg */,
+				B2A1E7EB1F221827006270E3 /* replyBtn.png */,
 				B2A6EE551ECAD7FF004BF416 /* Controller */,
 				B2A6EE561ECAD7FF004BF416 /* Model */,
 				B2A6EE571ECAD7FF004BF416 /* View */,
@@ -1855,6 +1861,8 @@
 				B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */,
 				B22171211EF778FA00B3CBC3 /* ActivityBarrageView.h */,
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
+				B2A1E7E81F21F96F006270E3 /* barrageReplyView.h */,
+				B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */,
 				B2C90E711F0F7223000E127A /* ActivityCollectionViewCell.h */,
 				B2C90E721F0F7223000E127A /* ActivityCollectionViewCell.m */,
 				B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */,
@@ -4225,6 +4233,7 @@
 				C41AC1EA1E1FFEA2003DD049 /* bg_looper_bk.png in Resources */,
 				C4F051091EB9F086005DA9F1 /* btn_share.png in Resources */,
 				C43E3D151EA5FC4C00EA4A6E /* add_music.png in Resources */,
+				B2A1E7EC1F221827006270E3 /* replyBtn.png in Resources */,
 				C4F28FFF1EB0EA9000EEB15E /* icon_scene.png in Resources */,
 				C46A692F1EB38C0200FCD5EB /* follow_ed.png in Resources */,
 				C4DD32561EB9B8A5008CA240 /* notify.png in Resources */,
@@ -4718,6 +4727,7 @@
 				C4BCE7521E091E710087E6C5 /* SDWebImageDecoder.m in Sources */,
 				C40F89771E1CF8A600DABEAA /* SerachView.m in Sources */,
 				C4DDB5421E2900BA005E3909 /* Base64Class.m in Sources */,
+				B2A1E7EA1F21F96F006270E3 /* barrageReplyView.m in Sources */,
 				C42FBF9E1E0A372100628A78 /* LocalDataMangaer.m in Sources */,
 				C4F59A671EB35F7D0088C815 /* addMusicController.m in Sources */,
 				C42839211E03F02200929093 /* ViewController.m in Sources */,

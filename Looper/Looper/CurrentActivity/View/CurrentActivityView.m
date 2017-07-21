@@ -151,7 +151,7 @@
     NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
     NSInteger day = [dateComponent day];
     
-    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(514*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:10  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(513*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:9  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:dayLabel];
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
 

@@ -37,7 +37,11 @@
 @property(nonatomic,strong)NSMutableArray *buddleCountArr;
 //用于储存cell的变化高度
 @property(nonatomic,strong)NSMutableDictionary *heightDic;
-
-
+//用于储存评论变化的高度
+@property(nonatomic,strong)NSMutableDictionary *heightPublishDic;
+//用于储存所有的对cell的评论
+@property(nonatomic,strong)NSMutableDictionary *publishCellDic;
+@property(nonatomic,strong)NSMutableArray *publishCountArr;
 -(void)showHUDWithString:(NSString*)commend;
+-(UIColor *)randomColorAndIndex:(int)index;
 @end
