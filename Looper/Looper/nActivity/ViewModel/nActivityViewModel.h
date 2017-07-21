@@ -45,4 +45,6 @@
 -(void)unfollowUser:(NSString*)targetID;
 
 -(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum;
+
+-(void)sharetTicket:(NSDictionary*)ticketDic;
 @end

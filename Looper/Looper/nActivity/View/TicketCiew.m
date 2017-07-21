@@ -10,6 +10,8 @@
 #import "nActivityViewModel.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
+#import "DataHander.h"
+
 @implementation TicketCiew{
     UIScrollView *bkScroll;
     
@@ -39,6 +41,37 @@
     
 }
 
+
+- (BOOL) webView:(UIWebView *)_webView shouldStartLoadWithRequest: (NSURLRequest *) request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    NSString *requestUrl = [request URL].absoluteString;
+    
+
+    if ([requestUrl rangeOfString:@"open.weixin.qq.com"].location == NSNotFound) {
+            NSLog(@"string 不存在 martin");
+    } else {
+            NSLog(@"string 包含 martin");
+        
+        [[DataHander sharedDataHander] showViewWithStr:@"该购票链接只能通过微信打开😂" andTime:3 andPos:CGPointZero];
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        [dic setObject:[self.dataDic objectForKey:@"ticketurl"] forKey:@"htmlurl"];
+        [dic setObject:[self.dataDic objectForKey:@"activityname"] forKey:@"name"];
+        
+        
+        
+        [_obj sharetTicket:dic];
+    }
+        
+        
+    
+    NSLog(@"%@",requestUrl);
+    
+    
+    return YES;
+}
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
     NSLog(@"%f",webView.scrollView.contentSize.height);
