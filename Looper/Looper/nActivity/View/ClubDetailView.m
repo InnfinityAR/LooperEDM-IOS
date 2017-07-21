@@ -108,8 +108,7 @@
     
     [self addSubview:icon_songer];
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:followBtn];
+
 
     
 }
@@ -152,7 +151,12 @@
             ShowselectView.hidden=true;
             
         }
-
+        
+        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
+            
+            followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
+            
+        }
         
         if (offset.y < 0) {
             CGRect rect = headImageView.frame;
@@ -177,7 +181,14 @@
     [self addSubview:scrollV];
     scrollV.tag=100;
     
+    
+    
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,284*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    [scrollV addSubview:followBtn];
+
     [self createHorizontalScroll];
+    
+   
 }
 
 
@@ -396,7 +407,7 @@
     [locationLable sizeToFit];
     [view addSubview:locationLable];
     
-    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5);
+    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5);
     NSString *dateString = [data objectForKey:@"location"];
     UIFont *dateFont = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     CGSize dateStringSize = [dateString sizeWithFont:dateFont

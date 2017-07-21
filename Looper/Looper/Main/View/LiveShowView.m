@@ -142,7 +142,7 @@
     [locationLable sizeToFit];
     [view addSubview:locationLable];
     
-    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5);
+     CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5);
     NSString *dateString = [data objectForKey:@"location"];
     UIFont *dateFont = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     CGSize dateStringSize = [dateString sizeWithFont:dateFont

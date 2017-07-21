@@ -303,6 +303,29 @@
     
 }
 
+
+
+-(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:activityID forKey:@"activityId"];
+    [dic setObject:islike forKey:@"like"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFollow" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
 -(void)addInformationToFavorite:(NSString*)activityID andisLike:(NSString*)islike{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -322,16 +345,23 @@
     }];
 }
 
--(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
+
+
+
+
+-(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:activityID forKey:@"activityId"];
-    [dic setObject:islike forKey:@"like"];
+    [dic setObject:ID forKey:@"id"];
+    [dic setObject:[NSString stringWithFormat:@"%d",typeNum] forKey:@"type"];
+    [dic setObject:[NSString stringWithFormat:@"%d",islike] forKey:@"like"];
     
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFollow" parameters:dic success:^(id responseObject){
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followBrand" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-
+            
+            
+            
         }else{
             
             
@@ -383,9 +413,6 @@
                         [recommendArray addObject:dic];
                     
                     }
-                    
-                    
-                    
                 }
                 [allActivityArray addObject:dic];
             }

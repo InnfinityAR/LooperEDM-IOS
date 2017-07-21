@@ -91,10 +91,10 @@
     
     
 #warning-需要换图的地方
-    UIButton *myLoop =[LooperToolClass createBtnImageName:@"otherUser.png" andRect:CGPointMake(180, 671) andTag:8003 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
-    [self addSubview: myLoop];
+//    UIButton *myLoop =[LooperToolClass createBtnImageName:@"otherUser.png" andRect:CGPointMake(180, 671) andTag:8003 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+//    [self addSubview: myLoop];
     
-    UIButton *myCollection =[LooperToolClass createBtnImageName:@"btn_myCollection.png" andRect:CGPointMake(180, 828) andTag:8004 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *myCollection =[LooperToolClass createBtnImageName:@"btn_myCollection.png" andRect:CGPointMake(180, 671) andTag:8004 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: myCollection];
     
     UIButton *btnFans =[LooperToolClass createBtnImageName:@"btn_fans.png" andRect:CGPointMake(320, 477) andTag:8002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];

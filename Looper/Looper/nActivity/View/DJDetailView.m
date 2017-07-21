@@ -46,6 +46,9 @@
     UIButton *detailBtn1;
     UIImageView *shadowV;
     
+    
+    float scrollOffNum_y;
+    
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)djData{
@@ -134,9 +137,6 @@
 }
 
 
-
-
-
 -(void)createImageViewHud{
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
@@ -174,8 +174,8 @@
     [self addSubview:icon_songer];
     
     
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:followBtn];
+//    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+//    [self addSubview:followBtn];
     
 }
 
@@ -188,6 +188,11 @@
     
     [self addSubview:scrollV];
     scrollV.tag=100;
+    
+    
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,284*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    [scrollV addSubview:followBtn];
+
     
     [self createHorizontalScroll];
 }
@@ -231,6 +236,7 @@
     CGFloat yOffset  = scrollView.contentOffset.y;
     if(scrollView.tag==100){
         
+        
         NSLog(@"%f",scrollView.contentOffset.y);
         
         if(scrollView.contentOffset.y>224){
@@ -238,6 +244,12 @@
         }else{
             ShowselectView.hidden=true;
             
+        }
+        
+        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
+
+            followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
+        
         }
         
         CGPoint offset = scrollView.contentOffset;
@@ -256,6 +268,7 @@
 
 -(void)createHorizontalScroll{
     
+
     
     selectView= [[UIView alloc] initWithFrame:CGRectMake(0, 490*DEF_Adaptation_Font*0.5-113*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 113*DEF_Adaptation_Font*0.5)];
     
@@ -293,6 +306,7 @@
     HorizontalScroll.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*2, DEF_SCREEN_HEIGHT);
     
     [scrollV addSubview:HorizontalScroll];
+
     [self createScrollDataView];
     
 }
@@ -328,7 +342,7 @@
     imageV.layer.masksToBounds = YES;
     [view addSubview:imageV];
 
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(276*DEF_Adaptation_Font*0.5, 54*DEF_Adaptation_Font*0.5, 328*DEF_Adaptation_Font*0.5, 66*DEF_Adaptation_Font*0.5)];
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(276*DEF_Adaptation_Font*0.5, 54*DEF_Adaptation_Font*0.5, 328*DEF_Adaptation_Font*0.5, 78*DEF_Adaptation_Font*0.5)];
     titleLable.numberOfLines = 0;
     [titleLable setTextColor:[UIColor whiteColor]];
     [titleLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:20]];
@@ -361,16 +375,17 @@
     [timeLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
     timeLable.text = [data objectForKey:@"starttime"];
     [view addSubview:timeLable];
+   
     
-    UILabel *locationLable = [[UILabel alloc] initWithFrame:CGRectMake(310*DEF_Adaptation_Font*0.5, 242*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5)];
+    UILabel *locationLable = [[UILabel alloc] initWithFrame:CGRectMake(310*DEF_Adaptation_Font*0.5, 242*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
     [locationLable setTextColor:[UIColor whiteColor]];
     locationLable.numberOfLines=0;
     [locationLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
     locationLable.text = [data objectForKey:@"location"];
     [locationLable sizeToFit];
     [view addSubview:locationLable];
-    
-    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5);
+
+    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5);
     NSString *dateString = [data objectForKey:@"location"];
     UIFont *dateFont = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     CGSize dateStringSize = [dateString sizeWithFont:dateFont
@@ -469,7 +484,7 @@
         
         [self createActiveCellView:[[_djData objectForKey:@"information"] objectAtIndex:i] andBgView:bgView];
 
-        }
+    }
 
 }
 

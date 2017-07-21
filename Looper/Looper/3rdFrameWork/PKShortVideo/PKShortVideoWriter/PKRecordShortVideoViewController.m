@@ -276,7 +276,6 @@ static CGFloat const PKRecordButtonWidth = 90;
     
 }
 
-
 //视频录制结束回调
 - (void)recorder:(PKShortVideoRecorder *)recorder didFinishRecordingToOutputFilePath:(NSString *)outputFilePath error:(NSError *)error {
     //解除自动锁屏限制
@@ -292,14 +291,15 @@ static CGFloat const PKRecordButtonWidth = 90;
         CFAbsoluteTime nowTime = CACurrentMediaTime();
         if (self.beginRecordTime != 0 && nowTime - self.beginRecordTime < self.videoMinimumDuration) {
             
-//            UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
-//
-//            [self dismissViewControllerAnimated:YES completion:^{
-//                [self.delegate didFinishImageToOutputFilePath:image];
-//            }];
+            UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
+
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self.delegate didFinishImageToOutputFilePath:image];
+            }];
             
             
-             [self endRecordingWithPath:outputFilePath failture:NO];
+           //
+            [self endRecordingWithPath:outputFilePath failture:NO];
             
         } else {
             self.outputFilePath = outputFilePath;
