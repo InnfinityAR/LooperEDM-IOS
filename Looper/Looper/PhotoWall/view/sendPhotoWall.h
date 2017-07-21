@@ -26,4 +26,6 @@
 
 -(void)setLocationStr:(NSString*)str;
 
+-(void)ImageFileSave:(UIImage*)imageFile;
+
 @end

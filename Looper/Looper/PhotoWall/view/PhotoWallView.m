@@ -24,6 +24,7 @@
     NSMutableDictionary *_dataSource;
     
     
+      
     UIButton *sendPhoto;
 
 }
@@ -438,6 +439,7 @@
 
 
 -(void)initView:(NSDictionary*)dic{
+  
     _dataSource = [[NSDictionary alloc] initWithDictionary:dic copyItems:true];
 
     [self setBackgroundColor: [UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];

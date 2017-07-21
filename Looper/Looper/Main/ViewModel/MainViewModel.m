@@ -44,6 +44,7 @@
 
 #import "HowToPlayView.h"
 #import "UserInfoViewController.h"
+#import "LiveShowView.h"
 
 
 @implementation MainViewModel{
@@ -65,6 +66,13 @@
     
     
     UIImageView *bkv ;
+    
+    
+    LiveShowView *liveShowV;
+    
+    nActivityViewController *activity;
+    
+    NSString *_activityId;
     
 
 }
@@ -431,6 +439,24 @@
 
 
 
+-(void)createActivityView:(NSString*)activityId{
+    
+    _activityId = activityId;
+    
+    activity = [[nActivityViewController alloc] init];
+    
+    [[_obj navigationController]  pushViewController:activity animated:YES];
+    
+    [self performSelector:@selector(showActivityView) withObject:nil afterDelay:0.1];
+    
+
+}
+
+-(void)showActivityView{
+    [activity jumpToActivityId:_activityId];
+}
+
+
 
 -(void)hudOnClick:(int)type{
 
@@ -441,6 +467,9 @@
 
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
+        
+    }else if(type==9008){
+       [self pushActivityViewController];
         
     }else if(type==ActiveBtnTag){
         [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
@@ -486,6 +515,16 @@
     }else if(type==8004){
         //我的loop
         [self createCommonView:3];
+        
+    }else if(type==8007){
+        //我的loop
+        NSLog(@"%@",[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]);
+        
+        
+        liveShowV = [[LiveShowView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
+        [[_obj view] addSubview:liveShowV];
+        
+        
         
     } else if(type==ActivityShareBtnTag){
         

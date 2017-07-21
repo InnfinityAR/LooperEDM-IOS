@@ -34,6 +34,7 @@
 -(void)bugReport:(NSString*)reportString and:(NSString*)path;
 
 -(void)jumpLoginViewC;
+-(void)createVideoView;
 
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)nSettingView  *settingV;

@@ -21,6 +21,7 @@
 
 
     NSMutableArray *serachArray;
+    NSMutableArray *userArray;
 
 }
 
@@ -31,9 +32,19 @@
     if(self=[super init]){
         self.obj = (SerachViewController*)controller;
         [self initView];
+      
     }
     return  self;
 }
+
+
+-(void)updateData{
+
+    if(_SerachV!=nil){
+        [_SerachV reloadTableData:serachArray andUserArray:userArray];
+    }
+}
+
 
 
 -(void)initView{    
@@ -73,11 +84,11 @@
 
         if([responseObject[@"status"] intValue]==0){
             serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
-            [_SerachV reloadTableData:serachArray andUserArray:[responseObject[@"data"] objectForKey:@"User"]];
+            userArray = [responseObject[@"data"] objectForKey:@"User"];
+
+            [_SerachV reloadTableData:serachArray andUserArray:userArray];
             
             if([serachArray count]==0){
-                
-            
                 [[DataHander sharedDataHander] showViewWithStr:@"找不到喔，自己创建一个吧~" andTime:1 andPos:CGPointZero];
             }
         }
@@ -85,9 +96,7 @@
         
     }];
     }else{
-    
          [[DataHander sharedDataHander] showViewWithStr:@"写点东西再来搜吧" andTime:1 andPos:CGPointZero];
-    
     }
 }
 
@@ -96,7 +105,6 @@
     SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
     [simpleC chatTargetID:userData];
     [[_obj navigationController]  pushViewController:simpleC animated:NO];
-
 
 }
 

@@ -184,7 +184,7 @@
     scrollV  =[[UIScrollView alloc] initWithFrame:CGRectMake(0, 120*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-113*DEF_Adaptation_Font*0.5)];
     scrollV.showsVerticalScrollIndicator = true;
     scrollV.delegate=self;
-    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*3);
+    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*1.5);
     
     [self addSubview:scrollV];
     scrollV.tag=100;
@@ -283,7 +283,7 @@
     [scrollV addSubview:selectView];
 
     
-    HorizontalScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,490*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*2.5)];
+    HorizontalScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,490*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*1.5)];
     HorizontalScroll.showsHorizontalScrollIndicator = true;
     [HorizontalScroll setPagingEnabled:true];
     HorizontalScroll.delegate=self;

@@ -159,14 +159,17 @@
 }
 -(void)removeDetailView{
     
-    if(_isPhoto==1){
-         [activityDetailV removeFromSuperview];
-         [[_obj navigationController]popViewControllerAnimated:true];
-        _isPhoto=0;
-    }else{
-         [activityDetailV removeFromSuperview];
     
-    }
+    // [activityDetailV removeFromSuperview];
+    
+//    if(_isPhoto==1){
+//         [activityDetailV removeFromSuperview];
+//         [[_obj navigationController]popViewControllerAnimated:true];
+//        _isPhoto=0;
+//    }else{
+//         [activityDetailV removeFromSuperview];
+//    
+//    }
 }
 
 //跳转到购票

@@ -202,6 +202,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     if(isHasData == false){
 
         VideoViewController* videoVc = [[VideoViewController alloc] init];
+        [videoVc setVideo:1];
         self.window.rootViewController = videoVc;
         [self.window makeKeyAndVisible];
 
@@ -267,6 +268,8 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"videoResume" object:nil];
+    
 }
 
 
@@ -274,10 +277,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
-
 -(void)applicationWillResignActive:(UIApplication* )application
 {
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"videoStop" object:nil];
     //开启后台处理多媒体事件
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     AVAudioSession *session=[AVAudioSession sharedInstance];
@@ -287,6 +290,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     //这样做，可以在按home键进入后台后 ，播放一段时间，几分钟吧。但是不能持续播放网络歌曲，若需要持续播放网络歌曲，还需要申请后台任务id，具体做法是：
     UIBackgroundTaskIdentifier *_bgTaskId=[AppDelegate backgroundPlayerID:_bgTaskId];
     //其中的_bgTaskId是后台任务UIBackgroundTaskIdentifier _bgTaskId;
+
 }
 
 +(UIBackgroundTaskIdentifier)backgroundPlayerID:(UIBackgroundTaskIdentifier)backTaskId

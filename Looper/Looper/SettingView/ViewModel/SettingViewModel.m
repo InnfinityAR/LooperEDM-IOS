@@ -20,6 +20,9 @@
 #import "Base64Class.h"
 #import "DataHander.h"
 #import "LoginViewController.h"
+#import "VideoViewController.h"
+
+
 
 @implementation SettingViewModel{
 
@@ -40,6 +43,16 @@
     return  self;
 }
 
+-(void)createVideoView{
+    VideoViewController* videoVc = [[VideoViewController alloc] init];
+    
+    [videoVc setVideo:2];
+    
+    [[_obj navigationController] pushViewController:videoVc animated:YES];
+
+}
+
+
 
 -(void)initView{
     
@@ -59,10 +72,7 @@
         picker.delegate = self;
         //设置选择后的图片可被编辑
         picker.allowsEditing = YES;
-        
-       // [[_obj navigationController] pushViewController:picker animated:YES];
 
-        
         [_obj presentViewController:picker animated:YES completion:nil];
         
     });
@@ -110,9 +120,7 @@
     if([userName isEqualToString:@""]){
         userName = [LocalDataMangaer sharedManager].NickName;
     }
-    
-    
-    
+
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
 
@@ -184,9 +192,6 @@
 
 -(void)bugReport:(NSString*)reportString and:(NSString*)path{
     if([reportString length]!=0){
-    
-    
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:reportString forKey:@"bug"];
@@ -201,8 +206,6 @@
             [self removeAccoutView];
             [[DataHander sharedDataHander] showViewWithStr:@"上传成功 感谢您的支持" andTime:1 andPos:CGPointZero];
         }else{
-            
-            
              [self removeAccoutView];
         }
     }fail:^{
@@ -266,7 +269,6 @@
 
 -(void)jumpLoginViewC{
     LoginViewController* login = [[LoginViewController alloc] init];
-    
     [[_obj view] window].rootViewController = login;
     [[[_obj view] window] makeKeyAndVisible];
 }

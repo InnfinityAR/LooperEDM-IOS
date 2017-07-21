@@ -340,9 +340,14 @@ typedef NS_ENUM( NSInteger, PKRecordingStatus ) {
     
     if (![self addDefaultCameraInputToCaptureSession:captureSession]){
         NSLog(@"加载摄像头失败");
+       
+        
+        
     }
     if (![self addDefaultMicInputToCaptureSession:captureSession]){
         NSLog(@"加载麦克风失败");
+        
+       
     }
     
     return captureSession;
@@ -354,6 +359,13 @@ typedef NS_ENUM( NSInteger, PKRecordingStatus ) {
     
     if (error) {
         NSLog(@"配置摄像头输入错误: %@", [error localizedDescription]);
+        dispatch_async( dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [self.delegate recorderDidErrorRecording:self];
+            }
+        });
+        
+
         return NO;
     } else {
         BOOL success = [self addInput:cameraDeviceInput toCaptureSession:captureSession];
@@ -367,6 +379,15 @@ typedef NS_ENUM( NSInteger, PKRecordingStatus ) {
     AVCaptureDeviceInput *micDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio] error:&error];
     if (error){
         NSLog(@"配置麦克风输入错误: %@", [error localizedDescription]);
+        dispatch_async( dispatch_get_main_queue(), ^{
+            @autoreleasepool {
+                [self.delegate recorderDidErrorRecording:self];
+            }
+        });
+        
+
+        
+        
         return NO;
     } else {
         BOOL success = [self addInput:micDeviceInput toCaptureSession:captureSession];

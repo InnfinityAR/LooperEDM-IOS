@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoViewController : UIViewController
+{
 
+
+}
+
+
+-(void)setVideo:(int)videoType;
 @end
