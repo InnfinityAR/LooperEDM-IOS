@@ -20,11 +20,16 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "YWCarouseView.h"
 #import "DataHander.h"
+#import "barrageReplyView.h"
 #define BUTTONTAG  100000
-@interface ActivityBarrageView()
+@interface ActivityBarrageView()<UITextViewDelegate>
 {
     float headViewHeight;
     LFWaterfallLayout *waterLayout;
+    //用于添加评论
+    UILabel *countLB;
+    
+    //当前选中的cell
 }
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
 //三个属性都是用于循环展示上传的照片
@@ -38,6 +43,24 @@
     
     //是否重置BuddleSubscriptArr
     BOOL  isAddBuddleSubscriptArr;
+}
+-(NSMutableDictionary *)publishCellDic{
+    if (!_publishCellDic) {
+        _publishCellDic=[[NSMutableDictionary alloc]init];
+    }
+    return _publishCellDic;
+}
+-(NSMutableArray *)publishCountArr{
+    if (!_publishCountArr) {
+        _publishCountArr=[[NSMutableArray alloc]init];
+    }
+    return _publishCountArr;
+}
+-(NSMutableDictionary *)heightPublishDic{
+    if (!_heightPublishDic) {
+        _heightPublishDic=[[NSMutableDictionary alloc]init];
+    }
+    return _heightPublishDic;
 }
 -(NSMutableArray *)buddleSubscriptArr{
     if (!_buddleSubscriptArr) {
@@ -135,10 +158,20 @@
     self.barrageInfo=imageArray;
     [self.userImageArr removeAllObjects];
     [self.buddleArr removeAllObjects];
-    for (NSDictionary *buddleDic in imageArray) {
+    for (int i=0;i<imageArray.count;i++) {
+        NSDictionary *buddleDic=imageArray[0];
         [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
         [self.userImageArr addObject:[buddleDic objectForKey:@"userimage"]];
+#warning 在这里获取到韬哥的结果，如果imageDic中有评论的属性，就把高度加入到heightPublishDic中，把评论的内容加入到cellPublishDic中,把评论的下标加入到publishCountArr中
+//        [self.publishCellDic setObject:@(20) forKey:@(i)];
+      
     }
+    [self.publishCellDic setObject:@(50) forKey:@(3)];
+    [self.publishCellDic setObject:@(50) forKey:@(4)];
+    [self.publishCellDic setObject:@(50) forKey:@(5)];
+    [self.publishCountArr addObject:@(3)];
+     [self.publishCountArr addObject:@(4)];
+     [self.publishCountArr addObject:@(5)];
     [self.collectView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
@@ -148,7 +181,7 @@
     }
     if (button.tag==101) {
         NSLog(@"这是一个发表评论button");
-        sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self];
+        sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self andIndexPath:-1];
         view.obj=self.viewModel;
         view.barrageView=self;
         [self.viewModel setSendView:view];
@@ -169,6 +202,11 @@
         labelHeight=button.alpha;
          [self.heightDic setObject:@(labelHeight) forKey:@(button.tag-3*BUTTONTAG)];
         [self.collectView reloadData];
+    }
+    if (button.tag>=4*BUTTONTAG&&button.tag<4*BUTTONTAG+self.barrageInfo.count+10) {
+        NSLog(@"这是跳转更多回复的按钮");
+        barrageReplyView *replyV=[[barrageReplyView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andIndex:button.tag-4*BUTTONTAG];
+        [self addSubview:replyV];
     }
 }
 - (void)initailHeaderView {
@@ -222,12 +260,11 @@
 //添加弹幕
 -(void)initDate
 {
-    if (self.buddleSubscriptArr.count!=0) {
+    if (self.buddleSubscriptArr.count!=0&&self.buddleSubscriptArr.count<=self.buddleArr.count) {
 //**防止弹幕重复出现
     int subscript=rand()%self.buddleSubscriptArr.count;
      int   count=[self.buddleSubscriptArr[subscript]intValue];
-    NSString *str = [self.buddleArr objectAtIndex:[self.buddleSubscriptArr[subscript]intValue]];
-        //把用过的下标移除
+        NSString *str=[self.buddleArr objectAtIndex:[self.buddleSubscriptArr[subscript]intValue]];        //把用过的下标移除
         [self.buddleSubscriptArr removeObjectAtIndex:subscript];
 //**设置弹幕的长度
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(55*DEF_Adaptation_Font*0.5, 0, 240, 50*DEF_Adaptation_Font*0.5)];
@@ -327,6 +364,9 @@
     [view1 addSubview:view];
     [self.buddleView addSubview:view1];
     [self.barrageArr addObject:view1];
+    }
+    else if (self.buddleSubscriptArr.count>self.buddleArr.count){
+        self.buddleSubscriptArr=nil;
     }
 //**弹幕下标使用完后暂停8秒重新生成下标
     else{
@@ -612,12 +652,20 @@
         NSLog(@"这是一个点赞按钮");
     };
     //分享按钮
-//    cell.shareBtnClick = ^{
+    cell.shareBtnClick = ^{
+        sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self andIndexPath:indexPath.row];
+        view.obj=self.viewModel;
+        view.barrageView=self;
+        view.cellIndexPath=indexPath.row;
+        [self.viewModel setSendView:view];
+        [self.viewModel setBarrageView:self];
+        [self addSubview:view];
 //        [self.viewModel shareH5:messageDic];
-//    };
+    };
     //点赞人数赋值
     cell.commendLB.text=[NSString stringWithFormat:@"%@赞",imageDic[@"thumbupcount"]];
 }
+
 //不管是否cell有图片都会使用的view
 -(void)AllUseViewForCellIfHaveImage:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
     [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
@@ -625,13 +673,16 @@
     cell.userImageView.tag=indexPath.row;
     [cell.userImageView addGestureRecognizer:singleTap];
     cell.userNameLB.text=[imageDic objectForKey:@"username"];
+    
 }
+
 -(void)hiddenCellUIForOther:(ActivityCollectionViewCell *)cell andIs:(BOOL)yes{
     [cell.commendLB setHidden:yes];
     [cell.commendBtn setHidden:yes];
     [cell.userImageView setHidden:yes];
     [cell.userNameLB setHidden:yes];
     [cell.contentLB setHidden:yes];
+    [cell.shareBtn setHidden:yes];
 }
 -(void)cellUIWhenNoPhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
     [cell.contentLB setHidden:NO];
@@ -643,7 +694,7 @@
     cell.contentLB.numberOfLines=0;
     if (label2Height>85.0) {
         cell.contentLB.numberOfLines=5;}
-    UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(3*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+ UIButton   *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(3*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     allShowBtn.alpha=label2Height;
     [cell.contentView addSubview:allShowBtn];
     //用于消除allShowBtn
@@ -657,6 +708,7 @@
             [cell layoutIfNeeded];
         }
     }
+     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn];
     if (label2Height<=85.0) {
         [allShowBtn removeFromSuperview];
     }
@@ -686,7 +738,7 @@
     if (label2Height>45.0) {
         label2.numberOfLines=3;
     }
-    UIButton *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(5*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+  UIButton  *allShowBtn= [LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(cell.frame.size.width/2-5-60*DEF_Adaptation_Font*0.5, cell.frame.size.height-5-60*DEF_Adaptation_Font*0.5) andTag:(int)(5*BUTTONTAG+indexPath.row) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     allShowBtn.alpha=label2Height;
     [cell.contentView addSubview:allShowBtn];
     //用于修改image和label的frame
@@ -703,6 +755,7 @@
             imageV.frame=frame2;
             [cell layoutIfNeeded];
         }}
+     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn];
   }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -738,9 +791,37 @@
                 //在这里添加有imageView的情况
                 [self cellUIWhenHavePhoto:cell andIndexpath:indexPath andImageDic:imageDic];
                 [self AllUseViewForCellIfHaveImage:cell andIndexpath:indexPath andImageDic:imageDic];
-}}
+}
+        }
         cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
         return cell;
+}
+-(void)addTalkingPublish:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic andallShowBtn:(UIButton *)allShowBtn{
+       for (NSNumber *index in self.publishCountArr) {
+        if ([index intValue]==indexPath.row) {
+            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-48, DEF_WIDTH(cell)-20, 0.5)];
+            lineView.backgroundColor=[UIColor whiteColor];
+            [cell.contentView addSubview:lineView];
+            UIButton *morePublishBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, DEF_HEIGHT(cell)-20) andTag:(int)indexPath.row+4*BUTTONTAG andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5, 18) andTarget:self];
+            [morePublishBtn setTitle:@"更多回复<<" forState:(UIControlStateNormal)];
+            morePublishBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
+            [cell.contentView addSubview:morePublishBtn];
+#warning-在这里加入多条回复
+            CGRect frame1=cell.commendBtn.frame;
+            frame1.origin.y-=50;
+            cell.commendBtn.frame=frame1;
+            CGRect frame2=cell.commendLB.frame;
+            frame2.origin.y-=50;
+            cell.commendLB.frame=frame2;
+            CGRect frame3=cell.shareBtn.frame;
+           frame3.origin.y-=50;
+            cell.shareBtn.frame=frame3;
+            CGRect frame4=allShowBtn.frame;
+            frame4.origin.y-=50;
+            allShowBtn.frame=frame4;
+        
+        }
+    }
 }
 -(void)onClickPhoto:(UITapGestureRecognizer *)tap{
     [self.viewArr removeAllObjects];
@@ -819,6 +900,27 @@
 }
 #pragma mark -- LFWaterfallLayoutDelegate --
 - (CGFloat)waterflowLayout:(LFWaterfallLayout *)waterflowLayout heightForItemAtIndex:(NSUInteger)index itemWidth:(CGFloat)itemWidth{
+    //当有图片展开且有回复的时候
+      for (NSNumber *tag in self.allShowImageTags) {
+         if ([tag intValue]==index+5*BUTTONTAG) {
+              for (NSNumber *count in self.publishCountArr ) {
+                   if ([count intValue]==index) {
+                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-5*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+                   }
+              }
+         }
+      }
+    //当有展开且有回复的时候
+    for (NSNumber *tag in self.allShowTags) {
+        if ([tag intValue]==index+3*BUTTONTAG) {
+            for (NSNumber *count in self.publishCountArr ) {
+                if ([count intValue]==index) {
+                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-3*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+20*DEF_Adaptation_Font*0.5+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+                }
+            }
+        }
+    }
+//当没有评论的时候
     for (NSNumber *tag in self.allShowTags) {
         if ([tag intValue]==index+3*BUTTONTAG) {
             return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-3*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+20*DEF_Adaptation_Font*0.5;
@@ -830,6 +932,11 @@
         }
     }
     NSLog(@"index %ld",index);
+    for (NSNumber *count in self.publishCountArr ) {
+         if ([count intValue]==index) {
+        return DEF_WIDTH(self)/2-10+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+         }
+    }
     return DEF_WIDTH(self)/2-10;
 }
 //定义每个Section 的 margin
@@ -890,5 +997,4 @@
     }
     //    NSLog(@"总长度:%f,加上的长度:%f", 40 - self.collectView.contentOffset.y-160*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5);
 }
-
 @end

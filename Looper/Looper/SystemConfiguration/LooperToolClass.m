@@ -171,8 +171,6 @@
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:selImage forState:UIControlStateSelected];
     [btn setImage:clickImage forState:UIControlStateHighlighted];
-    
-    
     btn.tag = tag;
     
     [btn addTarget:obj action:@selector(btnOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
