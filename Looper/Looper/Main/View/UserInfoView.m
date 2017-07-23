@@ -108,9 +108,9 @@
     //[self addSubview: myLoop];
     
     UIButton *myCollection =[LooperToolClass createBtnImageName:@"btn_myCollection.png" andRect:CGPointMake(180, 671) andTag:8003 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
-    [self addSubview: myCollection];
+    //[self addSubview: myCollection];
     
-    UIButton *liveShowBtn =[LooperToolClass createBtnImageName:@"btn_liveShow.png" andRect:CGPointMake(180, 810) andTag:8007 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *liveShowBtn =[LooperToolClass createBtnImageName:@"btn_liveShow.png" andRect:CGPointMake(180, 671) andTag:8007 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: liveShowBtn];
     
     
