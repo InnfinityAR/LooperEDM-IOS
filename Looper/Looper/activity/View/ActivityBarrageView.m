@@ -159,21 +159,46 @@
     [self.userImageArr removeAllObjects];
     [self.buddleArr removeAllObjects];
     for (int i=0;i<imageArray.count;i++) {
-        NSDictionary *buddleDic=imageArray[0];
+        NSDictionary *buddleDic=imageArray[i];
         [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
         [self.userImageArr addObject:[buddleDic objectForKey:@"userimage"]];
 #warning 在这里获取到韬哥的结果，如果imageDic中有评论的属性，就把高度加入到heightPublishDic中，把评论的内容加入到cellPublishDic中,把评论的下标加入到publishCountArr中
+        if ([[buddleDic objectForKey:@"reply"] count]) {
+            [self.viewModel getReplyDataForMessageID:[[buddleDic objectForKey:@"messageid"]intValue] andIndex:i];
+        }
 //        [self.publishCellDic setObject:@(20) forKey:@(i)];
       
     }
-    [self.publishCellDic setObject:@(50) forKey:@(3)];
-    [self.publishCellDic setObject:@(50) forKey:@(4)];
-    [self.publishCellDic setObject:@(50) forKey:@(5)];
-    [self.publishCountArr addObject:@(3)];
-     [self.publishCountArr addObject:@(4)];
-     [self.publishCountArr addObject:@(5)];
+
     [self.collectView reloadData];
 }
+
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr{
+    if (index!=0) {
+    index+=1;
+    }
+[self.publishCountArr addObject:@(index)];
+//     [self.heightPublishDic setObject:@(50) forKey:@(index)];
+     [self.publishCellDic setObject:dataArr forKey:@(index)];
+    float height=0;
+    for (int i=0;i<dataArr.count;i++) {
+        NSDictionary *dataDic=dataArr[i];
+        NSString * content = [dataDic objectForKey:@"messagecontent"];
+        if (dataArr.count==1) {
+            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+             [self.heightPublishDic setObject:@(height+40) forKey:@(index)];
+        }
+        if (dataArr.count>=2&&i==0) {
+            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+        }
+        if (dataArr.count>=2&&i==1) {
+            height+=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+               [self.heightPublishDic setObject:@(height+40) forKey:@(index)];
+        }
+    }
+    [self.collectView reloadData];
+}
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
         [self.movieController stop];
@@ -205,7 +230,7 @@
     }
     if (button.tag>=4*BUTTONTAG&&button.tag<4*BUTTONTAG+self.barrageInfo.count+10) {
         NSLog(@"这是跳转更多回复的按钮");
-        barrageReplyView *replyV=[[barrageReplyView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andIndex:button.tag-4*BUTTONTAG];
+        barrageReplyView *replyV=[[barrageReplyView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andIndex:button.tag-4*BUTTONTAG andViewModel:_viewModel];
         [self addSubview:replyV];
     }
 }
@@ -799,25 +824,79 @@
 -(void)addTalkingPublish:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic andallShowBtn:(UIButton *)allShowBtn{
        for (NSNumber *index in self.publishCountArr) {
         if ([index intValue]==indexPath.row) {
-            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-48, DEF_WIDTH(cell)-20, 0.5)];
+            NSInteger heightForReply=[[self.heightPublishDic objectForKey:index]integerValue];
+            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+4, DEF_WIDTH(cell)-20, 0.5)];
             lineView.backgroundColor=[UIColor whiteColor];
             [cell.contentView addSubview:lineView];
-            UIButton *morePublishBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, DEF_HEIGHT(cell)-20) andTag:(int)indexPath.row+4*BUTTONTAG andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5, 18) andTarget:self];
-            [morePublishBtn setTitle:@"更多回复<<" forState:(UIControlStateNormal)];
+             NSArray *dataArr=[self.publishCellDic objectForKey:index];
+            UIButton *morePublishBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-23) andTag:(int)indexPath.row+4*BUTTONTAG andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(DEF_WIDTH(cell), 18) andTarget:self];
+            [morePublishBtn setTitle:[NSString stringWithFormat:@"共%ld条回复<<",dataArr.count] forState:(UIControlStateNormal)];
+            morePublishBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             morePublishBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
             [cell.contentView addSubview:morePublishBtn];
 #warning-在这里加入多条回复
+           
+            if (dataArr.count==1) {
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                 label.text=[dataArr.firstObject objectForKey:@"username"];
+                 label.font=[UIFont systemFontOfSize:13];
+                 label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
+                [cell.contentView addSubview:label];
+                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+           content.text=[NSString stringWithFormat:@":%@",[dataArr.firstObject objectForKey:@"messagecontent"]];
+                content.textColor=[UIColor whiteColor];
+                content.numberOfLines=2;
+                content.font=[UIFont systemFontOfSize:13];
+                CGRect contentFrame=content.frame;
+                contentFrame.size.height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
+                content.frame=contentFrame;
+                [cell.contentView addSubview:content];
+            }
+            if (dataArr.count>=2) {
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                label.text=[dataArr.firstObject objectForKey:@"username"];
+               label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
+                  label.font=[UIFont systemFontOfSize:13];
+                [cell.contentView addSubview:label];
+                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                content.text=[NSString stringWithFormat:@":%@",[dataArr.firstObject objectForKey:@"messagecontent"]];
+                content.numberOfLines=2;
+                content.textColor=[UIColor whiteColor];
+                content.font=[UIFont systemFontOfSize:13];
+                CGRect contentFrame=content.frame;
+                float height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
+                contentFrame.size.height=height;
+                content.frame=contentFrame;
+                [cell.contentView addSubview:content];
+                
+                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5+height,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                  label2.font=[UIFont systemFontOfSize:13];
+                label2.text=[dataArr[1] objectForKey:@"username"];
+                label2.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
+                [cell.contentView addSubview:label2];
+                UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                content2.text=[NSString stringWithFormat:@":%@",[dataArr[1]objectForKey:@"messagecontent"]];
+                content2.numberOfLines=2;
+                content2.textColor=[UIColor whiteColor];
+                content2.font=[UIFont systemFontOfSize:13];
+                CGRect contentFrame2=content2.frame;
+                contentFrame2.size.height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
+                content2.frame=contentFrame2;
+                [cell.contentView addSubview:content2];
+
+            }
+            
             CGRect frame1=cell.commendBtn.frame;
-            frame1.origin.y-=50;
+            frame1.origin.y= DEF_HEIGHT(cell)-75*DEF_Adaptation_Font*0.5-heightForReply;
             cell.commendBtn.frame=frame1;
             CGRect frame2=cell.commendLB.frame;
-            frame2.origin.y-=50;
+            frame2.origin.y=DEF_HEIGHT(cell)-5-30*DEF_Adaptation_Font*0.5-heightForReply;
             cell.commendLB.frame=frame2;
             CGRect frame3=cell.shareBtn.frame;
-           frame3.origin.y-=50;
+           frame3.origin.y=DEF_HEIGHT(cell)-5-40*DEF_Adaptation_Font*0.5-heightForReply;
             cell.shareBtn.frame=frame3;
             CGRect frame4=allShowBtn.frame;
-            frame4.origin.y-=50;
+            frame4.origin.y=DEF_HEIGHT(cell)-5-60*DEF_Adaptation_Font*0.5-heightForReply;
             allShowBtn.frame=frame4;
         
         }
@@ -905,7 +984,7 @@
          if ([tag intValue]==index+5*BUTTONTAG) {
               for (NSNumber *count in self.publishCountArr ) {
                    if ([count intValue]==index) {
-                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-5*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-5*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+ (DEF_WIDTH(self)/2-10)-60*DEF_Adaptation_Font*0.5+[[self.heightPublishDic objectForKey:@([count intValue])]intValue];
                    }
               }
          }
@@ -915,7 +994,7 @@
         if ([tag intValue]==index+3*BUTTONTAG) {
             for (NSNumber *count in self.publishCountArr ) {
                 if ([count intValue]==index) {
-                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-3*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+20*DEF_Adaptation_Font*0.5+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+                   return DEF_WIDTH(self)/2-10+([[self.heightDic objectForKey:@([tag intValue]-3*BUTTONTAG)]intValue] -85.0)*DEF_Adaptation_Font+20*DEF_Adaptation_Font*0.5+[[self.heightPublishDic objectForKey:@([count intValue])]intValue];
                 }
             }
         }
@@ -934,7 +1013,7 @@
     NSLog(@"index %ld",index);
     for (NSNumber *count in self.publishCountArr ) {
          if ([count intValue]==index) {
-        return DEF_WIDTH(self)/2-10+[[self.publishCellDic objectForKey:@([count intValue])]intValue];
+        return DEF_WIDTH(self)/2-10+[[self.heightPublishDic objectForKey:@([count intValue])]intValue];
          }
     }
     return DEF_WIDTH(self)/2-10;

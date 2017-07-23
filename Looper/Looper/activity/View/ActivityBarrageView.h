@@ -44,4 +44,5 @@
 @property(nonatomic,strong)NSMutableArray *publishCountArr;
 -(void)showHUDWithString:(NSString*)commend;
 -(UIColor *)randomColorAndIndex:(int)index;
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr;
 @end
