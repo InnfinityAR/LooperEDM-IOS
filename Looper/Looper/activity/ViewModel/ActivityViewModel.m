@@ -18,11 +18,13 @@
 #import "DataHander.h"
 #import "WebViewController.h"
 #define ActivityURL @"getActivity"
+#define ReplyURL @"createReply"
 #import "LocalDataMangaer.h"
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import "UserInfoViewController.h"
 #import "PhotoWallViewController.h"
+#define GetReplyURL @"getReplyMessage"
 
 
 @implementation ActivityViewModel
@@ -292,7 +294,41 @@ NSLog(@"%@",dic);
     }];
 }
 
-
+//reply的发送和获取
+-(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV{
+    self.isReplyV=isReplyV;
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+//    [dic setObject:@([[LocalDataMangaer sharedManager].uid intValue]) forKey:@"userId"];
+   [dic setObject:userID forKey:@"userId"];
+    [dic setObject:@(activityID) forKey:@"activityId"];
+    [dic setObject:@(messageID) forKey:@"messageId"];
+    [dic setObject:content forKey:@"content"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:ReplyURL parameters:dic  success:^(id responseObject) {
+        
+        if([responseObject[@"status"] intValue]==0){
+            [[DataHander sharedDataHander] showViewWithStr:@"回复成功" andTime:2 andPos:CGPointZero];
+            [self getReplyDataForMessageID:messageID andIndex:index-1];
+        }
+    }fail:^{
+        
+    }];
+}
+-(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:@(messageID) forKey:@"messageId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:GetReplyURL parameters:dic  success:^(id responseObject) {
+        
+        if([responseObject[@"status"] intValue]==0){
+            if (self.isReplyV==NO) {
+            [self.barrageView addReplyData:index andArray: responseObject[@"data"]];
+            }else{
+                [self.replyView addReplyData:index andArray:responseObject[@"data"]];
+            }
+        }
+    }fail:^{
+        
+    }];
+}
 
 
 -(void)createPhotoWallController:(NSString*)activityId{

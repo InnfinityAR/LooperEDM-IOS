@@ -10,6 +10,7 @@
 #import "ActivityView.h"
 #import "sendMessageActivityView.h"
 #import "ActivityBarrageView.h"
+#import "barrageReplyView.h"
 @class sendMessageActivityView;
 @class ActivityView;
 typedef void(^CompletionHandle)(NSError *error);
@@ -21,7 +22,9 @@ typedef void(^CompletionHandle)(NSError *error);
 @property(nonatomic,strong)ActivityView *activityV;
 @property(nonatomic,strong)sendMessageActivityView *sendView;
 @property(nonatomic,strong)id barrageView;
+@property(nonatomic,strong)id replyView;
 @property(nonatomic,strong)NSArray *barrageArr;
+@property(nonatomic)BOOL isReplyV;
 //获取更多
 - (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
 //刷新
@@ -44,4 +47,8 @@ typedef void(^CompletionHandle)(NSError *error);
 -(void)requestData;
 
 -(void)createPhotoWallController:(NSString*)activityId;
+
+-(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV;
+
+-(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index;
 @end

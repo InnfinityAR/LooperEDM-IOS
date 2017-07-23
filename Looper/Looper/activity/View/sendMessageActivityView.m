@@ -12,6 +12,7 @@
 #import "ActivityBarrageView.h"
 #import "MBProgressHUD.h"
 #import "DataHander.h"
+#import "LocalDataMangaer.h"
 @implementation sendMessageActivityView{
 
     UIButton* sendBtn;
@@ -49,7 +50,14 @@
         else{
             if (self.cellIndexPath>=0) {
 //给涛哥发送消息
-                NSLog(@"发送信息%ld",self.cellIndexPath);
+                NSDictionary *barrageDic=nil;
+                if (self.cellIndexPath==0) {
+                 barrageDic= [self.barrageView barrageInfo][0];
+                }else{
+                barrageDic= [self.barrageView barrageInfo][self.cellIndexPath-1];
+                }
+                [self.obj pustDataForActivityID:[[barrageDic  objectForKey:@"activityid"]intValue] andMessageID:[[barrageDic  objectForKey:@"messageid"]intValue] andContent:textview.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue])  andIndex:self.cellIndexPath andIsReplyView:NO];
+                NSLog(@"发送信息%@",barrageDic);
             }
             else{
         [self.obj sendActivityMessage: [self.barrageView activityID] and:textview.text and:tempImageArray];
