@@ -56,7 +56,7 @@
                 }else{
                 barrageDic= [self.barrageView barrageInfo][self.cellIndexPath-1];
                 }
-                [self.obj pustDataForActivityID:[[barrageDic  objectForKey:@"activityid"]intValue] andMessageID:[[barrageDic  objectForKey:@"messageid"]intValue] andContent:[barrageDic  objectForKey:@"messagecontent"] andUserID:@([[LocalDataMangaer sharedManager].uid intValue])  andIndex:self.cellIndexPath andIsReplyView:NO];
+                [self.obj pustDataForActivityID:[[barrageDic  objectForKey:@"activityid"]intValue] andMessageID:[[barrageDic  objectForKey:@"messageid"]intValue] andContent:textview.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue])  andIndex:self.cellIndexPath andIsReplyView:NO];
                 NSLog(@"发送信息%@",barrageDic);
             }
             else{

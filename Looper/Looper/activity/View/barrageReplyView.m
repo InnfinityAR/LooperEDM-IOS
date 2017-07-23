@@ -83,11 +83,11 @@
                 }else{
                     buddleDic=_dataArr[self.index-1];
                 }
-              [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:[buddleDic  objectForKey:@"messagecontent"] andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
+              [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
         }
         if (_textField.tag>=0) {
             buddleDic=_replyArr[_textField.tag];
-           [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:[buddleDic  objectForKey:@"messagecontent"] andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
+           [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
         }
         
     }
