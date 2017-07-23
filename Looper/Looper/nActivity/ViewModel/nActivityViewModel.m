@@ -303,6 +303,68 @@
     
 }
 
+
+-(void)sharetTicket:(NSDictionary*)ticketDic{
+    
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRadius;
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        //创建分享消息对象
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+        //创建网页内容对象
+
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:[ticketDic objectForKey:@"name"] descr:@"请点击购票"  thumImage:nil];
+        //设置网页地址
+        shareObject.webpageUrl = [ticketDic objectForKey:@"htmlurl"];
+        
+        //分享消息对象设置分享内容对象
+        messageObject.shareObject = shareObject;
+        
+        //调用分享接口
+        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            if (error) {
+                UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            }else{
+                if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                    UMSocialShareResponse *resp = data;
+                    //分享结果消息
+                    UMSocialLogInfo(@"response message is %@",resp.message);
+                    //第三方原始返回的数据
+                    UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                    
+                }else{
+                    UMSocialLogInfo(@"response data is %@",data);
+                }
+            }
+        }];
+    }];
+}
+
+
+
+
+
+-(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:activityID forKey:@"activityId"];
+    [dic setObject:islike forKey:@"like"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFollow" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
 -(void)addInformationToFavorite:(NSString*)activityID andisLike:(NSString*)islike{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -322,16 +384,23 @@
     }];
 }
 
--(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike{
+
+
+
+
+-(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:activityID forKey:@"activityId"];
-    [dic setObject:islike forKey:@"like"];
+    [dic setObject:ID forKey:@"id"];
+    [dic setObject:[NSString stringWithFormat:@"%d",typeNum] forKey:@"type"];
+    [dic setObject:[NSString stringWithFormat:@"%d",islike] forKey:@"like"];
     
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFollow" parameters:dic success:^(id responseObject){
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followBrand" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-
+            
+            
+            
         }else{
             
             
@@ -383,9 +452,6 @@
                         [recommendArray addObject:dic];
                     
                     }
-                    
-                    
-                    
                 }
                 [allActivityArray addObject:dic];
             }

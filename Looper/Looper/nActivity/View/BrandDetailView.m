@@ -42,6 +42,9 @@
     UIButton *activeBtn1;
     UIButton *detailBtn1;
     UIView *ShowselectView;
+    
+    
+    NSString *_localId;
 
 
 
@@ -60,6 +63,7 @@
 
 -(void)initView:(NSDictionary*)data{
     _BrandData = data;
+    _localId =[[data objectForKey:@"data"] objectForKey: @"hostid"];
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [self createImageViewHud];
     [self createScrollView];
@@ -126,10 +130,7 @@
     
     [self addSubview:icon_songer];
 
-    
-    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(246*DEF_Adaptation_Font*0.5,404*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(149*DEF_Adaptation_Font*0.5,45*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:followBtn];
-    
+
 }
 
 
@@ -145,7 +146,11 @@
             ShowselectView.hidden=true;
             
         }
-        
+        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
+            
+            followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
+            
+        }
         if (offset.y < 0) {
             CGRect rect = headImageView.frame;
             rect.origin.y =offset.y;
@@ -203,8 +208,19 @@
     
     [self addSubview:scrollV];
     scrollV.tag=100;
+
+    followBtn = [LooperToolClass createBtnImageNameReal:@"btn_activity_unfollow.png" andRect:CGPointMake(245*DEF_Adaptation_Font*0.5,284*DEF_Adaptation_Font*0.5) andTag:107 andSelectImage:@"btn_activity_follow.png" andClickImage:@"btn_activity_follow.png" andTextStr:nil andSize:CGSizeMake(151*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    [scrollV addSubview:followBtn];
     
+    if([[_BrandData objectForKey:@"islike"]intValue]==1){
+        [followBtn setSelected:true];
+    
+    }
+    
+    
+
     [self createHorizontalScroll];
+    
 }
 
 
@@ -296,7 +312,16 @@
             
         }];
     }else if(button.tag==107){
-        [followBtn setSelected:true];
+        
+        if([followBtn isSelected]==true){
+        
+             [followBtn setSelected:false];
+                [_obj followBrand:_localId andisLike:0 andType:4];
+        }else{
+             [followBtn setSelected:true];
+                [_obj followBrand:_localId andisLike:1 andType:4];
+        
+        }
     }
 }
 
@@ -360,7 +385,7 @@
     [locationLable sizeToFit];
     [view addSubview:locationLable];
     
-    CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5);
+     CGSize maximumSize = CGSizeMake(294*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5);
     NSString *dateString = [data objectForKey:@"location"];
     UIFont *dateFont = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     CGSize dateStringSize = [dateString sizeWithFont:dateFont

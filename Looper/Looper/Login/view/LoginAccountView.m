@@ -46,7 +46,7 @@
       
     
     phoneText=[self createTextField:@"手机号" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 240, 428, 50) andTag:100];
-    codeText=[self createTextField:@"验证码" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 390, 428, 50) andTag:100];
+    codeText=[self createTextField:@"验证码" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 390, 300, 50) andTag:100];
     [self createBtnImageName:@"btn_loginV.png" andRect:CGPointMake(115, 545) andTag:joinBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     [self createBtnImageName:@"btn_looper_back.png" andRect:CGPointMake(40, 40) andTag:backBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     

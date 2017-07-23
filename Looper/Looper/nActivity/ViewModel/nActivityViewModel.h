@@ -32,7 +32,6 @@
 
 -(void)addInformationToFollow:(NSString*)activityID andisLike:(NSString*)islike;
 
-
 -(void)createPlayerView:(NSDictionary *)dicPlayer;
 
 -(void)removePlayerInfo;
@@ -42,5 +41,10 @@
 -(void)addActivityDetailView:(NSDictionary*)ActivityDic andPhotoWall:(int)isPhoto;
 
 -(void)followUser:(NSString*)targetID;
+
 -(void)unfollowUser:(NSString*)targetID;
+
+-(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum;
+
+-(void)sharetTicket:(NSDictionary*)ticketDic;
 @end

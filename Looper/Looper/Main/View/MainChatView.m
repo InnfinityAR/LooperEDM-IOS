@@ -184,7 +184,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(selectIndexNum==1){
-        return [loopArray count];
+        return 0;
     }else if(selectIndexNum==2){
         return [[[RongCloudManger sharedManager] getSessionArray]count];
     }
