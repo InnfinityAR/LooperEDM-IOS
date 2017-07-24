@@ -100,7 +100,6 @@
 }
 
 
-
 -(void)createWebView{
     
     
@@ -116,16 +115,10 @@
 
 }
 
-
-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     
-    
     [[DataHander sharedDataHander] showDlg];
-    
 }
-
-
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{

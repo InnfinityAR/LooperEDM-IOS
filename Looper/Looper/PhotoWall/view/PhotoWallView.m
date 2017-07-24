@@ -195,13 +195,36 @@
         [userImage sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_dataSource objectForKey:@"user"]objectAtIndex:i] objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        userImage.tag= [[[[_dataSource objectForKey:@"user"]objectAtIndex:i] objectForKey:@"userid"] intValue];
+        
+        userImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+        [userImage addGestureRecognizer:singleTap];
+
+        
         userImage.layer.cornerRadius = 76*DEF_Adaptation_Font_x*0.5/2;
         userImage.layer.masksToBounds = YES;
+        
+        
+        
         [userScrollV addSubview:userImage];
     }
     [userScrollV setContentSize:CGSizeMake([[_dataSource objectForKey:@"user"] count]*96*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
     
 }
+
+
+-(void)clickUserBtn:(UITapGestureRecognizer *)tap{
+
+
+    NSLog(@"%d",tap.view.tag);
+    
+    
+    [_obj createPlayerView:tap.view.tag];
+
+
+}
+
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -278,6 +301,14 @@
     [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"userimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
+    
+    headView.tag= [[dic objectForKey:@"userid"] intValue];
+    
+    headView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+    [headView addGestureRecognizer:singleTap];
+
+    
     headView.layer.cornerRadius = 68*DEF_Adaptation_Font_x*0.5/2;
     headView.layer.masksToBounds = YES;
     [cell.contentView addSubview:headView];

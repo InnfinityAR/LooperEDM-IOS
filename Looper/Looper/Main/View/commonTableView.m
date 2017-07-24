@@ -87,6 +87,20 @@
 }
 
 
+
+-(void)clickUserBtn:(UITapGestureRecognizer *)tap{
+    
+    
+    NSLog(@"%d",tap.view.tag);
+    
+    
+    [_obj createPlayerView:tap.view.tag];
+
+}
+
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString * cellName = @"UITableViewCell";
@@ -109,9 +123,20 @@
         [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString: [dic objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        
         loopHead.layer.cornerRadius =66*DEF_Adaptation_Font*0.5/2;
         loopHead.layer.masksToBounds = YES;
         [cell.contentView addSubview:loopHead];
+        
+        loopHead.tag= [[dic objectForKey:@"userid"] intValue];
+        
+        loopHead.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+        [loopHead addGestureRecognizer:singleTap];
+
+        
+        
+        
         UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(128, 93) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
         
@@ -130,6 +155,17 @@
         loopHead.layer.cornerRadius =66*DEF_Adaptation_Font*0.5/2;
         loopHead.layer.masksToBounds = YES;
         [cell.contentView addSubview:loopHead];
+        
+        
+        loopHead.tag= [[dic objectForKey:@"userid"] intValue];
+        
+        loopHead.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+        [loopHead addGestureRecognizer:singleTap];
+
+        
+        
+        
         UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(128, 93) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
         
@@ -195,7 +231,6 @@
         [cell.contentView addSubview:lineV1];
 
     }
-    
     
     return cell;
 }
