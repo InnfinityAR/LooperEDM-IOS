@@ -72,12 +72,10 @@
     
     UIImageView *shadowV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 176*DEF_Adaptation_Font*0.5)];
     [shadowV setImage:[UIImage imageNamed:@"top_shadow.png"]];
+    shadowV.alpha=2.0;
     [self addSubview:shadowV];
     
      UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
-    
-   
-    
     
     [self addSubview:backBtn];
     
@@ -86,7 +84,7 @@
     
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     titleLabel.text =[[activityDic objectForKey:@"data"]objectForKey:@"activityname"];
-    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
+    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:18]];
     [titleLabel setTextColor:[UIColor whiteColor]];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:titleLabel];
@@ -118,8 +116,22 @@
 
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
     
+    
+    [[DataHander sharedDataHander] showDlg];
+    
+}
+
+
+
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    
+    
+      [[DataHander sharedDataHander] hideDlg];
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
     
@@ -149,10 +161,12 @@
             UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
             [writeView1 setBackgroundColor:[UIColor whiteColor]];
             [bkScroll addSubview:writeView1];
+            
+            /*
             UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, ((scrollHeight/DEF_Adaptation_Font/0.5)+2120)*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"推荐loop" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
              [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
             
-            [bkScroll addSubview:activityStr];
+            //[bkScroll addSubview:activityStr];
             
             NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
             for(int i=0;i<[loopArray count];i++){
@@ -174,7 +188,8 @@
                      [loopImage addSubview:[self createLabel:[dic objectForKey:@"news_title"] andPoint:CGPointMake(20, 250) andSize:CGSizeMake(176, 70) andFontSize:13]];
                 }
             }
-            isHeight=true;
+             */
+            isHeight=false;
         }
     }
 }

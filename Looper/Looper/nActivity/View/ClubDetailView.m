@@ -11,6 +11,9 @@
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 #import "UIImageView+WebCache.h"
+#import "XHImageViewer.h"
+#import "UIImageView+XHURLDownload.h"
+
 
 @implementation ClubDetailView{
     UIScrollView *scrollV;
@@ -49,6 +52,7 @@
     
     
     NSString *_localId;
+    NSMutableArray *_imageViews;
 
 }
 
@@ -67,6 +71,8 @@
     _clubData = data;
     _localId =[[data objectForKey:@"data"] objectForKey: @"clubid"];
 
+    _imageViews= [[NSMutableArray alloc] initWithCapacity:50];
+    
     [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [self createImageViewHud];
     [self createScrollView];
@@ -485,7 +491,39 @@
 }
 
 
+-(void)onClickView:(UITapGestureRecognizer *)tap{
+    
+    [_imageViews removeAllObjects];
+    
+    int tag = tap.view.tag;
+    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+    imageViewer.delegate = self;
 
+    for (int i=0;i<[[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count];i++){
+        UIImageView *tempImageView = [[UIImageView alloc] init];
+        tempImageView.frame = CGRectMake(0, self.frame.size.height*0.5, self.frame.size.width, 0);
+
+        [tempImageView loadWithURL:[NSURL URLWithString:[[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] objectAtIndex:i]] placeholer:nil showActivityIndicatorView:YES];
+        
+        //tempImageView.image = (UIImage*)[[commodity_images_arr objectAtIndex:i] image];
+        [tempImageView setBackgroundColor:[UIColor whiteColor]];
+        [_imageViews addObject:tempImageView];
+    }
+
+    if([[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count]==1){
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:0]];
+    }else{
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:tag]];
+    }
+
+
+
+}
+
+- (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
+    
+    
+}
 
 
 
@@ -539,6 +577,13 @@
         num_y = i/2;
 
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_SCREEN_WIDTH+num_x,0+(num_y*302*DEF_Adaptation_Font*0.5), 274*DEF_Adaptation_Font*0.5, 274*DEF_Adaptation_Font*0.5)];
+        
+        imageV.tag=i;
+        imageV.userInteractionEnabled = true;
+
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+        [imageV addGestureRecognizer:singleTap];
+        
         [imageV sd_setImageWithURL:[[NSURL alloc] initWithString: [[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] objectAtIndex:i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (image != nil) {
                     if (image.size.height>image.size.width) {//图片的高要大于与宽
@@ -555,11 +600,7 @@
                 }
             
         }];
-        
-        
-        
-        
-        
+
  
         imageV.layer.cornerRadius = 6*DEF_Adaptation_Font*0.5;
         imageV.layer.masksToBounds = YES;

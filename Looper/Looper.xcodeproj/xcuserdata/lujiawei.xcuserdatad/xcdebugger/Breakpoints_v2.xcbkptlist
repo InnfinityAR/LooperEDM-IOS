@@ -282,7 +282,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522344952.048017"
+                  timestampString = "522522057.271171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "133"
@@ -297,7 +297,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522344952.049321"
+                  timestampString = "522522057.272537"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "134"
@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "-webViewDidFinishLoad:"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,7 +666,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.099615"
+                  timestampString = "522522058.289633"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -681,7 +681,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.100834"
+                  timestampString = "522522058.292192"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -696,7 +696,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.102046"
+                  timestampString = "522522058.293572"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -711,7 +711,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.103267"
+                  timestampString = "522522058.294836"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "167"
@@ -792,7 +792,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.114034"
+                  timestampString = "522522058.397172"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -807,7 +807,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522344952.115393"
+                  timestampString = "522522058.398587"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -1288,7 +1288,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.195012"
+                  timestampString = "522522058.689424"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -1303,7 +1303,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.196247"
+                  timestampString = "522522058.690868"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -1336,7 +1336,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.199195"
+                  timestampString = "522522058.694307"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1351,7 +1351,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.200455"
+                  timestampString = "522522058.695604"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1366,7 +1366,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.201684"
+                  timestampString = "522522058.696975"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1381,7 +1381,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.204052"
+                  timestampString = "522522058.698389"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1396,7 +1396,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522344952.206012"
+                  timestampString = "522522058.699738"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1445,7 +1445,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522344952.214118"
+                  timestampString = "522522058.706849"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
@@ -1460,7 +1460,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522344952.215962"
+                  timestampString = "522522058.70818"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "309"
@@ -1525,7 +1525,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522344952.222327"
+                  timestampString = "522522058.714441"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -1540,7 +1540,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522344952.22373"
+                  timestampString = "522522058.716441"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "242"
@@ -1685,11 +1685,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "535"
-            endingLineNumber = "535"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
             landmarkName = "-menuDidSelected:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1701,11 +1701,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "-menuDidSelected:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1717,11 +1717,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "-addcalendarView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1733,11 +1733,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1749,11 +1749,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1765,11 +1765,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "-addcalendarView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1781,11 +1781,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "521995112.977633"
+            timestampString = "522571162.44339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-addcalendarView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1802,7 +1802,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "816"
             endingLineNumber = "816"
-            landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1818,7 +1818,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "819"
             endingLineNumber = "819"
-            landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1834,7 +1834,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "817"
             endingLineNumber = "817"
-            landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1850,7 +1850,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "775"
             endingLineNumber = "775"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkName = "-cellUIWhenHavePhoto:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1866,7 +1866,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "777"
             endingLineNumber = "777"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkName = "-cellUIWhenHavePhoto:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1882,7 +1882,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "783"
             endingLineNumber = "783"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkName = "-cellUIWhenHavePhoto:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1930,7 +1930,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "809"
             endingLineNumber = "809"
-            landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1946,7 +1946,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "811"
             endingLineNumber = "811"
-            landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1989,7 +1989,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522344952.36488"
+                  timestampString = "522522059.2997"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "100"
@@ -2004,7 +2004,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522344952.366491"
+                  timestampString = "522522059.30105"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -2491,6 +2491,54 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/activity/View/ActivityBarrageView.m"
+            timestampString = "522520760.391741"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "743"
+            endingLineNumber = "743"
+            landmarkName = "-cellUIWhenHavePhoto:andIndexpath:andImageDic:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/activity/View/ActivityBarrageView.m"
+            timestampString = "522520775.106129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "905"
+            endingLineNumber = "905"
+            landmarkName = "-onClickPhoto:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/View/ClubDetailView.m"
+            timestampString = "522522313.83634"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "-onClickView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

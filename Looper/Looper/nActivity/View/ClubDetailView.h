@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XHImageViewer.h"
 
-@interface ClubDetailView : UIView <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface ClubDetailView : UIView <UICollectionViewDataSource,UICollectionViewDelegate,XHImageViewerDelegate>
 {
     
     
