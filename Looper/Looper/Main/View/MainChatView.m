@@ -59,9 +59,6 @@
 }
 
 
-
-
-
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     
@@ -70,8 +67,15 @@
         [chatBtn setSelected:true];
         selectIndexNum =2;
         [tableView1 reloadData];
-        [communityBtn setHidden:false];
-        [communityImage setHidden:false];
+        
+        if([[[RongCloudManger sharedManager] getSessionArray]count]>0){
+            communityImage.hidden=true;
+            communityBtn.hidden=true;
+        }else{
+            [communityBtn setHidden:false];
+            [communityImage setHidden:false];
+        
+        }
         [UIView animateWithDuration:0.5 animations:^{
             
             moveline.frame =CGRectMake(393*0.5*DEF_Adaptation_Font, 148*0.5*DEF_Adaptation_Font, moveline.frame.size.width, moveline.frame.size.height);
@@ -186,6 +190,13 @@
     if(selectIndexNum==1){
         return 0;
     }else if(selectIndexNum==2){
+        
+        if([[[RongCloudManger sharedManager] getSessionArray]count]>0){
+            communityImage.hidden=true;
+            communityBtn.hidden=true;
+        }
+        
+        
         return [[[RongCloudManger sharedManager] getSessionArray]count];
     }
     return 0;

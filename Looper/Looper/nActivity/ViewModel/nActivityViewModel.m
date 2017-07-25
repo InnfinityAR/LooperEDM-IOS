@@ -207,13 +207,6 @@
 }
 
 
--(void)createPhotoWallController{
-    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
-    [photoWallVC initWithActivityID:@"22222"];
-    [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
-}
-
-
 -(void)followUser:(NSString*)targetID{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -229,6 +222,16 @@
         
     }];
 }
+
+
+
+-(void)createPhotoWallController{
+    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
+    [photoWallVC initWithActivityID:@"22222"];
+    [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
+}
+
+
 
 -(void)createPlayerView:(NSDictionary *)dicPlayer{
     

@@ -49,11 +49,7 @@
     }
 }
 
-
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    
-    
-    
     
     
 }

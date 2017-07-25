@@ -21,6 +21,10 @@
 #import "nActivityViewController.h"
 #import "selectActivityView.h"
 #import "PlayVideoView.h"
+#import "LocalDataMangaer.h"
+#import "PlayerInfoView.h"
+#import "SimpleChatViewController.h"
+#import "UserInfoViewController.h"
 
 
 @implementation PhotoWallViewModel{
@@ -30,6 +34,9 @@
     PhotoWallView *PhotoWallV;
     nActivityViewController *activity;
     NSDictionary *_photoWallData;
+    
+    PlayerInfoView *_playerInfoV;
+    
 
 }
 -(id)initWithController:(id)controller andActivityId:(NSString*)activityId{
@@ -62,7 +69,7 @@
 
 
 -(void)playVideoFile:(NSString*)videoFile{
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:videoFile]];
     PKFullScreenPlayerViewController *vc = [[PKFullScreenPlayerViewController alloc] initWithVideoPath:videoFile previewImage:image];
     [_obj presentViewController:vc animated:NO completion:NULL];
@@ -70,7 +77,7 @@
 }
 
 -(void)playNetWorkVideo:(NSString*)videoUrl{
-
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     PlayVideoView *playVideoV  = [[PlayVideoView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andUrlStr:videoUrl];
     [[_obj view] addSubview:playVideoV];
 
@@ -82,6 +89,66 @@
      [sendPhotoV ImageFileSave:imagePath];
 
 }
+
+-(void)removePlayerInfo{
+
+    [_playerInfoV removeFromSuperview];
+    
+}
+
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
+}
+
+
+-(void)pushController:(NSDictionary*)dic{
+    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+    [simpleC chatTargetID:dic];
+    [[_obj navigationController]  pushViewController:simpleC animated:NO];
+}
+
+-(void)followUser:(NSString*)targetID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:targetID forKey:@"targetId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)createPlayerView:(int)PlayerId{
+    
+    if(PlayerId!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:[NSString stringWithFormat:@"%d",PlayerId] forKey:@"targetId"];
+        
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+}
+
 
 
 -(void)createRecordVideo{
@@ -149,7 +216,7 @@
         for (int i=0;i<[images count];i++){
             
             NSLog(@"%@",[images objectAtIndex:i]);
-            UIImage *imagePhoto2 = [UIImage imageNamed:[images objectAtIndex:i]];
+            UIImage *imagePhoto2 = [images objectAtIndex:i];
             NSData *imageDataP2 = UIImagePNGRepresentation(imagePhoto2);
             [imageDataArray addObject:[Base64Class encodeBase64Data:imageDataP2]];
         }
@@ -284,6 +351,71 @@
     }];
 }
 
+
+
+-(void)LocalPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    picker.allowsEditing = YES;
+    [_obj presentModalViewController:picker animated:YES];
+}
+
+
+-(void)takePhoto
+{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        //设置拍照后的图片可被编辑
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [_obj presentModalViewController:picker animated:YES];
+    }else
+    {
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* MyImage = [[UIImage alloc]init];
+        
+        UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+        //NSData *imageData = UIImagePNGRepresentation(image);
+        
+        MyImage=[LooperToolClass set_imageWithImage:image scaledToSize:CGSizeMake(400 * DEF_Adaptation_Font, 400 * DEF_Adaptation_Font)];
+        NSData * data = [LooperToolClass set_ImageData_UIImageJPEGRepresentationWithImage:MyImage CGFloat_compressionQuality:0.5];
+        
+        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+        [formatter setDateFormat:@"yyyyMMddHHmmss"];
+        NSString* dateString = [formatter stringFromDate:[NSDate date]];
+        dateString = [NSString stringWithFormat:@"%@.png",dateString];
+        NSString* filePath = [[NSString alloc]initWithFormat:@"%@/%@",DocumentsPath,dateString];
+        [fileManager removeItemAtPath:filePath error:nil];
+
+        [fileManager createFileAtPath:filePath contents:data attributes:nil];
+ 
+        [sendPhotoV ImageFileSave:[UIImage imageNamed:filePath]];
+        [picker dismissViewControllerAnimated:YES completion:^(void){}];
+    }
+}
 
 
 

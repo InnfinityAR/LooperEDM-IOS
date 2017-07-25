@@ -52,15 +52,10 @@
     } else {
             NSLog(@"string 包含 martin");
         
-        [[DataHander sharedDataHander] showViewWithStr:@"该购票链接只能通过微信打开😂" andTime:3 andPos:CGPointZero];
-        
-        
-        
+        [[DataHander sharedDataHander] showViewWithStr:@"该购票链接只能通过微信打开😂" andTime:2 andPos:CGPointZero];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
         [dic setObject:[self.dataDic objectForKey:@"ticketurl"] forKey:@"htmlurl"];
         [dic setObject:[self.dataDic objectForKey:@"activityname"] forKey:@"name"];
-        
-        
         
         [_obj sharetTicket:dic];
     }

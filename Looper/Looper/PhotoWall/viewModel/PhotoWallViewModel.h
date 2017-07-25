@@ -29,5 +29,11 @@
 -(void)setActivityID:(NSDictionary*)dic;
 -(void)getOfflineInformationByIP;
 -(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
+-(void)createPlayerView:(int )PlayerId;
+-(void)removePlayerInfo;
+
+
+-(void)LocalPhoto;
+-(void)takePhoto;
 
 @end

@@ -41,7 +41,7 @@
 #import "ActivityViewController.h"
 #import "nActivityViewController.h"
 
-
+#import "PlayerInfoView.h"
 #import "HowToPlayView.h"
 #import "UserInfoViewController.h"
 #import "LiveShowView.h"
@@ -73,6 +73,9 @@
     nActivityViewController *activity;
     
     NSString *_activityId;
+    
+    
+    PlayerInfoView *_playerInfoV;
     
 
 }
@@ -127,6 +130,66 @@
     }fail:^{
         
     }];
+}
+
+
+-(void)removePlayerInfo{
+    
+    [_playerInfoV removeFromSuperview];
+    
+}
+
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
+}
+
+
+-(void)pushController:(NSDictionary*)dic{
+    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+    [simpleC chatTargetID:dic];
+    [[_obj navigationController]  pushViewController:simpleC animated:NO];
+}
+
+-(void)followUser:(NSString*)targetID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:targetID forKey:@"targetId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)createPlayerView:(int)PlayerId{
+    
+    if(PlayerId!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:[NSString stringWithFormat:@"%d",PlayerId] forKey:@"targetId"];
+        
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
 }
 
 
@@ -198,9 +261,6 @@
         
     }];
 }
-
-
-
 
 
 -(void)requestgetMyFavorite{
@@ -517,15 +577,9 @@
         [self createCommonView:3];
         
     }else if(type==8007){
-        //我的loop
-        NSLog(@"%@",[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]);
-        
-        
+
         liveShowV = [[LiveShowView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
         [[_obj view] addSubview:liveShowV];
-        
-        
-        
     } else if(type==ActivityShareBtnTag){
         
         [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;

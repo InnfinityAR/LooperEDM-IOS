@@ -136,7 +136,7 @@
     headView.layer.masksToBounds = YES;
     [view addSubview:headView];
 
-    UILabel *activityName = [LooperToolClass createLableView:CGPointMake(212*DEF_Adaptation_Font_x*0.5, 136*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(386*DEF_Adaptation_Font_x*0.5, 68*DEF_Adaptation_Font_x*0.5) andText:[[_dataSource objectForKey:@"activity"]objectForKey:@"activityname"] andFontSize:18 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel *activityName = [LooperToolClass createLableView:CGPointMake(212*DEF_Adaptation_Font_x*0.5, 116*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(386*DEF_Adaptation_Font_x*0.5, 68*DEF_Adaptation_Font_x*0.5) andText:[[_dataSource objectForKey:@"activity"]objectForKey:@"activityname"] andFontSize:18 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     activityName.numberOfLines=0;
     [activityName sizeToFit];
     [view addSubview:activityName];
@@ -195,13 +195,36 @@
         [userImage sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_dataSource objectForKey:@"user"]objectAtIndex:i] objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        userImage.tag= [[[[_dataSource objectForKey:@"user"]objectAtIndex:i] objectForKey:@"userid"] intValue];
+        
+        userImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+        [userImage addGestureRecognizer:singleTap];
+
+        
         userImage.layer.cornerRadius = 76*DEF_Adaptation_Font_x*0.5/2;
         userImage.layer.masksToBounds = YES;
+        
+        
+        
         [userScrollV addSubview:userImage];
     }
     [userScrollV setContentSize:CGSizeMake([[_dataSource objectForKey:@"user"] count]*96*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
     
 }
+
+
+-(void)clickUserBtn:(UITapGestureRecognizer *)tap{
+
+
+    NSLog(@"%d",tap.view.tag);
+    
+    
+    [_obj createPlayerView:tap.view.tag];
+
+
+}
+
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -223,7 +246,6 @@
     return nil;
 }
 
-
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     return  CGSizeMake(DEF_SCREEN_WIDTH, 612*DEF_Adaptation_Font*0.5);
 }
@@ -242,12 +264,20 @@
 
          return  CGSizeMake(DEF_SCREEN_WIDTH, 803*DEF_Adaptation_Font*0.5+boardText.frame.size.height);
     }else if([[dic objectForKey:@"boardimage"] count]==1){
-         return  CGSizeMake(DEF_SCREEN_WIDTH, 618*DEF_Adaptation_Font*0.5);
+        UILabel *boardText = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+        boardText.numberOfLines=0;
+        [boardText sizeToFit];
+        return  CGSizeMake(DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5+boardText.frame.size.height);
     }else if([[dic objectForKey:@"boardimage"] count]>1){
-        return  CGSizeMake(DEF_SCREEN_WIDTH, 574*DEF_Adaptation_Font*0.5);
+        UILabel *boardText = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+        boardText.numberOfLines=0;
+        [boardText sizeToFit];
+        return  CGSizeMake(DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5+boardText.frame.size.height);
     }
     return  CGSizeMake(DEF_SCREEN_WIDTH, 618*DEF_Adaptation_Font*0.5);
 }
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
  
     
@@ -256,6 +286,8 @@
     
     
 }
+
+
 //设置每个item与上左下右四个方向的间隔
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
@@ -278,6 +310,14 @@
     [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[dic objectForKey:@"userimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
+    
+    headView.tag= [[dic objectForKey:@"userid"] intValue];
+    
+    headView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+    [headView addGestureRecognizer:singleTap];
+
+    
     headView.layer.cornerRadius = 68*DEF_Adaptation_Font_x*0.5/2;
     headView.layer.masksToBounds = YES;
     [cell.contentView addSubview:headView];
@@ -335,7 +375,6 @@
         videoImg.layer.cornerRadius = 10 *DEF_Adaptation_Font_x*0.5;
         videoImg.layer.masksToBounds = YES;
 
-        
         [cell.contentView addSubview:videoImg];
         videoImg.userInteractionEnabled=YES;
         
@@ -357,6 +396,57 @@
         
         
         UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+629*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"%@ 人",[dic objectForKey:@"thumbcount"]] andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+        
+        [cell.contentView addSubview:personNum];
+
+    }else{
+        
+        UIScrollView *ImageView = [[UIScrollView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5, 520*DEF_Adaptation_Font*0.5, 330*DEF_Adaptation_Font*0.5)];
+        ImageView.showsVerticalScrollIndicator = NO;
+        ImageView.showsHorizontalScrollIndicator = NO;
+        [cell.contentView addSubview:ImageView];
+        
+        for (int i=0;i<[[dic objectForKey:@"boardimage"] count];i++)
+        {
+            UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5+(i*360*DEF_Adaptation_Font*0.5), 0, 330*DEF_Adaptation_Font*0.5,  330*DEF_Adaptation_Font*0.5)];
+            djViewHead.layer.cornerRadius = 10 *DEF_Adaptation_Font_x*0.5;
+            djViewHead.layer.masksToBounds = YES;
+            [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[dic objectForKey:@"boardimage"] objectAtIndex:i] ] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                if (image != nil) {
+                    if (image.size.height>image.size.width) {//图片的高要大于与宽
+                        CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }else{
+                        CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                        CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                        djViewHead.image=[UIImage imageWithCGImage:cgimg];
+                        CGImageRelease(cgimg);
+                    }
+                }
+            }];
+            djViewHead.tag = i;
+            [ImageView addSubview:djViewHead];
+            //djViewHead.userInteractionEnabled=YES;
+           // UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(djViewJump:)];
+           // [djViewHead addGestureRecognizer:singleTap];
+
+        }
+        ImageView.contentSize = CGSizeMake(28*DEF_Adaptation_Font*0.5 +[[dic objectForKey:@"boardimage"] count]*360*DEF_Adaptation_Font*0.5,  330*DEF_Adaptation_Font*0.5);
+        UIButton *commend = [LooperToolClass createBtnImageNameReal:@"btn_un_commend.png" andRect:CGPointMake(119*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+330*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5) andTag:[[dic objectForKey:@"boardid"] intValue] andSelectImage:@"btn_commend.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(58*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
+        [cell.contentView addSubview:commend];
+        
+        [commend removeTarget:self action:NULL forControlEvents:UIControlEventAllEvents];
+        [commend addTarget:self action:@selector(commendOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if([[dic objectForKey:@"islike"] intValue]==1){
+            
+            [commend setSelected:true];
+        }
+        
+        UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+330*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"%@ 人",[dic objectForKey:@"thumbcount"]] andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
         
         [cell.contentView addSubview:personNum];
 

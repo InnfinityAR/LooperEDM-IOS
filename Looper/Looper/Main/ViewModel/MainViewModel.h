@@ -78,5 +78,6 @@
 -(void)requestgetMyFavorite;
 -(void)requestMainData;
 -(void)createActivityView:(NSString*)activityId;
+-(void)createPlayerView:(int)PlayerId;
 
 @end
