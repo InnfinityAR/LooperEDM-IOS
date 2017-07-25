@@ -309,7 +309,7 @@ static NSString *const kLTSCalendarDaySelected = @"kLTSCalendarDaySelected";
                 NSDate  *nowDate = [NSDate date];
                 long int nowtime = [nowDate timeIntervalSince1970];
                 long int  timeSp = [self.date timeIntervalSince1970];
-                if(nowtime>timeSp){
+                if(nowtime>=timeSp){
                 
                     textLabel.textColor =[UIColor colorWithRed:138.0/255.0 green:134.0/255.0 blue:152.0/255.0 alpha:1.0];
                 
