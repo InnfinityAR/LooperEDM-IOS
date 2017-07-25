@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface barrageReplyView : UIView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andIndex:(NSInteger)index andViewModel:(id)viewModel;
--(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andIndex:(NSInteger)index andViewModel:(id)viewModel andActivityID:(NSString *)activityID;
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andSendPerson:(NSString *)sendPerson;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)id viewModel;
+-(void)updateCommendLB:(NSArray *)dataArr;
+@property(nonatomic,strong)NSString *activityID;
 @property(nonatomic,strong)NSArray *dataArr;
 @property(nonatomic,strong)NSArray *replyArr;
 @end

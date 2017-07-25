@@ -22,7 +22,7 @@
 @property(nonatomic,strong)NSMutableArray *allShowImageTags;
 -(void)addImageArray:(NSArray *)imageArray;
 //完整的数据
-@property(nonatomic,strong)NSArray *barrageInfo;
+@property(nonatomic,strong)NSMutableArray *barrageInfo;
 //从数据中获取到的所有弹幕
 @property(nonatomic,strong)NSMutableArray *buddleArr;
 //为了保证弹幕不重复取到，将buddleArr的下标存入到数组中
@@ -44,5 +44,7 @@
 @property(nonatomic,strong)NSMutableArray *publishCountArr;
 -(void)showHUDWithString:(NSString*)commend;
 -(UIColor *)randomColorAndIndex:(int)index;
--(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr;
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andReplyCount:(NSInteger)replyCount;
+@property(nonatomic)NSInteger replyCount;
+@property(nonatomic)NSInteger replyIndex;
 @end

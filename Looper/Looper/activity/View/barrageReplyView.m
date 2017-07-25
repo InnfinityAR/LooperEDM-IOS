@@ -12,34 +12,50 @@
 #import "UIImageView+WebCache.h"
 #import "ActivityViewModel.h"
 #import "LocalDataMangaer.h"
-@interface barrageReplyView()<UITableViewDelegate,UITableViewDataSource>
+#define TAGBUTTON 10000
+@interface barrageReplyView()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     UITextField *_textField;
     UIButton *_sendButton;
     BOOL isHeader;
+    //总共有多少回复
     UILabel *numberLB;
+    //总共输入多少字
+    UILabel *countLB;
+    UILabel *_commendLB;
 }
 @property(nonatomic)NSInteger index;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIImageView *headerView;
 //设置高度
 @property(nonatomic,strong)NSMutableArray *heightArr;
-
+@property(nonatomic,strong)NSString *sendPerson;
 @end
 @implementation barrageReplyView
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andIndex:(NSInteger)index andViewModel:(id)viewModel
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andIndex:(NSInteger)index andViewModel:(id)viewModel andActivityID:(NSString *)activityID
 {
     if (self = [super initWithFrame:frame]) {
         isHeader=NO;
         self.index=index;
+        self.activityID=activityID;
+        self.sendPerson=nil;
         self.viewModel=(ActivityViewModel *)viewModel;
         [self.viewModel setReplyView:self];
         self.obj=(ActivityBarrageView *)idObject;
         self.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
         self.dataArr=[self.obj barrageInfo];
         [self addHeaderViewInView:self.headerView andFirstHeight:110 andIndex:self.index];
-         self.replyArr=[[self.obj publishCellDic]objectForKey:@(self.index)];
+//         self.replyArr=[[self.obj publishCellDic]objectForKey:@(self.index)];
+        __block NSDictionary *buddleDic=[NSDictionary dictionary];
+        //从第二个cell开始算的
+        if (self.index==0) {
+            buddleDic=self.dataArr[0];
+        }else{
+            buddleDic=self.dataArr[self.index-1];
+        }
+         [self.viewModel getReplyDataForMessageID:[[buddleDic objectForKey:@"messageid"]intValue] andIndex:self.index];
+        [self calculateHeightArr];
         [self initView];
         [self addBottomView];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -53,14 +69,63 @@
     }
     return _heightArr;
 }
--(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr{
+-(void)updateCommendLB:(NSArray *)dataArr{
+    __block NSDictionary *buddleDic=[NSDictionary dictionary];
+    //从第二个cell开始算的
+    if (self.index==0) {
+        buddleDic=dataArr[0];
+    }else{
+        buddleDic=dataArr[self.index-1];
+    }
+    _commendLB.text=[NSString stringWithFormat:@"%@",buddleDic[@"thumbupcount"]];
+}
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andSendPerson:(NSString *)sendPerson{
     self.replyArr=dataArr;
+    [self calculateHeightArr];
+    self.sendPerson=sendPerson;
     numberLB.text=[NSString stringWithFormat:@"共%ld条回复",self.replyArr.count];
     [self.tableView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSLog(@"%ld",button.tag);
+    
+    if (button.tag>=TAGBUTTON) {
+        NSDictionary *buddleDic=[NSDictionary dictionary];
+        buddleDic=_replyArr[button.tag-TAGBUTTON];
+        if (button.selected==YES) {
+            button.selected=NO;
+              [self.viewModel thumbActivityMessageLike:@(0) andUserId:[LocalDataMangaer sharedManager].uid andReplyID:[buddleDic objectForKey:@"replyid"] MessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andIndex:self.index andIsReplyView:YES];
+        }else{
+            button.selected=YES;
+            [self.viewModel thumbActivityMessageLike:@(1) andUserId:[LocalDataMangaer sharedManager].uid andReplyID:[buddleDic objectForKey:@"replyid"] MessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andIndex:self.index andIsReplyView:YES];
+        }
+    }
+    if (button.tag==-4) {
+        __block NSDictionary *buddleDic=[NSDictionary dictionary];
+//从第二个cell开始算的
+        if (self.index==0) {
+            buddleDic=_dataArr[0];
+        }else{
+            buddleDic=_dataArr[self.index-1];
+        }
+        if (button.selected==YES) {
+            [button setSelected:NO];
+            [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[buddleDic objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:YES];
+        }
+        else{
+            [button setSelected:YES];
+            [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[buddleDic objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:YES];
+        }
+    }
     if(button.tag==-2){
+        [self.viewModel setIsReplyV:NO];
+//        NSDictionary *buddleDic=[NSDictionary dictionary];
+//        if (self.index==0) {
+//            buddleDic=_dataArr[0];
+//        }else{
+//            buddleDic=_dataArr[self.index-1];
+//        }
+//        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
         [self removeFromSuperview];
     }
     if (button.tag==-1) {
@@ -68,7 +133,7 @@
         [_textField becomeFirstResponder];
         _textField.tag=button.tag;
     }
-    if (button.tag>=0) {
+    if (button.tag>=0&&button.tag<=self.replyArr.count+1) {
         [_textField becomeFirstResponder];
         _textField.tag=button.tag;
     }
@@ -83,15 +148,22 @@
                 }else{
                     buddleDic=_dataArr[self.index-1];
                 }
-              [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
+              [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:nil];
         }
         if (_textField.tag>=0) {
             buddleDic=_replyArr[_textField.tag];
-           [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES];
+            [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
         }
         
     }
         [_textField resignFirstResponder];
+    }
+}
+-(void)calculateHeightArr{
+    for (NSDictionary *replyDic in self.replyArr) {
+        NSString *content=[replyDic objectForKey:@"messagecontent"];
+        CGSize lblSize2 = [content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-40*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]} context:nil].size;
+         [self.heightArr addObject:@((270)*DEF_Adaptation_Font*0.5+lblSize2.height)];
     }
 }
 -(UIImageView *)headerView{
@@ -114,11 +186,11 @@
     buddleDic=_dataArr[index-1];
     }
          index=-1;
-        isHeader=YES;
+     
     }else{
         buddleDic=_replyArr[index];
     }
-     UIImageView  *userImageView =[[UIImageView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+     UIImageView  *userImageView =[[UIImageView alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
     userImageView.layer.cornerRadius =40*DEF_Adaptation_Font*0.5;
     userImageView.layer.masksToBounds=YES;
     //加入点击事件
@@ -127,55 +199,97 @@
         
     }];
     [view addSubview:userImageView];
-    UILabel *nameLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+    UILabel *nameLB=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
      nameLB.text=[buddleDic objectForKey:@"username"];
     nameLB.textColor=[UIColor whiteColor];
     [view addSubview:nameLB];
     
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, (firstY+50)*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, (firstY+50)*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     timeLB.text=buddleDic[@"creationdate"];
-    timeLB.font=[UIFont systemFontOfSize:13];
-    timeLB.textColor=[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.8];
+     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    timeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
     [view addSubview:timeLB];
 
-    UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"commendNO1.png" andRect:CGPointMake(420*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"commendYES1.png" andClickImage:@"commendYES1.png" andTextStr:nil andSize:CGSizeMake(40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *commendBtn= [LooperToolClass createBtnImageNameReal:@"praiseNO.png" andRect:CGPointMake(440*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5) andTag:(int)index+TAGBUTTON andSelectImage:@"praiseYES.png" andClickImage:@"praiseYES.png" andTextStr:nil andSize:CGSizeMake(66*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+    if (isHeader==NO) {
+        commendBtn.tag=-4;
+            }
+    if ([buddleDic[@"isthumb"]intValue]==1) {
+        [commendBtn setSelected:YES];
+    }else{
+        [commendBtn setSelected:NO];
+    }
     [view addSubview:commendBtn];
-  UILabel  *commendLB=[[UILabel alloc]initWithFrame:CGRectMake(475*DEF_Adaptation_Font*0.5,(firstY+10)*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+  UILabel  *commendLB=[[UILabel alloc]initWithFrame:CGRectMake(495*DEF_Adaptation_Font*0.5,(firstY+10)*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     commendLB.font=[UIFont boldSystemFontOfSize:12];
     commendLB.textColor=[UIColor whiteColor];
-    commendLB.text=[NSString stringWithFormat:@"%@",buddleDic[@"thumbupcount"]];
+    
+    if (isHeader==NO) {
+        commendLB.text=[NSString stringWithFormat:@"%@",buddleDic[@"thumbupcount"]];
+        _commendLB= commendLB;
+    }else{
+    commendLB.text=[NSString stringWithFormat:@"%@",buddleDic[@"thumbcount"]];
+    }
     [view addSubview:commendLB];
-   UIButton *shareBtn= [LooperToolClass createBtnImageNameReal:@"replyBtn.png" andRect:CGPointMake(530*DEF_Adaptation_Font*0.5, (firstY-10)*DEF_Adaptation_Font*0.5) andTag:(int)index andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5) andTarget:self];
+   UIButton *shareBtn= [LooperToolClass createBtnImageNameReal:@"replyBtn.png" andRect:CGPointMake(550*DEF_Adaptation_Font*0.5, (firstY)*DEF_Adaptation_Font*0.5) andTag:(int)index andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(66*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     shareBtn.tag=index;
     [view addSubview:shareBtn];
-    UILabel *contentLB=[[UILabel alloc]init];
-    float height=[self heightForString:buddleDic[@"messagecontent"] andWidth:DEF_WIDTH(self)-40*DEF_Adaptation_Font*0.5 andText:contentLB];
-    [contentLB setFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, (firstY+90)*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-40*DEF_Adaptation_Font*0.5, height)];
-    contentLB.textColor=[UIColor whiteColor];
+    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, (firstY+100)*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-40*DEF_Adaptation_Font*0.5, 240)];
+    contentLB.numberOfLines=0;
+      contentLB.textColor=[UIColor whiteColor];
+    contentLB.text=[buddleDic objectForKey:@"messagecontent"];
+//用来完成@功能
+    if ([buddleDic objectForKey:@"targetname"]!=[NSNull null]&&isHeader) {
+    contentLB.text=[NSString stringWithFormat:@"@%@ %@",[buddleDic objectForKey:@"targetname"], buddleDic[@"messagecontent"]];
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:contentLB.text];
+        //更改字体
+        [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:16] range:NSMakeRange(0, [[buddleDic objectForKey:@"targetname"]length]+2)];
+        //修改颜色
+        [string addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0] range:NSMakeRange(0,[[buddleDic objectForKey:@"targetname"]length]+2)];
+        contentLB.attributedText = string;
+        self.sendPerson=nil;
+    }
+    CGSize lblSize2 = [contentLB.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-40*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20]} context:nil].size;
+    float height=lblSize2.height;
+    CGRect contentFrame=contentLB.frame;
+    contentFrame.size.height=lblSize2.height;
+    contentLB.frame=contentFrame;
     [view addSubview:contentLB];
+    if (isHeader==NO) {
+        isHeader=YES;
+    }else{
+    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0,  (firstY+110)*DEF_Adaptation_Font*0.5+height+70*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 1*DEF_Adaptation_Font*0.5)];
+    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
+    [view addSubview:lineV];
+    }
     CGRect frame=view.frame;
-    frame.size.height=(firstY+120)*DEF_Adaptation_Font*0.5+height;
+    frame.size.height=(firstY+130)*DEF_Adaptation_Font*0.5+height;
     view.frame=frame;
-    
-    [self.heightArr addObject:@((firstY+120)*DEF_Adaptation_Font*0.5+height)];
     
 }
 -(void)addBottomView{
-    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-100*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 1*DEF_Adaptation_Font*0.5)];
-    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
-    [self addSubview:lineV];
+//    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-100*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 1*DEF_Adaptation_Font*0.5)];
+//    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
+//    [self addSubview:lineV];
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.placeholder = @"快来回复我";
+    _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
     [_textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     _textField.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
-    _textField.returnKeyType = UIReturnKeySearch; //设置按键类型
+    _textField.returnKeyType = UIReturnKeySend; //设置按键类型
     _textField.enablesReturnKeyAutomatically = YES; //这里设置为无文字就灰色不可点
     _textField.clearsOnBeginEditing = YES;
+    _textField.delegate=self;
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     _textField.textColor = [UIColor whiteColor];
     [_textField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [self addSubview:_textField];
+    countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-118*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
+    countLB.text=@"0/100";
+    countLB.textColor=[UIColor whiteColor];
+    countLB.font=[UIFont systemFontOfSize:10];
+    [self addSubview:countLB];
     _sendButton=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(self)- 160*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-80*DEF_Adaptation_Font*0.5) andTag:-3 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 140*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     _sendButton.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
     [_sendButton setTitle:@"发送" forState:(UIControlStateNormal)];
@@ -202,7 +316,7 @@
 -(void)initView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:-2 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
-    numberLB=[[UILabel alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(_headerView)+20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-40*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    numberLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, DEF_HEIGHT(_headerView)+40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-40*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     [self addSubview:numberLB];
     numberLB.text=[NSString stringWithFormat:@"共%ld条回复",self.replyArr.count];
     numberLB.font=[UIFont systemFontOfSize:20];
@@ -224,34 +338,43 @@
         //禁止上拉
         _tableView.alwaysBounceVertical=NO;
         _tableView.bounces=NO;
+
         [self addSubview:_tableView];
     }
     return _tableView;
 }
-
 -(void)keyboardWillShow:(NSNotification *)notification
 {
     //这样就拿到了键盘的位置大小信息frame，然后根据frame进行高度处理之类的信息
     
     CGRect frame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
-    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT- frame.size.height-_sendButton.frame.size.height-15*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
+    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT- frame.size.height-_sendButton.frame.size.height-20*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
     
-    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-_textField.frame.size.height-15*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
+    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-_textField.frame.size.height-20*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
+    countLB.frame = CGRectMake(countLB.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-countLB.frame.size.height-80*DEF_Adaptation_Font*0.5, countLB.frame.size.width, countLB.frame.size.height);
+
 }
 -(void)keyboardWillHide:(NSNotification *)notification{
     
-    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT-_sendButton.frame.size.height-15*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
+    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT-_sendButton.frame.size.height-20*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
     
-    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -_textField.frame.size.height-15*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
+    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -_textField.frame.size.height-20*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
+    countLB.frame = CGRectMake(countLB.frame.origin.x, DEF_SCREEN_HEIGHT -countLB.frame.size.height-80*DEF_Adaptation_Font*0.5, countLB.frame.size.width, countLB.frame.size.height);
+
     
 }
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    countLB.text=[NSString stringWithFormat:@"%ld/100",range.location];
+    if (range.location==100) {
+        return NO;
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
+    countLB.text=@"0/100";
     return YES;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -264,23 +387,74 @@
     return self.replyArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.accessoryType=UITableViewCellStyleDefault;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+         // 判断为空进行初始化  --（当拉动页面显示超过主页面内容的时候就会重用之前的cell，而不会再次初始化）
+        if (!cell) {
+                 cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+            }
+      else//当页面拉动的时候 当cell存在并且最后一个存在 把它进行删除就出来一个独特的cell我们在进行数据配置即可避免
+           {
+                     while ([cell.contentView.subviews lastObject] != nil) {
+                            [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
+                     }
+         }    cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [self addHeaderViewInView:cell.contentView andFirstHeight:150*DEF_Adaptation_Font*0.5 andIndex:indexPath.row];
-    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(cell)-1*DEF_Adaptation_Font*0.5, DEF_WIDTH(cell), 1*DEF_Adaptation_Font*0.5)];
-    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
-    [cell.contentView addSubview:lineV];
+    [self addHeaderViewInView:cell.contentView andFirstHeight:110*DEF_Adaptation_Font*0.5 andIndex:indexPath.row];
     cell.contentView.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
+    cell.layer.masksToBounds=YES;
         return cell;
-    
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([_textField isFirstResponder]) {
+        [_textField resignFirstResponder];
+    }
+    else{
+        [_textField becomeFirstResponder];
+        if (![_textField.text isEqualToString:@""]) {
+            NSDictionary *buddleDic=[NSDictionary dictionary];
+                buddleDic=_replyArr[indexPath.row];
+                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+            }
+
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.heightArr.firstObject floatValue];
-//    return [self.heightArr[indexPath.row]floatValue];
+//    return [self.heightArr.firstObject floatValue];
+    return [self.heightArr[indexPath.row]floatValue];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [_textField resignFirstResponder];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
+    if (moveY<0) {
+        //往上滑
+        CGRect frame=self.tableView.frame;
+        frame=CGRectMake(0,DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5+moveY,DEF_WIDTH(self),DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-200*DEF_Adaptation_Font*0.5-moveY);
+        if (frame.origin.y<DEF_HEIGHT(_headerView)) {
+            frame.origin.y=DEF_HEIGHT(_headerView);
+            frame.size.height=DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-100*DEF_Adaptation_Font*0.5;
+        }
+        self.tableView.frame=frame;
+        CGRect frame1=numberLB.frame;
+        frame1.size.height=60*DEF_Adaptation_Font*0.5+moveY;
+        if (frame1.size.height<0) {
+            frame1.size.height=0;
+        }
+        numberLB.frame=frame1;
+        
+    }
+    if (moveY>0) {
+        //往下滑
+        CGRect frame=self.tableView.frame;
+            frame.origin.y=DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5;
+            frame.size.height=DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-200*DEF_Adaptation_Font*0.5;
+        self.tableView.frame=frame;
+        CGRect frame1=numberLB.frame;
+            frame1.size.height=60*DEF_Adaptation_Font*0.5;
+        numberLB.frame=frame1;
+      
+    }
+
 }
 @end

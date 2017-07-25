@@ -30,7 +30,10 @@
         //加入点击事件
         self.userImageView.userInteractionEnabled=YES;
         [self addSubview:self.userImageView];
-        self.userNameLB=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-90*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+        self.userNameLB=[[UILabel alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-90*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        self.userNameLB.shadowColor = [UIColor blackColor];
+        //阴影偏移  x，y为正表示向右下偏移
+        self.userNameLB.shadowOffset = CGSizeMake(1, 1);
         self.userNameLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
         self.userNameLB.textColor=[UIColor whiteColor];
         [self addSubview:self.userNameLB];

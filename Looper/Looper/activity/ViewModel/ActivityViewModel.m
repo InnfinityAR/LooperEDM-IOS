@@ -140,17 +140,37 @@
     
 }
 
-
--(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID{
+-(void)thumbActivityMessageLike:(NSNumber*)like andUserId:(NSString*)userId andReplyID:(NSString*)replyID MessageID:(NSInteger)messageID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV{
+    self.isReplyV=isReplyV;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:@([userId intValue]) forKey:@"userId"];
+    [dic setObject:@([replyID intValue]) forKey:@"replyId"];
+    [dic setObject:like  forKey:@"like"];
+    NSLog(@"%@",dic);
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbReplyMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            [self getReplyDataForMessageID:messageID andIndex:index];
+           
+            NSLog(@"..........");
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+
+}
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID  andCommendForReply:(BOOL)isReply{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    self.commendForReply=isReply;
     [dic setObject:userId forKey:@"userId"];
     [dic setObject:messageID forKey:@"messageId"];
     [dic setObject:like forKey:@"like"];
 NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-        
-            [self getActivityInfoById:activityID andUserId:userId];
+            [self.barrageView setBarrageInfo:[NSMutableArray new]];
+            [self getActivityInfoById:activityID andUserId:userId andPage:1 andSize:100];
         }else{
             
         }
@@ -227,8 +247,13 @@ NSLog(@"%@",dic);
     [dic setObject:imageDataArray forKey:@"images"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid];
+            [self.barrageView setBarrageInfo:[NSMutableArray new]];
+            [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid andPage:1 andSize:100];
               [self.barrageView showHUDWithString:@"评论成功"];
+        
+                
+        
+        
         }
         else{
          [self.barrageView showHUDWithString:@"你真会玩，可惜发不出来，哈哈"];
@@ -238,15 +263,25 @@ NSLog(@"%@",dic);
     }];
 }
 
--(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId{
+
+
+
+-(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId  andPage:(NSInteger)page andSize:(NSInteger)size{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
     [dic setObject:userId forKey:@"userId"];
+    [dic setObject:@(page) forKey:@"page"];
+    [dic setObject:@(size) forKey:@"pageSize"];
        NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
       self.barrageArr= responseObject[@"message"];
+            if (self.commendForReply) {
+                [self.replyView updateCommendLB:self.barrageArr];
+                self.commendForReply=NO;
+            }else{
             [self.barrageView addImageArray:self.barrageArr];
+            }
         }
     }fail:^{
         
@@ -295,35 +330,83 @@ NSLog(@"%@",dic);
 }
 
 //reply的发送和获取
--(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV{
+-(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV andSendPerson:(NSString *)sendPerson{
     self.isReplyV=isReplyV;
+    self.sendPerson=sendPerson;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
 //    [dic setObject:@([[LocalDataMangaer sharedManager].uid intValue]) forKey:@"userId"];
    [dic setObject:userID forKey:@"userId"];
     [dic setObject:@(activityID) forKey:@"activityId"];
     [dic setObject:@(messageID) forKey:@"messageId"];
     [dic setObject:content forKey:@"content"];
+    if (sendPerson!=nil) {
+    [dic setObject:sendPerson forKey:@"targetId"];
+    }
     [AFNetworkTool Clarnece_Post_JSONWithUrl:ReplyURL parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
+            if (isReplyV==NO) {
+                 [self getReplyDataForMessageID:messageID andIndex:index];
+            }else{
+             [self getReplyDataForMessageID:messageID andIndex:index-1];
+            }
             [[DataHander sharedDataHander] showViewWithStr:@"回复成功" andTime:2 andPos:CGPointZero];
-            [self getReplyDataForMessageID:messageID andIndex:index-1];
+            
+            
+            NSMutableDictionary *temp;
+            int num = -1;
+            
+            for (int i=0;i<[[self.barrageView barrageInfo] count];i++){
+                NSMutableDictionary *dic =   [[NSMutableDictionary alloc] initWithDictionary:  [[self.barrageView barrageInfo] objectAtIndex:i]];
+                if([[dic objectForKey:@"messageid"] isEqualToString:[NSString stringWithFormat:@"%d",messageID]]){
+                    NSLog(@"%@",dic);
+                    if([dic objectForKey:@"replycount"]==nil){
+                           [dic setObject:@"1" forKey:@"replycount"];
+                        num = i;
+                        temp= [[NSMutableDictionary alloc] initWithDictionary:dic];
+                    }else{
+                        int  replyNum = [[dic objectForKey:@"replycount"] intValue]+1;
+                        [dic setObject:[NSString stringWithFormat:@"%d",replyNum] forKey:@"replycount"];
+                        num = i;
+                        temp= [[NSMutableDictionary alloc] initWithDictionary:dic];
+    
+                    }
+                
+                    break;
+                
+                }
+            }
+            
+            if(num!=-1){
+                [[self.barrageView barrageInfo] setObject:temp atIndexedSubscript:num];
+            }
+            
+            
+
+            
+            
+           
         }
     }fail:^{
         
     }];
 }
--(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index{
+-(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:@(messageID) forKey:@"messageId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:GetReplyURL parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
+                [self.replyView addReplyData:index andArray:responseObject[@"data"] andSendPerson:self.sendPerson];
             if (self.isReplyV==NO) {
-            [self.barrageView addReplyData:index andArray: responseObject[@"data"]];
+                 [self.barrageView addReplyData:index-1 andArray: responseObject[@"data"] andReplyCount:[[self.replyView replyArr]count]];
             }else{
-                [self.replyView addReplyData:index andArray:responseObject[@"data"]];
+             [self.barrageView addReplyData:index andArray: responseObject[@"data"]andReplyCount:[[self.replyView replyArr]count]];
+                self.isReplyV=NO;
             }
+            
         }
     }fail:^{
         

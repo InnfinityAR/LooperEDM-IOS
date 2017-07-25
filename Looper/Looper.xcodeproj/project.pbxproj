@@ -23,6 +23,9 @@
 		B2A1E7E71F1CDFCD006270E3 /* cityShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */; };
 		B2A1E7EA1F21F96F006270E3 /* barrageReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */; };
 		B2A1E7EC1F221827006270E3 /* replyBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7EB1F221827006270E3 /* replyBtn.png */; };
+		B2A1E7FD1F25DF8E006270E3 /* praiseNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */; };
+		B2A1E7FE1F25DF8E006270E3 /* praiseYES.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */; };
+		B2A1E8001F25F5F0006270E3 /* sendBuddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
@@ -732,6 +735,9 @@
 		B2A1E7E81F21F96F006270E3 /* barrageReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrageReplyView.h; sourceTree = "<group>"; };
 		B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = barrageReplyView.m; sourceTree = "<group>"; };
 		B2A1E7EB1F221827006270E3 /* replyBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replyBtn.png; sourceTree = "<group>"; };
+		B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = praiseNO.png; sourceTree = "<group>"; };
+		B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = praiseYES.png; sourceTree = "<group>"; };
+		B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendBuddle.png; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = View/AcitivitySeg.png; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
@@ -1853,7 +1859,10 @@
 		B2A6EE571ECAD7FF004BF416 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */,
 				B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */,
+				B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */,
+				B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */,
 				B2A6EEA31ECD3498004BF416 /* ActivityCell.h */,
 				B2A6EEA41ECD3498004BF416 /* ActivityCell.m */,
 				B2A6EEA51ECD3498004BF416 /* ActivityCell.xib */,
@@ -4350,6 +4359,8 @@
 				C460ED101ED417E500AE6A90 /* 3.json in Resources */,
 				C404A7C71EBF5DD6000B9E1D /* hand.png in Resources */,
 				C4C4B4981E9CB814003E2705 /* btn_loop_list.png in Resources */,
+				B2A1E7FD1F25DF8E006270E3 /* praiseNO.png in Resources */,
+				B2A1E8001F25F5F0006270E3 /* sendBuddle.png in Resources */,
 				C42E806C1EC332D400D9CC43 /* loading_00053.png in Resources */,
 				C42E806A1EC332D400D9CC43 /* loading_00051.png in Resources */,
 				B28BD8251F04D342004931AF /* otherUser.png in Resources */,
@@ -4482,6 +4493,7 @@
 				C4DA32391E8B7DBB00CD8305 /* btn_myCollection.png in Resources */,
 				C4F290011EB0EA9000EEB15E /* icon_style.png in Resources */,
 				C4DD32581EB9B8A5008CA240 /* unNotify.png in Resources */,
+				B2A1E7FE1F25DF8E006270E3 /* praiseYES.png in Resources */,
 				C4F59A7C1EB3782C0088C815 /* btn_unSelect.png in Resources */,
 				C40806931F1897E30084BC6E /* btn_sendPhoto_Small.png in Resources */,
 				C409A74E1E1E359400F76B5C /* icon_looper_write.png in Resources */,

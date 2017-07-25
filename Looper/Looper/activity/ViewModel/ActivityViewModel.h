@@ -25,8 +25,11 @@ typedef void(^CompletionHandle)(NSError *error);
 @property(nonatomic,strong)id replyView;
 @property(nonatomic,strong)NSArray *barrageArr;
 @property(nonatomic)BOOL isReplyV;
+@property(nonatomic)BOOL commendForReply;
+//用于@某某某
+@property(nonatomic,strong)NSString *sendPerson;
 //获取更多
-- (void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle;
+- (void)getMoreDataForCollectionView;
 //刷新
 - (void)refreshDataCompletionHandle:(CompletionHandle)completionHandle;
 //获取数据
@@ -39,8 +42,8 @@ typedef void(^CompletionHandle)(NSError *error);
 -(void)shareH5:(NSDictionary*)dic;
 
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images;
--(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId;
--(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID;
+-(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId  andPage:(NSInteger)page andSize:(NSInteger)size;
+-(void)thumbActivityMessage:(NSString*)like andUserId:(NSString*)userId andMessageId:(NSString*)messageID andActivityID:(NSString *)activityID  andCommendForReply:(BOOL)isReply;
 
 -(void)LocalPhoto;
 -(void)jumpToAddUserInfoVC:(NSString *)userID;
@@ -48,7 +51,9 @@ typedef void(^CompletionHandle)(NSError *error);
 
 -(void)createPhotoWallController:(NSString*)activityId;
 
--(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV;
+-(void)pustDataForActivityID:(NSInteger)activityID andMessageID:(NSInteger)messageID  andContent:(NSString *)content andUserID:(NSNumber *)userID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV andSendPerson:(NSString *)sendPerson;
 
 -(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index;
+//为评论回复点赞
+-(void)thumbActivityMessageLike:(NSNumber*)like andUserId:(NSString*)userId andReplyID:(NSString*)replyID MessageID:(NSInteger)messageID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV;
 @end

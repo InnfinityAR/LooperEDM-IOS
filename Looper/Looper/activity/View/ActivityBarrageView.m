@@ -21,6 +21,7 @@
 #import "YWCarouseView.h"
 #import "DataHander.h"
 #import "barrageReplyView.h"
+#import "XDRefresh.h"
 #define BUTTONTAG  100000
 @interface ActivityBarrageView()<UITextViewDelegate>
 {
@@ -28,9 +29,10 @@
     LFWaterfallLayout *waterLayout;
     //用于添加评论
     UILabel *countLB;
-    
     //当前选中的cell
+    XDRefreshFooter *_footer;
 }
+@property(nonatomic,strong)UIButton * suspendBtn;
 @property(nonatomic,retain) MPMoviePlayerController *movieController;
 //三个属性都是用于循环展示上传的照片
 @property (nonatomic, strong) YWCarouseView * carouseView;
@@ -43,6 +45,94 @@
     
     //是否重置BuddleSubscriptArr
     BOOL  isAddBuddleSubscriptArr;
+}
+-(UIButton *)suspendBtn{
+    if (!_suspendBtn) {
+        _suspendBtn=[LooperToolClass createBtnImageNameReal:@"sendBuddle.png" andRect:CGPointMake(DEF_WIDTH( self)-130*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-130*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 100*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)  andTarget:self];
+        [self addSubview:_suspendBtn];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(locationChange:)];
+        pan.delaysTouchesBegan = YES;
+        [_suspendBtn addGestureRecognizer:pan];
+        
+    }
+    return _suspendBtn;
+}
+//设置悬浮框
+-(void)locationChange:(UIPanGestureRecognizer*)p
+{
+    //[[UIApplication sharedApplication] keyWindow]
+    CGPoint panPoint = [p locationInView:[[UIApplication sharedApplication] keyWindow]];
+    float HEIGHT=70*DEF_Adaptation_Font*0.5;
+    float WIDTH=70*DEF_Adaptation_Font*0.5;
+    if(p.state == UIGestureRecognizerStateChanged)
+    {
+        _suspendBtn.center = CGPointMake(panPoint.x, panPoint.y);
+    }
+    else if(p.state == UIGestureRecognizerStateEnded)
+    {
+        if(panPoint.x <= DEF_WIDTH(self)/2)
+        {
+            if(panPoint.y <= 40+HEIGHT/2 && panPoint.x >= 20+WIDTH/2)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(panPoint.x, HEIGHT/2);
+                }];
+            }
+            else if(panPoint.y >= DEF_HEIGHT(self)-HEIGHT/2-40 && panPoint.x >= 20+WIDTH/2)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(panPoint.x, DEF_HEIGHT(self)-HEIGHT/2);
+                }];
+            }
+            else if (panPoint.x < WIDTH/2+15 && panPoint.y > DEF_HEIGHT(self)-HEIGHT/2)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(WIDTH/2, DEF_HEIGHT(self)-HEIGHT/2);
+                }];
+            }
+            else
+            {
+                CGFloat pointy = panPoint.y < HEIGHT/2 ? HEIGHT/2 :panPoint.y;
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(WIDTH/2, pointy);
+                }];
+            }
+        }
+        else if(panPoint.x > DEF_WIDTH(self)/2)
+        {
+            if(panPoint.y <= 40+HEIGHT/2 && panPoint.x < DEF_WIDTH(self)-WIDTH/2-20 )
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(panPoint.x, HEIGHT/2);
+                }];
+            }
+            else if(panPoint.y >= DEF_HEIGHT(self)-40-HEIGHT/2 && panPoint.x < DEF_WIDTH(self)-WIDTH/2-20)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(panPoint.x, 480*DEF_Adaptation_Font-HEIGHT/2);
+                }];
+            }
+            else if (panPoint.x > DEF_WIDTH(self)-WIDTH/2-15 && panPoint.y < HEIGHT/2)
+            {
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(DEF_WIDTH(self)-WIDTH/2, HEIGHT/2);
+                }];
+            }
+            else
+            {
+                CGFloat pointy = panPoint.y > DEF_HEIGHT(self)-HEIGHT/2 ? DEF_HEIGHT(self)-HEIGHT/2 :panPoint.y;
+                [UIView animateWithDuration:0.2 animations:^{
+                    _suspendBtn.center = CGPointMake(320*DEF_Adaptation_Font-WIDTH/2, pointy);
+                }];
+            }
+        }
+    }
+}
+-(NSMutableArray *)barrageInfo{
+    if (!_barrageInfo) {
+        _barrageInfo=[[NSMutableArray alloc]init];
+    }
+    return _barrageInfo;
 }
 -(NSMutableDictionary *)publishCellDic{
     if (!_publishCellDic) {
@@ -132,7 +222,7 @@
         self.viewModel=viewModel;
         self.activityID=[self.obj activityID];
         self.activityDIc=[self.obj activityDic];
-        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];        
+         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:self.barrageInfo.count/10+1 andSize:10];
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
@@ -149,22 +239,41 @@
     }
     return self;
 }
+-(void)refreshCollectionView{
+    _footer = [XDRefreshFooter footerOfScrollView:self.collectView refreshingBlock:^{
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            sleep(1);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"hello2");
+//                    [_footer endRefreshingWithNoMoreDataWithTitle:@"无数据了"];
+                 [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:self.barrageInfo.count/10+1 andSize:10];
+                    [self.collectView reloadData];
+                    [_footer endRefreshing];
+            });
+        });
+    }];
+}
 -(void)startTimer{
   NSTimer *timer=[NSTimer scheduledTimerWithTimeInterval:0.005 target:self selector:@selector(initDateBarrage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 //    [[NSRunLoop currentRunLoop] run];
 }
 -(void)addImageArray:(NSArray *)imageArray{
-    self.barrageInfo=imageArray;
+    [self.barrageInfo addObjectsFromArray:imageArray];
     [self.userImageArr removeAllObjects];
     [self.buddleArr removeAllObjects];
-    for (int i=0;i<imageArray.count;i++) {
-        NSDictionary *buddleDic=imageArray[i];
+    //去除评论回复的重复
+    [self.publishCountArr removeAllObjects];
+    [self.heightPublishDic removeAllObjects];
+    [self.publishCellDic removeAllObjects];
+    for (int i=0;i<self.barrageInfo.count;i++) {
+        NSDictionary *buddleDic=_barrageInfo[i];
         [self.buddleArr   addObject: [buddleDic objectForKey:@"messagecontent"]];
         [self.userImageArr addObject:[buddleDic objectForKey:@"userimage"]];
 #warning 在这里获取到韬哥的结果，如果imageDic中有评论的属性，就把高度加入到heightPublishDic中，把评论的内容加入到cellPublishDic中,把评论的下标加入到publishCountArr中
         if ([[buddleDic objectForKey:@"reply"] count]) {
-            [self.viewModel getReplyDataForMessageID:[[buddleDic objectForKey:@"messageid"]intValue] andIndex:i];
+//            [self.viewModel getReplyDataForMessageID:[[buddleDic objectForKey:@"messageid"]intValue] andIndex:i];
+            [self addReplyData:i andArray:[buddleDic objectForKey:@"reply"] andReplyCount:0];
         }
 //        [self.publishCellDic setObject:@(20) forKey:@(i)];
       
@@ -173,7 +282,9 @@
     [self.collectView reloadData];
 }
 
--(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr{
+-(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andReplyCount:(NSInteger)replyCount{
+    self.replyCount=replyCount;
+    self.replyIndex=index;
     if (index!=0) {
     index+=1;
     }
@@ -185,15 +296,21 @@
         NSDictionary *dataDic=dataArr[i];
         NSString * content = [dataDic objectForKey:@"messagecontent"];
         if (dataArr.count==1) {
-            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
-             [self.heightPublishDic setObject:@(height+40) forKey:@(index)];
+//            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+             CGSize lblSize = [content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            height=lblSize.height;
+             [self.heightPublishDic setObject:@(height+50*DEF_Adaptation_Font) forKey:@(index)];
         }
         if (dataArr.count>=2&&i==0) {
-            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+//            height=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+            CGSize lblSize = [content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            height=lblSize.height;
         }
         if (dataArr.count>=2&&i==1) {
-            height+=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
-               [self.heightPublishDic setObject:@(height+40) forKey:@(index)];
+            CGSize lblSize = [content boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            height+=lblSize.height;
+//            height+=[self heightForString:content andWidth:(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5) andText:[[UILabel alloc]init]];
+               [self.heightPublishDic setObject:@(height+140*DEF_Adaptation_Font*0.5) forKey:@(index)];
         }
     }
     [self.collectView reloadData];
@@ -205,6 +322,10 @@
         [self removeFromSuperview];
     }
     if (button.tag==101) {
+        [self.publishCountArr removeAllObjects];
+        [self.heightPublishDic removeAllObjects];
+        [self.publishCellDic removeAllObjects];
+        [self.heightDic removeObjectForKey:@(0)];
         NSLog(@"这是一个发表评论button");
         sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self andIndexPath:-1];
         view.obj=self.viewModel;
@@ -230,7 +351,7 @@
     }
     if (button.tag>=4*BUTTONTAG&&button.tag<4*BUTTONTAG+self.barrageInfo.count+10) {
         NSLog(@"这是跳转更多回复的按钮");
-        barrageReplyView *replyV=[[barrageReplyView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andIndex:button.tag-4*BUTTONTAG andViewModel:_viewModel];
+        barrageReplyView *replyV=[[barrageReplyView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andIndex:button.tag-4*BUTTONTAG andViewModel:_viewModel andActivityID:self.activityID];
         [self addSubview:replyV];
     }
 }
@@ -423,9 +544,9 @@
     NSLog(@"view1:%ld, view: %ld ,imageV :%ld",swipe.view.tag,view.tag,imageV.tag);
     [view setBackgroundColor:[UIColor colorWithRed:193/255.0 green:216/255.0 blue:76/255.0 alpha:1.0]];
              if (swipe.view.tag==BUTTONTAG*2||swipe.view.tag==-BUTTONTAG*2) {
-        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
     }else{
-        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-swipe.view.tag-1]objectForKey:@"messageid"] andActivityID:self.activityID];
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-swipe.view.tag-1]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
     }
     view.tag=-view.tag;
     imageV.tag=view.tag-BUTTONTAG;
@@ -466,9 +587,9 @@
         }
          ];
         if (tap.view.tag==-BUTTONTAG) {
-             [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+             [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
         }else{
-        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+        [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[-tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
         }
     }
     //已经点赞
@@ -482,9 +603,9 @@
         tap.view.backgroundColor=[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:0.4];
         //当view.tag=0时
         if (tap.view.tag==BUTTONTAG) {
-            [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID];
+            [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[0]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
         }else{
-        [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID];
+        [self.viewModel thumbActivityMessage:@"0" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[self.barrageInfo[tap.view.tag]objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
         }
     }
     tap.view.tag=-tap.view.tag;
@@ -559,6 +680,7 @@
     _collectView.contentInset = UIEdgeInsetsMake(450*DEF_Adaptation_Font*0.5, 0, 0, 0 );
     [_collectView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:37/255.0 blue:61/255.0 alpha:1.0]];
     [_collectView registerClass:[ActivityCollectionViewCell class] forCellWithReuseIdentifier:@"HomeCellView"];
+       [self refreshCollectionView];
     [self addSubview:_collectView];
 }
 //  返回头视图
@@ -641,7 +763,7 @@
     [cell.contentView addSubview:label];
     label.textColor=[UIColor whiteColor];
     cell.backgroundColor=[UIColor colorWithRed:30/255.0 green:31/255.0 blue:54/255.0 alpha:1.0];
-     cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
+     cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@""]];
 }
 -(void)originViewForCell:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
     cell.backgroundColor =[self randomColorAndIndex:indexPath.row%5];
@@ -664,13 +786,13 @@
         //在这返回islike和thumbupcount的参数
         if (!cell.commendBtn.selected) {
             [cell.commendBtn setSelected:YES];
-            [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID];
+            [self.viewModel thumbActivityMessage:@"1" andUserId: [LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
             [self.allShowTags removeAllObjects];
             [self.allShowImageTags removeAllObjects];
         }
         else{
             [cell.commendBtn setSelected:NO];
-            [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID];
+            [self.viewModel thumbActivityMessage:@"0" andUserId:[LocalDataMangaer sharedManager].uid andMessageId:[messageDic objectForKey:@"messageid"] andActivityID:self.activityID andCommendForReply:NO];
             [self.allShowTags removeAllObjects];
             [self.allShowImageTags removeAllObjects];
         }
@@ -709,7 +831,9 @@
     [cell.contentLB setHidden:yes];
     [cell.shareBtn setHidden:yes];
 }
--(void)cellUIWhenNoPhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
+-(void)cellUIWhenNoPhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:
+(NSDictionary*)imageDic{
+     cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
     [cell.contentLB setHidden:NO];
     cell.contentLB.text=imageDic[@"messagecontent"];
     float  label2Height= [self heightForString:cell.contentLB.text andWidth:(DEF_WIDTH(self)/2-50*DEF_Adaptation_Font*0.5) andText:cell.contentLB];
@@ -733,12 +857,13 @@
             [cell layoutIfNeeded];
         }
     }
-     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn];
+     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn andIsImageView:NO];
     if (label2Height<=85.0) {
         [allShowBtn removeFromSuperview];
     }
 }
 -(void)cellUIWhenHavePhoto:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
+     cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
     UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
     NSString *string=[imageDic objectForKey:@"messagePicture"];
     NSArray *array = [string componentsSeparatedByString:@";"];
@@ -780,7 +905,7 @@
             imageV.frame=frame2;
             [cell layoutIfNeeded];
         }}
-     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn];
+     [self addTalkingPublish:cell andIndexpath:indexPath andImageDic:imageDic andallShowBtn:allShowBtn andIsImageView:YES];
   }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -788,6 +913,13 @@
     //重用cell
    ActivityCollectionViewCell*cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCellView" forIndexPath:indexPath] ;
     [cell updateCell];
+    if (indexPath.row<10) {
+        [self.suspendBtn setHidden:YES];
+    }
+    else{
+        [self.suspendBtn setHidden:NO];
+    }
+    
     for (UIView *view in [cell.contentView subviews]){
         [view removeFromSuperview];
     }
@@ -818,69 +950,77 @@
                 [self AllUseViewForCellIfHaveImage:cell andIndexpath:indexPath andImageDic:imageDic];
 }
         }
-        cell.backgroundView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bottomIV.png"]];
+    
         return cell;
 }
--(void)addTalkingPublish:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic andallShowBtn:(UIButton *)allShowBtn{
+-(void)addTalkingPublish:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic andallShowBtn:(UIButton *)allShowBtn andIsImageView:(BOOL)isImageView{
        for (NSNumber *index in self.publishCountArr) {
         if ([index intValue]==indexPath.row) {
             NSInteger heightForReply=[[self.heightPublishDic objectForKey:index]integerValue];
-            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+4, DEF_WIDTH(cell)-20, 0.5)];
-            lineView.backgroundColor=[UIColor whiteColor];
+            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+10, DEF_WIDTH(cell)-20, 1.0)];
+            lineView.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2];
             [cell.contentView addSubview:lineView];
              NSArray *dataArr=[self.publishCellDic objectForKey:index];
             UIButton *morePublishBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-23) andTag:(int)indexPath.row+4*BUTTONTAG andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(DEF_WIDTH(cell), 18) andTarget:self];
-            [morePublishBtn setTitle:[NSString stringWithFormat:@"共%ld条回复<<",dataArr.count] forState:(UIControlStateNormal)];
+            if (self.replyIndex==[index intValue]&&self.replyCount>0) {
+                 [morePublishBtn setTitle:[NSString stringWithFormat:@"共%ld条回复>>",self.replyCount] forState:(UIControlStateNormal)];
+            }else{
+               [morePublishBtn setTitle:[NSString stringWithFormat:@"共%@条回复>>",[imageDic objectForKey:@"replycount"]] forState:(UIControlStateNormal)];
+            }
+            [morePublishBtn setTitleColor:[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0] forState:(UIControlStateNormal)];
             morePublishBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             morePublishBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
             [cell.contentView addSubview:morePublishBtn];
 #warning-在这里加入多条回复
            
             if (dataArr.count==1) {
-                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+33*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                  label.text=[dataArr.firstObject objectForKey:@"username"];
                  label.font=[UIFont systemFontOfSize:13];
                  label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label];
-                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+80*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+40*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
            content.text=[NSString stringWithFormat:@":%@",[dataArr.firstObject objectForKey:@"messagecontent"]];
                 content.textColor=[UIColor whiteColor];
-                content.numberOfLines=2;
+                content.numberOfLines=0;
                 content.font=[UIFont systemFontOfSize:13];
                 CGRect contentFrame=content.frame;
-                contentFrame.size.height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
+                CGSize lblSize = [content.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+                contentFrame.size=lblSize;
                 content.frame=contentFrame;
                 [cell.contentView addSubview:content];
             }
             if (dataArr.count>=2) {
-                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+38*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                 label.text=[dataArr.firstObject objectForKey:@"username"];
                label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                   label.font=[UIFont systemFontOfSize:13];
                 [cell.contentView addSubview:label];
-                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+80*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+45*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
                 content.text=[NSString stringWithFormat:@":%@",[dataArr.firstObject objectForKey:@"messagecontent"]];
-                content.numberOfLines=2;
+                content.numberOfLines=0;
                 content.textColor=[UIColor whiteColor];
                 content.font=[UIFont systemFontOfSize:13];
                 CGRect contentFrame=content.frame;
-                float height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
-                contentFrame.size.height=height;
+               CGSize lblSize = [content.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+                float height=lblSize.height;
+                contentFrame.size=lblSize;
                 content.frame=contentFrame;
                 [cell.contentView addSubview:content];
                 
-                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+25*DEF_Adaptation_Font*0.5+height,110*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+53*DEF_Adaptation_Font*0.5+height,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                   label2.font=[UIFont systemFontOfSize:13];
                 label2.text=[dataArr[1] objectForKey:@"username"];
                 label2.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label2];
-                UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+110*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+20*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+75*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+60*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
                 content2.text=[NSString stringWithFormat:@":%@",[dataArr[1]objectForKey:@"messagecontent"]];
-                content2.numberOfLines=2;
+                content2.numberOfLines=0;
                 content2.textColor=[UIColor whiteColor];
                 content2.font=[UIFont systemFontOfSize:13];
                 CGRect contentFrame2=content2.frame;
-                contentFrame2.size.height=[self heightForString:label.text andWidth:(DEF_WIDTH(self)/2-140*DEF_Adaptation_Font*0.5) andText:label];
+                 CGSize lblSize2 = [content2.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width/2-10 -120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+                contentFrame2.size=lblSize2;
                 content2.frame=contentFrame2;
                 [cell.contentView addSubview:content2];
 
@@ -898,8 +1038,13 @@
             CGRect frame4=allShowBtn.frame;
             frame4.origin.y=DEF_HEIGHT(cell)-5-60*DEF_Adaptation_Font*0.5-heightForReply;
             allShowBtn.frame=frame4;
-        
-        }
+//            if (isImageView==YES) {
+//            [self.allShowImageTags addObject:@(allShowBtn.tag)];
+//            labelHeight=allShowBtn.alpha;
+//            [self.heightDic setObject:@(labelHeight) forKey:@(allShowBtn.tag-5*BUTTONTAG)];
+//             [cell layoutIfNeeded];
+//            }
+    }
     }
 }
 -(void)onClickPhoto:(UITapGestureRecognizer *)tap{
@@ -1074,6 +1219,7 @@
             [self.buddleView setHidden:NO];
         }
     }
+   _collectView.contentInset = UIEdgeInsetsMake(450*DEF_Adaptation_Font*0.5, 0, 0, 0 );
     //    NSLog(@"总长度:%f,加上的长度:%f", 40 - self.collectView.contentOffset.y-160*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5);
 }
 @end
