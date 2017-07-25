@@ -32,4 +32,8 @@
 -(void)createPlayerView:(int )PlayerId;
 -(void)removePlayerInfo;
 
+
+-(void)LocalPhoto;
+-(void)takePhoto;
+
 @end

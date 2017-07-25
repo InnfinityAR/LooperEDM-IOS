@@ -114,6 +114,9 @@
 		C409A74C1E1E359400F76B5C /* btn_looper_share.png in Resources */ = {isa = PBXBuildFile; fileRef = C409A7431E1E359400F76B5C /* btn_looper_share.png */; };
 		C409A74D1E1E359400F76B5C /* btn_looper_show.png in Resources */ = {isa = PBXBuildFile; fileRef = C409A7441E1E359400F76B5C /* btn_looper_show.png */; };
 		C409A74E1E1E359400F76B5C /* icon_looper_write.png in Resources */ = {isa = PBXBuildFile; fileRef = C409A7451E1E359400F76B5C /* icon_looper_write.png */; };
+		C40A80EF1F2728BE00067916 /* btn_PhotoClose.png in Resources */ = {isa = PBXBuildFile; fileRef = C40A80EC1F2728BE00067916 /* btn_PhotoClose.png */; };
+		C40A80F01F2728BE00067916 /* btn_photoLib.png in Resources */ = {isa = PBXBuildFile; fileRef = C40A80ED1F2728BE00067916 /* btn_photoLib.png */; };
+		C40A80F11F2728BE00067916 /* btn_photoVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = C40A80EE1F2728BE00067916 /* btn_photoVideo.png */; };
 		C40B0FE81F0A055A008F7C41 /* icon_brand_lable.png in Resources */ = {isa = PBXBuildFile; fileRef = C40B0FE71F0A055A008F7C41 /* icon_brand_lable.png */; };
 		C40B0FEA1F0A0561008F7C41 /* icon_club.png in Resources */ = {isa = PBXBuildFile; fileRef = C40B0FE91F0A0561008F7C41 /* icon_club.png */; };
 		C40B0FED1F0A16E6008F7C41 /* btn_activity_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = C40B0FEB1F0A16E6008F7C41 /* btn_activity_follow.png */; };
@@ -879,6 +882,9 @@
 		C409A7431E1E359400F76B5C /* btn_looper_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_share.png; sourceTree = "<group>"; };
 		C409A7441E1E359400F76B5C /* btn_looper_show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_show.png; sourceTree = "<group>"; };
 		C409A7451E1E359400F76B5C /* icon_looper_write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_looper_write.png; sourceTree = "<group>"; };
+		C40A80EC1F2728BE00067916 /* btn_PhotoClose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_PhotoClose.png; sourceTree = "<group>"; };
+		C40A80ED1F2728BE00067916 /* btn_photoLib.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_photoLib.png; sourceTree = "<group>"; };
+		C40A80EE1F2728BE00067916 /* btn_photoVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_photoVideo.png; sourceTree = "<group>"; };
 		C40B0FE71F0A055A008F7C41 /* icon_brand_lable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_brand_lable.png; sourceTree = "<group>"; };
 		C40B0FE91F0A0561008F7C41 /* icon_club.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_club.png; sourceTree = "<group>"; };
 		C40B0FEB1F0A16E6008F7C41 /* btn_activity_follow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_activity_follow.png; sourceTree = "<group>"; };
@@ -3968,6 +3974,9 @@
 		C4E86F5D1F160E9700D9658D /* PhotoWall */ = {
 			isa = PBXGroup;
 			children = (
+				C40A80EC1F2728BE00067916 /* btn_PhotoClose.png */,
+				C40A80ED1F2728BE00067916 /* btn_photoLib.png */,
+				C40A80EE1F2728BE00067916 /* btn_photoVideo.png */,
 				C40806921F1897E30084BC6E /* btn_sendPhoto_Small.png */,
 				C408068E1F1890E90084BC6E /* btn_commend.png */,
 				C408068F1F1890E90084BC6E /* btn_un_commend.png */,
@@ -4202,6 +4211,7 @@
 				C45DC3121E4AF28B0031EDCD /* active_undetail.png in Resources */,
 				C46E7D301EADF37600996110 /* btn_next.png in Resources */,
 				C4E86F6D1F163C0A00D9658D /* btn_sendPhoto.png in Resources */,
+				C40A80F11F2728BE00067916 /* btn_photoVideo.png in Resources */,
 				C42E80461EC332D400D9CC43 /* loading_00015.png in Resources */,
 				C49FA0811E204493009111C7 /* icon_calendar_line.png in Resources */,
 				C40B0FF61F0A512E008F7C41 /* shadowTopDown.png in Resources */,
@@ -4289,6 +4299,7 @@
 				C43E76F91E091D8D004A5288 /* btn_line.png in Resources */,
 				C49FA07E1E204493009111C7 /* icon_calendar_click.png in Resources */,
 				C42E80581EC332D400D9CC43 /* loading_00033.png in Resources */,
+				C40A80EF1F2728BE00067916 /* btn_PhotoClose.png in Resources */,
 				C46E7D351EAE11D200996110 /* btn_opinion_title.png in Resources */,
 				C42E803A1EC332D400D9CC43 /* loading_00003.png in Resources */,
 				C43E77051E091D8D004A5288 /* icon_point1.png in Resources */,
@@ -4459,6 +4470,7 @@
 				C43E76EB1E091D8D004A5288 /* bg_iphone_send_code.png in Resources */,
 				C42E804B1EC332D400D9CC43 /* loading_00020.png in Resources */,
 				C42B47D61ED55C1C00AE4399 /* un_trip.png in Resources */,
+				C40A80F01F2728BE00067916 /* btn_photoLib.png in Resources */,
 				C43E77061E091D8D004A5288 /* icon_qq.png in Resources */,
 				C42B47CD1ED55C1300AE4399 /* activity_follow.png in Resources */,
 				C42E80631EC332D400D9CC43 /* loading_00044.png in Resources */,
@@ -4966,7 +4978,7 @@
 					"$(PROJECT_DIR)/Looper/3rdFrameWork/RongCloud",
 				);
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5018,7 +5030,7 @@
 					"$(PROJECT_DIR)/Looper/3rdFrameWork/RongCloud",
 				);
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

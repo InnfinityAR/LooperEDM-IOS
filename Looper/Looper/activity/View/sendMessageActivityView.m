@@ -85,9 +85,7 @@
 
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
-    
-    
-    
+
     sendBtn =[LooperToolClass createBtnImageName:@"send_comment.png" andRect:CGPointMake(34, 621) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: sendBtn];
     
@@ -112,7 +110,7 @@
     textview.editable = YES;        //是否允许编辑内容，默认为“YES”
     textview.delegate = self;       //设置代理方法的实现类
     textview.font=[UIFont fontWithName:looperFont size:10*DEF_Adaptation_Font]; //设置字体名字和字体大小;
-    textview.returnKeyType = UIReturnKeyDefault;//return键的类型
+    textview.returnKeyType = UIReturnKeyDone;//return键的类型
     textview.keyboardType = UIKeyboardTypeDefault;//键盘类型
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
     textview.dataDetectorTypes = UIDataDetectorTypeAll;
@@ -121,11 +119,7 @@
     [self addSubview:textview];
     
     [textview becomeFirstResponder];
-    
 
-    
-    
-    
 }
 
 -(void)removeAllImage{

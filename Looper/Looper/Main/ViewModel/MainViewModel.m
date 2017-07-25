@@ -193,10 +193,6 @@
 }
 
 
-
-
-
-
 -(void)checkMapIsUse:(CGPoint)point{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[[NSNumber alloc] initWithFloat:point.x] forKey:@"xPosition"];
@@ -265,9 +261,6 @@
         
     }];
 }
-
-
-
 
 
 -(void)requestgetMyFavorite{

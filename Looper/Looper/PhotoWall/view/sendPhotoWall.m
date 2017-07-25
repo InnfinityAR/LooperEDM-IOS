@@ -23,7 +23,7 @@
     UILabel *locationStr;
     UIImageView *videoImg;
     NSMutableArray *_photoArray;
-
+    UIView *colorV;
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject {
@@ -44,29 +44,33 @@
 -(void)playVideo{
 
     
-    
-
 
 }
 
 -(void)setLocationStr:(NSString*)str{
     locationStr.text= str;
-
-
 }
 
 
 -(void)ImageFileSave:(UIImage*)imageFile{
 
-    
+    if([_photoArray count]<3){
+
     [_photoArray addObject:imageFile];
-    
-    videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(38*DEF_Adaptation_Font*0.5,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
-    videoImg.image=imageFile;
-    videoImg.layer.cornerRadius = 15*DEF_Adaptation_Font_x*0.5;
+    UIImageView* ImageV = [[UIImageView alloc] initWithFrame:CGRectMake(addPicVideo.frame.origin.x,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
+    ImageV.image=imageFile;
+    ImageV.layer.cornerRadius = 15*DEF_Adaptation_Font_x*0.5;
     videoImg.layer.masksToBounds = YES;
-    [self addSubview:videoImg];
-  
+    [self addSubview:ImageV];
+
+        if([_photoArray count]==3){
+        
+            addPicVideo.hidden=true;
+        }else{
+            addPicVideo.frame=CGRectMake(addPicVideo.frame.origin.x+addPicVideo.frame.size.width+15*DEF_Adaptation_Font*0.5, addPicVideo.frame.origin.y, addPicVideo.frame.size.width, addPicVideo.frame.size.height);
+        }
+    }
+    
 }
 
 
@@ -96,6 +100,38 @@
 }
 
 
+-(void)closeSelectView{
+    [colorV removeFromSuperview];
+
+
+
+}
+
+-(void)createSelectBtn{
+    
+    colorV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    [colorV setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    [self addSubview:colorV];
+    colorV.userInteractionEnabled=true;
+    
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeSelectView)];
+    [colorV addGestureRecognizer:singleTap];
+    
+    UIButton *closeBtn = [LooperToolClass createBtnImageNameReal:@"btn_PhotoClose.png" andRect:CGPointMake(295*DEF_Adaptation_Font*0.5,1018*DEF_Adaptation_Font*0.5) andTag:200 andSelectImage:@"btn_PhotoClose.png" andClickImage:@"btn_PhotoClose.png" andTextStr:nil andSize:CGSizeMake(50*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5) andTarget:self];
+    [colorV addSubview:closeBtn];
+    
+    
+    UIButton *photoBtn = [LooperToolClass createBtnImageNameReal:@"btn_photoLib.png" andRect:CGPointMake(391*DEF_Adaptation_Font*0.5,828*DEF_Adaptation_Font*0.5) andTag:201 andSelectImage:@"btn_photoLib.png" andClickImage:@"btn_photoLib.png" andTextStr:nil andSize:CGSizeMake(84*DEF_Adaptation_Font*0.5, 121*DEF_Adaptation_Font*0.5) andTarget:self];
+    [colorV addSubview:photoBtn];
+    
+    
+    UIButton *videoBtn = [LooperToolClass createBtnImageNameReal:@"btn_photoVideo.png" andRect:CGPointMake(166*DEF_Adaptation_Font*0.5,828*DEF_Adaptation_Font*0.5) andTag:203 andSelectImage:@"btn_photoVideo.png" andClickImage:@"btn_photoVideo.png" andTextStr:nil andSize:CGSizeMake(83*DEF_Adaptation_Font*0.5, 121*DEF_Adaptation_Font*0.5) andTarget:self];
+    [colorV addSubview:videoBtn];
+
+}
+
+
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==106){
@@ -103,14 +139,22 @@
     }else if (button.tag==101){
         [self removeFromSuperview];
     }else if (button.tag==102){
-        if(videoStr==nil){
+        if(videoStr==nil&&[_photoArray count]==0){
               [[DataHander sharedDataHander] showViewWithStr:@"请上传图片" andTime:1 andPos:CGPointZero];
         }else{
-             [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr andVideoImage:videoImg.image];
+            if(videoStr!=nil)
+            {
+                [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr andVideoImage:videoImg.image];
+            }
+            if([_photoArray count]>0){
+            
+                [_obj createImageBoardText:textview.text and:_photoArray andVideoPath:nil andVideoImage:nil];
+            }
         }
     }else if(button.tag == 900){
-        
-        [_obj createRecordVideo];
+        [self endEditing:true];
+        [self createSelectBtn];
+        //[_obj createRecordVideo];
     }else if(button.tag == 109){
         [_obj playVideoFile:videoStr];
     }else if(button.tag == 119){
@@ -118,7 +162,21 @@
         [_obj getOfflineInformationByIP];
         
         // [[DataHander sharedDataHander] showViewWithStr:@"coming soon....." andTime:1 andPos:CGPointZero];
+    }else if(button.tag == 200){
+        [self closeSelectView];
+    }else if(button.tag == 201){
+            [_obj LocalPhoto];
+            [self closeSelectView];
+    }else if(button.tag == 203){
+        
+        if([_photoArray count]>0){
+             [_obj takePhoto];
+        }else{
+             [_obj createRecordVideo];
+        }
+        [self closeSelectView];
     }
+    
 }
 
 -(void)createHudView{
@@ -151,7 +209,7 @@
     textview.editable = YES;        //是否允许编辑内容，默认为“YES”
     textview.delegate = self;       //设置代理方法的实现类
     textview.font=[UIFont fontWithName:looperFont size:12*DEF_Adaptation_Font]; //设置字体名字和字体大小;
-    textview.returnKeyType = UIReturnKeyDefault;//return键的类型
+    textview.returnKeyType = UIReturnKeyDone;//return键的类型
     textview.keyboardType = UIKeyboardTypeDefault;//键盘类型
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
     textview.dataDetectorTypes = UIDataDetectorTypeAll;

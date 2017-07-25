@@ -270,6 +270,10 @@ static CGFloat const PKRecordButtonWidth = 90;
     
     if(show_lable==1){
         show_lable=2;
+          [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        
+        
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请打开照片和录音权限" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alertView show];
     }
@@ -290,17 +294,11 @@ static CGFloat const PKRecordButtonWidth = 90;
         //当前时间
         CFAbsoluteTime nowTime = CACurrentMediaTime();
         if (self.beginRecordTime != 0 && nowTime - self.beginRecordTime < self.videoMinimumDuration) {
-            
             UIImage *image = [UIImage pk_previewImageWithVideoURL:[NSURL fileURLWithPath:self.outputFilePath]];
-
             [self dismissViewControllerAnimated:YES completion:^{
                 [self.delegate didFinishImageToOutputFilePath:image];
             }];
-            
-            
-           //
-            [self endRecordingWithPath:outputFilePath failture:NO];
-            
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
         } else {
             self.outputFilePath = outputFilePath;
             [self.recordButton setTitle:@"发送" forState:UIControlStateNormal];
@@ -323,6 +321,7 @@ static CGFloat const PKRecordButtonWidth = 90;
             [self.view addSubview:self.refreshButton];
             
             [self sendButtonAction];
+              [[UIApplication sharedApplication] setStatusBarHidden:NO];
         }
 
     }
