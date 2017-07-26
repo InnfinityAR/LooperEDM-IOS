@@ -225,7 +225,7 @@
     UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, 15, 12)];
     imageview.image=[UIImage imageNamed:@"sun.png"];
     [bottomV addSubview:imageview];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-10)*0.1, 200*DEF_Adaptation_Font*0.5, 24)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-10)*0.1, 150*DEF_Adaptation_Font*0.5, 24)];
     CGRect frame=label3.frame;
     frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-10)*0.1);
     NSString *string=[[self getAStringOfChineseWord:[dic objectForKey:@"city"]]componentsJoinedByString:@","];

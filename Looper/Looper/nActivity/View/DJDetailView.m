@@ -248,25 +248,29 @@
 }
 
 
+
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if(scrollView.contentOffset.y==0){
+//    
+//        followBtn.frame=CGRectMake(followBtn.frame.origin.x, 284*DEF_Adaptation_Font*0.5, followBtn.frame.size.width, followBtn.frame.size.height);
+//    }
+//}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yOffset  = scrollView.contentOffset.y;
     if(scrollView.tag==100){
-        
-        
-        NSLog(@"%f",scrollView.contentOffset.y);
         
         if(scrollView.contentOffset.y>224){
             ShowselectView.hidden=false;
         }else{
             ShowselectView.hidden=true;
-            
         }
         
-        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
-
+       // if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<60){
             followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
-        
-        }
+       // }
         
         CGPoint offset = scrollView.contentOffset;
         if (offset.y < 0) {
@@ -324,7 +328,6 @@
     [scrollV addSubview:HorizontalScroll];
 
     [self createScrollDataView];
-    
 }
 
 

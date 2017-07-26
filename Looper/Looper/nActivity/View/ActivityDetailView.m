@@ -82,9 +82,9 @@
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
     
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     titleLabel.text =[[activityDic objectForKey:@"data"]objectForKey:@"activityname"];
-    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:18]];
+    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
     [titleLabel setTextColor:[UIColor whiteColor]];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:titleLabel];
@@ -128,7 +128,7 @@
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
     
-    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
+    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+270*DEF_Adaptation_Font*0.5);
     
     [webView setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height)];
     

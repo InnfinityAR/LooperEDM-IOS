@@ -449,11 +449,9 @@
                     NSDate *now= [NSDate date];
                     long int nowDate = (long int)([now timeIntervalSince1970]);
 
-                    
                     if([[dic objectForKey:@"endtime"] intValue]>nowDate){
                         
                         [recommendArray addObject:dic];
-                    
                     }
                 }
                 [allActivityArray addObject:dic];
