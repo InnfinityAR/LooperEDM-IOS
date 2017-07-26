@@ -13,7 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "nActivityViewModel.h"
 #import "CarlendarView.h"
-@interface CurrentActivityView()
+@interface CurrentActivityView()<CurrentActivityTableViewCellDelegate>
 {
     UILabel *looperName;
     UILabel *looperName2;
@@ -42,6 +42,21 @@
         }
     }
     return _historyActivityArr;
+}
+-(NSMutableArray *)currentActivityArr{
+    if (!_currentActivityArr) {
+        _currentActivityArr=[[NSMutableArray alloc]init];
+        for (int i=0; i<self.dataArr.count; i++) {
+            NSDictionary *activity=self.dataArr[i];
+            //当前时间的时间戳
+            NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+            NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+            if (timeNow<=[activity[@"starttime"]integerValue]) {
+                [_currentActivityArr addObject:activity];
+            }
+        }
+    }
+    return _currentActivityArr;
 }
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
 #warning-如果这句话不加则没有初始化view不能触发点击事件
@@ -183,8 +198,10 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (isHistory) {
         return self.historyActivityArr.count;
+    }else{
+      return self.currentActivityArr.count;
     }
-    return self.dataArr.count;
+  
     
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -193,9 +210,12 @@
     cell.accessoryType=UITableViewCellStyleDefault;
     //cell不能被选中
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    NSDictionary *activity=self.dataArr[indexPath.row];
-    if (isHistory) {
+    NSDictionary *activity=[NSDictionary dictionary];
+        if (isHistory) {
         activity=self.historyActivityArr[indexPath.row];
+    }else{
+       activity=self.currentActivityArr[indexPath.row];
+
     }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
     if (activity[@"location"]==[NSNull null]) {
@@ -226,27 +246,61 @@
     if (activity[@"price"]==[NSNull null]) {
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
+        [cell.finishLB setHidden:YES];
     }
     else{
      if([activity[@"price"]isEqualToString:@""]){
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
+       
+         if (isHistory) {
+               [cell.finishLB setHidden:NO];
+         }
     }
     else{
         [cell.ticketLB setHidden:NO];
         [cell.saleBtn setHidden:NO];
+        if (isHistory) {
+//            cell.saleBtn.layer.borderColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0].CGColor;
+//            [cell.saleBtn setTitleColor:[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+//            [cell.saleBtn setTitle:@"票价" forState:(UIControlStateNormal)];
+            [cell.saleBtn setHidden:YES];
+             [cell.finishLB setHidden:NO];
+            [cell.ticketLB setHidden:YES];
+        }else{
+            [cell.saleBtn setHidden:NO];
+            [cell.ticketLB setHidden:NO];
+           
+            if ([activity objectForKey:@"ticketurl"]==[NSNull null]||[[activity objectForKey:@"ticketurl"]isEqualToString:@""]) {
+            cell.saleBtn.layer.borderColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0].CGColor;
+            [cell.saleBtn setTitleColor:[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+            [cell.saleBtn setTitle:@"票价" forState:(UIControlStateNormal)];
+            }else{
+             cell.saleBtn.layer.borderColor=[UIColor colorWithRed:24.0/255.0 green:163.0/255.0 blue:170.0/255.0 alpha:1.0].CGColor;
+            [cell.saleBtn setTitleColor:[UIColor colorWithRed:190.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+            [cell.saleBtn setTitle:@"售票" forState:(UIControlStateNormal)];
+                cell.saleBtn.tag=indexPath.row;
+            }
+            [cell.finishLB setHidden:YES];
+        }
     }
     }
     [cell.edmBtn setTitle:[NSString stringWithFormat:@"    %@    " ,activity[@"tag"] ]forState:(UIControlStateNormal)];
+    cell.activityDelegate = self;
     return cell;
+    
+}
+- (void)testBtn:(UIButton *)btn{
+//      NSDictionary *activity=self.currentActivityArr[btn.tag];
+//    NSString *ticketURL= [activity objectForKey:@"ticketurl"];
     
 }
 //时间戳转换
 -(NSString *)timeChange:(NSString *)timeDate{
     NSString*str=timeDate;//时间戳
     
-    NSTimeInterval time=[str doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
-    
+//    NSTimeInterval time=[str doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    NSTimeInterval time=[str doubleValue];
     NSDate*detaildate=[NSDate dateWithTimeIntervalSince1970:time];
     
     //实例化一个NSDateFormatter对象

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol CurrentActivityTableViewCellDelegate <NSObject>
 
+- (void)testBtn:(UIButton*)btn;
+
+@end
 @interface CurrentActivityTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UILabel *themeLB;
@@ -16,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ticketLB;
 @property (weak, nonatomic) IBOutlet UIButton *edmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saleBtn;
-
+@property (weak, nonatomic) IBOutlet UILabel *finishLB;
+@property (nonatomic, weak)id <CurrentActivityTableViewCellDelegate> activityDelegate;
 @end

@@ -43,7 +43,9 @@
         // 获取不同时间字段的信息
         NSDateComponents* comp = [gregorian components: unitFlags
                                               fromDate:dt];
-        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:comp.year],[self currentMonth:comp.month]];
+//        self.calendarView.topLabel.text=[NSString stringWithFormat:@"👈   %@年%@月   👉",[self currentYear:comp.year],[self currentMonth:comp.month]];
+//        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%ld年%ld月",comp.year,comp.month];
+        self.topLabel.text=[NSString stringWithFormat:@"%ld年%ld月",comp.year,comp.month];
     }
     return self;
 }
@@ -129,7 +131,7 @@
         NSInteger endDay= [[cal components:unitFlags fromDate:endDate] day];
         NSString *key = [[self dateFormatter] stringFromDate:startDate];
         //日历中活动的所有时间都要加点
-        for (NSInteger i=0; i<endDay-startDay; i++) {
+        for (NSInteger i=0; i<endDay-startDay+1; i++) {
             NSDate *newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([startDate timeIntervalSinceReferenceDate] + i*24*3600)];
             key = [[self dateFormatter] stringFromDate:newDate];
         if(!self.eventsByDate[key]){
@@ -143,7 +145,8 @@
 
 - (NSDate *)timeWithTimeIntervalString:(NSString *)timeString
 {
-    NSTimeInterval time=[timeString doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+//    NSTimeInterval time=[timeString doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    NSTimeInterval time=[timeString doubleValue];
     NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
     return  detaildate;
 }
@@ -162,24 +165,45 @@
     self.backgroundColor=[UIColor colorWithRed:47/255.0 green:50/255.0 blue:101/255.0 alpha:1.0];
 
     
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
-
-    
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,70*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
+    UIButton *goBackBtn = [LooperToolClass createBtnImageNameReal:@"goback.png" andRect:CGPointMake(150*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+//    goBackBtn.backgroundColor=[UIColor redColor];
+    [self addSubview:goBackBtn];
+    UIButton *goDownBtn = [LooperToolClass createBtnImageNameReal:@"goDown.png" andRect:CGPointMake(DEF_WIDTH(self)-250*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+    //    goBackBtn.backgroundColor=[UIColor redColor];
+    [self addSubview:goDownBtn];
+    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, self.bounds.size.width-400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    self.topLabel.textAlignment=NSTextAlignmentCenter;
+    self.topLabel.backgroundColor=[UIColor colorWithRed:47/255.0 green:50/255.0 blue:101/255.0 alpha:1.0];
+    self.topLabel.font= [UIFont fontWithName:@"STHeitiTC-Light" size:18.f];
+    self.topLabel.textColor=[UIColor whiteColor];
+    [self addSubview:self.topLabel];
+    
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
-        
         [self removeFromSuperview];
     }
+    if(button.tag==102){
+        //到上一个月
+        [self.calendarView.calendar  loadPreviousPage];
+    }
+    if(button.tag==103){
+        //到下一个月
+       [self.calendarView.calendar  loadNextPage];
+    }
+
+    
 }
 
 #pragma mark -- LTSCalendarEventSource --
 - (void)calendarDidLoadPage:(LTSCalendarManager *)calendar{
    
     if (firstUpdate==NO) {
-     self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:_year],[self currentMonth:calendar.monthForSelectedDay]];
+//     self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:_year],[self currentMonth:calendar.monthForSelectedDay]];
+        self.topLabel.text=[NSString stringWithFormat:@"%ld年%ld月",_year,calendar.monthForSelectedDay];
          firstUpdate=YES;
     }
 }
@@ -199,7 +223,7 @@
      NSString *key = [[self dateFormatter] stringFromDate:date];
     _year=[[key substringToIndex:4]integerValue];
     if (firstUpdate==YES) {
-        self.calendarView.topLabel.text=[NSString stringWithFormat:@"%@年%@月",[self currentYear:_year],[self currentMonth:calendar.monthForSelectedDay]];
+        self.topLabel.text=[NSString stringWithFormat:@"%ld年%ld月",_year,calendar.monthForSelectedDay];
     }
     //    self.label.text =  key;
     NSArray *events = self.eventsByDate[key];
@@ -277,6 +301,27 @@
             else{
                 [cell.ticketLB setHidden:NO];
                 [cell.saleBtn setHidden:NO];
+                if ([activity objectForKey:@"ticketurl"]==[NSNull null]||[[activity objectForKey:@"ticketurl"]isEqualToString:@""]) {
+                    cell.saleBtn.layer.borderColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0].CGColor;
+                    [cell.saleBtn setTitleColor:[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+                    [cell.saleBtn setTitle:@"票价" forState:(UIControlStateNormal)];
+                }else{
+                    cell.saleBtn.layer.borderColor=[UIColor colorWithRed:24.0/255.0 green:163.0/255.0 blue:170.0/255.0 alpha:1.0].CGColor;
+                    [cell.saleBtn setTitleColor:[UIColor colorWithRed:190.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+                    [cell.saleBtn setTitle:@"售票" forState:(UIControlStateNormal)];
+                    cell.saleBtn.tag=indexPath.row;
+                }
+                [cell.finishLB setHidden:YES];
+                
+                //如果是历史任务就修改UI
+                NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+                NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+                if (timeNow>[activity[@"endtime"]integerValue]) {
+                    [cell.saleBtn setHidden:YES];
+                    [cell.finishLB setHidden:NO];
+                    [cell.ticketLB setHidden:YES];
+                }
+
             }
         }
         [cell.edmBtn setTitle:[NSString stringWithFormat:@"    %@    " ,activity[@"tag"] ]forState:(UIControlStateNormal)];
