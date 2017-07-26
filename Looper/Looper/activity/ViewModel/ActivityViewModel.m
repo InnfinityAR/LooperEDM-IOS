@@ -358,9 +358,9 @@ NSLog(@"%@",dic);
             
             for (int i=0;i<[[self.barrageView barrageInfo] count];i++){
                 NSMutableDictionary *dic =   [[NSMutableDictionary alloc] initWithDictionary:  [[self.barrageView barrageInfo] objectAtIndex:i]];
-                if([[dic objectForKey:@"messageid"] isEqualToString:[NSString stringWithFormat:@"%d",messageID]]){
+                if([[dic objectForKey:@"messageid"] isEqualToString:[NSString stringWithFormat:@"%ld",messageID]]){
                     NSLog(@"%@",dic);
-                    if([dic objectForKey:@"replycount"]==nil){
+                    if([dic objectForKey:@"replycount"]==nil||[dic objectForKey:@"replycount"]==[NSNull null]){
                            [dic setObject:@"1" forKey:@"replycount"];
                         num = i;
                         temp= [[NSMutableDictionary alloc] initWithDictionary:dic];

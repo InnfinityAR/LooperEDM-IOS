@@ -976,6 +976,7 @@
             if (dataArr.count==1) {
                 UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+33*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                  label.text=[dataArr.firstObject objectForKey:@"username"];
+                  label.textAlignment=NSTextAlignmentCenter;
                  label.font=[UIFont systemFontOfSize:13];
                  label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label];
@@ -994,6 +995,7 @@
                 UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+38*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                 label.text=[dataArr.firstObject objectForKey:@"username"];
                label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
+                label.textAlignment=NSTextAlignmentCenter;
                   label.font=[UIFont systemFontOfSize:13];
                 [cell.contentView addSubview:label];
                 UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+80*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+45*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
@@ -1011,6 +1013,7 @@
                 UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+53*DEF_Adaptation_Font*0.5+height,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                   label2.font=[UIFont systemFontOfSize:13];
                 label2.text=[dataArr[1] objectForKey:@"username"];
+                  label.textAlignment=NSTextAlignmentCenter;
                 label2.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label2];
                 UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+75*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+60*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];

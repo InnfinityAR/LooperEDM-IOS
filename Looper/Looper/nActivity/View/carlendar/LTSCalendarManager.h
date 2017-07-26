@@ -13,10 +13,10 @@
 #import "LTSCalendarContentView.h"
 #import "LTSCalendarWeekView.h"
 #import "LTSCalendarMonthView.h"
-
+#import "LooperConfig.h"
 #import "LTSCalendarWeekDayView.h"
 #import "LTSCalendarSelectedWeekView.h"
-#define WEEK_DAY_VIEW_HEIGHT 40
+#define WEEK_DAY_VIEW_HEIGHT 80*DEF_Adaptation_Font*0.5
 #define RGBCOLOR(r, g, b)       [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define DarkText RGBCOLOR(255, 255, 255)
 #define PrimaryText  RGBCOLOR(255, 255, 255)

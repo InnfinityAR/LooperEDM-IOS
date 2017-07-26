@@ -17,6 +17,7 @@
 }
 @property(nonatomic,strong) NSMutableDictionary *eventsByDate;
 @property(nonatomic,strong)NSArray *dataArray;
+@property(nonatomic,strong)UILabel *topLabel;
 @property(nonatomic,strong)NSArray *events;
 @property (nonatomic,strong)LTSCalendarView *calendarView;
 - (void)lts_InitUI;

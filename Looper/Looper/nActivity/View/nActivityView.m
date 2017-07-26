@@ -289,7 +289,7 @@
         }
         
     } if(button.tag==119){
-        CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:_commendArray andObj:self.obj];
+        CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:_allArray andObj:self.obj];
         [self addSubview:carlendarV];
     }
 }

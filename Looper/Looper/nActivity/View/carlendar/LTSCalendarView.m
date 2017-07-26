@@ -13,7 +13,7 @@
 #import "LTSCalendarEventSource.h"
 #import "LTSCalendarMonthView.h"
 #import "LTSCalendarWeekView.h"
-
+#import "LooperConfig.h"
 @interface LTSCalendarView ()
 
 @end
@@ -108,12 +108,12 @@
     
     [self.calendar reloadData];
     self.backgroundColor = self.calendar.calendarAppearance.backgroundColor;
-    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(65/2, -64, self.bounds.size.width-65, 64)];
-    self.topLabel.textAlignment=NSTextAlignmentCenter;
-    self.topLabel.backgroundColor=[UIColor colorWithRed:47/255.0 green:50/255.0 blue:101/255.0 alpha:1.0];
-    self.topLabel.font= [UIFont fontWithName:@"STHeitiTC-Light" size:18.f];;
-    self.topLabel.textColor=[UIColor whiteColor];
-    [self addSubview:self.topLabel];
+//    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, -80*DEF_Adaptation_Font*0.5, self.bounds.size.width-400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+//    self.topLabel.textAlignment=NSTextAlignmentCenter;
+//    self.topLabel.backgroundColor=[UIColor colorWithRed:47/255.0 green:50/255.0 blue:101/255.0 alpha:1.0];
+//    self.topLabel.font= [UIFont fontWithName:@"STHeitiTC-Light" size:18.f];
+//    self.topLabel.textColor=[UIColor whiteColor];
+//    [self addSubview:self.topLabel];
 }
 
 - (void)configurOriginalAppearance{

@@ -16,7 +16,7 @@
 
 @interface LTSCalendarView : UIView
 @property (nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)UILabel *topLabel;
+//@property(nonatomic,strong)UILabel *topLabel;
 @property (nonatomic,strong) UIView *containerView;
 
 @property (nonatomic,strong) LTSCalendarManager *calendar;

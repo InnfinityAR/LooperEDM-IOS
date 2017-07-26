@@ -319,9 +319,10 @@ static NSString *const kLTSCalendarDaySelected = @"kLTSCalendarDaySelected";
             else{
                 textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorOtherMonth];
                 lunarTextLabel.textColor = self.calendarManager.calendarAppearance.lunarDayTextColorOtherMonth;
-                dotView.color = [self.calendarManager.calendarAppearance dayDotColor];
+//                dotView.color = [self.calendarManager.calendarAppearance dayDotColor];
+                dotView.color=[UIColor clearColor];
 #warning 这里需要有空改回来
-                dotView.hidden=YES;
+//                dotView.hidden=YES;
             }
             
             circleView.layer.borderColor = [UIColor clearColor].CGColor;
