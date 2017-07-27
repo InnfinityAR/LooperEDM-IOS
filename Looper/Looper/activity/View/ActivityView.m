@@ -210,13 +210,11 @@
     imageView.layer.masksToBounds=YES;
     [imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"photo"]]];
     [cell.contentView addSubview:imageView];
-    UILabel *finishLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(cell)/2-30*DEF_Adaptation_Font, DEF_WIDTH(cell)*1.3-30*DEF_Adaptation_Font, 60*DEF_Adaptation_Font, 30*DEF_Adaptation_Font)];
-    finishLB.text=@"已结束";
-    finishLB.textAlignment=NSTextAlignmentCenter;
-    [finishLB.layer setBorderWidth:0.7];
-    finishLB.layer.borderColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0].CGColor;
-    finishLB.textColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0];
-    [cell.contentView addSubview:finishLB];
+    UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(cell)*1.3-30*DEF_Adaptation_Font, DEF_WIDTH(self)/2-10, 30*DEF_Adaptation_Font)];
+    finishView.layer.cornerRadius=5.0;
+    finishView.layer.masksToBounds=YES;
+    finishView.image=[UIImage imageNamed:@"btn_finishEnd.png"];
+    [cell.contentView addSubview:finishView];
     
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.3, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
     label.text=[dic objectForKey:@"activityname"];
