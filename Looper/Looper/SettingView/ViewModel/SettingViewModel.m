@@ -22,7 +22,9 @@
 #import "LoginViewController.h"
 #import "VideoViewController.h"
 
-
+#import <UMSocialCore/UMSocialCore.h>
+#import <UMSocialNetwork/UMSocialNetwork.h>
+#import <UShareUI/UShareUI.h>
 
 @implementation SettingViewModel{
 
@@ -188,6 +190,73 @@
         
     }];
 }
+
+
+-(void)bindWechat:(NSString*)openiD{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:openiD forKey:@"openId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"bindWeChat" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            [[DataHander sharedDataHander] showViewWithStr:@"微信绑定成功" andTime:1 andPos:CGPointZero];
+            
+            
+            [accoutV updataAccess:1];
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+        
+    }];
+}
+
+
+
+-(void)loginWechat{
+
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self completion:^(id result, NSError *error) {
+        
+        UMSocialUserInfoResponse *userinfo =result;
+        int sexNum;
+        
+        if(userinfo.openid!=nil){
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+            [dic setObject:userinfo.openid forKey:@"openId"];
+            [dic setObject:@"1" forKey:@"loginType"];
+            [dic setObject:userinfo.iconurl forKey:@"headImageUrl"];
+            [dic setObject:userinfo.name forKey:@"userName"];
+            
+            if([userinfo.gender isEqualToString:@"m"])
+            {
+                sexNum = 1;
+            }else{
+                sexNum = 2;
+            }
+            [dic setObject:[NSString stringWithFormat:@"%d",sexNum] forKey:@"userSex"];
+           
+            
+            [self bindWechat:userinfo.openid];
+            
+            [LocalDataMangaer sharedManager].thirdId = userinfo.openid;
+            
+            [[LocalDataMangaer sharedManager] setData];
+            
+            
+        
+        }
+    }];
+    
+    
+    
+}
+
+
 
 
 -(void)bugReport:(NSString*)reportString and:(NSString*)path{

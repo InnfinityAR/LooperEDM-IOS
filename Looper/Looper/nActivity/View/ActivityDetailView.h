@@ -21,5 +21,6 @@
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic;
+-(void)setCalendar;
 
 @end

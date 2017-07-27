@@ -107,7 +107,7 @@
 -(void)createImageViewHud{
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
-    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[_BrandData objectForKey:@"data"]objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_BrandData objectForKey:@"data"]objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
@@ -146,11 +146,11 @@
             ShowselectView.hidden=true;
             
         }
-        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
+       // if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
             
             followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
             
-        }
+       // }
         if (offset.y < 0) {
             CGRect rect = headImageView.frame;
             rect.origin.y =offset.y;
@@ -204,7 +204,7 @@
     scrollV  =[[UIScrollView alloc] initWithFrame:CGRectMake(0, 120*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-113*DEF_Adaptation_Font*0.5)];
     scrollV.showsVerticalScrollIndicator = true;
     scrollV.delegate=self;
-    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*3);
+    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*1.5);
     
     [self addSubview:scrollV];
     scrollV.tag=100;
@@ -216,9 +216,6 @@
         [followBtn setSelected:true];
     
     }
-    
-    
-
     [self createHorizontalScroll];
     
 }

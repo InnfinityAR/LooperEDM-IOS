@@ -24,7 +24,12 @@
     
    // [LocalDataMangaer sharedManager].uid = @"475";
     
+    
+   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    
     _MainVm = [[MainViewModel alloc] initWithController:self];
+    
+    
     
     // Do any additional setup after loading the view.
 }

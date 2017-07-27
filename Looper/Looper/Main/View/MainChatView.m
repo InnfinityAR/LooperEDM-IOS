@@ -131,7 +131,7 @@
     [self updataLoopFollowData:loopData];
     
     if([[[RongCloudManger sharedManager] getSessionArray]count]==0){
-        communityImage=[LooperToolClass createImageView:@"bg_Text.png" andRect:CGPointMake(134, 377) andTag:100 andSize:CGSizeMake(382*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        communityImage=[LooperToolClass createImageView:@"bg_TextChat.png" andRect:CGPointMake(134, 377) andTag:100 andSize:CGSizeMake(382*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [self addSubview:communityImage];
 
         communityBtn =[LooperToolClass createBtnImageName:@"btn_community.png" andRect:CGPointMake(160, 612) andTag:9008 andSelectImage:@"btn_community.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];

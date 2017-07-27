@@ -33,16 +33,22 @@
         char commitChar = [contentStr characterAtIndex:i];
         NSString *temp = [contentStr substringWithRange:NSMakeRange(i,1)];
         const char *u8Temp = [temp UTF8String];
-        if (3==strlen(u8Temp)){
-            num_x = num_x+26*DEF_Adaptation_Font_x*0.5;
-        }else if((commitChar>64)&&(commitChar<91)){
-            num_x = num_x +22*DEF_Adaptation_Font_x*0.5;
-        }else if((commitChar>96)&&(commitChar<123)){
-            num_x = num_x +13*DEF_Adaptation_Font_x*0.5;
-        }else if((commitChar>47)&&(commitChar<58)){
-            num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+        if(u8Temp!=nil){
+            
+            if (3==strlen(u8Temp)){
+                num_x = num_x+26*DEF_Adaptation_Font_x*0.5;
+            }else if((commitChar>64)&&(commitChar<91)){
+                num_x = num_x +22*DEF_Adaptation_Font_x*0.5;
+            }else if((commitChar>96)&&(commitChar<123)){
+                num_x = num_x +13*DEF_Adaptation_Font_x*0.5;
+            }else if((commitChar>47)&&(commitChar<58)){
+                num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+            }else{
+                num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+            }
         }else{
-            num_x = num_x +14*DEF_Adaptation_Font_x*0.5;
+            
+            num_x = num_x +20*DEF_Adaptation_Font_x*0.5;
         }
     }
     return num_x;

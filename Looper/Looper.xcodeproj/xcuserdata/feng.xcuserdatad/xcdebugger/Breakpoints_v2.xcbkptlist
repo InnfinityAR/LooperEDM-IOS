@@ -356,12 +356,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "522841642.494936"
+                  timestampString = "522845425.911819"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "145"
                   endingLineNumber = "145"
-                  offsetFromSymbolStart = "664">
+                  offsetFromSymbolStart = "668">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -371,12 +371,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "522841642.496352"
+                  timestampString = "522845425.913254"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "146"
                   endingLineNumber = "146"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "51">
                </Location>
             </Locations>
          </BreakpointContent>

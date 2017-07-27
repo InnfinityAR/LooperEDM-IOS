@@ -41,9 +41,11 @@
         [_obj removeAccoutView];
     
     }else if(button.tag==3003){
-        if([[LocalDataMangaer sharedManager].userData objectForKey:@"openid"]==[NSNull null]){
-            
+
         
+        if([LocalDataMangaer sharedManager].thirdId ==nil){
+            
+             [_obj loginWechat];
         }
     
     }else if(button.tag==3002){
@@ -100,7 +102,7 @@
     
     
     
-    if([[LocalDataMangaer sharedManager].userData objectForKey:@"openid"]!=[NSNull null]){
+    if([LocalDataMangaer sharedManager].thirdId !=nil){
     
         [wechatbind setSelected:true];
     }

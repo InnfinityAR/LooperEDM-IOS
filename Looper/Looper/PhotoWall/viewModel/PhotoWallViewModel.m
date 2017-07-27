@@ -317,8 +317,6 @@
 
 
 
-
-
 -(void)getImageBoard:(NSString*)activityID{
     _activityId = activityID;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -326,22 +324,13 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getImageBoard" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
              _photoWallData =  [[NSDictionary alloc] initWithDictionary:responseObject];
-            
             if(PhotoWallV!=nil){
                 [PhotoWallV reloadData:responseObject];
-            
             }else{
                 PhotoWallV =[[PhotoWallView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:responseObject];
-                
                 [[_obj view] addSubview:PhotoWallV];
-               
-            
             }
-            
-            
-            
         }else{
             
             
@@ -350,8 +339,6 @@
         
     }];
 }
-
-
 
 -(void)LocalPhoto
 {

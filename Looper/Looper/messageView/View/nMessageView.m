@@ -254,6 +254,7 @@
     
     UIButton *barrageBtn =[LooperToolClass createBtnImageName:@"barrage.png" andRect:CGPointMake(149, 101) andTag:2001 andSelectImage:@"unbarrage.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: barrageBtn];
+    [barrageBtn setSelected:true];
     
     UIButton *messageBtn =[LooperToolClass createBtnImageName:@"notify.png" andRect:CGPointMake(362, 101) andTag:2002 andSelectImage:@"unNotify.png" andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: messageBtn];

@@ -151,6 +151,7 @@
     
 }
 
+
 -(void)initBk{
     UIImage *bk = [UIImage imageNamed:@"bbk_InfoBgFrame.png"];
     UIImageView *imageBkV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];

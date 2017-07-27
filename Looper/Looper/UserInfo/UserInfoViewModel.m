@@ -19,9 +19,13 @@
 #import "MainViewController.h"
 #import "SimpleChatViewController.h"
 #import "looperViewController.h"
+#import "PlayerInfoView.h"
+
+
 @implementation UserInfoViewModel{
     NSString *userID;
-    commonTableView *commonTable;;
+    commonTableView *commonTable;
+    PlayerInfoView *_playerInfoV;
 }
 -(id)initWithController:(id)controller{
     if (self=[super init]) {
@@ -103,6 +107,66 @@
 -(void)jumpToSettingC{
     SettingViewController *settingVc = [[SettingViewController alloc] init];
     [[_obj navigationController]  pushViewController:settingVc animated:YES];
+}
+
+
+-(void)removePlayerInfo{
+    
+    [_playerInfoV removeFromSuperview];
+    
+}
+
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
+}
+
+
+-(void)pushController:(NSDictionary*)dic{
+    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+    [simpleC chatTargetID:dic];
+    [[_obj navigationController]  pushViewController:simpleC animated:NO];
+}
+
+-(void)followUser:(NSString*)targetID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:targetID forKey:@"targetId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)createPlayerView:(int)PlayerId{
+    
+    if(PlayerId!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:[NSString stringWithFormat:@"%d",PlayerId] forKey:@"targetId"];
+        
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
 }
 
 

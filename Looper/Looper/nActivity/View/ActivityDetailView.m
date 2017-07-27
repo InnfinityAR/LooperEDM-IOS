@@ -38,6 +38,15 @@
     UILabel *titleLabel;
 }
 
+-(void)setCalendar{
+
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
+    [data setObject:@"1" forKey:@"issave"];
+    [activityDic setObject:data forKey:@"data"];
+
+}
+
+
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic{
     
     if (self = [super initWithFrame:frame]) {
@@ -82,9 +91,9 @@
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
     
-    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     titleLabel.text =[[activityDic objectForKey:@"data"]objectForKey:@"activityname"];
-    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:18]];
+    [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
     [titleLabel setTextColor:[UIColor whiteColor]];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:titleLabel];
@@ -128,7 +137,7 @@
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
     
-    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+700*DEF_Adaptation_Font*0.5);
+    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+270*DEF_Adaptation_Font*0.5);
     
     [webView setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height)];
     
@@ -228,11 +237,7 @@
 -(void)addcalendarView{
 
      [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
-    [data setObject:@"1" forKey:@"issave"];
-    [activityDic setObject:data forKey:@"data"];
 }
-
 
 -(void)createBkView{
     
@@ -418,7 +423,7 @@
     for (int i=0;i<[[activityDic objectForKey:@"dj"] count];i++)
     {
         UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
-        [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if (image != nil) {
                 if (image.size.height>image.size.width) {//图片的高要大于与宽
@@ -539,13 +544,8 @@
         
        
          [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-        
-        
-        NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
-        [data setObject:@"1" forKey:@"issave"];
-        [activityDic setObject:data forKey:@"data"];
-        
-        
+    
+    
     }else if(index==3){
         
         [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
@@ -586,9 +586,6 @@
 
     }else if(button.tag==108){
         [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-        NSMutableDictionary *data = [activityDic objectForKey:@"data"];
-        [data setObject:@"1" forKey:@"issave"];
-        [activityDic setObject:data forKey:@"data"];
     }else if(button.tag==1009){
         
         if([ownerFollowBtn isSelected]==true){

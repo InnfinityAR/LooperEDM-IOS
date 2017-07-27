@@ -152,7 +152,7 @@
 -(void)createImageViewHud{
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
-    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[_djData objectForKey:@"data"]objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_djData objectForKey:@"data"]objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image != nil) {
             if (image.size.height>image.size.width) {//图片的高要大于与宽
                 CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
@@ -248,25 +248,29 @@
 }
 
 
+
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if(scrollView.contentOffset.y==0){
+//    
+//        followBtn.frame=CGRectMake(followBtn.frame.origin.x, 284*DEF_Adaptation_Font*0.5, followBtn.frame.size.width, followBtn.frame.size.height);
+//    }
+//}
+
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat yOffset  = scrollView.contentOffset.y;
     if(scrollView.tag==100){
-        
-        
-        NSLog(@"%f",scrollView.contentOffset.y);
         
         if(scrollView.contentOffset.y>224){
             ShowselectView.hidden=false;
         }else{
             ShowselectView.hidden=true;
-            
         }
         
-        if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
-
+       // if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<60){
             followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
-        
-        }
+       // }
         
         CGPoint offset = scrollView.contentOffset;
         if (offset.y < 0) {
@@ -324,7 +328,6 @@
     [scrollV addSubview:HorizontalScroll];
 
     [self createScrollDataView];
-    
 }
 
 
@@ -412,14 +415,14 @@
     
     if([data[@"ticketurl"] isEqualToString:@""]==true){
      
-        UIImageView *icon_price=[LooperToolClass createImageView:@"icon_price.png" andRect:CGPointMake(278, 308) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        UIImageView *icon_price=[LooperToolClass createImageView:@"icon_price.png" andRect:CGPointMake(278, 328) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [view addSubview:icon_price];
     }else{
-        UIImageView *icon_ticket=[LooperToolClass createImageView:@"icon_ticket.png" andRect:CGPointMake(278, 308) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        UIImageView *icon_ticket=[LooperToolClass createImageView:@"icon_ticket.png" andRect:CGPointMake(278, 328) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [view addSubview:icon_ticket];
     }
     
-    UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(368*DEF_Adaptation_Font*0.5, 308*DEF_Adaptation_Font*0.5, 235*DEF_Adaptation_Font*0.5, 32*DEF_Adaptation_Font*0.5)];
+    UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(368*DEF_Adaptation_Font*0.5, 328*DEF_Adaptation_Font*0.5, 235*DEF_Adaptation_Font*0.5, 32*DEF_Adaptation_Font*0.5)];
     [priceLable setTextColor:[UIColor colorWithRed:191/255.0 green:252/255.0 blue:255/255.0 alpha:1.0]];
     [priceLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
     priceLable.text = [data objectForKey:@"price"];
