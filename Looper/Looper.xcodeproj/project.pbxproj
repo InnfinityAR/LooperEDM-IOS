@@ -26,8 +26,8 @@
 		B2A1E7FD1F25DF8E006270E3 /* praiseNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */; };
 		B2A1E7FE1F25DF8E006270E3 /* praiseYES.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */; };
 		B2A1E8001F25F5F0006270E3 /* sendBuddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */; };
-		B2A1E8031F2899A6006270E3 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8011F2899A6006270E3 /* goback.png */; };
-		B2A1E8041F2899A6006270E3 /* godown.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8021F2899A6006270E3 /* godown.png */; };
+		B2A1E8031F2899A6006270E3 /* btn_goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8011F2899A6006270E3 /* btn_goBack.png */; };
+		B2A1E8041F2899A6006270E3 /* btn_goDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8021F2899A6006270E3 /* btn_goDown.png */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
@@ -751,8 +751,8 @@
 		B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = praiseNO.png; sourceTree = "<group>"; };
 		B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = praiseYES.png; sourceTree = "<group>"; };
 		B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendBuddle.png; sourceTree = "<group>"; };
-		B2A1E8011F2899A6006270E3 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
-		B2A1E8021F2899A6006270E3 /* godown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = godown.png; sourceTree = "<group>"; };
+		B2A1E8011F2899A6006270E3 /* btn_goBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_goBack.png; sourceTree = "<group>"; };
+		B2A1E8021F2899A6006270E3 /* btn_goDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_goDown.png; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = View/AcitivitySeg.png; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
@@ -1997,8 +1997,8 @@
 				B2C90EBD1F13A151000E127A /* LTSCalendarView.m */,
 				B2C90EDE1F13A1DF000E127A /* CarlendarView.h */,
 				B2C90EDF1F13A1DF000E127A /* CarlendarView.m */,
-				B2A1E8011F2899A6006270E3 /* goback.png */,
-				B2A1E8021F2899A6006270E3 /* godown.png */,
+				B2A1E8011F2899A6006270E3 /* btn_goBack.png */,
+				B2A1E8021F2899A6006270E3 /* btn_goDown.png */,
 			);
 			path = carlendar;
 			sourceTree = "<group>";
@@ -4489,7 +4489,7 @@
 				C42B47D61ED55C1C00AE4399 /* un_trip.png in Resources */,
 				C40A80F01F2728BE00067916 /* btn_photoLib.png in Resources */,
 				C43E77061E091D8D004A5288 /* icon_qq.png in Resources */,
-				B2A1E8031F2899A6006270E3 /* goback.png in Resources */,
+				B2A1E8031F2899A6006270E3 /* btn_goBack.png in Resources */,
 				C42B47CD1ED55C1300AE4399 /* activity_follow.png in Resources */,
 				C42E80631EC332D400D9CC43 /* loading_00044.png in Resources */,
 				C404A7CF1EBF6D78000B9E1D /* loop_1.png in Resources */,
@@ -4518,7 +4518,7 @@
 				C4ABAAB81E34C623000B46E2 /* icon_start_unlike.png in Resources */,
 				C41DDCDD1E7A5F3E00873CBF /* bk_2.png in Resources */,
 				C4C4B4A01E9CD90D003E2705 /* btn_addLoop.png in Resources */,
-				B2A1E8041F2899A6006270E3 /* godown.png in Resources */,
+				B2A1E8041F2899A6006270E3 /* btn_goDown.png in Resources */,
 				C45489331E9E073500BB1591 /* btn_user_chat.png in Resources */,
 				C46A69271EB38C0200FCD5EB /* addMusic_up.png in Resources */,
 				C4F0510E1EBA4B86005DA9F1 /* btn_selchat.png in Resources */,

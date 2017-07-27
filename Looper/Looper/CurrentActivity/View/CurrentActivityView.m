@@ -321,7 +321,14 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.obj addActivityDetailView:self.dataArr[indexPath.row] andPhotoWall:0];
+    if (isHistory) {
+         [self.obj addActivityDetailView:self.historyActivityArr[indexPath.row] andPhotoWall:0];
+    }else{
+          [self.obj addActivityDetailView:self.currentActivityArr[indexPath.row] andPhotoWall:0];
+        
+    }
+
+//    [self.obj addActivityDetailView:self.dataArr[indexPath.row] andPhotoWall:0];
 
 }
 
