@@ -210,6 +210,12 @@
     imageView.layer.masksToBounds=YES;
     [imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"photo"]]];
     [cell.contentView addSubview:imageView];
+    UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(cell)*1.3-30*DEF_Adaptation_Font, DEF_WIDTH(self)/2-10, 30*DEF_Adaptation_Font)];
+    finishView.layer.cornerRadius=5.0;
+    finishView.layer.masksToBounds=YES;
+    finishView.image=[UIImage imageNamed:@"btn_finishEnd.png"];
+    [cell.contentView addSubview:finishView];
+    
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.3, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
     label.text=[dic objectForKey:@"activityname"];
     label.textColor=[UIColor whiteColor];
@@ -298,7 +304,7 @@
     else{
         [cell.mainPhoto sd_setImageWithURL:[NSURL URLWithString:self.objDic[@"activityimage"]]];
     }
-    cell.commentLB.text=self.objDic[@"activitydes"];
+    cell.commentLB.text=self.objDic[@"subtitle"];
     cell.themeLB.text=[NSString stringWithFormat:@"%@",self.objDic[@"activityname"]];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.themeLB.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -317,6 +323,16 @@
             cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"joincount"]];
         }
     }
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+    if (timeNow>[self.objDic[@"endtime"]integerValue]) {
+        [cell.hotView setHidden:YES];
+        [cell.followCountLB setHidden:YES];
+    }else{
+        [cell.hotView setHidden:NO];
+        [cell.followCountLB setHidden:NO];
+    }
+
     return cell;
   
 }
@@ -371,10 +387,10 @@
     if (moveY<0) {
         //往上滑
         CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0, 3, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        frame=CGRectMake(0, 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
         self.tableView.frame=frame;
         CGRect frame1=self.collectView.frame;
-        frame1=CGRectMake(DEF_WIDTH(self), 3, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        frame1=CGRectMake(DEF_WIDTH(self), 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
         self.collectView.frame=frame1;
 
             }

@@ -90,6 +90,7 @@
             <connections>
                 <outlet property="commentLB" destination="Dw5-1Y-Drs" id="o02-AQ-7NJ"/>
                 <outlet property="followCountLB" destination="e5k-hD-u6a" id="Fuf-5Q-woB"/>
+                <outlet property="hotView" destination="O4a-HJ-kzD" id="l4d-Ye-CH4"/>
                 <outlet property="mainPhoto" destination="iyV-KH-4cX" id="Vdg-B6-SRA"/>
                 <outlet property="themeLB" destination="0pG-Xj-D1l" id="6p4-xg-qVT"/>
             </connections>

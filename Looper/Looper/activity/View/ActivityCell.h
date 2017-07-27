@@ -16,5 +16,6 @@
 //@property (weak, nonatomic) IBOutlet UILabel *numberLB;
 //@property (weak, nonatomic) IBOutlet UILabel *endTimeLB;
 @property (weak, nonatomic) IBOutlet UILabel *followCountLB;
+@property (weak, nonatomic) IBOutlet UIView *hotView;
 
 @end

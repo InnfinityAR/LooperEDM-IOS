@@ -130,13 +130,8 @@
     return self.dataArr.count;
 }
 -(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber+=1;
+   
 //    [self pustDataForSomeString:(NSString *)string];
-    
-}
--(void)refreshDataCompletionHandle:(CompletionHandle)completionHandle{
-    self.refreshNumber=0;
-    //    [self pustDataForSomeString:(NSString *)string];
     
 }
 
@@ -267,10 +262,14 @@ NSLog(@"%@",dic);
 
 
 -(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId  andPage:(NSInteger)page andSize:(NSInteger)size{
+    if (page==1) {
+        self.refreshNumber=0;
+    }
+     self.refreshNumber+=1;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
     [dic setObject:userId forKey:@"userId"];
-    [dic setObject:@(page) forKey:@"page"];
+    [dic setObject:@(self.refreshNumber) forKey:@"page"];
     [dic setObject:@(size) forKey:@"pageSize"];
        NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getActivityInfo" parameters:dic  success:^(id responseObject) {
@@ -281,6 +280,10 @@ NSLog(@"%@",dic);
                 self.commendForReply=NO;
             }else{
             [self.barrageView addImageArray:self.barrageArr];
+                if (self.barrageArr.count==0&&self.refreshNumber!=self.currentRefreshNumber) {
+                    self.currentRefreshNumber=self.refreshNumber+1;
+            [[DataHander sharedDataHander] showViewWithStr:@"没有更多数据了" andTime:1 andPos:CGPointZero];
+                }
             }
         }
     }fail:^{

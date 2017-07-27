@@ -18,6 +18,7 @@ typedef void(^CompletionHandle)(NSError *error);
 
 @property(nonatomic,strong) NSMutableArray *dataArr;
 @property(nonatomic)NSInteger refreshNumber;
+@property(nonatomic)NSInteger currentRefreshNumber;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)ActivityView *activityV;
 @property(nonatomic,strong)sendMessageActivityView *sendView;

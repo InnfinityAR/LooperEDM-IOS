@@ -220,9 +220,10 @@
         isAddBuddleSubscriptArr=NO;
         self.obj = (ActivityView*)idObject;
         self.viewModel=viewModel;
+        [self.viewModel setRefreshNumber:0];
         self.activityID=[self.obj activityID];
         self.activityDIc=[self.obj activityDic];
-         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:self.barrageInfo.count/10+1 andSize:10];
+         [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:1 andSize:10];
         [self createCollectionView];
         [self initailHeaderView];
         [self initailBuddleView];
@@ -246,7 +247,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"hello2");
 //                    [_footer endRefreshingWithNoMoreDataWithTitle:@"无数据了"];
-                 [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:self.barrageInfo.count/10+1 andSize:10];
+                [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid andPage:0 andSize:10];
                     [self.collectView reloadData];
                     [_footer endRefreshing];
             });
@@ -662,9 +663,17 @@
     LFWaterfallLayout *flowLayout = [[LFWaterfallLayout alloc] init];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(15, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
-    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-62*DEF_Adaptation_Font*0.5) andText:label2]+50*DEF_Adaptation_Font*0.5;
+     CGSize lblSize = [label2.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    headViewHeight=lblSize.height+50*DEF_Adaptation_Font*0.5;
+//    headViewHeight= [self heightForString:label2.text andWidth:( DEF_WIDTH(self)-62*DEF_Adaptation_Font*0.5) andText:label2]+50*DEF_Adaptation_Font*0.5;
     waterLayout=flowLayout;
     flowLayout.height=headViewHeight+170*DEF_Adaptation_Font*0.5+4;
+//没有活动详情
+    if ([self.activityDIc objectForKey:@"rules"]==[NSNull null]||[[self.activityDIc objectForKey:@"rules"]isEqualToString:@""]) {
+        CGSize lblSize2 = [label2.text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width-180*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+        headViewHeight=lblSize2.height+60*DEF_Adaptation_Font*0.5;
+         flowLayout.height=headViewHeight+55*DEF_Adaptation_Font*0.5+4;
+    }
     flowLayout.delegate = self;
     // 创建collecView
     _collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) collectionViewLayout:flowLayout ];
@@ -705,7 +714,7 @@
     NSDictionary *message=self.activityDIc[@"message"] ;
     self.collectHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), 240*DEF_Adaptation_Font*0.5)];
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(15, 85*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    label.text=[NSString stringWithFormat:@"%@",self.activityDIc[@"activityname"]];
+    label.text=[NSString stringWithFormat:@"%@",self.activityDIc[@"activitydes"]];
     label.font=[UIFont systemFontOfSize:16];
     [label setTextAlignment:NSTextAlignmentLeft];
     label.textColor=[UIColor whiteColor];
@@ -719,19 +728,31 @@
     label3.font=[UIFont boldSystemFontOfSize:14];
     [contentView addSubview:label3];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
+    if ([self.activityDIc objectForKey:@"rules"]==[NSNull null]||[[self.activityDIc objectForKey:@"rules"]isEqualToString:@""]) {
+        label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
+        label2.font=[UIFont systemFontOfSize:16];
+        label2.textColor=[UIColor whiteColor];
+        [label setHidden:YES];
+        [label3 setHidden:YES];
+        CGRect frame=contentView.frame;
+        frame.origin.y=60*DEF_Adaptation_Font*0.5;
+        contentView.frame=frame;
+    }else{
+    label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"rules"]];
+    label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
+    label2.textColor=[UIColor colorWithRed:150/255.0 green:145/255.0 blue:180/255.0 alpha:1.0];
+    }
     //自动适配
     CGRect frame=label2.frame;
     frame.size.height=headViewHeight-50*DEF_Adaptation_Font*0.5;
     label2.frame=frame;
-    label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
-    label2.textColor=[UIColor colorWithRed:150/255.0 green:145/255.0 blue:180/255.0 alpha:1.0];
+
     label2.numberOfLines=0;
     [contentView addSubview:label2];
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0,  170*DEF_Adaptation_Font*0.5+headViewHeight, DEF_WIDTH(self), 4)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(-15,  headViewHeight, DEF_WIDTH(self), 4)];
     imageView.alpha=0.6;
     imageView.image=[UIImage imageNamed:@"cutoffLine.png"];
-    [self.collectHeaderView addSubview:imageView];
+    [contentView addSubview:imageView];
 }
 //返回头headerView的大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
@@ -974,9 +995,9 @@
 #warning-在这里加入多条回复
            
             if (dataArr.count==1) {
-                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+33*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+33*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                  label.text=[dataArr.firstObject objectForKey:@"username"];
-                  label.textAlignment=NSTextAlignmentCenter;
+                 label.textAlignment=NSTextAlignmentRight;
                  label.font=[UIFont systemFontOfSize:13];
                  label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label];
@@ -992,10 +1013,10 @@
                 [cell.contentView addSubview:content];
             }
             if (dataArr.count>=2) {
-                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+38*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+38*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                 label.text=[dataArr.firstObject objectForKey:@"username"];
                label.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
-                label.textAlignment=NSTextAlignmentCenter;
+                 label.textAlignment=NSTextAlignmentRight;
                   label.font=[UIFont systemFontOfSize:13];
                 [cell.contentView addSubview:label];
                 UILabel *content=[[UILabel alloc]initWithFrame:CGRectMake(10+80*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+45*DEF_Adaptation_Font*0.5,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
@@ -1010,13 +1031,13 @@
                 content.frame=contentFrame;
                 [cell.contentView addSubview:content];
                 
-                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10, DEF_HEIGHT(cell)-heightForReply+53*DEF_Adaptation_Font*0.5+height,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+                UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+53*DEF_Adaptation_Font*0.5+height,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                   label2.font=[UIFont systemFontOfSize:13];
                 label2.text=[dataArr[1] objectForKey:@"username"];
-                  label.textAlignment=NSTextAlignmentCenter;
+                 label2.textAlignment=NSTextAlignmentRight;
                 label2.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];
                 [cell.contentView addSubview:label2];
-                UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+75*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+60*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+                UILabel *content2=[[UILabel alloc]initWithFrame:CGRectMake(10+80*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+60*DEF_Adaptation_Font*0.5+height,DEF_WIDTH(cell)-10-120*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
                 content2.text=[NSString stringWithFormat:@":%@",[dataArr[1]objectForKey:@"messagecontent"]];
                 content2.numberOfLines=0;
                 content2.textColor=[UIColor whiteColor];

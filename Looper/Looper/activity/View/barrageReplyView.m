@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "ActivityViewModel.h"
 #import "LocalDataMangaer.h"
+#import "DataHander.h"
 #define TAGBUTTON 10000
 @interface barrageReplyView()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -23,6 +24,8 @@
     //总共输入多少字
     UILabel *countLB;
     UILabel *_commendLB;
+    
+    UIView *bottomView;
 }
 @property(nonatomic)NSInteger index;
 @property(nonatomic,strong)UITableView *tableView;
@@ -154,8 +157,13 @@
             buddleDic=_replyArr[_textField.tag];
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
         }
-        
-    }
+        }
+        if ([_textField.text isEqualToString:@""]) {
+              [[DataHander sharedDataHander] showViewWithStr:@"地球人你发不了空评论" andTime:1 andPos:CGPointZero];
+        }
+        if (_textField.text.length>=100) {
+              [[DataHander sharedDataHander] showViewWithStr:@"地球人你发评论超过100字了" andTime:1 andPos:CGPointZero];
+        }
         [_textField resignFirstResponder];
     }
 }
@@ -271,7 +279,11 @@
 //    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-100*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 1*DEF_Adaptation_Font*0.5)];
 //    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.1];
 //    [self addSubview:lineV];
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-80*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-115*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 115*DEF_Adaptation_Font*0.5)];
+    bottomView=contentView;
+    contentView.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
+    [self addSubview:contentView];
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.placeholder = @"快来回复我";
     _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
@@ -284,20 +296,21 @@
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     _textField.textColor = [UIColor whiteColor];
     [_textField setClearButtonMode:UITextFieldViewModeWhileEditing];
-    [self addSubview:_textField];
-    countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-118*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
+    [contentView addSubview:_textField];
+    countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, -3*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
     countLB.text=@"0/100";
     countLB.textColor=[UIColor whiteColor];
     countLB.font=[UIFont systemFontOfSize:10];
-    [self addSubview:countLB];
-    _sendButton=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(self)- 160*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-80*DEF_Adaptation_Font*0.5) andTag:-3 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 140*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+    [contentView addSubview:countLB];
+    _sendButton=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(self)- 160*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5) andTag:-3 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 140*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     _sendButton.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
     [_sendButton setTitle:@"发送" forState:(UIControlStateNormal)];
     _sendButton.layer.cornerRadius=4.0;
     _sendButton.layer.masksToBounds=YES;
-    [self addSubview:_sendButton];
+    [contentView addSubview:_sendButton];
     
 }
+
 - (float) heightForString:(NSString *)value andWidth:(float)width andText:(UILabel *)label{
     //获取当前文本的属性
     NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:value];
@@ -348,31 +361,24 @@
     //这样就拿到了键盘的位置大小信息frame，然后根据frame进行高度处理之类的信息
     
     CGRect frame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT- frame.size.height-_sendButton.frame.size.height-20*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
-    
-    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-_textField.frame.size.height-20*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
-    countLB.frame = CGRectMake(countLB.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-countLB.frame.size.height-80*DEF_Adaptation_Font*0.5, countLB.frame.size.width, countLB.frame.size.height);
+    bottomView.frame = CGRectMake(bottomView.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-bottomView.frame.size.height, bottomView.frame.size.width, bottomView.frame.size.height);
 
 }
 -(void)keyboardWillHide:(NSNotification *)notification{
-    
-    _sendButton.frame = CGRectMake(_sendButton.frame.origin.x, DEF_SCREEN_HEIGHT-_sendButton.frame.size.height-20*DEF_Adaptation_Font*0.5, _sendButton.frame.size.width, _sendButton.frame.size.height);
-    
-    _textField.frame = CGRectMake(_textField.frame.origin.x, DEF_SCREEN_HEIGHT -_textField.frame.size.height-20*DEF_Adaptation_Font*0.5, _textField.frame.size.width, _textField.frame.size.height);
-    countLB.frame = CGRectMake(countLB.frame.origin.x, DEF_SCREEN_HEIGHT -countLB.frame.size.height-80*DEF_Adaptation_Font*0.5, countLB.frame.size.width, countLB.frame.size.height);
 
-    
+    bottomView.frame = CGRectMake(bottomView.frame.origin.x, DEF_SCREEN_HEIGHT -bottomView.frame.size.height, bottomView.frame.size.width, bottomView.frame.size.height);
 }
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    countLB.text=[NSString stringWithFormat:@"%ld/100",range.location];
-    if (range.location==100) {
-        return NO;
+    if (range.location>=100) {
+        textField.text=[textField.text substringToIndex:100];
     }
+    countLB.text=[NSString stringWithFormat:@"%ld/100",range.location];
+//    if (range.location==100) {
+//        return NO;
+//    }
     return YES;
 }
-
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
     countLB.text=@"0/100";
     return YES;
