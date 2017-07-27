@@ -96,9 +96,7 @@
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:3000 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
-    
-    
-    
+
     UIImageView * title=[LooperToolClass createImageView:@"bg_account_title.png" andRect:CGPointMake(224, 54) andTag:100 andSize:CGSizeZero andIsRadius:false];
     [self addSubview:title];
 
@@ -113,13 +111,7 @@
 
     phoneText = [self createTextField:@"请输入手机号" andRect:CGRectMake(117*DEF_Adaptation_Font*0.5, 178*DEF_Adaptation_Font*0.5, 460*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5) andTag:100];
     [self addSubview:phoneText];
-    
-    
-    
-    
-    
-    
-    
+  
 }
 
 

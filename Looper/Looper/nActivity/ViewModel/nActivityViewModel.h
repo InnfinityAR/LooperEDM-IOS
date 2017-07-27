@@ -47,4 +47,6 @@
 -(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum;
 
 -(void)sharetTicket:(NSDictionary*)ticketDic;
+
+-(void)setCalendarData;
 @end

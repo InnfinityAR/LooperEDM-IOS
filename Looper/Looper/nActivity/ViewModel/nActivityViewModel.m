@@ -61,6 +61,14 @@
 
 }
 
+-(void)setCalendarData{
+    
+    
+    
+    [activityDetailV setCalendar];
+
+}
+
 -(void)savaCalendar:(NSDictionary*)dic{
     
     if([[dic objectForKey:@"issave"] intValue]==0){
@@ -83,9 +91,9 @@
         NSString *notes = @"";
         
         //isReminder 是否写入提醒事项
-        [GALActionOnCalendar saveEventStartDate:[[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"starttime"]doubleValue]]  endDate: [[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"endtime"]doubleValue]] alarm:alarmFloat eventTitle:eventTitle location:location notes:notes];
+        [GALActionOnCalendar saveEventStartDate:[[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"starttime"]doubleValue]]  endDate: [[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"endtime"]doubleValue]] alarm:alarmFloat eventTitle:eventTitle location:location notes:notes andObj:self];
 
-        [[DataHander sharedDataHander] showViewWithStr:@"已添加至日历" andTime:1 andPos:CGPointZero];
+      
     }else{
         [[DataHander sharedDataHander] showViewWithStr:@"您之前已经成功添加过活动" andTime:1 andPos:CGPointZero];
     }
@@ -264,7 +272,8 @@
             //创建分享消息对象
             UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
             //创建网页内容对象
-            NSString* thumbURL =[webDic objectForKey:@"photo"];
+           // NSString* thumbURL =[webDic objectForKey:@"photo"];
+             NSString* thumbURL = @"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg";
             UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [webDic objectForKey:@"activityname"] descr:@"惊不惊喜？意不意外？别说了！来组团蹦一波吧！！"  thumImage:thumbURL];
             //设置网页地址
             shareObject.webpageUrl = [webDic objectForKey:@"htmlurl"];

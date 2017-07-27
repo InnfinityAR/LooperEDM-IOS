@@ -107,7 +107,7 @@
 -(void)createImageViewHud{
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
-    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[_BrandData objectForKey:@"data"]objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_BrandData objectForKey:@"data"]objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     

@@ -167,10 +167,10 @@
     
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,70*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
-    UIButton *goBackBtn = [LooperToolClass createBtnImageNameReal:@"goback.png" andRect:CGPointMake(150*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *goBackBtn = [LooperToolClass createBtnImageNameReal:@"btn_goback.png" andRect:CGPointMake(150*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
 //    goBackBtn.backgroundColor=[UIColor redColor];
     [self addSubview:goBackBtn];
-    UIButton *goDownBtn = [LooperToolClass createBtnImageNameReal:@"goDown.png" andRect:CGPointMake(DEF_WIDTH(self)-250*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *goDownBtn = [LooperToolClass createBtnImageNameReal:@"btn_goDown.png" andRect:CGPointMake(DEF_WIDTH(self)-250*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
     //    goBackBtn.backgroundColor=[UIColor redColor];
     [self addSubview:goDownBtn];
     self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, self.bounds.size.width-400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];

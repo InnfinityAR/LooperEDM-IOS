@@ -10,11 +10,13 @@
 //
 
 #import "GALActionOnCalendar.h"
+#import "DataHander.h"
+#import "nActivityViewModel.h"
 #import <EventKit/EventKit.h>
 
 @implementation GALActionOnCalendar
 
-+(void)saveEventStartDate:(NSDate *)startData endDate:(NSDate *)endDate alarm:(float)alarm eventTitle:(NSString *)eventTitle location:(NSString *)location notes:(NSString *)notes
++(void)saveEventStartDate:(NSDate *)startData endDate:(NSDate *)endDate alarm:(float)alarm eventTitle:(NSString *)eventTitle location:(NSString *)location notes:(NSString *)notes andObj:(id)obj
 {
     
     EKEventStore *eventStore = [[EKEventStore alloc] init];
@@ -33,27 +35,17 @@
                 else if (!granted)
                 {
                     //被用户拒绝，不允许访问日历
+                      [[DataHander sharedDataHander] showViewWithStr:@"请允许插入日程" andTime:1 andPos:CGPointZero];
                 }
                 else
                 {
-                    //创建事件
                     EKEvent *event  = [EKEvent eventWithEventStore:eventStore];
                     event.title  = eventTitle;
                     event.location = location;
-                    
-                    //设定事件开始时间
                     event.startDate = startData;
-                    //设定事件结束时间
                     event.endDate   = endDate;
-                    
-                    //添加提醒 可以添加多个
-                    //第一次提醒  (几分钟q前-)
                     [event addAlarm:[EKAlarm alarmWithRelativeOffset:alarm]];
-//                    [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f * -1.0f]];
-                    //第二次提醒  ()
-                    //                    [event addAlarm:[EKAlarm alarmWithRelativeOffset:60.0f * -10.0f * 24]];
-                    
-                    //06.07 add 事件类容备注
+
                     event.notes = notes;
                     
                     [event setCalendar:[eventStore defaultCalendarForNewEvents]];
@@ -61,9 +53,9 @@
                     
                     [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
                     
-                    NSLog(@"保存成功");
-
+                    [obj setCalendarData];
                     
+                    [[DataHander sharedDataHander] showViewWithStr:@"已添加至日历" andTime:1 andPos:CGPointZero];
                 }
             });
         }];

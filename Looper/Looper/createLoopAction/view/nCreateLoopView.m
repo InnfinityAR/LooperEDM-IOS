@@ -194,8 +194,6 @@
 
 }
 
-
-
 -(void)createHudView{
     UIImageView * bg=[LooperToolClass createImageView:@"bg_looperBg.png" andRect:CGPointMake(0, 0) andTag:100 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
     [self addSubview:bg];
@@ -209,8 +207,6 @@
     UIButton *commitBtn =[LooperToolClass createBtnImageName:@"btn_commit_loop.png" andRect:CGPointMake(532, 57) andTag:900 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: commitBtn];
 
-    
-    
     UILabel *loopName = [LooperToolClass createLableView:CGPointMake(64*DEF_Adaptation_Font_x*0.5, 156*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font_x*0.5, 24*DEF_Adaptation_Font_x*0.5) andText:@"loop名称" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [self addSubview:loopName];
 

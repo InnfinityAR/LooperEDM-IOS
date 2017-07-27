@@ -35,6 +35,7 @@
 
 -(void)jumpLoginViewC;
 -(void)createVideoView;
+-(void)loginWechat;
 
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)nSettingView  *settingV;

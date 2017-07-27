@@ -27,7 +27,7 @@
 
 @interface GALActionOnCalendar : NSObject
 
-+ (void)saveEventStartDate:(NSDate*)startData endDate:(NSDate*)endDate alarm:(float)alarm eventTitle:(NSString*)eventTitle location:(NSString*)location notes:(NSString*)notes;
++(void)saveEventStartDate:(NSDate *)startData endDate:(NSDate *)endDate alarm:(float)alarm eventTitle:(NSString *)eventTitle location:(NSString *)location notes:(NSString *)notes andObj:(id)obj;
 
 
 @end

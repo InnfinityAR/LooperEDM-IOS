@@ -38,6 +38,15 @@
     UILabel *titleLabel;
 }
 
+-(void)setCalendar{
+
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
+    [data setObject:@"1" forKey:@"issave"];
+    [activityDic setObject:data forKey:@"data"];
+
+}
+
+
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic{
     
     if (self = [super initWithFrame:frame]) {
@@ -228,11 +237,7 @@
 -(void)addcalendarView{
 
      [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-    NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
-    [data setObject:@"1" forKey:@"issave"];
-    [activityDic setObject:data forKey:@"data"];
 }
-
 
 -(void)createBkView{
     
@@ -418,7 +423,7 @@
     for (int i=0;i<[[activityDic objectForKey:@"dj"] count];i++)
     {
         UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
-        [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if (image != nil) {
                 if (image.size.height>image.size.width) {//图片的高要大于与宽
@@ -539,13 +544,8 @@
         
        
          [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-        
-        
-        NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithDictionary:[activityDic objectForKey:@"data"]];
-        [data setObject:@"1" forKey:@"issave"];
-        [activityDic setObject:data forKey:@"data"];
-        
-        
+    
+    
     }else if(index==3){
         
         [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
@@ -586,9 +586,6 @@
 
     }else if(button.tag==108){
         [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-        NSMutableDictionary *data = [activityDic objectForKey:@"data"];
-        [data setObject:@"1" forKey:@"issave"];
-        [activityDic setObject:data forKey:@"data"];
     }else if(button.tag==1009){
         
         if([ownerFollowBtn isSelected]==true){
