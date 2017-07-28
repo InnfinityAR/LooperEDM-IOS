@@ -226,13 +226,14 @@
 }
 
 + (UIImage*)set_imageWithImage:(UIImage*)myImage
+                  ToPoint:(CGPoint)newPoint
                   scaledToSize:(CGSize)newSize
 
 {
 
     UIGraphicsBeginImageContext(newSize);
 
-    [myImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    [myImage drawInRect:CGRectMake(newPoint.x,newPoint.y,newSize.width,newSize.height)];
 
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
 

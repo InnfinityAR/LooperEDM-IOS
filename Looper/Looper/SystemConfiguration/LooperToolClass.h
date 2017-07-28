@@ -25,7 +25,8 @@
 
 +(UIView*)createViewAndRect:(CGPoint)point andTag:(int)tag andSize:(CGSize)FrameSize andIsRadius:(BOOL)isRadius andImageName:(NSString*)imagePath;
 
-+(UIImage*)set_imageWithImage:(UIImage*)myImage
++ (UIImage*)set_imageWithImage:(UIImage*)myImage
+                       ToPoint:(CGPoint)newPoint
                   scaledToSize:(CGSize)newSize;
 
 +(NSData*)set_ImageData_UIImageJPEGRepresentationWithImage:(UIImage*)image

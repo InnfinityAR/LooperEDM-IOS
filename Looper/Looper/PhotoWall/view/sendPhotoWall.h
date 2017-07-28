@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XHImageViewer.h"
 
-@interface sendPhotoWall : UIView <UITextViewDelegate,UITextFieldDelegate>
+@interface sendPhotoWall : UIView <UITextViewDelegate,UITextFieldDelegate,UITableViewDelegate,XHImageViewerDelegate>
 {
     
     

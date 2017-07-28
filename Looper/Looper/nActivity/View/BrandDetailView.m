@@ -129,8 +129,6 @@
     [icon_songer setImage:[UIImage imageNamed:@"icon_brand_lable.png"]];
     
     [self addSubview:icon_songer];
-
-
 }
 
 

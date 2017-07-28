@@ -53,6 +53,10 @@
                     
                     [eventStore saveEvent:event span:EKSpanThisEvent error:&err];
                     
+                    
+                    
+                    
+                    
                     [obj setCalendarData];
                     
                     [[DataHander sharedDataHander] showViewWithStr:@"已添加至日历" andTime:1 andPos:CGPointZero];
