@@ -30,6 +30,8 @@
 		B2A1E8041F2899A6006270E3 /* btn_goDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8021F2899A6006270E3 /* btn_goDown.png */; };
 		B2A1E80B1F29FCE7006270E3 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E80A1F29FCE7006270E3 /* btn_play.png */; };
 		B2A1E80D1F29FFD1006270E3 /* btn_finishEnd.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E80C1F29FFD1006270E3 /* btn_finishEnd.png */; };
+		B2A1E8131F2AEB48006270E3 /* btn_ticketBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8121F2AEB48006270E3 /* btn_ticketBack.png */; };
+		B2A1E8191F2B3E86006270E3 /* UITextField+LooperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A1E8181F2B3E86006270E3 /* UITextField+LooperTextField.m */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
 		B2A6EE5B1ECADFE4004BF416 /* activityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5A1ECADFE4004BF416 /* activityModel.m */; };
@@ -756,6 +758,9 @@
 		B2A1E8021F2899A6006270E3 /* btn_goDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_goDown.png; sourceTree = "<group>"; };
 		B2A1E80A1F29FCE7006270E3 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_play.png; sourceTree = "<group>"; };
 		B2A1E80C1F29FFD1006270E3 /* btn_finishEnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_finishEnd.png; sourceTree = "<group>"; };
+		B2A1E8121F2AEB48006270E3 /* btn_ticketBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_ticketBack.png; sourceTree = "<group>"; };
+		B2A1E8171F2B3E86006270E3 /* UITextField+LooperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+LooperTextField.h"; sourceTree = "<group>"; };
+		B2A1E8181F2B3E86006270E3 /* UITextField+LooperTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+LooperTextField.m"; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = View/AcitivitySeg.png; sourceTree = "<group>"; };
 		B2A6EE591ECADFE4004BF416 /* activityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityModel.h; sourceTree = "<group>"; };
@@ -1909,6 +1914,8 @@
 				B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */,
 				B2A1E7E81F21F96F006270E3 /* barrageReplyView.h */,
 				B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */,
+				B2A1E8171F2B3E86006270E3 /* UITextField+LooperTextField.h */,
+				B2A1E8181F2B3E86006270E3 /* UITextField+LooperTextField.m */,
 				B2C90E711F0F7223000E127A /* ActivityCollectionViewCell.h */,
 				B2C90E721F0F7223000E127A /* ActivityCollectionViewCell.m */,
 				B2C00FE01F0B8AF500E369B6 /* YWCarouseView.h */,
@@ -2899,6 +2906,7 @@
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
+				B2A1E8121F2AEB48006270E3 /* btn_ticketBack.png */,
 				C413CE1E1F2B2056008B0BAF /* btn_delete_photo.png */,
 				C4796A791F1375AE00414AFD /* btn_calendar_s.png */,
 				C40B0FF91F0A5C9F008F7C41 /* tirp.png */,
@@ -4296,6 +4304,7 @@
 				C43E770A1E091D8D004A5288 /* pro.png in Resources */,
 				C4DF01101ED94AC8002447EE /* masking.png in Resources */,
 				C404A7D01EBF6D78000B9E1D /* loop_2.png in Resources */,
+				B2A1E8131F2AEB48006270E3 /* btn_ticketBack.png in Resources */,
 				C42E80411EC332D400D9CC43 /* loading_00010.png in Resources */,
 				C448BB451F0787B6006E9344 /* btn_Detail.png in Resources */,
 				C42E80511EC332D400D9CC43 /* loading_00026.png in Resources */,
@@ -4659,6 +4668,7 @@
 				C4BCE7731E091E710087E6C5 /* loginView.m in Sources */,
 				C4BCE7BE1E0920180087E6C5 /* StartViewModel.m in Sources */,
 				C4E86FA91F16474000D9658D /* PKPlayerManager.m in Sources */,
+				B2A1E8191F2B3E86006270E3 /* UITextField+LooperTextField.m in Sources */,
 				C4BCE7531E091E710087E6C5 /* SDWebImageDownloader.m in Sources */,
 				C4E86F9E1F16474000D9658D /* GLProgram.m in Sources */,
 				C450060F1ED2BEC40080F0EC /* ActivityDetailView.m in Sources */,
