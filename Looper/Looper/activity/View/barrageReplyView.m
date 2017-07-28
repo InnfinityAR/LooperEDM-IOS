@@ -13,10 +13,11 @@
 #import "ActivityViewModel.h"
 #import "LocalDataMangaer.h"
 #import "DataHander.h"
+#import "UITextField+LooperTextField.h"
 #define TAGBUTTON 10000
 @interface barrageReplyView()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    UITextField *_textField;
+    UITextField  *_textField;
     UIButton *_sendButton;
     BOOL isHeader;
     //总共有多少回复
@@ -139,6 +140,9 @@
     if (button.tag>=0&&button.tag<=self.replyArr.count+1) {
         [_textField becomeFirstResponder];
         _textField.tag=button.tag;
+        NSDictionary *buddleDic=_replyArr[_textField.tag];
+        _textField.text=[NSString stringWithFormat:@"@%@",[buddleDic  objectForKey:@"username"]];
+        
     }
     
     if (button.tag==-3) {
@@ -155,7 +159,12 @@
         }
         if (_textField.tag>=0) {
             buddleDic=_replyArr[_textField.tag];
+            if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
+                _textField.text=[_textField.text substringFromIndex:1];
+            }else{
+                _textField.text=[_textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+            }
         }
         }
         if ([_textField.text isEqualToString:@""]) {
@@ -203,9 +212,10 @@
     userImageView.layer.masksToBounds=YES;
     //加入点击事件
     userImageView.userInteractionEnabled=YES;
+    if ([buddleDic objectForKey:@"userimage"]==[NSNull null]) {
+    }else{
     [userImageView sd_setImageWithURL:[NSURL URLWithString:[buddleDic objectForKey:@"userimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    }];}
     [view addSubview:userImageView];
     UILabel *nameLB=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, firstY*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
      nameLB.text=[buddleDic objectForKey:@"username"];
@@ -247,7 +257,7 @@
       contentLB.textColor=[UIColor whiteColor];
     contentLB.text=[buddleDic objectForKey:@"messagecontent"];
 //用来完成@功能
-    if ([buddleDic objectForKey:@"targetname"]!=[NSNull null]&&isHeader) {
+    if ([buddleDic objectForKey:@"targetname"]!=[NSNull null]&&isHeader&&![[buddleDic objectForKey:@"targetname"]isEqualToString:@""]) {
     contentLB.text=[NSString stringWithFormat:@"@%@ %@",[buddleDic objectForKey:@"targetname"], buddleDic[@"messagecontent"]];
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:contentLB.text];
         //更改字体
@@ -287,6 +297,11 @@
     _textField.placeholder = @"快来回复我";
     _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
+    _textField.font=[UIFont systemFontOfSize:14];
+    _textField.layer.masksToBounds=YES;
+    _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+    _textField.leftView.layer.masksToBounds=YES;
+    _textField.leftViewMode=UITextFieldViewModeAlways;
     [_textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     _textField.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
     _textField.returnKeyType = UIReturnKeySend; //设置按键类型
@@ -294,6 +309,7 @@
     _textField.clearsOnBeginEditing = YES;
     _textField.delegate=self;
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
+    _textField.contentMode = UIViewContentModeCenter;
     _textField.textColor = [UIColor whiteColor];
     [_textField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:_textField];
@@ -308,7 +324,6 @@
     _sendButton.layer.cornerRadius=4.0;
     _sendButton.layer.masksToBounds=YES;
     [contentView addSubview:_sendButton];
-    
 }
 
 - (float) heightForString:(NSString *)value andWidth:(float)width andText:(UILabel *)label{
@@ -373,7 +388,7 @@
     if (range.location>=100) {
         textField.text=[textField.text substringToIndex:100];
     }
-    countLB.text=[NSString stringWithFormat:@"%ld/100",range.location];
+    countLB.text=[NSString stringWithFormat:@"%ld/100",_textField.text.length];
 //    if (range.location==100) {
 //        return NO;
 //    }
@@ -384,7 +399,32 @@
     return YES;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
+    if (textField.tag>=-1&&![textField.text isEqualToString:@""]) {
+        NSDictionary *buddleDic=[NSDictionary dictionary];
+        if (textField.tag==-1) {
+            if (self.index==0) {
+                buddleDic=_dataArr[0];
+            }else{
+                buddleDic=_dataArr[self.index-1];
+            }
+            [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:nil];
+        }
+        if (textField.tag>=0) {
+            buddleDic=_replyArr[textField.tag];
+            if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
+                textField.text=[textField.text substringFromIndex:1];
+            }else{
+                textField.text=[textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
+                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+            }
+        }
+    }
+    if ([textField.text isEqualToString:@""]) {
+        [[DataHander sharedDataHander] showViewWithStr:@"地球人你发不了空评论" andTime:1 andPos:CGPointZero];
+    }
+    if (textField.text.length>=100) {
+        [[DataHander sharedDataHander] showViewWithStr:@"地球人你发评论超过100字了" andTime:1 andPos:CGPointZero];
+    }
     [self endEditing:YES];
     return YES;
 }
@@ -420,7 +460,12 @@
             NSDictionary *buddleDic=[NSDictionary dictionary];
                 buddleDic=_replyArr[indexPath.row];
                 [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
-            }
+        }else{
+            NSDictionary *buddleDic=[NSDictionary dictionary];
+            buddleDic=_replyArr[indexPath.row];
+            _textField.text=[NSString stringWithFormat:@"@%@",[buddleDic objectForKey:@"username" ]];
+            _textField.tag=indexPath.row;
+        }
 
     }
 }

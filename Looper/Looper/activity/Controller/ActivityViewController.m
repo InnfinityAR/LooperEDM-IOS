@@ -23,7 +23,6 @@
     
      _activityVM=[[ActivityViewModel alloc]initWithController:self];
     
-    
   //  [self.activityVM pustDataForSomeString:NULL];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
@@ -31,7 +30,6 @@
 //    导航栏字体设为白色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-   
 }
 
 

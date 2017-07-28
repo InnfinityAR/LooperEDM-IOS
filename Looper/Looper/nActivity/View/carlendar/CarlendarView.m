@@ -180,8 +180,29 @@
     self.topLabel.font= [UIFont fontWithName:@"STHeitiTC-Light" size:18.f];
     self.topLabel.textColor=[UIColor whiteColor];
     [self addSubview:self.topLabel];
+    self.topLabel.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickTopLB:)];
+    [self.topLabel addGestureRecognizer:singleTap];
     
 }
+-(void)onClickTopLB:(UITapGestureRecognizer *)tap{
+    [self.calendarView backToToday];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // 获取当前日期
+    NSDate* dt = [NSDate date];
+    // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
+    unsigned unitFlags = NSCalendarUnitYear |
+    NSCalendarUnitMonth |  NSCalendarUnitDay |
+    NSCalendarUnitHour |  NSCalendarUnitMinute |
+    NSCalendarUnitSecond | NSCalendarUnitWeekday;
+    // 获取不同时间字段的信息
+    NSDateComponents* comp = [gregorian components: unitFlags
+                                          fromDate:dt];
+    self.topLabel.text=[NSString stringWithFormat:@"%ld年%ld月",comp.year,comp.month];
+
+}
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){

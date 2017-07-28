@@ -210,12 +210,15 @@
     imageView.layer.masksToBounds=YES;
     [imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"photo"]]];
     [cell.contentView addSubview:imageView];
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+    if (timeNow>[dic[@"endtime"]integerValue]) {
     UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(cell)*1.3-30*DEF_Adaptation_Font, DEF_WIDTH(self)/2-10, 30*DEF_Adaptation_Font)];
     finishView.layer.cornerRadius=5.0;
     finishView.layer.masksToBounds=YES;
     finishView.image=[UIImage imageNamed:@"btn_finishEnd.png"];
     [cell.contentView addSubview:finishView];
-    
+    }
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.3, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
     label.text=[dic objectForKey:@"activityname"];
     label.textColor=[UIColor whiteColor];
@@ -356,8 +359,8 @@
     CGFloat yOffset  = scrollView.contentOffset.y;
     CGFloat xOffset=scrollView.contentOffset.x;
     CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
-//    NSLog(@"%f", scrollView.contentOffset.x);
-//    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
+    NSLog(@"%f", scrollView.contentOffset.x);
+    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
     if (xOffset>50*DEF_Adaptation_Font*0.5&&xOffset<640*DEF_Adaptation_Font*0.5) {
         isScrollViewScrollForLeftOrRight=YES;
         //只有在这种情况下才去改变x
@@ -383,18 +386,17 @@
 
     }
     }
-    if (isScrollViewScrollForLeftOrRight==NO) {
-    if (moveY<0) {
-        //往上滑
-        CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0, 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
-        self.tableView.frame=frame;
-        CGRect frame1=self.collectView.frame;
-        frame1=CGRectMake(DEF_WIDTH(self), 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
-        self.collectView.frame=frame1;
 
-            }
-    if (moveY>0) {
+        if (yOffset>0) {
+        //往上滑
+            CGRect frame=self.tableView.frame;
+            frame=CGRectMake(0, 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            self.tableView.frame=frame;
+            CGRect frame1=self.collectView.frame;
+            frame1=CGRectMake(DEF_WIDTH(self), 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            self.collectView.frame=frame1;
+        }
+    if (yOffset<=0) {
         //往下滑
         CGRect frame=self.tableView.frame;
         frame=CGRectMake(0, 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
@@ -403,7 +405,6 @@
         frame1=CGRectMake(DEF_WIDTH(self), 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
         self.collectView.frame=frame1;
         }
-    }
     
 }
 
