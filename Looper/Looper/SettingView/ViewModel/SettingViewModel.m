@@ -92,7 +92,7 @@
         
         UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
         //NSData *imageData = UIImagePNGRepresentation(image);
-        MyImage1=[LooperToolClass set_imageWithImage:image scaledToSize:CGSizeMake(600 * DEF_Adaptation_Font, 600 * DEF_Adaptation_Font)];
+        MyImage1=[LooperToolClass set_imageWithImage:image ToPoint:CGPointMake(0, 0)  scaledToSize:CGSizeMake(600 * DEF_Adaptation_Font, 600 * DEF_Adaptation_Font)];
         NSData * data = [LooperToolClass set_ImageData_UIImageJPEGRepresentationWithImage:MyImage1 CGFloat_compressionQuality:0.5];
         
         NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];

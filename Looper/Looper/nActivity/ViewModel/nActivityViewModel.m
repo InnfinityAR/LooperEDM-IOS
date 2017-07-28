@@ -92,8 +92,6 @@
         
         //isReminder 是否写入提醒事项
         [GALActionOnCalendar saveEventStartDate:[[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"starttime"]doubleValue]]  endDate: [[NSDate alloc] initWithTimeIntervalSince1970:[[dic objectForKey:@"endtime"]doubleValue]] alarm:alarmFloat eventTitle:eventTitle location:location notes:notes andObj:self];
-
-      
     }else{
         [[DataHander sharedDataHander] showViewWithStr:@"您之前已经成功添加过活动" andTime:1 andPos:CGPointZero];
     }
@@ -387,7 +385,12 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToFavorite" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             
-            
+            if([islike intValue]==1){
+                [[DataHander sharedDataHander] showViewWithStr:@"收藏活动成功" andTime:1 andPos:CGPointZero];
+
+            }else{
+                [[DataHander sharedDataHander] showViewWithStr:@"取消活动成功" andTime:1 andPos:CGPointZero];
+        }
         }else{
             
         }
@@ -411,7 +414,14 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followBrand" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             
+            if(islike==1){
+                 [[DataHander sharedDataHander] showViewWithStr:@"关注成功" andTime:1 andPos:CGPointZero];
             
+            }else{
+                [[DataHander sharedDataHander] showViewWithStr:@"取消成功" andTime:1 andPos:CGPointZero];
+
+            
+            }
             
         }else{
             

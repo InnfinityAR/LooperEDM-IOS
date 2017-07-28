@@ -13,6 +13,9 @@
 @optional
 - (void)imageViewer:(XHImageViewer *)imageViewer  willDismissWithSelectedView:(UIImageView*)selectedView;
 
+
+- (void)imageViewer:(XHImageViewer *)imageViewer  finishWithSelectedView:(NSArray*)ImageArray;
+
 @end
 
 @interface XHImageViewer : UIView

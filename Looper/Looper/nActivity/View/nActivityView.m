@@ -17,6 +17,8 @@
 #import "NewPagedFlowView.h"
 #import "CarlendarView.h"
 
+#import "DataHander.h"
+
 
 @implementation nActivityView {
     
@@ -263,12 +265,13 @@
             [tripBtn setSelected:false];
             [_obj addInformationToFollow:[dic objectForKey:@"activityid"] andisLike:@"0"];
              [dic setObject:@"0" forKey:@"issave"];
+             [[DataHander sharedDataHander] showViewWithStr:@"取消成功" andTime:1 andPos:CGPointZero];
              [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }else{
             [_obj savaCalendar:[_commendArray objectAtIndex:pageIndex]];
             [_obj addInformationToFollow:[dic objectForKey:@"activityid"] andisLike:@"1"];
             [dic setObject:@"1" forKey:@"issave"];
-            
+
             [tripBtn setSelected:true];
              [_commendArray setObject:dic atIndexedSubscript:pageIndex];
         }

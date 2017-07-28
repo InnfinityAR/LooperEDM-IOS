@@ -121,7 +121,7 @@
         
         UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
         //NSData *imageData = UIImagePNGRepresentation(image);
-        MyImage1=[LooperToolClass set_imageWithImage:image scaledToSize:CGSizeMake(600 * DEF_Adaptation_Font, 600 * DEF_Adaptation_Font)];
+        MyImage1=[LooperToolClass set_imageWithImage:image ToPoint:CGPointMake(0, 0) scaledToSize:CGSizeMake(600 * DEF_Adaptation_Font, 600 * DEF_Adaptation_Font) ];
         NSData * data = [LooperToolClass set_ImageData_UIImageJPEGRepresentationWithImage:MyImage1 CGFloat_compressionQuality:0.5];
         
         NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -147,7 +147,7 @@
         
         
         if(Originalimage.size.height - Originalimage.size.width>50){
-             MyImage2=[LooperToolClass set_imageWithImage:Originalimage scaledToSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT)];
+             MyImage2=[LooperToolClass set_imageWithImage:Originalimage  ToPoint:CGPointMake(0, 0)  scaledToSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT)];
         }else{
             [picker dismissViewControllerAnimated:YES completion:^(void){}];
             [[DataHander sharedDataHander] showViewWithStr:@"请上传竖版长方形图片" andTime:1 andPos:CGPointZero];

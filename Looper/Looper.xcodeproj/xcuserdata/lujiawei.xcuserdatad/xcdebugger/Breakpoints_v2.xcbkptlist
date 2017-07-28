@@ -282,7 +282,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522839357.45061"
+                  timestampString = "522929083.915254"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "133"
@@ -297,7 +297,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522839357.451851"
+                  timestampString = "522929083.916473"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "134"
@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "522829797.66431"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "-addTicket:"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,7 +666,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.78467"
+                  timestampString = "522929083.969114"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -681,7 +681,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.78592"
+                  timestampString = "522929083.970359"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -696,7 +696,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.787294"
+                  timestampString = "522929083.9716"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "166"
@@ -711,7 +711,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.78857"
+                  timestampString = "522929083.972834"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "167"
@@ -760,11 +760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "522829797.66431"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "-shareh5View:"
             landmarkType = "7">
          </BreakpointContent>
@@ -792,7 +792,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.801516"
+                  timestampString = "522929083.984029"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -807,7 +807,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Simple/RongCloudManger.m"
-                  timestampString = "522839357.802803"
+                  timestampString = "522929083.985225"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "147"
@@ -824,11 +824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/nActivityView.m"
-            timestampString = "521197485.180149"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -840,11 +840,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/nActivityView.m"
-            timestampString = "521978195.310963"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1048,11 +1048,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "522829797.66431"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "-getDataById:andId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1064,11 +1064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "522829797.66431"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-getDataById:andId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1288,7 +1288,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.884168"
+                  timestampString = "522929084.057613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -1303,7 +1303,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.885399"
+                  timestampString = "522929084.05894"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -1336,7 +1336,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.888336"
+                  timestampString = "522929084.062285"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1351,7 +1351,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.889578"
+                  timestampString = "522929084.063651"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1362,11 +1362,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.171"
+                  symbolName = "__copy_helper_block_.173"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.890989"
+                  timestampString = "522929084.064973"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1377,11 +1377,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.172"
+                  symbolName = "__destroy_helper_block_.174"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.892407"
+                  timestampString = "522929084.066256"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1392,11 +1392,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__91+[AFNetworkTool Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:]_block_invoke.175"
+                  symbolName = "__91+[AFNetworkTool Clarence_Post_UploadWithUrl:Params:fileUrl:fileName:fileType:success:fail:]_block_invoke.177"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/3rdFrameWork/AFNetworking/AFNetworkTool.m"
-                  timestampString = "522839357.893973"
+                  timestampString = "522929084.067525"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "252"
@@ -1445,7 +1445,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522839357.901737"
+                  timestampString = "522929084.074749"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
@@ -1460,7 +1460,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522839357.903248"
+                  timestampString = "522929084.076003"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "309"
@@ -1525,7 +1525,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522839357.908808"
+                  timestampString = "522929084.081822"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -1540,7 +1540,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/WebView/controller/WebViewController.m"
-                  timestampString = "522839357.910606"
+                  timestampString = "522929084.083133"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "242"
@@ -1589,11 +1589,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "522676173.456869"
+            timestampString = "522916224.973801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "-videoOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1605,11 +1605,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "522676173.456869"
+            timestampString = "522916224.973801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "-videoOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1653,11 +1653,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/nActivityView.m"
-            timestampString = "521991900.451296"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1669,11 +1669,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/nActivityView.m"
-            timestampString = "521991900.451296"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1738,7 +1738,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "816"
             endingLineNumber = "816"
-            landmarkName = "-AllUseViewForCellIfHaveImage:andIndexpath:andImageDic:"
+            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1754,7 +1754,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "819"
             endingLineNumber = "819"
-            landmarkName = "-AllUseViewForCellIfHaveImage:andIndexpath:andImageDic:"
+            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1770,7 +1770,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "817"
             endingLineNumber = "817"
-            landmarkName = "-AllUseViewForCellIfHaveImage:andIndexpath:andImageDic:"
+            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1786,7 +1786,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "775"
             endingLineNumber = "775"
-            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
+            landmarkName = "-firstCellForUpdateData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1802,7 +1802,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "777"
             endingLineNumber = "777"
-            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
+            landmarkName = "-firstCellForUpdateData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1818,40 +1818,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "783"
             endingLineNumber = "783"
-            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
+            landmarkName = "-firstCellForUpdateData:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ActivityBarrageView originViewForCell:andIndexpath:andImageDic:]"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.042268"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "785"
-                  endingLineNumber = "785"
-                  offsetFromSymbolStart = "932">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66-[ActivityBarrageView originViewForCell:andIndexpath:andImageDic:]_block_invoke"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.043646"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "785"
-                  endingLineNumber = "785"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1866,40 +1834,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "785"
             endingLineNumber = "785"
-            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
+            landmarkName = "-firstCellForUpdateData:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ActivityBarrageView originViewForCell:andIndexpath:andImageDic:]"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.04688"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "785"
-                  endingLineNumber = "785"
-                  offsetFromSymbolStart = "932">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66-[ActivityBarrageView originViewForCell:andIndexpath:andImageDic:]_block_invoke"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.048215"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "785"
-                  endingLineNumber = "785"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1914,7 +1850,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "786"
             endingLineNumber = "786"
-            landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
+            landmarkName = "-firstCellForUpdateData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1948,53 +1884,6 @@
             endingLineNumber = "811"
             landmarkName = "-originViewForCell:andIndexpath:andImageDic:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66-[ActivityBarrageView originViewForCell:andIndexpath:andImageDic:]_block_invoke.512"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.056694"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "811"
-                  endingLineNumber = "811"
-                  offsetFromSymbolStart = "720">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.515"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.05811"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "811"
-                  endingLineNumber = "811"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.516"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/activity/View/ActivityBarrageView.m"
-                  timestampString = "522839358.059341"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "811"
-                  endingLineNumber = "811"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2036,7 +1925,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522839358.065765"
+                  timestampString = "522929084.245297"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "100"
@@ -2051,7 +1940,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/lujiawei/Documents/workLooper/LooperEDM-IOS/Looper/Looper/Login/viewModel/LoginViewModel.m"
-                  timestampString = "522839358.067048"
+                  timestampString = "522929084.247871"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "101"
@@ -2164,166 +2053,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKRecordShortVideoViewController.m"
-            timestampString = "522174263.285746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "-recorderDidEndRecording:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKRecordShortVideoViewController.m"
-            timestampString = "522174263.285746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "-recorderDidErrorRecording:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKRecordShortVideoViewController.m"
-            timestampString = "522174263.285746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
-            landmarkName = "-recorderDidErrorRecording:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "350"
-            endingLineNumber = "350"
-            landmarkName = "-setupCaptureSession"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
-            landmarkName = "-setupCaptureSession"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522164892.893062"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
-            landmarkName = "-setupCaptureSession"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
-            landmarkName = "-addDefaultMicInputToCaptureSession:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "-addDefaultCameraInputToCaptureSession:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356"
-            landmarkName = "-addDefaultCameraInputToCaptureSession:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKShortVideoRecorder.m"
-            timestampString = "522165262.726998"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
-            landmarkName = "-addDefaultMicInputToCaptureSession:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKRecordShortVideoViewController.m"
             timestampString = "522669036.642805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -2339,28 +2068,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/3rdFrameWork/PKShortVideo/PKShortVideoWriter/PKRecordShortVideoViewController.m"
-            timestampString = "522174263.285746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-recorderDidEndRecording:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "522829797.66431"
+            timestampString = "522907514.890069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-removeDetailView"
             landmarkType = "7">
          </BreakpointContent>
@@ -2553,7 +2266,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "743"
             endingLineNumber = "743"
-            landmarkName = "-collectionView:numberOfItemsInSection:"
+            landmarkName = "-addContent"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2586,54 +2299,6 @@
             startingLineNumber = "494"
             endingLineNumber = "494"
             landmarkName = "-onClickView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "522676173.456869"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
-            landmarkName = "-createCellView:andCell:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "522676173.456869"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
-            landmarkName = "-createCellView:andCell:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "522676173.456869"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
-            landmarkName = "-createCellView:andCell:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2794,6 +2459,38 @@
             startingLineNumber = "591"
             endingLineNumber = "591"
             landmarkName = "-createScrollDataView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/3rdFrameWork/XHImage/XHImageViewer.m"
+            timestampString = "522927537.969727"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "-btnOnClick:withEvent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/PhotoWall/view/sendPhotoWall.m"
+            timestampString = "522929538.467265"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-imageViewer:finishWithSelectedView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

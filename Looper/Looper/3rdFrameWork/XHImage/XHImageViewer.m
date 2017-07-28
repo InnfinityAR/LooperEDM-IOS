@@ -9,15 +9,22 @@
 #import "XHImageViewer.h"
 #import "XHViewState.h"
 #import "XHZoomingImageView.h"
+#import "LooperConfig.h"
+#import "LooperToolClass.h"
 
 @interface XHImageViewer ()
 
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSArray *imgViews;
+@property (nonatomic, strong) NSMutableArray *imgViews;
 
 @end
 
-@implementation XHImageViewer
+@implementation XHImageViewer{
+
+    NSMutableArray *tempArray;
+
+
+}
 
 - (id)init {
     self = [self initWithFrame:CGRectZero];
@@ -36,10 +43,47 @@
     [self addGestureRecognizer:pan];
 }
 
+- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    
+    if(button.tag == 101){
+        [self dismissWithAnimate];
+    }else if(button.tag == 102){
+        
+        [_scrollView removeFromSuperview];
+        [tempArray removeObjectAtIndex:(_scrollView.contentOffset.x / _scrollView.frame.size.width)];
+        
+        if([tempArray count]==0){
+        
+             [self dismissWithAnimate];
+        
+        }else{
+            [self showWithImageViews:tempArray selectedView:[tempArray objectAtIndex:0]];
+
+        
+        }
+    }
+}
+
+
+-(void)createHudView{
+
+
+    
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:backBtn];
+    
+    UIButton *delBtn = [LooperToolClass createBtnImageNameReal:@"btn_delete_photo.png" andRect:CGPointMake(534*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5)andTag:102 andSelectImage:@"btn_delete_photo.png" andClickImage:@"btn_delete_photo.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5)  andTarget:self];
+    [self addSubview:delBtn];
+
+}
+
+
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
     if (self) {
         [self _setup];
+       
     }
     return self;
 }
@@ -58,10 +102,13 @@
             view.userInteractionEnabled = NO;
         }
     }
-    _imgViews = [imgViews copy];
+    _imgViews = [[NSMutableArray alloc]initWithArray:[imgViews copy]];
 }
 
+
 - (void)showWithImageViews:(NSArray*)views selectedView:(UIImageView*)selectedView {
+    tempArray = [[NSMutableArray alloc] initWithArray:views];
+    
     [self setImageViewsFromArray:views];
     
     if(_imgViews.count > 0){
@@ -70,6 +117,9 @@
         }
         [self showWithSelectedView:selectedView];
     }
+    
+    
+     [self createHudView];
 }
 
 #pragma mark- Properties
@@ -156,6 +206,7 @@
      ];
 }
 
+
 - (void)prepareToDismiss {
     UIImageView *currentView = [self currentView];
     
@@ -201,6 +252,12 @@
         XHViewState *_state = [XHViewState viewStateForView:view];
         view.userInteractionEnabled = _state.userInteratctionEnabled;
     }
+    
+    
+    
+    [self.delegate imageViewer:self finishWithSelectedView:tempArray];
+    
+    
     
     [self removeFromSuperview];
     /*

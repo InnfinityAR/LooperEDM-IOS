@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIImage+PKShortVideoPlayer.h"
 #import "DataHander.h"
+#import "XHImageViewer.h"
 
 @implementation sendPhotoWall{
 
@@ -24,6 +25,10 @@
     UIImageView *videoImg;
     NSMutableArray *_photoArray;
     UIView *colorV;
+    
+    NSMutableArray *_imageViews;
+    NSMutableArray *_imageArray;
+    
 }
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject {
@@ -52,16 +57,94 @@
 }
 
 
+
+- (void)imageViewer:(XHImageViewer *)imageViewer  willDismissWithSelectedView:(UIImageView*)selectedView{
+
+
+
+}
+
+
+
+
+- (void)imageViewer:(XHImageViewer *)imageViewer finishWithSelectedView:(NSArray*)ImageArray{
+    [_photoArray removeAllObjects];
+    [addPicVideo removeFromSuperview];
+    addPicVideo = [LooperToolClass createBtnImageNameReal:@"icon_addPic.png" andRect:CGPointMake(38*DEF_Adaptation_Font*0.5,427*DEF_Adaptation_Font*0.5) andTag:900 andSelectImage:@"icon_addPic.png" andClickImage:@"icon_addPic.png" andTextStr:nil andSize:CGSizeMake(144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:addPicVideo];
+    for(int i=0;i<[_imageArray count];i++){
+    
+        UIView *view = [_imageArray objectAtIndex:i];
+        [view removeFromSuperview];
+    }
+  
+    
+    for (int j=0;j<[ImageArray count];j++){
+        [self ImageFileSave:[[ImageArray objectAtIndex:j] image]];
+    }
+    
+}
+
+
+
+-(void)SelectView:(UITapGestureRecognizer *)tap{
+
+
+    
+    [_imageViews removeAllObjects];
+    
+    int tag = tap.view.tag;
+    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+    imageViewer.delegate = self;
+    
+    for (int i=0;i<[_photoArray count];i++){
+        UIImageView *tempImageView = [[UIImageView alloc] init];
+        tempImageView.frame = CGRectMake(0, self.frame.size.height*0.5, self.frame.size.width, 0);
+        tempImageView.image = [_photoArray objectAtIndex:i];
+       
+        [tempImageView setBackgroundColor:[UIColor whiteColor]];
+        [_imageViews addObject:tempImageView];
+    }
+    
+    if([_photoArray count]==1){
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:0]];
+    }else{
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:tag]];
+    }
+}
+
+
 -(void)ImageFileSave:(UIImage*)imageFile{
 
     if([_photoArray count]<3){
 
     [_photoArray addObject:imageFile];
     UIImageView* ImageV = [[UIImageView alloc] initWithFrame:CGRectMake(addPicVideo.frame.origin.x,427*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5)];
-    ImageV.image=imageFile;
+        
+        if (imageFile != nil) {
+            if (imageFile.size.height>imageFile.size.width) {//图片的高要大于与宽
+                CGRect rect = CGRectMake(0, imageFile.size.height/2-imageFile.size.width/2, imageFile.size.width, imageFile.size.width);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([imageFile CGImage], rect);
+                ImageV.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }else{
+                CGRect rect = CGRectMake(imageFile.size.width/2-imageFile.size.height/2, 0, imageFile.size.height, imageFile.size.height);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([imageFile CGImage], rect);
+                ImageV.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }
+        }
+
+    ImageV.tag=[_photoArray count]-1;
     ImageV.layer.cornerRadius = 15*DEF_Adaptation_Font_x*0.5;
     videoImg.layer.masksToBounds = YES;
     [self addSubview:ImageV];
+    [_imageArray addObject:ImageV];
+        
+    ImageV.userInteractionEnabled=true;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SelectView:)];
+    [ImageV addGestureRecognizer:singleTap];
+        
 
         if([_photoArray count]==3){
         
@@ -282,7 +365,9 @@
 
 
 -(void)initView{
+      _imageViews= [[NSMutableArray alloc] initWithCapacity:50];
       _photoArray = [[NSMutableArray alloc] initWithCapacity:50];
+      _imageArray = [[NSMutableArray alloc] initWithCapacity:50];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [self setBackgroundColor: [UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [self createHudView];

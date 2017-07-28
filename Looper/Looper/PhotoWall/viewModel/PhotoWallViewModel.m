@@ -83,11 +83,12 @@
 
 }
 
-
 - (void)didFinishImageToOutputFilePath:(UIImage *)imagePath{
-
-     [sendPhotoV ImageFileSave:imagePath];
-
+    CGImageRef cgRef = imagePath.CGImage;
+    CGImageRef imageRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(0*DEF_Adaptation_Font,114*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 856*DEF_Adaptation_Font*0.5));
+    UIImage *thumbScale = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    [sendPhotoV ImageFileSave:thumbScale];
 }
 
 -(void)removePlayerInfo{
@@ -347,7 +348,7 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.delegate = self;
     //设置选择后的图片可被编辑
-    picker.allowsEditing = YES;
+    //picker.allowsEditing = YES;
     [_obj presentModalViewController:picker animated:YES];
 }
 
@@ -360,7 +361,7 @@
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         //设置拍照后的图片可被编辑
-        picker.allowsEditing = YES;
+        //picker.allowsEditing = YES;
         picker.sourceType = sourceType;
         [_obj presentModalViewController:picker animated:YES];
     }else
@@ -379,10 +380,10 @@
         //先把图片转成NSData
         UIImage* MyImage = [[UIImage alloc]init];
         
-        UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+        UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
         //NSData *imageData = UIImagePNGRepresentation(image);
         
-        MyImage=[LooperToolClass set_imageWithImage:image scaledToSize:CGSizeMake(400 * DEF_Adaptation_Font, 400 * DEF_Adaptation_Font)];
+        MyImage=[LooperToolClass set_imageWithImage:image ToPoint:CGPointMake(0, 0)  scaledToSize:CGSizeMake(image.size.width, image.size.height)];
         NSData * data = [LooperToolClass set_ImageData_UIImageJPEGRepresentationWithImage:MyImage CGFloat_compressionQuality:0.5];
         
         NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
