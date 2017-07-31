@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "DataHander.h"
 #import "LocalDataMangaer.h"
+#import "XHImageViewer.h"
 @implementation sendMessageActivityView{
 
     UIButton* sendBtn;
@@ -23,6 +24,8 @@
     UITextView *textview;
     NSMutableArray *tempImageArray;
     NSMutableArray *ImageArray;
+    
+     NSMutableArray *_imageViews;
 
 }
 
@@ -36,6 +39,8 @@
     }
     return self;
 }
+
+
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
 
 
@@ -74,9 +79,16 @@
     }
 
 }
+
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [textview resignFirstResponder];
 }
+
+
+
+
+
 -(void)createHudView{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -141,27 +153,92 @@
         }else{
         
         }
-        UIImageView *imagev=[LooperToolClass createImageViewReal:[tempImageArray objectAtIndex:i] andRect:CGPointMake(num_x*DEF_Adaptation_Font*0.5,400*DEF_Adaptation_Font*0.5) andTag:i andSize:CGSizeMake(128*DEF_Adaptation_Font*0.5, 128*DEF_Adaptation_Font*0.5) andIsRadius:false];
+
+        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(num_x*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 128*DEF_Adaptation_Font*0.5, 128*DEF_Adaptation_Font*0.5)];
+        
+        imagev.image = [tempImageArray objectAtIndex:i];
         imagev.layer.cornerRadius = 8*DEF_Adaptation_Font*0.5;
         imagev.layer.masksToBounds = YES;
+        imagev.tag=i;
         [imagev setBackgroundColor:[UIColor redColor]];
+
+        imagev.userInteractionEnabled=true;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(SelectView:)];
+        [imagev addGestureRecognizer:singleTap];
+        
         [self addSubview:imagev];
         [ImageArray addObject:imagev];
     }
 }
 
+- (void)imageViewer:(XHImageViewer *)imageViewer  willDismissWithSelectedView:(UIImageView*)selectedView{
+    
+    
+    
+}
+
+
+- (void)imageViewer:(XHImageViewer *)imageViewer finishWithSelectedView:(NSArray*)ImageArray{
+   [self removeAllImage];
+    
+    [tempImageArray removeAllObjects];
+    for (int i=0;i<[ImageArray count];i++){
+    
+        [tempImageArray addObject:[[ImageArray objectAtIndex:i] image]];
+    
+    }
+    
+    [self createSelectImage];
+}
+
+
+
+
+-(void)SelectView:(UITapGestureRecognizer *)tap{
+ 
+    [_imageViews removeAllObjects];
+    
+    int tag = tap.view.tag;
+    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+    imageViewer.delegate = self;
+    
+    for (int i=0;i<[tempImageArray count];i++){
+        UIImageView *tempImageView = [[UIImageView alloc] init];
+        tempImageView.frame = CGRectMake(0, self.frame.size.height*0.5, self.frame.size.width, 0);
+        tempImageView.image =[tempImageArray objectAtIndex:i];
+        
+        [tempImageView setBackgroundColor:[UIColor whiteColor]];
+        [_imageViews addObject:tempImageView];
+    }
+    
+    if([tempImageArray count]==1){
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:0]];
+    }else{
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:tag]];
+    }
+}
+
+
+
+
+
 
 -(void)showSelectImage:(NSString*)selectImage{
     [textview becomeFirstResponder];
-    [tempImageArray addObject:selectImage];
+    [tempImageArray addObject:[UIImage imageNamed:selectImage]];
     [self createSelectImage];
 }
+
+
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
 
     
 }
+
+
+
 
 -(void)keyboardWillShow:(NSNotification *)notification
 {
@@ -173,6 +250,8 @@
     
     sendPicBtn.frame = CGRectMake(sendPicBtn.frame.origin.x, DEF_SCREEN_HEIGHT -frame.size.height-sendPicBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendPicBtn.frame.size.width, sendPicBtn.frame.size.height);
 }
+
+
 -(void)keyboardWillHide:(NSNotification *)notification{
     
     sendBtn.frame = CGRectMake(sendBtn.frame.origin.x, DEF_SCREEN_HEIGHT-sendBtn.frame.size.height-15*DEF_Adaptation_Font*0.5, sendBtn.frame.size.width, sendBtn.frame.size.height);
@@ -204,6 +283,7 @@
 -(void)initView{
     tempImageArray = [[NSMutableArray alloc] initWithCapacity:50];
     ImageArray = [[NSMutableArray alloc] initWithCapacity:50];
+    _imageViews = [[NSMutableArray alloc] initWithCapacity:50];
     [self setBackgroundColor:[UIColor colorWithRed:35.0/255.0 green:33.0/255.0 blue:57.0/255.0 alpha:1.0]];
     [self createHudView];
 }

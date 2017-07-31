@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *imgViews;
+@property (nonatomic) int _type_num;
 
 @end
 
@@ -26,7 +27,7 @@
 
 }
 
-- (id)init {
+- (id)init{
     self = [self initWithFrame:CGRectZero];
     if (self) {
         [self _setup];
@@ -67,8 +68,6 @@
 
 -(void)createHudView{
 
-
-    
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
@@ -117,8 +116,6 @@
         }
         [self showWithSelectedView:selectedView];
     }
-    
-    
      [self createHudView];
 }
 

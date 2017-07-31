@@ -32,7 +32,7 @@
 -(void)createPlayerView:(int )PlayerId;
 -(void)removePlayerInfo;
 
-
+-(void)setSendPhotoV;
 -(void)LocalPhoto;
 -(void)takePhoto;
 

@@ -27,7 +27,7 @@
 -(void)addOpinionView;
 -(void)removeOpinionView;
 -(void)LocalPhoto;
--(void)updateUserInfo:(NSString*)userName andSex:(int)sex andHeadImage:(NSString*)headUrl;
+-(void)updateUserInfo:(NSString*)userName andSex:(int)sex andHeadImage:(NSString*)headUrl andAge:(NSString*)age;
 -(void)requestDataCode:(NSString*)mobileNum;
 
 -(void)bindMobile:(NSString*)mobileNum andCode:(NSString*)code;
