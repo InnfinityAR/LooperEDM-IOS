@@ -108,6 +108,25 @@
     
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
     [headImageView sd_setImageWithURL:[[NSURL alloc] initWithString:[[[_BrandData objectForKey:@"data"]objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image != nil) {
+            if (image.size.height>image.size.width) {//图片的高要大于与宽
+                CGRect rect = CGRectMake(0, image.size.height/2-image.size.width/2, image.size.width, image.size.width);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                headImageView.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }else{
+                CGRect rect = CGRectMake(image.size.width/2-image.size.height/2, 0, image.size.height, image.size.height);//创建矩形框
+                CGImageRef cgimg = CGImageCreateWithImageInRect([image CGImage], rect);
+                headImageView.image=[UIImage imageWithCGImage:cgimg];
+                CGImageRelease(cgimg);
+            }
+        }
+
+        
+        
+        
+        
+        
         
     }];
     
