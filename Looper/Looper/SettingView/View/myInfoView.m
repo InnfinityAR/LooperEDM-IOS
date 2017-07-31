@@ -218,6 +218,8 @@
 }
 
 -(void)createSelectView{
+    [self endEditing:true];
+    
     [manBtn removeFromSuperview];
     [womenBtn removeFromSuperview];
     
