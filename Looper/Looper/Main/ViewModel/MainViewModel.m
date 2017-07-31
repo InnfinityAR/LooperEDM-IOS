@@ -323,9 +323,9 @@
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    
+    if ([JPUSHService registrationID] !=nil) {
     [dic setObject:[JPUSHService registrationID] forKey:@"registrationid"];
-    
+    }
     
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getHome" parameters:dic success:^(id responseObject){
@@ -533,7 +533,7 @@
 
     if(type==LopperBtnTag){
         
-       //[self pushLooperListController];
+//       [self pushLooperListController];
          [self pushNActivityViewController];
 
     }else if(type==HomeBtnTag){
@@ -543,8 +543,8 @@
        [self pushActivityViewController];
         
     }else if(type==ActiveBtnTag){
-        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
-        
+//        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+      [self pushLooperListController];
     }else if(type==DJBtnTag){
         [self pushActivityViewController];
         

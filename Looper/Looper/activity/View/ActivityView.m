@@ -73,7 +73,7 @@
     onlineLB.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [onlineLB addGestureRecognizer:singleTap2];
-    UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 129*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
+    UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 130*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
     view.image=[UIImage imageNamed:@"AcitivitySeg.png"];
     [self addSubview:view];
     lineView=[[UIView alloc]initWithFrame:CGRectMake(187*DEF_Adaptation_Font*0.5, 131*DEF_Adaptation_Font*0.5, (500/2-204)*DEF_Adaptation_Font*0.5, 2)];
@@ -145,8 +145,8 @@
         //取消button点击延迟
         _tableView.delaysContentTouches = NO;
         //禁止上拉
-        _tableView.alwaysBounceVertical=NO;
-        _tableView.bounces=NO;
+//        _tableView.bounces=NO;
+         _tableView.alwaysBounceVertical=YES;
     }
     return _tableView;
 }
@@ -359,8 +359,8 @@
     CGFloat yOffset  = scrollView.contentOffset.y;
     CGFloat xOffset=scrollView.contentOffset.x;
     CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
-    NSLog(@"%f", scrollView.contentOffset.x);
-    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
+    NSLog(@"%f", scrollView.contentOffset.y);
+//    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
     if (xOffset>50*DEF_Adaptation_Font*0.5&&xOffset<640*DEF_Adaptation_Font*0.5) {
         isScrollViewScrollForLeftOrRight=YES;
         //只有在这种情况下才去改变x
@@ -390,19 +390,32 @@
         if (yOffset>0) {
         //往上滑
             CGRect frame=self.tableView.frame;
-            frame=CGRectMake(0, 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            frame.origin.y-=yOffset;
+            if (frame.origin.y<0) {
+            frame=CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            }
             self.tableView.frame=frame;
             CGRect frame1=self.collectView.frame;
-            frame1=CGRectMake(DEF_WIDTH(self), 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            frame1.origin.y-=yOffset;
+            if (frame1.origin.y<0) {
+            frame1=CGRectMake(DEF_WIDTH(self), 0, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            }
             self.collectView.frame=frame1;
         }
     if (yOffset<=0) {
         //往下滑
+       NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
         CGRect frame=self.tableView.frame;
+        frame.origin.y-=yOffset;
+        if (frame.origin.y>30*DEF_Adaptation_Font*0.5) {
         frame=CGRectMake(0, 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        }
         self.tableView.frame=frame;
         CGRect frame1=self.collectView.frame;
+        frame1.origin.y-=yOffset;
+        if (frame1.origin.y>30*DEF_Adaptation_Font*0.5) {
         frame1=CGRectMake(DEF_WIDTH(self), 30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+        }
         self.collectView.frame=frame1;
         }
     

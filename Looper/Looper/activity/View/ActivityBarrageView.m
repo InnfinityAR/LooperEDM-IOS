@@ -316,10 +316,14 @@
     }
     [self.collectView reloadData];
 }
-
+-(void)removeActivityAction{
+    _footer=nil;
+    [_collectView removeFromSuperview];
+}
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
-        [self.movieController stop];
+        [self removeActivityAction];
+               [self.movieController stop];
         [self removeFromSuperview];
     }
     if (button.tag==101) {
@@ -726,6 +730,9 @@
     label3.text=@"· 活动说明";
     label3.textColor=[UIColor yellowColor];
     label3.font=[UIFont boldSystemFontOfSize:14];
+    label3.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityStateLB:)];
+    [label3 addGestureRecognizer:singleTap];
     [contentView addSubview:label3];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
     if ([self.activityDIc objectForKey:@"rules"]==[NSNull null]||[[self.activityDIc objectForKey:@"rules"]isEqualToString:@""]) {
@@ -753,6 +760,9 @@
     imageView.alpha=0.6;
     imageView.image=[UIImage imageNamed:@"cutoffLine.png"];
     [contentView addSubview:imageView];
+}
+-(void)onClickActivityStateLB:(UITapGestureRecognizer *)tap{
+
 }
 //返回头headerView的大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
@@ -1040,8 +1050,8 @@
                 UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, DEF_HEIGHT(cell)-heightForReply+53*DEF_Adaptation_Font*0.5+height,80*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
                   label2.font=[UIFont systemFontOfSize:13];
                 label2.text=[dataArr[1] objectForKey:@"username"];
-                if ([[dataArr.firstObject objectForKey:@"username"]isEqualToString:@""]) {
-                    label.text=@"赵日天";
+                if ([[dataArr[1] objectForKey:@"username"]isEqualToString:@""]) {
+                    label2.text=@"赵日天";
                 }
                  label2.textAlignment=NSTextAlignmentRight;
                 label2.textColor=[UIColor colorWithRed:68/255.0 green:130/255.0 blue:173/255.0 alpha:1.0];

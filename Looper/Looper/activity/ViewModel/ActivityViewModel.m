@@ -164,7 +164,7 @@
 NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            [self.barrageView setBarrageInfo:[NSMutableArray new]];
+//            [[self.barrageView barrageInfo]removeAllObjects];
             [self getActivityInfoById:activityID andUserId:userId andPage:1 andSize:100];
         }else{
             
@@ -236,7 +236,7 @@ NSLog(@"%@",dic);
     [dic setObject:imageDataArray forKey:@"images"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            [self.barrageView setBarrageInfo:[NSMutableArray new]];
+//             [[self.barrageView barrageInfo]removeAllObjects];
             [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid andPage:1 andSize:100];
               [self.barrageView showHUDWithString:@"评论成功"];
         
@@ -270,6 +270,9 @@ NSLog(@"%@",dic);
                 [self.replyView updateCommendLB:self.barrageArr];
                 self.commendForReply=NO;
             }else{
+                if (page==1) {
+                     [[self.barrageView barrageInfo]removeAllObjects];
+                }
             [self.barrageView addImageArray:self.barrageArr];
                 if (self.barrageArr.count==0&&self.refreshNumber!=self.currentRefreshNumber) {
                     self.currentRefreshNumber=self.refreshNumber+1;
@@ -384,6 +387,9 @@ NSLog(@"%@",dic);
     }fail:^{
         
     }];
+}
+-(void)removeActivityAction{
+    [self.barrageView removeActivityAction];
 }
 -(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
