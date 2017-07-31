@@ -57,4 +57,5 @@ typedef void(^CompletionHandle)(NSError *error);
 -(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index;
 //为评论回复点赞
 -(void)thumbActivityMessageLike:(NSNumber*)like andUserId:(NSString*)userId andReplyID:(NSString*)replyID MessageID:(NSInteger)messageID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV;
+-(void)removeActivityAction;
 @end

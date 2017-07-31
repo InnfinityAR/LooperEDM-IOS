@@ -108,11 +108,11 @@
     
     if([[[LocalDataMangaer sharedManager] sex] intValue]==1){
         
-        manFrame=[LooperToolClass createImageViewReal:@"bg_manFrame.png" andRect:CGPointMake(214*DEF_Adaptation_Font_x*0.5,104*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(200*DEF_Adaptation_Font_x*0.5, 200*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        manFrame=[LooperToolClass createImageViewReal:@"bg_manFrame.png" andRect:CGPointMake(214*DEF_Adaptation_Font_x*0.5,104*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(202*DEF_Adaptation_Font_x*0.5, 202*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [self addSubview:manFrame];
         
     }else{
-        manFrame=[LooperToolClass createImageViewReal:@"bg_womanFrame.png" andRect:CGPointMake(214*DEF_Adaptation_Font_x*0.5,104*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(200*DEF_Adaptation_Font_x*0.5, 200*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        manFrame=[LooperToolClass createImageViewReal:@"bg_womanFrame.png" andRect:CGPointMake(214*DEF_Adaptation_Font_x*0.5,104*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(202*DEF_Adaptation_Font_x*0.5, 202*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [self addSubview:manFrame];
     }
     

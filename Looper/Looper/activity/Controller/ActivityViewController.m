@@ -32,6 +32,12 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    if (! [ [ self.navigationController viewControllers] containsObject:self]) {
+        [_activityVM removeActivityAction];
+    }
+    [super viewWillDisappear:animated];
+}
 
 @end

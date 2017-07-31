@@ -316,11 +316,14 @@
     }
     [self.collectView reloadData];
 }
-
+-(void)removeActivityAction{
+    _footer=nil;
+    [_collectView removeFromSuperview];
+}
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
-        _footer=nil;
-        [self.movieController stop];
+        [self removeActivityAction];
+               [self.movieController stop];
         [self removeFromSuperview];
     }
     if (button.tag==101) {

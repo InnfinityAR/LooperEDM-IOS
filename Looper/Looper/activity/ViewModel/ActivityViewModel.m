@@ -388,6 +388,9 @@ NSLog(@"%@",dic);
         
     }];
 }
+-(void)removeActivityAction{
+    [self.barrageView removeActivityAction];
+}
 -(void)getReplyDataForMessageID:(NSInteger)messageID andIndex:(NSInteger)index {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:@(messageID) forKey:@"messageId"];

@@ -47,4 +47,5 @@
 -(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andReplyCount:(NSInteger)replyCount;
 @property(nonatomic)NSInteger replyCount;
 @property(nonatomic)NSInteger replyIndex;
+-(void)removeActivityAction;
 @end
