@@ -79,9 +79,7 @@
     UIButton *playBtn =[LooperToolClass createBtnImageName:@"btn_play.png" andRect:CGPointMake(34, 575) andTag:2007 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: playBtn];
 
-    
-    
-    
+
     UILabel *verison = [LooperToolClass createLableView:CGPointMake(500*DEF_Adaptation_Font_x*0.5, 500*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(92*DEF_Adaptation_Font_x*0.5, 27*DEF_Adaptation_Font_x*0.5) andText:@"v1.0" andFontSize:11 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [self addSubview:verison];
 

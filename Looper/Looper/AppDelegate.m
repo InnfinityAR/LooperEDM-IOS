@@ -192,6 +192,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [self initJpush:launchOptions];
     [NSThread sleepForTimeInterval:1.5];
+    
+    
+    
+    
 
     
     [self initUmSdk];

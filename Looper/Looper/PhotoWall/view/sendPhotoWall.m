@@ -65,8 +65,6 @@
 }
 
 
-
-
 - (void)imageViewer:(XHImageViewer *)imageViewer finishWithSelectedView:(NSArray*)ImageArray{
     [_photoArray removeAllObjects];
     [addPicVideo removeFromSuperview];
@@ -77,8 +75,7 @@
         UIView *view = [_imageArray objectAtIndex:i];
         [view removeFromSuperview];
     }
-  
-    
+
     for (int j=0;j<[ImageArray count];j++){
         [self ImageFileSave:[[ImageArray objectAtIndex:j] image]];
     }
@@ -221,6 +218,7 @@
         
     }else if (button.tag==101){
         [self removeFromSuperview];
+        [_obj setSendPhotoV];
     }else if (button.tag==102){
         if(videoStr==nil&&[_photoArray count]==0){
               [[DataHander sharedDataHander] showViewWithStr:@"请上传图片" andTime:1 andPos:CGPointZero];

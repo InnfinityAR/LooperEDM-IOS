@@ -20,6 +20,7 @@ static LocalDataMangaer *localDataManagerM=nil;
 @synthesize tokenStr = _tokenStr;
 @synthesize HeadImageUrl = _HeadImageUrl;
 @synthesize sex = _sex;
+@synthesize age = _age;
 @synthesize NickName = _NickName;
 @synthesize localUserData = _localUserData;
 @synthesize loginType = _loginType;
@@ -41,6 +42,7 @@ static LocalDataMangaer *localDataManagerM=nil;
     [[NSUserDefaults standardUserDefaults] setObject:_tokenStr forKey:@"tokenStr"];
     [[NSUserDefaults standardUserDefaults] setObject:_HeadImageUrl forKey:@"HeadImageUrl"];
     [[NSUserDefaults standardUserDefaults] setObject:_sex forKey:@"sex"];
+    [[NSUserDefaults standardUserDefaults] setObject:_age forKey:@"age"];
     [[NSUserDefaults standardUserDefaults] setObject:_NickName forKey:@"NickName"];
 
 }
@@ -53,6 +55,7 @@ static LocalDataMangaer *localDataManagerM=nil;
     _HeadImageUrl=[[NSUserDefaults standardUserDefaults] objectForKey: @"HeadImageUrl"];
     _sex=[[NSUserDefaults standardUserDefaults] objectForKey: @"sex"];
     _NickName=[[NSUserDefaults standardUserDefaults] objectForKey: @"NickName"];
+    _age=[[NSUserDefaults standardUserDefaults] objectForKey: @"_age"];
     
 }
 

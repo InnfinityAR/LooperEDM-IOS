@@ -58,12 +58,12 @@
 
 -(void)createSendPhotoWall{
 
-    sendPhotoV =[[sendPhotoWall alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     
-    [[_obj view] addSubview:sendPhotoV];
-
-    [sendPhotoV setLocationStr:[[_photoWallData objectForKey:@"activity"] objectForKey:@"activityname"]];
+    [self createRecordVideo];
     
+    
+    
+   
 }
 
 
@@ -83,7 +83,44 @@
 
 }
 
+
+-(void)setSendPhotoV{
+
+    
+    sendPhotoV=nil;
+
+}
+
+
+- (void)didFinishRecordingToOutputFilePath:(NSString *)outputFilePath {
+    //自定义的生成小视频聊天对象方法
+    
+    if(sendPhotoV==nil){
+        
+        sendPhotoV =[[sendPhotoWall alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        
+        [[_obj view] addSubview:sendPhotoV];
+        
+        [sendPhotoV setLocationStr:[[_photoWallData objectForKey:@"activity"] objectForKey:@"activityname"]];
+    }
+    
+    [sendPhotoV videoFileSave:outputFilePath];
+}
+
+
+
 - (void)didFinishImageToOutputFilePath:(UIImage *)imagePath{
+    
+    
+    if(sendPhotoV==nil){
+    
+        sendPhotoV =[[sendPhotoWall alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        
+        [[_obj view] addSubview:sendPhotoV];
+    
+        [sendPhotoV setLocationStr:[[_photoWallData objectForKey:@"activity"] objectForKey:@"activityname"]];
+
+    }
     CGImageRef cgRef = imagePath.CGImage;
     CGImageRef imageRef = CGImageCreateWithImageInRect(cgRef, CGRectMake(0*DEF_Adaptation_Font,114*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 856*DEF_Adaptation_Font*0.5));
     UIImage *thumbScale = [UIImage imageWithCGImage:imageRef];
@@ -167,14 +204,6 @@
 }
 
 
-- (void)didFinishRecordingToOutputFilePath:(NSString *)outputFilePath {
-    //自定义的生成小视频聊天对象方法
-    
-    NSLog(@"%@",outputFilePath);
-    
-    
-    [sendPhotoV videoFileSave:outputFilePath];
-}
 
 
 -(void)createActivityView{
@@ -218,7 +247,7 @@
             
             NSLog(@"%@",[images objectAtIndex:i]);
             UIImage *imagePhoto2 = [images objectAtIndex:i];
-            NSData *imageDataP2 = UIImagePNGRepresentation(imagePhoto2);
+            NSData *imageDataP2 = UIImageJPEGRepresentation(imagePhoto2,0.1);
             [imageDataArray addObject:[Base64Class encodeBase64Data:imageDataP2]];
         }
         
@@ -235,6 +264,8 @@
                 
                 [sendPhotoV removeFromSuperview];
                 
+                [self setSendPhotoV];
+                
                 [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
                 
                 [self getImageBoard:_activityId];
@@ -246,11 +277,10 @@
             
         }];
     }else{
-    
         [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createImageBoard" parameters:dic success:^(id responseObject){
             if([responseObject[@"status"] intValue]==0){
                 [sendPhotoV removeFromSuperview];
-                
+                [self setSendPhotoV];
                 [[DataHander sharedDataHander] showViewWithStr:@"上传成功" andTime:1 andPos:CGPointZero];
                   [self getImageBoard:_activityId];
             }else{

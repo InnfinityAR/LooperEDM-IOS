@@ -116,7 +116,7 @@
     }
 }
 
--(void)updateUserInfo:(NSString*)userName andSex:(int)sex andHeadImage:(NSString*)headUrl{
+-(void)updateUserInfo:(NSString*)userName andSex:(int)sex andHeadImage:(NSString*)headUrl andAge:(NSString*)age{
     
     
     if([userName isEqualToString:@""]){
@@ -131,8 +131,14 @@
         NSData *imageData = UIImagePNGRepresentation(imagePhoto);
         [dic setObject:[Base64Class encodeBase64Data:imageData] forKey:@"headImage"];
     }
+    if([age isEqualToString:@""]==false){
+         [dic setObject:age forKey:@"age"];
+    }
+    
+    
     [dic setObject:[[NSNumber alloc] initWithInt:sex] forKey:@"gender"];
     [dic setObject:userName forKey:@"name"];
+   
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateUserInfo" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
@@ -140,6 +146,7 @@
             [LocalDataMangaer sharedManager].HeadImageUrl = responseObject[@"data"][@"headimageurl"];
             [LocalDataMangaer sharedManager].sex = responseObject[@"data"][@"sex"];
             [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
+             [LocalDataMangaer sharedManager].age = responseObject[@"data"][@"age"];
              [[LocalDataMangaer sharedManager] setData];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"updateHeadImage" object:nil];
@@ -272,10 +279,10 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"bugReport" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             
-            [self removeAccoutView];
+            [self removeOpinionView];
             [[DataHander sharedDataHander] showViewWithStr:@"上传成功 感谢您的支持" andTime:1 andPos:CGPointZero];
         }else{
-             [self removeAccoutView];
+             [self removeOpinionView];
         }
     }fail:^{
         

@@ -218,10 +218,6 @@ NSLog(@"%@",dic);
     
 }
 
-
-
-
-
 -(void)sendActivityMessage:(NSString *)activityId and:(NSString*)message and:(NSArray*)images{
     
     NSMutableArray *imageDataArray= [[NSMutableArray alloc] initWithCapacity:50];
@@ -229,12 +225,10 @@ NSLog(@"%@",dic);
     for (int i=0;i<[images count];i++){
     
         NSLog(@"%@",[images objectAtIndex:i]);
-        UIImage *imagePhoto2 = [UIImage imageNamed:[images objectAtIndex:i]];
-        NSData *imageDataP2 = UIImagePNGRepresentation(imagePhoto2);
+        UIImage *imagePhoto2 = [images objectAtIndex:i];
+        NSData *imageDataP2 = UIImageJPEGRepresentation(imagePhoto2,0.1);
         [imageDataArray addObject:[Base64Class encodeBase64Data:imageDataP2]];
     }
-    
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:activityId forKey:@"activityId"];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
@@ -257,9 +251,6 @@ NSLog(@"%@",dic);
        
     }];
 }
-
-
-
 
 -(void)getActivityInfoById:(NSString *)activityId  andUserId:(NSString *)userId  andPage:(NSInteger)page andSize:(NSInteger)size{
     if (page==1) {

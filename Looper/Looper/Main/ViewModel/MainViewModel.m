@@ -46,6 +46,8 @@
 #import "UserInfoViewController.h"
 #import "LiveShowView.h"
 
+#import "JPUSHService.h"
+
 
 @implementation MainViewModel{
 
@@ -322,6 +324,10 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
+    [dic setObject:[JPUSHService registrationID] forKey:@"registrationid"];
+    
+    
+    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getHome" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
@@ -329,6 +335,11 @@
             [self requestgetMyFavorite];
             
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
+            [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
+            [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
+            [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
+            
+            
             [[LocalDataMangaer sharedManager] setData];
             
             [[RongCloudManger sharedManager] initRongCloudSDK];

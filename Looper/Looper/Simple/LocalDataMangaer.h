@@ -17,6 +17,7 @@
     NSString *HeadImageUrl;
     NSString *sex;
     NSString *NickName;
+    NSString *age;
     
     
     
@@ -28,6 +29,7 @@
     
     
 }
+@property(nonatomic,strong)NSString * age;
 @property(nonatomic,strong)NSString * uid;
 @property(nonatomic,strong)NSString * thirdId;
 @property(nonatomic,strong)NSDictionary * userData;

@@ -227,7 +227,7 @@
         UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.6-10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
     [cell.contentView addSubview:bottomV];
     UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(20,  0, DEF_WIDTH(self)/2-10, 40*DEF_Adaptation_Font*0.5)];
-    label2.text=[NSString stringWithFormat:@"%@人参加",[dic objectForKey:@"joincount"]];
+    label2.text=[NSString stringWithFormat:@"%@人参加",[dic objectForKey:@"boarduser"]];
     label2.textColor=[UIColor colorWithRed:169/255.0 green:167/255.0 blue:183/255.0 alpha:1.0];
     label2.font=[UIFont systemFontOfSize:12];
     [bottomV addSubview:label2];
@@ -323,7 +323,7 @@
             cell.followCountLB.text=@"我要参加";
         }
         else{
-            cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"joincount"]];
+            cell.followCountLB.text=[NSString stringWithFormat:@"%@人参加", self.objDic[@"boarduser"]];
         }
     }
     NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
