@@ -364,8 +364,8 @@
         //取消button点击延迟
         _tableView.delaysContentTouches = NO;
         //禁止上拉
-        _tableView.alwaysBounceVertical=NO;
-        _tableView.bounces=NO;
+        _tableView.alwaysBounceVertical=YES;
+//        _tableView.bounces=NO;
 
         [self addSubview:_tableView];
     }
@@ -477,31 +477,42 @@
     [_textField resignFirstResponder];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
-    if (moveY<0) {
+//CGFloat moveY=[scrollView.panGestureRecognizer translationInView:self].y;
+     CGFloat yOffset  = scrollView.contentOffset.y;
+//    NSLog(@"yOffset===%f,panPoint===%f",yOffset,moveY);
+    if (yOffset>0) {
         //往上滑
         CGRect frame=self.tableView.frame;
-        frame=CGRectMake(0,DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5+moveY,DEF_WIDTH(self),DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-200*DEF_Adaptation_Font*0.5-moveY);
+        frame=CGRectMake(0,DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5-yOffset,DEF_WIDTH(self),DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-200*DEF_Adaptation_Font*0.5+yOffset);
         if (frame.origin.y<DEF_HEIGHT(_headerView)) {
             frame.origin.y=DEF_HEIGHT(_headerView);
             frame.size.height=DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-100*DEF_Adaptation_Font*0.5;
         }
         self.tableView.frame=frame;
         CGRect frame1=numberLB.frame;
-        frame1.size.height=60*DEF_Adaptation_Font*0.5+moveY;
-        if (frame1.size.height<0) {
+        frame1.origin.y-=yOffset*0.2;
+        if (frame1.origin.y<DEF_HEIGHT(_headerView)+4*DEF_Adaptation_Font*0.5) {
+            frame1.origin.y=DEF_HEIGHT(_headerView);
             frame1.size.height=0;
+            numberLB.alpha=0;
         }
         numberLB.frame=frame1;
         
     }
-    if (moveY>0) {
+    if (yOffset<=0) {
         //往下滑
         CGRect frame=self.tableView.frame;
+        frame.origin.y=DEF_HEIGHT(_headerView)+frame.origin.y-yOffset;
+        frame.size.height-=DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-100*DEF_Adaptation_Font*0.5+yOffset;
+        if (frame.origin.y>DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5) {
             frame.origin.y=DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5;
             frame.size.height=DEF_HEIGHT(self)-DEF_HEIGHT(_headerView)-200*DEF_Adaptation_Font*0.5;
+        }
+//          NSLog(@"frameY: %f,biggestY: %f",frame.origin.y,DEF_HEIGHT(_headerView)+100*DEF_Adaptation_Font*0.5);
         self.tableView.frame=frame;
+        numberLB.alpha=1;
         CGRect frame1=numberLB.frame;
+         frame1.origin.y=DEF_HEIGHT(_headerView)+40*DEF_Adaptation_Font*0.5;
             frame1.size.height=60*DEF_Adaptation_Font*0.5;
         numberLB.frame=frame1;
       

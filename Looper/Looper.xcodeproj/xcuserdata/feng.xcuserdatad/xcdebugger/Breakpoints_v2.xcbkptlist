@@ -355,13 +355,13 @@
                   symbolName = "-[ActivityViewModel thumbActivityMessageLike:andUserId:andReplyID:MessageID:andIndex:andIsReplyView:]"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523177741.426969"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.1/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
+                  timestampString = "523190982.836965"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "145"
                   endingLineNumber = "145"
-                  offsetFromSymbolStart = "664">
+                  offsetFromSymbolStart = "668">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -370,13 +370,13 @@
                   symbolName = "__101-[ActivityViewModel thumbActivityMessageLike:andUserId:andReplyID:MessageID:andIndex:andIsReplyView:]_block_invoke"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523177741.428327"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.1/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
+                  timestampString = "523190982.838342"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "146"
                   endingLineNumber = "146"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "51">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -612,7 +612,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/barrageReplyView.m"
-            timestampString = "522930067.261633"
+            timestampString = "523184420.810004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "401"

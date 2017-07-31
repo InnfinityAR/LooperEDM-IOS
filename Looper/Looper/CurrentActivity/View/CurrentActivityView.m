@@ -81,9 +81,9 @@
         looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         isHistory=NO;
         [UIView animateWithDuration:0.1 animations:^{
-            CGRect frame=lineView.frame;
-            frame=CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
-            lineView.frame=frame;
+            CGRect frame1=lineView.frame;
+            frame1=CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            lineView.frame=frame1;
         }];
         [self.tableView reloadData];
     }
@@ -92,9 +92,9 @@
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         isHistory=YES;
         [UIView animateWithDuration:0.1 animations:^{
-            CGRect frame=lineView.frame;
-            frame=CGRectMake(390*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
-            lineView.frame=frame;
+            CGRect frame2=lineView.frame;
+            frame2=CGRectMake(390*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            lineView.frame=frame2;
         }];
         [self.tableView reloadData];
     }
