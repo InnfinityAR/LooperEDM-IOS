@@ -73,7 +73,7 @@
     onlineLB.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [onlineLB addGestureRecognizer:singleTap2];
-    UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 129*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
+    UIImageView *view=[[UIImageView alloc]initWithFrame:CGRectMake(0, 130*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 4)];
     view.image=[UIImage imageNamed:@"AcitivitySeg.png"];
     [self addSubview:view];
     lineView=[[UIView alloc]initWithFrame:CGRectMake(187*DEF_Adaptation_Font*0.5, 131*DEF_Adaptation_Font*0.5, (500/2-204)*DEF_Adaptation_Font*0.5, 2)];
@@ -390,10 +390,10 @@
         if (yOffset>0) {
         //往上滑
             CGRect frame=self.tableView.frame;
-            frame=CGRectMake(0, 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            frame=CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
             self.tableView.frame=frame;
             CGRect frame1=self.collectView.frame;
-            frame1=CGRectMake(DEF_WIDTH(self), 1, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
+            frame1=CGRectMake(DEF_WIDTH(self), 0, DEF_WIDTH(self), DEF_HEIGHT(scrollView));
             self.collectView.frame=frame1;
         }
     if (yOffset<=0) {
