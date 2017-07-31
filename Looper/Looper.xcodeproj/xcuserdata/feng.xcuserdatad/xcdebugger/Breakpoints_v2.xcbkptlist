@@ -356,12 +356,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523168369.060892"
+                  timestampString = "523177741.426969"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "145"
                   endingLineNumber = "145"
-                  offsetFromSymbolStart = "668">
+                  offsetFromSymbolStart = "664">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -371,12 +371,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523168369.062213"
+                  timestampString = "523177741.428327"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "146"
                   endingLineNumber = "146"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -571,38 +571,6 @@
             endingLineNumber = "351"
             landmarkName = "-pustDataForActivityID:andMessageID:andContent:andUserID:andIndex:andIsReplyView:andSendPerson:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ActivityViewModel pustDataForActivityID:andMessageID:andContent:andUserID:andIndex:andIsReplyView:andSendPerson:]"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523168369.068063"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "351"
-                  endingLineNumber = "351"
-                  offsetFromSymbolStart = "610">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__115-[ActivityViewModel pustDataForActivityID:andMessageID:andContent:andUserID:andIndex:andIsReplyView:andSendPerson:]_block_invoke"
-                  moduleName = "Looper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS4.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523168369.069509"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "353"
-                  endingLineNumber = "353"
-                  offsetFromSymbolStart = "54">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
