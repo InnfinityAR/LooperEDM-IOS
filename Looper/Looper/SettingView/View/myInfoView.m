@@ -82,7 +82,18 @@
         }
 }
     
+
+
+
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
     
+    [manBtn removeFromSuperview];
+    [womenBtn removeFromSuperview];
+    
+    
+}
     
 
 -(void)updataHeadView:(NSString*)headStr{
@@ -190,9 +201,7 @@
     }else{
         sexStr =@"女";
     }
-//    sexText = [self createTextField:sexStr andRect:CGRectMake(154*DEF_Adaptation_Font*0.5, 421*DEF_Adaptation_Font*0.5, 452*DEF_Adaptation_Font*0.5, 42*DEF_Adaptation_Font*0.5) andTag:100];
-//    [self addSubview:sexText];
-    
+
     sexText = [LooperToolClass createLableView:CGPointMake(162*DEF_Adaptation_Font*0.5, 421*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(452*DEF_Adaptation_Font*0.5,  42*DEF_Adaptation_Font*0.5) andText:sexStr andFontSize:13 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5] andType:NSTextAlignmentLeft];
     sexText.userInteractionEnabled=true;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectView)];
@@ -209,6 +218,9 @@
 }
 
 -(void)createSelectView{
+    [manBtn removeFromSuperview];
+    [womenBtn removeFromSuperview];
+    
     
     manBtn =[LooperToolClass createBtnImageName:@"btn_Xman.png" andRect:CGPointMake(0, 900) andTag:3008 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: manBtn];
