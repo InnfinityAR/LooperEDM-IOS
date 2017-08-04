@@ -49,4 +49,5 @@
 -(void)sharetTicket:(NSDictionary*)ticketDic;
 
 -(void)setCalendarData;
+-(void)jumpToSaleTicketController:(NSDictionary *)dataDic;
 @end

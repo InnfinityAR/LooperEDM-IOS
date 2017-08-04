@@ -37,6 +37,8 @@
 
 #define looperFont @"PingFang SC"
 
+#define ColorRGB(x,y,z,a)  [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:a]
+
 //#define looperFont @"Helvetica"
 
 

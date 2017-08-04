@@ -154,14 +154,14 @@
     if (!_collectView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         // 设置每个item的大小，
-        flowLayout.itemSize = CGSizeMake(DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*1.8);
+        flowLayout.itemSize = CGSizeMake(DEF_WIDTH(self)/2-14, (DEF_WIDTH(self)/2-14)*2);
         //    flowLayout.itemSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
         // 设置列的最小间距
         flowLayout.minimumInteritemSpacing = 5;
         // 设置最小行间距
         flowLayout.minimumLineSpacing = 5;
         // 设置布局的内边距
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 7, 5, 7);
         // 滚动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -205,7 +205,8 @@
     }
     // 取出每个item所需要的数据
     NSDictionary *dic = [self.selectDataArr objectAtIndex:indexPath.item];
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*1.3)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self)/2-14, (DEF_WIDTH(self)/2-14)*1.5)];
+    imageView.contentMode=UIViewContentModeScaleAspectFill;
     imageView.layer.cornerRadius=5.0;
     imageView.layer.masksToBounds=YES;
     [imageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"photo"]]];
@@ -213,20 +214,18 @@
     NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
     NSInteger timeNow =(long)[datenow timeIntervalSince1970];
     if (timeNow>[dic[@"endtime"]integerValue]) {
-    UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(cell)*1.3-30*DEF_Adaptation_Font, DEF_WIDTH(self)/2-10, 30*DEF_Adaptation_Font)];
-    finishView.layer.cornerRadius=5.0;
-    finishView.layer.masksToBounds=YES;
+    UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(-1, DEF_WIDTH(cell)*1.5-30*DEF_Adaptation_Font, DEF_WIDTH(self)/2-12, 30*DEF_Adaptation_Font)];
     finishView.image=[UIImage imageNamed:@"btn_finishEnd.png"];
     [cell.contentView addSubview:finishView];
     }
-    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.3, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-14)*1.5, DEF_WIDTH(self)/2-14, (DEF_WIDTH(self)/2-14)*0.3)];
     label.text=[dic objectForKey:@"activityname"];
     label.textColor=[UIColor whiteColor];
     label.numberOfLines=2;
     [cell.contentView addSubview:label];
-        UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*1.6-10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-10, (DEF_WIDTH(self)/2-10)*0.3)];
+        UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-14)*1.8-10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)/2-14, (DEF_WIDTH(self)/2-14)*0.3)];
     [cell.contentView addSubview:bottomV];
-    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(20,  0, DEF_WIDTH(self)/2-10, 40*DEF_Adaptation_Font*0.5)];
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(20,  0, DEF_WIDTH(self)/2-14, 40*DEF_Adaptation_Font*0.5)];
     label2.text=[NSString stringWithFormat:@"%@人参加",[dic objectForKey:@"boarduser"]];
     label2.textColor=[UIColor colorWithRed:169/255.0 green:167/255.0 blue:183/255.0 alpha:1.0];
     label2.font=[UIFont systemFontOfSize:12];
@@ -234,15 +233,15 @@
     UIImageView *imageview=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, 15, 12)];
     imageview.image=[UIImage imageNamed:@"sun.png"];
     [bottomV addSubview:imageview];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-10)*0.1, 150*DEF_Adaptation_Font*0.5, 24)];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  (DEF_WIDTH(self)/2-14)*0.1, 150*DEF_Adaptation_Font*0.5, 24)];
     CGRect frame=label3.frame;
-    frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-10)*0.1);
+    frame.origin=CGPointMake(0,  (DEF_WIDTH(self)/2-14)*0.1);
     NSString *string=[[self getAStringOfChineseWord:[dic objectForKey:@"city"]]componentsJoinedByString:@","];
     string = [string stringByReplacingOccurrencesOfString:@"," withString:@""];
     label3.text=[NSString stringWithFormat:@"%@",string];
     label3.textColor=[UIColor whiteColor];
     label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
-    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-10)*0.1, 50, 20)];
+    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  (DEF_WIDTH(self)/2-14)*0.1, 50, 20)];
     label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
     label3.layer.cornerRadius=12;
     label3.layer.masksToBounds=YES;

@@ -111,6 +111,9 @@
     UIButton *liveShowBtn =[LooperToolClass createBtnImageName:@"btn_liveShow.png" andRect:CGPointMake(180, 671) andTag:8007 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: liveShowBtn];
     
+    UIButton *ticketDetailBtn =[LooperToolClass createBtnImageName:@"btn_liveShow.png" andRect:CGPointMake(180, 800) andTag:8008 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    [self addSubview: ticketDetailBtn];
+    
     
     UIButton *btnFans =[LooperToolClass createBtnImageName:@"btn_fans.png" andRect:CGPointMake(320, 477) andTag:8002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: btnFans];

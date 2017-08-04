@@ -27,7 +27,7 @@
 #import "SimpleChatViewController.h"
 #import "PhotoWallViewController.h"
 
-
+#import "SaleTicketController.h"
 
 #import "ClubDetailView.h"
 #import "BrandDetailView.h"
@@ -498,5 +498,8 @@
     [[_obj view]addSubview:view];
 }
 
-
+-(void)jumpToSaleTicketController:(NSDictionary *)dataDic{
+    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic];
+    [[self.obj navigationController]pushViewController:saleTicketVC animated:YES];
+}
 @end

@@ -48,6 +48,7 @@
 
 #import "JPUSHService.h"
 
+#import "TicketDetailView.h"
 
 @implementation MainViewModel{
 
@@ -543,8 +544,8 @@
        [self pushActivityViewController];
         
     }else if(type==ActiveBtnTag){
-//        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
-      [self pushLooperListController];
+       [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+//      [self pushLooperListController];
     }else if(type==DJBtnTag){
         [self pushActivityViewController];
         
@@ -587,7 +588,14 @@
         //我的loop
         [self createCommonView:3];
         
-    }else if(type==8007){
+    }
+    else if(type==8008){
+#warning 在这里写入订票详情
+        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
+        [[_obj view] addSubview:ticketDetailV];
+    }
+    
+    else if(type==8007){
 
         liveShowV = [[LiveShowView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
         [[_obj view] addSubview:liveShowV];
