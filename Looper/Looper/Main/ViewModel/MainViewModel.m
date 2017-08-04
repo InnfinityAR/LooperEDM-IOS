@@ -26,7 +26,6 @@
 #import <UMSocialCore/UMSocialCore.h>
 
 #import "Base64Class.h"
-
 #import "RongCloudManger.h"
 
 #import "nMainView.h"
@@ -311,13 +310,24 @@
     }];
 }
 
+
+-(void)updataMessage{
+
+    
+    [[RongCloudManger sharedManager] getConversationList];
+
+}
+
+
+
 -(void)requestData{
   
+     NSTimer*time = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updataMessage) userInfo:nil repeats:YES];
+    
     
     //[[NIMCloudMander sharedManager] initNIMSDK];
     [self requestMainData];
-    
-    
+
 }
 
 -(void)requestMainData{

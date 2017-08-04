@@ -93,8 +93,6 @@ static RongCloudManger *RongCloudMangerM=nil;
 }
 
 
-
-
 -(void)getRomotoHistoryMessage:(int)typeNum andTargetId:(NSString*)targetId andRecordTime:(long)recordTime andMessageCount:(int)Count{
     [[RCIMClient sharedRCIMClient] getRemoteHistoryMessages:ConversationType_PRIVATE targetId:targetId recordTime:recordTime count:Count success:^(NSArray *messages){
     
@@ -114,6 +112,9 @@ static RongCloudManger *RongCloudMangerM=nil;
     for (RCConversation *conversation in conversationList) {
         NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
     }
+    
+     sessionArray=[[NSMutableArray alloc]initWithArray:conversationList];
+    
     return conversationList;
 
 }

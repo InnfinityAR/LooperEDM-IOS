@@ -246,7 +246,6 @@ static NSString *cellId = @"cellId";
     
     
     NSString *hexColor = @"#aa8d6b";
-
     NSString *imgURL = [item valueForKey:@"LoopTagImage"];
     UIImageView *imgView = (UIImageView*)[cell viewWithTag:100];
     [imgView setBackgroundColor:[UIColor clearColor]];

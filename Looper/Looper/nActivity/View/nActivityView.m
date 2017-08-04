@@ -138,7 +138,7 @@
     [bannerView addSubview:TimeStr];
      [TimeStr sizeToFit];
     
-    UILabel* tagStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 560*DEF_Adaptation_Font*0.5) andSize:CGSizeMake([self getContentLength:[[_commendArray objectAtIndex:index]objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"tag"] andFontSize:9 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* tagStr = [LooperToolClass createLableView:CGPointMake(24*DEF_Adaptation_Font_x*0.5, 560*DEF_Adaptation_Font*0.5) andSize:CGSizeMake([self getContentLength:[[_commendArray objectAtIndex:index]objectForKey:@"tag"]]+30*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font_x*0.5) andText:[[_commendArray objectAtIndex:index]objectForKey:@"tag"] andFontSize:9 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [bannerView addSubview:tagStr];
     [tagStr setBackgroundColor:[UIColor colorWithRed:92/255.0 green:118/255.0 blue:148/255.0 alpha:1.0]];
     tagStr.layer.cornerRadius = 28*DEF_Adaptation_Font*0.5/2;
