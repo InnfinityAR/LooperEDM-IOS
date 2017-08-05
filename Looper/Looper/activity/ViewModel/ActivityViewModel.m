@@ -161,13 +161,17 @@
     [dic setObject:userId forKey:@"userId"];
     [dic setObject:messageID forKey:@"messageId"];
     [dic setObject:like forKey:@"like"];
-NSLog(@"%@",dic);
+    NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbActivityMessage" parameters:dic success:^(id responseObject){
+        
+        if([responseObject count]!=0){
+        
         if([responseObject[@"status"] intValue]==0){
 //            [[self.barrageView barrageInfo]removeAllObjects];
             [self getActivityInfoById:activityID andUserId:userId andPage:1 andSize:100];
         }else{
             
+        }
         }
     }fail:^{
         

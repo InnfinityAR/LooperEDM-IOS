@@ -518,8 +518,6 @@
     
 }
 
-
-
 -(void)createActivityView:(NSString*)activityId{
     
     _activityId = activityId;
@@ -529,32 +527,23 @@
     [[_obj navigationController]  pushViewController:activity animated:YES];
     
     [self performSelector:@selector(showActivityView) withObject:nil afterDelay:0.1];
-    
-
 }
 
 -(void)showActivityView{
     [activity jumpToActivityId:_activityId];
 }
 
-
-
 -(void)hudOnClick:(int)type{
 
     if(type==LopperBtnTag){
-        
-//       [self pushLooperListController];
-         [self pushNActivityViewController];
-
+        [self pushNActivityViewController];
     }else if(type==HomeBtnTag){
         [self performSelector:@selector(pushHomeController) withObject:nil afterDelay:0.3];
-        
     }else if(type==9008){
        [self pushActivityViewController];
-        
     }else if(type==ActiveBtnTag){
-//        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
-      [self pushLooperListController];
+        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+//      [self pushLooperListController];
     }else if(type==DJBtnTag){
         [self pushActivityViewController];
         
@@ -564,13 +553,10 @@
         [_activityV removeFromSuperview];
     }else if(type==ActivityFollowBtnTag){
         
-
     }else if(type==ActivityLikeBtnTag){
-        
-    
+
         
     }else if(type==createLoopBackTag){
-        
         [_createLoopV removeFromSuperview];
         
     }else if(type==103){

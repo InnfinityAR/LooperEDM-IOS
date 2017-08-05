@@ -28,6 +28,8 @@
     AVPlayerLayer *playerLayer;
     
     int num_video;
+    
+    UIButton* jumpBtn;
 
 
 }
@@ -112,14 +114,26 @@
     [[self view].layer addSublayer:playerLayer];
     [_player play];
     
-
-    UIButton* jumpBtn = [LooperToolClass createBtnImageName:@"btn_jump.png" andRect:CGPointMake(1700, 34) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    
+    jumpBtn = [LooperToolClass createBtnImageName:@"btn_jump.png" andRect:CGPointMake(1700, 34) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [[self view] addSubview:jumpBtn];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_player currentItem]];
     jumpBtn.frame=CGRectMake(1700*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.8,51*DEF_Adaptation_Font*0.8);
+    
+    [self createViewTouch];
 
 }
+
+
+-(void)createViewTouch{
+    UIView *touchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    [[self view] addSubview:touchView];
+
+
+
+}
+
 
 -(void)jumpToView{
     
@@ -139,7 +153,6 @@
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationLandscapeLeft] forKey:@"orientation"];
     //上一句话是防止手动先把设备置为竖屏,导致下面的语句失效.
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
-    
     
     
     if(num_video==1){
