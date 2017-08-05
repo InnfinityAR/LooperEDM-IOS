@@ -84,7 +84,7 @@
     cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 226*DEF_Adaptation_Font*0.5)];
-    imageView.backgroundColor=[UIColor greenColor];
+    imageView.backgroundColor=ColorRGB(72, 104, 207, 1.0);
 //        [imageView sd_setImageWithURL:[NSURL URLWithString:[activityDic objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //        }];
     [cell.contentView addSubview:imageView];
@@ -93,17 +93,17 @@
     contentLB.text=@"Looper发门票Looper发门票门票发门票,大家快来抢门票啦";
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
-    contentLB.font=[UIFont boldSystemFontOfSize:15];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize:15];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;
     [cell.contentView addSubview:contentLB];
     
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    locationLB.font=[UIFont systemFontOfSize:13];
+    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     locationLB.text=@"地点:来自二次元的你来自二次元";
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
     locationLB.frame=frame2;
@@ -112,9 +112,9 @@
     [cell.contentView addSubview:locationLB];
     
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+12*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    timeLB.font=[UIFont systemFontOfSize:13];
+    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     timeLB.text=@"时间:公元20017年5月6号";
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
     timeLB.frame=frame1;
@@ -123,9 +123,9 @@
     [cell.contentView addSubview:timeLB];
     
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+12*DEF_Adaptation_Font*0.5, 221*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    priceLB.font=[UIFont systemFontOfSize:13];
+    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     priceLB.text=@"票价:129普通票  ×1";
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
     priceLB.frame=frame3;
@@ -133,8 +133,8 @@
     priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:priceLB];
     
-    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(480*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    sumPriceLB.font=[UIFont systemFontOfSize:14];
+    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(480*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+15*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+    sumPriceLB.font=[UIFont systemFontOfSize:13];
     sumPriceLB.text=@"共计:129元";
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;

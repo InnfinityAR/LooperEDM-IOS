@@ -46,8 +46,10 @@
 
     if(button.tag==101){
         NSLog(@"我是send按钮");
-        if ([textview.text isEqualToString:@""]) {
+        
+        if ([textview.text isEqualToString:@""]||[self isEmpty:textview.text]) {
             [[DataHander sharedDataHander] showViewWithStr:@"地球人你确定不写评论吗" andTime:2 andPos:CGPointZero];
+            textview.text=@"";
         }
         else if(textview.text.length>=100){
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你评论超过100字了" andTime:2 andPos:CGPointZero];
@@ -79,8 +81,20 @@
     }
 
 }
-
-
+//对于输入框全是空格的判断
+- (BOOL) isEmpty:(NSString *) str {
+    if (!str) {
+        return true;
+    } else {
+        NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimedString = [str stringByTrimmingCharactersInSet:set];
+        if ([trimedString length] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [textview resignFirstResponder];
 }

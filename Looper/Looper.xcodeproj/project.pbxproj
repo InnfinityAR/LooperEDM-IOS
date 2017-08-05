@@ -27,6 +27,8 @@
 		B225B98B1F346B0C0008E5AF /* btn_select_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = B225B9881F346B0C0008E5AF /* btn_select_pay.png */; };
 		B225B98C1F346B0C0008E5AF /* btn_inselect_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */; };
 		B225B98D1F346B0C0008E5AF /* image_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = B225B98A1F346B0C0008E5AF /* image_pay.png */; };
+		B225B9901F35A8CE0008E5AF /* AttenceTimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B98F1F35A8CE0008E5AF /* AttenceTimelineCell.m */; };
+		B225B9921F35C9C80008E5AF /* btn_MyList.png in Resources */ = {isa = PBXBuildFile; fileRef = B225B9911F35C9C80008E5AF /* btn_MyList.png */; };
 		B28BD8231F04D170004931AF /* allShowBtn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8221F04D170004931AF /* allShowBtn.jpg */; };
 		B28BD8251F04D342004931AF /* otherUser.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8241F04D342004931AF /* otherUser.png */; };
 		B28BD8271F075FE4004931AF /* commendYes2.png in Resources */ = {isa = PBXBuildFile; fileRef = B28BD8261F075FE4004931AF /* commendYes2.png */; };
@@ -775,6 +777,9 @@
 		B225B9881F346B0C0008E5AF /* btn_select_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_select_pay.png; sourceTree = "<group>"; };
 		B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_inselect_pay.png; sourceTree = "<group>"; };
 		B225B98A1F346B0C0008E5AF /* image_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_pay.png; sourceTree = "<group>"; };
+		B225B98E1F35A8CE0008E5AF /* AttenceTimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttenceTimelineCell.h; sourceTree = "<group>"; };
+		B225B98F1F35A8CE0008E5AF /* AttenceTimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttenceTimelineCell.m; sourceTree = "<group>"; };
+		B225B9911F35C9C80008E5AF /* btn_MyList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_MyList.png; path = View/btn_MyList.png; sourceTree = "<group>"; };
 		B28BD8221F04D170004931AF /* allShowBtn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = allShowBtn.jpg; path = ../../activity/allShowBtn.jpg; sourceTree = "<group>"; };
 		B28BD8241F04D342004931AF /* otherUser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = otherUser.png; path = ../../activity/otherUser.png; sourceTree = "<group>"; };
 		B28BD8261F075FE4004931AF /* commendYes2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = commendYes2.png; path = ../../activity/commendYes2.png; sourceTree = "<group>"; };
@@ -2696,6 +2701,7 @@
 			children = (
 				C43E764B1E091D8C004A5288 /* Controller */,
 				C43E764E1E091D8C004A5288 /* Model */,
+				B225B9911F35C9C80008E5AF /* btn_MyList.png */,
 				C43E76511E091D8C004A5288 /* View */,
 				C43E76561E091D8C004A5288 /* ViewModel */,
 			);
@@ -2742,6 +2748,8 @@
 				B225B9831F34255A0008E5AF /* TicketDetailView.m */,
 				B225B9851F3449640008E5AF /* TicketLogisticsView.h */,
 				B225B9861F3449640008E5AF /* TicketLogisticsView.m */,
+				B225B98E1F35A8CE0008E5AF /* AttenceTimelineCell.h */,
+				B225B98F1F35A8CE0008E5AF /* AttenceTimelineCell.m */,
 				C4C0B60E1E8A569100B32214 /* MainChatView.h */,
 				C4C0B60F1E8A569100B32214 /* MainChatView.m */,
 				C46E7D3C1EAE235600996110 /* commonTableView.h */,
@@ -4356,6 +4364,7 @@
 				C46E7D121EADA92900996110 /* setting_title.png in Resources */,
 				C43E76FB1E091D8D004A5288 /* btn_login1.png in Resources */,
 				C43E76EA1E091D8D004A5288 /* bg_iphone_code.png in Resources */,
+				B225B9921F35C9C80008E5AF /* btn_MyList.png in Resources */,
 				C43E3D171EA607D500EA4A6E /* createLoopbtn.png in Resources */,
 				C46A692D1EB38C0200FCD5EB /* 分割线-@3x.png in Resources */,
 				C4174FC51F00DC4A00901671 /* locaton1.png in Resources */,
@@ -4745,6 +4754,7 @@
 				B2A6EE831ECAEEA0004BF416 /* NSString+MJExtension.m in Sources */,
 				C4BCE7491E091E710087E6C5 /* UIImage+RTTint.m in Sources */,
 				C4E86FA71F16474000D9658D /* PKFullScreenPlayerView.m in Sources */,
+				B225B9901F35A8CE0008E5AF /* AttenceTimelineCell.m in Sources */,
 				C4C0ECD31F250B4500140E5A /* XHCacheManager.m in Sources */,
 				C407B0DB1E4C99100067801F /* LooperScorllLayer.m in Sources */,
 				C4E86FAA1F16474000D9658D /* PKPlayerView.m in Sources */,

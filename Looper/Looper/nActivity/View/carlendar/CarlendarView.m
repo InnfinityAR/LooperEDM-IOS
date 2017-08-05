@@ -174,7 +174,7 @@
     UIButton *goDownBtn = [LooperToolClass createBtnImageNameReal:@"btn_goDown.png" andRect:CGPointMake(DEF_WIDTH(self)-250*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
     //    goBackBtn.backgroundColor=[UIColor redColor];
     [self addSubview:goDownBtn];
-    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, self.bounds.size.width-400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(230*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, self.bounds.size.width-460*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     self.topLabel.textAlignment=NSTextAlignmentCenter;
     self.topLabel.backgroundColor=[UIColor colorWithRed:47/255.0 green:50/255.0 blue:101/255.0 alpha:1.0];
     self.topLabel.font= [UIFont fontWithName:@"STHeitiTC-Light" size:18.f];

@@ -44,7 +44,7 @@
     self.backgroundColor=[UIColor whiteColor];
     NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
     
-    UIScrollView *contentScrol=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-196*DEF_Adaptation_Font*0.5)];
+    UIScrollView *contentScrol=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-196*DEF_Adaptation_Font*0.5)];
     self.contentScroll=contentScrol;
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapScrollView)];
     [contentScrol addGestureRecognizer:tap];
@@ -52,17 +52,16 @@
     [self addSubview:contentScrol];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5, 560*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    contentLB.text=@"Looper发门票Looper发门票门票发门票,大家快来抢门票啦";
+    contentLB.text=@"Looper发门票Looper发门票............";
     contentLB.textColor=[UIColor whiteColor];
-    contentLB.numberOfLines=0;
-    contentLB.font=[UIFont boldSystemFontOfSize:15];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize:17];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;
     [contentScrol addSubview:contentLB];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+14*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+19*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
     imageView.backgroundColor=[UIColor greenColor];
     if( [activityDic objectForKey:@"photo"]!=nil) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:[activityDic objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -74,9 +73,9 @@
     locationLV.image=[UIImage imageNamed:@"locaton.png"];
     [contentScrol addSubview:locationLV];
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    locationLB.font=[UIFont systemFontOfSize:13];
+    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     locationLB.text=@"地点:来自二次元的你来自二次元";
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
     locationLB.frame=frame2;
@@ -88,9 +87,9 @@
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    timeLB.font=[UIFont systemFontOfSize:13];
+    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     timeLB.text=@"时间:公元20017年5月6号";
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
     timeLB.frame=frame1;
@@ -102,9 +101,9 @@
     priceLV.image=[UIImage imageNamed:@"ticket.png"];
     [contentScrol addSubview:priceLV];
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    priceLB.font=[UIFont systemFontOfSize:13];
+    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     priceLB.text=@"票价:129普通票  ×1";
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
     priceLB.frame=frame3;
@@ -121,10 +120,11 @@
     
     UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
     lineIV.image=[UIImage imageNamed:@"cutoffLine.png"];
+    lineIV.alpha=0.5;
     [contentScrol addSubview:lineIV];
     
     UILabel *deliveryLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV)+40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-    deliveryLB.font=[UIFont systemFontOfSize:14];
+    deliveryLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     deliveryLB.text=@"实体票配送";
     deliveryLB.textColor=ColorRGB(223, 219, 234, 1.0);
     deliveryLB.textAlignment=NSTextAlignmentLeft;
@@ -196,7 +196,7 @@
     [contentScrol addSubview:lineIV6];
     
     UILabel *payWayLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV6)+50*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-    payWayLB.font=[UIFont systemFontOfSize:14];
+    payWayLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     payWayLB.text=@"支付方式";
     payWayLB.textColor=ColorRGB(223, 219, 234, 1.0);
     payWayLB.textAlignment=NSTextAlignmentLeft;
@@ -215,17 +215,18 @@
     
     UIButton *payEnsureBtn=[LooperToolClass createBtnImageNameReal:@"btn_inselect_pay.png" andRect:CGPointMake(555*DEF_Adaptation_Font*0.5, DEF_Y(payWayLB)+54*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_select_pay.png" andClickImage:@"btn_select_pay.png" andTextStr:nil andSize:CGSizeMake(72*DEF_Adaptation_Font*0.5, 72*DEF_Adaptation_Font*0.5) andTarget:self];
     [contentScrol addSubview:payEnsureBtn];
+    [payEnsureBtn setSelected:YES];
     self.paySureBtn=payEnsureBtn;
     
     UILabel *payTicketLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payIV)+102*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-    payTicketLB.font=[UIFont systemFontOfSize:14];
+    payTicketLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     payTicketLB.text=@"购票须知";
     payTicketLB.textColor=ColorRGB(223, 219, 234, 1.0);
     payTicketLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:payTicketLB];
     
     UILabel *payTicketDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payTicketLB)+42*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 222*DEF_Adaptation_Font*0.5)];
-    payTicketDetailLB.font=[UIFont systemFontOfSize:14];
+    payTicketDetailLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     payTicketDetailLB.text=@" 我们时常需要在软件中点击空白处然后显示或者隐藏导航栏，工具栏，Tab时。如果 在UIView中这个很容易实现，将view的Custom Class 由UIVIew更改为UIControl，就可以发现View和Button一样拥有了事件响应，但是在UIScrollView中该方法就行不通了，这时就需要使用NSNotification在类与类之间实现通信。";
     payTicketDetailLB.numberOfLines=0;
     payTicketDetailLB.textColor=ColorRGB(223, 219, 234, 1.0);
@@ -342,6 +343,7 @@
         if (button.selected==YES) {
             [button setSelected:NO];
              [button setTitleColor:ColorRGB(255, 255, 255, 0.36) forState:UIControlStateNormal];
+            [self openCountdown];
         }
     }if (tag==102) {
         if (button.selected==YES) {
@@ -356,6 +358,38 @@
                 }
         }
     }
+}
+// 开启倒计时效果
+-(void)openCountdown{
+    
+    __block NSInteger time = 59; //倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(time <= 0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //设置按钮的样式
+                [self.sendCodeBtn setTitle:@"重新发送" forState:UIControlStateSelected];
+                [self.sendCodeBtn setTitleColor:ColorRGB(55,135, 145, 1.0) forState:UIControlStateSelected];
+                [self.sendCodeBtn setSelected:YES];
+                self.sendCodeBtn.userInteractionEnabled = YES;
+            });
+        }else{
+            int seconds = time % 60;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.sendCodeBtn setSelected:NO];
+                //设置按钮显示读秒效果
+                [self.sendCodeBtn setTitle:[NSString stringWithFormat:@"重新发送(%.2d)", seconds] forState:UIControlStateNormal];
+                [self.sendCodeBtn setTitleColor:ColorRGB(255, 255, 255, 0.36) forState:UIControlStateNormal];
+                self.sendCodeBtn.userInteractionEnabled = NO;
+            });
+            time--;
+        }
+    });
+    dispatch_resume(_timer);
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField.tag==100) {
@@ -378,12 +412,31 @@
     return YES;
 }
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-     textField.text=@"";
+     textField.returnKeyType=UIReturnKeyNext;
+    if (textField.tag==99) {
+        if ( [textField.text  isEqualToString:@"姓名"]) {
+            textField.text=@"";
+        }
+    }if (textField.tag==100) {
+        if ( [textField.text  isEqualToString:@"手机号"]) {
+            textField.text=@"";
+        }
+    }if (textField.tag==101) {
+        if ( [textField.text  isEqualToString:@"短信验证码"]) {
+            textField.text=@"";
+        }
+    }if (textField.tag==102) {
+        if ( [textField.text  isEqualToString:@"邮编地址"]) {
+            textField.text=@"";
+        }
+    }
+
     self.currentTextField=textField;
     if (textField.tag==102) {
         CGPoint position = CGPointMake(0, 90*DEF_Adaptation_Font);
         [self.contentScroll setContentOffset:position animated:YES];
     }
+     textField.textColor=[UIColor whiteColor];
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField.text isEqualToString:@""]) {
@@ -396,6 +449,7 @@
         }if (textField.tag==102) {
             textField.text=@"邮编地址";
         }
+        textField.textColor=ColorRGB(255, 255, 255, 0.36);
     }
     if (textField.tag==102) {
         CGPoint position = CGPointMake(0, 0);
@@ -408,6 +462,7 @@
     self.currentTextView=textView;
     if ([textView.text isEqualToString:@"收货地址"]) {
     textView.text=@"";
+        textView.textColor=[UIColor whiteColor];
     }
 }
 -(void)textViewDidEndEditing:(UITextView *)textView{
@@ -415,6 +470,7 @@
     [self.contentScroll setContentOffset:position animated:YES];
     if ([textView.text isEqualToString:@""]) {
         textView.text=@"收货地址";
+         textView.textColor=ColorRGB(255, 255, 255, 0.36);
     }
 }
 //验证 ：验证请求的是手机号
