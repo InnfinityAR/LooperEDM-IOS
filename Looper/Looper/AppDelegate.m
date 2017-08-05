@@ -26,7 +26,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UMMobClick/MobClick.h>
 #import "nActivityViewController.h"
-
+#import "SaleTicketController.h"
 
 
 #import <Foundation/Foundation.h>
@@ -220,7 +220,15 @@ void uncaughtExceptionHandler(NSException *exception) {
 
         [self.window makeKeyAndVisible];
     }
-
+//    SaleTicketController *start = [SaleTicketController alloc];
+//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+//    nav.delegate = self;
+//    nav.navigationBar.hidden = YES;
+//    nav.interactivePopGestureRecognizer.enabled = YES;
+//    self.window.rootViewController = nav;
+//    [self.window makeKeyAndVisible];
+    
+    
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;

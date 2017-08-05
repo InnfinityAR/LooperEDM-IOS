@@ -13,7 +13,6 @@
 #import "LooperToolClass.h"
 #import "DataHander.h"
 
-
 @implementation ActivityDetailView{
     UIScrollView *bkScroll;
 
@@ -99,8 +98,25 @@
     [self addSubview:titleLabel];
     
     titleLabel.hidden=true;
-    
+#warning-在这里进行是否进行抽奖的判断
+    if (/* DISABLES CODE */ (1)) {
+        UIImageView *shadowIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-140*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 46*DEF_Adaptation_Font*0.5)];
+        shadowIV.image=[UIImage imageNamed:@"shadow_pay_liveshow.png"];
+        [self addSubview:shadowIV];
+        gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,925*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor colorWithRed:47/255.0 green:168/255.0 blue:255.0/255.0 alpha:1.0]];
+        UIView *payBtnView=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-94*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 94*DEF_Adaptation_Font*0.5)];
+        payBtnView.backgroundColor=[UIColor whiteColor];
+        [self addSubview:payBtnView];
+        UIButton *payBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(36*DEF_Adaptation_Font*0.5, 14*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+        [payBtn setTitle:@"立即购买" forState:(UIControlStateNormal)];
+        [payBtn setTintColor:[UIColor whiteColor]];
+        payBtn.backgroundColor=ColorRGB(42, 195, 192, 1.0);
+        payBtn.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
+        payBtn.layer.masksToBounds=YES;
+        [payBtnView addSubview:payBtn];
+    }else{
     gooeyMenu = [[KYGooeyMenu alloc]initWithOrigin:CGPointMake(550*DEF_Adaptation_Font*0.5,1025*DEF_Adaptation_Font*0.5) andDiameter:40.0f andDelegate:self themeColor:[UIColor colorWithRed:47/255.0 green:168/255.0 blue:255.0/255.0 alpha:1.0]];
+    }
     gooeyMenu.menuDelegate = self;
     gooeyMenu.radius = 20;//大圆的1/4
     gooeyMenu.extraDistance = 45;
@@ -567,7 +583,10 @@
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    
+    if (button.tag==100) {
+        //payBtn
+        [self.obj jumpToSaleTicketController:activityDic];
+    }
     if(button.tag==101){
         [self removeFromSuperview];
     }else if(button.tag==102){
