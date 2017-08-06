@@ -28,6 +28,8 @@
 @property(nonatomic,strong)UIButton *currentPriceBtn;
 
 @property(nonatomic,strong)UIButton *payBtn;
+
+@property(nonatomic,strong)UIButton *subBtn;
 @end
 @implementation SaleTicketView
 -(NSMutableArray *)priceBtnWidthArr{
@@ -75,25 +77,33 @@
     contentLB.text=[activityDic objectForKey:@"activityname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
-    contentLB.font=[UIFont systemFontOfSize:16];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-260*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize:18];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-260*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;
     [self addSubview:contentLB];
-    UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(230*DEF_Adaptation_Font*0.5, 216*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+    UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(230*DEF_Adaptation_Font*0.5, 222*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     locationLV.image=[UIImage imageNamed:@"locaton.png"];
     [self addSubview:locationLV];
-    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(264*DEF_Adaptation_Font*0.5, 216*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-      locationLB.font=[UIFont systemFontOfSize:13];
+    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(264*DEF_Adaptation_Font*0.5, 220*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+      locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     locationLB.text=[activityDic objectForKey:@"location"];
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
     locationLB.frame=frame2;
     locationLB.numberOfLines=0;
     locationLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [self addSubview:locationLB];
+    
+    UILabel *moneyLB=[[UILabel alloc]initWithFrame:CGRectMake(240*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    moneyLB.font=[UIFont boldSystemFontOfSize:16];
+    moneyLB.text=@"￥ 258-1258";
+    moneyLB.textColor=ColorRGB(223, 219, 234, 1.0);
+    [self addSubview:moneyLB];
+    
+    
     UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, 405*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
     lineIV.image=[UIImage imageNamed:@"cutoffLine.png"];
     [self addSubview:lineIV];
@@ -109,7 +119,7 @@
     timeIV.image=[UIImage imageNamed:@"selectTime.png"];
     [contentSelectView addSubview:timeIV];
 //使按钮可以平铺。如果右边距离不够自动切换到下一行
-    for (int i=0; i<2; i++) {
+    for (int i=0; i<1; i++) {
   UIButton *timeBtn=[self publishButton:@"2017-8月5号" andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5+_currentTimeY) andTag:i];
     [contentSelectView addSubview:timeBtn];
     CGFloat width = [@"2017-8月5号" sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:timeBtn.titleLabel.font.fontName size:timeBtn.titleLabel.font.pointSize]}].width+50*DEF_Adaptation_Font;
@@ -139,7 +149,7 @@
     priceIV.image=[UIImage imageNamed:@"selectPrice.png"];
     [contentSelectView addSubview:priceIV];
 //使按钮可以平铺。如果右边距离不够自动切换到下一行
-    for (int i=0; i<2; i++) {
+    for (int i=0; i<1; i++) {
         UIButton *priceBtn=[self publishButton:@"$189普通票" andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 255*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY) andTag:i+200];
         [contentSelectView addSubview:priceBtn];
         CGFloat width = [@"$189普通票" sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:priceBtn.titleLabel.font.fontName size:priceBtn.titleLabel.font.pointSize]}].width+50*DEF_Adaptation_Font;
@@ -169,29 +179,39 @@
     UIImageView *numberIV=[[UIImageView alloc]initWithFrame:CGRectMake(37*DEF_Adaptation_Font*0.5, 375*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY, 84*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     numberIV.image=[UIImage imageNamed:@"selectNumber.png"];
     [contentSelectView addSubview:numberIV];
-    UIView *selectNumberV=[[UIView alloc]initWithFrame:CGRectMake(35*DEF_Adaptation_Font*0.5, 425*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY, 140*DEF_Adaptation_Font, 80*DEF_Adaptation_Font*0.5)];
+    UIView *selectNumberV=[[UIView alloc]initWithFrame:CGRectMake(35*DEF_Adaptation_Font*0.5, 425*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY, 95*DEF_Adaptation_Font, 56*DEF_Adaptation_Font*0.5)];
     selectNumberV.layer.masksToBounds = YES;
     selectNumberV.layer.borderWidth = 1;
     selectNumberV.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     selectNumberV.layer.cornerRadius = 3;
     [contentSelectView addSubview:selectNumberV];
-    UIButton *addBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 0) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 80*DEF_Adaptation_Font*0.5,  80*DEF_Adaptation_Font*0.5) andTarget:self];
-    [addBtn setTitle:@"+" forState:(UIControlStateNormal)];
+    UIButton *addBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 0) andTag:104 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 56*DEF_Adaptation_Font*0.5,  56*DEF_Adaptation_Font*0.5) andTarget:self];
+    self.subBtn=addBtn;
+    [addBtn setTitle:@"-" forState:(UIControlStateNormal)];
+     [addBtn setFont:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f]];
     [addBtn setTintColor:[UIColor whiteColor]];
     addBtn.layer.borderWidth = 1;
     addBtn.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     [selectNumberV addSubview:addBtn];
-    UIButton *subBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(selectNumberV)-80*DEF_Adaptation_Font*0.5, 0) andTag:104 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 80*DEF_Adaptation_Font*0.5,  80*DEF_Adaptation_Font*0.5) andTarget:self];
-    [subBtn setTitle:@"-" forState:(UIControlStateNormal)];
+    UIButton *subBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(selectNumberV)-56*DEF_Adaptation_Font*0.5, 0) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake( 56*DEF_Adaptation_Font*0.5,  56*DEF_Adaptation_Font*0.5) andTarget:self];
+    [subBtn setTitle:@"+" forState:(UIControlStateNormal)];
+    [subBtn setFont:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f]];
     [subBtn setTintColor:[UIColor whiteColor]];
     subBtn.layer.borderWidth = 1;
     subBtn.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     [selectNumberV addSubview:subBtn];
-    self.numberLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(selectNumberV)/2-40*DEF_Adaptation_Font*0.5, 0,  80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+    self.numberLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(selectNumberV)/2-28*DEF_Adaptation_Font*0.5, 0,  56*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font*0.5)];
     self.numberLB.textColor=[UIColor whiteColor];
     self.numberLB.text=[NSString stringWithFormat:@"%ld",payNumber];
     self.numberLB.textAlignment=NSTextAlignmentCenter;
     [selectNumberV addSubview:self.numberLB];
+    if (payNumber<=1) {
+        [addBtn setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
+    }else{
+        [addBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    }
+    
+    
 //修改scrollV的contentSize
     contentSelectView.contentSize=CGSizeMake( DEF_WIDTH(self), 530*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY);
     self.payBtn=[self creatButton:@"立即购买" andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
@@ -277,15 +297,22 @@
         //add
         payNumber++;
         self.numberLB.text=[NSString stringWithFormat:@"%ld",payNumber];
+        if (payNumber>1) {
+         [self.subBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        }
     }
     if (tag==104) {
       //  sub
         payNumber--;
         self.numberLB.text=[NSString stringWithFormat:@"%ld",payNumber];
-        if (payNumber<=0) {
-            self.numberLB.text=@"0";
-            payNumber=0;
+        if (payNumber<=1) {
+            self.numberLB.text=@"1";
+            payNumber=1;
+            [button setTitleColor:[UIColor lightGrayColor] forState:(UIControlStateNormal)];
+        }else{
+            [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         }
+
     }
     if (tag==105) {
         //pay

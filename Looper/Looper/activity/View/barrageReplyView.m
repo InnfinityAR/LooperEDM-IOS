@@ -17,7 +17,7 @@
 #define TAGBUTTON 10000
 @interface barrageReplyView()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    UITextField  *_textField;
+    
     UIButton *_sendButton;
     BOOL isHeader;
     //总共有多少回复
@@ -87,6 +87,7 @@
     self.replyArr=dataArr;
     [self calculateHeightArr];
     self.sendPerson=sendPerson;
+    self.textField.text=@"";
     numberLB.text=[NSString stringWithFormat:@"共%ld条回复",self.replyArr.count];
     [self.tableView reloadData];
 }
@@ -462,8 +463,12 @@
         [self endEditing:false];
         if (![_textField.text isEqualToString:@""]) {
             NSDictionary *buddleDic=[NSDictionary dictionary];
-                buddleDic=_replyArr[indexPath.row];
-                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+            buddleDic=_replyArr[indexPath.row];
+            _textField.text=[NSString stringWithFormat:@"@%@",[buddleDic objectForKey:@"username" ]];
+            _textField.tag=indexPath.row;
+//            NSDictionary *buddleDic=[NSDictionary dictionary];
+//                buddleDic=_replyArr[indexPath.row];
+//                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
         }else{
             NSDictionary *buddleDic=[NSDictionary dictionary];
             buddleDic=_replyArr[indexPath.row];

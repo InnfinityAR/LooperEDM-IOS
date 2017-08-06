@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface barrageReplyView : UIView
+@property(nonatomic,strong)UITextField *textField;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andIndex:(NSInteger)index andViewModel:(id)viewModel andActivityID:(NSString *)activityID;
 -(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andSendPerson:(NSString *)sendPerson;
 @property(nonatomic,strong)id obj;

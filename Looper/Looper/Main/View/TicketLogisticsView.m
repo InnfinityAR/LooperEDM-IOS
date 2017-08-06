@@ -11,8 +11,11 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
-@interface TicketLogisticsView()<UIScrollViewDelegate,UIWebViewDelegate>
+#import "AttenceTimelineCell.h"
+@interface TicketLogisticsView()<UIScrollViewDelegate>
 @property(nonatomic,strong)UIScrollView *contentScroll;
+
+@property(nonatomic,strong)UITableView *logiDetailView;
 @end
 @implementation TicketLogisticsView
 
@@ -43,8 +46,8 @@
     contentLB.text=@"Looper发门票Looper发门票门票发门票,大家快来抢门票啦";
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
-    contentLB.font=[UIFont boldSystemFontOfSize:16];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:16]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize: 16];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;
@@ -58,9 +61,9 @@
     locationLV.image=[UIImage imageNamed:@"locaton.png"];
     [contentScrol addSubview:locationLV];
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    locationLB.font=[UIFont systemFontOfSize:13];
+    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     locationLB.text=@"地点:来自二次元的你来自二次元";
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
     locationLB.frame=frame2;
@@ -72,9 +75,9 @@
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    timeLB.font=[UIFont systemFontOfSize:13];
+    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     timeLB.text=@"时间:公元20017年5月6号";
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
     timeLB.frame=frame1;
@@ -86,9 +89,9 @@
     priceLV.image=[UIImage imageNamed:@"ticket.png"];
     [contentScrol addSubview:priceLV];
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    priceLB.font=[UIFont systemFontOfSize:13];
+    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     priceLB.text=@"票价:129普通票  ×1";
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
     priceLB.frame=frame3;
@@ -108,14 +111,14 @@
     [contentScrol addSubview:lineIV];
 
     UILabel *deliveryLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV)+40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    deliveryLB.font=[UIFont systemFontOfSize:16];
+    deliveryLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
     deliveryLB.text=@"个人详情";
     deliveryLB.textColor=ColorRGB(212, 215, 230, 1.0);
     deliveryLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:deliveryLB];
     
     UILabel *tradingCardLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(deliveryLB)+65*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    tradingCardLB.font=[UIFont systemFontOfSize:14];
+    tradingCardLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     tradingCardLB.text=@"交易单号：2828282828";
     tradingCardLB.textColor=[UIColor whiteColor];
     tradingCardLB.textAlignment=NSTextAlignmentLeft;
@@ -125,7 +128,7 @@
     [contentScrol addSubview:tradingCardLB];
     
     UILabel *tradingNameLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(tradingCardLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    tradingNameLB.font=[UIFont systemFontOfSize:14];
+    tradingNameLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     tradingNameLB.text=@"收货人： 叶伟达";
     tradingNameLB.textColor=[UIColor whiteColor];
     tradingNameLB.textAlignment=NSTextAlignmentLeft;
@@ -135,7 +138,7 @@
     [contentScrol addSubview:tradingNameLB];
     
     UILabel *tradingPhoneLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(tradingNameLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    tradingPhoneLB.font=[UIFont systemFontOfSize:14];
+    tradingPhoneLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     tradingPhoneLB.text=@"手机号： 15755361985";
     tradingPhoneLB.textColor=[UIColor whiteColor];
     tradingPhoneLB.textAlignment=NSTextAlignmentLeft;
@@ -150,14 +153,14 @@
     tradingAddressLB.numberOfLines=0;
     tradingAddressLB.textColor=[UIColor whiteColor];
     tradingAddressLB.textAlignment=NSTextAlignmentLeft;
-    CGSize lblSize5 = [tradingAddressLB.text boundingRectWithSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+    CGSize lblSize5 = [tradingAddressLB.text boundingRectWithSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f]} context:nil].size;
     CGRect frame5=tradingAddressLB.frame;
     frame5.size.height=lblSize5.height+16*DEF_Adaptation_Font*0.5;
     tradingAddressLB.frame=frame5;
 //改变字体行间距
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineSpacing = 16*DEF_Adaptation_Font*0.5;
-    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@0.1f};
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f], NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@0.1f};
 //改变部分字体颜色
     NSMutableAttributedString *str4= [[NSMutableAttributedString alloc] initWithString:tradingAddressLB.text attributes:dic];
     [str4 addAttribute:NSForegroundColorAttributeName value:ColorRGB(212, 215, 230, 1.0) range:NSMakeRange(0,5)];
@@ -169,14 +172,14 @@
     [contentScrol addSubview:lineIV2];
     
     UILabel *logisticsLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV2)+40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    logisticsLB.font=[UIFont systemFontOfSize:16];
+    logisticsLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
     logisticsLB.text=@"物流详情";
     logisticsLB.textColor=ColorRGB(212, 215, 230, 1.0);
     logisticsLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:logisticsLB];
     
     UILabel *logiCardLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logisticsLB)+65*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    logiCardLB.font=[UIFont systemFontOfSize:14];
+    logiCardLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     logiCardLB.text=@"快递单号：2828282828";
     logiCardLB.textColor=[UIColor whiteColor];
     logiCardLB.textAlignment=NSTextAlignmentLeft;
@@ -186,7 +189,7 @@
     [contentScrol addSubview:logiCardLB];
     
     UILabel *logiCompanyLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logiCardLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    logiCompanyLB.font=[UIFont systemFontOfSize:14];
+    logiCompanyLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     logiCompanyLB.text=@"快递公司： 顺丰速运";
     logiCompanyLB.textColor=[UIColor whiteColor];
     logiCompanyLB.textAlignment=NSTextAlignmentLeft;
@@ -196,32 +199,85 @@
     [contentScrol addSubview:logiCompanyLB];
     
     UILabel *logiDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logiCompanyLB)+55*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    logiDetailLB.font=[UIFont systemFontOfSize:14];
+    logiDetailLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     logiDetailLB.text=@"物流详情";
     logiDetailLB.textColor=ColorRGB(212, 215, 230, 1.0);
     logiDetailLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:logiDetailLB];
     
-    UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, DEF_Y(logiDetailLB)+55*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_WIDTH(self))];
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    webView.delegate=self;
-    [contentScrol addSubview: webView];
-    [webView loadRequest:request];
-    self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(webView)+DEF_HEIGHT(webView));
+    self.logiDetailView=[[UITableView alloc]initWithFrame:CGRectMake(0, DEF_Y(logiDetailLB)+55*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self))];
+    self.logiDetailView.backgroundColor=[UIColor clearColor];
+    self.logiDetailView.delegate=self;
+    self.logiDetailView.dataSource=self;
+    self.logiDetailView.showsVerticalScrollIndicator = NO;
+    self.logiDetailView.separatorStyle = NO;
+    //取消button点击延迟
+    self.logiDetailView.delaysContentTouches = NO;
+    self.logiDetailView.alwaysBounceVertical=YES;
+    [self.logiDetailView registerClass:[AttenceTimelineCell class] forCellReuseIdentifier:@"Cell"];
+    [contentScrol addSubview:self.logiDetailView];
+    self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(self.logiDetailView)+DEF_HEIGHT(self.logiDetailView));
 }
-- (void) webViewDidFinishLoad:(UIWebView *)webView{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    webView.scrollView.bounces=NO;
-    CGRect frame = webView.frame;
-    //webView的宽度
-    frame.size = CGSizeMake(DEF_WIDTH(self), 0);
-    webView.frame = frame;
-    float content_height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] floatValue];
-    frame = webView.frame;
-    //webView的宽度和高度
-    frame.size = CGSizeMake(DEF_WIDTH(self), content_height);
-    webView.frame = frame;
-    self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(webView)+DEF_HEIGHT(webView));
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+     return dataSourceArr.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    AttenceTimelineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.backgroundColor=[UIColor clearColor];
+    cell.contentView.backgroundColor=[UIColor clearColor];
+    cell.accessoryType=UITableViewCellStyleDefault;
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    bool isFirst = indexPath.row == 0;
+//    bool isLast = indexPath.row == dataSourceArr.count - 1;
+  UIView  *verticalLineTopView = [[UIView alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font, 0, 1, 16*DEF_Adaptation_Font)];
+    verticalLineTopView.backgroundColor = ColorRGB(97, 97, 97, 1.0);
+    [cell.contentView addSubview:verticalLineTopView];
+    UILabel *showLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font, 10*DEF_Adaptation_Font, DEF_WIDTH(self)-40*DEF_Adaptation_Font, 40)];
+    showLB.text= dataSourceArr[dataSourceArr.count - 1 - indexPath.row];
+    showLB.numberOfLines = 0;
+    showLB.textColor=[UIColor whiteColor];
+    showLB.textAlignment=NSTextAlignmentLeft;
+    showLB.font=[UIFont systemFontOfSize:15];
+    CGSize lblSize = [showLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-40*DEF_Adaptation_Font, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} context:nil].size;
+    CGRect frame=showLB.frame;
+    frame.size.height=lblSize.height;
+    showLB.frame=frame;
+    [cell.contentView addSubview:showLB];
+    UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(DotViewCentX - VerticalLineWidth/2.0 + 20*DEF_Adaptation_Font, showLB.frame.origin.y+showLB.frame.size.height+5*DEF_Adaptation_Font, ShowLabWidth, 10*DEF_Adaptation_Font)];
+    timeLabel.text=@"2017年10月1日";
+    timeLabel.textColor=[UIColor lightGrayColor];
+    timeLabel.font=[UIFont systemFontOfSize:13];
+    [cell.contentView addSubview:timeLabel];
+    UIView  *verticalLineBottomView = [[UIView alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font, 16*DEF_Adaptation_Font, 1,DEF_HEIGHT(showLB)+40*DEF_Adaptation_Font)];
+    verticalLineBottomView.backgroundColor =  ColorRGB(97, 97, 97, 1.0);
+    [cell.contentView addSubview:verticalLineBottomView];
+    UIView  *dotView = [[UIView alloc] initWithFrame:CGRectMake(16*DEF_Adaptation_Font, 12*DEF_Adaptation_Font,  8*DEF_Adaptation_Font,  8*DEF_Adaptation_Font)];
+    dotView.backgroundColor = [UIColor greenColor];
+    dotView.layer.cornerRadius = 4*DEF_Adaptation_Font;
+    [cell.contentView addSubview:dotView];
+    //设置最上面和最下面是否隐藏
+    if (indexPath.row==0) {
+        verticalLineTopView.hidden = YES;
+    }else{
+    verticalLineTopView.hidden = NO;
+    }if (indexPath.row==dataSourceArr.count-1) {
+        verticalLineBottomView.hidden = YES;
+    }
+    //判断是否是第一个（是第一个更改背景色）
+    dotView.backgroundColor = isFirst ? [UIColor greenColor] : [UIColor lightGrayColor];
+    CGRect frame2=dotView.frame;
+    frame2.size.width=6*DEF_Adaptation_Font;
+    frame2.size.height=6*DEF_Adaptation_Font;
+    frame2.origin.x=17*DEF_Adaptation_Font;
+    dotView.frame=isFirst? dotView.frame:frame2;
+
+    return cell;
+}
+//设置cell的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+   return [AttenceTimelineCell cellHeightWithString:dataSourceArr[dataSourceArr.count - 1 - indexPath.row] isContentHeight:NO]+15*DEF_Adaptation_Font;
+    
+    
 }
 
 
