@@ -49,6 +49,17 @@
     [_player play];
 }
 
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"videoStop" object:nil];
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"videoResume" object:nil];
+
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -114,14 +125,12 @@
     [[self view].layer addSublayer:playerLayer];
     [_player play];
     
-    
     jumpBtn = [LooperToolClass createBtnImageName:@"btn_jump.png" andRect:CGPointMake(1700, 34) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [[self view] addSubview:jumpBtn];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_player currentItem]];
     jumpBtn.frame=CGRectMake(1700*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.8,51*DEF_Adaptation_Font*0.8);
     
-    [self createViewTouch];
 
 }
 

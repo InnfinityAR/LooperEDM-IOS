@@ -98,8 +98,14 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getChatMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             
+            if(responseObject[@"data"]!=nil){
+                  [self ReceiveMessageArray:responseObject[@"data"]];
             
-            [self ReceiveMessageArray:responseObject[@"data"]];
+            }else{
+                [self popController];
+            
+            }
+
             
         }else{
            

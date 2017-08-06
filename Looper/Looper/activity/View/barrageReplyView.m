@@ -130,6 +130,10 @@
 //            buddleDic=_dataArr[self.index-1];
 //        }
 //        [self.viewModel getActivityInfoById:self.activityID andUserId:[LocalDataMangaer sharedManager].uid];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
         [self removeFromSuperview];
     }
     if (button.tag==-1) {
@@ -455,7 +459,7 @@
         [_textField resignFirstResponder];
     }
     else{
-        [_textField becomeFirstResponder];
+        [self endEditing:false];
         if (![_textField.text isEqualToString:@""]) {
             NSDictionary *buddleDic=[NSDictionary dictionary];
                 buddleDic=_replyArr[indexPath.row];

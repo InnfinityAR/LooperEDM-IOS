@@ -395,11 +395,23 @@
 
 -(void)pushControllerToUser:(NSDictionary*)dic{
     
-    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
-    [simpleC chatTargetID:dic];
-   // [_obj presentViewController:simpleC animated:NO completion:nil];
     
-     [[_obj navigationController]  pushViewController:simpleC animated:YES];
+    if([[dic objectForKey:@"userid"] isEqualToString:[LocalDataMangaer sharedManager].uid]!=true){
+        
+        SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+        [simpleC chatTargetID:dic];
+        // [_obj presentViewController:simpleC animated:NO completion:nil];
+        
+        [[_obj navigationController]  pushViewController:simpleC animated:YES];
+        
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"不能和自己聊天" andTime:2 andPos:CGPointZero];
+        
+    }
+
+    
+    
+  
 }
 
 -(void)LocalPhoto
@@ -543,11 +555,8 @@
     }else if(type==9008){
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
-<<<<<<< HEAD
-        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
-=======
        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
->>>>>>> ce0b5156f1c462322799d3484eea633201e83a52
+
 //      [self pushLooperListController];
     }else if(type==DJBtnTag){
         [self pushActivityViewController];

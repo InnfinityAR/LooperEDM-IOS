@@ -166,6 +166,8 @@
 
 -(void)createPlayerView:(int)PlayerId{
     
+    [_playerInfoV removeFromSuperview];
+    
     if(PlayerId!=[[LocalDataMangaer sharedManager].uid intValue]){
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
@@ -177,6 +179,9 @@
         [[_obj view] addSubview:_playerInfoV];
         [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
             if([responseObject[@"status"] intValue]==0){
+                
+                
+                NSLog(@"222222222");
                 [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
             }else{
                 

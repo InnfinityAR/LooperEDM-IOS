@@ -62,9 +62,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(_typeView==1){
-        return 94*DEF_Adaptation_Font*0.5;
+        return 99*DEF_Adaptation_Font*0.5;
     }else if(_typeView==2){
-        return 94*DEF_Adaptation_Font*0.5;
+        return 99*DEF_Adaptation_Font*0.5;
     }else if(_typeView==3){
         return 162*DEF_Adaptation_Font*0.5;
     }else if(_typeView==4){
@@ -134,9 +134,6 @@
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
         [loopHead addGestureRecognizer:singleTap];
 
-        
-        
-        
         UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(128, 93) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
         
@@ -163,9 +160,7 @@
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
         [loopHead addGestureRecognizer:singleTap];
 
-        
-        
-        
+
         UIImageView * lineV1=[LooperToolClass createImageView:@"bg_line.png" andRect:CGPointMake(128, 93) andTag:100 andSize:CGSizeZero andIsRadius:false];
         [cell.contentView addSubview:lineV1];
         

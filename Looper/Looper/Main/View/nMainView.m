@@ -132,7 +132,7 @@
 
 -(void)updataHeadImage{
     [looperImage  sd_setImageWithURL:[NSURL URLWithString:[LocalDataMangaer sharedManager].HeadImageUrl]];
-    }
+}
 
 
 -(void)createBackGround{

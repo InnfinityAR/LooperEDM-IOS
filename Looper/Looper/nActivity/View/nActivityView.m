@@ -28,6 +28,7 @@
     NSArray *_allArray;
     UIButton * tripBtn;
     UIButton *activityFollowBtn;
+    NewPagedFlowView *pageFlowView;
     
     int pageIndex;
     
@@ -229,7 +230,7 @@
 }
 
 -(void)createCommendView{
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 834*DEF_Adaptation_Font*0.5)];
+    pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 834*DEF_Adaptation_Font*0.5)];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
     pageFlowView.minimumPageAlpha = 0.1;
@@ -250,9 +251,10 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
-        
+        [pageFlowView removeFromSuperview];
         [_obj popController];
-    }else if(button.tag==102){
+        [self removeFromSuperview];
+        }else if(button.tag==102){
         
          [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
     }else if(button.tag==103){

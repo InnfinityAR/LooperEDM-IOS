@@ -20,7 +20,7 @@
 #import "SimpleChatViewController.h"
 #import "looperViewController.h"
 #import "PlayerInfoView.h"
-
+#import "DataHander.h"
 
 @implementation UserInfoViewModel{
     NSString *userID;
@@ -223,10 +223,24 @@
     
 }
 -(void)pushControllerToUser:(NSDictionary*)dic{
+
+    if([[dic objectForKey:@"userid"] isEqualToString:[LocalDataMangaer sharedManager].uid]!=true){
+        
+        SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+        [simpleC chatTargetID:dic];
+        // [_obj presentViewController:simpleC animated:NO completion:nil];
+        
+        [[_obj navigationController]  pushViewController:simpleC animated:YES];
+        
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"不能和自己聊天" andTime:2 andPos:CGPointZero];
+        
+    }
     
-    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
-    [simpleC chatTargetID:dic];
-    [[_obj navigationController]  pushViewController:simpleC animated:YES];
+
+    
+    
+    
 }
 -(void)JumpLooperView:(NSDictionary*)loopData{
     

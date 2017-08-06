@@ -64,9 +64,14 @@
     }
     if(imagePath!=nil){
         UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, FrameSize.width,FrameSize.height)];
-        [imageV sd_setImageWithURL:[[NSURL alloc] initWithString:imagePath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
+        
+        
+        if(imagePath!=[NSNull null]){
+            [imageV sd_setImageWithURL:[[NSURL alloc] initWithString:imagePath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+        }
+        
          [viewV addSubview:imageV];
         imageV.tag = 200;
         imageV.layer.cornerRadius = FrameSize.width/2;
