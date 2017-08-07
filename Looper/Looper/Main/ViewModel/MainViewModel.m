@@ -79,7 +79,7 @@
     
     PlayerInfoView *_playerInfoV;
     
-
+    NSArray *orderArr;
 }
 @synthesize musicData = _musicData;
 @synthesize MainData = _mainData;
@@ -95,6 +95,7 @@
         self.VMNumber=0;
         [self createBackView];
         [self requestData];
+        [self getMyOrderFromHttp];
     }
     return  self;
 }
@@ -344,7 +345,7 @@
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
             [self requestgetMyFavorite];
-            
+            [self getMyOrderFromHttp];
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
@@ -601,7 +602,7 @@
     }
     else if(type==8008){
 #warning 在这里写入订票详情
-        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
+        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:orderArr];
         [[_obj view] addSubview:ticketDetailV];
     }
     
@@ -758,7 +759,22 @@
     
 }
 
-
+//获取我的历史订单
+-(void)getMyOrderFromHttp{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            orderArr=responseObject[@"data"];
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+    
+    
+}
 
 
 @end

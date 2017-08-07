@@ -79,5 +79,5 @@
 -(void)requestMainData;
 -(void)createActivityView:(NSString*)activityId;
 -(void)createPlayerView:(int)PlayerId;
-
+-(void)getMyOrderFromHttp;
 @end
