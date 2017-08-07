@@ -47,6 +47,7 @@
 
 #import "JPUSHService.h"
 
+#import "AliManagerData.h"
 #import "TicketDetailView.h"
 
 @implementation MainViewModel{
@@ -344,6 +345,10 @@
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
             [self requestgetMyFavorite];
+            
+            
+            
+            [AliManagerData doAlipayPay:nil];
             
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
