@@ -185,8 +185,6 @@
         playIndex=-1;
     
     }
-   
-  
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
@@ -1254,6 +1252,10 @@
         
         // [_obj shareH5];
     }else if(button.tag==100){
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
         [_player seekToTime:kCMTimeZero];
         
         [_player pause];

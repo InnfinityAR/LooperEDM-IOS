@@ -217,6 +217,8 @@
     if(button.tag==106){
         
     }else if (button.tag==101){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
         [self removeFromSuperview];
         [_obj setSendPhotoV];
     }else if (button.tag==102){
@@ -359,6 +361,15 @@
     
     [self endEditing:YES];
     return YES;
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+
+    
 }
 
 

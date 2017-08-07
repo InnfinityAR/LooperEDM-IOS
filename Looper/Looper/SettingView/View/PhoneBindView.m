@@ -78,7 +78,17 @@
                 
             }
         }else if(statusNum==2){
-            [_obj bindMobile:phoneNum andCode:phoneText.text];
+            
+            if([phoneText.text length]==6){
+                [_obj bindMobile:phoneNum andCode:phoneText.text];
+            }else{
+                phoneText.text=@"";
+                [[DataHander sharedDataHander] showViewWithStr:@"验证码码错误" andTime:1 andPos:CGPointZero];
+                
+            }
+            
+            
+           
         }
         
     }

@@ -42,6 +42,8 @@
 
     int _isPhoto;
     PlayerInfoView * _playerInfoV;
+    
+    CurrentActivityView *view;
 
 }
 
@@ -494,7 +496,10 @@
 }
 
 -(void)jumpToCurrentActivity:(NSArray*)array{
-    CurrentActivityView *view=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self  andMyData:array];
+    
+    [view removeFromSuperview];
+    
+    view=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self  andMyData:array];
     [[_obj view]addSubview:view];
 }
 

@@ -42,7 +42,6 @@
     _footer=nil;
     [_collectView removeFromSuperview];
 
-    
 
 }
 
@@ -103,8 +102,6 @@
         [_collectView setContentOffset:CGPointMake(0, _collectView.contentSize.height - _collectView.frame.size.height) animated:NO];
 
     }
-    
-    
 
 }
 
@@ -146,8 +143,7 @@
     _collectView.scrollEnabled = YES;
     _collectView.showsVerticalScrollIndicator = FALSE;
     _collectView.showsHorizontalScrollIndicator = FALSE;
-    //[_collectView setBackgroundColor:[UIColor clearColor]];
-    
+
     [_collectView setBackgroundColor:[UIColor colorWithRed:55/255.0 green:49/255.0 blue:80/255.0 alpha:1.0]];
     
     UITapGestureRecognizer *myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollTap:)];
@@ -371,6 +367,18 @@
 }
 
 
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+
+
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 
     [self endEditing:true];
@@ -409,7 +417,7 @@
     textField.keyboardType = UIKeyboardTypeDefault;
     
     textField.enablesReturnKeyAutomatically = YES;
-    textField.returnKeyType = UIReturnKeyDefault;
+    textField.returnKeyType = UIReturnKeySend;
     textField.autocorrectionType = UITextAutocorrectionTypeYes;
     
     textField.delegate = self;

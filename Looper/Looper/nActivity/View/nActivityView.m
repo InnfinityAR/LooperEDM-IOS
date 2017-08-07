@@ -28,6 +28,7 @@
     NSArray *_allArray;
     UIButton * tripBtn;
     UIButton *activityFollowBtn;
+    NewPagedFlowView *pageFlowView;
     
     int pageIndex;
     
@@ -81,7 +82,7 @@
     if (!bannerView) {
         bannerView = [[PGIndexBannerSubiew alloc] initWithFrame:CGRectMake(0, 0, 515*DEF_Adaptation_Font*0.5,855*DEF_Adaptation_Font*0.5)];
         bannerView.tag = index;
-        bannerView.layer.cornerRadius = 4;
+        bannerView.layer.cornerRadius = 20;
         bannerView.layer.masksToBounds = YES;
     }
     
@@ -91,7 +92,7 @@
     }
     
     
-    UIImageView *bannerView1=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(0,45*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(515*DEF_Adaptation_Font*0.5, 804*DEF_Adaptation_Font*0.5) andIsRadius:false];
+    UIImageView *bannerView1=[LooperToolClass createImageViewReal:@"locaton.png" andRect:CGPointMake(0,45*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(515*DEF_Adaptation_Font*0.5, 927*DEF_Adaptation_Font*0.5) andIsRadius:false];
    
     
     [bannerView1  sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:index]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -229,7 +230,7 @@
 }
 
 -(void)createCommendView{
-    NewPagedFlowView *pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 834*DEF_Adaptation_Font*0.5)];
+    pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0,DEF_SCREEN_WIDTH, 834*DEF_Adaptation_Font*0.5)];
     pageFlowView.delegate = self;
     pageFlowView.dataSource = self;
     pageFlowView.minimumPageAlpha = 0.1;
@@ -250,9 +251,10 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
-        
+        [pageFlowView removeFromSuperview];
         [_obj popController];
-    }else if(button.tag==102){
+        [self removeFromSuperview];
+        }else if(button.tag==102){
         
          [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
     }else if(button.tag==103){

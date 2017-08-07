@@ -343,7 +343,7 @@
         isEnd=false;
         [self touchesEnded:touches withEvent:event];
 
-        [self moveViewCell];
+        //[self moveViewCell];
     }
 
 }
@@ -355,33 +355,33 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
 
-    if(moveViewCell==nil){
-        
-        if(isfristTouch==true){
-            if(startPoint.x<point.x){
-                float num_y= point.y-195*0.5*DEF_Adaptation_Font;
-                float num = (num_y+tableView.contentOffset.y)/(160*DEF_Adaptation_Font*0.5);
-                int selectNum=(int)ceil(num);
-                selectNum= selectNum-1;
-                selectIndex=selectNum;
-                UITableViewCell *cell = [tableView1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectIndex inSection:0]];
-                moveViewCell = cell;
-                isfristTouch=false;
-            }else{
-                [tableView1 setScrollEnabled:false];
-                [self touchesMoved:touches withEvent:event];
-                isfristTouch=false;
-            }
-        }else{
-            [tableView1 setScrollEnabled:false];
-            [self touchesMoved:touches withEvent:event];
-        }
-        
-    }else{
-        [tableView1 setScrollEnabled:false];
-        moveViewCell.frame = CGRectMake(moveViewCell.frame.origin.x-(movePoint.x-point.x), moveViewCell.frame.origin.y, moveViewCell.frame.size.width, moveViewCell.frame.size.height);
-    }
-    movePoint =point;
+//    if(moveViewCell==nil){
+//        
+//        if(isfristTouch==true){
+//            if(startPoint.x<point.x){
+//                float num_y= point.y-195*0.5*DEF_Adaptation_Font;
+//                float num = (num_y+tableView.contentOffset.y)/(160*DEF_Adaptation_Font*0.5);
+//                int selectNum=(int)ceil(num);
+//                selectNum= selectNum-1;
+//                selectIndex=selectNum;
+//                UITableViewCell *cell = [tableView1 cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectIndex inSection:0]];
+//                moveViewCell = cell;
+//                isfristTouch=false;
+//            }else{
+//                [tableView1 setScrollEnabled:false];
+//                [self touchesMoved:touches withEvent:event];
+//                isfristTouch=false;
+//            }
+//        }else{
+//            [tableView1 setScrollEnabled:false];
+//            [self touchesMoved:touches withEvent:event];
+//        }
+//        
+//    }else{
+//        [tableView1 setScrollEnabled:false];
+//        moveViewCell.frame = CGRectMake(moveViewCell.frame.origin.x-(movePoint.x-point.x), moveViewCell.frame.origin.y, moveViewCell.frame.size.width, moveViewCell.frame.size.height);
+//    }
+//    movePoint =point;
     
 }
 
