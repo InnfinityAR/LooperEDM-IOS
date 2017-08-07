@@ -317,7 +317,7 @@
     if (tag==105) {
         //pay
         if (self.currentTimeBtn.isSelected==YES&&self.currentPriceBtn.isSelected==YES&&payNumber>0) {
-        TicketPayView *ticketPayV=[[TicketPayView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andDataDic:self.dataDic];
+        TicketPayView *ticketPayV=[[TicketPayView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self andDataDic:self.dataDic andPayNumber:payNumber];
         [self addSubview:ticketPayV];
         }else{
             button.backgroundColor=[UIColor lightGrayColor];

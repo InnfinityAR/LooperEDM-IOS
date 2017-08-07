@@ -43,7 +43,7 @@
     contentScrol.delegate=self;
     [self addSubview:contentScrol];
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5, 560*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    contentLB.text=@"Looper发门票Looper发门票门票发门票,大家快来抢门票啦";
+    contentLB.text=[self.myData objectForKey:@"productname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
     contentLB.font=[UIFont systemFontOfSize: 16];
@@ -54,7 +54,8 @@
     [contentScrol addSubview:contentLB];
     
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+35*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
-    imageView.backgroundColor=[UIColor greenColor];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[self.myData objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
     [contentScrol addSubview:imageView];
     
     UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
@@ -62,7 +63,7 @@
     [contentScrol addSubview:locationLV];
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    locationLB.text=@"地点:来自二次元的你来自二次元";
+    locationLB.text=[self.myData objectForKey:@"location"];
     CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
@@ -76,7 +77,7 @@
     [contentScrol addSubview:timeLV];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    timeLB.text=@"时间:公元20017年5月6号";
+    timeLB.text=[self.myData objectForKey:@"starttime"];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
@@ -90,7 +91,7 @@
     [contentScrol addSubview:priceLV];
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    priceLB.text=@"票价:129普通票  ×1";
+    priceLB.text=[NSString stringWithFormat:@"票价:%d   ×%@",[[_myData objectForKey:@"price"]intValue]/[[_myData objectForKey:@"number"]intValue],[_myData objectForKey:@"number"]];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
@@ -101,7 +102,7 @@
     
     UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     sumPriceLB.font=[UIFont systemFontOfSize:14];
-    sumPriceLB.text=@"共计:129元";
+    sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[_myData objectForKey:@"price"]intValue]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [contentScrol addSubview:sumPriceLB];
@@ -129,17 +130,21 @@
     
     UILabel *tradingNameLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(tradingCardLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     tradingNameLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    tradingNameLB.text=@"收货人： 叶伟达";
     tradingNameLB.textColor=[UIColor whiteColor];
     tradingNameLB.textAlignment=NSTextAlignmentLeft;
+    if ([_myData objectForKey:@"clientname"]!=[NSNull null]) {
+    tradingNameLB.text=[NSString stringWithFormat:@"收货人：%@",[_myData objectForKey:@"clientname"]];
     NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:tradingNameLB.text];
     [str2 addAttribute:NSForegroundColorAttributeName value:ColorRGB(212, 215, 230, 1.0) range:NSMakeRange(0,5)];
     tradingNameLB.attributedText = str2;
+    }else{
+     tradingNameLB.text=@"收货人：";
+    }
     [contentScrol addSubview:tradingNameLB];
     
     UILabel *tradingPhoneLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(tradingNameLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     tradingPhoneLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    tradingPhoneLB.text=@"手机号： 15755361985";
+    tradingPhoneLB.text=[NSString stringWithFormat:@"手机号：%@",[_myData objectForKey:@"clientmobile"]];
     tradingPhoneLB.textColor=[UIColor whiteColor];
     tradingPhoneLB.textAlignment=NSTextAlignmentLeft;
     NSMutableAttributedString *str3= [[NSMutableAttributedString alloc] initWithString:tradingPhoneLB.text];
@@ -149,7 +154,7 @@
     
     UILabel *tradingAddressLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(tradingPhoneLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     tradingAddressLB.font=[UIFont systemFontOfSize:14];
-    tradingAddressLB.text=@"收货地址：上海市东方明珠向上走穿过平流层，中间有一个叫做天堂的地方";
+    tradingAddressLB.text=[NSString stringWithFormat:@"收货地址：%@",[_myData objectForKey:@"clientaddress"]];
     tradingAddressLB.numberOfLines=0;
     tradingAddressLB.textColor=[UIColor whiteColor];
     tradingAddressLB.textAlignment=NSTextAlignmentLeft;
@@ -180,7 +185,7 @@
     
     UILabel *logiCardLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logisticsLB)+65*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     logiCardLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    logiCardLB.text=@"快递单号：2828282828";
+    logiCardLB.text=[NSString stringWithFormat:@"快递单号：%@",[_myData objectForKey:@"deliverycode"]];
     logiCardLB.textColor=[UIColor whiteColor];
     logiCardLB.textAlignment=NSTextAlignmentLeft;
     NSMutableAttributedString *str5 = [[NSMutableAttributedString alloc] initWithString:logiCardLB.text];
@@ -190,12 +195,12 @@
     
     UILabel *logiCompanyLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logiCardLB)+55*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     logiCompanyLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    logiCompanyLB.text=@"快递公司： 顺丰速运";
+    logiCompanyLB.text=[NSString stringWithFormat:@"快递公司：%@",[_myData objectForKey:@"delivery"]];
     logiCompanyLB.textColor=[UIColor whiteColor];
     logiCompanyLB.textAlignment=NSTextAlignmentLeft;
     NSMutableAttributedString *str6 = [[NSMutableAttributedString alloc] initWithString:logiCompanyLB.text];
     [str6 addAttribute:NSForegroundColorAttributeName value:ColorRGB(212, 215, 230, 1.0) range:NSMakeRange(0,5)];
-    tradingNameLB.attributedText = str6;
+    logiCompanyLB.attributedText = str6;
     [contentScrol addSubview:logiCompanyLB];
     
     UILabel *logiDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(logiCompanyLB)+55*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];

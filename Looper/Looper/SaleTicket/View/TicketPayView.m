@@ -11,6 +11,7 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
+#import "SaleTicketViewModel.h"
 @interface TicketPayView()<UIScrollViewDelegate,UITextFieldDelegate,UITextViewDelegate>
 @property(nonatomic,strong)UIButton *payBtn;
 @property(nonatomic,strong)UIButton *sendCodeBtn;
@@ -22,6 +23,13 @@
 @property(nonatomic)BOOL isEnsurePayBtn;
 
 @property(nonatomic,strong)UIButton *paySureBtn;
+
+@property(nonatomic,strong)UITextField *phoneField;
+@property(nonatomic,strong)UITextField *codeField;
+@property(nonatomic,strong)UITextView *addressV;
+
+@property(nonatomic)NSInteger payNumber;
+@property(nonatomic,strong)UITextField *nameField;
 @end
 @implementation TicketPayView
 -(NSMutableArray *)textFieldArr{
@@ -30,10 +38,12 @@
     }
     return _textFieldArr;
 }
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic andPayNumber:(NSInteger)paynumber{
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (SaleTicketView*)idObject;
+        self.viewModel=(SaleTicketViewModel*)[self.obj obj];
+        self.payNumber=paynumber;
         self.dataDic=dataDic;
         self.isEnsurePayBtn=NO;
         [self initView];
@@ -52,7 +62,7 @@
     [self addSubview:contentScrol];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5, 560*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    contentLB.text=@"Looper发门票Looper发门票............";
+    contentLB.text=[activityDic objectForKey:@"activityname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.font=[UIFont systemFontOfSize:17];
     CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size;
@@ -74,7 +84,7 @@
     [contentScrol addSubview:locationLV];
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    locationLB.text=@"地点:来自二次元的你来自二次元";
+    locationLB.text=[activityDic objectForKey:@"location"];
     CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame2=locationLB.frame;
     frame2.size=lblSize2;
@@ -88,7 +98,7 @@
     [contentScrol addSubview:timeLV];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    timeLB.text=@"时间:公元20017年5月6号";
+    timeLB.text=[activityDic objectForKey:@"timetag"];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
@@ -132,6 +142,7 @@
 
     UITextField *nameField=[[UITextField alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV)+100*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     self.currentTextField=nameField;
+    self.nameField=nameField;
     nameField.delegate=self;
     nameField.tag=99;
     nameField.text = @"姓名";
@@ -145,6 +156,7 @@
     
     UITextField *phoneField=[[UITextField alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV2)+30*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     [self.textFieldArr addObject:phoneField];
+    self.phoneField=phoneField;
     phoneField.tag=100;
     phoneField.delegate=self;
     phoneField.text = @"手机号";
@@ -160,6 +172,7 @@
     
     UITextField *codeField=[[UITextField alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV3)+30*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     [self.textFieldArr addObject:codeField];
+    self.codeField=codeField;
     codeField.tag=101;
     codeField.delegate=self;
     codeField.text = @"短信验证码";
@@ -172,6 +185,7 @@
     
     UITextView *addressTextView=[[UITextView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV4)+30*DEF_Adaptation_Font*0.5, 566*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
     self.currentTextView=addressTextView;
+    self.addressV=addressTextView;
     addressTextView.tag=102;
     addressTextView.backgroundColor=ColorRGB(34, 35, 71, 1.0);
     addressTextView.delegate=self;
@@ -227,10 +241,10 @@
     
     UILabel *payTicketDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payTicketLB)+42*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 222*DEF_Adaptation_Font*0.5)];
     payTicketDetailLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    payTicketDetailLB.text=@" 我们时常需要在软件中点击空白处然后显示或者隐藏导航栏，工具栏，Tab时。如果 在UIView中这个很容易实现，将view的Custom Class 由UIVIew更改为UIControl，就可以发现View和Button一样拥有了事件响应，但是在UIScrollView中该方法就行不通了，这时就需要使用NSNotification在类与类之间实现通信。";
+    payTicketDetailLB.text=@" 1  购票成功后不可退票。\n 2  中奖后商品保留时间为：3天！ 3天后中奖但未付款成功或提交信息的小伙伴将视为放弃。奖品将回归抽奖平台，等待其他幸运的用户抽中。\n 3  购买成功后可以在首页下滑“我的订单”查看购买的票品。";
     payTicketDetailLB.numberOfLines=0;
     payTicketDetailLB.textColor=ColorRGB(223, 219, 234, 1.0);
-    CGSize lblSize5 = [payTicketDetailLB.text boundingRectWithSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+    CGSize lblSize5 = [payTicketDetailLB.text boundingRectWithSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f]} context:nil].size;
     CGRect frame5=payTicketDetailLB.frame;
     frame5.size=lblSize5;
     payTicketDetailLB.frame=frame5;
@@ -337,11 +351,14 @@
     if (tag==105) {
         if ([self judgeIsEnsurePayBtn]) {
 //sendPayUserInfo
+            NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
+            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:1 andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[[activityDic objectForKey:@"price"] substringFromIndex:[[activityDic objectForKey:@"price"] length]-3]intValue]];
         }
     }
     if (tag==101) {
         if (button.selected==YES) {
             [button setSelected:NO];
+            [self.viewModel requestDataCode:self.phoneField.text];
              [button setTitleColor:ColorRGB(255, 255, 255, 0.36) forState:UIControlStateNormal];
             [self openCountdown];
         }

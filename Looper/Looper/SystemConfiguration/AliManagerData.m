@@ -104,7 +104,7 @@
     order.biz_content = [BizContent new];
     order.biz_content.body = @"我是测试数据";
     order.biz_content.subject = @"1";
-    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
+    order.biz_content.out_trade_no = [Paydic objectForKey:@"ordercode"]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
     order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
     

@@ -66,9 +66,10 @@
 
 #pragma-UITableView的代理
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return self.myData.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dataDic=self.myData[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     // 判断为空进行初始化  --（当拉动页面显示超过主页面内容的时候就会重用之前的cell，而不会再次初始化）
     if (!cell) {
@@ -85,12 +86,12 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 226*DEF_Adaptation_Font*0.5)];
     imageView.backgroundColor=ColorRGB(72, 104, 207, 1.0);
-//        [imageView sd_setImageWithURL:[NSURL URLWithString:[activityDic objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        }];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        }];
     [cell.contentView addSubview:imageView];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    contentLB.text=@"Looper发门票Looper发门票门票发门票,大家快来抢门票啦";
+    contentLB.text=[dataDic objectForKey:@"productname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
     contentLB.font=[UIFont systemFontOfSize:15];
@@ -100,20 +101,15 @@
     contentLB.frame=frame;
     [cell.contentView addSubview:contentLB];
     
-    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    locationLB.text=@"地点:来自二次元的你来自二次元";
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
-    CGRect frame2=locationLB.frame;
-    frame2.size=lblSize2;
-    locationLB.frame=frame2;
-    locationLB.numberOfLines=0;
+    locationLB.text=[dataDic objectForKey:@"location"];
     locationLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:locationLB];
     
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+12*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    timeLB.text=@"时间:公元20017年5月6号";
+    timeLB.text=[dataDic objectForKey:@"starttime"];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
@@ -124,7 +120,7 @@
     
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+12*DEF_Adaptation_Font*0.5, 221*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    priceLB.text=@"票价:129普通票  ×1";
+    priceLB.text= [NSString stringWithFormat:@"票价:%d   ×%@",[[dataDic objectForKey:@"price"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"]];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
@@ -135,7 +131,7 @@
     
     UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(480*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+15*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     sumPriceLB.font=[UIFont systemFontOfSize:13];
-    sumPriceLB.text=@"共计:129元";
+    sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[dataDic objectForKey:@"price"]intValue]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [cell.contentView addSubview:sumPriceLB];
@@ -169,7 +165,7 @@
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
-    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:nil];
+    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
     [self addSubview:ticketView];
 }
 -(UIButton *)publishButton:(NSString *)str andCGPoint:(CGPoint)point andTag:(NSInteger)tag{
