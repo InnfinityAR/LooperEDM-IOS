@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SaleTicketController : UIViewController
--(instancetype)initWithDataDic:(NSDictionary *)dataDic;
+-(instancetype)initWithDataDic:(NSDictionary *)dataDic orderDic:(NSDictionary*)orderDic;
 @end

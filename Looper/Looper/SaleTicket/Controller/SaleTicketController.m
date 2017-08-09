@@ -14,9 +14,9 @@
 @end
 
 @implementation SaleTicketController
--(instancetype)initWithDataDic:(NSDictionary *)dataDic{
+-(instancetype)initWithDataDic:(NSDictionary *)dataDic orderDic:(NSDictionary*)orderDic{
     if (self=[super init]) {
-        [self.saleTicketVM getDataFromHTTP:dataDic];
+        [self.saleTicketVM getDataFromHTTP:dataDic  orderDic:orderDic];
         self.dataDic=dataDic;
     }
     return self;

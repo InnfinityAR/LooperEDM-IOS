@@ -78,8 +78,8 @@
     
     
     PlayerInfoView *_playerInfoV;
-    
-    NSArray *orderArr;
+//award
+  NSArray * rouletteArr;
 }
 @synthesize musicData = _musicData;
 @synthesize MainData = _mainData;
@@ -344,6 +344,8 @@
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
+//            [self getRouletteResultFromHttp];
+            rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
             [self getMyOrderFromHttp];
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
@@ -527,7 +529,7 @@
 
 
 -(void)pushNActivityViewController{
-    nActivityViewController *activity = [[nActivityViewController alloc] init];
+    nActivityViewController *activity = [[nActivityViewController alloc] initWithOrderArr:rouletteArr];
     [[_obj navigationController]  pushViewController:activity animated:YES];
     
 }
@@ -601,7 +603,7 @@
     }
     else if(type==8008){
 #warning 在这里写入订票详情
-        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:orderArr];
+        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr];
         [[_obj view] addSubview:ticketDetailV];
     }
     
@@ -764,7 +766,7 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            orderArr=responseObject[@"data"];
+            self.orderArr=responseObject[@"data"];
         }else{
             
         }
@@ -774,6 +776,22 @@
     
     
 }
+-(void)getRouletteResultFromHttp{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteResult" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            self.orderArr=responseObject[@"data"];
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+    
+    
+}
+
 
 
 @end

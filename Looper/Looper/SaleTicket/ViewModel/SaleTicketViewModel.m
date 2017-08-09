@@ -24,9 +24,9 @@
     }
     return self;
 }
--(void)getDataFromHTTP:(NSDictionary *)dataDic{
+-(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
     self.dataDic=dataDic;
-    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:self.dataDic];
+    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:self.dataDic orderDic:orderDic];
     [[self.obj view]addSubview:self.saleTicketV];
 }
 -(void)popViewController{
@@ -78,12 +78,12 @@
     [dic setObject:clientName forKey:@"clientName"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-
-            if (price>0) {
+            NSDictionary *dataDic=responseObject[@"data"];
+            if ([[dataDic objectForKey:@"price"]intValue]>0) {
 #warning-跳转到支付宝界面
-                
+                [self getMyOrderFromHttp];
             }else{
-            [self getMyOrderFromHttp];
+                [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
             }
         }else{
             
@@ -91,10 +91,24 @@
     }fail:^{
         
     }];
-    
-    
 }
-
+-(void)changeOrderStatusForOrderId:(NSString *)orderId ProductId:(NSString*)productId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:@([orderId intValue]) forKey:@"orderId"];
+    [dic setObject:@([productId intValue]) forKey:@"productId"];
+    [dic setObject:@(1) forKey:@"status"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"changeOrderStatus" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+             [self getMyOrderFromHttp];
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
 //发送验证码
 -(void)requestDataCode:(NSString*)mobileNum{
     

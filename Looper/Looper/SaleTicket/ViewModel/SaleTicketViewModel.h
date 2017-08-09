@@ -12,7 +12,7 @@
 -(id)initWithController:(id)controller;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary *dataDic;
--(void)getDataFromHTTP:(NSDictionary *)dataDic;
+-(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic;
 -(void)popViewController;
 
 

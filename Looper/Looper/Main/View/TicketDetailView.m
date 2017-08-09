@@ -46,16 +46,17 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
-    if (button.tag==100) {
+    if (button.tag==99) {
         [self removeFromSuperview];
     }
-    if (button.tag==101) {
+    if (button.tag>=100) {
 //去支付的按钮
+        
     }
 }
 
 -(void)creatBKView{
-    UIImageView * bk=[LooperToolClass createImageView:@"bg_setting.png" andRect:CGPointMake(0, 0) andTag:100 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
+    UIImageView * bk=[LooperToolClass createImageView:@"bg_setting.png" andRect:CGPointMake(0, 0) andTag:99 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
     [self addSubview:bk];
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
@@ -136,20 +137,20 @@
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [cell.contentView addSubview:sumPriceLB];
     
-    if (indexPath.row==0) {
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==1) {
         UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=@"购买成功";
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(181, 252, 255, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
-    }else if (indexPath.row==1){
-        UIButton *payBtn=[self publishButton:@"去支付" andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5) andTag:101];
+    }else if([[dataDic objectForKey:@"orderstatus"]intValue]==0){
+        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
         [cell.contentView addSubview:payBtn];
     }else{
         UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=@"支付失败";
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(255, 106, 148, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
@@ -190,5 +191,16 @@
     return btn;
     
 }
-
+-(NSString *)orderstatusForCount:(NSInteger)count{
+    if (count==0) {
+        return @"去支付";
+    }
+    if (count==1) {
+        return @"已支付";
+    }
+    if (count==2) {
+        return @"支付失败";
+    }
+    return @"删除";
+}
 @end

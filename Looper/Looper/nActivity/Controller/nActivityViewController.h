@@ -16,7 +16,8 @@
     
 }
 @property(nonatomic)nActivityViewModel *activityVm;
-
+-(instancetype)initWithOrderArr:(NSArray*)orderArr;
+@property(nonatomic,strong)NSArray *orderArr;
 -(void)jumpToActivityId:(NSString*)activityId;
 
 @end

@@ -56,6 +56,7 @@
 @property(nonatomic)NSDictionary *MainData;
 @property(nonatomic)NSArray *musicData;
 @property(nonatomic)NSInteger VMNumber;
+@property(nonatomic,strong)NSArray *orderArr;
 
 -(id)initWithController:(id)controller;
 -(void)hudOnClick:(int)type;

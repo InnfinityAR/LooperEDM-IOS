@@ -20,7 +20,7 @@
 @property(nonatomic)id obj;
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic andActivityDic:(NSDictionary *)ActivityDic;
 -(void)setCalendar;
 
 @end
