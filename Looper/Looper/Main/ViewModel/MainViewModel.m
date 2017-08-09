@@ -47,6 +47,7 @@
 
 #import "JPUSHService.h"
 
+#import "AliManagerData.h"
 #import "TicketDetailView.h"
 
 @implementation MainViewModel{
@@ -347,7 +348,12 @@
 //            [self getRouletteResultFromHttp];
             rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
-            [self getMyOrderFromHttp];
+
+            
+           
+
+            //[self getMyOrderFromHttp];
+
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];

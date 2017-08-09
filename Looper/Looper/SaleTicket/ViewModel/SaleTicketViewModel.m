@@ -14,6 +14,7 @@
 #import "DataHander.h"
 #import "TicketLogisticsView.h"
 #import "LooperConfig.h"
+#import "AliManagerData.h"
 @interface SaleTicketViewModel()
 @property(nonatomic,strong)SaleTicketView *saleTicketV;
 @end
@@ -82,6 +83,7 @@
             if ([[dataDic objectForKey:@"price"]intValue]>0) {
 #warning-跳转到支付宝界面
                 [self getMyOrderFromHttp];
+                 [AliManagerData doAlipayPay:responseObject[@"data"]];
             }else{
                 [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
             }
