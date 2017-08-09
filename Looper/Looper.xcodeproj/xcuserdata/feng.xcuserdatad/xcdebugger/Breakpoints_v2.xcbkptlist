@@ -708,11 +708,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523794903.196686"
+            timestampString = "523960696.233845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "-createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
             landmarkType = "7">
          </BreakpointContent>
@@ -724,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523958777.652817"
+            timestampString = "523960696.233845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "-getMyOrderFromHttp"
             landmarkType = "7">
          </BreakpointContent>
@@ -970,6 +970,22 @@
             startingLineNumber = "82"
             endingLineNumber = "82"
             landmarkName = "-createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/Main/View/TicketDetailView.m"
+            timestampString = "523961164.396298"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-btnOnClick:withEvent:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

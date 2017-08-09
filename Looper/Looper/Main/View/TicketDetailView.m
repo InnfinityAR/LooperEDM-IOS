@@ -12,6 +12,7 @@
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
 #import "TicketLogisticsView.h"
+#import "AliManagerData.h"
 @interface TicketDetailView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *myData;
 @property(nonatomic,strong)UITableView *tableView;
@@ -51,14 +52,14 @@
     }
     if (button.tag>=100) {
 //去支付的按钮
-        
+         [AliManagerData doAlipayPay:_myData[button.tag-100]];
     }
 }
 
 -(void)creatBKView{
     UIImageView * bk=[LooperToolClass createImageView:@"bg_setting.png" andRect:CGPointMake(0, 0) andTag:99 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
     [self addSubview:bk];
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
   UILabel  *titleLB = [LooperToolClass createLableView:CGPointMake(258*DEF_Adaptation_Font*0.5,64*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(200*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andText:@"订单详情" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
@@ -165,9 +166,13 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
+    NSDictionary *dataDic=self.myData[indexPath.row];
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==2) {
+       [AliManagerData doAlipayPay:_myData[indexPath.row]];
+    }else{
     TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
     [self addSubview:ticketView];
+    }
 }
 -(UIButton *)publishButton:(NSString *)str andCGPoint:(CGPoint)point andTag:(NSInteger)tag{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
