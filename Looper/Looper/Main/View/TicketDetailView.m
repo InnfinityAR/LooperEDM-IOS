@@ -96,8 +96,8 @@
     contentLB.text=[dataDic objectForKey:@"productname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
-    contentLB.font=[UIFont systemFontOfSize:15];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize:18];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;

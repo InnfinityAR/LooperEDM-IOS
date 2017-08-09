@@ -589,7 +589,7 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag==100) {
         //payBtn
-        [self.obj jumpToSaleTicketController:activityDic orderDic:_orderDic];
+        [self.obj jumpToSaleTicketController:[activityDic objectForKey:@"data"] orderDic:_orderDic];
     }
     if(button.tag==101){
         [self removeFromSuperview];

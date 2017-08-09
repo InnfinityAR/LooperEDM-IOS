@@ -38,7 +38,9 @@
     if (!_priceArr) {
         _priceArr=[[NSMutableArray alloc]init];
         for (NSDictionary *dataDic in [self.orderDic objectForKey:@"roulette"]) {
+            if ([[dataDic objectForKey:@"price"]integerValue]>0) {
             [_priceArr addObject:[dataDic objectForKey:@"price"]];
+            }
         }
         [_priceArr sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
             return [obj1 compare:obj2]; //升序
@@ -83,7 +85,7 @@
     return self;
 }
 -(void)initView{
-     NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
+     NSDictionary *activityDic=self.dataDic;
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, 108*DEF_Adaptation_Font*0.5, 170*DEF_Adaptation_Font*0.5, 256*DEF_Adaptation_Font*0.5)];
     [imageView sd_setImageWithURL:[NSURL URLWithString:[activityDic objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
@@ -114,7 +116,11 @@
     
     UILabel *moneyLB=[[UILabel alloc]initWithFrame:CGRectMake(240*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     moneyLB.font=[UIFont boldSystemFontOfSize:16];
+    if ([self.priceArr[0]integerValue]<[self.priceArr[self.priceArr.count-1]integerValue]) {
     moneyLB.text=[NSString stringWithFormat:@"￥ %@-%@",self.priceArr[0],self.priceArr[self.priceArr.count-1]];
+    }else{
+    moneyLB.text=[NSString stringWithFormat:@"￥ %@",self.priceArr[0]];
+    }
     moneyLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [self addSubview:moneyLB];
     
@@ -133,22 +139,23 @@
     UIImageView *timeIV=[[UIImageView alloc]initWithFrame:CGRectMake(37*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     timeIV.image=[UIImage imageNamed:@"selectTime.png"];
     [contentSelectView addSubview:timeIV];
-    
+//用于计算时间间隔内的每一天
     NSDate *startDate =[self timeWithTimeIntervalString:[activityDic objectForKey:@"starttime"]];
     NSDate *endDate=[self timeWithTimeIntervalString:[activityDic objectForKey:@"endtime"]];
     NSCalendar *cal = [NSCalendar currentCalendar];
     unsigned int unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;//这句是说你要获取日期的元素有哪些。获取年就要写NSYearCalendarUnit，获取小时就要写NSHourCalendarUnit，中间用|隔开；
     NSDateComponents *startcomp=[cal components:unitFlags fromDate:startDate];
     NSDateComponents *endcomp=[cal components:unitFlags fromDate:endDate];
-    NSMutableArray *dateArr=[[NSMutableArray alloc]init];
-    for (NSInteger i=[startcomp day]; i<=[endcomp day]; i++) {
-        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
-    }
+//    NSMutableArray *dateArr=[[NSMutableArray alloc]init];
+//    for (NSInteger i=[startcomp day]; i<=[endcomp day]; i++) {
+//        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
+//    }
+    NSString *dataStr=[NSString stringWithFormat:@"%ld年%ld月%ld号-%ld月%ld号",[startcomp year],[startcomp month],[startcomp day],[endcomp month],[endcomp day]];
 //使按钮可以平铺。如果右边距离不够自动切换到下一行
-    for (int i=0; i<dateArr.count; i++) {
-  UIButton *timeBtn=[self publishButton:dateArr[i] andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5+_currentTimeY) andTag:i];
+    for (int i=0; i<1; i++) {
+  UIButton *timeBtn=[self publishButton:dataStr andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5+_currentTimeY) andTag:i];
     [contentSelectView addSubview:timeBtn];
-    CGFloat width = [dateArr[i] sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:timeBtn.titleLabel.font.fontName size:timeBtn.titleLabel.font.pointSize]}].width+50*DEF_Adaptation_Font;
+    CGFloat width = [dataStr sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:timeBtn.titleLabel.font.fontName size:timeBtn.titleLabel.font.pointSize]}].width+50*DEF_Adaptation_Font;
         if (i>=1) {
             CGRect frame=timeBtn.frame;
             if ([self.timeBtnWidthArr[i-1]integerValue]+width+70*DEF_Adaptation_Font*0.5<DEF_WIDTH(self)) {
@@ -170,6 +177,7 @@
         btn.selected=YES;
         [btn.layer setBorderColor: [ColorRGB(181, 252, 255, 1.0) CGColor]];
         [btn setTitleColor:ColorRGB(181, 252, 255, 1.0) forState:UIControlStateSelected];
+        btn.userInteractionEnabled=NO;
     }
     UIImageView *priceIV=[[UIImageView alloc]initWithFrame:CGRectMake(37*DEF_Adaptation_Font*0.5, 205*DEF_Adaptation_Font*0.5+_currentTimeY, 84*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     priceIV.image=[UIImage imageNamed:@"selectPrice.png"];
@@ -177,6 +185,7 @@
     NSArray *roulette=[self.orderDic objectForKey:@"roulette"];
 //使按钮可以平铺。如果右边距离不够自动切换到下一行
     for (int i=0; i<roulette.count; i++) {
+        if ([[roulette[i]objectForKey:@"price"]integerValue]>0) {
         UIButton *priceBtn=[self publishButton:[roulette[i]objectForKey:@"productname"] andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 255*DEF_Adaptation_Font*0.5+_currentTimeY+_currentPriceY) andTag:i+200];
         [contentSelectView addSubview:priceBtn];
         CGFloat width = [[roulette[i]objectForKey:@"productname"] sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:priceBtn.titleLabel.font.fontName size:priceBtn.titleLabel.font.pointSize]}].width+50*DEF_Adaptation_Font;
@@ -193,6 +202,7 @@
         }
         [self.priceBtnWidthArr addObject:@(width+35*DEF_Adaptation_Font*0.5)];
         [self.priceBtnArr addObject:priceBtn];
+        }
     }
     if (self.priceBtnArr.count==1) {
         UIButton *btn=self.priceBtnArr.firstObject;
@@ -200,6 +210,7 @@
         btn.selected=YES;
         [btn.layer setBorderColor: [ColorRGB(181, 252, 255, 1.0) CGColor]];
         [btn setTitleColor:ColorRGB(181, 252, 255, 1.0) forState:UIControlStateSelected];
+        btn.userInteractionEnabled=NO;
     }
 
     

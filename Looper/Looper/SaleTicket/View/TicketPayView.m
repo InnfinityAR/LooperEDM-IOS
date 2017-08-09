@@ -59,7 +59,7 @@
 }
 -(void)initView{
     self.backgroundColor=[UIColor whiteColor];
-    NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
+    NSDictionary *activityDic=self.dataDic;
     
     UIScrollView *contentScrol=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-196*DEF_Adaptation_Font*0.5)];
     self.contentScroll=contentScrol;
@@ -81,7 +81,7 @@
     
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+19*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
     imageView.backgroundColor=[UIColor greenColor];
-    if( [activityDic objectForKey:@"photo"]!=nil) {
+    if([self.orderDic objectForKey:@"productimage"]!=nil) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:[self.orderDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
     }

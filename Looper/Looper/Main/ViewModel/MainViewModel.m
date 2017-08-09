@@ -345,7 +345,7 @@
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
-//            [self getRouletteResultFromHttp];
+            [self getMyOrderFromHttp];
             rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
 
@@ -771,21 +771,6 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            self.orderArr=responseObject[@"data"];
-        }else{
-            
-        }
-    }fail:^{
-        
-    }];
-    
-    
-}
--(void)getRouletteResultFromHttp{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteResult" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             self.orderArr=responseObject[@"data"];
         }else{
