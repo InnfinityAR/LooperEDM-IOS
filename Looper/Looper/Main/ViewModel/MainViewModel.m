@@ -50,6 +50,8 @@
 #import "AliManagerData.h"
 #import "TicketDetailView.h"
 
+#import "ExtractPriceViewController.h"
+
 @implementation MainViewModel{
 
 
@@ -331,7 +333,6 @@
     [self requestMainData];
 
 }
-
 -(void)requestMainData{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -348,9 +349,6 @@
             [self getMyOrderFromHttp];
             rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
-
-            
-           
 
             //[self getMyOrderFromHttp];
 
@@ -556,7 +554,10 @@
 }
 
 -(void)hudOnClick:(int)type{
-
+    if (type==55000) {
+        ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
+        [[_obj navigationController]  pushViewController:extractVC animated:YES];
+    }
     if(type==LopperBtnTag){
         [self pushNActivityViewController];
     }else if(type==HomeBtnTag){

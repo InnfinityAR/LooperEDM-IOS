@@ -21,4 +21,5 @@
     return CGRectInset(bounds, 5*DEF_Adaptation_Font, 1);
     
 }
+
 @end

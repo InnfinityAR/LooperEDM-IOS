@@ -512,7 +512,7 @@
 }
 
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
-    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic];
+    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:1];
     [[self.obj navigationController]pushViewController:saleTicketVC animated:YES];
 }
 @end

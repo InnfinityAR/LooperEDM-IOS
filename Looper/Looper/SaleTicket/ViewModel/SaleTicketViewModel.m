@@ -15,8 +15,10 @@
 #import "TicketLogisticsView.h"
 #import "LooperConfig.h"
 #import "AliManagerData.h"
+#import "TicketPayView.h"
 @interface SaleTicketViewModel()
 @property(nonatomic,strong)SaleTicketView *saleTicketV;
+@property(nonatomic,strong)TicketPayView *ticketPayView;
 @end
 @implementation SaleTicketViewModel
 -(id)initWithController:(id)controller{
@@ -25,10 +27,14 @@
     }
     return self;
 }
--(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
-    self.dataDic=dataDic;
-    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:self.dataDic orderDic:orderDic];
+-(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic andPrice:(NSInteger)price{
+    if (price>0) {
+    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:dataDic orderDic:orderDic];
     [[self.obj view]addSubview:self.saleTicketV];
+    }else{
+        self.ticketPayView=[[TicketPayView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:dataDic andPayNumber:1 andOrderDic:orderDic andTime:nil];
+        [[self.obj view]addSubview:self.ticketPayView];
+    }
 }
 -(void)popViewController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
@@ -48,29 +54,13 @@
 
 
 }
-//获取当前活动奖品
--(void)getRouletteProductForRouletteId:(NSInteger)rouletteId{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-//    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:@(rouletteId) forKey:@"rouletteId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteProduct" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            
-        }else{
-            
-        }
-    }fail:^{
-        
-    }];
-    
-    
-}
 
 //创建支付订单
--(void)createOrderForProductId:(int)productId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber andclientName:(NSString *)clientName andPrice:(NSInteger)price{
+-(void)createOrderForProductId:(int)productId andresultid:(int)resultId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber andclientName:(NSString *)clientName andPrice:(NSInteger)price{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@(productId) forKey:@"productId"];
+    [dic setObject:@(resultId) forKey:@"resultId"];
     [dic setObject:clientAddress forKey:@"clientAddress"];
     [dic setObject:clientMobile forKey:@"clientMobile"];
     [dic setObject:delivery  forKey:@"delivery"];
@@ -128,7 +118,7 @@
     }];
 }
 //验证验证码
--(void)checkVerificationCodeForvCode:(NSString *)vCode ProductId:(int)productId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber  andclientName:(NSString *)clientName andPrice:(NSInteger)price{
+-(void)checkVerificationCodeForvCode:(NSString *)vCode ProductId:(int)productId andresultid:(int)resultId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber  andclientName:(NSString *)clientName andPrice:(NSInteger)price{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     //    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:clientMobile forKey:@"mobile"];
@@ -136,7 +126,7 @@
 //    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"checkVerificationCode" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            [self createOrderForProductId:productId andClientAddress:clientAddress andclientMobile:clientMobile anddelivery:delivery anddeliveryCode:deliveryCode andPayNumber:payNumber andclientName:clientName andPrice:price];
+            [self createOrderForProductId:productId andresultid:resultId andClientAddress:clientAddress andclientMobile:clientMobile anddelivery:delivery anddeliveryCode:deliveryCode andPayNumber:payNumber andclientName:clientName andPrice:price];
         }else{
              [[DataHander sharedDataHander] showViewWithStr:@"手机号或验证码错误" andTime:1 andPos:CGPointZero];
         }

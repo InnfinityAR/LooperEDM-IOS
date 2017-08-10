@@ -116,10 +116,12 @@
     
     UILabel *moneyLB=[[UILabel alloc]initWithFrame:CGRectMake(240*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-299*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     moneyLB.font=[UIFont boldSystemFontOfSize:16];
+    if (self.priceArr.count>0) {
     if ([self.priceArr[0]integerValue]<[self.priceArr[self.priceArr.count-1]integerValue]) {
     moneyLB.text=[NSString stringWithFormat:@"￥ %@-%@",self.priceArr[0],self.priceArr[self.priceArr.count-1]];
     }else{
     moneyLB.text=[NSString stringWithFormat:@"￥ %@",self.priceArr[0]];
+    }
     }
     moneyLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [self addSubview:moneyLB];

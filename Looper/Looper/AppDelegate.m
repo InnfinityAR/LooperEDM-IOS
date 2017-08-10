@@ -34,7 +34,7 @@
 
 #import "WebViewController.h"
 
-
+#import "ExtractPriceViewController.h"
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 
@@ -220,7 +220,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
         [self.window makeKeyAndVisible];
     }
-//    SaleTicketController *start = [SaleTicketController alloc];
+//    ExtractPriceViewController *start = [ExtractPriceViewController alloc];
 //    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
 //    nav.delegate = self;
 //    nav.navigationBar.hidden = YES;

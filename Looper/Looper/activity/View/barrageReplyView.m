@@ -314,6 +314,7 @@
     _textField.clearsOnBeginEditing = YES;
     _textField.delegate=self;
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
+    _textField.contentVerticalAlignment =UIControlContentHorizontalAlignmentCenter;
     _textField.contentMode = UIViewContentModeCenter;
     _textField.textColor = [UIColor whiteColor];
     [_textField setClearButtonMode:UITextFieldViewModeWhileEditing];
