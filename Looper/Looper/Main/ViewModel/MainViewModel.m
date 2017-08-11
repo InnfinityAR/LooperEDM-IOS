@@ -332,6 +332,24 @@
 
 }
 
+
+
+-(void)getRouletteResult{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteResult" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+        
+            NSLog(@"%@",responseObject);
+        }
+    }fail:^{
+        
+    }];
+}
+
 -(void)requestMainData{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -347,10 +365,8 @@
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
             [self requestgetMyFavorite];
 
-            
+            [self getRouletteResult];
            
-
-            //[self getMyOrderFromHttp];
 
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
@@ -362,8 +378,7 @@
             
             [[RongCloudManger sharedManager] initRongCloudSDK];
             [[RongCloudManger sharedManager]loginRCSdk];
-            
-            
+
         }else{
             
         }
