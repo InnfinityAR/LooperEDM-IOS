@@ -298,15 +298,16 @@
     bottomView=contentView;
     contentView.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
     [self addSubview:contentView];
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    _textField = [[UITextView alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.placeholder = @"快来回复我";
     _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
     _textField.font=[UIFont systemFontOfSize:14];
     _textField.layer.masksToBounds=YES;
-    _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+    _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.leftView.layer.masksToBounds=YES;
     _textField.leftViewMode=UITextFieldViewModeAlways;
+    _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     _textField.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
     _textField.returnKeyType = UIReturnKeySend; //设置按键类型
@@ -317,7 +318,6 @@
     _textField.contentVerticalAlignment =UIControlContentHorizontalAlignmentCenter;
     _textField.contentMode = UIViewContentModeCenter;
     _textField.textColor = [UIColor whiteColor];
-    [_textField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [contentView addSubview:_textField];
     countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, -3*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
     countLB.text=@"0/100";
@@ -462,6 +462,7 @@
     }
     else{
         [self endEditing:false];
+         [_textField becomeFirstResponder];
         if (![_textField.text isEqualToString:@""]) {
             NSDictionary *buddleDic=[NSDictionary dictionary];
             buddleDic=_replyArr[indexPath.row];
