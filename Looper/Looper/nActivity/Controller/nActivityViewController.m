@@ -16,12 +16,18 @@
 @implementation nActivityViewController
 
 @synthesize activityVm = _activityVm;
-
+-(instancetype)initWithOrderArr:(NSArray*)orderArr{
+    if (self=[super init]) {
+         _activityVm = [[nActivityViewModel alloc] initWithController:self andOrderArr:orderArr];
+        self.orderArr=orderArr;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    _activityVm = [[nActivityViewModel alloc] initWithController:self];
+   
     
 }
 

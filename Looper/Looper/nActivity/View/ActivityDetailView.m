@@ -35,6 +35,8 @@
     UIView *colorView;
     
     UILabel *titleLabel;
+    
+    NSDictionary *_orderDic;
 }
 
 -(void)setCalendar{
@@ -46,11 +48,12 @@
 }
 
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic andActivityDic:(NSDictionary *)ActivityDic{
     
     if (self = [super initWithFrame:frame]) {
         self.obj = (nActivityViewModel*)idObject;
         activityDic = [[NSMutableDictionary alloc] initWithDictionary:detailDic];
+        _orderDic=ActivityDic;
         [self initView];
     }
     return self;
@@ -99,7 +102,8 @@
     
     titleLabel.hidden=true;
 #warning-在这里进行是否进行抽奖的判断
-    if (/* DISABLES CODE */ (1)) {
+    NSArray *roulette=[_orderDic objectForKey:@"roulette"];
+    if (roulette.count>=1) {
         UIImageView *shadowIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-140*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 46*DEF_Adaptation_Font*0.5)];
         shadowIV.image=[UIImage imageNamed:@"shadow_pay_liveshow.png"];
         [self addSubview:shadowIV];
@@ -585,7 +589,7 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag==100) {
         //payBtn
-        [self.obj jumpToSaleTicketController:activityDic];
+        [self.obj jumpToSaleTicketController:[activityDic objectForKey:@"data"] orderDic:_orderDic];
     }
     if(button.tag==101){
         [self removeFromSuperview];

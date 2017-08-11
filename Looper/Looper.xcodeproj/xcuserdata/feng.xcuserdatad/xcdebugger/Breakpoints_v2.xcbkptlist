@@ -324,7 +324,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523795187.088124"
+                  timestampString = "524056062.237874"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "145"
@@ -339,7 +339,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "523795187.089519"
+                  timestampString = "524056062.239375"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "146"
@@ -356,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "523193738.325245"
+            timestampString = "523970336.933645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "988"
-            endingLineNumber = "988"
+            startingLineNumber = "990"
+            endingLineNumber = "990"
             landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:andIsImageView:"
             landmarkType = "7">
             <Locations>
@@ -404,11 +404,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "523193738.325245"
+            timestampString = "523970336.933645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "987"
-            endingLineNumber = "987"
+            startingLineNumber = "989"
+            endingLineNumber = "989"
             landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:andIsImageView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -420,11 +420,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "523193738.325245"
+            timestampString = "523970336.933645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "997"
-            endingLineNumber = "997"
+            startingLineNumber = "999"
+            endingLineNumber = "999"
             landmarkName = "-addTalkingPublish:andIndexpath:andImageDic:andallShowBtn:andIsImageView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -580,12 +580,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/barrageReplyView.m"
-            timestampString = "523624156.320556"
+            timestampString = "524028258.858503"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
+            landmarkName = "-textFieldShouldClear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -596,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/ActivityBarrageView.m"
-            timestampString = "523193738.325245"
+            timestampString = "523970336.933645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "765"
-            endingLineNumber = "765"
+            startingLineNumber = "767"
+            endingLineNumber = "767"
             landmarkName = "-onClickActivityStateLB:"
             landmarkType = "7">
          </BreakpointContent>
@@ -628,11 +628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523777367.823151"
+            timestampString = "524054777.548628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
+            startingLineNumber = "597"
+            endingLineNumber = "597"
             landmarkName = "-hudOnClick:"
             landmarkType = "7">
          </BreakpointContent>
@@ -659,28 +659,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
-            timestampString = "523772966.212709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
-            landmarkName = "-createActivityView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523783039.710688"
+            timestampString = "524054777.548628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-requestMainData"
             landmarkType = "7">
          </BreakpointContent>
@@ -692,11 +676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523785013.077375"
+            timestampString = "524054777.548628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "768"
-            endingLineNumber = "768"
+            startingLineNumber = "771"
+            endingLineNumber = "771"
             landmarkName = "-getMyOrderFromHttp"
             landmarkType = "7">
          </BreakpointContent>
@@ -708,12 +692,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523788321.463247"
+            timestampString = "524047594.862994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-createOrderForProductId:andresultid:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -724,12 +708,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523794903.196686"
+            timestampString = "524047594.862994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-createOrderForProductId:andresultid:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -740,7 +724,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523794903.196686"
+            timestampString = "524047594.862994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
@@ -756,42 +740,250 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-            timestampString = "523794378.347935"
+            timestampString = "524047594.862994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-createOrderForProductId:andresultid:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/Main/ViewModel/MainViewModel.m"
+            timestampString = "524054777.548628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "613"
+            endingLineNumber = "613"
+            landmarkName = "-hudOnClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
+            timestampString = "523939393.362672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-createActivityView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
+            timestampString = "523937213.38613"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "-initWithController:andOrderArr:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
+            timestampString = "523939158.556666"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "-requestData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
+            timestampString = "523939393.362672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
+            landmarkName = "-requestData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/View/ActivityDetailView.m"
+            timestampString = "523939793.853329"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-initWithFrame:and:andDetailDic:andActivityDic:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/ViewModel/nActivityViewModel.m"
+            timestampString = "523939847.404331"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-addActivityDetailView:andPhotoWall:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/View/SaleTicketView.m"
+            timestampString = "523968810.543951"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-initWithFrame:and:andDataDic:orderDic:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/nActivity/View/ActivityDetailView.m"
+            timestampString = "523952533.24332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-createHudView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/View/SaleTicketView.m"
+            timestampString = "524056062.017525"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "-initView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
+            timestampString = "524047594.862994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "-createOrderForProductId:andresultid:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
+            timestampString = "524047594.862994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-changeOrderStatusForOrderId:ProductId:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
+            timestampString = "524047594.862994"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-changeOrderStatusForOrderId:ProductId:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[SaleTicketViewModel createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:]"
+                  symbolName = "-[SaleTicketViewModel changeOrderStatusForOrderId:ProductId:]"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-                  timestampString = "523795187.127155"
+                  timestampString = "524056062.307964"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "79"
-                  endingLineNumber = "79"
-                  offsetFromSymbolStart = "880">
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "702">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__144-[SaleTicketViewModel createOrderForProductId:andClientAddress:andclientMobile:anddelivery:anddeliveryCode:andPayNumber:andclientName:andPrice:]_block_invoke"
+                  symbolName = "__61-[SaleTicketViewModel changeOrderStatusForOrderId:ProductId:]_block_invoke"
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-                  timestampString = "523795187.128539"
+                  timestampString = "524056062.309452"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
                   offsetFromSymbolStart = "51">
                </Location>
             </Locations>
@@ -803,13 +995,93 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Looper/SaleTicket/View/TicketPayView.m"
-            timestampString = "523794858.887761"
+            filePath = "Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
+            timestampString = "524047594.862994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "-getMyOrderFromHttp"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/View/TicketPayView.m"
+            timestampString = "523967952.140325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-initWithFrame:and:andDataDic:andPayNumber:andOrderDic:andTime:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/SaleTicket/View/SaleTicketView.m"
+            timestampString = "523969606.429631"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-initView"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SaleTicketView initView]"
+                  moduleName = "Looper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/View/SaleTicketView.m"
+                  timestampString = "524056062.319193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "1014">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__26-[SaleTicketView initView]_block_invoke"
+                  moduleName = "Looper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/View/SaleTicketView.m"
+                  timestampString = "524056062.320705"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "128">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/ExtractPrize/viewModel/ExtractPriceViewModel.m"
+            timestampString = "524055590.018175"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-jumpToSaleTicketController:andOrderDic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

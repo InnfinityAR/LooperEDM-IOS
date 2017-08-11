@@ -44,13 +44,14 @@
     PlayerInfoView * _playerInfoV;
     
     CurrentActivityView *view;
-
+    NSArray *orderArray;
 }
 
 
--(id)initWithController:(id)controller{
+-(id)initWithController:(id)controller andOrderArr:(NSArray *)orderArr{
     if(self=[super init]){
         self.obj = (nActivityViewController*)controller;
+        orderArray=orderArr;
         [self requestData];
     }
     return  self;
@@ -144,7 +145,7 @@
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-           activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject];
+            activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject andActivityDic:ActivityDic];
             [[_obj view] addSubview:activityDetailV];
 
         }else{
@@ -465,16 +466,23 @@
         if([responseObject[@"status"] intValue]==0){
             
             for (int i=0;i<[responseObject[@"data"] count];i++){
-                NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
-                if([[dic objectForKey:@"recommendation"] intValue]==1){
+                NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
+//                if([[dic objectForKey:@"recommendation"] intValue]==1){
                     NSDate *now= [NSDate date];
                     long int nowDate = (long int)([now timeIntervalSince1970]);
 
                     if([[dic objectForKey:@"endtime"] intValue]>nowDate){
-                        
+//在这里加入活动中的奖品
+                        NSMutableArray *rouletteArr=[[NSMutableArray alloc]init];
+                        for (NSDictionary *roulette in orderArray) {
+                            if ([[roulette objectForKey:@"activityid"]intValue]==[[dic objectForKey:@"activityid"]intValue]) {
+                                [rouletteArr addObject:roulette];
+                            }
+                        }
+                        [dic setValue:[rouletteArr copy] forKey:@"roulette"];
                         [recommendArray addObject:dic];
                     }
-                }
+//                }
                 [allActivityArray addObject:dic];
             }
             [self createActivityView];
@@ -503,8 +511,8 @@
     [[_obj view]addSubview:view];
 }
 
--(void)jumpToSaleTicketController:(NSDictionary *)dataDic{
-    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic];
+-(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
+    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:1];
     [[self.obj navigationController]pushViewController:saleTicketVC animated:YES];
 }
 @end

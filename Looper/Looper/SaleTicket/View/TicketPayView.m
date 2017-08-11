@@ -13,6 +13,9 @@
 #import "UIImageView+WebCache.h"
 #import "SaleTicketViewModel.h"
 @interface TicketPayView()<UIScrollViewDelegate,UITextFieldDelegate,UITextViewDelegate>
+{
+    NSString *selectTime;
+}
 @property(nonatomic,strong)UIButton *payBtn;
 @property(nonatomic,strong)UIButton *sendCodeBtn;
 @property(nonatomic,strong)UITextField *currentTextField;
@@ -30,6 +33,9 @@
 
 @property(nonatomic)NSInteger payNumber;
 @property(nonatomic,strong)UITextField *nameField;
+
+@property(nonatomic,strong)NSDictionary *orderDic;
+
 @end
 @implementation TicketPayView
 -(NSMutableArray *)textFieldArr{
@@ -38,13 +44,14 @@
     }
     return _textFieldArr;
 }
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic andPayNumber:(NSInteger)paynumber{
-    
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic andPayNumber:(NSInteger)paynumber andOrderDic:(NSDictionary *)orderDic andTime:(NSString *)time{
     if (self = [super initWithFrame:frame]) {
         self.obj = (SaleTicketView*)idObject;
         self.viewModel=(SaleTicketViewModel*)[self.obj obj];
         self.payNumber=paynumber;
         self.dataDic=dataDic;
+        self.orderDic=orderDic;
+        selectTime=time;
         self.isEnsurePayBtn=NO;
         [self initView];
     }
@@ -52,7 +59,7 @@
 }
 -(void)initView{
     self.backgroundColor=[UIColor whiteColor];
-    NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
+    NSDictionary *activityDic=self.dataDic;
     
     UIScrollView *contentScrol=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-196*DEF_Adaptation_Font*0.5)];
     self.contentScroll=contentScrol;
@@ -62,7 +69,7 @@
     [self addSubview:contentScrol];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 4*DEF_Adaptation_Font*0.5, 560*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    contentLB.text=[activityDic objectForKey:@"activityname"];
+    contentLB.text=[self.orderDic objectForKey:@"productname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.font=[UIFont systemFontOfSize:17];
     CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(560*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size;
@@ -71,10 +78,9 @@
     contentLB.frame=frame;
     [contentScrol addSubview:contentLB];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+19*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
-    imageView.backgroundColor=[UIColor greenColor];
-    if( [activityDic objectForKey:@"photo"]!=nil) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[activityDic objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
+    if([self.orderDic objectForKey:@"productimage"]!=nil) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[self.orderDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
     }
     [contentScrol addSubview:imageView];
@@ -82,7 +88,7 @@
     UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     locationLV.image=[UIImage imageNamed:@"locaton.png"];
     [contentScrol addSubview:locationLV];
-    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+0*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     locationLB.text=[activityDic objectForKey:@"location"];
     CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
@@ -96,9 +102,13 @@
     UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+7*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    timeLB.text=[activityDic objectForKey:@"timetag"];
+    if ([[self.orderDic objectForKey:@"price" ]intValue]>0) {
+    timeLB.text=selectTime;
+    }else{
+        timeLB.text=[self setSelecttime];
+    }
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
@@ -110,9 +120,9 @@
     UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     priceLV.image=[UIImage imageNamed:@"ticket.png"];
     [contentScrol addSubview:priceLV];
-    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+7*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    priceLB.text=@"票价:129普通票  ×1";
+    priceLB.text=[NSString stringWithFormat:@"%ld   ×%ld",[[self.orderDic objectForKey:@"price" ]intValue]/self.payNumber,self.payNumber];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
@@ -123,12 +133,12 @@
     
     UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     sumPriceLB.font=[UIFont systemFontOfSize:14];
-    sumPriceLB.text=@"共计:129元";
+    sumPriceLB.text=[NSString stringWithFormat:@"共计:%@",[self.orderDic objectForKey:@"price" ]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [contentScrol addSubview:sumPriceLB];
     
-    UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+20*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
+    UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+50*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
     lineIV.image=[UIImage imageNamed:@"cutoffLine.png"];
     lineIV.alpha=0.5;
     [contentScrol addSubview:lineIV];
@@ -251,13 +261,37 @@
     payTicketDetailLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:payTicketDetailLB];
     contentScrol.contentSize=CGSizeMake(DEF_WIDTH(self), DEF_Y(payTicketDetailLB)+280*DEF_Adaptation_Font*0.5);
-    self.payBtn=[self creatButton:@"确认购票" andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
-    
+     if ([[self.orderDic objectForKey:@"price" ]integerValue]>0) {
+         self.payBtn=[self creatButton:[NSString stringWithFormat:@"确认购票 ￥ %@",[self.orderDic objectForKey:@"price" ]] andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
+     }else{
+        self.payBtn=[self creatButton:@"确认购票" andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
+     }
     if (self.isEnsurePayBtn==NO) {
        self.payBtn.backgroundColor=[UIColor lightGrayColor];
     }
     [self addSubview: self.payBtn];
     [self creatBKView];
+}
+-(NSString *)setSelecttime{
+    NSDate *startDate =[self timeWithTimeIntervalString:[self.dataDic objectForKey:@"starttime"]];
+    NSDate *endDate=[self timeWithTimeIntervalString:[self.dataDic objectForKey:@"endtime"]];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;//这句是说你要获取日期的元素有哪些。获取年就要写NSYearCalendarUnit，获取小时就要写NSHourCalendarUnit，中间用|隔开；
+    NSDateComponents *startcomp=[cal components:unitFlags fromDate:startDate];
+    NSDateComponents *endcomp=[cal components:unitFlags fromDate:endDate];
+    //    NSMutableArray *dateArr=[[NSMutableArray alloc]init];
+    //    for (NSInteger i=[startcomp day]; i<=[endcomp day]; i++) {
+    //        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
+    //    }
+    NSString *dataStr=[NSString stringWithFormat:@"%ld年%ld月%ld号-%ld月%ld号",[startcomp year],[startcomp month],[startcomp day],[endcomp month],[endcomp day]];
+    return dataStr;
+}
+- (NSDate *)timeWithTimeIntervalString:(NSString *)timeString
+{
+    //    NSTimeInterval time=[timeString doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    NSTimeInterval time=[timeString doubleValue];
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    return  detaildate;
 }
 -(void)creatBKView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
@@ -351,8 +385,7 @@
     if (tag==105) {
         if ([self judgeIsEnsurePayBtn]) {
 //sendPayUserInfo
-            NSDictionary *activityDic=[self.dataDic objectForKey:@"data"];
-            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:1 andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[[activityDic objectForKey:@"price"] substringFromIndex:[[activityDic objectForKey:@"price"] length]-3]intValue]];
+            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
         }
     }
     if (tag==101) {

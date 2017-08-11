@@ -12,6 +12,7 @@
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
 #import "TicketLogisticsView.h"
+#import "AliManagerData.h"
 @interface TicketDetailView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSArray *myData;
 @property(nonatomic,strong)UITableView *tableView;
@@ -46,18 +47,19 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
-    if (button.tag==100) {
+    if (button.tag==99) {
         [self removeFromSuperview];
     }
-    if (button.tag==101) {
+    if (button.tag>=100) {
 //去支付的按钮
+         [AliManagerData doAlipayPay:_myData[button.tag-100]];
     }
 }
 
 -(void)creatBKView{
-    UIImageView * bk=[LooperToolClass createImageView:@"bg_setting.png" andRect:CGPointMake(0, 0) andTag:100 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
+    UIImageView * bk=[LooperToolClass createImageView:@"bg_setting.png" andRect:CGPointMake(0, 0) andTag:99 andSize:CGSizeMake(DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT) andIsRadius:false];
     [self addSubview:bk];
-    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     
   UILabel  *titleLB = [LooperToolClass createLableView:CGPointMake(258*DEF_Adaptation_Font*0.5,64*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(200*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andText:@"订单详情" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
@@ -94,8 +96,8 @@
     contentLB.text=[dataDic objectForKey:@"productname"];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
-    contentLB.font=[UIFont systemFontOfSize:15];
-    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    contentLB.font=[UIFont systemFontOfSize:18];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
     CGRect frame=contentLB.frame;
     frame.size.height=lblSize.height;
     contentLB.frame=frame;
@@ -136,20 +138,20 @@
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [cell.contentView addSubview:sumPriceLB];
     
-    if (indexPath.row==0) {
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==1) {
         UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=@"购买成功";
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(181, 252, 255, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
-    }else if (indexPath.row==1){
-        UIButton *payBtn=[self publishButton:@"去支付" andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5) andTag:101];
+    }else if([[dataDic objectForKey:@"orderstatus"]intValue]==0){
+        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
         [cell.contentView addSubview:payBtn];
     }else{
         UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=@"支付失败";
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(255, 106, 148, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
@@ -164,9 +166,13 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
+    NSDictionary *dataDic=self.myData[indexPath.row];
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==2) {
+       [AliManagerData doAlipayPay:_myData[indexPath.row]];
+    }else{
     TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
     [self addSubview:ticketView];
+    }
 }
 -(UIButton *)publishButton:(NSString *)str andCGPoint:(CGPoint)point andTag:(NSInteger)tag{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -190,5 +196,16 @@
     return btn;
     
 }
-
+-(NSString *)orderstatusForCount:(NSInteger)count{
+    if (count==0) {
+        return @"去支付";
+    }
+    if (count==1) {
+        return @"已支付";
+    }
+    if (count==2) {
+        return @"支付失败";
+    }
+    return @"删除";
+}
 @end

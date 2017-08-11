@@ -330,7 +330,9 @@
         [self.publishCountArr removeAllObjects];
         [self.heightPublishDic removeAllObjects];
         [self.publishCellDic removeAllObjects];
-        [self.heightDic removeObjectForKey:@(0)];
+        [self.allShowTags removeAllObjects];
+        [self.allShowImageTags removeAllObjects];
+//        [self.heightDic removeObjectForKey:@(0)];
         NSLog(@"这是一个发表评论button");
         sendMessageActivityView *view=[[sendMessageActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.viewModel and:self andIndexPath:-1];
         view.obj=self.viewModel;

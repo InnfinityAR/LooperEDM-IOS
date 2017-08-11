@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523942806.109967"
+            timestampString = "524129952.123327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
-            landmarkName = "-pushControllerToUser:"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
+            landmarkName = "-JumpLooperView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523942806.109967"
+            timestampString = "524129952.123327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
-            landmarkName = "-JumpLooperView:"
-            landmarkType = "7">
+            startingLineNumber = "408"
+            endingLineNumber = "408"
+            landmarkName = "@implementation MainViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523888307.324766"
+            timestampString = "524129952.123327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "-getRouletteResult"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "523951005.943501"
+            timestampString = "524129952.123327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "-requestMainData"
             landmarkType = "7">
          </BreakpointContent>

@@ -11,11 +11,11 @@
 @interface SaleTicketViewModel : NSObject
 -(id)initWithController:(id)controller;
 @property(nonatomic,strong)id obj;
-@property(nonatomic,strong)NSDictionary *dataDic;
--(void)getDataFromHTTP:(NSDictionary *)dataDic;
+
+-(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic andPrice:(NSInteger)price;
 -(void)popViewController;
 
 
 -(void)requestDataCode:(NSString*)mobileNum;
--(void)checkVerificationCodeForvCode:(NSString *)vCode ProductId:(int)productId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber  andclientName:(NSString *)clientName andPrice:(NSInteger)price;
+-(void)checkVerificationCodeForvCode:(NSString *)vCode ProductId:(int)productId andresultid:(int)resultId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber  andclientName:(NSString *)clientName andPrice:(NSInteger)price;
 @end

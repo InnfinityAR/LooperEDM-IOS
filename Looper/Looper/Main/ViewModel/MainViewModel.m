@@ -50,6 +50,8 @@
 #import "AliManagerData.h"
 #import "TicketDetailView.h"
 
+#import "ExtractPriceViewController.h"
+
 @implementation MainViewModel{
 
 
@@ -79,8 +81,8 @@
     
     
     PlayerInfoView *_playerInfoV;
-    
-    NSArray *orderArr;
+//award
+  NSArray * rouletteArr;
 }
 @synthesize musicData = _musicData;
 @synthesize MainData = _mainData;
@@ -332,8 +334,6 @@
 
 }
 
-
-
 -(void)getRouletteResult{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -350,6 +350,7 @@
     }];
 }
 
+
 -(void)requestMainData{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -363,10 +364,13 @@
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
+            [self getMyOrderFromHttp];
+            rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
 
-            [self getRouletteResult];
+            //[self getRouletteResult];
            
+
 
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
@@ -548,7 +552,7 @@
 
 
 -(void)pushNActivityViewController{
-    nActivityViewController *activity = [[nActivityViewController alloc] init];
+    nActivityViewController *activity = [[nActivityViewController alloc] initWithOrderArr:rouletteArr];
     [[_obj navigationController]  pushViewController:activity animated:YES];
     
 }
@@ -569,7 +573,10 @@
 }
 
 -(void)hudOnClick:(int)type{
-
+    if (type==55000) {
+        ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
+        [[_obj navigationController]  pushViewController:extractVC animated:YES];
+    }
     if(type==LopperBtnTag){
         [self pushNActivityViewController];
     }else if(type==HomeBtnTag){
@@ -622,7 +629,7 @@
     }
     else if(type==8008){
 #warning 在这里写入订票详情
-        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:orderArr];
+        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr];
         [[_obj view] addSubview:ticketDetailV];
     }
     
@@ -785,7 +792,7 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            orderArr=responseObject[@"data"];
+            self.orderArr=responseObject[@"data"];
         }else{
             
         }
@@ -795,6 +802,7 @@
     
     
 }
+
 
 
 @end

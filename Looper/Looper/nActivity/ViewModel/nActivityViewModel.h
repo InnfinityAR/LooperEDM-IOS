@@ -15,7 +15,7 @@
         
 }
 @property (nonatomic )id obj;
--(id)initWithController:(id)controller;
+-(id)initWithController:(id)controller andOrderArr:(NSArray *)orderArr;
 
 -(void)popController;
 
@@ -49,5 +49,5 @@
 -(void)sharetTicket:(NSDictionary*)ticketDic;
 
 -(void)setCalendarData;
--(void)jumpToSaleTicketController:(NSDictionary *)dataDic;
+-(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic;
 @end

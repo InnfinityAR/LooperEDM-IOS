@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TicketPayView : UIView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic andPayNumber:(NSInteger)paynumber;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic andPayNumber:(NSInteger)paynumber andOrderDic:(NSDictionary *)orderDic andTime:(NSString*)time;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary *dataDic;
 @property(nonatomic,strong)id viewModel;
