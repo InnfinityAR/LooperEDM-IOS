@@ -41,9 +41,16 @@
             }else{
              [dataDic setObject:[orderDic objectForKey:@"location"] forKey:@"location"];
             }
+            if ([orderDic objectForKey:@"roulettename"]==nil||[orderDic objectForKey:@"roulettename"]==[NSNull null]) {
+            [dataDic setObject:@"640-2.png" forKey:@"activityname"];
+            }else{
              [dataDic setObject:[orderDic objectForKey:@"roulettename"] forKey:@"activityname"];
-             [dataDic setObject:[orderDic objectForKey:@"coverimage"] forKey:@"photo"];
-            
+            }
+             if ([orderDic objectForKey:@"roulettename"]==nil||[orderDic objectForKey:@"roulettename"]==[NSNull null]) {
+                  [dataDic setObject:@"640-2.png" forKey:@"photo"];
+             }else{
+              [dataDic setObject:[orderDic objectForKey:@"coverimage"] forKey:@"photo"];
+             }
             [self jumpToSaleTicketController:dataDic andOrderDic:orderDic];
         }else{
             

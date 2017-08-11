@@ -10,8 +10,9 @@
 #import "ExtractPriceViewModel.h"
 #import "LooperConfig.h"
 #import"LooperToolClass.h"
+#import "LocalDataMangaer.h"
 @interface ExtractPriceView()<UIWebViewDelegate>
-
+@property(nonatomic,strong)UIWebView *webView;
 @end
 @implementation ExtractPriceView
 
@@ -31,12 +32,12 @@
     }
 }
 -(void)initView{
-    UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
-    webView.suppressesIncrementalRendering=YES;
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    webView.delegate=self;
-    [self addSubview: webView];
-    [webView loadRequest:request];
+    self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
+    self.webView.suppressesIncrementalRendering=YES;
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://roulette.looper.pro/index.php?userId=%@",[LocalDataMangaer sharedManager].uid]]];
+    self.webView.delegate=self;
+    [self addSubview: self.webView];
+    [self.webView loadRequest:request];
       [self creatBKView];
    
 }
@@ -48,20 +49,40 @@
     [self addSubview:goBtn];
 }
 
-- (void) webViewDidFinishLoad:(UIWebView *)webView{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    webView.scrollView.bounces=NO;
-    CGRect frame = webView.frame;
-    //webView的宽度
-    frame.size = CGSizeMake(DEF_WIDTH(self), 0);
-    webView.frame = frame;
-    float content_height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] floatValue];
-    frame = webView.frame;
-    //webView的宽度和高度
-    frame.size = CGSizeMake(DEF_WIDTH(self), content_height);
-    webView.frame = frame;
-   
-   
+-(IBAction)IOS_JS:(id)sender
+{
+    NSString *str = [self.webView stringByEvaluatingJavaScriptFromString:@"postStr();"];
+    NSLog(@"JS返回值：%@",str);
 }
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        NSURL *url = [request URL];
+        if([[UIApplication sharedApplication]canOpenURL:url])
+        {
+            [[UIApplication sharedApplication]openURL:url];
+        }
+        return NO;
+    }
+    return YES;
+}
+
+//- (void) webViewDidFinishLoad:(UIWebView *)webView{
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    webView.scrollView.bounces=NO;
+//    CGRect frame = webView.frame;
+//    //webView的宽度
+//    frame.size = CGSizeMake(DEF_WIDTH(self), 0);
+//    webView.frame = frame;
+//    float content_height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] floatValue];
+//    frame = webView.frame;
+//    //webView的宽度和高度
+//    frame.size = CGSizeMake(DEF_WIDTH(self), content_height);
+//    webView.frame = frame;
+//   
+//   
+//}
 
 @end
