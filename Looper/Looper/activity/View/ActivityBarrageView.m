@@ -383,14 +383,14 @@
     [self.collectView addSubview:self.headerView];
 }
 -(void)addAVPlayer {
-    NSString *videoPath=@"http://flv2.bn.netease.com/videolib3/1510/25/bIHxK3719/SD/bIHxK3719-mobile.mp4";
-    //    NSURL *videoUrl = [[NSBundle mainBundle]URLForResource:@"clear" withExtension:@"mp4"];//定位资源clear.mp4
-    self.movieController = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL URLWithString:videoPath]];//初始化movieController
-    [self.movieController.view setFrame:CGRectMake(0, 0, DEF_WIDTH(self), 530*DEF_Adaptation_Font*0.5)];//movieController视图的大小
-    [self.movieController setRepeatMode:MPMovieRepeatModeOne];//重复方式
-    [self.movieController setScalingMode:MPMovieScalingModeAspectFill];//缩放方式满屏
-    [self.movieController play];//播放
-    [self.headerView addSubview:self.movieController.view];//添加
+//    NSString *videoPath=@"http://flv2.bn.netease.com/videolib3/1510/25/bIHxK3719/SD/bIHxK3719-mobile.mp4";
+//    //    NSURL *videoUrl = [[NSBundle mainBundle]URLForResource:@"clear" withExtension:@"mp4"];//定位资源clear.mp4
+//    self.movieController = [[MPMoviePlayerController alloc]initWithContentURL:[NSURL URLWithString:videoPath]];//初始化movieController
+//    [self.movieController.view setFrame:CGRectMake(0, 0, DEF_WIDTH(self), 530*DEF_Adaptation_Font*0.5)];//movieController视图的大小
+//    [self.movieController setRepeatMode:MPMovieRepeatModeOne];//重复方式
+//    [self.movieController setScalingMode:MPMovieScalingModeAspectFill];//缩放方式满屏
+//    [self.movieController play];//播放
+//    [self.headerView addSubview:self.movieController.view];//添加
 }
 - (void)initailBuddleView {
     

@@ -30,6 +30,12 @@
 //    导航栏字体设为白色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+    {
+        self.edgesForExtendedLayout =UIRectEdgeNone;
+    }
+    self.automaticallyAdjustsScrollViewInsets = NO; 
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

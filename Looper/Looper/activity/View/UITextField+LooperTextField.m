@@ -11,14 +11,14 @@
 @implementation UITextField (LooperTextField)
 - (CGRect)textRectForBounds:(CGRect)bounds {
     bounds.size.width-=10*DEF_Adaptation_Font;
-    return CGRectInset(bounds, 5*DEF_Adaptation_Font, 1);
+    return CGRectInset(bounds, 5*DEF_Adaptation_Font, 2);
     
 }
 
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
     bounds.size.width-=10*DEF_Adaptation_Font;
-    return CGRectInset(bounds, 5*DEF_Adaptation_Font, 1);
+    return CGRectInset(bounds, 5*DEF_Adaptation_Font, 2);
     
 }
 

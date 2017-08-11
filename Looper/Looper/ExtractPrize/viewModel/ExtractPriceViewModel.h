@@ -13,4 +13,5 @@
 -(instancetype)initWithController:(id)controller;
 -(void)updateView;
 -(void)getRouletteProductForproductId:(NSInteger)productId;
+-(void)popViewController;
 @end

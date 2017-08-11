@@ -9,6 +9,7 @@
 #import "ExtractPriceView.h"
 #import "ExtractPriceViewModel.h"
 #import "LooperConfig.h"
+#import"LooperToolClass.h"
 @interface ExtractPriceView()<UIWebViewDelegate>
 
 @end
@@ -21,6 +22,14 @@
     }
     return self;
 }
+- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    if (button.tag==99) {
+        [self.obj popViewController];
+    }
+    if (button.tag==100) {
+    [self.obj getRouletteProductForproductId:2];
+    }
+}
 -(void)initView{
     UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
     webView.suppressesIncrementalRendering=YES;
@@ -28,7 +37,17 @@
     webView.delegate=self;
     [self addSubview: webView];
     [webView loadRequest:request];
+      [self creatBKView];
+   
 }
+-(void)creatBKView{
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:backBtn];
+    self.backgroundColor=ColorRGB(34, 35, 71, 1.0);
+    UIButton *goBtn = [LooperToolClass createBtnImageNameReal:@"image_pay.png" andRect:CGPointMake(0,700*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"image_pay.png" andClickImage:@"image_pay.png" andTextStr:nil andSize:CGSizeMake(60*DEF_Adaptation_Font*0.5,60*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:goBtn];
+}
+
 - (void) webViewDidFinishLoad:(UIWebView *)webView{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     webView.scrollView.bounces=NO;
@@ -41,7 +60,8 @@
     //webView的宽度和高度
     frame.size = CGSizeMake(DEF_WIDTH(self), content_height);
     webView.frame = frame;
-    [self.obj getRouletteProductForproductId:2];
+   
+   
 }
 
 @end

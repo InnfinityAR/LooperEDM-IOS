@@ -36,7 +36,11 @@
             NSMutableDictionary *dataDic=[NSMutableDictionary dictionary];
             [dataDic setObject:[orderDic objectForKey:@"starttime"] forKey:@"starttime"];
              [dataDic setObject:[orderDic objectForKey:@"endtime"] forKey:@"endtime"];
+            if ([orderDic objectForKey:@"location"]==nil||[orderDic objectForKey:@"location"]==[NSNull null]) {
+                 [dataDic setObject:@"默认地址" forKey:@"location"];
+            }else{
              [dataDic setObject:[orderDic objectForKey:@"location"] forKey:@"location"];
+            }
              [dataDic setObject:[orderDic objectForKey:@"roulettename"] forKey:@"activityname"];
              [dataDic setObject:[orderDic objectForKey:@"coverimage"] forKey:@"photo"];
             
@@ -47,9 +51,11 @@
     }fail:^{
         
     }];
-    
-    
 }
+-(void)popViewController{
+    [[self.obj navigationController]popViewControllerAnimated:YES];
+}
+
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic andOrderDic:(NSDictionary*)orderDic{
     if ([[orderDic objectForKey:@"price"]integerValue]>0) {
         NSArray *array=@[orderDic];
