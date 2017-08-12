@@ -28,9 +28,6 @@
     if (button.tag==99) {
         [self.obj popViewController];
     }
-    if (button.tag==100) {
-    [self.obj getRouletteProductForproductId:2];
-    }
 }
 
 
@@ -38,6 +35,7 @@
 
 -(void)initView{
     self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
+    self.webView.backgroundColor=ColorRGB(34, 35, 71, 1.0);
     self.webView.suppressesIncrementalRendering=YES;
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://roulette.looper.pro/index.php?userId=%@",[LocalDataMangaer sharedManager].uid]]];
     self.webView.delegate=self;
@@ -49,15 +47,13 @@
     JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
     context[@"toCreateOrderForID"] = ^() {
-        NSLog(@"666666666");
-        
- 
-        
+         [self.obj getRouletteProductForproductId:2];
     };
     
     
     context[@"toShare"] = ^() {
-        NSLog(@"666666666");
+        NSDictionary *webDic=@{@"htmlurl":@"http://roulette.looper.pro/index.php?userId=%@",@"activityname":@"恭喜你获得了ultra门票"};
+        [self.obj shareh5View:webDic];
         
     };
 
@@ -66,28 +62,6 @@
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
     self.backgroundColor=ColorRGB(34, 35, 71, 1.0);
-    UIButton *goBtn = [LooperToolClass createBtnImageNameReal:@"image_pay.png" andRect:CGPointMake(DEF_WIDTH(self)-70*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"image_pay.png" andClickImage:@"image_pay.png" andTextStr:nil andSize:CGSizeMake(60*DEF_Adaptation_Font*0.5,60*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:goBtn];
-}
-
--(IBAction)IOS_JS:(id)sender
-{
-    NSString *str = [self.webView stringByEvaluatingJavaScriptFromString:@"postStr();"];
-    NSLog(@"JS返回值：%@",str);
-}
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    //判断是否是单击
-    if (navigationType == UIWebViewNavigationTypeLinkClicked)
-    {
-        NSURL *url = [request URL];
-        if([[UIApplication sharedApplication]canOpenURL:url])
-        {
-            [[UIApplication sharedApplication]openURL:url];
-        }
-        return NO;
-    }
-    return YES;
 }
 
 //- (void) webViewDidFinishLoad:(UIWebView *)webView{

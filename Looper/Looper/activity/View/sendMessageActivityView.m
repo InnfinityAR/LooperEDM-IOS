@@ -149,6 +149,7 @@
     textview.returnKeyType = UIReturnKeyDone;//return键的类型
     textview.keyboardType = UIKeyboardTypeDefault;//键盘类型
     textview.textAlignment = NSTextAlignmentLeft; //文本显示的位置默认为居左
+    textview.returnKeyType=UIReturnKeyNext;
     textview.dataDetectorTypes = UIDataDetectorTypeAll;
     textview.textColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0];
     textview.text = @"";//设置显示的文本内容

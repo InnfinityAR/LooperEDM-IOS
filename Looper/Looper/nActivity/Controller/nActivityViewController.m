@@ -27,7 +27,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-   
     
 }
 

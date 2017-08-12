@@ -142,11 +142,17 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
      [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
+            if (isPhoto==1) {
+                NSMutableDictionary *dictionary=[[NSMutableDictionary alloc]initWithDictionary: responseObject[@"data"]];
+                [dictionary setObject:orderArray forKey:@"roulette"];
+                activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject andActivityDic:dictionary];
+                [[_obj view] addSubview:activityDetailV];
+            }else{
             activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject andActivityDic:ActivityDic];
             [[_obj view] addSubview:activityDetailV];
+            }
 
         }else{
             

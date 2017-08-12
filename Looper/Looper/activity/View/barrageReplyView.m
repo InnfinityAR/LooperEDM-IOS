@@ -167,7 +167,9 @@
             if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
                 _textField.text=[_textField.text substringFromIndex:1];
             }else{
+                if (_textField.text.length>[[buddleDic  objectForKey:@"username"]length]+1&&[[_textField.text substringToIndex:[[buddleDic  objectForKey:@"username"]length]+1]isEqualToString:[NSString stringWithFormat:@"@%@",[buddleDic  objectForKey:@"username"]]]) {
                 _textField.text=[_textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
+                }
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
             }
         }
@@ -298,7 +300,7 @@
     bottomView=contentView;
     contentView.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
     [self addSubview:contentView];
-    _textField = [[UITextView alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.placeholder = @"快来回复我";
     _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
@@ -415,13 +417,15 @@
             }
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:nil];
         }
-        if (textField.tag>=0) {
-            buddleDic=_replyArr[textField.tag];
+        if (_textField.tag>=0) {
+            buddleDic=_replyArr[_textField.tag];
             if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
-                textField.text=[textField.text substringFromIndex:1];
+                _textField.text=[_textField.text substringFromIndex:1];
             }else{
-                textField.text=[textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
-                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+                if (_textField.text.length>[[buddleDic  objectForKey:@"username"]length]+1&&[[_textField.text substringToIndex:[[buddleDic  objectForKey:@"username"]length]+1]isEqualToString:[NSString stringWithFormat:@"@%@",[buddleDic  objectForKey:@"username"]]]) {
+                    _textField.text=[_textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
+                }
+                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
             }
         }
     }
