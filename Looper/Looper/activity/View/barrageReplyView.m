@@ -167,7 +167,9 @@
             if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
                 _textField.text=[_textField.text substringFromIndex:1];
             }else{
+                if (_textField.text.length>[[buddleDic  objectForKey:@"username"]length]+1&&[[_textField.text substringToIndex:[[buddleDic  objectForKey:@"username"]length]+1]isEqualToString:[NSString stringWithFormat:@"@%@",[buddleDic  objectForKey:@"username"]]]) {
                 _textField.text=[_textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
+                }
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
             }
         }
@@ -415,13 +417,15 @@
             }
             [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:nil];
         }
-        if (textField.tag>=0) {
-            buddleDic=_replyArr[textField.tag];
+        if (_textField.tag>=0) {
+            buddleDic=_replyArr[_textField.tag];
             if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
-                textField.text=[textField.text substringFromIndex:1];
+                _textField.text=[_textField.text substringFromIndex:1];
             }else{
-                textField.text=[textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
-                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
+                if (_textField.text.length>[[buddleDic  objectForKey:@"username"]length]+1&&[[_textField.text substringToIndex:[[buddleDic  objectForKey:@"username"]length]+1]isEqualToString:[NSString stringWithFormat:@"@%@",[buddleDic  objectForKey:@"username"]]]) {
+                    _textField.text=[_textField.text substringFromIndex:[[buddleDic  objectForKey:@"username"]length]+1];
+                }
+                [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:[buddleDic  objectForKey:@"userid"]];
             }
         }
     }

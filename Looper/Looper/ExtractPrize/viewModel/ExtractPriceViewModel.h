@@ -14,4 +14,6 @@
 -(void)updateView;
 -(void)getRouletteProductForproductId:(NSInteger)productId;
 -(void)popViewController;
+
+-(void)shareh5View:(NSDictionary*)webDic;
 @end
