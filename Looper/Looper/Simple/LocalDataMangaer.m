@@ -24,7 +24,7 @@ static LocalDataMangaer *localDataManagerM=nil;
 @synthesize NickName = _NickName;
 @synthesize localUserData = _localUserData;
 @synthesize loginType = _loginType;
-
+@synthesize rouletteArr = _rouletteArr;
 
 +(LocalDataMangaer *)sharedManager{
     if(localDataManagerM==nil){
