@@ -391,13 +391,22 @@
     if (tag==105) {
         if ([self judgeIsEnsurePayBtn]) {
 //sendPayUserInfo
-            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+            if (selectTime==nil) {
+                [self.obj checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+            }else{
+                 [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+            }
+           
         }
     }
     if (tag==101) {
         if (button.selected==YES) {
             [button setSelected:NO];
+            if (selectTime==nil) {
+                 [self.obj requestDataCode:self.phoneField.text];
+            }else{
             [self.viewModel requestDataCode:self.phoneField.text];
+            }
              [button setTitleColor:ColorRGB(255, 255, 255, 0.36) forState:UIControlStateNormal];
             [self openCountdown];
         }

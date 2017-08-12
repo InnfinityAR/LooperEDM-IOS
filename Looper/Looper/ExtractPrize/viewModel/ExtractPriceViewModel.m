@@ -85,7 +85,7 @@
         //创建网页内容对象
          NSString* thumbURL =[webDic objectForKey:@"photo"];
 //        NSString* thumbURL = @"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg";
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [webDic objectForKey:@"activityname"] descr:@"惊不惊喜？意不意外？你中奖了！！"  thumImage:thumbURL];
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [webDic objectForKey:@"activityname"] descr:@"LOOPER想带你一起去Ultra China！快来参加活动吧！"  thumImage:thumbURL];
         //设置网页地址
         shareObject.webpageUrl = [webDic objectForKey:@"htmlurl"];
         

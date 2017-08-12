@@ -113,7 +113,7 @@
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+22*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     timeLB.text=[dataDic objectForKey:@"starttime"];
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
     timeLB.frame=frame1;
@@ -121,10 +121,10 @@
     timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:timeLB];
     
-    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 221*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
-    priceLB.text= [NSString stringWithFormat:@"票价:%d   ×%@",[[dataDic objectForKey:@"price"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"]];
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    priceLB.text= [NSString stringWithFormat:@"票价:%d   ×%@    共计%d元",[[dataDic objectForKey:@"price"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"],[[dataDic objectForKey:@"price"]intValue]];
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
     priceLB.frame=frame3;
@@ -132,25 +132,18 @@
     priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:priceLB];
     
-    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(400*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+25*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    sumPriceLB.font=[UIFont systemFontOfSize:15];
-    sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[dataDic objectForKey:@"price"]intValue]];
-    sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
-    sumPriceLB.textAlignment=NSTextAlignmentRight;
-    [cell.contentView addSubview:sumPriceLB];
-    
     if ([[dataDic objectForKey:@"orderstatus"]intValue]==1) {
-        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
         paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(181, 252, 255, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
     }else if([[dataDic objectForKey:@"orderstatus"]intValue]==0){
-        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
+        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
         [cell.contentView addSubview:payBtn];
     }else{
-        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(sumPriceLB)+DEF_HEIGHT(sumPriceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
         paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
         paySuccessLB.textColor=ColorRGB(255, 106, 148, 1.0);
