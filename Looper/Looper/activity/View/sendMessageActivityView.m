@@ -249,6 +249,12 @@
 
 -(void)showSelectImage:(NSString*)selectImage{
     [textview becomeFirstResponder];
+    
+    
+    if([tempImageArray count]==3){
+        [tempImageArray removeObjectAtIndex:2];
+    }
+    
     [tempImageArray addObject:[UIImage imageNamed:selectImage]];
     [self createSelectImage];
 }

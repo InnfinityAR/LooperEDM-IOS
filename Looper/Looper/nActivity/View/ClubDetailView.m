@@ -52,6 +52,7 @@
     
     
     NSString *_localId;
+    XHImageViewer *imageViewer;
     NSMutableArray *_imageViews;
 
 }
@@ -496,8 +497,9 @@
     [_imageViews removeAllObjects];
     
     int tag = tap.view.tag;
-    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+     imageViewer = [[XHImageViewer alloc] init];
     imageViewer.delegate = self;
+    [self addSubview:imageViewer];
 
     for (int i=0;i<[[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count];i++){
         UIImageView *tempImageView = [[UIImageView alloc] init];
@@ -526,7 +528,7 @@
 
 - (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
     
-    
+    [imageViewer removeFromSuperview];
 }
 
 

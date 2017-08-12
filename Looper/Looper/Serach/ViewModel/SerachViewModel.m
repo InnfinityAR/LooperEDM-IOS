@@ -83,13 +83,13 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchLoop" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
-            serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
+            //serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
             userArray = [responseObject[@"data"] objectForKey:@"User"];
 
             [_SerachV reloadTableData:serachArray andUserArray:userArray];
             
-            if([serachArray count]==0){
-                [[DataHander sharedDataHander] showViewWithStr:@"找不到喔，自己创建一个吧~" andTime:1 andPos:CGPointZero];
+            if([userArray count]==0){
+                [[DataHander sharedDataHander] showViewWithStr:@"找不到用户" andTime:1 andPos:CGPointZero];
             }
         }
     }fail:^{
