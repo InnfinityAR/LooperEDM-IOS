@@ -11,6 +11,7 @@
 #import "LooperConfig.h"
 #import"LooperToolClass.h"
 #import "LocalDataMangaer.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 @interface ExtractPriceView()<UIWebViewDelegate>
 @property(nonatomic,strong)UIWebView *webView;
 @end
@@ -31,6 +32,10 @@
     [self.obj getRouletteProductForproductId:2];
     }
 }
+
+
+
+
 -(void)initView{
     self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
     self.webView.suppressesIncrementalRendering=YES;
@@ -38,8 +43,24 @@
     self.webView.delegate=self;
     [self addSubview: self.webView];
     [self.webView loadRequest:request];
-      [self creatBKView];
-   
+    [self creatBKView];
+    
+    
+    JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    context[@"toCreateOrderForID"] = ^() {
+        NSLog(@"666666666");
+        
+ 
+        
+    };
+    
+    
+    context[@"toShare"] = ^() {
+        NSLog(@"666666666");
+        
+    };
+
 }
 -(void)creatBKView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
