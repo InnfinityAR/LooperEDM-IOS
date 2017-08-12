@@ -52,7 +52,7 @@
     
     
     context[@"toShare"] = ^() {
-        NSDictionary *webDic=@{@"htmlurl":@"http://roulette.looper.pro/index.php?userId=%@",@"activityname":@"恭喜你获得了ultra门票"};
+        NSDictionary *webDic=@{@"htmlurl":@"http://roulette.looper.pro/index.php?userId=%@",@"activityname":@"恭喜你获得了ultra门票",@"photo":@"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg"};
         [self.obj shareh5View:webDic];
         
     };

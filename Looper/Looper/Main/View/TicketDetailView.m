@@ -103,27 +103,28 @@
     contentLB.frame=frame;
     [cell.contentView addSubview:contentLB];
     
-    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+    locationLB.numberOfLines=1;
+    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     locationLB.text=[dataDic objectForKey:@"location"];
     locationLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:locationLB];
     
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+12*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+22*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     timeLB.text=[dataDic objectForKey:@"starttime"];
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;
     timeLB.frame=frame1;
-    timeLB.numberOfLines=0;
+    timeLB.numberOfLines=1;
     timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:timeLB];
     
-    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+12*DEF_Adaptation_Font*0.5, 221*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 221*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     priceLB.text= [NSString stringWithFormat:@"票价:%d   ×%@",[[dataDic objectForKey:@"price"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"]];
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(221*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
     priceLB.frame=frame3;
@@ -131,8 +132,8 @@
     priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:priceLB];
     
-    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(480*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+15*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    sumPriceLB.font=[UIFont systemFontOfSize:13];
+    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(400*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+25*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+    sumPriceLB.font=[UIFont systemFontOfSize:15];
     sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[dataDic objectForKey:@"price"]intValue]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
