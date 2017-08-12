@@ -138,7 +138,6 @@
 
     UILabel *activityName = [LooperToolClass createLableView:CGPointMake(212*DEF_Adaptation_Font_x*0.5, 116*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(386*DEF_Adaptation_Font_x*0.5, 68*DEF_Adaptation_Font_x*0.5) andText:[[_dataSource objectForKey:@"activity"]objectForKey:@"activityname"] andFontSize:18 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     activityName.numberOfLines=0;
-    [activityName sizeToFit];
     [view addSubview:activityName];
     
     

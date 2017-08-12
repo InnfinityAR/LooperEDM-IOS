@@ -111,7 +111,7 @@
             width = 330*0.5*DEF_Adaptation_Font+15*0.5*DEF_Adaptation_Font;
         }
         
-        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake((12+55+16)*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font +add_y,width, (num_y*32+20)*0.5*DEF_Adaptation_Font)];
+        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake((12+55+16)*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font +add_y,width, (num_y*39+20)*0.5*DEF_Adaptation_Font)];
         [frame setBackgroundColor:[UIColor colorWithRed:246/255.0 green:241/255.0 blue:254/255.0 alpha:1.0]];
         
         frame.layer.cornerRadius = 20*0.5*DEF_Adaptation_Font;
@@ -135,13 +135,13 @@
             width = 330*0.5*DEF_Adaptation_Font+15*0.5*DEF_Adaptation_Font;
         }
         
-        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake(573*DEF_Adaptation_Font_x*0.5-width-16*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font+add_y,width, (num_y*35+20)*0.5*DEF_Adaptation_Font)];
+        UIView *frame = [[UIView  alloc] initWithFrame:CGRectMake(573*DEF_Adaptation_Font_x*0.5-width-16*0.5*DEF_Adaptation_Font, 20*0.5*DEF_Adaptation_Font+add_y,width, (num_y*39+20)*0.5*DEF_Adaptation_Font)];
         [frame setBackgroundColor:[UIColor colorWithRed:195/255.0 green:119/255.0 blue:221/255.0 alpha:1.0]];
         frame.layer.cornerRadius = 20*0.5*DEF_Adaptation_Font;
         frame.layer.masksToBounds = YES;
         [self addSubview:frame];
         
-        UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(12*DEF_Adaptation_Font_x*0.5, 5*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(330*DEF_Adaptation_Font_x*0.5, num_y*45*DEF_Adaptation_Font*0.5) andText:[cellData objectForKey:@"text"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(12*DEF_Adaptation_Font_x*0.5, 5*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(330*DEF_Adaptation_Font_x*0.5, num_y*48*DEF_Adaptation_Font*0.5) andText:[cellData objectForKey:@"text"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [frame addSubview:titleNum];
         titleNum.numberOfLines=0;
         [titleNum sizeToFit];

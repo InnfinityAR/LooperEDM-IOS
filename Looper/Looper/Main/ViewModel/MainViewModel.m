@@ -112,6 +112,29 @@
 }
 
 
+-(void)getRouletteUser{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+            
+            
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+
 -(void)getSessionArray{
   //  SessionArray = [[NSArray alloc] initWithArray:[[NIMCloudMander sharedManager] allRecentSessions]];
 }

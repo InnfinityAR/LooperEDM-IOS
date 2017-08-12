@@ -68,17 +68,25 @@
     
     
     
-    if([[looper objectForKey:@"sex"]intValue]==1){
-    
+    if([looper objectForKey:@"sex"]!=[NSNull null]){
+        if([[looper objectForKey:@"sex"]intValue]==1){
+            
+            imageV = [LooperToolClass createImageView:@"bg_looper_man.png" andRect:CGPointMake(111, 370) andTag:100 andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, 261*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+            [self addSubview:imageV];
+            
+        }else {
+            imageV = [LooperToolClass createImageView:@"bg_looper_woman.png" andRect:CGPointMake(111, 370) andTag:100 andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, 261*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
+            [self addSubview:imageV];
+            
+        }
+    }else{
         imageV = [LooperToolClass createImageView:@"bg_looper_man.png" andRect:CGPointMake(111, 370) andTag:100 andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, 261*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
         [self addSubview:imageV];
+        
+
     
-    }else {
-        imageV = [LooperToolClass createImageView:@"bg_looper_woman.png" andRect:CGPointMake(111, 370) andTag:100 andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, 261*DEF_Adaptation_Font_x*0.5) andIsRadius:false];
-        [self addSubview:imageV];
-
-        }
-
+    
+    }
 }
 
 

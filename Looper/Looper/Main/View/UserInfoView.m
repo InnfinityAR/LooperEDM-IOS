@@ -21,6 +21,8 @@
     UIView *headView;
     UIImageView *headFrame;
     UIImageView *manFrame;
+    UILabel *followNum;
+    UILabel *fanNum;
 
 
 }
@@ -138,13 +140,13 @@
         [self addSubview:manFrame];
     }
 
-    UILabel *followNum = [[UILabel alloc] initWithFrame:CGRectMake(204*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
-     [followNum setText:[_myData objectForKey:@"followcount"]];
+    followNum = [[UILabel alloc] initWithFrame:CGRectMake(204*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
+    [followNum setText:[_myData objectForKey:@"followcount"]];
     [followNum setTextAlignment:NSTextAlignmentLeft];
     [followNum setTextColor:[UIColor whiteColor]];
     [self addSubview:followNum];
     
-    UILabel *fanNum = [[UILabel alloc] initWithFrame:CGRectMake(448*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
+    fanNum = [[UILabel alloc] initWithFrame:CGRectMake(448*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
     [fanNum setText:[_myData objectForKey:@"fanscount"]];
     [fanNum setTextAlignment:NSTextAlignmentLeft];
     [fanNum setTextColor:[UIColor whiteColor]];

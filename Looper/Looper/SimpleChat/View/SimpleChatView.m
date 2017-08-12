@@ -124,6 +124,7 @@
         
         chatArray=[[NSMutableArray alloc] initWithArray:[(NSArray*)chatArray sortedArrayUsingComparator:cmptr]];
         [_collectView reloadData];
+        [_collectView setContentOffset:CGPointMake(0, _collectView.contentSize.height - _collectView.frame.size.height) animated:YES];
     });
 }
 
@@ -245,9 +246,9 @@
     int num_y = [self getYWithForContentStr:[dic objectForKey:@"text"]];
 
     if(isHasTime==true){
-         return CGSizeMake(DEF_SCREEN_WIDTH,(80+35*num_y)*DEF_Adaptation_Font*0.5+54*DEF_Adaptation_Font*0.5);
+         return CGSizeMake(DEF_SCREEN_WIDTH,(80+39*num_y)*DEF_Adaptation_Font*0.5+54*DEF_Adaptation_Font*0.5);
     }else{
-         return CGSizeMake(DEF_SCREEN_WIDTH,(80+35*num_y)*DEF_Adaptation_Font*0.5);
+         return CGSizeMake(DEF_SCREEN_WIDTH,(80+39*num_y)*DEF_Adaptation_Font*0.5);
     }
 }
 

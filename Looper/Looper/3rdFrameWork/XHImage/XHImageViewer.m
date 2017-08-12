@@ -23,8 +23,7 @@
 @implementation XHImageViewer{
 
     NSMutableArray *tempArray;
-
-
+    UIImageView *tempImage;
 }
 
 - (id)init{
@@ -50,14 +49,19 @@
         [self dismissWithAnimate];
     }else if(button.tag == 102){
         
+        for (int i=0;i<[[_scrollView subviews]count];i++){
+            [[[_scrollView subviews] objectAtIndex:i] removeFromSuperview];
+        }
+        
         [_scrollView removeFromSuperview];
         [tempArray removeObjectAtIndex:(_scrollView.contentOffset.x / _scrollView.frame.size.width)];
         
         if([tempArray count]==0){
-        
+            [self removeFromSuperview];
              [self dismissWithAnimate];
         
         }else{
+            [tempImage removeFromSuperview];
             [self showWithImageViews:tempArray selectedView:[tempArray objectAtIndex:0]];
 
         
@@ -159,6 +163,8 @@
     const CGFloat fullW = window.frame.size.width;
     const CGFloat fullH = window.frame.size.height;
     
+    
+    tempImage = selectedView;
     selectedView.frame = [window convertRect:selectedView.frame fromView:selectedView.superview];
     [window addSubview:selectedView];
     

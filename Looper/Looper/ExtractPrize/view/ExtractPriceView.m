@@ -47,7 +47,13 @@
     JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
     context[@"toCreateOrderForID"] = ^() {
-         [self.obj getRouletteProductForproductId:2];
+        
+        
+        NSArray *args = [JSContext currentArguments];
+        NSString *product = [NSString stringWithFormat:@"%@",[args objectAtIndex:0]];
+ 
+        
+         [self.obj getRouletteProductForproductId:product];
     };
     
     
