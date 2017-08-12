@@ -213,7 +213,7 @@
 
 -(void)createActivityView{
 
-    activity = [[nActivityViewController alloc] init];
+    activity = [[nActivityViewController alloc] initWithOrderArr: [LocalDataMangaer sharedManager].rouletteArr];
     
     [[_obj navigationController]  pushViewController:activity animated:YES];
     

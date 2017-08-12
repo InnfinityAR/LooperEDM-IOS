@@ -365,7 +365,7 @@
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
             [self getMyOrderFromHttp];
-            rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
+            [LocalDataMangaer sharedManager].rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
 
             //[self getRouletteResult];
@@ -552,7 +552,7 @@
 
 
 -(void)pushNActivityViewController{
-    nActivityViewController *activity = [[nActivityViewController alloc] initWithOrderArr:rouletteArr];
+    nActivityViewController *activity = [[nActivityViewController alloc] initWithOrderArr: [LocalDataMangaer sharedManager].rouletteArr];
     [[_obj navigationController]  pushViewController:activity animated:YES];
     
 }
@@ -561,7 +561,7 @@
     
     _activityId = activityId;
     
-    activity = [[nActivityViewController alloc] init];
+    activity = [[nActivityViewController alloc] initWithOrderArr: [LocalDataMangaer sharedManager].rouletteArr];
     
     [[_obj navigationController]  pushViewController:activity animated:YES];
     

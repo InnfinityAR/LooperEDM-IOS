@@ -18,7 +18,7 @@
     NSString *sex;
     NSString *NickName;
     NSString *age;
-    
+    NSArray *rouletteArr;
     
     
     
@@ -38,6 +38,8 @@
 @property(nonatomic,strong)NSString *sex;
 @property(nonatomic,strong)NSString *NickName;
 @property(nonatomic,strong)NSDictionary *localUserData;
+@property(nonatomic,strong)NSArray *rouletteArr;
+
 
 @property(nonatomic)int loginType;
 
