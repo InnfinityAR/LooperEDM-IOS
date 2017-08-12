@@ -38,6 +38,7 @@
 
 -(void)initView{
     self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
+    self.webView.backgroundColor=ColorRGB(34, 35, 71, 1.0);
     self.webView.suppressesIncrementalRendering=YES;
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://roulette.looper.pro/index.php?userId=%@",[LocalDataMangaer sharedManager].uid]]];
     self.webView.delegate=self;
@@ -68,26 +69,6 @@
     self.backgroundColor=ColorRGB(34, 35, 71, 1.0);
     UIButton *goBtn = [LooperToolClass createBtnImageNameReal:@"image_pay.png" andRect:CGPointMake(DEF_WIDTH(self)-70*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"image_pay.png" andClickImage:@"image_pay.png" andTextStr:nil andSize:CGSizeMake(60*DEF_Adaptation_Font*0.5,60*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:goBtn];
-}
-
--(IBAction)IOS_JS:(id)sender
-{
-    NSString *str = [self.webView stringByEvaluatingJavaScriptFromString:@"postStr();"];
-    NSLog(@"JS返回值：%@",str);
-}
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    //判断是否是单击
-    if (navigationType == UIWebViewNavigationTypeLinkClicked)
-    {
-        NSURL *url = [request URL];
-        if([[UIApplication sharedApplication]canOpenURL:url])
-        {
-            [[UIApplication sharedApplication]openURL:url];
-        }
-        return NO;
-    }
-    return YES;
 }
 
 //- (void) webViewDidFinishLoad:(UIWebView *)webView{
