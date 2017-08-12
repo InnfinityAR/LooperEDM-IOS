@@ -298,7 +298,7 @@
     bottomView=contentView;
     contentView.backgroundColor=[UIColor colorWithRed:36/255.0 green:34/255.0 blue:60/255.0 alpha:1.0];
     [self addSubview:contentView];
-    _textField = [[UITextView alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)- 200*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     _textField.placeholder = @"快来回复我";
     _textField.tag=-1;
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
