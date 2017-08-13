@@ -513,9 +513,9 @@
     }
 
     if([[[_clubData objectForKey:@"data"] objectForKey:@"avatar"] count]==1){
-        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:0]];
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:0] andType:0];
     }else{
-        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:tag]];
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:tag] andType:0];
     }
 
 }
@@ -528,7 +528,6 @@
 
 - (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
     
-    [imageViewer removeFromSuperview];
 }
 
 

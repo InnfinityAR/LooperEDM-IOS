@@ -283,8 +283,9 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
         if (_outputStream) {
             [_outputStream close];
         }
-
+       // if(_outputStream!=nil){
         _outputStream = outputStream;
+       // }
     }
     [self.lock unlock];
 }

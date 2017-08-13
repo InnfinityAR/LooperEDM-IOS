@@ -124,7 +124,7 @@
         
         chatArray=[[NSMutableArray alloc] initWithArray:[(NSArray*)chatArray sortedArrayUsingComparator:cmptr]];
         [_collectView reloadData];
-        [_collectView setContentOffset:CGPointMake(0, _collectView.contentSize.height - _collectView.frame.size.height) animated:YES];
+        //[_collectView setContentOffset:CGPointMake(0, _collectView.contentSize.height - _collectView.frame.size.height) animated:YES];
     });
 }
 
