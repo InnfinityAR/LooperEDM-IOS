@@ -52,13 +52,12 @@
         NSArray *args = [JSContext currentArguments];
         NSString *product = [NSString stringWithFormat:@"%@",[args objectAtIndex:0]];
  
-        
-         [self.obj getRouletteProductForproductId:product];
+         [self.obj getRouletteProductForproductId:[product intValue]];
     };
     
     
     context[@"toShare"] = ^() {
-        NSDictionary *webDic=@{@"htmlurl":@"http://roulette.looper.pro/index.php?userId=%@",@"activityname":@"恭喜你获得了ultra门票"};
+        NSDictionary *webDic=@{@"htmlurl":[NSString stringWithFormat:@"http://roulette.looper.pro/index.php?userId=%@",[LocalDataMangaer sharedManager].uid],@"activityname":@"诺，你的Ultra China免费门票来了！",@"photo":@"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg"};
         [self.obj shareh5View:webDic];
         
     };
