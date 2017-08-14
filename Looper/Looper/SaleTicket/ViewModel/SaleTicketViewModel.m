@@ -95,7 +95,7 @@
              [self getMyOrderFromHttp];
             
         }else{
-            
+             [[DataHander sharedDataHander] showViewWithStr:@"您填写的地址信息错误" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         

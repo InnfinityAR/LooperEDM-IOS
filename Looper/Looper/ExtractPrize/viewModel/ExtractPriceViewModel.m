@@ -71,13 +71,14 @@
 
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic andOrderDic:(NSDictionary*)orderDic andResultId:(NSInteger)resultId{
     NSMutableDictionary *dictionary=[[NSMutableDictionary alloc]initWithDictionary:orderDic];
+     NSInteger price=[[orderDic objectForKey:@"price"]integerValue];
     [dictionary setObject:@(resultId) forKey:@"resultId"];
     orderDic=[dictionary copy];
     if ([[orderDic objectForKey:@"price"]integerValue]>0) {
         NSArray *array=@[dictionary];
         orderDic=@{@"roulette":array};
     }
-    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:[[orderDic objectForKey:@"price"]integerValue]];
+    SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:price];
     [[self.obj navigationController]pushViewController:saleTicketVC animated:YES];
 }
 
