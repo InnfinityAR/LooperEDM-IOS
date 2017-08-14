@@ -49,7 +49,7 @@
         NSString *product = [NSString stringWithFormat:@"%@",[args objectAtIndex:0]];
         NSString *resultId = [NSString stringWithFormat:@"%@",[args objectAtIndex:1]];
  
-         [self.obj getRouletteProductForproductId:[product intValue]];
+         [self.obj getRouletteProductForproductId:[product intValue] andResultId:[resultId integerValue]];
     };
     
     
