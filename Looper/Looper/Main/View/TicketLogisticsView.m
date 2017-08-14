@@ -25,7 +25,7 @@
         self.obj = (MainViewModel*)idObject;
         if (self.obj!=nil) {
             [self.obj setTickLoginV:self];
-            [self.obj getKuaiDi100FromHttp:@"shunfeng" andNu:@"786655113275"];
+            [self.obj getKuaiDi100FromHttp:nil andNu:nil];
         }
         self.myData = myDataSource;
         [self initView];
