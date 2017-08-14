@@ -17,10 +17,6 @@
 
 @implementation AliManagerData
 
-
-
-
-
 +(NSString *)generateTradeNO
 {
     static int kNumber = 15;
@@ -135,6 +131,16 @@
         // NOTE: 调用支付结果开始支付
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }];
     }
 }
