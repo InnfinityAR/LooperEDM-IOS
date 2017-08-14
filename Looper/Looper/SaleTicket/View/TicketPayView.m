@@ -392,9 +392,9 @@
         if ([self judgeIsEnsurePayBtn]) {
 //sendPayUserInfo
             if (selectTime==nil) {
-                [self.obj checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+                [self.obj checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultId"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
             }else{
-                 [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultid"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+                 [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultId"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
             }
            
         }
