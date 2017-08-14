@@ -23,6 +23,7 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource{
     if (self = [super initWithFrame:frame]) {
         self.obj = (MainViewModel*)idObject;
+//从历史订单过来，self.obj才不是空的
         if (self.obj!=nil) {
             [self.obj setTickLoginV:self];
             [self.obj getKuaiDi100FromHttp:nil andNu:nil];

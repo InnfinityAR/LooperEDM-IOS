@@ -86,8 +86,7 @@
     cell.backgroundColor=[UIColor clearColor];
     cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 226*DEF_Adaptation_Font*0.5)];
-    imageView.backgroundColor=ColorRGB(72, 104, 207, 1.0);
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
     [cell.contentView addSubview:imageView];
