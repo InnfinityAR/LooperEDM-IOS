@@ -98,7 +98,7 @@
         self.VMNumber=0;
         [self createBackView];
         [self requestData];
-        [self getMyOrderFromHttp];
+//        [self getMyOrderFromHttp];
     }
     return  self;
 }
@@ -388,7 +388,7 @@
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
             _mainData = [[NSDictionary alloc] initWithDictionary:responseObject];
-            [self getMyOrderFromHttp];
+            
             [LocalDataMangaer sharedManager].rouletteArr=[responseObject[@"data"]objectForKey:@"roulette"];
             [self requestgetMyFavorite];
 
@@ -653,8 +653,7 @@
     }
     else if(type==8008){
 #warning 在这里写入订票详情
-        TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr];
-        [[_obj view] addSubview:ticketDetailV];
+        [self getMyOrderFromHttp];
     }
     
     else if(type==8007){
@@ -821,6 +820,8 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             self.orderArr=responseObject[@"data"];
+            TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr];
+            [[_obj view] addSubview:ticketDetailV];
         }else{
             
         }
