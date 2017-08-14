@@ -840,14 +840,11 @@
     if (nu!=nil) {
          [dic setObject:nu forKey:@"nu"];
     }
-     [dic setObject:@"0" forKey:@"show"];
-    [dic setObject:@"1" forKey:@"muti"];
-    [dic setObject:@"desc" forKey:@"order"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 设置请求格式
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    NSString* url =@"http://api.kuaidi100.com/api";
-   NSString *url= @"http://api.kuaidi100.com/api?id=29833628d495d7a5&com=shunfeng&nu=786655113275&show=0&muti=1&order=desc";
+    NSString* url =@"http://api.kuaidi100.com/api?id=29833628d495d7a5&show=0&muti=1&order=desc";
+//   NSString *url= @"http://api.kuaidi100.com/api?id=29833628d495d7a5&show=0&muti=1&order=desc";
     [manager POST:url parameters:nil constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"status"]integerValue]==1) {
             [self.tickLoginV setKuaidiArr:[responseObject objectForKey:@"data"]];

@@ -30,10 +30,11 @@
     [[self.obj view]addSubview:extractView];
 }
 //获取商品详情
--(void)getRouletteProductForproductId:(NSInteger)productId{
+-(void)getRouletteProductForproductId:(NSInteger)productId andResultId:(NSInteger)resultId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@(productId) forKey:@"productId"];
+    [dic setObject:@(resultId) forKey:@"resultId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getProduct" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSDictionary *orderDic=responseObject[@"data"];

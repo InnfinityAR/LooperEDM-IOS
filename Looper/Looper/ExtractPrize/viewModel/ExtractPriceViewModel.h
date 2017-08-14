@@ -12,7 +12,7 @@
 @property(nonatomic,strong)id obj;
 -(instancetype)initWithController:(id)controller;
 -(void)updateView;
--(void)getRouletteProductForproductId:(NSInteger)productId;
+-(void)getRouletteProductForproductId:(NSInteger)productId andResultId:(NSInteger)resultId;
 -(void)popViewController;
 
 -(void)shareh5View:(NSDictionary*)webDic;
