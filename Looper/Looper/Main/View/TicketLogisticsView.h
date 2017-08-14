@@ -18,4 +18,5 @@
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary *myData;
 @property(nonatomic,strong)NSArray *kuaidiArr;
+-(void)updataTableView :(NSArray *)kuaidiArr;
 @end

@@ -34,7 +34,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@(productId) forKey:@"productId"];
-    [dic setObject:@(resultId) forKey:@"resultId"];
+//    [dic setObject:@(resultId) forKey:@"resultId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getProduct" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSDictionary *orderDic=responseObject[@"data"];
@@ -55,7 +55,7 @@
                 [[DataHander sharedDataHander] showViewWithStr:@"当前数据错误" andTime:1 andPos:CGPointZero];
             }else{
                 [dataDic setObject:[orderDic objectForKey:@"roulettename"] forKey:@"activityname"];
-                [self jumpToSaleTicketController:dataDic andOrderDic:orderDic];
+                [self jumpToSaleTicketController:dataDic andOrderDic:orderDic andResultId:resultId];
             }
             
         }else{
@@ -69,9 +69,12 @@
     [[self.obj navigationController]popViewControllerAnimated:YES];
 }
 
--(void)jumpToSaleTicketController:(NSDictionary *)dataDic andOrderDic:(NSDictionary*)orderDic{
+-(void)jumpToSaleTicketController:(NSDictionary *)dataDic andOrderDic:(NSDictionary*)orderDic andResultId:(NSInteger)resultId{
+    NSMutableDictionary *dictionary=[[NSMutableDictionary alloc]initWithDictionary:orderDic];
+    [dictionary setObject:@(resultId) forKey:@"resultId"];
+    orderDic=[dictionary copy];
     if ([[orderDic objectForKey:@"price"]integerValue]>0) {
-        NSArray *array=@[orderDic];
+        NSArray *array=@[dictionary];
         orderDic=@{@"roulette":array};
     }
     SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:[[orderDic objectForKey:@"price"]integerValue]];

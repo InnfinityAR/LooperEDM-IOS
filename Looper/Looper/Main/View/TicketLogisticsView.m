@@ -25,12 +25,18 @@
         self.obj = (MainViewModel*)idObject;
         if (self.obj!=nil) {
             [self.obj setTickLoginV:self];
-            [self.obj getKuaiDi100FromHttp:nil andNu:nil];
+            [self.obj getKuaiDi100FromHttp:@"shunfeng" andNu:@"786655113275"];
         }
         self.myData = myDataSource;
         [self initView];
     }
     return self;
+}
+-(void)updataTableView :(NSArray *)kuaidiArr{
+    self.kuaidiArr=kuaidiArr;
+     self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(self.logiDetailView)+DEF_HEIGHT(self.logiDetailView));
+    [self.logiDetailView reloadData];
+
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -214,7 +220,6 @@
     logiDetailLB.textColor=ColorRGB(212, 215, 230, 1.0);
     logiDetailLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:logiDetailLB];
-    
     self.logiDetailView=[[UITableView alloc]initWithFrame:CGRectMake(0, DEF_Y(logiDetailLB)+55*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self))];
     self.logiDetailView.backgroundColor=[UIColor clearColor];
     self.logiDetailView.delegate=self;
@@ -226,7 +231,7 @@
     self.logiDetailView.alwaysBounceVertical=YES;
     [self.logiDetailView registerClass:[AttenceTimelineCell class] forCellReuseIdentifier:@"Cell"];
     [contentScrol addSubview:self.logiDetailView];
-    self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(self.logiDetailView)+DEF_HEIGHT(self.logiDetailView));
+   
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    if (self.kuaidiArr.count) {

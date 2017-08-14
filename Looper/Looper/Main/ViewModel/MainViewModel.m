@@ -832,24 +832,24 @@
 }
 
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-     [dic setObject:@"29833628d495d7a5" forKey:@"id"];
-    if (com!=nil) {
-          [dic setObject:com forKey:@"com"];
-    }
-    if (nu!=nil) {
-         [dic setObject:nu forKey:@"nu"];
-    }
+//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+//     [dic setObject:@"29833628d495d7a5" forKey:@"id"];
+//    if (com!=nil) {
+//          [dic setObject:com forKey:@"com"];
+//    }
+//    if (nu!=nil) {
+//         [dic setObject:nu forKey:@"nu"];
+//    }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 设置请求格式
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    NSString* url =@"http://api.kuaidi100.com/api?id=29833628d495d7a5&show=0&muti=1&order=desc";
+    NSString* url =[NSString stringWithFormat:@"http://api.kuaidi100.com/api?id=29833628d495d7a5&com=%@&nu=%@&show=0&muti=1&order=desc",com,nu];
 //   NSString *url= @"http://api.kuaidi100.com/api?id=29833628d495d7a5&show=0&muti=1&order=desc";
     [manager POST:url parameters:nil constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject objectForKey:@"status"]integerValue]==1) {
-            [self.tickLoginV setKuaidiArr:[responseObject objectForKey:@"data"]];
+            [self.tickLoginV updataTableView:[responseObject objectForKey:@"data"]];
         }else{
-         [[DataHander sharedDataHander] showViewWithStr:[responseObject objectForKey:@"message"] andTime:1 andPos:CGPointZero];
+         [[DataHander sharedDataHander] showViewWithStr:[responseObject objectForKey:@"message"] andTime:2 andPos:CGPointZero];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"错误 %@", error.localizedDescription);
