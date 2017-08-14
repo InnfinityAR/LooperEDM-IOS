@@ -17,4 +17,5 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary *myData;
+@property(nonatomic,strong)NSArray *kuaidiArr;
 @end
