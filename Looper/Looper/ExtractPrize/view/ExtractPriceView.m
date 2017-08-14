@@ -30,9 +30,6 @@
     }
 }
 
-
-
-
 -(void)initView{
     self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
     self.webView.backgroundColor=ColorRGB(34, 35, 71, 1.0);
@@ -48,9 +45,9 @@
     
     context[@"toCreateOrderForID"] = ^() {
         
-        
         NSArray *args = [JSContext currentArguments];
         NSString *product = [NSString stringWithFormat:@"%@",[args objectAtIndex:0]];
+        NSString *resultId = [NSString stringWithFormat:@"%@",[args objectAtIndex:1]];
  
          [self.obj getRouletteProductForproductId:[product intValue]];
     };

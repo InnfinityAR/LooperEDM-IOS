@@ -80,11 +80,11 @@
 }
 
 
--(void)updataView{
+-(void)updataView:(NSDictionary*)data{
 
     [mainChatV updataLoopFollowData:[[_obj MainData] objectForKey:@"data"]];
 
-    [userInfoView updataView];
+    [userInfoView updataView:data];
 
 }
 

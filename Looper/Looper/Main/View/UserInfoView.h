@@ -17,7 +17,7 @@
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary* myData;
 
--(void)updataView;
+-(void)updataView:(NSDictionary*)data;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource;
 
 @end
