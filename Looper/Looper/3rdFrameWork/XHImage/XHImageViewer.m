@@ -61,8 +61,8 @@
              [self dismissWithAnimate];
         
         }else{
-            [tempImage removeFromSuperview];
-            [self showWithImageViews:tempArray selectedView:[tempArray objectAtIndex:0]];
+
+            [self showWithImageViews:tempArray selectedView:[tempArray objectAtIndex:0] andType:1];
 
         
         }
@@ -109,7 +109,7 @@
 }
 
 
-- (void)showWithImageViews:(NSArray*)views selectedView:(UIImageView*)selectedView {
+- (void)showWithImageViews:(NSArray*)views selectedView:(UIImageView*)selectedView andType:(int)type{
     tempArray = [[NSMutableArray alloc] initWithArray:views];
     
     [self setImageViewsFromArray:views];
@@ -120,7 +120,13 @@
         }
         [self showWithSelectedView:selectedView];
     }
-     [self createHudView];
+    if(type==1){
+    
+        [self createHudView];
+    }else if(type==0){
+        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+        [self addSubview:backBtn];
+    }
 }
 
 #pragma mark- Properties
@@ -184,6 +190,8 @@
                          NSLog(@"---x--%f,y--%f,width---%f,height---%f",selectedView.frame.origin.x,selectedView.frame.origin.y,selectedView.frame.size.width,selectedView.frame.size.height);
                      }
                      completion:^(BOOL finished) {
+                         
+                         [selectedView removeFromSuperview];
                          _scrollView.contentSize = CGSizeMake(_imgViews.count * fullW, 0);
                          _scrollView.contentOffset = CGPointMake(currentPage * fullW, 0);
                          

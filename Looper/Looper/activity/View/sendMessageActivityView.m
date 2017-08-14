@@ -237,9 +237,9 @@
     }
     
     if([tempImageArray count]==1){
-        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:0]];
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:0] andType:1];
     }else{
-        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:tag]];
+        [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[tempImageArray objectAtIndex:tag] andType:1];
     }
 }
 
