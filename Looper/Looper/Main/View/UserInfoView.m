@@ -43,12 +43,18 @@
 }
 
 
--(void)updataView{
+-(void)updataView:(NSDictionary*)data{
+    
+    _myData = data;
     [headView removeFromSuperview];
     [headFrame removeFromSuperview];
     [manFrame removeFromSuperview];
 
     [titleName setText:[LocalDataMangaer sharedManager].NickName];
+    
+    
+    [followNum setText:[_myData objectForKey:@"followcount"]];
+    [fanNum setText:[_myData objectForKey:@"fanscount"]];
     
 
     headView = [LooperToolClass createViewAndRect:CGPointMake(215, 105) andTag:100 andSize:CGSizeMake(198*0.5*DEF_Adaptation_Font, 198*0.5*DEF_Adaptation_Font) andIsRadius:true andImageName:[LocalDataMangaer sharedManager].HeadImageUrl];

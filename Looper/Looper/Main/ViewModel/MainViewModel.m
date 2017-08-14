@@ -116,13 +116,14 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRouletteUser" parameters:dic success:^(id responseObject){
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getHeartBeat" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
-            
-            
-            
-            
+            [LocalDataMangaer sharedManager].tokenStr =responseObject[@"user"][@"sdkid"];
+            [LocalDataMangaer sharedManager].NickName =responseObject[@"user"][@"nickname"];
+            [LocalDataMangaer sharedManager].sex =responseObject[@"user"][@"sex"];
+            [LocalDataMangaer sharedManager].age =responseObject[@"user"][@"age"];
+            [[LocalDataMangaer sharedManager] setData];
+            [_mainV updataView:responseObject[@"user"]];
         }else{
             
             
@@ -309,7 +310,7 @@
                     bkv.alpha=0;
                 }];
             }else{
-                [_mainV updataView];
+                [_mainV updataView:[[_mainData objectForKey:@"data"] objectForKey:@"User"]];
                 
                 [commonTable updataView];
                 
@@ -797,6 +798,10 @@
 
 -(void)initView{
 
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(getRouletteUser) userInfo:nil repeats:true];
+    
+    
+    
     _mainV = [[nMainView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     _mainV.multipleTouchEnabled=true;
     [[_obj view] addSubview:_mainV];

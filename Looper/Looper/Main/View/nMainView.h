@@ -21,7 +21,7 @@
 -(void)toLoopView:(NSDictionary*)loopData;
 -(void)chatView:(NSString*)targetId;
 
--(void)updataView;
+-(void)updataView:(NSDictionary*)data;
 
 
 @end
