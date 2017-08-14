@@ -16,12 +16,17 @@
 @property(nonatomic,strong)UIScrollView *contentScroll;
 
 @property(nonatomic,strong)UITableView *logiDetailView;
+
 @end
 @implementation TicketLogisticsView
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource{
     if (self = [super initWithFrame:frame]) {
         self.obj = (MainViewModel*)idObject;
+        if (self.obj!=nil) {
+            [self.obj setTickLoginV:self];
+            [self.obj getKuaiDi100FromHttp:nil andNu:nil];
+        }
         self.myData = myDataSource;
         [self initView];
     }
@@ -53,7 +58,7 @@
     contentLB.frame=frame;
     [contentScrol addSubview:contentLB];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+35*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 116*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+35*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
     [imageView sd_setImageWithURL:[NSURL URLWithString:[self.myData objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     [contentScrol addSubview:imageView];
@@ -72,10 +77,10 @@
     locationLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [contentScrol addSubview:locationLB];
     
-    UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+    UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+10*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     timeLB.text=[self.myData objectForKey:@"starttime"];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
@@ -86,10 +91,10 @@
     timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [contentScrol addSubview:timeLB];
     
-    UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+    UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     priceLV.image=[UIImage imageNamed:@"ticket.png"];
     [contentScrol addSubview:priceLV];
-    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+17*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     priceLB.text=[NSString stringWithFormat:@"票价:%d   ×%@",[[_myData objectForKey:@"price"]intValue]/[[_myData objectForKey:@"number"]intValue],[_myData objectForKey:@"number"]];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
@@ -100,14 +105,14 @@
     priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [contentScrol addSubview:priceLB];
     
-    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+10*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     sumPriceLB.font=[UIFont systemFontOfSize:14];
     sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[_myData objectForKey:@"price"]intValue]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [contentScrol addSubview:sumPriceLB];
     
-    UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+30*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
+    UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+60*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
     lineIV.image=[UIImage imageNamed:@"cutoffLine.png"];
     [contentScrol addSubview:lineIV];
 
@@ -224,7 +229,10 @@
     self.contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self),DEF_Y(self.logiDetailView)+DEF_HEIGHT(self.logiDetailView));
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-     return dataSourceArr.count;
+//    if (self.kuaidiArr.count) {
+        return _kuaidiArr.count;
+//    }
+//     return dataSourceArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     AttenceTimelineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -238,7 +246,10 @@
     verticalLineTopView.backgroundColor = ColorRGB(97, 97, 97, 1.0);
     [cell.contentView addSubview:verticalLineTopView];
     UILabel *showLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font, 10*DEF_Adaptation_Font, DEF_WIDTH(self)-40*DEF_Adaptation_Font, 40)];
-    showLB.text= dataSourceArr[dataSourceArr.count - 1 - indexPath.row];
+//    showLB.text= dataSourceArr[dataSourceArr.count - 1 - indexPath.row];
+    if (self.kuaidiArr.count) {
+        showLB.text=[self.kuaidiArr[indexPath.row]objectForKey:@"context"];
+    }
     showLB.numberOfLines = 0;
     showLB.textColor=[UIColor whiteColor];
     showLB.textAlignment=NSTextAlignmentLeft;
@@ -250,6 +261,9 @@
     [cell.contentView addSubview:showLB];
     UILabel *timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(DotViewCentX - VerticalLineWidth/2.0 + 20*DEF_Adaptation_Font, showLB.frame.origin.y+showLB.frame.size.height+5*DEF_Adaptation_Font, ShowLabWidth, 10*DEF_Adaptation_Font)];
     timeLabel.text=@"2017年10月1日";
+    if (self.kuaidiArr.count) {
+        timeLabel.text=[self.kuaidiArr[indexPath.row]objectForKey:@"time"];
+    }
     timeLabel.textColor=[UIColor lightGrayColor];
     timeLabel.font=[UIFont systemFontOfSize:13];
     [cell.contentView addSubview:timeLabel];
@@ -261,12 +275,22 @@
     dotView.layer.cornerRadius = 4*DEF_Adaptation_Font;
     [cell.contentView addSubview:dotView];
     //设置最上面和最下面是否隐藏
+    if (self.kuaidiArr.count) {
+        if (indexPath.row==0) {
+            verticalLineTopView.hidden = YES;
+        }else{
+            verticalLineTopView.hidden = NO;
+        }if (indexPath.row==self.kuaidiArr.count-1) {
+            verticalLineBottomView.hidden = YES;
+        }
+    }else{
     if (indexPath.row==0) {
         verticalLineTopView.hidden = YES;
     }else{
     verticalLineTopView.hidden = NO;
     }if (indexPath.row==dataSourceArr.count-1) {
         verticalLineBottomView.hidden = YES;
+    }
     }
     //判断是否是第一个（是第一个更改背景色）
     dotView.backgroundColor = isFirst ? [UIColor greenColor] : [UIColor lightGrayColor];
@@ -280,6 +304,9 @@
 }
 //设置cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.kuaidiArr.count) {
+        return [AttenceTimelineCell cellHeightWithString:[self.kuaidiArr[indexPath.row]objectForKey:@"context"] isContentHeight:NO]+15*DEF_Adaptation_Font;
+    }
    return [AttenceTimelineCell cellHeightWithString:dataSourceArr[dataSourceArr.count - 1 - indexPath.row] isContentHeight:NO]+15*DEF_Adaptation_Font;
     
     

@@ -393,13 +393,14 @@
 }
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (range.location>=100) {
-        textField.text=[textField.text substringToIndex:100];
+    if (range.location>=99) {
+        textField.text=[textField.text substringToIndex:99];
     }
     countLB.text=[NSString stringWithFormat:@"%ld/100",_textField.text.length];
-//    if (range.location==100) {
-//        return NO;
-//    }
+    if (range.location==99) {
+        countLB.text=@"100/100";
+        return NO;
+    }
     return YES;
 }
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
@@ -432,7 +433,7 @@
     if ([textField.text isEqualToString:@""]) {
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你发不了空评论" andTime:1 andPos:CGPointZero];
     }
-    if (textField.text.length>=100) {
+    if (textField.text.length>=99) {
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你发评论超过100字了" andTime:1 andPos:CGPointZero];
     }
     [self endEditing:YES];

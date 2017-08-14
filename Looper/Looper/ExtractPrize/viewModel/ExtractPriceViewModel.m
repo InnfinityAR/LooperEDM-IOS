@@ -16,6 +16,7 @@
 
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
+#import "DataHander.h"
 @implementation ExtractPriceViewModel
 -(instancetype)initWithController:(id)controller{
     if (self=[super init]) {
@@ -44,17 +45,18 @@
             }else{
              [dataDic setObject:[orderDic objectForKey:@"location"] forKey:@"location"];
             }
-            if ([orderDic objectForKey:@"roulettename"]==nil||[orderDic objectForKey:@"roulettename"]==[NSNull null]) {
-            [dataDic setObject:@"640-2.png" forKey:@"activityname"];
-            }else{
-             [dataDic setObject:[orderDic objectForKey:@"roulettename"] forKey:@"activityname"];
-            }
              if ([orderDic objectForKey:@"roulettename"]==nil||[orderDic objectForKey:@"roulettename"]==[NSNull null]) {
                   [dataDic setObject:@"640-2.png" forKey:@"photo"];
              }else{
               [dataDic setObject:[orderDic objectForKey:@"coverimage"] forKey:@"photo"];
              }
-            [self jumpToSaleTicketController:dataDic andOrderDic:orderDic];
+            if ([orderDic objectForKey:@"roulettename"]==nil||[orderDic objectForKey:@"roulettename"]==[NSNull null]) {
+                [[DataHander sharedDataHander] showViewWithStr:@"当前数据错误" andTime:1 andPos:CGPointZero];
+            }else{
+                [dataDic setObject:[orderDic objectForKey:@"roulettename"] forKey:@"activityname"];
+                [self jumpToSaleTicketController:dataDic andOrderDic:orderDic];
+            }
+            
         }else{
             
         }

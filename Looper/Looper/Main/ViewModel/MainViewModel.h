@@ -33,7 +33,7 @@
 #import "CreateLoopView.h"
 #import "nMainView.h"
 
-
+#import "TicketLogisticsView.h"
 @interface MainViewModel : NSObject <UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>{
 
     
@@ -57,6 +57,8 @@
 @property(nonatomic)NSArray *musicData;
 @property(nonatomic)NSInteger VMNumber;
 @property(nonatomic,strong)NSArray *orderArr;
+@property(nonatomic,strong)TicketLogisticsView *tickLoginV;
+
 
 -(id)initWithController:(id)controller;
 -(void)hudOnClick:(int)type;
@@ -81,4 +83,9 @@
 -(void)createActivityView:(NSString*)activityId;
 -(void)createPlayerView:(int)PlayerId;
 -(void)getMyOrderFromHttp;
+
+
+-(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
+
+@property(nonatomic,strong)NSArray *kuaidiArr;
 @end
