@@ -88,4 +88,6 @@
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
 
 @property(nonatomic,strong)NSArray *kuaidiArr;
+
+
 @end

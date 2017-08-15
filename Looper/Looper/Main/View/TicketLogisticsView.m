@@ -45,7 +45,7 @@
         [self removeFromSuperview];
     }
     if (button.tag==101) {
-        
+        [[self.ticketVC navigationController]popToRootViewControllerAnimated:YES];
     }
 }
 -(void)initView{
@@ -356,6 +356,9 @@
     [self addSubview:bk];
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
+    if (self.obj==nil) {
+        backBtn.tag=101;
+    }
     
     UILabel  *titleLB = [LooperToolClass createLableView:CGPointMake(258*DEF_Adaptation_Font*0.5,64*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(200*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andText:@"订单详情" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [self addSubview:titleLB];
