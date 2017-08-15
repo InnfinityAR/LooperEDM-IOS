@@ -759,6 +759,7 @@
 		C4F59A781EB36D370088C815 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F59A771EB36D370088C815 /* MediaPlayer.framework */; };
 		C4F59A7B1EB3782C0088C815 /* btn_select.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F59A791EB3782C0088C815 /* btn_select.png */; };
 		C4F59A7C1EB3782C0088C815 /* btn_unSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F59A7A1EB3782C0088C815 /* btn_unSelect.png */; };
+		C4F6B9B51F422A0500C9F43D /* order.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F6B9B41F422A0500C9F43D /* order.png */; };
 		C4FE98501E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE984F1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -1892,6 +1893,7 @@
 		C4F59A771EB36D370088C815 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		C4F59A791EB3782C0088C815 /* btn_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_select.png; sourceTree = "<group>"; };
 		C4F59A7A1EB3782C0088C815 /* btn_unSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_unSelect.png; sourceTree = "<group>"; };
+		C4F6B9B41F422A0500C9F43D /* order.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = order.png; sourceTree = "<group>"; };
 		C4FE984E1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperlistCellCollectionViewCell.h; sourceTree = "<group>"; };
 		C4FE984F1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperlistCellCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3522,6 +3524,7 @@
 		C4A4D0BE1E791A85002519F2 /* mainView */ = {
 			isa = PBXGroup;
 			children = (
+				C4F6B9B41F422A0500C9F43D /* order.png */,
 				C4313BDA1E8CDBA100C40650 /* icon_serach.png */,
 				C41DDCD81E7A5F3E00873CBF /* bk_1.png */,
 				C41DDCD91E7A5F3E00873CBF /* bk_2.png */,
@@ -4903,6 +4906,7 @@
 				B2A1E80D1F29FFD1006270E3 /* btn_finishEnd.png in Resources */,
 				C42E80381EC332D400D9CC43 /* loading_00001.png in Resources */,
 				C41DDCDE1E7A5F3E00873CBF /* bk_3.png in Resources */,
+				C4F6B9B51F422A0500C9F43D /* order.png in Resources */,
 				C42E80441EC332D400D9CC43 /* loading_00013.png in Resources */,
 				C42E80561EC332D400D9CC43 /* loading_00031.png in Resources */,
 				C4DD32571EB9B8A5008CA240 /* unbarrage.png in Resources */,

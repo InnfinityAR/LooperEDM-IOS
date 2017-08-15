@@ -12,6 +12,7 @@
 #import "APAuthV2Info.h"
 #import "RSADataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "DataHander.h"
 
 
 
@@ -67,6 +68,7 @@
                                               cancelButtonTitle:@"确定"
                                               otherButtonTitles:nil];
         [alert show];
+        
         return;
     }
     
@@ -92,17 +94,21 @@
     
     // NOTE: 支付版本
     order.version = @"1.0";
-    
+
     // NOTE: sign_type 根据商户设置的私钥来决定
     order.sign_type = (rsa2PrivateKey.length > 1)?@"RSA2":@"RSA";
     
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
-    order.biz_content.body = @"我是测试数据";
+    order.biz_content.body = [Paydic objectForKey:@"productid"];
     order.biz_content.subject = @"1";
     order.biz_content.out_trade_no = [Paydic objectForKey:@"ordercode"]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
-    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
+    //order.biz_content.total_amount = [Paydic objectForKey:@"price"]; //商品价格
+    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    
+    
+    order.notify_url = @"http://api2.innfinityar.com/alipay/return_url.php";
     
     //将商品信息拼接成字符串
     NSString *orderInfo = [order orderInfoEncoded:NO];
@@ -132,14 +138,18 @@
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
             
-            
-            
-            
-            
-            
-            
-            
-            
+            int  resultStatus=[[resultDic objectForKey:@"resultStatus"] intValue];
+        
+            if(resultStatus==9000){
+                [[DataHander sharedDataHander] showViewWithStr:@"订单支付成功" andTime:2 andPos:CGPointZero];
+            }else if(resultStatus==4000){
+                [[DataHander sharedDataHander] showViewWithStr:@"订单支付失败" andTime:2 andPos:CGPointZero];
+            }else if(resultStatus==5000){
+                [[DataHander sharedDataHander] showViewWithStr:@"重复请求" andTime:2 andPos:CGPointZero];
+            }else if(resultStatus==6001){
+                [[DataHander sharedDataHander] showViewWithStr:@"中途取消" andTime:2 andPos:CGPointZero];
+            }
+
             
         }];
     }
