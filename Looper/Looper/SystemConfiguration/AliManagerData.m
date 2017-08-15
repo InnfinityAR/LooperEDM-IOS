@@ -104,8 +104,8 @@
     order.biz_content.subject = @"1";
     order.biz_content.out_trade_no = [Paydic objectForKey:@"ordercode"]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
-    //order.biz_content.total_amount = [Paydic objectForKey:@"price"]; //商品价格
-    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01];
+    order.biz_content.total_amount = [Paydic objectForKey:@"price"]; //商品价格
+    //order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01];
     
     
     order.notify_url = @"http://api2.innfinityar.com/alipay/return_url.php";
