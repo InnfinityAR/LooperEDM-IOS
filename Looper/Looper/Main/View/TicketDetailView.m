@@ -66,6 +66,37 @@
     [self addSubview:titleLB];
 }
 
+
+-(NSString *)setSelecttime:(NSDictionary *)dictionary{
+    NSDate *startDate =[self timeWithTimeIntervalString:[dictionary objectForKey:@"starttime"]];
+    NSDate *endDate=[self timeWithTimeIntervalString:[dictionary objectForKey:@"endtime"]];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit;//这句是说你要获取日期的元素有哪些。获取年就要写NSYearCalendarUnit，获取小时就要写NSHourCalendarUnit，中间用|隔开；
+    NSDateComponents *startcomp=[cal components:unitFlags fromDate:startDate];
+    NSDateComponents *endcomp=[cal components:unitFlags fromDate:endDate];
+    //    NSMutableArray *dateArr=[[NSMutableArray alloc]init];
+    //    for (NSInteger i=[startcomp day]; i<=[endcomp day]; i++) {
+    //        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
+    //    }
+    if ([startcomp day]==[endcomp day]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //设置格式：zzz表示时区
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        //NSDate转NSString
+        NSString *currentDateString = [dateFormatter stringFromDate:startDate];
+        return currentDateString;
+    }
+    NSString *dataStr=[NSString stringWithFormat:@"%ld年%ld月%ld号-%ld月%ld号",[startcomp year],[startcomp month],[startcomp day],[endcomp month],[endcomp day]];
+    return dataStr;
+}
+- (NSDate *)timeWithTimeIntervalString:(NSString *)timeString
+{
+    //    NSTimeInterval time=[timeString doubleValue]+28800;//因为时差问题要加8小时 == 28800 sec
+    NSTimeInterval time=[timeString doubleValue];
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    return  detaildate;
+}
+
 #pragma-UITableView的代理
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.myData.count;
@@ -111,7 +142,7 @@
     
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+22*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
-    timeLB.text=[dataDic objectForKey:@"starttime"];
+    timeLB.text=[self setSelecttime:dataDic];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;

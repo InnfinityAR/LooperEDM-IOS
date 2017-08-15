@@ -153,6 +153,13 @@
 //        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
 //    }
     NSString *dataStr=[NSString stringWithFormat:@"%ld年%ld月%ld号-%ld月%ld号",[startcomp year],[startcomp month],[startcomp day],[endcomp month],[endcomp day]];
+    if ([startcomp day]==[endcomp day]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //设置格式：zzz表示时区
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        //NSDate转NSString
+        dataStr = [dateFormatter stringFromDate:startDate];
+    }
 //使按钮可以平铺。如果右边距离不够自动切换到下一行
     for (int i=0; i<1; i++) {
   UIButton *timeBtn=[self publishButton:dataStr andCGPoint:CGPointMake(35*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5+_currentTimeY) andTag:i];

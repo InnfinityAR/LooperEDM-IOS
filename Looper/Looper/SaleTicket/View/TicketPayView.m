@@ -283,6 +283,14 @@
     //    for (NSInteger i=[startcomp day]; i<=[endcomp day]; i++) {
     //        [dateArr addObject:[NSString stringWithFormat:@"%ld年%ld月%ld号",[startcomp year],[startcomp month],i]];
     //    }
+    if ([startcomp day]==[endcomp day]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        //设置格式：zzz表示时区
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        //NSDate转NSString
+        NSString *currentDateString = [dateFormatter stringFromDate:startDate];
+        return currentDateString;
+    }
     NSString *dataStr=[NSString stringWithFormat:@"%ld年%ld月%ld号-%ld月%ld号",[startcomp year],[startcomp month],[startcomp day],[endcomp month],[endcomp day]];
     return dataStr;
 }
