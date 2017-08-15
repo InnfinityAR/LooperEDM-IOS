@@ -19,4 +19,8 @@
 @property(nonatomic,strong)NSDictionary *myData;
 @property(nonatomic,strong)NSArray *kuaidiArr;
 -(void)updataTableView :(NSArray *)kuaidiArr;
+
+
+//用于储存controller
+@property(nonatomic,strong)id ticketVC;
 @end
