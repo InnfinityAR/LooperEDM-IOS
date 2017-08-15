@@ -98,7 +98,6 @@
         self.VMNumber=0;
         [self createBackView];
         [self requestData];
-//        [self getMyOrderFromHttp];
     }
     return  self;
 }

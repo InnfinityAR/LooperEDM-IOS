@@ -103,7 +103,7 @@
     titleLabel.hidden=true;
 #warning-在这里进行是否进行抽奖的判断
     NSArray *roulette=[_orderDic objectForKey:@"roulette"];
-    if (roulette.count>=1) {
+    if (roulette.count<0) {
         UIImageView *shadowIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-140*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 46*DEF_Adaptation_Font*0.5)];
         shadowIV.image=[UIImage imageNamed:@"shadow_pay_liveshow.png"];
         [self addSubview:shadowIV];

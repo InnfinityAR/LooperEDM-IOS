@@ -28,13 +28,13 @@
     return self;
 }
 -(void)getDataFromHTTP:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic andPrice:(NSInteger)price{
-    if (price>0) {
-    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:dataDic orderDic:orderDic];
-    [[self.obj view]addSubview:self.saleTicketV];
-    }else{
+//    if (price>0) {
+//    self.saleTicketV=[[SaleTicketView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:dataDic orderDic:orderDic];
+//    [[self.obj view]addSubview:self.saleTicketV];
+//    }else{
         self.ticketPayView=[[TicketPayView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self andDataDic:dataDic andPayNumber:1 andOrderDic:orderDic andTime:nil];
         [[self.obj view]addSubview:self.ticketPayView];
-    }
+//    }
 }
 -(void)popViewController{
     [[self.obj navigationController]popViewControllerAnimated:YES];

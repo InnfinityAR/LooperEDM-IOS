@@ -104,7 +104,7 @@
     [contentScrol addSubview:timeLV];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    if ([[self.orderDic objectForKey:@"price" ]intValue]>0) {
+    if ([[self.orderDic objectForKey:@"isPrice" ]intValue]>0) {
     timeLB.text=selectTime;
     }else{
         timeLB.text=[self setSelecttime];
