@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/activity/View/barrageReplyView.m"
-            timestampString = "524390221.014006"
+            timestampString = "524545606.83315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
             landmarkName = "-textFieldShouldClear:"
             landmarkType = "7">
          </BreakpointContent>

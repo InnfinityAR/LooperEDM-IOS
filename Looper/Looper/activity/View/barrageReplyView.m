@@ -307,8 +307,8 @@
     _textField.font=[UIFont systemFontOfSize:14];
     _textField.layer.masksToBounds=YES;
     _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    _textField.leftView.layer.masksToBounds=YES;
-    _textField.leftViewMode=UITextFieldViewModeAlways;
+//    _textField.leftView.layer.masksToBounds=YES;
+//    _textField.leftViewMode=UITextFieldViewModeAlways;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     _textField.backgroundColor=[UIColor colorWithRed:68/255.0 green:68/255.0 blue:89/255.0 alpha:1.0];
@@ -317,8 +317,7 @@
     _textField.clearsOnBeginEditing = YES;
     _textField.delegate=self;
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
-    _textField.contentVerticalAlignment =UIControlContentHorizontalAlignmentCenter;
-    _textField.contentMode = UIViewContentModeCenter;
+    _textField.contentVerticalAlignment =UIControlContentVerticalAlignmentCenter;
     _textField.textColor = [UIColor whiteColor];
     [contentView addSubview:_textField];
     countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, -3*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
