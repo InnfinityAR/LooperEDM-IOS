@@ -302,9 +302,11 @@
 
 -(void)createBkView{
     backImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    if (_commendArray.count>0) {
     [backImageV sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:0]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
+    }
     [self addSubview:backImageV];
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView* effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
@@ -342,7 +344,7 @@
     activityFollowBtn = [LooperToolClass createBtnImageNameReal:@"activity_unfollow.png" andRect:CGPointMake(195*DEF_Adaptation_Font*0.5,991*DEF_Adaptation_Font*0.5) andTag:105 andSelectImage:@"activity_follow.png" andClickImage:@"activity_follow.png" andTextStr:nil andSize:CGSizeMake(78*DEF_Adaptation_Font*0.5,72*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:activityFollowBtn];
     
-    
+    if (_commendArray.count) {
     NSDictionary *dic =[_commendArray objectAtIndex:0];
     if([[dic objectForKey:@"isfollow"] intValue]==1){
         [activityFollowBtn setSelected:true];
@@ -355,7 +357,7 @@
     }else{
         [tripBtn setSelected:false];
     }
-
+    }
 }
 
 
