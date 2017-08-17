@@ -163,6 +163,7 @@
               [self.viewModel pustDataForActivityID:[[buddleDic  objectForKey:@"activityid"]intValue] andMessageID:[[buddleDic  objectForKey:@"messageid"]intValue] andContent:_textField.text andUserID:@([[LocalDataMangaer sharedManager].uid intValue]) andIndex:self.index andIsReplyView:YES andSendPerson:nil];
         }
         if (_textField.tag>=0) {
+            
             buddleDic=_replyArr[_textField.tag];
             if ([[buddleDic  objectForKey:@"username"]isEqualToString:@""]) {
                 _textField.text=[_textField.text substringFromIndex:1];
@@ -306,8 +307,7 @@
     // 设置了占位文字内容以后, 才能设置占位文字的颜色
     _textField.font=[UIFont systemFontOfSize:14];
     _textField.layer.masksToBounds=YES;
-    _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 5*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-//    _textField.leftView.layer.masksToBounds=YES;
+//    _textField.leftView=[[UIView alloc]initWithFrame:CGRectMake(-10*DEF_Adaptation_Font*0.5, 0, 30*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
 //    _textField.leftViewMode=UITextFieldViewModeAlways;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [_textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -319,6 +319,7 @@
      [_textField setBorderStyle:UITextBorderStyleRoundedRect];
     _textField.contentVerticalAlignment =UIControlContentVerticalAlignmentCenter;
     _textField.textColor = [UIColor whiteColor];
+//    _textField.clipsToBounds=NO;
     [contentView addSubview:_textField];
     countLB=[[UILabel alloc]initWithFrame:CGRectMake(559*DEF_Adaptation_Font*0.5, -3*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
     countLB.text=@"0/100";
@@ -332,7 +333,6 @@
     _sendButton.layer.masksToBounds=YES;
     [contentView addSubview:_sendButton];
 }
-
 - (float) heightForString:(NSString *)value andWidth:(float)width andText:(UILabel *)label{
     //获取当前文本的属性
     NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:value];
@@ -392,10 +392,13 @@
 }
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (range.location>=99) {
+if (range.location>=99) {
         textField.text=[textField.text substringToIndex:99];
     }
     countLB.text=[NSString stringWithFormat:@"%ld/100",_textField.text.length];
+    if (range.location==0) {
+         countLB.text=@"0/100";
+    }
     if (range.location==99) {
         countLB.text=@"100/100";
         return NO;

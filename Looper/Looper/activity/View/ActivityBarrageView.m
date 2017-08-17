@@ -33,7 +33,7 @@
     XDRefreshFooter *_footer;
 }
 @property(nonatomic,strong)UIButton * suspendBtn;
-@property(nonatomic,retain) MPMoviePlayerController *movieController;
+//@property(nonatomic,retain) MPMoviePlayerController *movieController;
 //三个属性都是用于循环展示上传的照片
 @property (nonatomic, strong) YWCarouseView * carouseView;
 @property(nonatomic,strong)NSMutableArray * imageNameArray;
@@ -323,8 +323,10 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
         [self removeActivityAction];
-               [self.movieController stop];
+//               [self.movieController stop];
         [self removeFromSuperview];
+        [[SDImageCache sharedImageCache] clearMemory];
+         [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
     }
     if (button.tag==101) {
         [self.publishCountArr removeAllObjects];
@@ -1231,10 +1233,10 @@
         f.size.width=DEF_WIDTH(self) + fabs(xOffset)*2;
         self.headerView.frame= f;
         //修改视频的拉伸效果
-        CGRect f3=self.movieController.view.frame;
-        f3.size.height=-yOffset+60*DEF_Adaptation_Font*0.5;
-        f3.size.width=DEF_WIDTH(self) + fabs(xOffset)*2;
-        self.movieController.view.frame= f3;
+//        CGRect f3=self.movieController.view.frame;
+//        f3.size.height=-yOffset+60*DEF_Adaptation_Font*0.5;
+//        f3.size.width=DEF_WIDTH(self) + fabs(xOffset)*2;
+//        self.movieController.view.frame= f3;
     }
     else{
         CGRect f2 =self.buddleView.frame;
@@ -1267,4 +1269,5 @@
    _collectView.contentInset = UIEdgeInsetsMake(450*DEF_Adaptation_Font*0.5, 0, 0, 0 );
     //    NSLog(@"总长度:%f,加上的长度:%f", 40 - self.collectView.contentOffset.y-160*DEF_Adaptation_Font*0.5,80*DEF_Adaptation_Font*0.5);
 }
+
 @end

@@ -8,6 +8,7 @@
 
 #import "ActivityViewController.h"
 #import "ActivityViewModel.h"
+#import "SDImageCache.h"
 @interface ActivityViewController ()
 @property(nonatomic,strong)ActivityViewModel *activityVM;
 
@@ -45,5 +46,15 @@
     }
     [super viewWillDisappear:animated];
 }
+- (void)didReceiveMemoryWarning {
+    
+    [super didReceiveMemoryWarning];
+    
+    [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+    
+    [[SDImageCache sharedImageCache] clearDisk];
+    
+}
+
 
 @end
