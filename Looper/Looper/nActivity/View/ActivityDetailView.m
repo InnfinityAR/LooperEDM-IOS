@@ -424,7 +424,7 @@
 
 
 -(void)addbrandView{
-    if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]||[[activityDic objectForKey:@"host"]isEqualToString:@""]) {
+    if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
     }else{
     [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
 }
