@@ -108,7 +108,7 @@
     //order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01];
     
     
-    order.notify_url = @"http://api2.innfinityar.com/alipay/return_url.php";
+    order.notify_url = @"http://api2.innfinityar.com/alipay/notify_url.php";
     
     //将商品信息拼接成字符串
     NSString *orderInfo = [order orderInfoEncoded:NO];
