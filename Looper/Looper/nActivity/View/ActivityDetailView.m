@@ -425,7 +425,10 @@
 
 
 -(void)addbrandView{
+    if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
+    }else{
     [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+}
 }
 
 
@@ -594,6 +597,8 @@
     }
     if(button.tag==101){
         [self removeFromSuperview];
+        [[SDImageCache sharedImageCache] clearMemory];
+        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];
     }else if(button.tag==103){
