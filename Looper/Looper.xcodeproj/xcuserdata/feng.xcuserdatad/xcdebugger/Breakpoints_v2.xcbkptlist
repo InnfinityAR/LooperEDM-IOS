@@ -1338,11 +1338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "524640801.813119"
+            timestampString = "524731333.47286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "-addbrandView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1354,11 +1354,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/nActivity/View/ActivityDetailView.m"
-            timestampString = "524640811.687385"
+            timestampString = "524731333.47286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "-createDjView"
             landmarkType = "7">
          </BreakpointContent>

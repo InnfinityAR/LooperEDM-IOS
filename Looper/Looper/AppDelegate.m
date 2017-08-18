@@ -51,7 +51,7 @@
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
     NSLog(@"内存警告了⚠️⚠️⚠️⚠️⚠️⚠️⚠️");
- 
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 
