@@ -16,7 +16,6 @@
 #endif
 
 @implementation UIImage (MultiFormat)
-
 + (UIImage *)sd_imageWithData:(NSData *)data {
     UIImage *image;
     NSString *imageContentType = [NSData sd_contentTypeForImageData:data];
@@ -31,6 +30,9 @@
 #endif
     else {
         image = [[UIImage alloc] initWithData:data];
+        if (data.length/1024 > 90) {
+            image = [self compressImageWith:image];
+        }
         UIImageOrientation orientation = [self sd_imageOrientationFromImageData:data];
         if (orientation != UIImageOrientationUp) {
             image = [UIImage imageWithCGImage:image.CGImage
@@ -38,11 +40,10 @@
                                   orientation:orientation];
         }
     }
-
-
+    
+    
     return image;
 }
-
 
 +(UIImageOrientation)sd_imageOrientationFromImageData:(NSData *)imageData {
     UIImageOrientation result = UIImageOrientationUp;
@@ -109,6 +110,34 @@
     return orientation;
 }
 
-
++(UIImage *)compressImageWith:(UIImage *)image
+{
+    float imageWidth = image.size.width;
+    float imageHeight = image.size.height;
+    float width = 320;
+    float height = image.size.height/(image.size.width/width);
+    
+    float widthScale = imageWidth /width;
+    float heightScale = imageHeight /height;
+    
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    
+    if (widthScale > heightScale) {
+        [image drawInRect:CGRectMake(0, 0, imageWidth /heightScale , height)];
+    }
+    else {
+        [image drawInRect:CGRectMake(0, 0, width , imageHeight /widthScale)];
+    }
+    
+    // 从当前context中创建一个改变大小后的图片
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+    
+}
 
 @end
