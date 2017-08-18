@@ -54,7 +54,7 @@
     
     
     context[@"toShare"] = ^() {
-        NSDictionary *webDic=@{@"htmlurl":[NSString stringWithFormat:@"http://roulette.looper.pro/index.php?userId=%@",[LocalDataMangaer sharedManager].uid],@"activityname":@"诺，你的Ultra China免费门票来了！",@"photo":@"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg"};
+        NSDictionary *webDic=@{@"htmlurl":@"http://roulette.looper.pro",@"activityname":@"诺，你的Ultra China免费门票来了",@"photo":@"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg"};
         [self.obj shareh5View:webDic];
         
     };

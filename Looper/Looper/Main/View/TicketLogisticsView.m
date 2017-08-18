@@ -26,7 +26,7 @@
 //从历史订单过来，self.obj才不是空的
         if (self.obj!=nil) {
             [self.obj setTickLoginV:self];
-            [self.obj getKuaiDi100FromHttp:@"shunfeng" andNu:@"786655113275"];
+            [self.obj getKuaiDi100FromHttp:nil andNu:nil];
         }
         self.myData = myDataSource;
         [self initView];
