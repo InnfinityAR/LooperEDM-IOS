@@ -11,4 +11,5 @@
 @interface ExtractPriceView : UIView
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 @property(nonatomic,strong)id obj;
+-(void)removeActivityAction;
 @end

@@ -134,8 +134,8 @@
     
     
     UIWebView *webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
-    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
-      NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://baidu.com"]];
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
+//      NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://baidu.com"]];
     webV.delegate=self;
 
      webV.userInteractionEnabled=false;
@@ -603,8 +603,6 @@
     }
     if(button.tag==101){
         [self removeFromSuperview];
-        [[SDImageCache sharedImageCache] clearMemory];
-        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];
     }else if(button.tag==103){

@@ -16,4 +16,6 @@
 -(void)popViewController;
 
 -(void)shareh5View:(NSDictionary*)webDic;
+
+-(void)removeActivityAction;
 @end

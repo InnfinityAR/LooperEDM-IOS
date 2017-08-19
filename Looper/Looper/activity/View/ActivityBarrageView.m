@@ -325,9 +325,7 @@
         [self removeActivityAction];
 //               [self.movieController stop];
         [self removeFromSuperview];
-        [[SDImageCache sharedImageCache] clearMemory];
-         [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
-    }
+        }
     if (button.tag==101) {
         [self.publishCountArr removeAllObjects];
         [self.heightPublishDic removeAllObjects];

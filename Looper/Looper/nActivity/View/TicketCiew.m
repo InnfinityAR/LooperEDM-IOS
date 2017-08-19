@@ -14,7 +14,7 @@
 
 @implementation TicketCiew{
     UIScrollView *bkScroll;
-    
+    UIWebView *webV;
     
 }
 
@@ -31,7 +31,7 @@
 }
 -(void)createWebView{
     
-    UIWebView *webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"ticketurl"]]];
     webV.delegate=self;
     
@@ -92,10 +92,18 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
+        [ webV loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+        [ webV stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
+        [ webV removeFromSuperview];
         [self removeFromSuperview];
     }else if(button.tag==102){
         
     }
+}
+-(void)removeActivityAction{
+    [ webV loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+    [ webV stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
+    [ webV removeFromSuperview];
 }
 
 @end

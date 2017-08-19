@@ -17,6 +17,10 @@
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
 #import "DataHander.h"
+@interface ExtractPriceViewModel()
+@property(nonatomic,strong)ExtractPriceView *extractView;
+
+@end
 @implementation ExtractPriceViewModel
 -(instancetype)initWithController:(id)controller{
     if (self=[super init]) {
@@ -25,9 +29,9 @@
     return self;
 }
 -(void)updateView{
-    ExtractPriceView *extractView=[[ExtractPriceView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self];
-    extractView.backgroundColor=[UIColor whiteColor];
-    [[self.obj view]addSubview:extractView];
+   self.extractView=[[ExtractPriceView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:self];
+    self.extractView.backgroundColor=[UIColor whiteColor];
+    [[self.obj view]addSubview:self.extractView];
 }
 //获取商品详情
 -(void)getRouletteProductForproductId:(NSInteger)productId andResultId:(NSInteger)resultId{
@@ -123,5 +127,8 @@
     }];
 }
 
+-(void)removeActivityAction{
+    [self.extractView removeActivityAction];
+}
 
 @end

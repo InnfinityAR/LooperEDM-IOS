@@ -50,4 +50,6 @@
 
 -(void)setCalendarData;
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic;
+
+-(void)removeActivityAction;
 @end

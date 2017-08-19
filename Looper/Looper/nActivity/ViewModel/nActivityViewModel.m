@@ -31,7 +31,7 @@
 
 #import "ClubDetailView.h"
 #import "BrandDetailView.h"
-
+#import "UIImageView+WebCache.h"
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
@@ -45,6 +45,7 @@
     
     CurrentActivityView *view;
     NSArray *orderArray;
+    TicketCiew *ticketV;
 }
 
 
@@ -61,7 +62,8 @@
 -(void)popController{
 
    [[_obj navigationController] popViewControllerAnimated:NO];
-
+    [[SDImageCache sharedImageCache] clearMemory];
+    [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
 }
 
 -(void)setCalendarData{
@@ -190,6 +192,7 @@
 //跳转到购票
 -(void)addTicket:(NSDictionary *)dic{
     TicketCiew *ticketView=[[TicketCiew alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDic:dic];
+    ticketV=ticketView;
     [[_obj view]addSubview:ticketView];
 
    
@@ -520,5 +523,11 @@
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
     SaleTicketController *saleTicketVC=[[SaleTicketController alloc]initWithDataDic:dataDic orderDic:orderDic andPrice:1];
     [[self.obj navigationController]pushViewController:saleTicketVC animated:YES];
+}
+
+-(void)removeActivityAction{
+    if (ticketV!=nil) {
+    [ticketV removeActivityAction];
+    }
 }
 @end
