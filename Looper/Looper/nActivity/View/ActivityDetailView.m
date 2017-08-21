@@ -37,6 +37,7 @@
     UILabel *titleLabel;
     
     NSDictionary *_orderDic;
+    UIWebView *webV;
 }
 
 -(void)setCalendar{
@@ -133,9 +134,9 @@
 -(void)createWebView{
     
     
-    UIWebView *webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
-    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
-      NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://baidu.com"]];
+    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
+    //  NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/s/aVKAnIUKxs0St0b8CHk5Uw"]];
     webV.delegate=self;
 
      webV.userInteractionEnabled=false;
@@ -602,9 +603,14 @@
         [self.obj jumpToSaleTicketController:[activityDic objectForKey:@"data"] orderDic:_orderDic];
     }
     if(button.tag==101){
+        
+        
+        [webV loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+        [webV stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
+        [webV removeFromSuperview];
+        
         [self removeFromSuperview];
-        [[SDImageCache sharedImageCache] clearMemory];
-        [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];
     }else if(button.tag==103){

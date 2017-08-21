@@ -90,6 +90,8 @@
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+ 
+    
     [_obj hudOnClick:(int)button.tag];
 }
 
@@ -251,6 +253,10 @@
 
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
+    
+    
+    [updataTimer invalidate];
+    
     
      directionNum = 3;
      moveView =userInfoView;
@@ -471,20 +477,28 @@
                     if(moveView.frame.origin.y>-DEF_SCREEN_HEIGHT/2){
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];
+                             [updataTimer invalidate];
                              backViewColor.alpha=1.0f;
                              _effectView.alpha=1.0f;
+                           
                         }];
                     }else{
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,-DEF_SCREEN_HEIGHT, moveView.frame.size.width, moveView.frame.size.height)];
                             moveView=nil;
-                             backViewColor.alpha=0.0f;
+                            [updataTimer invalidate];
+                              updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
+                            
+                            backViewColor.alpha=0.0f;
                              _effectView.alpha=0.0f;
                         }];
                     }
                 }else{
                     if(startLocation.y>endLocation.y){
                         
+                       
+                        [updataTimer invalidate];
+                        updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,-DEF_SCREEN_HEIGHT, moveView.frame.size.width, moveView.frame.size.height)];
                             moveView=nil;
@@ -493,6 +507,8 @@
                         }];
                         
                     }else{
+                        
+                        [updataTimer invalidate];
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];
                              backViewColor.alpha=1.0f;
