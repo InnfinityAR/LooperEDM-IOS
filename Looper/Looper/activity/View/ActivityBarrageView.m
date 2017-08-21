@@ -9,7 +9,6 @@
 #import "ActivityBarrageView.h"
 #import "LooperToolClass.h"
 #import "ActivityView.h"
-#import "UIImageView+WebCache.h"
 #import "LooperConfig.h"
 #import "ActivityCollectionViewCell.h"
 #import "sendMessageActivityView.h"
@@ -325,9 +324,7 @@
         [self removeActivityAction];
 //               [self.movieController stop];
         [self removeFromSuperview];
-        [[SDImageCache sharedImageCache] clearMemory];
-         [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
-    }
+        }
     if (button.tag==101) {
         [self.publishCountArr removeAllObjects];
         [self.heightPublishDic removeAllObjects];

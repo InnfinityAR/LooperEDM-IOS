@@ -39,6 +39,13 @@
     [_activityVm addActivityDetailView:dic andPhotoWall:1];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    if (! [ [ self.navigationController viewControllers] containsObject:self]) {
+        [_activityVm removeActivityAction];
+    }
+    [super viewWillDisappear:animated];
+}
 
 
 -(void)dealloc{

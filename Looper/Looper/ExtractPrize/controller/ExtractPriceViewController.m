@@ -28,6 +28,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    if (! [ [ self.navigationController viewControllers] containsObject:self]) {
+        [_extractVM removeActivityAction];
+    }
+    [super viewWillDisappear:animated];
+}
 
 /*
 #pragma mark - Navigation

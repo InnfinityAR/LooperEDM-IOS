@@ -22,7 +22,7 @@
     if(lableStr!=[NSNull null]){
         lable.text  = lableStr;
     }
-    [lable setFont:[UIFont fontWithName:looperFont size:FontSize*DEF_Adaptation_Font]];
+    [lable setFont:[UIFont systemFontOfSize:FontSize*DEF_Adaptation_Font]];
     [lable setTextColor:color];
     
     lable.textAlignment = type;

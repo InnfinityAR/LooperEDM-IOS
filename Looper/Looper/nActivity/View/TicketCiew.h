@@ -20,5 +20,5 @@
 @property(nonatomic,strong)NSDictionary *dataDic;
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDic:(NSDictionary *)dataDic;
-
+-(void)removeActivityAction;
 @end

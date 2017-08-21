@@ -78,12 +78,13 @@
                 [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
             }
         }else{
-            
+             [[DataHander sharedDataHander] showViewWithStr:@"您填写的地址信息错误" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
     }];
 }
+//改变创建订单的状态
 -(void)changeOrderStatusForOrderId:(NSString *)orderId ProductId:(NSString*)productId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
@@ -95,7 +96,7 @@
              [self getMyOrderFromHttp];
             
         }else{
-             [[DataHander sharedDataHander] showViewWithStr:@"您填写的地址信息错误" andTime:1 andPos:CGPointZero];
+        
         }
     }fail:^{
         
