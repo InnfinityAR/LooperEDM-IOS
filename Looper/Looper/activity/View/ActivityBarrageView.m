@@ -9,7 +9,6 @@
 #import "ActivityBarrageView.h"
 #import "LooperToolClass.h"
 #import "ActivityView.h"
-#import "UIImageView+WebCache.h"
 #import "LooperConfig.h"
 #import "ActivityCollectionViewCell.h"
 #import "sendMessageActivityView.h"
