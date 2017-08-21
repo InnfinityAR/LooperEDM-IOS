@@ -130,13 +130,11 @@
     
 }
 
-
 -(void)createWebView{
     
     
     webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
-    //  NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mp.weixin.qq.com/s/aVKAnIUKxs0St0b8CHk5Uw"]];
 
     webV.delegate=self;
 
@@ -327,7 +325,7 @@
     [bkScroll addSubview:brandTicket];
     
     
-    UIButton *calendarBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1055*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
+    UIButton *calendarBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(526*DEF_Adaptation_Font_x*0.5, 1055*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [calendarBtn1 addTarget:self action:@selector(addcalendarView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:calendarBtn1];
 
@@ -572,11 +570,7 @@
     if(index==1){
         [self addTicketView];
     }else if(index==2){
-        
-       
          [_obj savaCalendar:[activityDic objectForKey:@"data"]];
-    
-    
     }else if(index==3){
         
         [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];

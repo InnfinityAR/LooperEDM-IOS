@@ -83,7 +83,7 @@
 -(void)updataView:(NSDictionary*)data{
 
     [mainChatV updataLoopFollowData:[[_obj MainData] objectForKey:@"data"]];
-
+    
     [userInfoView updataView:data];
 
 }
@@ -101,7 +101,6 @@
     [[RongCloudManger sharedManager] getUserData:targetId success:^(id responseObject){
         
         [_obj pushControllerToUser:responseObject];
-    
     }];
 }
 
@@ -126,6 +125,11 @@
             moveView=nil;
             backViewColor.alpha=0.0f;
             _effectView.alpha=0.0f;
+            [updataTimer invalidate];
+            updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
+
+            
+            
         }];
     }
      [_obj hudOnClick:EventTag];
@@ -289,8 +293,6 @@
     
     [self createBackGround];
 
-    
-    
     updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
