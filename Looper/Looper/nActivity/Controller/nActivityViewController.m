@@ -8,7 +8,7 @@
 
 #import "nActivityViewController.h"
 #import "nActivityViewModel.h"
-
+#import"UIImageView+WebCache.h"
 @interface nActivityViewController ()
 
 @end
