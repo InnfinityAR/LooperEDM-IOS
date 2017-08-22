@@ -730,7 +730,6 @@
 		C4E86FAD1F16474000D9658D /* PKShortVideoProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E86F981F16474000D9658D /* PKShortVideoProgressBar.m */; };
 		C4E86FAE1F16474000D9658D /* PKShortVideoRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E86F9A1F16474000D9658D /* PKShortVideoRecorder.m */; };
 		C4E86FAF1F16474000D9658D /* PKShortVideoSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E86F9C1F16474000D9658D /* PKShortVideoSession.m */; };
-		C4E86FBA1F166D0D00D9658D /* f1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C4E86FB91F166D0D00D9658D /* f1.mp4 */; };
 		C4EB3D661F14AE7200045EE1 /* PhotoWallCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EB3D651F14AE7200045EE1 /* PhotoWallCollectionViewCell.m */; };
 		C4EC38881E366EB700102B47 /* looperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4EC38871E366EB700102B47 /* looperCellView.m */; };
 		C4F051091EB9F086005DA9F1 /* btn_share.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F051081EB9F086005DA9F1 /* btn_share.png */; };
@@ -1858,7 +1857,6 @@
 		C4E86F9A1F16474000D9658D /* PKShortVideoRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKShortVideoRecorder.m; sourceTree = "<group>"; };
 		C4E86F9B1F16474000D9658D /* PKShortVideoSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKShortVideoSession.h; sourceTree = "<group>"; };
 		C4E86F9C1F16474000D9658D /* PKShortVideoSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKShortVideoSession.m; sourceTree = "<group>"; };
-		C4E86FB91F166D0D00D9658D /* f1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = f1.mp4; sourceTree = "<group>"; };
 		C4EB3D641F14AE7200045EE1 /* PhotoWallCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallCollectionViewCell.h; sourceTree = "<group>"; };
 		C4EB3D651F14AE7200045EE1 /* PhotoWallCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallCollectionViewCell.m; sourceTree = "<group>"; };
 		C4EC38861E366EB700102B47 /* looperCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperCellView.h; sourceTree = "<group>"; };
@@ -4506,7 +4504,6 @@
 			isa = PBXGroup;
 			children = (
 				C4050A381F1C8C8D00BE3419 /* 720.mp4 */,
-				C4E86FB91F166D0D00D9658D /* f1.mp4 */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -4859,7 +4856,6 @@
 				C43203201E80E372009F508F /* Main.storyboard in Resources */,
 				C42F9D521E96156C00F5450F /* chatlist_back.png in Resources */,
 				C4DA323A1E8B7DBB00CD8305 /* btn_myLoop.png in Resources */,
-				C4E86FBA1F166D0D00D9658D /* f1.mp4 in Resources */,
 				C43E77081E091D8D004A5288 /* icon_weibo.png in Resources */,
 				C446CDE71E85276300921FD1 /* LOGO.png in Resources */,
 				C4C4B4901E9C73D2003E2705 /* follow.png in Resources */,
@@ -5433,7 +5429,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5490,7 +5486,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

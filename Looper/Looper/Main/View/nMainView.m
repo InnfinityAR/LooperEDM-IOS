@@ -83,13 +83,15 @@
 -(void)updataView:(NSDictionary*)data{
 
     [mainChatV updataLoopFollowData:[[_obj MainData] objectForKey:@"data"]];
-
+    
     [userInfoView updataView:data];
 
 }
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+ 
+    
     [_obj hudOnClick:(int)button.tag];
 }
 
@@ -99,7 +101,6 @@
     [[RongCloudManger sharedManager] getUserData:targetId success:^(id responseObject){
         
         [_obj pushControllerToUser:responseObject];
-    
     }];
 }
 
@@ -124,6 +125,11 @@
             moveView=nil;
             backViewColor.alpha=0.0f;
             _effectView.alpha=0.0f;
+            [updataTimer invalidate];
+            updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
+
+            
+            
         }];
     }
      [_obj hudOnClick:EventTag];
@@ -252,6 +258,10 @@
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     
+    
+    [updataTimer invalidate];
+    
+    
      directionNum = 3;
      moveView =userInfoView;
     [backViewColor setBackgroundColor:[UIColor colorWithRed:16/255.0 green:18/255.0 blue:30/255.0 alpha:1.0]];
@@ -283,8 +293,6 @@
     
     [self createBackGround];
 
-    
-    
     updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -471,20 +479,28 @@
                     if(moveView.frame.origin.y>-DEF_SCREEN_HEIGHT/2){
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];
+                             [updataTimer invalidate];
                              backViewColor.alpha=1.0f;
                              _effectView.alpha=1.0f;
+                           
                         }];
                     }else{
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,-DEF_SCREEN_HEIGHT, moveView.frame.size.width, moveView.frame.size.height)];
                             moveView=nil;
-                             backViewColor.alpha=0.0f;
+                            [updataTimer invalidate];
+                              updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
+                            
+                            backViewColor.alpha=0.0f;
                              _effectView.alpha=0.0f;
                         }];
                     }
                 }else{
                     if(startLocation.y>endLocation.y){
                         
+                       
+                        [updataTimer invalidate];
+                        updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,-DEF_SCREEN_HEIGHT, moveView.frame.size.width, moveView.frame.size.height)];
                             moveView=nil;
@@ -493,6 +509,8 @@
                         }];
                         
                     }else{
+                        
+                        [updataTimer invalidate];
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];
                              backViewColor.alpha=1.0f;

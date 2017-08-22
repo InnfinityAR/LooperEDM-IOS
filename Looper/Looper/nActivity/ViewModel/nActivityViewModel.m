@@ -28,7 +28,7 @@
 #import "PhotoWallViewController.h"
 
 #import "SaleTicketController.h"
-
+#import "SDImageCache.h"
 #import "ClubDetailView.h"
 #import "BrandDetailView.h"
 #import "UIImageView+WebCache.h"
@@ -61,6 +61,9 @@
 
 -(void)popController{
 
+    [[SDImageCache sharedImageCache] clearMemory];
+    [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+    
    [[_obj navigationController] popViewControllerAnimated:NO];
     [[SDImageCache sharedImageCache] clearMemory];
     [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
