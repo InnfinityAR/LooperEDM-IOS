@@ -167,7 +167,7 @@
         
         if([responseObject[@"status"] intValue]==0){
 //            [[self.barrageView barrageInfo]removeAllObjects];
-            [self getActivityInfoById:activityID andUserId:userId andPage:1 andSize:100];
+            [self getActivityInfoById:activityID andUserId:userId andPage:1 andSize:50];
         }else{
             
         }
@@ -240,7 +240,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendActivityMessage" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
 //             [[self.barrageView barrageInfo]removeAllObjects];
-            [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid andPage:1 andSize:100];
+            [self getActivityInfoById:activityId andUserId:[LocalDataMangaer sharedManager].uid andPage:1 andSize:50];
               [self.barrageView showHUDWithString:@"评论成功"];
         
                 
