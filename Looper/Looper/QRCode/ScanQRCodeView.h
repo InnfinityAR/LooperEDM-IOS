@@ -11,5 +11,5 @@
 @interface ScanQRCodeView : UIView
 //扫描二维码
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj;
-
+@property(nonatomic,strong)id obj;
 @end

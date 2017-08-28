@@ -12,6 +12,37 @@
 #import "LooperConfig.h"
 #import "GenerateQRCodeView.h"
 @implementation ScanQRCode
++(NSString *)initWithImage:(UIImage *)image{
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
+    // 取得识别结果
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    if (features.count == 0) {
+            NSLog(@"暂未识别出扫描的二维码 - - %@", features);
+         [[DataHander sharedDataHander] showViewWithStr:@"暂未识别出扫描的二维码" andTime:1 andPos:CGPointZero];
+        return nil;
+        
+    } else {
+        for (int index = 0; index < [features count]; index ++) {
+            CIQRCodeFeature *feature = [features objectAtIndex:index];
+            NSString *resultStr = feature.messageString;
+            return resultStr;
+        }
+    }
+        return nil;
+}
++ (NSArray *)readQRCodeFromImage:(UIImage *)image{
+    // 创建一个CIImage对象
+    CIImage *ciImage = [[CIImage alloc] initWithCGImage:image.CGImage options:nil];
+    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}]; // 软件渲染
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:context options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];// 二维码识别
+    // 注意这里的CIDetectorTypeQRCode
+    NSArray *features = [detector featuresInImage:ciImage];
+    NSLog(@"features = %@",features); // 识别后的结果集
+    for (CIQRCodeFeature *feature in features) {
+        NSLog(@"msg = %@",feature.messageString); // 打印二维码中的信息
+    }
+    return features;
+}
 +(void)initScanQRWithCurrentView:(UIView*)currentV{
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device) {

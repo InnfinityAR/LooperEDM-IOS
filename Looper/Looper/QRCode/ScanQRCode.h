@@ -13,6 +13,8 @@
 @interface ScanQRCode : NSObject
 //扫描二维码
 +(void)initScanQRWithCurrentView:(UIView*)currentV;
++ (NSArray *)readQRCodeFromImage:(UIImage *)image;
++(NSString *)initWithImage:(UIImage *)image;
 //生成二维码
 +(void)initGenerateWithCurrentView:(UIView *)currentV andUrl:(NSString *)url andImage:(NSString *)imageUrl;
 +(UIImageView *)initWithFrame:(CGRect)frame andUrl:(NSString *)url andImage:(NSString *)imageUrl;

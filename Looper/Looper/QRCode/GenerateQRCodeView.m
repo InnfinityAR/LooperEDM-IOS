@@ -25,13 +25,14 @@
     self.backgroundColor=[UIColor grayColor];
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
+    
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
     if (tag==100) {
         [self removeFromSuperview];
     }
-}
+  }
 -(void)initViewWithUrl:(NSString *)url andImage:(NSString *)imageUrl{
     // 1、借助UIImageView显示二维码
     UIImageView *imageView = [[UIImageView alloc] init];
