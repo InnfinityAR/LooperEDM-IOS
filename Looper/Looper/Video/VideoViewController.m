@@ -79,6 +79,9 @@
     
     
     [self playVideo];
+    
+    
+    [self createViewTouch];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,12 +128,15 @@
     [[self view].layer addSublayer:playerLayer];
     [_player play];
     
-    jumpBtn = [LooperToolClass createBtnImageName:@"btn_jump.png" andRect:CGPointMake(1700, 34) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
-    [[self view] addSubview:jumpBtn];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_player currentItem]];
-    jumpBtn.frame=CGRectMake(1700*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.8,51*DEF_Adaptation_Font*0.8);
     
+
+}
+
+
+-(void)onClickTouchView{
+
+    [jumpBtn setHidden:false];
+
 
 }
 
@@ -138,7 +144,20 @@
 -(void)createViewTouch{
     UIView *touchView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     [[self view] addSubview:touchView];
+    touchView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickTouchView)];
+    [touchView addGestureRecognizer:singleTap];
 
+    
+    jumpBtn = [LooperToolClass createBtnImageName:@"btn_jump.png" andRect:CGPointMake(1700, 34) andTag:102 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    [[self view] addSubview:jumpBtn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidReachEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_player currentItem]];
+    jumpBtn.frame=CGRectMake(1700*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.8,51*DEF_Adaptation_Font*0.8);
+    
+    [jumpBtn setHidden:true];
+
+    
 
 
 }

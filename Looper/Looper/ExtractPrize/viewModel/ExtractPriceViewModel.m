@@ -80,6 +80,8 @@
     if ([[orderDic objectForKey:@"price"]integerValue]>0) {
      [dictionary setObject:@(0) forKey:@"isPrice"];
     }
+    
+    
     orderDic=[dictionary copy];
 #warning-如果要传递一个界面，需要加入这个
 //    if ([[orderDic objectForKey:@"price"]integerValue]>0) {
@@ -113,6 +115,18 @@
                 UMSocialLogInfo(@"************Share fail with error %@*********",error);
             }else{
                 if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                    
+                    
+                    if(platformType==UMSocialPlatformType_WechatTimeLine){
+                        
+                        
+                        NSLog(@"UMSocialPlatformType_WechatTimeLine");
+                        [self.extractView shareH5View];
+                        
+                    }
+                    
+                    
+                    
                     UMSocialShareResponse *resp = data;
                     //分享结果消息
                     UMSocialLogInfo(@"response message is %@",resp.message);

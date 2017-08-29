@@ -34,10 +34,16 @@
 
 #import "WebViewController.h"
 
+
+#import "LocationManagerData.h"
+
+#import "ExtractPriceViewController.h"
+
 #import "ScanQRCodeView.h"
 #import "ScanQRCode.h"
 #import "FamilyRankView.h"
 #import"FamilyMessageView.h"
+
 @interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
@@ -166,13 +172,10 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self initJpush:launchOptions];
     [NSThread sleepForTimeInterval:1.5];
     
-    
-    
-    
 
     
     [self initUmSdk];
-
+    //[[LocationManagerData sharedManager] getLocalationPoint];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 
@@ -206,7 +209,6 @@ void uncaughtExceptionHandler(NSException *exception) {
 //    nav.interactivePopGestureRecognizer.enabled = YES;
 //    self.window.rootViewController = nav;
 //    [self.window makeKeyAndVisible];
-    
     
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     

@@ -158,7 +158,7 @@
         
         if(userinfo.openid!=nil){
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-            [dic setObject:userinfo.openid forKey:@"openId"];
+            [dic setObject:userinfo.uid forKey:@"openId"];
             [dic setObject:@"1" forKey:@"loginType"];
             [dic setObject:userinfo.iconurl forKey:@"headImageUrl"];
             [dic setObject:userinfo.name forKey:@"userName"];
@@ -174,7 +174,7 @@
                 NSLog(@"%@",responseObject);
                 if(responseObject!=nil){
                     if([responseObject[@"status"] intValue]==0){
-                    [LocalDataMangaer sharedManager].uid = responseObject[@"data"][@"userid"];
+                    [LocalDataMangaer sharedManager].uid =responseObject[@"data"][@"userid"];
                     [LocalDataMangaer sharedManager].thirdId = responseObject[@"data"][@"openid"];
                     [LocalDataMangaer sharedManager].userData = responseObject[@"data"];
                     [LocalDataMangaer sharedManager].tokenStr = responseObject[@"data"][@"sdkid"];

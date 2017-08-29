@@ -12,4 +12,7 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 @property(nonatomic,strong)id obj;
 -(void)removeActivityAction;
+
+-(void)shareH5View;
+
 @end

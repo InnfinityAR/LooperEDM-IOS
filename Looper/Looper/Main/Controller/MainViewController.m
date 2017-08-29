@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "LocalDataMangaer.h"
+#import "LocationManagerData.h"
 
 @interface MainViewController ()
 
@@ -28,6 +29,9 @@
    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     _MainVm = [[MainViewModel alloc] initWithController:self];
+    
+    
+   
     
     
     

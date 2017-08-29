@@ -9,6 +9,8 @@
 #import "FamilyRankView.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
+#import "FamilyViewModel.h"
+#import "UIImageView+WebCache.h"
 @interface FamilyRankView()<UITableViewDelegate,UITableViewDataSource>
 {
 //type用来传入是家族排行还是家族列表,1为排行，0为列表,默认为1
@@ -20,7 +22,8 @@
 @implementation FamilyRankView
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataArr:(NSArray *)dataArr andType:(int)type{
     if (self=[super initWithFrame:frame]) {
-        self.obj=(UIView *)obj;
+        self.obj=(FamilyViewModel *)obj;
+        [self.obj setRankView:self];
         self.dataArr=dataArr;
         familyType=1;
         familyType=type;
@@ -56,12 +59,22 @@
     [self addSubview:headView];
     UILabel *familyLB=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 292*DEF_Adaptation_Font*0.5, DEF_HEIGHT(headView))];
     familyLB.text=@"家族";
+    familyLB.userInteractionEnabled=YES;
+    familyLB.tag=1;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityLB:)];
+    [familyLB addGestureRecognizer:singleTap];
+    [self addSubview:familyLB];
     familyLB.textColor=[UIColor whiteColor];
     familyLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     familyLB.textAlignment=NSTextAlignmentCenter;
     [headView addSubview:familyLB];
     UILabel *rankLB=[[UILabel alloc]initWithFrame:CGRectMake(292*DEF_Adaptation_Font*0.5, 0, 58*DEF_Adaptation_Font*0.5, DEF_HEIGHT(headView))];
     rankLB.text=@"等级";
+    rankLB.userInteractionEnabled=YES;
+    rankLB.tag=2;
+    UITapGestureRecognizer *singleTap1 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityLB:)];
+    [rankLB addGestureRecognizer:singleTap1];
+    [self addSubview:rankLB];
     rankLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     rankLB.textColor=[UIColor whiteColor];
      rankLB.textAlignment=NSTextAlignmentCenter;
@@ -71,19 +84,51 @@
     if (familyType==0) {
          livenessLB.text=@"位置";
     }
+    livenessLB.userInteractionEnabled=YES;
+    livenessLB.tag=3;
+    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityLB:)];
+    [livenessLB addGestureRecognizer:singleTap2];
+    [self addSubview:livenessLB];
     livenessLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     livenessLB.textColor=[UIColor whiteColor];
      livenessLB.textAlignment=NSTextAlignmentCenter;
     [headView addSubview:livenessLB];
     UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(466*DEF_Adaptation_Font*0.5, 0, DEF_WIDTH(self)-466*DEF_Adaptation_Font*0.5, DEF_HEIGHT(headView))];
     personNumLB.text=@"人数\n(500人)";
+    personNumLB.userInteractionEnabled=YES;
+    personNumLB.tag=4;
+    UITapGestureRecognizer *singleTap3 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityLB:)];
+    [personNumLB addGestureRecognizer:singleTap3];
+    [self addSubview:personNumLB];
     personNumLB.numberOfLines=0;
     personNumLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     personNumLB.textColor=[UIColor whiteColor];
      personNumLB.textAlignment=NSTextAlignmentCenter;
     [headView addSubview:personNumLB];
-
-    
+}
+-(void)reloadData:(NSArray *)dataArr{
+    self.dataArr=dataArr;
+    [self.tableView reloadData];
+}
+-(void)onClickActivityLB:(UITapGestureRecognizer *)tap{
+    if (familyType==1) {
+    if (tap.view.tag==1) {
+        NSLog(@"家族");
+        [self.obj getFamilyRankDataForOrderType:@"1"];
+    }
+    if (tap.view.tag==2) {
+        NSLog(@"等级");
+        [self.obj getFamilyRankDataForOrderType:@"2"];
+    }
+    if (tap.view.tag==3) {
+        NSLog(@"活跃度");
+        [self.obj getFamilyRankDataForOrderType:@"3"];
+    }
+    if (tap.view.tag==4) {
+        NSLog(@"人数");
+        [self.obj getFamilyRankDataForOrderType:@"4"];
+    }
+    }
 }
 -(void)setBackView{
     [self setBackgroundColor:[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0]];
@@ -93,7 +138,7 @@
 
 #pragma -tableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return  self.dataArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -112,6 +157,7 @@
         return cell;
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
+    NSDictionary *dataDic=self.dataArr[indexPath.row];
     UIImageView *topIV=nil;
     if (familyType==1) {
     if (indexPath.row==0||indexPath.row==1||indexPath.row==2) {
@@ -120,10 +166,11 @@
         topIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 20*DEF_Adaptation_Font, 20*DEF_Adaptation_Font)];
     }
     }
-    topIV.image=[UIImage imageNamed:[NSString stringWithFormat:@"top%ld.png",indexPath.row+1]];
+    topIV.image=[UIImage imageNamed:[NSString stringWithFormat:@"familyRank_top%ld.png",indexPath.row+1]];
     [cell.contentView addSubview:topIV];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(11*DEF_Adaptation_Font, 17*DEF_Adaptation_Font, 28*DEF_Adaptation_Font, 28*DEF_Adaptation_Font)];
-    headIV.image=[UIImage imageNamed:@"640-2.png"];
+    [headIV sd_setImageWithURL:[NSURL URLWithString:dataDic[@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
     headIV.layer.cornerRadius=14*DEF_Adaptation_Font;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];
@@ -131,10 +178,10 @@
     headLB.numberOfLines=0;
     headLB.font=[UIFont systemFontOfSize:14];
     headLB.textColor=[UIColor whiteColor];
-    if (indexPath.row==1) {
-        headLB.text=@"Welphon------------WCNMLGB";
+    if (indexPath.row==0) {
+         headLB.text=@"LooperEDM";
     }else{
-        headLB.text=@"LooperEDM";
+        headLB.text=dataDic[@"ravername"];
     }
     [cell.contentView addSubview:headLB];
     
@@ -142,7 +189,11 @@
     rankLB.font=[UIFont systemFontOfSize:14];
     rankLB.textColor=[UIColor whiteColor];
     rankLB.textAlignment=NSTextAlignmentCenter;
-    rankLB.text=@"II";
+    if ([dataDic objectForKey:@"raverlevel"]==[NSNull null]) {
+    rankLB.text=@"I";
+    }else{
+    rankLB.text=[dataDic objectForKey:@"raverlevel"];
+    }
     [cell.contentView addSubview:rankLB];
     
     UILabel *livenessLB=[[UILabel alloc]initWithFrame:CGRectMake(350*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, 116*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
@@ -150,14 +201,18 @@
     livenessLB.textColor=[UIColor whiteColor];
     livenessLB.textAlignment=NSTextAlignmentCenter;
     if (familyType==1) {
-    livenessLB.text=@"6660000";
+        if ([dataDic objectForKey:@"raveractive"]==[NSNull null]) {
+            livenessLB.text=@"0";
+        }else{
+            livenessLB.text=[dataDic objectForKey:@"raveractive"];
+        }
     }else{
      livenessLB.text=@"上海-黄埔";
     }
     [cell.contentView addSubview:livenessLB];
     
     UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(466*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, DEF_WIDTH(self)-466*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
-    personNumLB.text=@"499";
+    personNumLB.text=[dataDic objectForKey:@"membercount"];
     personNumLB.numberOfLines=0;
     personNumLB.font=[UIFont systemFontOfSize:14];
     personNumLB.textColor=[UIColor whiteColor];

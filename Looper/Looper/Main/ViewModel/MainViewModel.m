@@ -39,6 +39,7 @@
 #import "CreateLoopController.h"
 #import "ActivityViewController.h"
 #import "nActivityViewController.h"
+#import "FamilyViewController.h"
 
 #import "PlayerInfoView.h"
 #import "HowToPlayView.h"
@@ -595,6 +596,17 @@
     [activity jumpToActivityId:_activityId];
 }
 
+
+
+-(void)createFamilyViewController{
+    
+    FamilyViewController *familyVc =[[FamilyViewController alloc] init];
+    [[_obj navigationController]  pushViewController:familyVc animated:YES];
+    
+
+
+}
+
 -(void)hudOnClick:(int)type{
     if (type==55000) {
         ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
@@ -607,7 +619,9 @@
     }else if(type==9008){
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
-       [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+        
+        [self createFamilyViewController];
+       //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 
 //      [self pushLooperListController];
     }else if(type==DJBtnTag){
