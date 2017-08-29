@@ -397,7 +397,7 @@
     self.buddleView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 500*DEF_Adaptation_Font*0.5);
     self.buddleView.clipsToBounds = YES;
     
-    NSTimer *timer=  [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(initDate) userInfo:nil repeats:YES];
+    NSTimer *timer=  [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(initDate) userInfo:nil repeats:YES];
     AppDelegate *delegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
     delegate.timer=timer;
             [self startTimer];
@@ -523,7 +523,7 @@
 //**弹幕下标使用完后暂停8秒重新生成下标
     else{
         if (isAddBuddleSubscriptArr==NO) {
-        [self performSelector:@selector(addBuddleSubscriptArr) withObject:nil/*可传任意类型参数*/ afterDelay:8.0];
+        [self performSelector:@selector(addBuddleSubscriptArr) withObject:nil/*可传任意类型参数*/ afterDelay:10.0];
             isAddBuddleSubscriptArr=YES;
         }
     }

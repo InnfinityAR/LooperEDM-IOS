@@ -625,14 +625,14 @@
     }else if(button.tag==108){
         [_obj savaCalendar:[activityDic objectForKey:@"data"]];
     }else if(button.tag==1009){
-        
+//添加关注
         if([ownerFollowBtn isSelected]==true){
             [_obj unfollowUser:[[activityDic objectForKey:@"owner"] objectForKey:@"userid"]];
             [ownerFollowBtn setSelected:false];
-        
+        [[DataHander sharedDataHander] showViewWithStr:@"取消关注" andTime:1 andPos:CGPointZero];
         }else{
             [_obj followUser:[[activityDic objectForKey:@"owner"] objectForKey:@"userid"]];
-        
+         [[DataHander sharedDataHander] showViewWithStr:@"成功关注" andTime:1 andPos:CGPointZero];
             [ownerFollowBtn setSelected:true];
         }
     }
