@@ -12,7 +12,7 @@
 #import "LooperConfig.h"
 #import "GenerateQRCodeView.h"
 @implementation ScanQRCode
-+(NSString *)initWithImage:(UIImage *)image{
++(NSString *)urlFromImage:(UIImage *)image{
     CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
     // 取得识别结果
     NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
