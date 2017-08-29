@@ -32,6 +32,7 @@
 		B225B9991F3C2BBC0008E5AF /* ExtractPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B9981F3C2BBC0008E5AF /* ExtractPriceViewController.m */; };
 		B225B99C1F3C2BDA0008E5AF /* ExtractPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */; };
 		B225B99F1F3C2BF60008E5AF /* ExtractPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */; };
+		B22C5A991F5533C1005C9E28 /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5A981F5533C1005C9E28 /* wechat.png */; };
 		B235213D1F482880003D06CB /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */; };
 		B235213E1F482880003D06CB /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211F1F482880003D06CB /* NSData+ImageContentType.m */; };
 		B235213F1F482880003D06CB /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B23521211F482880003D06CB /* SDImageCache.m */; };
@@ -824,6 +825,7 @@
 		B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractPriceViewModel.m; sourceTree = "<group>"; };
 		B225B99D1F3C2BF60008E5AF /* ExtractPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractPriceView.h; sourceTree = "<group>"; };
 		B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractPriceView.m; sourceTree = "<group>"; };
+		B22C5A981F5533C1005C9E28 /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wechat.png; path = SGQRCode/wechat.png; sourceTree = "<group>"; };
 		B235211C1F482880003D06CB /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		B235211E1F482880003D06CB /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -2180,6 +2182,7 @@
 			children = (
 				B23521751F4FD141003D06CB /* familyView */,
 				B23521511F4EA343003D06CB /* SGQRCode */,
+				B22C5A981F5533C1005C9E28 /* wechat.png */,
 				B235214E1F4E9993003D06CB /* ScanQRCodeView.h */,
 				B235214F1F4E9993003D06CB /* ScanQRCodeView.m */,
 				B235216E1F4ED364003D06CB /* GenerateQRCodeView.h */,
@@ -4960,6 +4963,7 @@
 				C4C4B4911E9C73D2003E2705 /* list.png in Resources */,
 				C4C4B4951E9C73D2003E2705 /* previous.png in Resources */,
 				C4E86F6F1F163C0A00D9658D /* selLocation.png in Resources */,
+				B22C5A991F5533C1005C9E28 /* wechat.png in Resources */,
 				C4E86F651F161E3800D9658D /* sendActive.png in Resources */,
 				C460ED101ED417E500AE6A90 /* 3.json in Resources */,
 				C404A7C71EBF5DD6000B9E1D /* hand.png in Resources */,
