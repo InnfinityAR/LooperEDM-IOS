@@ -15,11 +15,14 @@
 #import "LocalDataMangaer.h"
 #import "RongCloudManger.h"
 #import "UIImageView+WebCache.h"
+#import "LocationManagerData.h"
 
 @implementation nMainView{
     
     
     NSTimer *updataTimer;
+    BOOL isTimerRun;
+    
     UIImageView *imageOne;
     UIImageView *imageTwo;
     
@@ -71,6 +74,10 @@
         self.obj = (MainViewModel*)idObject;
         dispatch_async(dispatch_get_main_queue(), ^{
              [self initView];
+            
+            
+
+            
         });
       
         
@@ -84,7 +91,11 @@
 
     [mainChatV updataLoopFollowData:[[_obj MainData] objectForKey:@"data"]];
     
-    [userInfoView updataView:data];
+    if( isTimerRun==true){
+    
+        [userInfoView updataView:data];
+        
+    }
 
 }
 
@@ -126,6 +137,7 @@
             backViewColor.alpha=0.0f;
             _effectView.alpha=0.0f;
             [updataTimer invalidate];
+            isTimerRun=true;
             updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
 
             
@@ -142,6 +154,8 @@
 
 
 -(void)createBackGround{
+    
+    isTimerRun=true;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updataHeadImage) name:@"updateHeadImage" object:nil];
     
@@ -260,7 +274,7 @@
     
     
     [updataTimer invalidate];
-    
+    isTimerRun=false;
     
      directionNum = 3;
      moveView =userInfoView;
@@ -292,7 +306,7 @@
 -(void)initView{
     
     [self createBackGround];
-
+    isTimerRun=true;
     updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -313,7 +327,13 @@
     
     mainChatV =[[MainChatView alloc] initWithFrame:CGRectMake(-DEF_SCREEN_WIDTH,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andLoopData:[[_obj MainData] objectForKey:@"data"]];
     [self addSubview:mainChatV];
+    
 
+    
+    
+   
+
+    
   
 }
 
@@ -480,6 +500,7 @@
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];
                              [updataTimer invalidate];
+                            isTimerRun=false;
                              backViewColor.alpha=1.0f;
                              _effectView.alpha=1.0f;
                            
@@ -489,6 +510,7 @@
                             [moveView setFrame:CGRectMake(0,-DEF_SCREEN_HEIGHT, moveView.frame.size.width, moveView.frame.size.height)];
                             moveView=nil;
                             [updataTimer invalidate];
+                            isTimerRun=true;
                               updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
                             
                             backViewColor.alpha=0.0f;
@@ -498,7 +520,7 @@
                 }else{
                     if(startLocation.y>endLocation.y){
                         
-                       
+                       isTimerRun=true;
                         [updataTimer invalidate];
                         updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
                         [UIView animateWithDuration:0.3 animations:^{
@@ -509,7 +531,7 @@
                         }];
                         
                     }else{
-                        
+                         isTimerRun=false;
                         [updataTimer invalidate];
                         [UIView animateWithDuration:0.3 animations:^{
                             [moveView setFrame:CGRectMake(0,0, moveView.frame.size.width, moveView.frame.size.height)];

@@ -33,6 +33,14 @@
     }
 }
 
+-(void)shareH5View{
+
+    JSContext *context=[ self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    NSString *alertJS=@"shareRoulette()";
+    [context evaluateScript:alertJS];
+}
+
+
 -(void)initView{
     self.webView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
     self.webView.backgroundColor=ColorRGB(34, 35, 71, 1.0);

@@ -324,12 +324,10 @@
     [brandTicket sizeToFit];
     [bkScroll addSubview:brandTicket];
     
-    
     UIButton *calendarBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(526*DEF_Adaptation_Font_x*0.5, 1055*DEF_Adaptation_Font_x*0.5, 100*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [calendarBtn1 addTarget:self action:@selector(addcalendarView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:calendarBtn1];
 
-    
     UIButton *ticketBtn = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1316*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
     [ticketBtn addTarget:self action:@selector(addTicketView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:ticketBtn];
@@ -426,15 +424,20 @@
 }
 
 -(void)SpaceView{
-    [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
+    if ([activityDic objectForKey:@"club"]==nil||[activityDic objectForKey:@"club"]==[NSNull null]) {
+        
+    }else{
+        [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
+    }
 }
 
 
 -(void)addbrandView{
     if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
+        
     }else{
-    [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
-}
+        [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+    }
 }
 
 
@@ -444,14 +447,14 @@
 
 -(void)createDjView{
 
-    UIScrollView *DjView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 1590*DEF_Adaptation_Font_x*0.5, DEF_SCREEN_WIDTH, 281*DEF_Adaptation_Font*0.5)];
+    UIScrollView *DjView = [[UIScrollView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5, 1590*DEF_Adaptation_Font_x*0.5, DEF_SCREEN_WIDTH-28*DEF_Adaptation_Font*0.5, 281*DEF_Adaptation_Font*0.5)];
     DjView.showsVerticalScrollIndicator = NO;
     DjView.showsHorizontalScrollIndicator = NO;
     [bkScroll addSubview:DjView];
 
     for (int i=0;i<[[activityDic objectForKey:@"dj"] count];i++)
     {
-        UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(28*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
+        UIImageView *djViewHead = [[UIImageView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5), 30*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5)];
         [djViewHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"avatar"] objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             if (image != nil) {
@@ -474,13 +477,13 @@
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(djViewJump:)];
         [djViewHead addGestureRecognizer:singleTap];
 
-        UILabel *ticketStr = [LooperToolClass createLableView:CGPointMake(43*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5),245*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(192*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        UILabel *ticketStr = [LooperToolClass createLableView:CGPointMake(15*DEF_Adaptation_Font*0.5+(i*238*DEF_Adaptation_Font*0.5),245*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(192*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"dj"]objectAtIndex:i] objectForKey:@"djname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [ticketStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
         [DjView addSubview:ticketStr];
         
     }
     
-     DjView.contentSize = CGSizeMake(28*DEF_Adaptation_Font*0.5 +[[activityDic objectForKey:@"dj"] count]*238*DEF_Adaptation_Font*0.5, 281*DEF_Adaptation_Font*0.5);
+     DjView.contentSize = CGSizeMake([[activityDic objectForKey:@"dj"] count]*238*DEF_Adaptation_Font*0.5, 281*DEF_Adaptation_Font*0.5);
 }
 
 -(void)initView{
@@ -573,7 +576,7 @@
          [_obj savaCalendar:[activityDic objectForKey:@"data"]];
     }else if(index==3){
         
-        [[DataHander sharedDataHander] showViewWithStr:@"别急，程序猿小哥哥还在开发中哦" andTime:1 andPos:CGPointZero];
+        [[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 //        NSArray *loopArray = [[NSArray alloc] initWithArray:[activityDic objectForKey:@"loop"]];
 //        NSDictionary *dic =[loopArray objectAtIndex:0];
 //        [_obj toLooperView:dic];
