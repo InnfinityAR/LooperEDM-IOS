@@ -33,6 +33,10 @@
 		B225B99C1F3C2BDA0008E5AF /* ExtractPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */; };
 		B225B99F1F3C2BF60008E5AF /* ExtractPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */; };
 		B22C5A991F5533C1005C9E28 /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5A981F5533C1005C9E28 /* wechat.png */; };
+		B22C5A9E1F56CB29005C9E28 /* FamilyDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22C5A9D1F56CB29005C9E28 /* FamilyDetailView.m */; };
+		B22C5AA01F57EB9E005C9E28 /* family_header_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5A9F1F57EB9E005C9E28 /* family_header_bottom.png */; };
+		B22C5AA21F57F0BF005C9E28 /* familydetail_code.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5AA11F57F0BF005C9E28 /* familydetail_code.png */; };
+		B22C5AA71F57FA78005C9E28 /* CycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22C5AA61F57FA78005C9E28 /* CycleView.m */; };
 		B235213D1F482880003D06CB /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */; };
 		B235213E1F482880003D06CB /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211F1F482880003D06CB /* NSData+ImageContentType.m */; };
 		B235213F1F482880003D06CB /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B23521211F482880003D06CB /* SDImageCache.m */; };
@@ -811,16 +815,16 @@
 		B225B9721F31913F0008E5AF /* TicketPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketPayView.h; sourceTree = "<group>"; };
 		B225B9731F31913F0008E5AF /* TicketPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketPayView.m; sourceTree = "<group>"; };
 		B225B9751F31B1F30008E5AF /* shadow_pay_liveshow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow_pay_liveshow.png; sourceTree = "<group>"; };
-		B225B9781F31DED20008E5AF /* selectPrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectPrice.png; sourceTree = "<group>"; };
-		B225B9791F31DED20008E5AF /* selectTime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectTime.png; sourceTree = "<group>"; };
-		B225B97A1F31DED20008E5AF /* selectNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectNumber.png; sourceTree = "<group>"; };
+		B225B9781F31DED20008E5AF /* selectPrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectPrice.png; path = ../../SaleTicket/View/selectPrice.png; sourceTree = "<group>"; };
+		B225B9791F31DED20008E5AF /* selectTime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectTime.png; path = ../../SaleTicket/View/selectTime.png; sourceTree = "<group>"; };
+		B225B97A1F31DED20008E5AF /* selectNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectNumber.png; path = ../../SaleTicket/View/selectNumber.png; sourceTree = "<group>"; };
 		B225B9821F34255A0008E5AF /* TicketDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailView.h; sourceTree = "<group>"; };
 		B225B9831F34255A0008E5AF /* TicketDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailView.m; sourceTree = "<group>"; };
 		B225B9851F3449640008E5AF /* TicketLogisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketLogisticsView.h; sourceTree = "<group>"; };
 		B225B9861F3449640008E5AF /* TicketLogisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketLogisticsView.m; sourceTree = "<group>"; };
-		B225B9881F346B0C0008E5AF /* btn_select_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_select_pay.png; sourceTree = "<group>"; };
-		B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_inselect_pay.png; sourceTree = "<group>"; };
-		B225B98A1F346B0C0008E5AF /* image_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_pay.png; sourceTree = "<group>"; };
+		B225B9881F346B0C0008E5AF /* btn_select_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_select_pay.png; path = ../../SaleTicket/View/btn_select_pay.png; sourceTree = "<group>"; };
+		B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_inselect_pay.png; path = ../../SaleTicket/View/btn_inselect_pay.png; sourceTree = "<group>"; };
+		B225B98A1F346B0C0008E5AF /* image_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_pay.png; path = ../../SaleTicket/View/image_pay.png; sourceTree = "<group>"; };
 		B225B98E1F35A8CE0008E5AF /* AttenceTimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttenceTimelineCell.h; sourceTree = "<group>"; };
 		B225B98F1F35A8CE0008E5AF /* AttenceTimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttenceTimelineCell.m; sourceTree = "<group>"; };
 		B225B9911F35C9C80008E5AF /* btn_MyList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_MyList.png; path = View/btn_MyList.png; sourceTree = "<group>"; };
@@ -831,6 +835,12 @@
 		B225B99D1F3C2BF60008E5AF /* ExtractPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractPriceView.h; sourceTree = "<group>"; };
 		B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractPriceView.m; sourceTree = "<group>"; };
 		B22C5A981F5533C1005C9E28 /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wechat.png; path = SGQRCode/wechat.png; sourceTree = "<group>"; };
+		B22C5A9C1F56CB29005C9E28 /* FamilyDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyDetailView.h; sourceTree = "<group>"; };
+		B22C5A9D1F56CB29005C9E28 /* FamilyDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyDetailView.m; sourceTree = "<group>"; };
+		B22C5A9F1F57EB9E005C9E28 /* family_header_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_header_bottom.png; sourceTree = "<group>"; };
+		B22C5AA11F57F0BF005C9E28 /* familydetail_code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = familydetail_code.png; sourceTree = "<group>"; };
+		B22C5AA51F57FA78005C9E28 /* CycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleView.h; sourceTree = "<group>"; };
+		B22C5AA61F57FA78005C9E28 /* CycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleView.m; sourceTree = "<group>"; };
 		B235211C1F482880003D06CB /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		B235211E1F482880003D06CB /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -2062,12 +2072,6 @@
 		B225B9661F3055680008E5AF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B225B9881F346B0C0008E5AF /* btn_select_pay.png */,
-				B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */,
-				B225B98A1F346B0C0008E5AF /* image_pay.png */,
-				B225B9781F31DED20008E5AF /* selectPrice.png */,
-				B225B9791F31DED20008E5AF /* selectTime.png */,
-				B225B97A1F31DED20008E5AF /* selectNumber.png */,
 				B225B96E1F3075300008E5AF /* SaleTicketView.h */,
 				B225B96F1F3075300008E5AF /* SaleTicketView.m */,
 				B225B9721F31913F0008E5AF /* TicketPayView.h */,
@@ -2149,6 +2153,19 @@
 				B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */,
 			);
 			path = viewModel;
+			sourceTree = "<group>";
+		};
+		B22C5AA81F580C82005C9E28 /* SaleTicket */ = {
+			isa = PBXGroup;
+			children = (
+				B225B9881F346B0C0008E5AF /* btn_select_pay.png */,
+				B225B9891F346B0C0008E5AF /* btn_inselect_pay.png */,
+				B225B98A1F346B0C0008E5AF /* image_pay.png */,
+				B225B9781F31DED20008E5AF /* selectPrice.png */,
+				B225B9791F31DED20008E5AF /* selectTime.png */,
+				B225B97A1F31DED20008E5AF /* selectNumber.png */,
+			);
+			name = SaleTicket;
 			sourceTree = "<group>";
 		};
 		B235211B1F482880003D06CB /* NewSDWebImage */ = {
@@ -3216,6 +3233,7 @@
 		C43E765A1E091D8C004A5288 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				B22C5AA81F580C82005C9E28 /* SaleTicket */,
 				C4CF01E71F554DA300315F57 /* Family */,
 				B225B9711F307AF00008E5AF /* activty */,
 				C4D8660B1F1F002D00A270E5 /* btn_jump.png */,
@@ -3355,6 +3373,10 @@
 				B23521721F4EE93F003D06CB /* FamilyRankView.m */,
 				B235218A1F53C8B0003D06CB /* FamilyMessageView.h */,
 				B235218B1F53C8B0003D06CB /* FamilyMessageView.m */,
+				B22C5A9C1F56CB29005C9E28 /* FamilyDetailView.h */,
+				B22C5A9D1F56CB29005C9E28 /* FamilyDetailView.m */,
+				B22C5AA51F57FA78005C9E28 /* CycleView.h */,
+				B22C5AA61F57FA78005C9E28 /* CycleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4510,6 +4532,8 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				B22C5AA11F57F0BF005C9E28 /* familydetail_code.png */,
+				B22C5A9F1F57EB9E005C9E28 /* family_header_bottom.png */,
 				B23521761F4FD299003D06CB /* familyRank_top4.png */,
 				B23521771F4FD299003D06CB /* familyRank_top5.png */,
 				B23521781F4FD299003D06CB /* familyRank_top6.png */,
@@ -5077,6 +5101,7 @@
 				C448BB3D1F077B40006E9344 /* icon_songer.png in Resources */,
 				C42E80671EC332D400D9CC43 /* loading_00048.png in Resources */,
 				C41DDCDF1E7A5F3E00873CBF /* bk_4.png in Resources */,
+				B22C5AA01F57EB9E005C9E28 /* family_header_bottom.png in Resources */,
 				B221712A1EFA326400B3CBC3 /* cutoffLine.png in Resources */,
 				C4DE360C1F2F065A00AF2B06 /* btn_Xwomen.png in Resources */,
 				C43E76F41E091D8D004A5288 /* btn-pop.png in Resources */,
@@ -5095,6 +5120,7 @@
 				C43286FD1E36B66E00FA4DD8 /* btn_zan.png in Resources */,
 				C42E805A1EC332D400D9CC43 /* loading_00035.png in Resources */,
 				C448BB471F0787B6006E9344 /* btn_unActive1.png in Resources */,
+				B22C5AA21F57F0BF005C9E28 /* familydetail_code.png in Resources */,
 				C42E804D1EC332D400D9CC43 /* loading_00022.png in Resources */,
 				C4E86F631F160E9700D9658D /* moveDetail.png in Resources */,
 				C46E7D2C1EADED5C00996110 /* icon_iphone.png in Resources */,
@@ -5347,6 +5373,7 @@
 				B23521491F482880003D06CB /* UIImage+WebP.m in Sources */,
 				C46E2EA01E0BA4A800CD7A52 /* ActivityLayer.m in Sources */,
 				C45DC30D1E4ADCEB0031EDCD /* AdDataModel.m in Sources */,
+				B22C5AA71F57FA78005C9E28 /* CycleView.m in Sources */,
 				B225B96A1F3055A60008E5AF /* SaleTicketController.m in Sources */,
 				C4BCE7421E091E710087E6C5 /* UIImageView+AFNetworking.m in Sources */,
 				B225B9991F3C2BBC0008E5AF /* ExtractPriceViewController.m in Sources */,
@@ -5448,6 +5475,7 @@
 				C4BCE7361E091E710087E6C5 /* AFHTTPSessionManager.m in Sources */,
 				C4C0ECD41F250B4500140E5A /* XHFileAttribute.m in Sources */,
 				B2C90ED61F13A16C000E127A /* LTSCalendarDataCache.m in Sources */,
+				B22C5A9E1F56CB29005C9E28 /* FamilyDetailView.m in Sources */,
 				C45DC3151E4AF44F0031EDCD /* aboutView.m in Sources */,
 				C426015E1E14F91A00BE5CE2 /* SettingView.m in Sources */,
 				C4CCFCE61EB3B78F00114711 /* messageViewController.m in Sources */,

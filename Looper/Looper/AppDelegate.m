@@ -44,6 +44,9 @@
 #import "FamilyRankView.h"
 #import"FamilyMessageView.h"
 
+
+#import "FamilyDetailView.h"
+
 @interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
@@ -177,38 +180,38 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self initUmSdk];
     //[[LocationManagerData sharedManager] getLocalationPoint];
     
-    BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
+//    BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
+//
+//    if(isHasData == false){
+//
+//        VideoViewController* videoVc = [[VideoViewController alloc] init];
+//        [videoVc setVideo:1];
+//        self.window.rootViewController = videoVc;
+//        [self.window makeKeyAndVisible];
+//
+//    }else{
+//        MainViewController *start = [MainViewController alloc];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+//        nav.delegate = self;
+//        nav.navigationBar.hidden = YES;
+//        nav.interactivePopGestureRecognizer.enabled = YES;
+//        self.window.rootViewController = nav;
+//
+//        [self.window makeKeyAndVisible];
+//    }
 
-    if(isHasData == false){
-
-        VideoViewController* videoVc = [[VideoViewController alloc] init];
-        [videoVc setVideo:1];
-        self.window.rootViewController = videoVc;
-        [self.window makeKeyAndVisible];
-
-    }else{
-        MainViewController *start = [MainViewController alloc];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
-        nav.delegate = self;
-        nav.navigationBar.hidden = YES;
-        nav.interactivePopGestureRecognizer.enabled = YES;
-        self.window.rootViewController = nav;
-
-        [self.window makeKeyAndVisible];
-    }
-
-//    UIViewController *start = [UIViewController alloc];
-//    [start.view addSubview:[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:start.view andDataArr:nil andType:1]];
-////    [ScanQRCode initScanQRWithCurrentView: start.view];
-////    [ScanQRCode initGenerateWithCurrentView:start.view andUrl:nil andImage:nil];
-//  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
-//    [start.view addSubview:imageV];
-//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
-//    nav.delegate = self;
-//    nav.navigationBar.hidden = YES;
-//    nav.interactivePopGestureRecognizer.enabled = YES;
-//    self.window.rootViewController = nav;
-//    [self.window makeKeyAndVisible];
+    UIViewController *start = [UIViewController alloc];
+    [start.view addSubview:[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:start.view andDataDic:nil]];
+//    [ScanQRCode initScanQRWithCurrentView: start.view];
+//    [ScanQRCode initGenerateWithCurrentView:start.view andUrl:nil andImage:nil];
+  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
+    [start.view addSubview:imageV];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
+    nav.delegate = self;
+    nav.navigationBar.hidden = YES;
+    nav.interactivePopGestureRecognizer.enabled = YES;
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
     
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     

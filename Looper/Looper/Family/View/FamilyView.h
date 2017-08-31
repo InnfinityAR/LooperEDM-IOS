@@ -23,6 +23,9 @@
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject ;
--(void)initContentViewWithDataArr:(NSArray *)dataArr;
+-(void)initFamilyRankWithDataArr:(NSArray *)dataArr;
+-(void)initFamilyListWithDataArr:(NSArray *)dataArr;
 
+
+-(void)initSearchData:(NSArray*)searchData;
 @end

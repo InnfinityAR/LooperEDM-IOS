@@ -19,9 +19,12 @@
 @property (nonatomic )id obj;
 
 -(id)initWithController:(id)controller;
-
+-(void)popController;
 
 @property(nonatomic,strong)FamilyView *familyView;
 @property(nonatomic,strong)FamilyRankView *rankView;
 -(void)getFamilyRankDataForOrderType:(NSString*)orderType;
+-(void)getRaverData;
+
+-(void)searchRaverFamilyDataForSearchText:(NSString*)searchText;
 @end

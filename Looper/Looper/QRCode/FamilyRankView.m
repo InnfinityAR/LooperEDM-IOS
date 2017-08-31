@@ -196,8 +196,9 @@
     }
     [cell.contentView addSubview:rankLB];
     
-    UILabel *livenessLB=[[UILabel alloc]initWithFrame:CGRectMake(350*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, 116*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
+    UILabel *livenessLB=[[UILabel alloc]initWithFrame:CGRectMake(350*DEF_Adaptation_Font*0.5, 13*DEF_Adaptation_Font, 116*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font)];
     livenessLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
+    livenessLB.numberOfLines=0;
     livenessLB.textColor=[UIColor whiteColor];
     livenessLB.textAlignment=NSTextAlignmentCenter;
     if (familyType==1) {
@@ -207,11 +208,12 @@
             livenessLB.text=[dataDic objectForKey:@"raveractive"];
         }
     }else{
-     livenessLB.text=@"上海-黄埔";
+//        livenessLB.text=@"上海/黄浦";
+     livenessLB.text=[dataDic objectForKey:@"raveraddress"];
     }
     [cell.contentView addSubview:livenessLB];
     
-    UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(466*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, DEF_WIDTH(self)-466*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
+    UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(468*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, DEF_WIDTH(self)-468*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
     personNumLB.text=[dataDic objectForKey:@"membercount"];
     personNumLB.numberOfLines=0;
     personNumLB.font=[UIFont systemFontOfSize:14];
