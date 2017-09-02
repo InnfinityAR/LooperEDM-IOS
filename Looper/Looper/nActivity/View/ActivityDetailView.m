@@ -470,7 +470,11 @@
     if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
         
     }else{
+        if ([[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==nil||[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==[NSNull null]) {
+            [[DataHander sharedDataHander]showViewWithStr:@"还没有主办方" andTime:1 andPos:CGPointZero];
+        }else{
         [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+        }
     }
 }
 

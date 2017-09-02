@@ -367,11 +367,15 @@
     [titleLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:20]];
     titleLable.text = [data objectForKey:@"activityname"];
     [view addSubview:titleLable];
-    
-    UILabel *tagLable = [[UILabel alloc] initWithFrame:CGRectMake(277*DEF_Adaptation_Font*0.5, 139*DEF_Adaptation_Font*0.5,[self getContentLength:[data objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 27*DEF_Adaptation_Font*0.5)];
+    UILabel *tagLable=nil;
+    if ([data objectForKey:@"tag"]==[NSNull null]) {
+        tagLable = [[UILabel alloc] initWithFrame:CGRectMake(277*DEF_Adaptation_Font*0.5, 139*DEF_Adaptation_Font*0.5,15*DEF_Adaptation_Font*0.5, 27*DEF_Adaptation_Font*0.5)];
+    }else{
+    tagLable = [[UILabel alloc] initWithFrame:CGRectMake(277*DEF_Adaptation_Font*0.5, 139*DEF_Adaptation_Font*0.5,[self getContentLength:[data objectForKey:@"tag"]]+15*DEF_Adaptation_Font*0.5, 27*DEF_Adaptation_Font*0.5)];
+        tagLable.text = [data objectForKey:@"tag"];
+    }
     [tagLable setTextColor:[UIColor whiteColor]];
     [tagLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
-    tagLable.text = [data objectForKey:@"tag"];
     [tagLable setBackgroundColor:[UIColor colorWithRed:25/255.0 green:196/255.0 blue:193/255.0 alpha:1.0]];
     [view addSubview:tagLable];
     [tagLable setTextAlignment:NSTextAlignmentCenter];
@@ -437,7 +441,6 @@
 
 
 -(int)getContentLength:(NSString*)contentStr{
-    
     float num_x =0;
     NSString *perchar;
     int alength = [contentStr length];

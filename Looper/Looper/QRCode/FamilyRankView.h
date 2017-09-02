@@ -12,4 +12,5 @@
 
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataArr:(NSArray *)dataArr andType:(int)type;
 @property(nonatomic,strong)id obj;
+-(void)reloadData:(NSArray *)dataArr;
 @end
