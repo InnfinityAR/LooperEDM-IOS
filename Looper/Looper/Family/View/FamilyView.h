@@ -27,5 +27,4 @@
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr;
 
 
--(void)initSearchData:(NSArray*)searchData;
 @end
