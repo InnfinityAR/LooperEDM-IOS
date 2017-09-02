@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FamilyRankView.h"
 #import "FamilyView.h"
+#import "FamilySearchView.h"
 @interface FamilyViewModel : NSObject
 
 {
@@ -23,6 +24,7 @@
 
 @property(nonatomic,strong)FamilyView *familyView;
 @property(nonatomic,strong)FamilyRankView *rankView;
+@property(nonatomic,strong)FamilySearchView *searchView;
 -(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId;
 -(void)getRaverData;
 

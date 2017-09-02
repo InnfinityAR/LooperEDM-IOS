@@ -128,7 +128,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchRaverFamily" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            [self.familyView initSearchData:responseObject[@"data"]];
+            [self.searchView initSearchData:responseObject[@"data"]];
         }
     }fail:^{
         

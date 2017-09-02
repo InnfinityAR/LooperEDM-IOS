@@ -67,7 +67,7 @@
     [headView addSubview:nameLB];
     nameLB.textColor=[UIColor whiteColor];
     nameLB.textAlignment=NSTextAlignmentCenter;
-    nameLB.text=@"WelphenEDM";
+    nameLB.text=self.dataDic[@"ravername"];
     UILabel *idLB=[[UILabel alloc]initWithFrame:CGRectMake(110*DEF_Adaptation_Font*0.5, 66*DEF_Adaptation_Font*0.5, 134*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5)];
     [headView addSubview:idLB];
     idLB.textColor=ColorRGB(255, 255, 255, 0.88);
