@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FamilyDetailView : UIView
--(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic;
+-(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic andRankNumber:(NSString *)rankNumber;
 @property(nonatomic,strong)id obj;
 @end

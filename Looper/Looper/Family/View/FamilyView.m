@@ -9,7 +9,7 @@
 #import "FamilyView.h"
 #import "FamilyViewModel.h"
 #import "LooperConfig.h"
-#import "FamilyRankView.h"
+//#import "FamilyRankView.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
 @interface FamilyView()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
@@ -294,8 +294,8 @@
     UIImageView *bk_image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     [bk_image setImage:[UIImage imageNamed:@"bg_family.png"]];
     [self addSubview:bk_image];
-//    [self.obj getFamilyRankDataForOrderType:nil];
-    [self.obj getRaverData];
+    [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
+//    [self.obj getRaverData];
     [self createRecognizer];
 }
 

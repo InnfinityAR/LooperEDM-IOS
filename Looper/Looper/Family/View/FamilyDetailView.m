@@ -11,6 +11,8 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "CycleView.h"
+#import "UIImageView+WebCache.h"
+#import "FamilyHeaderView.h"
 @interface FamilyDetailView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 {
     UILabel *logLB;
@@ -27,12 +29,14 @@
 @property(nonatomic,strong)NSArray *applyArr;
 
 @property(nonatomic,strong)NSDictionary *dataDic;
+@property(nonatomic,strong)NSString *rankNumber;
 @end
 @implementation FamilyDetailView
--(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic{
+-(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic andRankNumber:(NSString *)rankNumber{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
         self.dataDic=dataDic;
+        self.rankNumber=rankNumber;
         [self initView];
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -58,7 +62,7 @@
     headView.image=[UIImage imageNamed:@"family_header_bottom.png"];
     UIImageView *topIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 92*DEF_Adaptation_Font*0.5, 82*DEF_Adaptation_Font*0.5)];
     [headView addSubview:topIV];
-    topIV.image=[UIImage imageNamed:@"familyRank_top1.png"];
+    topIV.image=[UIImage imageNamed:[NSString stringWithFormat:@"familyRank_top%@.png",self.rankNumber]];
     UILabel *nameLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-240*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     [headView addSubview:nameLB];
     nameLB.textColor=[UIColor whiteColor];
@@ -68,19 +72,31 @@
     [headView addSubview:idLB];
     idLB.textColor=ColorRGB(255, 255, 255, 0.88);
     idLB.textAlignment=NSTextAlignmentCenter;
-    idLB.text=@"ID:38270199";
+    idLB.text=[NSString stringWithFormat:@"ID:%@",[self.dataDic objectForKey:@"raverid"]];
     idLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(349*DEF_Adaptation_Font*0.5, 66*DEF_Adaptation_Font*0.5, 110*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5)];
     [headView addSubview:levelLB];
     levelLB.textColor=ColorRGB(255, 255, 255, 0.88);
     levelLB.textAlignment=NSTextAlignmentCenter;
-    levelLB.text=@"等级:4级";
+    levelLB.text=[NSString stringWithFormat:@"等级:%@级",[self.dataDic objectForKey:@"raverlevel"]];
     levelLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     UIImageView *SQCodeIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 33*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
     [self addSubview:SQCodeIV];
+    if ([self.dataDic objectForKey:@"raverqrcodeurl"]==[NSNull null]) {
     SQCodeIV.image=[UIImage imageNamed:@"familydetail_code.png"];
+    }else{
+        [SQCodeIV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"raverqrcodeurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+    }
     cycleView=[[CycleView alloc]initWithFrame:CGRectMake(211*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5)];
-    cycleView.imageV.image=[UIImage imageNamed:@"640-2.png"];
+    [cycleView.imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    cycleView.imageV.userInteractionEnabled=YES;
+    cycleView.imageV.tag=5;
+    UITapGestureRecognizer *singleTap5 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [cycleView.imageV addGestureRecognizer:singleTap5];
     cycleView.backgroundColor=[UIColor grayColor];
     cycleView.layer.cornerRadius=DEF_WIDTH(cycleView)/2;
     cycleView.layer.masksToBounds=YES;
@@ -174,7 +190,11 @@
     [self addSubview:scrollV];
     UILabel *noticeDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(54*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 474*DEF_Adaptation_Font*0.5, 456*DEF_Adaptation_Font*0.5)];
     noticeDetailLB.textColor=[UIColor whiteColor];
-    noticeDetailLB.text=@"老鹰吃小鸡老鹰吃小鸡老鹰吃小鸡老鹰吃小----鸡老鹰吃---小鸡老鹰吃小--鸡老鹰---吃小鸡老鹰---吃小鸡";
+    if ([self.dataDic objectForKey:@"raverbulletin"]==[NSNull null]) {
+        noticeDetailLB.text=@"让我能在毕业前能够圆梦使劲的呐喊，随着音乐挥动着手中的荧光棒，身体跟随着音乐的节奏律动，伴随着DJ的手势发出尖叫，尽情享受电音盛宴，释放自我。";
+    }else{
+    noticeDetailLB.text=[self.dataDic objectForKey:@"raverbulletin"];
+    }
     CGSize lblSize3 = [noticeDetailLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14*DEF_Adaptation_Font]} context:nil].size;
     CGRect frame3=noticeDetailLB.frame;
     frame3.size=lblSize3;
@@ -220,7 +240,11 @@
         } completion:^(BOOL finished) {
         }];
     }
-    
+    if (tap.view.tag==5) {
+//点击家族头像
+        FamilyHeaderView *headerView=[[FamilyHeaderView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataDic:self.dataDic];
+        [[[self.obj obj]view] addSubview:headerView];
+    }
 }
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -355,12 +379,12 @@
     NSString *club=@"XXX";
     NSString *experience=@"XX经验值";
     NSString *active=@"XX活跃度";
-    subLB.text=[NSString stringWithFormat:@"%@在%@得%@和%@",name,club,experience,active];
+    subLB.text=[NSString stringWithFormat:@"%@在%@发表评论得%@和%@",name,club,experience,active];
     NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:subLB.text];
     [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(0, name.length)];
     [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(1+name.length, club.length)];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(2+name.length+club.length, experience.length)];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(3+name.length+club.length+experience.length, active.length)];
+    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(6+name.length+club.length, experience.length)];
+    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(233, 117, 149, 1.0)range:NSMakeRange(7+name.length+club.length+experience.length, active.length)];
     subLB.attributedText= aString;
     CGSize lblSize3 = [subLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-180*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     CGRect frame3=subLB.frame;
@@ -376,7 +400,7 @@
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100*DEF_Adaptation_Font*0.5;
+    return 90*DEF_Adaptation_Font*0.5;
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

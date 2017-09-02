@@ -12,6 +12,7 @@
 #import "LooperConfig.h"
 #import "LocalDataMangaer.h"
 #import "AFNetworkTool.h"
+#import "FamilyDetailView.h"
 @implementation FamilyViewModel{
 
 
@@ -44,7 +45,7 @@
 
 }
 //家族排行
--(void)getFamilyRankDataForOrderType:(NSString*)orderType{
+-(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     if (orderType==nil) {
         [dic setObject:@"1" forKey:@"orderType"];
@@ -52,9 +53,12 @@
     [dic setObject:orderType forKey:@"orderType"];
     }
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    
+    if (raverId==nil) {
+        [dic setObject:[LocalDataMangaer sharedManager].raverid forKey:@"raverId"];
+    }
+     [dic setObject:@"8" forKey:@"raverId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
-        
+
         if([responseObject[@"status"] intValue]==0){
             if (orderType==nil) {
 //第一次加载
@@ -66,17 +70,23 @@
         }
     }fail:^{
         
-    }];
+    }
+     
+     ];
+
+    
+    
 }
 //家族详情
--(void)getFamilyDetailDataForRfId:(NSString*)rfId{
+-(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
         [dic setObject:rfId forKey:@"rfId"];
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamilyDetail" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-         
+            FamilyDetailView *familyDetailV=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self andDataDic:responseObject[@"data"] andRankNumber:rankNumber];
+            [self.familyView addSubview:familyDetailV];
         }
     }fail:^{
         
