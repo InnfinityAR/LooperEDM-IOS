@@ -83,20 +83,11 @@
     [ self.webView removeFromSuperview];
 }
 
-//- (void) webViewDidFinishLoad:(UIWebView *)webView{
-//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//    webView.scrollView.bounces=NO;
-//    CGRect frame = webView.frame;
-//    //webView的宽度
-//    frame.size = CGSizeMake(DEF_WIDTH(self), 0);
-//    webView.frame = frame;
-//    float content_height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"] floatValue];
-//    frame = webView.frame;
-//    //webView的宽度和高度
-//    frame.size = CGSizeMake(DEF_WIDTH(self), content_height);
-//    webView.frame = frame;
-//   
-//   
-//}
+- (void) webViewDidFinishLoad:(UIWebView *)webView{
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] synchronize]; 
+}
 
 @end

@@ -74,14 +74,7 @@
         self.obj = (MainViewModel*)idObject;
         dispatch_async(dispatch_get_main_queue(), ^{
              [self initView];
-            
-            
-
-            
         });
-      
-        
-        
     }
     return self;
 }
@@ -327,13 +320,6 @@
     
     mainChatV =[[MainChatView alloc] initWithFrame:CGRectMake(-DEF_SCREEN_WIDTH,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andLoopData:[[_obj MainData] objectForKey:@"data"]];
     [self addSubview:mainChatV];
-    
-
-    
-    
-   
-
-    
   
 }
 
@@ -346,7 +332,6 @@
     
     NSDate *now= [NSDate date];
     startDate = (long int)([now timeIntervalSince1970]*100);
-  
 }
 
 

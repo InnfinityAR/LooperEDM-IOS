@@ -84,7 +84,6 @@
 		B2A1E7FD1F25DF8E006270E3 /* praiseNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */; };
 		B2A1E7FE1F25DF8E006270E3 /* praiseYES.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FC1F25DF8E006270E3 /* praiseYES.png */; };
 		B2A1E8001F25F5F0006270E3 /* sendBuddle.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FF1F25F5F0006270E3 /* sendBuddle.png */; };
-		B2A1E8031F2899A6006270E3 /* btn_goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8011F2899A6006270E3 /* btn_goBack.png */; };
 		B2A1E8041F2899A6006270E3 /* btn_goDown.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8021F2899A6006270E3 /* btn_goDown.png */; };
 		B2A1E80B1F29FCE7006270E3 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E80A1F29FCE7006270E3 /* btn_play.png */; };
 		B2A1E80D1F29FFD1006270E3 /* btn_finishEnd.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E80C1F29FFD1006270E3 /* btn_finishEnd.png */; };
@@ -252,7 +251,6 @@
 		C42838DB1E03F02100929093 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838261E03F02100929093 /* AppDelegate.m */; };
 		C42838DC1E03F02100929093 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C42838281E03F02100929093 /* LaunchScreen.storyboard */; };
 		C42838DF1E03F02100929093 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838311E03F02100929093 /* HomeViewController.m */; };
-		C42838E11E03F02100929093 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42838361E03F02100929093 /* Info.plist */; };
 		C42838E91E03F02100929093 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C428384F1E03F02100929093 /* main.m */; };
 		C42839211E03F02200929093 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838A11E03F02100929093 /* ViewController.m */; };
 		C42B47CD1ED55C1300AE4399 /* activity_follow.png in Resources */ = {isa = PBXBuildFile; fileRef = C42B47CB1ED55C1300AE4399 /* activity_follow.png */; };
@@ -437,6 +435,7 @@
 		C45489341E9E073500BB1591 /* btn_user_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489321E9E073500BB1591 /* btn_user_home.png */; };
 		C45489361E9E242D00BB1591 /* bg_chat_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489351E9E242D00BB1591 /* bg_chat_back.png */; };
 		C45489381E9E2EDD00BB1591 /* bg_title_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489371E9E2EDD00BB1591 /* bg_title_chat.png */; };
+		C45C063F1F56E32B0037ECC2 /* btn_goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8011F2899A6006270E3 /* btn_goBack.png */; };
 		C45D82011F4EC0080055DE99 /* LocationManagerData.m in Sources */ = {isa = PBXBuildFile; fileRef = C45D82001F4EC0080055DE99 /* LocationManagerData.m */; };
 		C45DAF191EA1FA9D000AB5C5 /* MusicListManage.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DAF181EA1FA9D000AB5C5 /* MusicListManage.m */; };
 		C45DAF1C1EA3405A000AB5C5 /* MusicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DAF1B1EA3405A000AB5C5 /* MusicViewCell.m */; };
@@ -513,6 +512,7 @@
 		C46E7D3B1EAE174200996110 /* text_opinion.png in Resources */ = {isa = PBXBuildFile; fileRef = C46E7D3A1EAE174200996110 /* text_opinion.png */; };
 		C46E7D3E1EAE235600996110 /* commonTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C46E7D3D1EAE235600996110 /* commonTableView.m */; };
 		C47180FA1E9A4A61000CD17C /* bg_looper_down.png in Resources */ = {isa = PBXBuildFile; fileRef = C47180F91E9A4A61000CD17C /* bg_looper_down.png */; };
+		C47672211F5676E4005C3CCE /* UIScrollView+_DScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C47672201F5676E4005C3CCE /* UIScrollView+_DScrollView.m */; };
 		C478B36C1F1BCA780057CD05 /* selectActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = C478B36B1F1BCA780057CD05 /* selectActivityView.m */; };
 		C4796A711F13615B00414AFD /* PhotoWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4796A701F13615B00414AFD /* PhotoWallViewController.m */; };
 		C4796A751F1361A100414AFD /* PhotoWallViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4796A741F1361A100414AFD /* PhotoWallViewModel.m */; };
@@ -1559,6 +1559,8 @@
 		C46E7D3C1EAE235600996110 /* commonTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commonTableView.h; sourceTree = "<group>"; };
 		C46E7D3D1EAE235600996110 /* commonTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commonTableView.m; sourceTree = "<group>"; };
 		C47180F91E9A4A61000CD17C /* bg_looper_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_down.png; sourceTree = "<group>"; };
+		C476721F1F5676E4005C3CCE /* UIScrollView+_DScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+_DScrollView.h"; sourceTree = "<group>"; };
+		C47672201F5676E4005C3CCE /* UIScrollView+_DScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+_DScrollView.m"; sourceTree = "<group>"; };
 		C478B36A1F1BCA780057CD05 /* selectActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = selectActivityView.h; sourceTree = "<group>"; };
 		C478B36B1F1BCA780057CD05 /* selectActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = selectActivityView.m; sourceTree = "<group>"; };
 		C4796A6F1F13615B00414AFD /* PhotoWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallViewController.h; sourceTree = "<group>"; };
@@ -3953,6 +3955,8 @@
 		C4BCE6351E091E710087E6C5 /* 3rdFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				C476721F1F5676E4005C3CCE /* UIScrollView+_DScrollView.h */,
+				C47672201F5676E4005C3CCE /* UIScrollView+_DScrollView.m */,
 				B235211B1F482880003D06CB /* NewSDWebImage */,
 				C4028C921F38605900E821E9 /* aliSdk */,
 				C4E86F731F16474000D9658D /* PKShortVideo */,
@@ -4736,7 +4740,7 @@
 		C4B8AAC21DF16CFC0004C8C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = lujiawei;
 				TargetAttributes = {
 					C4B8AAC91DF16CFC0004C8C4 = {
@@ -5107,8 +5111,7 @@
 				C42B47D61ED55C1C00AE4399 /* un_trip.png in Resources */,
 				C40A80F01F2728BE00067916 /* btn_photoLib.png in Resources */,
 				C43E77061E091D8D004A5288 /* icon_qq.png in Resources */,
-				B2A1E8031F2899A6006270E3 /* btn_goBack.png in Resources */,
-				B2A1E8031F2899A6006270E3 /* btn_goBack.png in Resources */,
+				C45C063F1F56E32B0037ECC2 /* btn_goBack.png in Resources */,
 				C42B47CD1ED55C1300AE4399 /* activity_follow.png in Resources */,
 				B23521821F4FD299003D06CB /* top6.png in Resources */,
 				C42E80631EC332D400D9CC43 /* loading_00044.png in Resources */,
@@ -5156,7 +5159,6 @@
 				C4F051151EBA51EB005DA9F1 /* moveline.png in Resources */,
 				C4F051111EBA4B86005DA9F1 /* btn_unLoop.png in Resources */,
 				C43E76F61E091D8D004A5288 /* btn-prp.png in Resources */,
-				C42838E11E03F02100929093 /* Info.plist in Resources */,
 				C41C3CF31ECD4FEE00393C7A /* openid.json in Resources */,
 				C4F2C20A1EAF03A100BB10CA /* btn_fans.png in Resources */,
 				C45E2D7F1EF8F16700BD03E3 /* send_comment.png in Resources */,
@@ -5509,6 +5511,7 @@
 				C4664A251E20080C005755C6 /* CalendarView.m in Sources */,
 				C426016E1E150EAC00BE5CE2 /* AccountView.m in Sources */,
 				C4ABC7F31E1B709700BFA544 /* PhoneViewModel.m in Sources */,
+				C47672211F5676E4005C3CCE /* UIScrollView+_DScrollView.m in Sources */,
 				B23521421F482880003D06CB /* SDWebImageDownloader.m in Sources */,
 				B235218C1F53C8B0003D06CB /* FamilyMessageView.m in Sources */,
 				C42838E91E03F02100929093 /* main.m in Sources */,
@@ -5561,6 +5564,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -5609,6 +5613,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

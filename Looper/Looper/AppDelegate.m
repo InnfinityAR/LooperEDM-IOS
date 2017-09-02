@@ -172,6 +172,12 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self initJpush:launchOptions];
     [NSThread sleepForTimeInterval:1.5];
     
+//    
+//    int cacheSizeMemory = 1*1024*1024; // 4MB
+//    int cacheSizeDisk = 5*1024*1024; // 32MB
+//    NSURLCache *sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:cacheSizeMemory diskCapacity:cacheSizeDisk diskPath:@"nsurlcache"];
+//    [NSURLCache setSharedURLCache:sharedCache];
+    
 
     
     [self initUmSdk];

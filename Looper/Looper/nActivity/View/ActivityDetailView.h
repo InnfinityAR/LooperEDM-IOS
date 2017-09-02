@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "KYGooeyMenu.h"
-
-@interface ActivityDetailView : UIView <UIWebViewDelegate,menuDidSelectedDelegate,UIImagePickerControllerDelegate>
+#import<WebKit/WebKit.h>
+@interface ActivityDetailView : UIView <UIWebViewDelegate,menuDidSelectedDelegate,UIImagePickerControllerDelegate,WKNavigationDelegate>
 {
     
     
