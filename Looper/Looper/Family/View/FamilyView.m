@@ -9,21 +9,33 @@
 #import "FamilyView.h"
 #import "FamilyViewModel.h"
 #import "LooperConfig.h"
-//#import "FamilyRankView.h"
+#import "FamilyRankView.h"
+#import "FamilyMessageView.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
+#import "UIScrollView+_DScrollView.h"
+#import <objc/runtime.h>
+
 @interface FamilyView()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSArray *searchDatas;
 @end
 @implementation FamilyView{
-
-
-    FamilyRankView *contentView;
-
-
+    
+    
+    FamilyRankView *rankView;
+    FamilyRankView *listView;
+    FamilyMessageView *messageView;
+    
+//用于页面切换
+//    UIView *contentView;
+    UIScrollView *_sc;
+    int localCurrent;
+    
+    
 }
+
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject {
     
@@ -35,6 +47,7 @@
         [self initBackView];
     }
     return self;
+    
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -44,17 +57,18 @@
         [_obj popController];
     }
     if (button.tag==101) {
-//家族搜索
+        //家族搜索
         // 是否自动隐藏导航
-            self.searchController.hidesNavigationBarDuringPresentation = NO;
+        self.searchController.hidesNavigationBarDuringPresentation = NO;
         // 将searchBar赋值给tableView的tableHeaderView
         self.tableView.tableHeaderView = self.searchController.searchBar;
         self.searchController.searchBar.delegate = self;
         [self.tableView setHidden:NO];
         [self.tableView reloadData];
-      
+        
     }
 }
+
 #pragma-在这里加入搜索
 -(void)initSearchData:(NSArray*)searchData{
     self.searchDatas=searchData;
@@ -109,7 +123,7 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [self setTableViewCellView:cell andIndexPath:indexPath];
     return cell;
-
+    
 }
 
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
@@ -124,7 +138,7 @@
     headLB.numberOfLines=0;
     headLB.font=[UIFont systemFontOfSize:14];
     headLB.textColor=[UIColor whiteColor];
-        headLB.text=dataDic[@"ravername"];
+    headLB.text=dataDic[@"ravername"];
     [cell.contentView addSubview:headLB];
     
     UILabel *rankLB=[[UILabel alloc]initWithFrame:CGRectMake(292*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, 58*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
@@ -143,8 +157,8 @@
     livenessLB.numberOfLines=0;
     livenessLB.textColor=[UIColor whiteColor];
     livenessLB.textAlignment=NSTextAlignmentCenter;
-        livenessLB.text=@"上海/黄浦";
-//        livenessLB.text=[dataDic objectForKey:@"raveraddress"];
+    livenessLB.text=@"上海/黄浦";
+    //        livenessLB.text=[dataDic objectForKey:@"raveraddress"];
     [cell.contentView addSubview:livenessLB];
     
     UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(468*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, DEF_WIDTH(self)-468*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
@@ -169,17 +183,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-        NSLog(@"选择了列表中的%@", [self.searchDatas objectAtIndex:indexPath.row]);
-
+    
+    NSLog(@"选择了列表中的%@", [self.searchDatas objectAtIndex:indexPath.row]);
+    
     
 }
 
 #pragma mark - UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     
-//用于判断字符是否存在于字符串当中
-//        if ([str.lowercaseString rangeOfString:inputStr.lowercaseString].location != NSNotFound) {
+    //用于判断字符是否存在于字符串当中
+    //        if ([str.lowercaseString rangeOfString:inputStr.lowercaseString].location != NSNotFound) {
 }
 
 #pragma mark - UISearchBarDelegate
@@ -228,7 +242,6 @@
 }
 
 
-
 #pragma-添加BackView
 -(void)initBackView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
@@ -236,29 +249,64 @@
     UIButton *searchBtn = [LooperToolClass createBtnImageNameReal:@"btn_serach_select.png" andRect:CGPointMake(DEF_WIDTH(self)-84*DEF_Adaptation_Font*0.5,10*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_serach_select.png" andClickImage:@"btn_serach_select.png" andTextStr:nil andSize:CGSizeMake(54*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:searchBtn];
 
-
 }
 
-
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGPoint offset = [scrollView contentOffset];
+    int currentPage = offset.x/DEF_SCREEN_WIDTH;
+    if (currentPage == 0) {
+        
+        if(localCurrent ==currentPage){
+            
+            [_sc setContentOffset:CGPointMake(DEF_SCREEN_WIDTH * (7-1), 0) animated:NO];
+        }
+    }
+    else if(currentPage == 6) {
+        if (localCurrent==currentPage) {
+            [_sc setContentOffset:CGPointMake(0, 9) animated:NO];
+        }
+    };
+    localCurrent=currentPage;
+}
 
 -(void)initView{
     
     UIImageView *bk_image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     [bk_image setImage:[UIImage imageNamed:@"bg_family.png"]];
     [self addSubview:bk_image];
+    [self initSCView];
     [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
-//    [self.obj getRaverData];
+    [self.obj getRaverData];
 }
 
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
-    contentView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
-    [self addSubview:contentView];
+     rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
+    [_sc addSubview:rankView];
     
 }
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr{
-    contentView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
-    [self addSubview:contentView];
+    rankView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+DEF_WIDTH(self), 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
+    [_sc addSubview:rankView];
+}
+-(void)initSCView{
+    _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
+    for (int i=0; i<7; i++) {
+        
+        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+i *582*DEF_Adaptation_Font*0.5+(i*58*DEF_Adaptation_Font*0.5), 0, 582*DEF_Adaptation_Font*0.5,  976*DEF_Adaptation_Font*0.5)];
+        if (i>1) {
+        view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255. green:arc4random()%256/255. blue:arc4random()%256/255. alpha:1];
+        }
+        [_sc addSubview:view];
+        
+    }
+    _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*7, 0);
+    _sc.delegate = self;
+    _sc.pagingEnabled = YES;
     
+    [_sc make3Dscrollview];
+    
+    [self addSubview:_sc];
 }
 
 @end

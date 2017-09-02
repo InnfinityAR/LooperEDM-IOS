@@ -260,9 +260,12 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==101){
+        
+        
         [pageFlowView removeFromSuperview];
-        [_obj popController];
         [self removeFromSuperview];
+        [_obj popController];
+        
         }else if(button.tag==102){
         
          [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];

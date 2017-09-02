@@ -13,6 +13,7 @@
 #import "LooperToolClass.h"
 #import "DataHander.h"
 
+
 @implementation ActivityDetailView{
     UIScrollView *bkScroll;
 
@@ -37,7 +38,7 @@
     UILabel *titleLabel;
     
     NSDictionary *_orderDic;
-    UIWebView *webV;
+    WKWebView *webV;
 }
 
 -(void)setCalendar{
@@ -133,10 +134,12 @@
 -(void)createWebView{
     
     
-    webV = [[UIWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+    webV = [[WKWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
+    
 
-    webV.delegate=self;
+
+    webV.navigationDelegate=self;
 
      webV.userInteractionEnabled=false;
     
@@ -144,32 +147,63 @@
     
     [bkScroll addSubview:webV];
 
-}
+    NSLog(@"%@",webV);
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    
-    [[DataHander sharedDataHander] showDlg];
 }
 
 
--(void)webViewDidFinishLoad:(UIWebView *)webView{
+
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+
+    
+       [[DataHander sharedDataHander] showDlg];
+
+
+}
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+
+    
+    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.1];
+
+}
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+
+     NSLog(@"%@",webView);
     
     
-      [[DataHander sharedDataHander] hideDlg];
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
     
-    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+270*DEF_Adaptation_Font*0.5);
-    
-    [webView setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webView.scrollView.contentSize.height)];
-    
-    [self createLoopView:webView.scrollView.contentSize.height];
-//在这里释放webView内存
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.1];
+
 }
+
+
+-(void)reloadView{
+
+     [[DataHander sharedDataHander] hideDlg];
+    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
+    
+    [webV setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+    
+    [self createLoopView:webV.scrollView.contentSize.height];
+}
+
+
+
+
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+
+
+
+
+}
+
+
 
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
@@ -187,7 +221,7 @@
         if(isHeight ==false){
             
             
-            UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,((scrollHeight/DEF_Adaptation_Font/0.5)+2020)*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+            UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,scrollHeight+2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 100*DEF_Adaptation_Font*0.5)];
             [writeView1 setBackgroundColor:[UIColor whiteColor]];
             [bkScroll addSubview:writeView1];
             
@@ -510,9 +544,10 @@
     [self addSubview:bkScroll];
 
     bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*2);
-    [self createWebView];
+  
     [self createBkView];
     [self createHudView];
+      [self createWebView];
 }
 
 -(void)closeTouchView{
@@ -607,10 +642,12 @@
     }
     if(button.tag==101){
         
-        
+        [bkScroll removeFromSuperview];
         [webV loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
-        [webV stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
+       // [webV stringByEvaluatingJavaScriptFromString:@"document.open();document.close()"];
         [webV removeFromSuperview];
+        
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
         [self removeFromSuperview];
 

@@ -178,7 +178,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
     
     [self initUmSdk];
-    //[[LocationManagerData sharedManager] getLocalationPoint];
+    [[LocationManagerData sharedManager] getLocalationPoint];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 
@@ -211,7 +211,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 //    nav.interactivePopGestureRecognizer.enabled = YES;
 //    self.window.rootViewController = nav;
 //    [self.window makeKeyAndVisible];
-    
+       
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;

@@ -44,6 +44,10 @@
     if (! [ [ self.navigationController viewControllers] containsObject:self]) {
         [_activityVm removeActivityAction];
     }
+    [[SDImageCache sharedImageCache] clearMemory];
+    [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+
+    
     [super viewWillDisappear:animated];
 }
 
