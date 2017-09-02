@@ -238,54 +238,6 @@
 
 
 }
-- (void)swipeGestureOfLeftClicked:(UISwipeGestureRecognizer *)swipeGesture
-{
-    [self transitionAnimation:YES];
-}
-#pragma mark --向右滑动浏览上一张图片--
-- (void)swipeGestureOfRightClicked:(UISwipeGestureRecognizer *)swipeGesture
-{
-    [self transitionAnimation:NO];
-}
-
--(void)createRecognizer{
-    /**轻扫手势--左手势*/
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureOfLeftClicked:)];
-    
-    /**手势方向*/
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    /**轻扫手势--右手势*/
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureOfRightClicked:)];
-    
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [self addGestureRecognizer:swipeLeft];
-    [self addGestureRecognizer:swipeRight];
-}
-
-
-- (void)transitionAnimation:(BOOL)isNext
-{
-    //创建转场动画对象
-    CATransition *transition = [[CATransition alloc]init];
-    if (isNext == YES) {
-        transition.type     =   @"cube";
-        transition.subtype  =   kCATransitionFromRight;
-    } else {
-        transition.type     =   @"cube";
-        transition.subtype  =   kCATransitionFromLeft;
-    }
-    
-    
-    
-    
-    //设置动画时长，默认为0
-    transition.duration=1.0;
-
-    
-    [contentView.layer addAnimation:transition forKey:@"Animation"];
-}
 
 
 
@@ -296,7 +248,6 @@
     [self addSubview:bk_image];
     [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
 //    [self.obj getRaverData];
-    [self createRecognizer];
 }
 
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
