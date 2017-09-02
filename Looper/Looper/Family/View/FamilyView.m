@@ -85,7 +85,8 @@
     for (int i=0; i<7; i++) {
         
         UIView *view =[[UIView alloc] initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+i *582*DEF_Adaptation_Font*0.5+(i*58*DEF_Adaptation_Font*0.5), 0, 582*DEF_Adaptation_Font*0.5,  976*DEF_Adaptation_Font*0.5)];
-        view.backgroundColor = [UIColor colorWithRed:arc4random()%256/255. green:arc4random()%256/255. blue:arc4random()%256/255. alpha:1];
+        view.backgroundColor = [UIColor colorWithRed:86/255.0 green:79/255.0 blue:109/255.0 alpha:1.0];
+
         [_sc addSubview:view];
         
     }
