@@ -25,6 +25,7 @@ static LocalDataMangaer *localDataManagerM=nil;
 @synthesize localUserData = _localUserData;
 @synthesize loginType = _loginType;
 @synthesize rouletteArr = _rouletteArr;
+@synthesize raverid = _raverid;
 
 +(LocalDataMangaer *)sharedManager{
     if(localDataManagerM==nil){
@@ -44,7 +45,8 @@ static LocalDataMangaer *localDataManagerM=nil;
     [[NSUserDefaults standardUserDefaults] setObject:_sex forKey:@"sex"];
     [[NSUserDefaults standardUserDefaults] setObject:_age forKey:@"age"];
     [[NSUserDefaults standardUserDefaults] setObject:_NickName forKey:@"NickName"];
-
+    [[NSUserDefaults standardUserDefaults] setObject:raverid forKey:@"raverid"];
+     [[NSUserDefaults standardUserDefaults] setObject:rouletteArr forKey:@"rouletteArr"];
 }
 
 -(void)getData{

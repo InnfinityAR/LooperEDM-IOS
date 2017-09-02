@@ -23,8 +23,11 @@
 
 @property(nonatomic,strong)FamilyView *familyView;
 @property(nonatomic,strong)FamilyRankView *rankView;
--(void)getFamilyRankDataForOrderType:(NSString*)orderType;
+-(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId;
 -(void)getRaverData;
 
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText;
+-(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber;
+
+
 @end

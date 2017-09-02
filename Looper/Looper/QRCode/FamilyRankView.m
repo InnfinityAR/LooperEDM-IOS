@@ -11,6 +11,7 @@
 #import "LooperConfig.h"
 #import "FamilyViewModel.h"
 #import "UIImageView+WebCache.h"
+#import "FamilyDetailView.h"
 @interface FamilyRankView()<UITableViewDelegate,UITableViewDataSource>
 {
 //type用来传入是家族排行还是家族列表,1为排行，0为列表,默认为1
@@ -114,19 +115,19 @@
     if (familyType==1) {
     if (tap.view.tag==1) {
         NSLog(@"家族");
-        [self.obj getFamilyRankDataForOrderType:@"1"];
+        [self.obj getFamilyRankDataForOrderType:@"1" andRaverId:nil];
     }
     if (tap.view.tag==2) {
         NSLog(@"等级");
-        [self.obj getFamilyRankDataForOrderType:@"2"];
+        [self.obj getFamilyRankDataForOrderType:@"2" andRaverId:nil];
     }
     if (tap.view.tag==3) {
         NSLog(@"活跃度");
-        [self.obj getFamilyRankDataForOrderType:@"3"];
+        [self.obj getFamilyRankDataForOrderType:@"3" andRaverId:nil];
     }
     if (tap.view.tag==4) {
         NSLog(@"人数");
-        [self.obj getFamilyRankDataForOrderType:@"4"];
+        [self.obj getFamilyRankDataForOrderType:@"4" andRaverId:nil];
     }
     }
 }
@@ -231,7 +232,9 @@
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+  NSDictionary *dataDic=self.dataArr[indexPath.row];
+    [self.obj getFamilyDetailDataForRfId:[dataDic objectForKey:@"raverid"] andRank:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  62*DEF_Adaptation_Font;
