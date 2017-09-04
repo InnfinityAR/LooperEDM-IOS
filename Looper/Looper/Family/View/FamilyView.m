@@ -27,8 +27,8 @@
     FamilyRankView *listView;
     FamilyMessageView *messageView;
     
-//用于页面切换
-//    UIView *contentView;
+    //用于页面切换
+    //    UIView *contentView;
     UIScrollView *_sc;
     int localCurrent;
     
@@ -92,7 +92,7 @@
     textLB2.textAlignment=NSTextAlignmentCenter;
     textLB2.text=titleArray[2];
     [self addSubview:textLB2];
-
+    
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -112,7 +112,7 @@
         }
     };
     localCurrent=currentPage;
-     textLB.text=titleArray[currentPage];
+    textLB.text=titleArray[currentPage];
     if (currentPage==titleArray.count-1) {
         textLB1.text=titleArray[0];
     }else{
@@ -123,7 +123,7 @@
     }else{
         textLB2.text=titleArray[currentPage-1];
     }
-   
+    
 }
 
 -(void)initView{
@@ -133,14 +133,14 @@
     [self addSubview:bk_image];
     [self initSCView];
     if ([LocalDataMangaer sharedManager].raverid ==nil) {
-    [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
+        [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
     }else{
-     [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
+        [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
     }
 }
 //家族排行
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
-     rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
+    rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
     [_sc addSubview:rankView];
     [_sc make3Dscrollview];
 }
@@ -160,7 +160,7 @@
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
     _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*titleArray.count, 0);
-
+    
     _sc.delegate = self;
     _sc.pagingEnabled = YES;
     [self addSubview:_sc];
