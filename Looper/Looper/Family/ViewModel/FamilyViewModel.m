@@ -32,11 +32,8 @@
 }
 
 -(void)requestData{
-
-    
     familyV = [[FamilyView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:familyV];
-
 
 }
 //家族排行
@@ -69,8 +66,6 @@
      
      ];
 
-    
-    
 }
 //家族详情
 -(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber{

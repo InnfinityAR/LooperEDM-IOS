@@ -104,22 +104,28 @@
 
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
      rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
-    [_sc addSubview:rankView];
+    
+    
+    [self addSubScrollView:rankView];
     
 }
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr{
     rankView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+DEF_WIDTH(self), 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
-    [_sc addSubview:rankView];
+    [self addSubScrollView:rankView];
 }
+
+-(void)addSubScrollView:(UIView*)view{
+
+    [_sc setFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+([[_sc subviews] count]*DEF_SCREEN_WIDTH), 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5)];
+    
+    [_sc addSubview:view];
+    [_sc make3Dscrollview];
+}
+
+
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
-    for (int i=0; i<3; i++) {
-        
-        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+i *582*DEF_Adaptation_Font*0.5+(i*58*DEF_Adaptation_Font*0.5), 0, 582*DEF_Adaptation_Font*0.5,  976*DEF_Adaptation_Font*0.5)];
-       // view.backgroundColor = [UIColor colorWithRed:86/255.0 green:79/255.0 blue:109/255.0 alpha:1.0];
-        [_sc addSubview:view];
-        
-    }
+   
     _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*3, 0);
     _sc.delegate = self;
     _sc.pagingEnabled = YES;
