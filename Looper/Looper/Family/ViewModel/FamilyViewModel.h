@@ -10,6 +10,7 @@
 #import "FamilyRankView.h"
 #import "FamilyView.h"
 #import "FamilySearchView.h"
+#import "FamilyMessageView.h"
 @interface FamilyViewModel : NSObject
 
 {
@@ -25,11 +26,16 @@
 @property(nonatomic,strong)FamilyView *familyView;
 @property(nonatomic,strong)FamilyRankView *rankView;
 @property(nonatomic,strong)FamilySearchView *searchView;
+@property(nonatomic,strong)FamilyMessageView *messageView;
 -(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId;
 -(void)getRaverData;
 
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText;
 -(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber;
 
+-(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic;
+-(void)getApplyFamilyDataForRfId:(NSString*)rfId;
 
+//同意/拒绝加入家族
+-(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId;
 @end

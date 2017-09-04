@@ -25,6 +25,6 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject ;
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr;
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr;
-
+-(void)initFamilyMessageWithDataArr:(NSArray *)dataArr;
 
 @end
