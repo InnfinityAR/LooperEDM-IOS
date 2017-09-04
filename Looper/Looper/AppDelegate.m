@@ -47,6 +47,8 @@
 
 #import "FamilyDetailView.h"
 
+#import"FamilyMemberView.h"
+
 @interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
@@ -200,18 +202,18 @@ void uncaughtExceptionHandler(NSException *exception) {
     }
 
 //    UIViewController *start = [UIViewController alloc];
-//    [start.view addSubview:[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:start.view andDataDic:nil]];
+//    [start.view addSubview:[[FamilyMemberView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObj:nil andDataArr:nil]];
 ////    [ScanQRCode initScanQRWithCurrentView: start.view];
 ////    [ScanQRCode initGenerateWithCurrentView:start.view andUrl:nil andImage:nil];
-//  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
-//    [start.view addSubview:imageV];
+////  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
+////    [start.view addSubview:imageV];
 //    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
 //    nav.delegate = self;
 //    nav.navigationBar.hidden = YES;
 //    nav.interactivePopGestureRecognizer.enabled = YES;
 //    self.window.rootViewController = nav;
 //    [self.window makeKeyAndVisible];
-       
+    
      NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;

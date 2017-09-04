@@ -50,6 +50,8 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"raverId"];
+    NSLog(@"%@",[LocalDataMangaer sharedManager].raverid);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
@@ -60,6 +62,7 @@
                 [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
                 [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
                 }else{
+#warning-需要修改
                     [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
                     [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
                 }
@@ -69,6 +72,7 @@
                 if (raverId==nil) {
                 [self.messageView reloadData:responseObject[@"message"]];
                 }else{
+#warning-需要修改
                  [self.messageView reloadData:responseObject[@"message"]];
                 }
             }

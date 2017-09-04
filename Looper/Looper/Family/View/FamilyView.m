@@ -132,7 +132,7 @@
     [bk_image setImage:[UIImage imageNamed:@"bg_family.png"]];
     [self addSubview:bk_image];
     [self initSCView];
-    if ([LocalDataMangaer sharedManager].raverid ==nil) {
+    if ([LocalDataMangaer sharedManager].raverid ==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
     }else{
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
