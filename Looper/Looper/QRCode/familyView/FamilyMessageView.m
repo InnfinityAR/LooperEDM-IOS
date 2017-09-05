@@ -10,6 +10,7 @@
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 #import "FamilyViewModel.h"
+#import "UIImageView+WebCache.h"
 @interface FamilyMessageView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *dataArr;
@@ -48,13 +49,15 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
-    NSDictionary *dataDic=self.dataArr[-tag-1];
+    
     if (tag<0) {
+        NSDictionary *dataDic=self.dataArr[-tag-1];
     //拒绝
-        [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raaverid"]  andApplyId:[dataDic objectForKey:@"applyid"]];
+        [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raverid"]  andApplyId:[dataDic objectForKey:@"inviteid"]];
     }else{
+        NSDictionary *dataDic=self.dataArr[tag-1];
     //同意
-        [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raaverid"]  andApplyId:[dataDic objectForKey:@"applyid"]];
+        [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raverid"]  andApplyId:[dataDic objectForKey:@"inviteid"]];
     }
 }
 -(void)setBackView{
@@ -90,21 +93,22 @@
     NSDictionary *dataDic=self.dataArr[indexPath.row];
     NSString *status=[dataDic objectForKey:@"reviewstatus"];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(11*DEF_Adaptation_Font, 17*DEF_Adaptation_Font, 40*DEF_Adaptation_Font, 40*DEF_Adaptation_Font)];
-    headIV.image=[UIImage imageNamed:@"640-2.png"];
+    NSLog(@"%@",[dataDic objectForKey:@"headimageurl"]);
+    [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
     headIV.layer.cornerRadius=20*DEF_Adaptation_Font;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];
     UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font, 300*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font)];
     headLB.font=[UIFont systemFontOfSize:18];
     headLB.textColor=[UIColor whiteColor];
-        headLB.text=@"LooperEDM";
+        headLB.text=[dataDic objectForKey:@"nickname"];
     [cell.contentView addSubview:headLB];
     UILabel *inviteLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font, 300*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font)];
     inviteLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
     inviteLB.textColor=[UIColor whiteColor];
     inviteLB.text=@"邀你入LooperEDM";
     [cell.contentView addSubview:inviteLB];
-    if (indexPath.row==0) {
+    if ([status intValue]==1) {
         UIButton *sureButton=[LooperToolClass createBtnImageNameReal:@"agreeBtn.png" andRect:CGPointMake(430*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font) andTag:(int)indexPath.row+1 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(28*DEF_Adaptation_Font, 28*DEF_Adaptation_Font) andTarget:self];
         [cell.contentView addSubview:sureButton];
         UIButton *refuseButton=[LooperToolClass createBtnImageNameReal:@"refuseBtn.png" andRect:CGPointMake(510*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font) andTag:(int)-(indexPath.row+1) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(28*DEF_Adaptation_Font, 28*DEF_Adaptation_Font) andTarget:self];
