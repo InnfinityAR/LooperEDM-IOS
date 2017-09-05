@@ -13,9 +13,12 @@
 #import "LocalDataMangaer.h"
 #import "AFNetworkTool.h"
 #import "FamilyDetailView.h"
+#import "DataHander.h"
+#import "FamilyApplyView.h"
+#import "LocationManagerData.h"
 @implementation FamilyViewModel{
 
-
+    FamilyApplyView *familyApplyV;
     FamilyView *familyV;
 
 }
@@ -45,19 +48,29 @@
     [dic setObject:orderType forKey:@"orderType"];
     }
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    if (raverId==nil) {
-        [dic setObject:[LocalDataMangaer sharedManager].raverid forKey:@"raverId"];
-    }
-     [dic setObject:@"8" forKey:@"raverId"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
             if (orderType==nil) {
 //第一次加载
                 [self.familyView initFamilyRankWithDataArr:responseObject[@"data"]];
+                if (raverId==nil){
+                [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
+                [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
+                }else{
+                    [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
+                    [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
+                }
             }else{
 //排行筛选
                 [self.rankView reloadData:responseObject[@"data"]];
+                if (raverId==nil) {
+                [self.messageView reloadData:responseObject[@"message"]];
+                }else{
+                 [self.messageView reloadData:responseObject[@"message"]];
+                }
             }
         }
     }fail:^{
@@ -65,8 +78,29 @@
     }
      
      ];
-
 }
+//同意/拒绝加入家族
+-(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:join forKey:@"join"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:applyId forKey:@"applyId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaver" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            if ([join intValue]==1) {
+            [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
+            }else{
+            [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
+                [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+            }
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 //家族详情
 -(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
@@ -91,7 +125,8 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"applyFamily" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            
+            [familyApplyV removeFromSuperview];
+            [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:2 andPos:CGPointZero];
         }
     }fail:^{
         
@@ -124,6 +159,14 @@
         
     }];
 }
+//家族申请弹窗
+-(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic{
+    FamilyApplyView *applyView=[[FamilyApplyView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataDic:dataDic];
+    familyApplyV=applyView;
+    [[self.obj view]addSubview:applyView];
+}
+
+
 
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];

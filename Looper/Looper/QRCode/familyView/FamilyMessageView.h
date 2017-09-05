@@ -11,4 +11,5 @@
 @interface FamilyMessageView : UIView
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataArr:(NSArray *)dataArr;
 @property(nonatomic,strong)id obj;
+-(void)reloadData:(NSArray *)dataArr;
 @end

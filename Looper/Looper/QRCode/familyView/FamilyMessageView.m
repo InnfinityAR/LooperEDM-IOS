@@ -9,6 +9,7 @@
 #import "FamilyMessageView.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
+#import "FamilyViewModel.h"
 @interface FamilyMessageView()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *dataArr;
@@ -17,7 +18,8 @@
 
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataArr:(NSArray *)dataArr{
     if (self=[super initWithFrame:frame]) {
-        self.obj=(UIView *)obj;
+        self.obj=(FamilyViewModel *)obj;
+        [self.obj setMessageView:self];
         self.dataArr=dataArr;
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -46,10 +48,13 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
+    NSDictionary *dataDic=self.dataArr[-tag-1];
     if (tag<0) {
     //拒绝
+        [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raaverid"]  andApplyId:[dataDic objectForKey:@"applyid"]];
     }else{
     //同意
+        [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raaverid"]  andApplyId:[dataDic objectForKey:@"applyid"]];
     }
 }
 -(void)setBackView{
@@ -57,9 +62,13 @@
     self.layer.cornerRadius=12.0*DEF_Adaptation_Font;
     self.layer.masksToBounds=YES;
 }
+-(void)reloadData:(NSArray *)dataArr{
+    self.dataArr=dataArr;
+    [self.tableView reloadData];
+}
 #pragma -tableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return  self.dataArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -78,6 +87,8 @@
     return cell;
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
+    NSDictionary *dataDic=self.dataArr[indexPath.row];
+    NSString *status=[dataDic objectForKey:@"reviewstatus"];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(11*DEF_Adaptation_Font, 17*DEF_Adaptation_Font, 40*DEF_Adaptation_Font, 40*DEF_Adaptation_Font)];
     headIV.image=[UIImage imageNamed:@"640-2.png"];
     headIV.layer.cornerRadius=20*DEF_Adaptation_Font;
@@ -86,11 +97,7 @@
     UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font, 300*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font)];
     headLB.font=[UIFont systemFontOfSize:18];
     headLB.textColor=[UIColor whiteColor];
-    if (indexPath.row==1) {
-        headLB.text=@"Welphon------------WC";
-    }else{
         headLB.text=@"LooperEDM";
-    }
     [cell.contentView addSubview:headLB];
     UILabel *inviteLB=[[UILabel alloc]initWithFrame:CGRectMake(120*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font, 300*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font)];
     inviteLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
