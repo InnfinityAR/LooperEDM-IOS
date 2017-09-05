@@ -138,6 +138,7 @@
     
     UIImageView *bk_image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     [bk_image setImage:[UIImage imageNamed:@"bg_family.png"]];
+    
     [self addSubview:bk_image];
     [self initSCView];
     if ([LocalDataMangaer sharedManager].raverid ==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
