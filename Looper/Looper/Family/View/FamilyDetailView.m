@@ -203,6 +203,51 @@
     noticeDetailLB.numberOfLines=0;
     [scrollV addSubview:noticeDetailLB];
 }
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+CGFloat xOffset=scrollView.contentOffset.x;
+    CGFloat yOffset=scrollView.contentOffset.y;;
+    xOffset=ceilf(xOffset);
+ CGFloat  scollX=ceilf(DEF_WIDTH(self));
+    NSLog(@"xoffset:%f,scroll: %f ,yoffset:%f",xOffset,scollX,yOffset);
+    if (yOffset==0) {
+    if (xOffset==scollX) {
+        applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        noticeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        logLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        scrollV.contentOffset=CGPointMake(DEF_WIDTH(self), 0);
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=248*DEF_Adaptation_Font*0.5;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    if (xOffset>0&&xOffset<20*DEF_Adaptation_Font*0.5){
+        applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        noticeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        logLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        scrollV.contentOffset=CGPointMake(0, 0);
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=65*DEF_Adaptation_Font*0.5;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    if (xOffset==ceilf(DEF_WIDTH(self)*2)) {
+        applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+        noticeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        logLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
+        scrollV.contentOffset=CGPointMake(DEF_WIDTH(self)*2,0);
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame=lineView.frame;
+            frame.origin.x=177*DEF_Adaptation_Font*0.5+530*DEF_Adaptation_Font*0.5/2;
+            lineView.frame=frame;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    }
+}
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==0) {
         applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
@@ -259,7 +304,7 @@
         //取消button点击延迟
         _tableView.delaysContentTouches = NO;
         //禁止上拉
-        //        _tableView.bounces=NO;
+//        _tableView.bounces=NO;
         _tableView.alwaysBounceVertical=YES;
     }
     return _tableView;

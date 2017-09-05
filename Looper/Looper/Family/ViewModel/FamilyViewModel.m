@@ -50,8 +50,9 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"raverId"];
-    NSLog(@"%@",[LocalDataMangaer sharedManager].raverid);
+    if (raverId!=nil) {
+    [dic setObject:raverId forKey:@"raverId"];
+    }
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
@@ -62,9 +63,7 @@
                 [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
                 [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
                 }else{
-#warning-需要修改
-                    [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
-                    [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
+                    [self.familyView initFamilyMemberWithDataArr:responseObject[@"member"]];
                 }
             }else{
 //排行筛选
@@ -113,8 +112,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamilyDetail" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            FamilyDetailView *familyDetailV=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self andDataDic:responseObject[@"data"] andRankNumber:rankNumber];
-            [self.familyView addSubview:familyDetailV];
+            [self.familyView initFamilyDetailWithDataDic:responseObject[@"data"]];
         }
     }fail:^{
         

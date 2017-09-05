@@ -17,6 +17,8 @@
 #import <objc/runtime.h>
 #import "FamilySearchView.h"
 #import "LocalDataMangaer.h"
+#import "FamilyMemberView.h"
+#import "FamilyDetailView.h"
 @interface FamilyView()
 
 @end
@@ -26,6 +28,8 @@
     FamilyRankView *rankView;
     FamilyRankView *listView;
     FamilyMessageView *messageView;
+    FamilyMemberView *memberView;
+    FamilyDetailView *detailView;
     
     //用于页面切换
     //    UIView *contentView;
@@ -46,7 +50,11 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (FamilyViewModel*)idObject;
         [self.obj setFamilyView:self];
+        if ([LocalDataMangaer sharedManager].raverid ==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
         titleArray=@[@"家族排行",@"家族列表",@"家族消息"];
+        }else{
+            titleArray=@[@"家族排行",@"家族详情",@"家族成员"];
+        }
         [self initView];
         [self initBackView];
     }
@@ -90,7 +98,7 @@
     textLB2=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2+120*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB2.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB2.textAlignment=NSTextAlignmentCenter;
-    textLB2.text=titleArray[2];
+    textLB2.text=titleArray[titleArray.count-1];
     [self addSubview:textLB2];
     
 }
@@ -136,6 +144,7 @@
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
     }else{
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
+        [self.obj getFamilyDetailDataForRfId:[LocalDataMangaer sharedManager].raverid andRank:@"1"];
     }
 }
 //家族排行
@@ -155,7 +164,19 @@
     messageView=[[FamilyMessageView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*2*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr];
     [_sc addSubview:messageView];
     [_sc make3Dscrollview];
-    
+}
+//家族详情
+-(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic{
+    detailView=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataDic:dataDic andRankNumber:@"1"];
+    [_sc addSubview:detailView];
+    [_sc make3Dscrollview];
+}
+//家族成员
+-(void)initFamilyMemberWithDataArr:(NSArray *)dataArr{
+    memberView=[[FamilyMemberView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*2*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObj:self.obj andDataArr:dataArr];
+    [_sc addSubview:memberView];
+    [_sc make3Dscrollview];
+
 }
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];

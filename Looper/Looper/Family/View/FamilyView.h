@@ -26,5 +26,6 @@
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr;
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr;
 -(void)initFamilyMessageWithDataArr:(NSArray *)dataArr;
-
+-(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic;
+-(void)initFamilyMemberWithDataArr:(NSArray *)dataArr;
 @end

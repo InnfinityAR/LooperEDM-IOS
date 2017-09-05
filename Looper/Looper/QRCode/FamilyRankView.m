@@ -234,7 +234,6 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   NSDictionary *dataDic=self.dataArr[indexPath.row];
-//    [self.obj getFamilyDetailDataForRfId:[dataDic objectForKey:@"raverid"] andRank:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
     [self.obj getFamilyApplyDataWithDataDic:dataDic];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
