@@ -185,8 +185,8 @@
 }
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
+//    _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*3, 0);
     _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*titleArray.count, 0);
-    
     _sc.delegate = self;
     _sc.pagingEnabled = YES;
     [self addSubview:_sc];

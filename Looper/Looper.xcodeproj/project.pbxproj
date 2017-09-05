@@ -422,6 +422,7 @@
 		C43F56A61F54052D009BE471 /* FamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = C43F56A51F54052D009BE471 /* FamilyView.m */; };
 		C43F56A91F540549009BE471 /* FamilyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C43F56A81F540549009BE471 /* FamilyViewModel.m */; };
 		C43F56AC1F54055C009BE471 /* FramilyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C43F56AB1F54055C009BE471 /* FramilyModel.m */; };
+		C445BAC21F5D4112007650D3 /* FramilyAddInviteView.m in Sources */ = {isa = PBXBuildFile; fileRef = C445BAC11F5D4112007650D3 /* FramilyAddInviteView.m */; };
 		C446CDE51E85275D00921FD1 /* btn_loginWechat.png in Resources */ = {isa = PBXBuildFile; fileRef = C446CDE31E85275D00921FD1 /* btn_loginWechat.png */; };
 		C446CDE71E85276300921FD1 /* LOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = C446CDE61E85276300921FD1 /* LOGO.png */; };
 		C446CDEA1E8531CC00921FD1 /* LoginAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = C446CDE91E8531CC00921FD1 /* LoginAccountView.m */; };
@@ -1457,6 +1458,8 @@
 		C43F56A81F540549009BE471 /* FamilyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewModel.m; sourceTree = "<group>"; };
 		C43F56AA1F54055C009BE471 /* FramilyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramilyModel.h; sourceTree = "<group>"; };
 		C43F56AB1F54055C009BE471 /* FramilyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FramilyModel.m; sourceTree = "<group>"; };
+		C445BAC01F5D4112007650D3 /* FramilyAddInviteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramilyAddInviteView.h; sourceTree = "<group>"; };
+		C445BAC11F5D4112007650D3 /* FramilyAddInviteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FramilyAddInviteView.m; sourceTree = "<group>"; };
 		C446CDE31E85275D00921FD1 /* btn_loginWechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_loginWechat.png; sourceTree = "<group>"; };
 		C446CDE61E85276300921FD1 /* LOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LOGO.png; sourceTree = "<group>"; };
 		C446CDE81E8531CC00921FD1 /* LoginAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAccountView.h; sourceTree = "<group>"; };
@@ -3413,6 +3416,8 @@
 				B22C5AB91F5D3466005C9E28 /* FamilyMemberView.m */,
 				B22C5AA51F57FA78005C9E28 /* CycleView.h */,
 				B22C5AA61F57FA78005C9E28 /* CycleView.m */,
+				C445BAC01F5D4112007650D3 /* FramilyAddInviteView.h */,
+				C445BAC11F5D4112007650D3 /* FramilyAddInviteView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5357,6 +5362,7 @@
 				C4BCE74A1E091E710087E6C5 /* MBProgressHUD.m in Sources */,
 				C4BCE7731E091E710087E6C5 /* loginView.m in Sources */,
 				B225B9701F3075300008E5AF /* SaleTicketView.m in Sources */,
+				C445BAC21F5D4112007650D3 /* FramilyAddInviteView.m in Sources */,
 				C4BCE7BE1E0920180087E6C5 /* StartViewModel.m in Sources */,
 				C4E86FA91F16474000D9658D /* PKPlayerManager.m in Sources */,
 				B23521411F482880003D06CB /* SDWebImageDecoder.m in Sources */,
