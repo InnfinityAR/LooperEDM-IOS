@@ -86,11 +86,6 @@
 //邀请button
         
     }
-    if (tag==100) {
-        //保存到手机
-    }if(tag==101){
-        //分享二维码
-    }
 }
 
 -(UITableView *)tableView{
