@@ -133,11 +133,24 @@
         [self removeFromSuperview];
     }
     if (tag==100) {
-         UIImageWriteToSavedPhotosAlbum(SQCodeIV.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        [self snapshotScreenInView:self];
 //保存到手机
     }if(tag==101){
 //分享二维码
     }
+}
+//手机截图效果
+- (void)snapshotScreenInView:(UIView *)contentView {
+    CGSize size = contentView.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    CGRect rect = contentView.frame;
+    //  自iOS7开始，UIView类提供了一个方法-drawViewHierarchyInRect:afterScreenUpdates: 它允许你截取一个UIView或者其子类中的内容，并且以位图的形式（bitmap）保存到UIImage中
+    [contentView drawViewHierarchyInRect:rect afterScreenUpdates:YES];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
 }
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
     

@@ -393,8 +393,6 @@
     [brandBtn addTarget:self action:@selector(addbrandView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:brandBtn];
 #warning-在这里加入多个主办方
-    NSArray *hostArr=[activityDic objectForKey:@"host"];
-    [activityDic setObject:hostArr.firstObject forKey:@"host"];
     UILabel *brandStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1430*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"host"] objectForKey:@"hostname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
     [brandStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
     [bkScroll addSubview:brandStr];

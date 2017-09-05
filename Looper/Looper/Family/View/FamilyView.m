@@ -107,19 +107,6 @@
 {
     CGPoint offset = [scrollView contentOffset];
     int currentPage = offset.x/DEF_SCREEN_WIDTH;
-    if (currentPage == 0) {
-        
-        if(localCurrent ==currentPage){
-            
-            [_sc setContentOffset:CGPointMake(DEF_SCREEN_WIDTH * (3-1), 0) animated:NO];
-        }
-    }
-    else if(currentPage == 2) {
-        if (localCurrent==currentPage) {
-            [_sc setContentOffset:CGPointMake(0, 0) animated:NO];
-        }
-    };
-    localCurrent=currentPage;
     textLB.text=titleArray[currentPage];
     if (currentPage==titleArray.count-1) {
         textLB1.text=titleArray[0];
@@ -131,7 +118,25 @@
     }else{
         textLB2.text=titleArray[currentPage-1];
     }
-    
+    if (currentPage == 0) {
+        
+        if(localCurrent ==currentPage){
+            
+            [_sc setContentOffset:CGPointMake(DEF_SCREEN_WIDTH * (titleArray.count-1), 0) animated:NO];
+              textLB.text=titleArray[titleArray.count-1];
+             textLB1.text=titleArray[0];
+            textLB2.text=titleArray[titleArray.count-2];
+        }
+    }
+    else if(currentPage == titleArray.count-1) {
+        if (localCurrent==currentPage) {
+            [_sc setContentOffset:CGPointMake(0, 9) animated:NO];
+            textLB.text=titleArray[0];
+            textLB1.text=titleArray[1];
+            textLB2.text=titleArray[titleArray.count-1];
+        }
+    };
+    localCurrent=currentPage;
 }
 
 -(void)initView{

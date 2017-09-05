@@ -323,7 +323,6 @@ CGFloat xOffset=scrollView.contentOffset.x;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0,0);
         // 滚动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        //    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)*2,0,DEF_WIDTH(self), DEF_HEIGHT(scrollV)) collectionViewLayout:flowLayout];
         _collectView.backgroundColor = [UIColor colorWithRed:86/255.0 green:77/255.0 blue:108/255.0 alpha:1.0];
         // 设置代理
