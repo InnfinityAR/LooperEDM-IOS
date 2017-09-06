@@ -10,6 +10,7 @@
 #import "FamilyViewModel.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
+#import "UIImageView+WebCache.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource>
 {
     NSInteger isSort;//sortBtn
@@ -153,7 +154,7 @@
     }
     }
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    headIV.image=[UIImage imageNamed:@"640-2.png"];
+    [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
     headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];
@@ -180,24 +181,34 @@
     UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(290*DEF_Adaptation_Font*0.5, 0, 80*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
     levelLB.textColor=[UIColor whiteColor];
     levelLB.font=[UIFont systemFontOfSize:14];
-    levelLB.text=@"99";
+    if ([dataDic objectForKey:@"level"]==[NSNull null]) {
+         levelLB.text=@"I";
+    }else{
+    levelLB.text=[dataDic objectForKey:@"level"];
+    }
     levelLB.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:levelLB];
     UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(370*DEF_Adaptation_Font*0.5, 0, 120*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
     activeLB.textColor=[UIColor whiteColor];
     activeLB.font=[UIFont systemFontOfSize:14];
-    activeLB.text=@"10000";
+    if ([dataDic objectForKey:@"exp"]==[NSNull null]) {
+        activeLB.text=@"0";
+    }else{
+        activeLB.text=[dataDic objectForKey:@"exp"];
+    }
      activeLB.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:activeLB];
-
-//    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(510*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
-//    sexIV.image=[UIImage imageNamed:@"familyMember_person.png"];
-//    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
-//    sexIV.image=[UIImage imageNamed:@"family_woman.png"];
-    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 33*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
-    sexIV.image=[UIImage imageNamed:@"family_man.png"];
-    [cell.contentView addSubview:sexIV];
-    
+    if ([[dataDic objectForKey:@"sex"]intValue]==1) {
+        UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 33*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        sexIV.image=[UIImage imageNamed:@"family_man.png"];
+        [cell.contentView addSubview:sexIV];
+    }else if([[dataDic objectForKey:@"sex"]intValue]==0){
+    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(510*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    sexIV.image=[UIImage imageNamed:@"familyMember_person.png"];
+    }else{
+    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    sexIV.image=[UIImage imageNamed:@"family_woman.png"];
+    }
     if (indexPath.row%2==0) {
         cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
     }else{

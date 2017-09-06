@@ -65,7 +65,10 @@
                 [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
                 }else{
                     [self.familyView initFamilyMemberWithDataArr:responseObject[@"member"]];
-                      [self getFamilyDetailDataForRfId:[LocalDataMangaer sharedManager].raverid andRank:@"1"];
+                    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:responseObject[@"raver"]];
+                    [dataDic setObject:ownername forKey:@"ownername"];
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy]];
+                     
                 }
             }else{
 //排行筛选
@@ -114,9 +117,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamilyDetail" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:responseObject[@"data"]];
-            [dataDic setObject:ownername forKey:@"ownername"];
-            [self.familyView initFamilyDetailWithDataDic:[dataDic copy]];
+            
         }
     }fail:^{
         

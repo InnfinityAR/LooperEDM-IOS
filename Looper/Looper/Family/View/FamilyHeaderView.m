@@ -56,7 +56,7 @@
     levelLB.font=[UIFont systemFontOfSize:16];
     levelLB.text=@"等级";
     [self addSubview:levelLB];
-     [self initProgressVWithRate:[_dataDic objectForKey:@"raverexp"] andSum:@"160"];
+     [self initProgressVWithRate:[_dataDic objectForKey:@"raverexp"] andSum:@"16000"];
     UILabel *levelNumLB=[[UILabel alloc]initWithFrame:CGRectMake(110*DEF_Adaptation_Font*0.5, 495*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     levelNumLB.textColor=[UIColor whiteColor];
     levelNumLB.layer.cornerRadius=20*DEF_Adaptation_Font*0.5;
