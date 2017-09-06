@@ -18,6 +18,8 @@
     NSMutableArray *recommendArray;
     NSMutableDictionary *familyDetailData;
     NSMutableArray * familyMember;
+    NSMutableArray *applyArray;
+    NSMutableArray *messageArray;
     
 }
 
@@ -27,7 +29,8 @@
 @property(nonatomic)NSMutableArray *InviteArray;
 @property(nonatomic)NSMutableArray *RankingArray;
 @property(nonatomic)NSMutableArray *recommendArray;
-
+@property(nonatomic)NSMutableArray *applyArray;
+@property(nonatomic)NSMutableArray *messageArray;
 
 -(void)initWithData:(NSDictionary*)data;
 -(void)updataWithData:(NSDictionary*)data;

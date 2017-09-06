@@ -16,6 +16,8 @@
 @synthesize recommendArray = _recommendArray;
 @synthesize familyDetailData = _familyDetailData;
 @synthesize familyMember = _familyMember;
+@synthesize applyArray = _applyArray;
+@synthesize messageArray =_messageArray;
 
 -(instancetype)init{
 
@@ -48,6 +50,24 @@
     if([_sourceDic objectForKey:@"raver"]!=nil){
         [self updataWithDetail:[_sourceDic objectForKey:@"raver"]];
     }
+    if([_sourceDic objectForKey:@"apply"]!=nil){
+        [self updataWithDetail:[_sourceDic objectForKey:@"apply"]];
+    }
+    if([_sourceDic objectForKey:@"message"]!=nil){
+        [self updateWithMessageData:[_sourceDic objectForKey:@"message"]];
+    }
+    
+}
+
+
+-(void)updateWithMessageData:(NSArray*)messageData{
+    [_messageArray removeAllObjects];
+    _messageArray = [[NSMutableArray alloc] initWithArray:messageData];
+}
+
+-(void)updateWithApplyData:(NSArray*)applyData{
+    [_applyArray removeAllObjects];
+    _applyArray = [[NSMutableArray alloc] initWithArray:applyData];
 }
 
 -(void)updateWithMemberData:(NSArray*)memberArray{

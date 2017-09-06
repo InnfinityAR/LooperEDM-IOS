@@ -55,17 +55,10 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
-    if (raverId!=nil) {
-    [dic setObject:raverId forKey:@"raverId"];
-    }
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            
             [_familyModel initWithData:responseObject];
-            
-            
             if (orderType==nil) {
 //第一次加载
                 [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];

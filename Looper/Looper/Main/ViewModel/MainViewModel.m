@@ -393,8 +393,6 @@
             [self requestgetMyFavorite];
 
             //[self getRouletteResult];
-           
-
 
             [LocalDataMangaer sharedManager].tokenStr =responseObject[@"data"][@"User"][@"sdkid"];
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
