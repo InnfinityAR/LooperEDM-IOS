@@ -23,6 +23,8 @@
 
 }
 
+@synthesize familyModel =_familyModel;
+
 
 -(id)initWithController:(id)controller{
     if(self=[super init]){
@@ -35,6 +37,9 @@
 }
 
 -(void)requestData{
+    
+    _familyModel  = [[FramilyModel alloc] init];
+    
     familyV = [[FamilyView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:familyV];
 
@@ -56,6 +61,11 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
+            
+            
+            [_familyModel initWithData:responseObject];
+            
+            
             if (orderType==nil) {
 //第一次加载
                 [self.familyView initFamilyRankWithDataArr:responseObject[@"data"]];

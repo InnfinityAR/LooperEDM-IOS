@@ -48,8 +48,7 @@
     
     
     NSLog(@"您的当前位置:经度：%f,纬度：%f,海拔：%f,航向：%f,速度：%f",coordinate.longitude,coordinate.latitude,location.altitude,location.course,location.speed);
-    
-    
+
     _LocationPoint_xy = CGPointMake(coordinate.longitude, coordinate.latitude);
     
 
