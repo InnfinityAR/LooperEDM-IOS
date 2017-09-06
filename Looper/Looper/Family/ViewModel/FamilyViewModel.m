@@ -76,7 +76,10 @@
                 }else{
                     [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
                     NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
+                    if (ownername==nil||[ownername isEqual:[NSNull null]]) {
+                    }else{
                     [dataDic setObject:ownername forKey:@"ownername"];
+                    }
                     NSArray *applyArr=nil;
                     if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
                         applyArr=responseObject[@"apply"];
@@ -87,9 +90,9 @@
             }else{
 //排行筛选
                 [_familyModel updataWithData:responseObject];
-                [self.rankView reloadData:responseObject[@"data"]];
+                [self.rankView reloadData:_familyModel.RankingArray];
                 if (raverId==nil) {
-                [self.messageView reloadData:_familyModel.RankingArray];
+                [self.messageView reloadData:_familyModel.InviteArray];
                 }else{
 //同意邀请就直接跳转界面
                   [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
@@ -111,16 +114,17 @@
      ];
 }
 //同意/拒绝申请家族
--(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId{
+-(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:join forKey:@"join"];
     [dic setObject:raverId forKey:@"raverId"];
     [dic setObject:applyId forKey:@"applyId"];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:userid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaver" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
             [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
+                 [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
             }else{
             [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
                 [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];

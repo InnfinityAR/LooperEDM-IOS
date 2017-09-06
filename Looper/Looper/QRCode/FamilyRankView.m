@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "FamilyDetailView.h"
 #import"FamilyApplyView.h"
+#import "LocalDataMangaer.h"
 @interface FamilyRankView()<UITableViewDelegate,UITableViewDataSource>
 {
 //type用来传入是家族排行还是家族列表,1为排行，0为列表,默认为1
@@ -230,7 +231,9 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   NSDictionary *dataDic=self.dataArr[indexPath.row];
+    if ([LocalDataMangaer sharedManager].raverid==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
     [self.obj getFamilyApplyDataWithDataDic:dataDic];
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  62*DEF_Adaptation_Font;

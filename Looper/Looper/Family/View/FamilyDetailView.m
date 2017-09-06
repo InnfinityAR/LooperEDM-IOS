@@ -50,7 +50,9 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
     if (tag>0) {
+        NSDictionary *dataDic=self.applyArr[button.tag-1];
         //同意
+        [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raverid"] andApplyId:[dataDic objectForKey:@"applyid"] andUserId:[dataDic objectForKey:@"userid"]];
     }
 }
 -(void)initView{
@@ -350,10 +352,10 @@ CGFloat xOffset=scrollView.contentOffset.x;
         [view removeFromSuperview];
     }
     // 取出每个item所需要的数据
-    NSDictionary *dic = [self.applyArr objectAtIndex:indexPath.item];
+    NSDictionary *dataDic = [self.applyArr objectAtIndex:indexPath.item];
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(33*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 440*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5)];
     contentLB.textColor=[UIColor whiteColor];
-    NSString *name=@"我是蹦极王某";
+    NSString *name=[dataDic objectForKey:@"nickname"];
     NSString *applyName=@"暴走大垃圾";
 #warning -在这里加入是别人邀请还是自己申请
     if (1) {
@@ -410,7 +412,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
         }
     }    cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.logArr[indexPath.row]];
+//    NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.logArr[indexPath.row]];
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
     timeLB.text=@"2017-8-28";
     timeLB.textColor=ColorRGB(255, 255, 255, 0.76);

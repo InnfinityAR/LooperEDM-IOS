@@ -225,25 +225,25 @@
 }
 -(NSString *)jobnameForStatus:(NSInteger)status{
     switch (status) {
-        case 0:
+        case 6:
             return @"舰长";
             break;
-        case 1:
+        case 5:
             return @"副舰长";
             break;
-        case 2:
+        case 4:
             return @"大副";
             break;
         case 3:
             return @"二副";
             break;
-        case 4:
+        case 2:
             return @"三副";
             break;
-        case 5:
+        case 1:
             return @"水手长";
             break;
-        case 6:
+        case 0:
             return @"水手";
             break;
         default:
@@ -253,26 +253,26 @@
 }
 -(UIColor *)jobColorForStatus:(NSInteger)status{
     switch (status) {
-        case 0:
+        case 6:
             return ColorRGB(253, 123, 153, 1.0);
             break;
-        case 1:
+        case 5:
              return ColorRGB(252, 119, 158, 1.0);
             break;
-        case 2:
+        case 4:
             return ColorRGB(231, 152, 163, 1.0);
             break;
         case 3:
              return ColorRGB(247, 156, 150, 1.0);
             break;
-        case 4:
+        case 2:
             return ColorRGB(241, 171, 152, 1.0);
             break;
-        case 5:
+        case 1:
              return ColorRGB(252, 186, 140, 1.0);
             break;
-        case 6:
-             return ColorRGB(206, 157, 116, 1.0);
+        case 0:
+             return ColorRGB(255, 207, 160, 1.0);
             break;
         default:
             break;
