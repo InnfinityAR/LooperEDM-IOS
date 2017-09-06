@@ -66,7 +66,7 @@
     declarationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
     declarationLB.textAlignment=NSTextAlignmentCenter;
     declarationLB.numberOfLines=2;
-    declarationLB.text=@"每一个残暴的君主都能懂得怜悯；每一个失落的灵魂中都有创造奇迹的傲骨";
+    declarationLB.text=[self.dataDic objectForKey:@"familydeclaration"];
     [contentView addSubview:declarationLB];
     UIButton *saveBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(DEF_WIDTH(contentView)/2-110*DEF_Adaptation_Font*0.5, 220*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(220*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     [saveBtn setTitle:@"申请加入" forState:(UIControlStateNormal)];

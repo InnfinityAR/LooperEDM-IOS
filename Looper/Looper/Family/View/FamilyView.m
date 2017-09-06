@@ -33,7 +33,7 @@
     
     //用于页面切换
     //    UIView *contentView;
-    UIScrollView *_sc;
+//    UIScrollView *_sc;
     int localCurrent;
     
     NSArray *titleArray;
@@ -90,12 +90,12 @@
     textLB.textAlignment=NSTextAlignmentCenter;
     textLB.text=titleArray[titleNum];
     [self addSubview:textLB];
-    textLB1=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-240*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    textLB1=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2+120*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB1.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB1.textAlignment=NSTextAlignmentCenter;
     textLB1.text=titleArray[1];
     [self addSubview:textLB1];
-    textLB2=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2+120*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    textLB2=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-240*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB2.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB2.textAlignment=NSTextAlignmentCenter;
     textLB2.text=titleArray[titleArray.count-1];
@@ -150,7 +150,7 @@
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
     }else{
         [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
-        [self.obj getFamilyDetailDataForRfId:[LocalDataMangaer sharedManager].raverid andRank:@"1"];
+      
     }
 }
 //家族排行

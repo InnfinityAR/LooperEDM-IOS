@@ -401,7 +401,11 @@
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
             [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
             [LocalDataMangaer sharedManager].raverid =responseObject[@"data"][@"raverid"];
+<<<<<<< HEAD
             [LocalDataMangaer sharedManager].raverid =@"8";
+=======
+            [LocalDataMangaer sharedManager].raverid =@"9";
+>>>>>>> bd139c232992d4d7046dd6bca59d02bb7b69787d
             [[LocalDataMangaer sharedManager] setData];
             
             [[RongCloudManger sharedManager] initRongCloudSDK];

@@ -180,11 +180,7 @@
     headLB.numberOfLines=0;
     headLB.font=[UIFont systemFontOfSize:14];
     headLB.textColor=[UIColor whiteColor];
-    if (indexPath.row==0) {
-         headLB.text=@"LooperEDM";
-    }else{
         headLB.text=dataDic[@"ravername"];
-    }
     [cell.contentView addSubview:headLB];
     
     UILabel *rankLB=[[UILabel alloc]initWithFrame:CGRectMake(292*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font, 58*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];

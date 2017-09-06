@@ -20,7 +20,7 @@
 
     FamilyApplyView *familyApplyV;
     FamilyView *familyV;
-
+    NSString *ownername;
 }
 
 @synthesize familyModel =_familyModel;
@@ -55,9 +55,9 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
-//    if (raverId!=nil) {
-//    [dic setObject:raverId forKey:@"raverId"];
-//    }
+    if (raverId!=nil) {
+    [dic setObject:raverId forKey:@"raverId"];
+    }
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
@@ -69,20 +69,25 @@
             if (orderType==nil) {
 //第一次加载
                 [self.familyView initFamilyRankWithDataArr:responseObject[@"data"]];
+                ownername=responseObject[@"ownername"];
                 if (raverId==nil){
                 [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
                 [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
                 }else{
                     [self.familyView initFamilyMemberWithDataArr:responseObject[@"member"]];
+                    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:responseObject[@"raver"]];
+                    [dataDic setObject:ownername forKey:@"ownername"];
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy]];
+                     
                 }
             }else{
 //排行筛选
                 [self.rankView reloadData:responseObject[@"data"]];
                 if (raverId==nil) {
-                [self.messageView reloadData:responseObject[@"message"]];
+                [self.messageView reloadData:responseObject[@"invite"]];
                 }else{
 #warning-需要修改
-                 [self.messageView reloadData:responseObject[@"message"]];
+                 [self.messageView reloadData:responseObject[@"invite"]];
                 }
             }
         }
@@ -122,7 +127,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamilyDetail" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
-            [self.familyView initFamilyDetailWithDataDic:responseObject[@"data"]];
+            
         }
     }fail:^{
         
