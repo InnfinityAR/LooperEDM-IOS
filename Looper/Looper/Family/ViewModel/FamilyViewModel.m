@@ -87,7 +87,7 @@
      
      ];
 }
-//同意/拒绝加入家族
+//同意/拒绝申请家族
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:join forKey:@"join"];
@@ -108,7 +108,26 @@
     }];
 }
 
-
+//同意/拒绝邀请加入家族
+-(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:join forKey:@"join"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:inviteId forKey:@"inviteId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaver" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            if ([join intValue]==1) {
+                [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
+            }else{
+                [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
+                [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+            }
+        }
+    }fail:^{
+        
+    }];
+}
 //家族详情
 -(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];

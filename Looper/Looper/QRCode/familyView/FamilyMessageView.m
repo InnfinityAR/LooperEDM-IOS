@@ -53,11 +53,11 @@
     if (tag<0) {
         NSDictionary *dataDic=self.dataArr[-tag-1];
     //拒绝
-        [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raverid"]  andApplyId:[dataDic objectForKey:@"inviteid"]];
+        [self.obj judgeInviteJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raverid"] andinviteId:[dataDic objectForKey:@"inviteid"]];
     }else{
         NSDictionary *dataDic=self.dataArr[tag-1];
     //同意
-        [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raverid"]  andApplyId:[dataDic objectForKey:@"inviteid"]];
+      [self.obj judgeInviteJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raverid"] andinviteId:[dataDic objectForKey:@"inviteid"]];
     }
 }
 -(void)setBackView{
@@ -115,7 +115,7 @@
         [cell.contentView addSubview:refuseButton];
     }else{
     UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(466*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font, DEF_WIDTH(self)-466*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
-    personNumLB.text=@"已过期";
+    personNumLB.text=@"已拒绝";
     personNumLB.numberOfLines=0;
     personNumLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     personNumLB.textColor=[UIColor lightGrayColor];

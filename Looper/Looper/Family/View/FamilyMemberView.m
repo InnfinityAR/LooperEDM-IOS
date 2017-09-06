@@ -191,10 +191,10 @@
     UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(370*DEF_Adaptation_Font*0.5, 0, 120*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
     activeLB.textColor=[UIColor whiteColor];
     activeLB.font=[UIFont systemFontOfSize:14];
-    if ([dataDic objectForKey:@"exp"]==[NSNull null]) {
+    if ([dataDic objectForKey:@"activepoints"]==[NSNull null]) {
         activeLB.text=@"0";
     }else{
-        activeLB.text=[dataDic objectForKey:@"exp"];
+        activeLB.text=[dataDic objectForKey:@"activepoints"];
     }
      activeLB.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:activeLB];
