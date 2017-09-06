@@ -11,4 +11,8 @@
 @interface FamilyDetailView : UIView
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic andRankNumber:(NSString *)rankNumber;
 @property(nonatomic,strong)id obj;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *logArr;
+@property(nonatomic,strong)UICollectionView *collectView;
+@property(nonatomic,strong)NSArray *applyArr;
 @end

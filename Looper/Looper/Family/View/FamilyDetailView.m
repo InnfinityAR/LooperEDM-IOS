@@ -23,10 +23,6 @@
     UIScrollView *scrollV;
     CycleView *cycleView;
 }
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *logArr;
-@property(nonatomic,strong)UICollectionView *collectView;
-@property(nonatomic,strong)NSArray *applyArr;
 
 @property(nonatomic,strong)NSDictionary *dataDic;
 @property(nonatomic,strong)NSString *rankNumber;
@@ -345,7 +341,6 @@ CGFloat xOffset=scrollView.contentOffset.x;
 
 // 每个分区多少个item
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
     return self.applyArr.count;
 }
 

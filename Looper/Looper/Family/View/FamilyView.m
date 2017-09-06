@@ -155,30 +155,39 @@
 }
 //家族排行
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
+    [rankView removeFromSuperview];
     rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
     [_sc addSubview:rankView];
     [_sc make3Dscrollview];
 }
 //家族列表
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr{
+    [listView removeFromSuperview];
     listView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
     [_sc addSubview:listView];
     [_sc make3Dscrollview];
 }
 //消息
 -(void)initFamilyMessageWithDataArr:(NSArray *)dataArr{
+    [messageView removeFromSuperview];
     messageView=[[FamilyMessageView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*2*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr];
     [_sc addSubview:messageView];
     [_sc make3Dscrollview];
 }
 //家族详情
--(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic{
+-(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic andApplyArr:(NSArray *)applyArr andLogArr:(NSArray *)logArr{
+    [detailView removeFromSuperview];
     detailView=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataDic:dataDic andRankNumber:@"1"];
+    if (applyArr!=nil) {
+        [detailView setApplyArr:applyArr];
+    }
+    [detailView setLogArr:logArr];
     [_sc addSubview:detailView];
     [_sc make3Dscrollview];
 }
 //家族成员
 -(void)initFamilyMemberWithDataArr:(NSArray *)dataArr{
+    [memberView removeFromSuperview];
     memberView=[[FamilyMemberView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*2*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObj:self.obj andDataArr:dataArr];
     [_sc addSubview:memberView];
     [_sc make3Dscrollview];

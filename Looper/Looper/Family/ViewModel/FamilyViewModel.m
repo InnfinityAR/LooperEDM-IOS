@@ -23,6 +23,8 @@
     NSString *ownername;
 }
 
+@synthesize familyModel =_familyModel;
+
 
 -(id)initWithController:(id)controller{
     if(self=[super init]){
@@ -35,6 +37,9 @@
 }
 
 -(void)requestData{
+    
+    _familyModel  = [[FramilyModel alloc] init];
+    
     familyV = [[FamilyView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:familyV];
 
@@ -56,28 +61,46 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
+            
+            
+            [_familyModel initWithData:responseObject];
+            
+            
             if (orderType==nil) {
 //第一次加载
-                [self.familyView initFamilyRankWithDataArr:responseObject[@"data"]];
+                [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                 ownername=responseObject[@"ownername"];
                 if (raverId==nil){
-                [self.familyView initFamilyMessageWithDataArr:responseObject[@"invite"]];
-                [self.familyView initFamilyListWithDataArr:responseObject[@"recommendation"]];
+                [self.familyView initFamilyMessageWithDataArr:_familyModel.InviteArray];
+                [self.familyView initFamilyListWithDataArr:_familyModel.recommendArray];
                 }else{
-                    [self.familyView initFamilyMemberWithDataArr:responseObject[@"member"]];
-                    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:responseObject[@"raver"]];
+                    [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
+                    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
                     [dataDic setObject:ownername forKey:@"ownername"];
-                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy]];
+                    NSArray *applyArr=nil;
+                    if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
+                        applyArr=responseObject[@"apply"];
+                    }
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:responseObject[@"message"]];
                      
                 }
             }else{
 //排行筛选
+                [_familyModel updataWithData:responseObject];
                 [self.rankView reloadData:responseObject[@"data"]];
                 if (raverId==nil) {
-                [self.messageView reloadData:responseObject[@"invite"]];
+                [self.messageView reloadData:_familyModel.RankingArray];
                 }else{
-#warning-需要修改
-                 [self.messageView reloadData:responseObject[@"invite"]];
+//同意邀请就直接跳转界面
+                  [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
+                    [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
+                    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
+                    [dataDic setObject:ownername forKey:@"ownername"];
+                    NSArray *applyArr=nil;
+                    if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
+                        applyArr=responseObject[@"apply"];
+                    }
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:responseObject[@"message"]];
                 }
             }
         }
@@ -119,24 +142,11 @@
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
                 [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
+                 [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
             }else{
                 [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
-                [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+                [self getFamilyRankDataForOrderType:@"1" andRaverId:nil];
             }
-        }
-    }fail:^{
-        
-    }];
-}
-//家族详情
--(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-        [dic setObject:rfId forKey:@"rfId"];
-    
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamilyDetail" parameters:dic  success:^(id responseObject) {
-        
-        if([responseObject[@"status"] intValue]==0){
-            
         }
     }fail:^{
         
@@ -159,19 +169,7 @@
     }];
 }
 
-//获取所有的家族
--(void)getRaverData{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaver" parameters:dic  success:^(id responseObject) {
-        
-        if([responseObject[@"status"] intValue]==0){
-            [self.familyView initFamilyListWithDataArr:responseObject[@"raver"]];
-        }
-    }fail:^{
-        
-    }];
-}
+
 //搜索家族
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
