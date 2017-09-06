@@ -45,6 +45,9 @@
     if([_sourceDic objectForKey:@"member"]!=nil){
         [self updateWithMemberData:[_sourceDic objectForKey:@"member"]];
     }
+    if([_sourceDic objectForKey:@"raver"]!=nil){
+        [self updataWithDetail:[_sourceDic objectForKey:@"raver"]];
+    }
 }
 
 -(void)updateWithMemberData:(NSArray*)memberArray{
