@@ -49,6 +49,7 @@
     [self setBackgroundColor:[UIColor colorWithRed:86/255.0 green:77/255.0 blue:108/255.0 alpha:1.0]];
     self.layer.cornerRadius=12.0*DEF_Adaptation_Font;
     self.layer.masksToBounds=YES;
+
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
@@ -109,7 +110,7 @@
     titleLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [self addSubview:titleLB];
     UILabel *titleLB2=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    titleLB2.text=@"我是来自火星的";
+    titleLB2.text=[_dataDic objectForKey:@"ownername"];
     titleLB2.textColor=ColorRGB(255, 255, 255, 1);
     titleLB2.font=[UIFont systemFontOfSize:13];
     [self addSubview:titleLB2];
@@ -120,7 +121,7 @@
     integralLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [self addSubview:integralLB];
     UILabel *integralLB2=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, 350*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    integralLB2.text=@"999999";
+    integralLB2.text=[_dataDic objectForKey:@"raverexp"];
     integralLB2.textColor=ColorRGB(255, 255, 255, 1);
     integralLB2.font=[UIFont systemFontOfSize:13];
     [self addSubview:integralLB2];
@@ -132,7 +133,7 @@
     numberLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [self addSubview:numberLB];
     UILabel *numberLB2=[[UILabel alloc]initWithFrame:CGRectMake(430*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    numberLB2.text=@"500/500";
+    numberLB2.text=[NSString stringWithFormat:@"%@/500",[_dataDic objectForKey:@"membercount"]];
     numberLB2.textColor=ColorRGB(255, 255, 255, 1);
     numberLB2.font=[UIFont systemFontOfSize:13];
     [self addSubview:numberLB2];
@@ -143,7 +144,7 @@
     activeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [self addSubview:activeLB];
     UILabel *activeLB2=[[UILabel alloc]initWithFrame:CGRectMake(430*DEF_Adaptation_Font*0.5, 350*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    activeLB2.text=@"非常高";
+    activeLB2.text=[_dataDic objectForKey:@"raveractive"];
     activeLB2.textColor=ColorRGB(233, 117, 149, 1.0);
     activeLB2.font=[UIFont systemFontOfSize:13];
     [self addSubview:activeLB2];
@@ -181,12 +182,12 @@
     lineView.backgroundColor=[UIColor colorWithRed:182/255.0 green:169/255.0 blue:255/255.0 alpha:1.0];
     [self addSubview:lineView];
     scrollV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 497*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-497*DEF_Adaptation_Font*0.5)];
-    scrollV.contentSize=CGSizeMake(DEF_WIDTH(scrollV)*3, DEF_HEIGHT(scrollV));
+    scrollV.contentSize=CGSizeMake(DEF_WIDTH(self)*3.001, DEF_HEIGHT(self)-497*DEF_Adaptation_Font*0.5);
     scrollV.backgroundColor=[UIColor colorWithRed:86/255.0 green:77/255.0 blue:108/255.0 alpha:1.0];
     scrollV.pagingEnabled=YES;
     scrollV.bounces=NO;
     scrollV.delegate=self;
-     scrollV.contentOffset=CGPointMake(DEF_WIDTH(scrollV), 0);
+     scrollV.contentOffset=CGPointMake(DEF_WIDTH(self), 0);
     [self addSubview:scrollV];
     UILabel *noticeDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(54*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 474*DEF_Adaptation_Font*0.5, 456*DEF_Adaptation_Font*0.5)];
     noticeDetailLB.textColor=[UIColor whiteColor];
@@ -246,6 +247,9 @@ CGFloat xOffset=scrollView.contentOffset.x;
         } completion:^(BOOL finished) {
         }];
     }
+        if (xOffset>ceilf(DEF_WIDTH(self)*2)) {
+            [[[self.obj familyView]sc]setContentOffset:CGPointMake(DEF_SCREEN_WIDTH , 0) animated:NO];
+        }
     }
 }
 -(void)onClickView:(UITapGestureRecognizer *)tap{
@@ -320,7 +324,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
         // 设置最小行间距
         flowLayout.minimumLineSpacing = 0;
         // 设置布局的内边距
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0,0);
+//        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0,0);
         // 滚动方向
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _collectView=[[UICollectionView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)*2,0,DEF_WIDTH(self), DEF_HEIGHT(scrollV)) collectionViewLayout:flowLayout];

@@ -48,6 +48,7 @@
 		B22C5AC21F5D3CDE005C9E28 /* family_Woman.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5ABD1F5D3CDE005C9E28 /* family_Woman.png */; };
 		B22C5AC31F5D3CDE005C9E28 /* familyMember_invite.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5ABE1F5D3CDE005C9E28 /* familyMember_invite.png */; };
 		B22C5AC41F5D3CDE005C9E28 /* familyMember_person.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5ABF1F5D3CDE005C9E28 /* familyMember_person.png */; };
+		B22C5AC61F5E90B4005C9E28 /* familyMember_sort.png in Resources */ = {isa = PBXBuildFile; fileRef = B22C5AC51F5E90B4005C9E28 /* familyMember_sort.png */; };
 		B235213D1F482880003D06CB /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */; };
 		B235213E1F482880003D06CB /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = B235211F1F482880003D06CB /* NSData+ImageContentType.m */; };
 		B235213F1F482880003D06CB /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B23521211F482880003D06CB /* SDImageCache.m */; };
@@ -868,6 +869,7 @@
 		B22C5ABD1F5D3CDE005C9E28 /* family_Woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = family_Woman.png; path = ../../../Family/View/family_Woman.png; sourceTree = "<group>"; };
 		B22C5ABE1F5D3CDE005C9E28 /* familyMember_invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = familyMember_invite.png; path = ../../../Family/View/familyMember_invite.png; sourceTree = "<group>"; };
 		B22C5ABF1F5D3CDE005C9E28 /* familyMember_person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = familyMember_person.png; path = ../../../Family/View/familyMember_person.png; sourceTree = "<group>"; };
+		B22C5AC51F5E90B4005C9E28 /* familyMember_sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = familyMember_sort.png; path = ../../../Family/View/familyMember_sort.png; sourceTree = "<group>"; };
 		B235211C1F482880003D06CB /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		B235211D1F482880003D06CB /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		B235211E1F482880003D06CB /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -4575,6 +4577,7 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				B22C5AC51F5E90B4005C9E28 /* familyMember_sort.png */,
 				B22C5ABB1F5D3CDE005C9E28 /* family_header_BG.png */,
 				B22C5ABC1F5D3CDE005C9E28 /* family_man.png */,
 				B22C5ABD1F5D3CDE005C9E28 /* family_Woman.png */,
@@ -5144,6 +5147,7 @@
 				B235218F1F53EFC2003D06CB /* refuseBtn.png in Resources */,
 				C44E0BF31E767BF400AC4083 /* front.png in Resources */,
 				C43203201E80E372009F508F /* Main.storyboard in Resources */,
+				B22C5AC61F5E90B4005C9E28 /* familyMember_sort.png in Resources */,
 				C42F9D521E96156C00F5450F /* chatlist_back.png in Resources */,
 				C4DA323A1E8B7DBB00CD8305 /* btn_myLoop.png in Resources */,
 				C43E77081E091D8D004A5288 /* icon_weibo.png in Resources */,

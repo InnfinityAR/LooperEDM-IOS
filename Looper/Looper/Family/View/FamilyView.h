@@ -19,7 +19,7 @@
     
 }
 @property(nonatomic)id obj;
-
+@property(nonatomic,strong)UIScrollView *sc;
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject ;

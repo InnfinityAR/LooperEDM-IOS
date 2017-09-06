@@ -400,7 +400,7 @@
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
             [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
-//            [LocalDataMangaer sharedManager].raverid =responseObject[@"data"][@"raverid"];
+            [LocalDataMangaer sharedManager].raverid =responseObject[@"data"][@"raverid"];
             [LocalDataMangaer sharedManager].raverid =@"8";
             [[LocalDataMangaer sharedManager] setData];
             

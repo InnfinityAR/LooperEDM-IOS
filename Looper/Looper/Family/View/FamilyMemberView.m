@@ -11,6 +11,9 @@
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource>
+{
+    NSInteger isSort;//sortBtn
+}
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *dataArr;
 @end
@@ -24,6 +27,7 @@
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+        isSort=0;
 
     }
     return self;
@@ -52,6 +56,8 @@
     jobName.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     jobName.userInteractionEnabled=YES;
     [contentView addSubview:jobName];
+    UIButton *sortBtn=[LooperToolClass createBtnImageNameReal:@"familyMember_sort.png" andRect:CGPointMake(210*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"familyMember_sort.png" andClickImage:@"familyMember_sort.png" andTextStr:nil andSize:CGSizeMake(15*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5) andTarget:self];
+    [jobName addSubview:sortBtn];
     UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(290*DEF_Adaptation_Font*0.5, 0, 80*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
     levelLB.text=@"等级";
     levelLB.textColor=ColorRGB(225, 255, 255, 0.7);
@@ -85,6 +91,16 @@
     if (tag==99) {
 //邀请button
         
+    }
+    if (tag==100) {
+//sortBtn
+        if (isSort==0) {
+            isSort=1;
+            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+        }else{
+            isSort=0;
+            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+        }
     }
 }
 
@@ -129,6 +145,13 @@
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
     NSDictionary *dataDic=self.dataArr[indexPath.row];
+    if (isSort==1) {
+    if (indexPath.row==0) {
+        dataDic=self.dataArr[self.dataArr.count-1];
+    }else{
+        dataDic=self.dataArr[indexPath.row-1];
+    }
+    }
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     headIV.image=[UIImage imageNamed:@"640-2.png"];
     headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
@@ -137,16 +160,16 @@
     UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 12*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
     headLB.textColor=[UIColor whiteColor];
     headLB.font=[UIFont systemFontOfSize:14];
-    headLB.text=@"阿波罗一号";
+    headLB.text=[dataDic objectForKey:@"nickname"];
     [cell.contentView addSubview:headLB];
     UILabel *jobLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 51*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     jobLB.textColor=[UIColor whiteColor];
     jobLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
-    jobLB.text=@"舰长";
+    jobLB.text=[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]];
     [cell.contentView addSubview:jobLB];
     jobLB.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
     jobLB.layer.masksToBounds=YES;
-    jobLB.backgroundColor=[UIColor blueColor];
+    jobLB.backgroundColor=[self jobColorForStatus:[[dataDic objectForKey:@"role"]intValue]];
     jobLB.textAlignment=NSTextAlignmentCenter;
     CGSize lblSize3 = [jobLB.text boundingRectWithSize:CGSizeMake(190*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
     CGRect frame3=jobLB.frame;
@@ -182,13 +205,68 @@
         
     }
     cell.layer.masksToBounds=YES;
-    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  92*DEF_Adaptation_Font*0.5;
+}
+-(NSString *)jobnameForStatus:(NSInteger)status{
+    switch (status) {
+        case 0:
+            return @"舰长";
+            break;
+        case 1:
+            return @"副舰长";
+            break;
+        case 2:
+            return @"大副";
+            break;
+        case 3:
+            return @"二副";
+            break;
+        case 4:
+            return @"三副";
+            break;
+        case 5:
+            return @"水手长";
+            break;
+        case 6:
+            return @"水手";
+            break;
+        default:
+            break;
+    }
+    return nil;
+}
+-(UIColor *)jobColorForStatus:(NSInteger)status{
+    switch (status) {
+        case 0:
+            return ColorRGB(253, 123, 153, 1.0);
+            break;
+        case 1:
+             return ColorRGB(252, 119, 158, 1.0);
+            break;
+        case 2:
+            return ColorRGB(231, 152, 163, 1.0);
+            break;
+        case 3:
+             return ColorRGB(247, 156, 150, 1.0);
+            break;
+        case 4:
+            return ColorRGB(241, 171, 152, 1.0);
+            break;
+        case 5:
+             return ColorRGB(252, 186, 140, 1.0);
+            break;
+        case 6:
+             return ColorRGB(206, 157, 116, 1.0);
+            break;
+        default:
+            break;
+    }
+    return nil;
 }
 
 @end
