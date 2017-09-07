@@ -53,6 +53,10 @@
         NSDictionary *dataDic=self.applyArr[button.tag-1];
         //同意
         [self.obj judgeJoinFamilyWithJoin:@"1" andRaverId:[dataDic objectForKey:@"raverid"] andApplyId:[dataDic objectForKey:@"applyid"] andUserId:[dataDic objectForKey:@"userid"]];
+    }else{
+        NSDictionary *dataDic=self.applyArr[-tag-1];
+        //拒绝
+        [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raverid"] andApplyId:[dataDic objectForKey:@"applyid"] andUserId:[dataDic objectForKey:@"userid"]];
     }
 }
 -(void)initView{
@@ -353,7 +357,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
     }
     // 取出每个item所需要的数据
     NSDictionary *dataDic = [self.applyArr objectAtIndex:indexPath.item];
-    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(33*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 440*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5)];
+    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(33*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 390*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5)];
     contentLB.textColor=[UIColor whiteColor];
     NSString *name=[dataDic objectForKey:@"nickname"];
     NSString *applyName=@"暴走大垃圾";
@@ -373,9 +377,22 @@ CGFloat xOffset=scrollView.contentOffset.x;
     contentLB.font=[UIFont systemFontOfSize:14];
     contentLB.numberOfLines=0;
     [cell.contentView addSubview:contentLB];
-    
-    UIButton *sureButton=[LooperToolClass createBtnImageNameReal:@"agreeBtn.png" andRect:CGPointMake(DEF_WIDTH(self)-80*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font*0.5) andTag:(int)indexPath.row+1 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(41*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
-    [cell.contentView addSubview:sureButton];
+
+    NSString *status=[dataDic objectForKey:@"reviewstatus"];
+    if ([status intValue]==1) {
+        UIButton *sureButton=[LooperToolClass createBtnImageNameReal:@"agreeBtn.png" andRect:CGPointMake(430*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font*0.5) andTag:(int)indexPath.row+1 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(41*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+        [cell.contentView addSubview:sureButton];
+        UIButton *refuseButton=[LooperToolClass createBtnImageNameReal:@"refuseBtn.png" andRect:CGPointMake(510*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font*0.5) andTag:(int)-(indexPath.row+1) andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(41*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5) andTarget:self];
+        [cell.contentView addSubview:refuseButton];
+    }else{
+        UILabel *personNumLB=[[UILabel alloc]initWithFrame:CGRectMake(466*DEF_Adaptation_Font*0.5, 23*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-466*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font)];
+        personNumLB.text=@"已拒绝";
+        personNumLB.numberOfLines=0;
+        personNumLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
+        personNumLB.textColor=[UIColor lightGrayColor];
+        personNumLB.textAlignment=NSTextAlignmentCenter;
+        [cell.contentView addSubview:personNumLB];
+    }
 
     
     if (indexPath.row%2==0) {

@@ -44,7 +44,8 @@
     if([_sourceDic objectForKey:@"invite"]!=nil){
         [self updateInviteData:[_sourceDic objectForKey:@"invite"]];
     }
-    if([_sourceDic objectForKey:@"member"]!=nil){
+    if([_sourceDic objectForKey:@"member"]==nil||[_sourceDic objectForKey:@"member"]==[NSNull null]){
+    }else{
         [self updateWithMemberData:[_sourceDic objectForKey:@"member"]];
     }
     if([_sourceDic objectForKey:@"raver"]!=nil){

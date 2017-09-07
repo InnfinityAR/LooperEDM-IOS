@@ -84,9 +84,9 @@
                     }
                     NSArray *applyArr=nil;
                     if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
-                        applyArr=responseObject[@"apply"];
+                        applyArr=_familyModel.applyArray;
                     }
-                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:responseObject[@"message"]];
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:_familyModel.messageArray];
                      
                 }
             }else{
@@ -104,9 +104,9 @@
                     [dataDic setObject:ownername forKey:@"ownername"];
                     NSArray *applyArr=nil;
                     if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
-                        applyArr=responseObject[@"apply"];
+                        applyArr=_familyModel.applyArray;
                     }
-                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:responseObject[@"message"]];
+                    [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:_familyModel.messageArray];
                 }
             }
         }
@@ -156,6 +156,8 @@
                 [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
                 [self getFamilyRankDataForOrderType:@"1"];
             }
+        }else{
+            [[DataHander sharedDataHander] showViewWithStr:@"已经加入家族" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
