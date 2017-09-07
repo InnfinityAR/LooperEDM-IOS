@@ -374,7 +374,6 @@
     }];
 }
 
-
 -(void)requestMainData{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
