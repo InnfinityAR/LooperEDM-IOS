@@ -117,19 +117,19 @@
     if (familyType==1) {
     if (tap.view.tag==1) {
         NSLog(@"家族");
-        [self.obj getFamilyRankDataForOrderType:@"1" andRaverId:nil];
+        [self.obj getFamilyRankDataForOrderType:@"1"];
     }
     if (tap.view.tag==2) {
         NSLog(@"等级");
-        [self.obj getFamilyRankDataForOrderType:@"2" andRaverId:nil];
+        [self.obj getFamilyRankDataForOrderType:@"2"];
     }
     if (tap.view.tag==3) {
         NSLog(@"活跃度");
-        [self.obj getFamilyRankDataForOrderType:@"3" andRaverId:nil];
+        [self.obj getFamilyRankDataForOrderType:@"3"];
     }
     if (tap.view.tag==4) {
         NSLog(@"人数");
-        [self.obj getFamilyRankDataForOrderType:@"4" andRaverId:nil];
+        [self.obj getFamilyRankDataForOrderType:@"4"];
     }
     }
 }
@@ -231,7 +231,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   NSDictionary *dataDic=self.dataArr[indexPath.row];
-    if ([LocalDataMangaer sharedManager].raverid==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
+    if ([self.obj familyModel].familyDetailData==nil||[[self.obj familyModel].familyDetailData isEqual:[NSNull null]]) {
     [self.obj getFamilyApplyDataWithDataDic:dataDic];
     }
 }

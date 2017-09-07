@@ -479,7 +479,7 @@
             
             for (int i=0;i<[responseObject[@"data"] count];i++){
                 NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[responseObject[@"data"] objectAtIndex:i]];
-//                if([[dic objectForKey:@"recommendation"] intValue]==1){
+                if([[dic objectForKey:@"recommendation"] intValue]==1){
                     NSDate *now= [NSDate date];
                     long int nowDate = (long int)([now timeIntervalSince1970]);
 
@@ -494,7 +494,7 @@
                         [dic setValue:[rouletteArr copy] forKey:@"roulette"];
                         [recommendArray addObject:dic];
                     }
-//                }
+                }
                 [allActivityArray addObject:dic];
             }
             [self createActivityView];
