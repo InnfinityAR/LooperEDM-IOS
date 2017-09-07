@@ -36,7 +36,6 @@
 //    UIScrollView *_sc;
     int localCurrent;
     
-    NSArray *titleArray;
     UILabel *textLB;
     UILabel *textLB1;
     UILabel *textLB2;
@@ -50,11 +49,6 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (FamilyViewModel*)idObject;
         [self.obj setFamilyView:self];
-        if ([LocalDataMangaer sharedManager].raverid ==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
-        titleArray=@[@"家族排行",@"家族列表",@"家族消息"];
-        }else{
-            titleArray=@[@"家族排行",@"家族详情",@"家族成员"];
-        }
         [self initView];
         [self initBackView];
     }
@@ -77,7 +71,6 @@
     }
 }
 
-
 #pragma-添加BackView
 -(void)initBackView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
@@ -85,55 +78,55 @@
     UIButton *searchBtn = [LooperToolClass createBtnImageNameReal:@"btn_serach_select.png" andRect:CGPointMake(DEF_WIDTH(self)-84*DEF_Adaptation_Font*0.5,10*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_serach_select.png" andClickImage:@"btn_serach_select.png" andTextStr:nil andSize:CGSizeMake(54*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:searchBtn];
     titleNum=0;
+   }
+-(void)updateTitleArr{
     textLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-60*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB.textColor=[UIColor whiteColor];
     textLB.textAlignment=NSTextAlignmentCenter;
-    textLB.text=titleArray[titleNum];
+    textLB.text=_titleArray[titleNum];
     [self addSubview:textLB];
     textLB1=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2+120*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB1.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB1.textAlignment=NSTextAlignmentCenter;
-    textLB1.text=titleArray[1];
+    textLB1.text=_titleArray[1];
     [self addSubview:textLB1];
     textLB2=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-240*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     textLB2.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB2.textAlignment=NSTextAlignmentCenter;
-    textLB2.text=titleArray[titleArray.count-1];
+    textLB2.text=_titleArray[_titleArray.count-1];
     [self addSubview:textLB2];
-    
 }
-
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGPoint offset = [scrollView contentOffset];
     int currentPage = offset.x/DEF_SCREEN_WIDTH;
-    textLB.text=titleArray[currentPage];
-    if (currentPage==titleArray.count-1) {
-        textLB1.text=titleArray[0];
+    textLB.text=_titleArray[currentPage];
+    if (currentPage==_titleArray.count-1) {
+        textLB1.text=_titleArray[0];
     }else{
-        textLB1.text=titleArray[currentPage+1];
+        textLB1.text=_titleArray[currentPage+1];
     }
     if (currentPage==0) {
-        textLB2.text=titleArray[titleArray.count-1];
+        textLB2.text=_titleArray[_titleArray.count-1];
     }else{
-        textLB2.text=titleArray[currentPage-1];
+        textLB2.text=_titleArray[currentPage-1];
     }
     if (currentPage == 0) {
         
         if(localCurrent ==currentPage){
             
-            [_sc setContentOffset:CGPointMake(DEF_SCREEN_WIDTH * (titleArray.count-1), 0) animated:NO];
-              textLB.text=titleArray[titleArray.count-1];
-             textLB1.text=titleArray[0];
-            textLB2.text=titleArray[titleArray.count-2];
+            [_sc setContentOffset:CGPointMake(DEF_SCREEN_WIDTH * (_titleArray.count-1), 0) animated:NO];
+              textLB.text=_titleArray[_titleArray.count-1];
+             textLB1.text=_titleArray[0];
+            textLB2.text=_titleArray[_titleArray.count-2];
         }
     }
-    else if(currentPage == titleArray.count-1) {
+    else if(currentPage == _titleArray.count-1) {
         if (localCurrent==currentPage) {
-            [_sc setContentOffset:CGPointMake(0, 9) animated:NO];
-            textLB.text=titleArray[0];
-            textLB1.text=titleArray[1];
-            textLB2.text=titleArray[titleArray.count-1];
+            [_sc setContentOffset:CGPointMake(0, 0) animated:NO];
+            textLB.text=_titleArray[0];
+            textLB1.text=_titleArray[1];
+            textLB2.text=_titleArray[_titleArray.count-1];
         }
     };
     localCurrent=currentPage;
@@ -146,24 +139,19 @@
     
     [self addSubview:bk_image];
     [self initSCView];
-    if ([LocalDataMangaer sharedManager].raverid ==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
-        [self.obj getFamilyRankDataForOrderType:nil andRaverId:nil];
-    }else{
-        [self.obj getFamilyRankDataForOrderType:nil andRaverId:[LocalDataMangaer sharedManager].raverid];
-      
-    }
+        [self.obj getFamilyRankDataForOrderType:nil];
 }
 //家族排行
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr{
     [rankView removeFromSuperview];
-    rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
+    rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:1];
     [_sc addSubview:rankView];
     [_sc make3Dscrollview];
 }
 //家族列表
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr{
     [listView removeFromSuperview];
-    listView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
+    listView =[[FamilyRankView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataArr:dataArr andType:0];
     [_sc addSubview:listView];
     [_sc make3Dscrollview];
 }
@@ -177,7 +165,7 @@
 //家族详情
 -(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic andApplyArr:(NSArray *)applyArr andLogArr:(NSArray *)logArr{
     [detailView removeFromSuperview];
-    detailView=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataDic:dataDic andRankNumber:@"1"];
+    detailView=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataDic:dataDic andRankNumber:@"1"];
     if (applyArr!=nil) {
         [detailView setApplyArr:applyArr];
     }
@@ -195,11 +183,12 @@
 }
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
-//    _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*3, 0);
-    _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*titleArray.count, 0);
+    _sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*_titleArray.count, 0);
     _sc.delegate = self;
     _sc.pagingEnabled = YES;
     [self addSubview:_sc];
 }
-
+-(void)updateSC{
+_sc.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*_titleArray.count, 0);
+}
 @end

@@ -37,7 +37,7 @@
 
 
 @property(nonatomic,strong)FamilyMessageView *messageView;
--(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId;
+-(void)getFamilyRankDataForOrderType:(NSString*)orderType;
 -(void)getRaverData;
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText;
 -(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber;

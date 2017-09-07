@@ -51,7 +51,7 @@
         [self updataWithDetail:[_sourceDic objectForKey:@"raver"]];
     }
     if([_sourceDic objectForKey:@"apply"]!=nil){
-        [self updataWithDetail:[_sourceDic objectForKey:@"apply"]];
+        [self updateWithApplyData:[_sourceDic objectForKey:@"apply"]];
     }
     if([_sourceDic objectForKey:@"message"]!=nil){
         [self updateWithMessageData:[_sourceDic objectForKey:@"message"]];

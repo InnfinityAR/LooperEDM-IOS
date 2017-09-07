@@ -45,7 +45,7 @@
 
 }
 //家族排行
--(void)getFamilyRankDataForOrderType:(NSString*)orderType andRaverId:(NSString *)raverId{
+-(void)getFamilyRankDataForOrderType:(NSString*)orderType{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     if (orderType==nil) {
         [dic setObject:@"1" forKey:@"orderType"];
@@ -60,10 +60,19 @@
         if([responseObject[@"status"] intValue]==0){
             [_familyModel initWithData:responseObject];
             if (orderType==nil) {
-//第一次加载
+//第一次加载     注：以后退出家族时传入的orderType也应该是nil，用来判断
+                if (_familyModel.familyDetailData==nil) {
+                    self.familyView.titleArray=@[@"家族列表",@"家族排行",@"家族消息"];
+                    [self.familyView updateTitleArr];
+                    [self.familyView updateSC];
+                }else{
+                    self.familyView.titleArray=@[@"家族详情",@"家族排行",@"家族成员"];
+                    [self.familyView updateTitleArr];
+                    [self.familyView updateSC];
+                }
                 [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                 ownername=responseObject[@"ownername"];
-                if (raverId==nil){
+                if (_familyModel.familyDetailData==nil){
                 [self.familyView initFamilyMessageWithDataArr:_familyModel.InviteArray];
                 [self.familyView initFamilyListWithDataArr:_familyModel.recommendArray];
                 }else{
@@ -84,7 +93,8 @@
 //排行筛选
                 [_familyModel updataWithData:responseObject];
                 [self.rankView reloadData:_familyModel.RankingArray];
-                if (raverId==nil) {
+                if (_familyModel.familyDetailData==nil) {
+//拒绝邀请就重新加载界面
                 [self.messageView reloadData:_familyModel.InviteArray];
                 }else{
 //同意邀请就直接跳转界面
@@ -117,11 +127,13 @@
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
             [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
-                 [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+                 [self getFamilyRankDataForOrderType:@"1"];
             }else{
             [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
-                [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+                [self getFamilyRankDataForOrderType:@"1"];
             }
+        }else{
+         [[DataHander sharedDataHander] showViewWithStr:@"已经加入家族" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
@@ -139,10 +151,10 @@
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
                 [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
-                 [self getFamilyRankDataForOrderType:@"1" andRaverId:raverId];
+                 [self getFamilyRankDataForOrderType:@"1"];
             }else{
                 [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
-                [self getFamilyRankDataForOrderType:@"1" andRaverId:nil];
+                [self getFamilyRankDataForOrderType:@"1"];
             }
         }
     }fail:^{

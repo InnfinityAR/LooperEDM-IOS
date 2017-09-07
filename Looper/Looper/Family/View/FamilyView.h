@@ -22,6 +22,13 @@
 @property(nonatomic,strong)UIScrollView *sc;
 
 
+
+@property(nonatomic,strong)NSArray *titleArray;
+-(void)updateTitleArr;
+-(void)updateSC;
+
+
+
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject ;
 -(void)initFamilyRankWithDataArr:(NSArray *)dataArr;
 -(void)initFamilyListWithDataArr:(NSArray *)dataArr;
