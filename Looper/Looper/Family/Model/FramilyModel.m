@@ -73,6 +73,11 @@
 
 -(void)updateWithMemberData:(NSArray*)memberArray{
     [_familyMember removeAllObjects];
+    NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:@"100",@"activepoints", @"2017-09-05 15:02:56",@"creationdate", @"100",@"exp",@"http://api2.innfinityar.com/web/data/m5.png", @"headimageurl",@"10", @"level", @"157****1985",@"nickname", @"3",@"role",@"1",@"sex", @"48",@"userid", nil];
+    NSDictionary *dic2=[[NSDictionary alloc]initWithObjectsAndKeys:@"300",@"activepoints", @"2017-09-05 15:02:56",@"creationdate", @"400",@"exp", @"http://api.innfinityar.com/web/data/logo.jpg",@"headimageurl",@"3", @"level", @"clarence",@"nickname", @"5",@"role",@"2", @"sex",@"17", @"userid", nil];
+    NSDictionary *dic3=[[NSDictionary alloc]initWithObjectsAndKeys:@"200",@"activepoints",@"2017-09-05 15:02:56", @"creationdate",  @"200",@"exp",@"http://wx.qlogo.cn/mmopen/VuOYOm8nBx6s5T49ib7MYH2AF39qoOnpFvgMZMN30yIxskaM8e21K8jgubiaq1TsibEthxtibwqAJkE8blJ5yKl51wtrAEC9kJGG/0",@"headimageurl", @"8",@"level", @"clarence Lu",@"nickname",  @"2",@"role",@"1",@"sex", @"67",@"userid", nil];
+    NSDictionary *dic4=[[NSDictionary alloc]initWithObjectsAndKeys:@"400",@"activepoints", @"2017-09-05 15:02:56",@"creationdate", @"300",@"exp", @"http://api2.innfinityar.com/web/data/m4.png",@"headimageurl",@"12", @"level", @"156****7660",@"nickname", @"0",@"role",@"2", @"sex",  @"92119",@"userid",nil];
+    memberArray=@[dic1,dic2,dic3,dic4];
     _familyMember = [[NSMutableArray alloc] initWithArray:memberArray];
 }
 

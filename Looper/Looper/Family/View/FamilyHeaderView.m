@@ -48,7 +48,7 @@
     declarationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16.f];
     declarationLB.textAlignment=NSTextAlignmentCenter;
     declarationLB.numberOfLines=2;
-    declarationLB.text=@"每一个残暴的君主都能懂得怜悯；每一个失落的灵魂中都有创造奇迹的傲骨";
+    declarationLB.text=[self.dataDic objectForKey:@"familydeclaration"];
     [self addSubview:declarationLB];
     
     UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 500*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
@@ -56,7 +56,7 @@
     levelLB.font=[UIFont systemFontOfSize:16];
     levelLB.text=@"等级";
     [self addSubview:levelLB];
-     [self initProgressVWithRate:[_dataDic objectForKey:@"raverexp"] andSum:@"16000"];
+     [self initProgressVWithRate:[self.dataDic objectForKey:@"raverexp"] andSum:@"16000"];
     UILabel *levelNumLB=[[UILabel alloc]initWithFrame:CGRectMake(110*DEF_Adaptation_Font*0.5, 495*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     levelNumLB.textColor=[UIColor whiteColor];
     levelNumLB.layer.cornerRadius=20*DEF_Adaptation_Font*0.5;
@@ -103,18 +103,14 @@
     
 }
 -(void)initProgressVWithRate:(NSString*)rate andSum:(NSString*)sum{
-    UIView *progressV=[[UIView alloc]initWithFrame:CGRectMake(148*DEF_Adaptation_Font*0.5, 505*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-200*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5)];
+    UIView *progressV=[[UIView alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, 505*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-200*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5)];
     progressV.backgroundColor=[UIColor grayColor];
     progressV.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
     progressV.layer.masksToBounds=YES;
     [self addSubview:progressV];
-    UIView *progressV1=[[UIView alloc]initWithFrame:CGRectMake(148*DEF_Adaptation_Font*0.5, 505*DEF_Adaptation_Font*0.5, (DEF_WIDTH(self)-200*DEF_Adaptation_Font*0.5)*[rate intValue]/[sum intValue], 18*DEF_Adaptation_Font*0.5)];
-    if (rate==sum) {
-        progressV1.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
-        progressV1.layer.masksToBounds=YES;
-    }
+    UIView *progressV1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)-200*DEF_Adaptation_Font*0.5)*[rate intValue]/[sum intValue], 18*DEF_Adaptation_Font*0.5)];
     progressV1.backgroundColor=ColorRGB(193, 159, 252, 1.0);
-    [self addSubview:progressV1];
+    [progressV addSubview:progressV1];
     UILabel *numberLB=[[UILabel alloc]initWithFrame:CGRectMake(160*DEF_Adaptation_Font*0.5, 540*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-210*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     numberLB.textAlignment=NSTextAlignmentRight;
     numberLB.textColor=[UIColor lightGrayColor];
