@@ -26,7 +26,7 @@
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
-        self.dataArr=dataArr;
+        self.dataArr=(NSMutableArray *)dataArr;
         [self initView];
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -109,11 +109,11 @@
     if (tap.view.tag==0) {
         if (isSortJob==0) {
             isSortJob=1;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+            [self sortReverseArr];
             [self.tableView reloadData];
         }else{
             isSortJob=0;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+            [self sortReverseArr];
             [self.tableView reloadData];
         }
     }
@@ -138,16 +138,24 @@
             [self.tableView reloadData];
         }
     }if (tap.view.tag==3) {
-        if (isSortSex==1) {
-            isSortSex=0;
+        if (isSortSex==0) {
+            isSortSex=1;
           [self sortFromLargelToSmall:@"sex"];
             [self.tableView reloadData];
         }else{
-            isSortSex=1;
+            isSortSex=0;
             [self sortFromSmallToLarge:@"sex"];
             [self.tableView reloadData];
         }
-
+    }
+}
+-(void)sortReverseArr{
+    if (self.dataArr.count>1) {
+        for (int i=1; i<self.dataArr.count/2; i++) {
+            NSDictionary *dic=self.dataArr[i];
+            _dataArr[i]=_dataArr[self.dataArr.count-i];
+            self.dataArr[self.dataArr.count-i]=dic;
+        }
     }
 
 }
@@ -192,11 +200,11 @@
 //sortBtn
         if (isSortJob==0) {
             isSortJob=1;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+            [self sortReverseArr];
             [self.tableView reloadData];
         }else{
             isSortJob=0;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+            [self sortReverseArr];
             [self.tableView reloadData];
         }
     }
@@ -243,13 +251,6 @@
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
     NSDictionary *dataDic=self.dataArr[indexPath.row];
-    if (isSortJob==1) {
-    if (indexPath.row==0) {
-        dataDic=self.dataArr[self.dataArr.count-1];
-    }else{
-        dataDic=self.dataArr[indexPath.row-1];
-    }
-    }
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
     headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;

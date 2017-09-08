@@ -430,7 +430,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
     }    cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.logArr[indexPath.row]];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 8*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
     timeLB.text=[dataDic objectForKey:@"creationdate"];
     timeLB.numberOfLines=0;
     timeLB.textColor=ColorRGB(255, 255, 255, 0.76);
