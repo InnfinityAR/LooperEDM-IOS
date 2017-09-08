@@ -91,6 +91,7 @@
     NSInteger tag=button.tag;
     if (tag==99) {
 //邀请button
+        [_obj getInviteUser];
         
     }
     if (tag==100) {

@@ -16,6 +16,10 @@
 #import "DataHander.h"
 #import "FamilyApplyView.h"
 #import "LocationManagerData.h"
+
+#import "FramilyAddInviteView.h"
+
+
 @implementation FamilyViewModel{
 
     FamilyApplyView *familyApplyV;
@@ -174,6 +178,25 @@
         if([responseObject[@"status"] intValue]==0){
             [familyApplyV removeFromSuperview];
             [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:2 andPos:CGPointZero];
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+-(void)getInviteUser{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getInviteUser" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+           
+           FramilyAddInviteView* FramilyAddInviteV = [[FramilyAddInviteView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+            [FramilyAddInviteV setDataSource:responseObject[@"data"]];
+            
+            [[_obj view] addSubview:FramilyAddInviteV];
+
         }
     }fail:^{
         

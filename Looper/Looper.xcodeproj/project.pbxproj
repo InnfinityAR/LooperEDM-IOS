@@ -265,6 +265,8 @@
 		C426015E1E14F91A00BE5CE2 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C426015D1E14F91A00BE5CE2 /* SettingView.m */; };
 		C426016E1E150EAC00BE5CE2 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = C426016D1E150EAC00BE5CE2 /* AccountView.m */; };
 		C42601711E150EBE00BE5CE2 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42601701E150EBE00BE5CE2 /* MessageView.m */; };
+		C4278E891F62A97200BA6029 /* btn_Family_invite.png in Resources */ = {isa = PBXBuildFile; fileRef = C4278E871F62A97200BA6029 /* btn_Family_invite.png */; };
+		C4278E8A1F62A97200BA6029 /* btn_family_invited.png in Resources */ = {isa = PBXBuildFile; fileRef = C4278E881F62A97200BA6029 /* btn_family_invited.png */; };
 		C42838DB1E03F02100929093 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838261E03F02100929093 /* AppDelegate.m */; };
 		C42838DC1E03F02100929093 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C42838281E03F02100929093 /* LaunchScreen.storyboard */; };
 		C42838DF1E03F02100929093 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838311E03F02100929093 /* HomeViewController.m */; };
@@ -748,6 +750,7 @@
 		C4DF01121ED951C0002447EE /* activity_line.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01111ED951C0002447EE /* activity_line.png */; };
 		C4DF01151ED957F0002447EE /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01131ED957F0002447EE /* home.png */; };
 		C4DF01161ED957F0002447EE /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01141ED957F0002447EE /* ticket.png */; };
+		C4E782531F616E2800310D01 /* btn_Family_close.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E782521F616E2800310D01 /* btn_Family_close.png */; };
 		C4E86F611F160E9700D9658D /* bg_now.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F5E1F160E9700D9658D /* bg_now.png */; };
 		C4E86F621F160E9700D9658D /* head_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F5F1F160E9700D9658D /* head_circle.png */; };
 		C4E86F631F160E9700D9658D /* moveDetail.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F601F160E9700D9658D /* moveDetail.png */; };
@@ -1264,6 +1267,8 @@
 		C426016D1E150EAC00BE5CE2 /* AccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountView.m; sourceTree = "<group>"; };
 		C426016F1E150EBE00BE5CE2 /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
 		C42601701E150EBE00BE5CE2 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
+		C4278E871F62A97200BA6029 /* btn_Family_invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Family_invite.png; sourceTree = "<group>"; };
+		C4278E881F62A97200BA6029 /* btn_family_invited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_family_invited.png; sourceTree = "<group>"; };
 		C42838251E03F02100929093 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Looper/AppDelegate.h; sourceTree = "<group>"; };
 		C42838261E03F02100929093 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Looper/AppDelegate.m; sourceTree = "<group>"; };
 		C42838291E03F02100929093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1930,6 +1935,7 @@
 		C4DF01111ED951C0002447EE /* activity_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity_line.png; sourceTree = "<group>"; };
 		C4DF01131ED957F0002447EE /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		C4DF01141ED957F0002447EE /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
+		C4E782521F616E2800310D01 /* btn_Family_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Family_close.png; sourceTree = "<group>"; };
 		C4E86F5E1F160E9700D9658D /* bg_now.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_now.png; sourceTree = "<group>"; };
 		C4E86F5F1F160E9700D9658D /* head_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_circle.png; sourceTree = "<group>"; };
 		C4E86F601F160E9700D9658D /* moveDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moveDetail.png; sourceTree = "<group>"; };
@@ -4577,6 +4583,9 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				C4278E871F62A97200BA6029 /* btn_Family_invite.png */,
+				C4278E881F62A97200BA6029 /* btn_family_invited.png */,
+				C4E782521F616E2800310D01 /* btn_Family_close.png */,
 				B22C5AC51F5E90B4005C9E28 /* familyMember_sort.png */,
 				B22C5ABB1F5D3CDE005C9E28 /* family_header_BG.png */,
 				B22C5ABC1F5D3CDE005C9E28 /* family_man.png */,
@@ -4930,6 +4939,7 @@
 				C409A74D1E1E359400F76B5C /* btn_looper_show.png in Resources */,
 				C4D866141F1FAD3D00A270E5 /* bg_TextChat.png in Resources */,
 				C42E80641EC332D400D9CC43 /* loading_00045.png in Resources */,
+				C4E782531F616E2800310D01 /* btn_Family_close.png in Resources */,
 				C40E751E1E1D541F009E96B4 /* bg_serach_line.png in Resources */,
 				C42FBFA71E0A6DA400628A78 /* dialCell.xib in Resources */,
 				B2A902261ED810750022C282 /* hotActivity.png in Resources */,
@@ -5067,6 +5077,7 @@
 				C4DA32351E8B7DBB00CD8305 /* bk_InfoBgFrame.png in Resources */,
 				C4654E081E79702A00D910F2 /* icon_plane.png in Resources */,
 				C49FA07F1E204493009111C7 /* icon_calendar_clock.png in Resources */,
+				C4278E8A1F62A97200BA6029 /* btn_family_invited.png in Resources */,
 				C460ED0C1ED417D300AE6A90 /* 1.json in Resources */,
 				C4B4ABBF1E50882D00DC000E /* active_back.png in Resources */,
 				C413CE1F1F2B2056008B0BAF /* btn_delete_photo.png in Resources */,
@@ -5114,6 +5125,7 @@
 				C4C4B4911E9C73D2003E2705 /* list.png in Resources */,
 				C4C4B4951E9C73D2003E2705 /* previous.png in Resources */,
 				C4E86F6F1F163C0A00D9658D /* selLocation.png in Resources */,
+				C4278E891F62A97200BA6029 /* btn_Family_invite.png in Resources */,
 				B22C5A991F5533C1005C9E28 /* wechat.png in Resources */,
 				C4E86F651F161E3800D9658D /* sendActive.png in Resources */,
 				C460ED101ED417E500AE6A90 /* 3.json in Resources */,
