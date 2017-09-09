@@ -231,10 +231,7 @@
         
         labelHeight=85.0;
 
-        
-        UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
-
-        
+        UIButton *backBtn= [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
         [self addSubview:backBtn];
     }
     return self;
@@ -284,10 +281,10 @@
 
 -(void)addReplyData:(NSInteger)index andArray:(NSArray *)dataArr andReplyCount:(NSInteger)replyCount{
     self.replyCount=replyCount;
-    self.replyIndex=index;
     if (index!=0) {
     index+=1;
     }
+    self.replyIndex=index;
 [self.publishCountArr addObject:@(index)];
 //     [self.heightPublishDic setObject:@(50) forKey:@(index)];
      [self.publishCellDic setObject:dataArr forKey:@(index)];
@@ -317,7 +314,7 @@
 }
 -(void)removeActivityAction{
     _footer=nil;
-    [_collectView removeFromSuperview];
+//    [_collectView removeFromSuperview];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==100){
