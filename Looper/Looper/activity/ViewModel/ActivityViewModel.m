@@ -144,7 +144,7 @@
     NSLog(@"%@",dic);
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbReplyMessage" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            [self getReplyDataForMessageID:messageID andIndex:index];
+            [self getReplyDataForMessageID:messageID andIndex:index-1];
             NSLog(@"..........");
         }else{
             
