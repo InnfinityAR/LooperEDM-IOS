@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FramilyAddInviteView : UIView
+@interface FramilyAddInviteView : UIView<UITableViewDelegate,UITableViewDataSource>
 {
     
     
@@ -21,4 +21,6 @@
 
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+
+-(void)setDataSource:(NSArray*)arrayData;
 @end

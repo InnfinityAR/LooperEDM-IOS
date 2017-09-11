@@ -11,7 +11,9 @@
 #import "DataHander.h"
 #import "NSString +AES256.h"
 
-#define URL_STR @"http://api2.innfinityar.com/web/"
+//#define URL_STR @"http://api2.innfinityar.com/web/"
+#define URL_STR @"http://api3.innfinityar.com/web/"
+
 #define URL_JAVA_STR @"http://api2.innfinityar.com/web/"
 
 #define LooperStr @"Looper2017"

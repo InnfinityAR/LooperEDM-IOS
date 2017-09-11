@@ -185,9 +185,20 @@
 -(void)reloadView{
 
      [[DataHander sharedDataHander] hideDlg];
-    bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
     
-    [webV setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+    
+    
+    if([[activityDic objectForKey:@"dj"] count]>0){
+        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
+          [webV setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+    }else{
+        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+1600*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
+         [webV setFrame:CGRectMake(0,1600*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+    }
+  
+    
+    
+   
     
     [self createLoopView:webV.scrollView.contentSize.height];
 }
@@ -403,16 +414,35 @@
     [title setBackgroundColor:[UIColor colorWithRed:25/255.0 green:196/255.0 blue:193/255.0 alpha:1.0]];
     [bkScroll addSubview:title];
     
-    UILabel *DjStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1540*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"参与艺人" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     
-    [DjStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
-    [bkScroll addSubview:DjStr];
+    if([[activityDic objectForKey:@"dj"] count]>0){
+    
+    
+        UILabel *DjStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1540*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"参与艺人" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        
+        [DjStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
+        [bkScroll addSubview:DjStr];
+        
+    }
 
+    if([[activityDic objectForKey:@"dj"] count]>0){
+        
+          [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1914*DEF_Adaptation_Font*0.5, 640*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
+        
+        UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1960*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        
+        [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
+        [bkScroll addSubview:activityStr];
+        
+    }else{
+        
+        UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1540*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+        
+        [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
+        [bkScroll addSubview:activityStr];
     
-    UILabel *activityStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1960*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"活动详情" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+    }
     
-    [activityStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:18]];
-    [bkScroll addSubview:activityStr];
     
     title.layer.cornerRadius =  46*DEF_Adaptation_Font_x*0.5/2;
     title.layer.masksToBounds = YES;
@@ -431,7 +461,7 @@
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1489*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
     
     
-    [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1914*DEF_Adaptation_Font*0.5, 640*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
+  
     
     
     [self createImage:CGRectMake(590*DEF_Adaptation_Font*0.5, 1070*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5, 39*DEF_Adaptation_Font*0.5) andImageStr:@"tirp.png"];

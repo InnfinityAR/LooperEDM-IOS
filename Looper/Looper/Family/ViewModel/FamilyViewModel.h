@@ -44,7 +44,7 @@
 
 -(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic;
 -(void)getApplyFamilyDataForRfId:(NSString*)rfId;
-
+-(void)getInviteUser;
 //同意/拒绝申请家族
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid;
 //同意/拒绝邀请加入家族

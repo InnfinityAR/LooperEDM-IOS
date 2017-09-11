@@ -126,14 +126,11 @@
             [_mainV updataView:responseObject[@"user"]];
         }else{
             
-            
         }
     }fail:^{
         
     }];
 }
-
-
 
 
 -(void)getSessionArray{
@@ -379,10 +376,9 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     if ([JPUSHService registrationID] !=nil) {
-    [dic setObject:[JPUSHService registrationID] forKey:@"registrationid"];
+        [dic setObject:[JPUSHService registrationID] forKey:@"registrationid"];
     }
-    
-    
+
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getHome" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSLog(@"%@",responseObject);
@@ -614,6 +610,8 @@
     }else if(type==9008){
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
+        
+//         [self pushNActivityViewController];
         [self createFamilyViewController];
        //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 
