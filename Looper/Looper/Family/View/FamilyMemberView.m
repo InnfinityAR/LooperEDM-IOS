@@ -11,12 +11,16 @@
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 #import "UIImageView+WebCache.h"
+#import "MemberDeleteView.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource>
 {
     NSInteger isSortJob;//sortBtn
     NSInteger isSortLevel;//sortBtn
     NSInteger isSortActive;//sortBtn
     NSInteger isSortSex;//sortBtn
+    
+    //用于判断cell是否被选中
+    NSInteger isSelectCell;
 }
 @property(nonatomic,strong)UIView *tableSelectView;
 @property(nonatomic,strong)UITableView *tableView;
@@ -36,6 +40,7 @@
         isSortLevel=0;
         isSortActive=0;
         isSortSex=0;
+        isSelectCell=-1;
 
     }
     return self;
@@ -327,6 +332,12 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableSelectView removeFromSuperview];
+    if (isSelectCell==indexPath.row) {
+        isSelectCell=-1;
+        UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
+        cell.selected=NO;
+    }else{
+        isSelectCell=indexPath.row;
     if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
        self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
     }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
@@ -367,12 +378,17 @@
     memberInfoBtn.tag=indexPath.row+2000;
     [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.tableSelectView addSubview:memberInfoBtn];
+    }
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag>=0&&button.tag<1000) {
         NSLog(@"%ld",button.tag);
     }   else if (button.tag>=1000&&button.tag<2000) {
-         NSLog(@"%ld",button.tag);
+//删除
+      NSDictionary *dataDic=self.dataArr[button.tag-1000];
+        [self.tableSelectView removeFromSuperview];
+        MemberDeleteView *deleteView=[[MemberDeleteView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataDic:dataDic];
+        [[[self.obj obj]view]addSubview:deleteView];
     } else if (button.tag>=2000){
          NSLog(@"%ld",button.tag);
     }
