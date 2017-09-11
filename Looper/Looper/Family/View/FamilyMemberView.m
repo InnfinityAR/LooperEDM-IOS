@@ -18,6 +18,7 @@
     NSInteger isSortActive;//sortBtn
     NSInteger isSortSex;//sortBtn
 }
+@property(nonatomic,strong)UIView *tableSelectView;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @end
@@ -163,10 +164,13 @@
     if (self.dataArr.count>1) {
         for (int i=1; i<self.dataArr.count; i++) {
             for (int j=1; j<i; j++) {
+                if ([self.dataArr[i]objectForKey:type]==nil||[self.dataArr[i]objectForKey:type]==[NSNull null]) {
+                }else{
                 if ([[self.dataArr[i]objectForKey:type]integerValue]<[[self.dataArr[j]objectForKey:type]integerValue]) {
                     NSDictionary *dic=self.dataArr[i];
                     _dataArr[i]=_dataArr[j];
                     self.dataArr[j]=dic;
+                }
                 }
             }
         }
@@ -176,10 +180,13 @@
     if (self.dataArr.count>1) {
         for (int i=1; i<self.dataArr.count; i++) {
             for (int j=1; j<i; j++) {
+                if ([self.dataArr[i]objectForKey:type]==nil||[self.dataArr[i]objectForKey:type]==[NSNull null]) {
+                }else{
                 if ([[self.dataArr[i]objectForKey:type]integerValue]>[[self.dataArr[j]objectForKey:type]integerValue]) {
                     NSDictionary *dic=self.dataArr[i];
                     _dataArr[i]=_dataArr[j];
                     self.dataArr[j]=dic;
+                }
                 }
             }
         }
@@ -245,11 +252,12 @@
             [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
         }
     }    cell.accessoryType=UITableViewCellStyleDefault;
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [self setTableViewCellView:cell andIndexPath:indexPath];
     return cell;
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
+    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_iphone_text.png"]];
     NSDictionary *dataDic=self.dataArr[indexPath.row];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
@@ -318,7 +326,56 @@
     cell.layer.masksToBounds=YES;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [self.tableSelectView removeFromSuperview];
+    if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
+       self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+    }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
+     self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+    }
+    else{
+    self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (10+92*indexPath.row)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+    }
+    self.tableSelectView.backgroundColor=ColorRGB(0, 0, 0, 0.4);
+    [tableView addSubview:self.tableSelectView];
+    UIButton *changeJobBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+    changeJobBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+    [changeJobBtn setTitle:@"变更职务" forState:(UIControlStateNormal)];
+    changeJobBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+    changeJobBtn.layer.masksToBounds=YES;
+    changeJobBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+    [changeJobBtn setTintColor:[UIColor whiteColor]];
+    changeJobBtn.tag=indexPath.row;
+    [changeJobBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableSelectView addSubview:changeJobBtn];
+    UIButton *deleteMemberBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 94*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+    deleteMemberBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+    [deleteMemberBtn setTitle:@"删除成员" forState:(UIControlStateNormal)];
+    deleteMemberBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+    deleteMemberBtn.layer.masksToBounds=YES;
+    deleteMemberBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+    [deleteMemberBtn setTintColor:[UIColor whiteColor]];
+    deleteMemberBtn.tag=indexPath.row+1000;
+    [deleteMemberBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableSelectView addSubview:deleteMemberBtn];
+    UIButton *memberInfoBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 164*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+    memberInfoBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+    [memberInfoBtn setTitle:@"查看资料" forState:(UIControlStateNormal)];
+    memberInfoBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+    memberInfoBtn.layer.masksToBounds=YES;
+    memberInfoBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+    [memberInfoBtn setTintColor:[UIColor whiteColor]];
+    memberInfoBtn.tag=indexPath.row+2000;
+    [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableSelectView addSubview:memberInfoBtn];
+}
+- (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    if (button.tag>=0&&button.tag<1000) {
+        NSLog(@"%ld",button.tag);
+    }   else if (button.tag>=1000&&button.tag<2000) {
+         NSLog(@"%ld",button.tag);
+    } else if (button.tag>=2000){
+         NSLog(@"%ld",button.tag);
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  92*DEF_Adaptation_Font*0.5;
