@@ -52,9 +52,9 @@
     
     if(button.tag==3000){
         int sexNum = [[LocalDataMangaer sharedManager].sex intValue];
-        if([sexText.text isEqualToString:@"男"]){
+        if([sexText.text isEqualToString:@"小哥哥"]){
             sexNum = 1;
-        }else if([sexText.text isEqualToString:@"女"]){
+        }else if([sexText.text isEqualToString:@"小姐姐"]){
             sexNum = 2;
         }
             if(_headUrl==nil){
@@ -68,17 +68,13 @@
             
             [_obj LocalPhoto];
         }else if(button.tag==3008){
-            
-            sexText.text=@"男";
+            sexText.text=@"小哥哥";
             [manBtn removeFromSuperview];
             [womenBtn removeFromSuperview];
-
-            
         }else if(button.tag==3009){
-             sexText.text=@"女";
+             sexText.text=@"小姐姐";
             [manBtn removeFromSuperview];
             [womenBtn removeFromSuperview];
-
         }
 }
     
@@ -197,9 +193,9 @@
     NSString *sexStr;
     
     if([[LocalDataMangaer sharedManager].sex intValue]==1){
-        sexStr =@"男";
+        sexStr =@"小哥哥";
     }else{
-        sexStr =@"女";
+        sexStr =@"小姐姐";
     }
 
     sexText = [LooperToolClass createLableView:CGPointMake(162*DEF_Adaptation_Font*0.5, 421*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(452*DEF_Adaptation_Font*0.5,  42*DEF_Adaptation_Font*0.5) andText:sexStr andFontSize:13 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5] andType:NSTextAlignmentLeft];

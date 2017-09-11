@@ -13,22 +13,28 @@
 #import "UIImageView+WebCache.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource>
 {
-    NSInteger isSort;//sortBtn
+    NSInteger isSortJob;//sortBtn
+    NSInteger isSortLevel;//sortBtn
+    NSInteger isSortActive;//sortBtn
+    NSInteger isSortSex;//sortBtn
 }
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *dataArr;
+@property(nonatomic,strong)NSMutableArray *dataArr;
 @end
 @implementation FamilyMemberView
 
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
-        self.dataArr=dataArr;
+        self.dataArr=(NSMutableArray *)dataArr;
         [self initView];
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-        isSort=0;
+        isSortJob=0;
+        isSortLevel=0;
+        isSortActive=0;
+        isSortSex=0;
 
     }
     return self;
@@ -42,7 +48,8 @@
     [headerView addSubview:inviteBtn];
     UILabel *headerLB=[[UILabel alloc]initWithFrame:CGRectMake(90*DEF_Adaptation_Font*0.5, 0, DEF_WIDTH(self)-180*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5)];
     headerLB.textAlignment=NSTextAlignmentCenter;
-    headerLB.text=@"Welphen";
+    NSDictionary *detailDic=[[self.obj familyModel]familyDetailData];
+    headerLB.text=[detailDic objectForKey:@"ravername"];
     headerLB.textColor=[UIColor whiteColor];
     headerLB.font=[UIFont boldSystemFontOfSize:18];
     [headerView addSubview:headerLB];
@@ -52,6 +59,10 @@
     [self addSubview:contentView];
     UILabel *jobName=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 290*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
     jobName.text=@"职称/名称";
+    jobName.userInteractionEnabled=YES;
+    jobName.tag=0;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickSortLB:)];
+    [jobName addGestureRecognizer:singleTap];
     jobName.textColor=ColorRGB(225, 255, 255, 0.7);
     jobName.textAlignment=NSTextAlignmentCenter;
     jobName.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
@@ -61,6 +72,10 @@
     [jobName addSubview:sortBtn];
     UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(290*DEF_Adaptation_Font*0.5, 0, 80*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
     levelLB.text=@"等级";
+    levelLB.userInteractionEnabled=YES;
+    levelLB.tag=1;
+    UITapGestureRecognizer *singleTap1 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickSortLB:)];
+    [levelLB addGestureRecognizer:singleTap1];
     levelLB.textColor=ColorRGB(225, 255, 255, 0.7);
     levelLB.textAlignment=NSTextAlignmentCenter;
     levelLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
@@ -68,6 +83,10 @@
     [contentView addSubview:levelLB];
     UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(370*DEF_Adaptation_Font*0.5, 0, 120*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
     activeLB.text=@"活跃度";
+    activeLB.userInteractionEnabled=YES;
+    activeLB.tag=2;
+    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickSortLB:)];
+    [activeLB addGestureRecognizer:singleTap2];
     activeLB.textColor=ColorRGB(225, 255, 255, 0.7);
     activeLB.textAlignment=NSTextAlignmentCenter;
     activeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
@@ -75,12 +94,96 @@
     [contentView addSubview:activeLB];
     UILabel *sexLB=[[UILabel alloc]initWithFrame:CGRectMake(480*DEF_Adaptation_Font*0.5, 0, 100*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
     sexLB.text=@"性别";
+    sexLB.userInteractionEnabled=YES;
+    sexLB.tag=3;
+    UITapGestureRecognizer *singleTap3 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickSortLB:)];
+    [sexLB addGestureRecognizer:singleTap3];
     sexLB.textColor=ColorRGB(225, 255, 255, 0.7);
     sexLB.textAlignment=NSTextAlignmentCenter;
     sexLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     sexLB.userInteractionEnabled=YES;
     [contentView addSubview:sexLB];
 
+}
+-(void)onClickSortLB:(UITapGestureRecognizer *)tap{
+    if (tap.view.tag==0) {
+        if (isSortJob==0) {
+            isSortJob=1;
+            [self sortReverseArr];
+            [self.tableView reloadData];
+        }else{
+            isSortJob=0;
+            [self sortReverseArr];
+            [self.tableView reloadData];
+        }
+    }
+    if (tap.view.tag==1) {
+        if (isSortLevel==1) {
+            isSortLevel=0;
+            [self sortFromLargelToSmall:@"level"];
+        [self.tableView reloadData];
+        }else{
+            isSortLevel=1;
+            [self sortFromSmallToLarge:@"level"];
+        [self.tableView reloadData];
+        }
+    }if (tap.view.tag==2) {
+        if (isSortActive==1) {
+            isSortActive=0;
+           [self sortFromLargelToSmall:@"activepoints"];
+            [self.tableView reloadData];
+        }else{
+            isSortActive=1;
+            [self sortFromSmallToLarge:@"activepoints"];
+            [self.tableView reloadData];
+        }
+    }if (tap.view.tag==3) {
+        if (isSortSex==0) {
+            isSortSex=1;
+          [self sortFromLargelToSmall:@"sex"];
+            [self.tableView reloadData];
+        }else{
+            isSortSex=0;
+            [self sortFromSmallToLarge:@"sex"];
+            [self.tableView reloadData];
+        }
+    }
+}
+-(void)sortReverseArr{
+    if (self.dataArr.count>1) {
+        for (int i=1; i<self.dataArr.count/2; i++) {
+            NSDictionary *dic=self.dataArr[i];
+            _dataArr[i]=_dataArr[self.dataArr.count-i];
+            self.dataArr[self.dataArr.count-i]=dic;
+        }
+    }
+
+}
+-(void)sortFromSmallToLarge:(NSString *)type{
+    if (self.dataArr.count>1) {
+        for (int i=1; i<self.dataArr.count; i++) {
+            for (int j=1; j<i; j++) {
+                if ([[self.dataArr[i]objectForKey:type]integerValue]<[[self.dataArr[j]objectForKey:type]integerValue]) {
+                    NSDictionary *dic=self.dataArr[i];
+                    _dataArr[i]=_dataArr[j];
+                    self.dataArr[j]=dic;
+                }
+            }
+        }
+    }
+}
+-(void)sortFromLargelToSmall:(NSString *)type{
+    if (self.dataArr.count>1) {
+        for (int i=1; i<self.dataArr.count; i++) {
+            for (int j=1; j<i; j++) {
+                if ([[self.dataArr[i]objectForKey:type]integerValue]>[[self.dataArr[j]objectForKey:type]integerValue]) {
+                    NSDictionary *dic=self.dataArr[i];
+                    _dataArr[i]=_dataArr[j];
+                    self.dataArr[j]=dic;
+                }
+            }
+        }
+    }
 }
 -(void)setBackView{
     [self setBackgroundColor:[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0]];
@@ -96,12 +199,14 @@
     }
     if (tag==100) {
 //sortBtn
-        if (isSort==0) {
-            isSort=1;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+        if (isSortJob==0) {
+            isSortJob=1;
+            [self sortReverseArr];
+            [self.tableView reloadData];
         }else{
-            isSort=0;
-            self.dataArr = [[self.dataArr reverseObjectEnumerator] allObjects];
+            isSortJob=0;
+            [self sortReverseArr];
+            [self.tableView reloadData];
         }
     }
 }
@@ -147,13 +252,6 @@
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
     NSDictionary *dataDic=self.dataArr[indexPath.row];
-    if (isSort==1) {
-    if (indexPath.row==0) {
-        dataDic=self.dataArr[self.dataArr.count-1];
-    }else{
-        dataDic=self.dataArr[indexPath.row-1];
-    }
-    }
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
     headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
@@ -183,7 +281,7 @@
     levelLB.textColor=[UIColor whiteColor];
     levelLB.font=[UIFont systemFontOfSize:14];
     if ([dataDic objectForKey:@"level"]==[NSNull null]) {
-         levelLB.text=@"I";
+         levelLB.text=@"0";
     }else{
     levelLB.text=[dataDic objectForKey:@"level"];
     }
@@ -206,9 +304,11 @@
     }else if([[dataDic objectForKey:@"sex"]intValue]==0){
     UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(510*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     sexIV.image=[UIImage imageNamed:@"familyMember_person.png"];
+        [cell.contentView addSubview:sexIV];
     }else{
     UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
-    sexIV.image=[UIImage imageNamed:@"family_woman.png"];
+    sexIV.image=[UIImage imageNamed:@"family_Woman.png"];
+    [cell.contentView addSubview:sexIV];
     }
     if (indexPath.row%2==0) {
         cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];

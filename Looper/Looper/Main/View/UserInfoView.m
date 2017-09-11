@@ -53,8 +53,8 @@
     [titleName setText:[LocalDataMangaer sharedManager].NickName];
     
     
-    [followNum setText:[_myData objectForKey:@"followcount"]];
-    [fanNum setText:[_myData objectForKey:@"fanscount"]];
+    [followNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"followcount"]]];
+    [fanNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"fanscount"]]];
     
 
     headView = [LooperToolClass createViewAndRect:CGPointMake(215, 105) andTag:100 andSize:CGSizeMake(198*0.5*DEF_Adaptation_Font, 198*0.5*DEF_Adaptation_Font) andIsRadius:true andImageName:[LocalDataMangaer sharedManager].HeadImageUrl];
@@ -80,8 +80,6 @@
     [_obj MainChatEvent:button.tag];
 
 }
-
-
 
 
 -(void)initView{
@@ -147,13 +145,15 @@
     }
 
     followNum = [[UILabel alloc] initWithFrame:CGRectMake(204*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
-    [followNum setText:[_myData objectForKey:@"followcount"]];
+    [followNum setText: [NSString stringWithFormat:@"%@",[_myData objectForKey:@"followcount"]]];
+    
+   
     [followNum setTextAlignment:NSTextAlignmentLeft];
     [followNum setTextColor:[UIColor whiteColor]];
     [self addSubview:followNum];
     
     fanNum = [[UILabel alloc] initWithFrame:CGRectMake(448*0.5*DEF_Adaptation_Font, 503*0.5*DEF_Adaptation_Font, 70*0.5*DEF_Adaptation_Font, 24*0.5*DEF_Adaptation_Font)];
-    [fanNum setText:[_myData objectForKey:@"fanscount"]];
+    [fanNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"fanscount"]]];
     [fanNum setTextAlignment:NSTextAlignmentLeft];
     [fanNum setTextColor:[UIColor whiteColor]];
     [self addSubview:fanNum];

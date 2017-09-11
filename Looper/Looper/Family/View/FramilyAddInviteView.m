@@ -23,7 +23,11 @@
     UITableView *tableView;
     
     NSMutableArray *_dataSource;
-    
+    NSInteger isSortJob;//sortBtn
+    NSInteger isSortLevel;//sortBtn
+    NSInteger isSortActive;//sortBtn
+    NSInteger isSortSex;//sortBtn
+
 
 }
 
@@ -48,6 +52,11 @@
 
 
 -(void)createView{
+
+    isSortJob=0;
+    isSortLevel=0;
+    isSortActive=0;
+    isSortSex=0;
     
     
 
@@ -76,18 +85,85 @@
 
 -(void)onClickBtn:(UITapGestureRecognizer*)tap{
 
-    if(tap.view.tag==100){
+
+    if (tap.view.tag==101) {
+        if (isSortLevel==1) {
+            isSortLevel=0;
+            [self sortFromLargelToSmall:@"level"];
+            [tableView reloadData];
+        }else{
+            isSortLevel=1;
+            [self sortFromSmallToLarge:@"level"];
+            [tableView reloadData];
+        }
+    }
     
     
     
-    }else if(tap.view.tag==101){
-        
-        
-        
-    }else if(tap.view.tag==102){
-        
-        
-        
+    if (tap.view.tag==100) {
+        if (isSortActive==1) {
+            isSortActive=0;
+            [self sortFromLargelToSmall:@"nickname"];
+             [tableView reloadData];
+        }else{
+            isSortActive=1;
+            [self sortFromSmallToLarge:@"nickname"];
+             [tableView reloadData];
+        }
+    }
+
+
+
+if (tap.view.tag==102) {
+        if (isSortSex==0) {
+            isSortSex=1;
+            [self sortFromLargelToSmall:@"sex"];
+             [tableView reloadData];
+        }else{
+            isSortSex=0;
+            [self sortFromSmallToLarge:@"sex"];
+             [tableView reloadData];
+        }
+    }
+
+    
+}
+
+
+-(void)sortReverseArr{
+    if (_dataSource.count>1) {
+        for (int i=1; i<_dataSource.count/2; i++) {
+            NSDictionary *dic=_dataSource[i];
+            _dataSource[i]=_dataSource[_dataSource.count-i];
+            _dataSource[_dataSource.count-i]=dic;
+        }
+    }
+    
+}
+-(void)sortFromSmallToLarge:(NSString *)type{
+    if (_dataSource.count>1) {
+        for (int i=1; i<_dataSource.count; i++) {
+            for (int j=1; j<i; j++) {
+                if ([[_dataSource[i]objectForKey:type]integerValue]<[[_dataSource[j]objectForKey:type]integerValue]) {
+                    NSDictionary *dic=_dataSource[i];
+                    _dataSource[i]=_dataSource[j];
+                    _dataSource[j]=dic;
+                }
+            }
+        }
+    }
+}
+-(void)sortFromLargelToSmall:(NSString *)type{
+    if (_dataSource.count>1) {
+        for (int i=1; i<_dataSource.count; i++) {
+            for (int j=1; j<i; j++) {
+                if ([[_dataSource[i]objectForKey:type]integerValue]>[[_dataSource[j]objectForKey:type]integerValue]) {
+                    NSDictionary *dic=_dataSource[i];
+                    _dataSource[i]=_dataSource[j];
+                    _dataSource[j]=dic;
+                }
+            }
+        }
     }
 }
 
@@ -97,7 +173,7 @@
     UILabel *btnName=[[UILabel alloc]initWithFrame:rect];
     btnName.text=string;
     btnName.userInteractionEnabled=YES;
-    btnName.tag=1;
+    btnName.tag=tag;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickBtn:)];
     [btnName addGestureRecognizer:singleTap];
     [self addSubview:btnName];

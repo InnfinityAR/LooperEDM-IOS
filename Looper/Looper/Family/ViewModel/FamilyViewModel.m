@@ -25,7 +25,7 @@
     FamilyApplyView *familyApplyV;
     FamilyView *familyV;
     NSString *ownername;
-}
+  }
 
 @synthesize familyModel =_familyModel;
 

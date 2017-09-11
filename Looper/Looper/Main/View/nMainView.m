@@ -133,8 +133,6 @@
             isTimerRun=true;
             updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updataMoveView) userInfo:nil repeats:YES];
 
-            
-            
         }];
     }
      [_obj hudOnClick:EventTag];
@@ -206,10 +204,9 @@
     [self addSubview:activeBtn];
     isActiveUp = true;
 #warning-在这里添加抽奖按钮
-    UIButton *extractBtn = [LooperToolClass createBtnImageName:@"order.png" andRect:CGPointMake(26, 900) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(79, 97)  andTarget:self];
-    [self addSubview:extractBtn];
+//    UIButton *extractBtn = [LooperToolClass createBtnImageName:@"order.png" andRect:CGPointMake(26, 900) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(79, 97)  andTarget:self];
+//    [self addSubview:extractBtn];
 
-    
     
     UIImage *bg2 = [UIImage imageNamed:@"bk_2.png"];
     UIImageView *bg2V = [[UIImageView alloc] initWithFrame:CGRectMake(93*0.3*DEF_Adaptation_Font,1200*0.3*DEF_Adaptation_Font, bg2.size.width*0.3*DEF_Adaptation_Font, bg2.size.height*0.3*DEF_Adaptation_Font)];

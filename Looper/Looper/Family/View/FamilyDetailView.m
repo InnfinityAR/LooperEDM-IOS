@@ -103,7 +103,7 @@
     cycleView.backgroundColor=[UIColor grayColor];
     cycleView.layer.cornerRadius=DEF_WIDTH(cycleView)/2;
     cycleView.layer.masksToBounds=YES;
-    [cycleView drawProgress:0.3];
+    [cycleView drawProgress:[[self.dataDic objectForKey:@"raverexp"]floatValue]/16000];
     [self addSubview:cycleView];
     
     UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake(64*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
@@ -413,7 +413,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+//    return 7;
     return self.logArr.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -429,25 +429,21 @@ CGFloat xOffset=scrollView.contentOffset.x;
         }
     }    cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.logArr[indexPath.row]];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
-    timeLB.text=@"2017-8-28";
+    NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.logArr[indexPath.row]];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 8*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
+    timeLB.text=[dataDic objectForKey:@"creationdate"];
+    timeLB.numberOfLines=0;
     timeLB.textColor=ColorRGB(255, 255, 255, 0.76);
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    CGSize lblSize2 = [timeLB.text boundingRectWithSize:CGSizeMake(120*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGRect frame2=timeLB.frame;
+    frame2.size=lblSize2;
+    timeLB.frame=frame2;
     [cell.contentView addSubview:timeLB];
     UILabel *subLB=[[UILabel alloc]initWithFrame:CGRectMake(160*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-180*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     subLB.textColor=ColorRGB(255, 255, 255, 1.0);
-    NSString *name=@"XXX";
-    NSString *club=@"XXX";
-    NSString *experience=@"XX经验值";
-    NSString *active=@"XX活跃度";
-    subLB.text=[NSString stringWithFormat:@"%@在%@发表评论得%@和%@",name,club,experience,active];
-    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:subLB.text];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(1+name.length, club.length)];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(6+name.length+club.length, experience.length)];
-    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(7+name.length+club.length+experience.length, active.length)];
-    subLB.attributedText= aString;
+//    [self modificationColorWithLabel:subLB andStatus:indexPath.row andDataDic:nil];
+    [self modificationColorWithLabel:subLB andType:[[dataDic objectForKey:@"messagetype"]intValue] andDataDic:self.logArr[indexPath.row]];
     CGSize lblSize3 = [subLB.text boundingRectWithSize:CGSizeMake(DEF_WIDTH(self)-180*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     CGRect frame3=subLB.frame;
     frame3.size=lblSize3;
@@ -468,5 +464,122 @@ CGFloat xOffset=scrollView.contentOffset.x;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *dic=self.logArr[indexPath.row];
-  }
+}
+-(void)modificationColorWithLabel:(UILabel *)LB andType:(NSInteger)type andDataDic:(NSDictionary *)dataDic{
+    NSString *name=[dataDic objectForKey:@"username"];
+    NSString *targetName=[dataDic objectForKey:@"targetname"];
+    NSString *message=[dataDic objectForKey:@"messagecontent"];
+    if (type==1) {
+        LB.text=[NSString stringWithFormat:@"%@ %@",name,message];
+        LB.textColor=ColorRGB(219, 23, 115, 1.0);
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        LB.attributedText= aString;
+    }else if (type==2){
+        LB.text=[NSString stringWithFormat:@"%@ %@",name,message];
+        LB.textColor=ColorRGB(219, 23, 115, 1.0);
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        LB.attributedText= aString;
+    }else if (type==3){
+        LB.text=[NSString stringWithFormat:@"%@ %@",name,message];
+        LB.textColor=ColorRGB(219, 23, 115, 1.0);
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        LB.attributedText= aString;
+    }else if (type==4){
+        LB.text=[NSString stringWithFormat:@"%@ %@",name,message];
+        LB.textColor=ColorRGB(219, 23, 115, 1.0);
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        LB.attributedText= aString;
+    }else if (type==5){
+        LB.text=[NSString stringWithFormat:@"%@ %@",name,message];
+        LB.textColor=ColorRGB(219, 23, 115, 1.0);
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        LB.attributedText= aString;
+    }
+
+
+}
+
+-(void)modificationColorWithLabel:(UILabel *)LB andStatus:(NSInteger)Status andDataDic:(NSDictionary *)dataDic{
+    NSString *name=@"XXX";
+    NSString *club=@"叨逼叨/liveshow";
+    NSString *activity=@"发表评论/点赞";
+    NSString *experience=@"XX经验值";
+    NSString *active=@"XX活跃度";
+    NSString *day=@"5";
+    NSString *family=@"XX家族";
+    NSString *group=@"第一小组";
+    NSString *job=@"二副/职务";
+    NSString *member=@"成员名字";
+    NSString *memberJob=@"成员职务";
+    NSString *anotherJob=@"另一成员职务";
+    NSInteger status=Status;
+    if (status==0) {
+            LB.text=[NSString stringWithFormat:@"%@在%@中%@得%@和%@",name,club,activity,experience,active];
+            NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+            [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+            [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(1+name.length, club.length)];
+            [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(3+activity.length+name.length+club.length, experience.length)];
+            [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+activity.length+name.length+club.length+experience.length, active.length)];
+            LB.attributedText= aString;
+    }else if (status==1){
+        LB.text=[NSString stringWithFormat:@"%@完成%@得%@和%@",name,activity,experience,active];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(2+name.length, activity.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(3+activity.length+name.length, experience.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+activity.length+name.length+experience.length, active.length)];
+        LB.attributedText= aString;
+    }else if (status==2){
+        LB.text=[NSString stringWithFormat:@"%@连续%@天未增加经验值扣除%@ ",name,day,active];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(2+name.length, day.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(11+name.length+day.length, active.length)];
+        LB.attributedText= aString;
+    }else if (status==3){
+        LB.text=[NSString stringWithFormat:@"%@完成%@,家族获得%@",family,activity,active];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, family.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(2+family.length, activity.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(7+activity.length+family.length, active.length)];
+        LB.attributedText= aString;
+    }else if (status==4){
+        LB.text=[NSString stringWithFormat:@"%@在%@满员打卡，家族获得%@",group,club,active];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, group.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(1+group.length, club.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(10+group.length+club.length, active.length)];
+        LB.attributedText= aString;
+    }else if (status==5){
+        LB.text=[NSString stringWithFormat:@"%@(%@)，从%@ 移出%@(%@)，家族扣除%@和%@",name,job,family,member,memberJob,experience,active];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(1+name.length, job.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+name.length+job.length, family.length)];
+         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(7+name.length+job.length+family.length, member.length)];
+         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(8+name.length+job.length+family.length+member.length, memberJob.length)];
+         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(14+name.length+job.length+family.length+member.length+memberJob.length, experience.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(15+name.length+job.length+family.length+member.length+memberJob.length+experience.length, active.length)];
+        LB.attributedText= aString;
+    }else if (status==6){
+        LB.text=[NSString stringWithFormat:@"%@(%@)，把%@(%@)变更 为%@(%@)",name,job,member,memberJob,member,anotherJob];
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:LB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(0, name.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(1+name.length, job.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+name.length+job.length, member.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(5+name.length+job.length+member.length, memberJob.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(10+name.length+job.length+member.length+memberJob.length, member.length)];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(11+name.length+job.length+member.length+memberJob.length+member.length, anotherJob.length)];
+        LB.attributedText= aString;
+    }
+
+    
+    
+}
+
 @end

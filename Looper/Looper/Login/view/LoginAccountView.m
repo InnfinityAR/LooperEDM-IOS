@@ -83,6 +83,8 @@
             sendBtn.hidden= YES;
             downTime = 60;
             
+            [downTimer invalidate];
+            
             downTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(downTimer) userInfo:nil repeats:YES];
             
             downNum = [LooperToolClass createLableView:CGPointMake(403*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(126*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat: @"%d秒后可重发",downTime] andFontSize:10 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.55] andType:NSTextAlignmentRight];
