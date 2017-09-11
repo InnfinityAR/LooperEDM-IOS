@@ -88,7 +88,26 @@
 }
 
 
+-(void)initProgressVWithRate:(NSString*)rate andSum:(NSString*)sum{
+    UIView *progressV=[[UIView alloc]initWithFrame:CGRectMake(95*DEF_Adaptation_Font_x*0.5,400*DEF_Adaptation_Font_x*0.5, 452*DEF_Adaptation_Font_x*0.5, 40*DEF_Adaptation_Font*0.5)];
+    progressV.backgroundColor=ColorRGB(39, 41, 83, 0.8);
+    progressV.layer.cornerRadius=20*DEF_Adaptation_Font*0.5;
+    progressV.layer.masksToBounds=YES;
+    [self addSubview:progressV];
+    UIView *progressV1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue], 40*DEF_Adaptation_Font*0.5)];
+    progressV1.backgroundColor=ColorRGB(107, 104, 221, 1.0);
+    [progressV addSubview:progressV1];
+    UILabel *levelNumLB=[[UILabel alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 390*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    levelNumLB.textColor=ColorRGB(107, 104, 221, 1.0);
+    levelNumLB.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
+    levelNumLB.layer.masksToBounds=YES;
+    levelNumLB.text=@"Lv5";
+    levelNumLB.font=[UIFont boldSystemFontOfSize:20];
+    levelNumLB.textAlignment=NSTextAlignmentCenter;
+    levelNumLB.backgroundColor=ColorRGB(19, 22, 39, 1.0);
+    [self addSubview:levelNumLB];
 
+}
 
 -(void)initUI{
     UIButton *back =[LooperToolClass createBtnImageName:@"btn_infoBack.png" andRect:CGPointMake(1, 34) andTag:mainAccountBackTag andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
@@ -100,9 +119,9 @@
     UIButton *message =[LooperToolClass createBtnImageName:@"btn_InfoMessage.png" andRect:CGPointMake(548, 33) andTag:104 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: message];
 
-    UIImageView *FrameName=[LooperToolClass createImageViewReal:@"image_NameFrame.png" andRect:CGPointMake(95*DEF_Adaptation_Font_x*0.5,400*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(452*DEF_Adaptation_Font_x*0.5, 40*DEF_Adaptation_Font*0.5) andIsRadius:false];
-    [self addSubview:FrameName];
-    
+//    UIImageView *FrameName=[LooperToolClass createImageViewReal:@"image_NameFrame.png" andRect:CGPointMake(95*DEF_Adaptation_Font_x*0.5,400*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(452*DEF_Adaptation_Font_x*0.5, 40*DEF_Adaptation_Font*0.5) andIsRadius:false];
+//    [self addSubview:FrameName];
+    [self initProgressVWithRate:@"100" andSum:@"160"];
     
     titleName = [LooperToolClass createLableView:CGPointMake(95*DEF_Adaptation_Font_x*0.5, 377*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(452*DEF_Adaptation_Font_x*0.5, 42*DEF_Adaptation_Font_x*0.5) andText:[LocalDataMangaer sharedManager].NickName andFontSize:25 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [self addSubview:titleName];
@@ -162,7 +181,7 @@
 
 
 -(void)initBk{
-    UIImage *bk = [UIImage imageNamed:@"bbk_InfoBgFrame.png"];
+    UIImage *bk = [UIImage imageNamed:@"bk_InfoBgFrame.png"];
     UIImageView *imageBkV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     imageBkV.image = bk;
     [self addSubview:imageBkV];
