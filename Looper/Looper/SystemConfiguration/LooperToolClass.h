@@ -48,6 +48,7 @@
 +(UIView*)createFrameView:(CGPoint)point andSize:(CGSize)FrameSize andFrameWide:(int)wide andRadius:(int)Radius;
 
 
-
+//创建弹窗
++(UIView *)createPointView:(CGPoint)point andContentLB:(NSString *)contentStr;
 
 @end

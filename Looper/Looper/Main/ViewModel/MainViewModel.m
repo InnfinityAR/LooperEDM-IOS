@@ -394,7 +394,6 @@
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
             [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
             [[LocalDataMangaer sharedManager] setData];
-            
             [[RongCloudManger sharedManager] initRongCloudSDK];
             [[RongCloudManger sharedManager]loginRCSdk];
 
@@ -565,7 +564,6 @@
 
 }
 
-
 -(void)pushNActivityViewController{
     nActivityViewController *activity = [[nActivityViewController alloc] initWithOrderArr: [LocalDataMangaer sharedManager].rouletteArr];
     [[_obj navigationController]  pushViewController:activity animated:YES];
@@ -610,8 +608,7 @@
     }else if(type==9008){
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
-        
-      //   [self pushNActivityViewController];
+
         [self createFamilyViewController];
        //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 

@@ -27,6 +27,8 @@
 		B225B9991F3C2BBC0008E5AF /* ExtractPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B9981F3C2BBC0008E5AF /* ExtractPriceViewController.m */; };
 		B225B99C1F3C2BDA0008E5AF /* ExtractPriceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */; };
 		B225B99F1F3C2BF60008E5AF /* ExtractPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */; };
+		B22A03FB1F66817800E3EA2E /* MemberDeleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */; };
+		B22A03FD1F66851900E3EA2E /* BK_family_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */; };
 		B22BFCB61F611DD400FD131E /* bk_liveshow_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = B22BFCB51F611DD400FD131E /* bk_liveshow_empty.png */; };
 		B22BFCB91F616F9F00FD131E /* FamilyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22BFCB81F616F9F00FD131E /* FamilyMessageView.m */; };
 		B22BFCCE1F616FC400FD131E /* agreeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B22BFCBA1F616FC400FD131E /* agreeBtn.png */; };
@@ -846,6 +848,9 @@
 		B225B99B1F3C2BDA0008E5AF /* ExtractPriceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractPriceViewModel.m; sourceTree = "<group>"; };
 		B225B99D1F3C2BF60008E5AF /* ExtractPriceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtractPriceView.h; sourceTree = "<group>"; };
 		B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtractPriceView.m; sourceTree = "<group>"; };
+		B22A03F91F66817800E3EA2E /* MemberDeleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDeleteView.h; sourceTree = "<group>"; };
+		B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDeleteView.m; sourceTree = "<group>"; };
+		B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BK_family_bottom.png; sourceTree = "<group>"; };
 		B22BFCB51F611DD400FD131E /* bk_liveshow_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk_liveshow_empty.png; sourceTree = "<group>"; };
 		B22BFCB71F616F9F00FD131E /* FamilyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyMessageView.h; sourceTree = "<group>"; };
 		B22BFCB81F616F9F00FD131E /* FamilyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyMessageView.m; sourceTree = "<group>"; };
@@ -3425,6 +3430,8 @@
 				B22C5AAA1F59398D005C9E28 /* FamilyHeaderView.m */,
 				B22C5AB81F5D3466005C9E28 /* FamilyMemberView.h */,
 				B22C5AB91F5D3466005C9E28 /* FamilyMemberView.m */,
+				B22A03F91F66817800E3EA2E /* MemberDeleteView.h */,
+				B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */,
 				B22C5AA51F57FA78005C9E28 /* CycleView.h */,
 				B22C5AA61F57FA78005C9E28 /* CycleView.m */,
 				C445BAC01F5D4112007650D3 /* FramilyAddInviteView.h */,
@@ -4586,6 +4593,7 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */,
 				C4278E871F62A97200BA6029 /* btn_Family_invite.png */,
 				C4278E881F62A97200BA6029 /* btn_family_invited.png */,
 				C4E782521F616E2800310D01 /* btn_Family_close.png */,
@@ -4962,6 +4970,7 @@
 				C4CB0B3D1EFA44C700225614 /* close_comment.png in Resources */,
 				C409A7461E1E359400F76B5C /* bg_looper_line.png in Resources */,
 				C4654E041E79702A00D910F2 /* btn_active.png in Resources */,
+				B22A03FD1F66851900E3EA2E /* BK_family_bottom.png in Resources */,
 				C43E76FE1E091D8D004A5288 /* btn_looper.png in Resources */,
 				C4BE23D81E530B4000971A60 /* caption_cannel.png in Resources */,
 				C4AE24731E1FA123009D5851 /* icon_looper_me.png in Resources */,
@@ -5424,6 +5433,7 @@
 				C404A7DB1EBF8E9B000B9E1D /* RotateNavigationController.m in Sources */,
 				C4E86FA11F16474000D9658D /* GPUImageFramebufferCache.m in Sources */,
 				B2A9020D1ED6A2020022C282 /* UserInfoViewModel.m in Sources */,
+				B22A03FB1F66817800E3EA2E /* MemberDeleteView.m in Sources */,
 				B22C5AAB1F59398D005C9E28 /* FamilyHeaderView.m in Sources */,
 				B23521431F482880003D06CB /* SDWebImageDownloaderOperation.m in Sources */,
 				B225B99C1F3C2BDA0008E5AF /* ExtractPriceViewModel.m in Sources */,
