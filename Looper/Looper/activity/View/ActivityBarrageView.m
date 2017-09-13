@@ -732,8 +732,8 @@
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityStateLB:)];
     [label3 addGestureRecognizer:singleTap];
     [contentView addSubview:label3];
-    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 80*DEF_Adaptation_Font*0.5)];
-    if ([self.activityDIc objectForKey:@"rules"]==[NSNull null]||[[self.activityDIc objectForKey:@"rules"]isEqualToString:@""]) {
+    UILabel *label2=[[UILabel alloc]initWithFrame:CGRectMake(0, 24*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-30, 100*DEF_Adaptation_Font*0.5)];
+    if ([self.activityDIc objectForKey:@"applerules"]==[NSNull null]||[[self.activityDIc objectForKey:@"applerules"]isEqualToString:@""]) {
         label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"activitydes"]];
         label2.font=[UIFont systemFontOfSize:16];
         label2.textColor=[UIColor whiteColor];
@@ -743,13 +743,13 @@
         frame.origin.y=60*DEF_Adaptation_Font*0.5;
         contentView.frame=frame;
     }else{
-    label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"rules"]];
+    label2.text=[NSString stringWithFormat:@"%@",[self.activityDIc objectForKey:@"applerules"]];
     label2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     label2.textColor=[UIColor colorWithRed:150/255.0 green:145/255.0 blue:180/255.0 alpha:1.0];
     }
     //自动适配
     CGRect frame=label2.frame;
-    frame.size.height=headViewHeight-50*DEF_Adaptation_Font*0.5;
+    frame.size.height=headViewHeight-20*DEF_Adaptation_Font*0.5;
     label2.frame=frame;
 
     label2.numberOfLines=0;
