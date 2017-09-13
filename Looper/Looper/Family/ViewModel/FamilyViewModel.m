@@ -226,53 +226,109 @@
 
 
 //变更职位
--(void)ChangeJobToSailorWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole{
+-(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:userId forKey:@"userId"];
-      [dic setObject:raverId forKey:@"raverId"];
+      [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
     if (role==nil) {
 //传空的时候是在删除家族成员，因为删除家族成员需要先将他的职位改成水手
        [dic setObject:@"0" forKey:@"role"];
     }else{
      [dic setObject:role forKey:@"role"];
     }
+    if ([originalRole integerValue]==0&&role==nil) {
+         [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
+    }else{
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateRaverMemberRights" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
            
             if (role!=nil) {
-              [[DataHander sharedDataHander] showViewWithStr:@"更改职位成功" andTime:1 andPos:CGPointZero];
+                [self updateFamilyModelWithType:1 andInfo:nil];
             }else{
-             [self DeleteMemberWithUserId:userId andRaverId:raverId andOriginalRole:originalRole];
+//传空的时候是在删除家族成员，因为删除家族成员需要先将他的职位改成水手
+             [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
             }
         }
     }fail:^{
         
     }];
+    }
 }
 //删除家族成员
--(void)DeleteMemberWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andOriginalRole:(NSString *)originalRole{
+-(void)DeleteMemberWithUserId:(NSString *)userId  andOriginalRole:(NSString *)originalRole{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:userId forKey:@"userId"];
-    [dic setObject:raverId forKey:@"raverId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchRaverFamily" parameters:dic  success:^(id responseObject) {
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"removeRaverMember" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:@"请重新选择一位替换原成员暴走萝莉“三副”的位置"andBtnName:@"选择"];
-            [[self.obj familyView] addSubview:selectView];
-            [selectView addButtonAction:^(id sender) {
-                [self.memberView.tableView reloadData];
-                self.memberView.isSelectMemberToChangeJob=originalRole;
-                
-#warning -在这里加入选择成员的界面
-                [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
-            }];
+             [self updateFamilyModelWithType:1 andInfo:originalRole];
+            
         }
     }fail:^{
         
     }];
 }
-
+-(void)updateFamilyModelWithType:(NSInteger)type andInfo:(NSString *)info{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:@"1" forKey:@"orderType"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [_familyModel initWithData:responseObject];
+            if (type==1) {
+                [self.memberView updateData:_familyModel.familyMember];
+                self.memberView.isSelectMemberToChangeJob=info;
+                if (info==nil) {
+                      [[DataHander sharedDataHander] showViewWithStr:@"更改职位成功" andTime:1 andPos:CGPointZero];
+                }else{
+                  [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
+                    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:1.0f];
+                                   }
+            }
+        }
+    }fail:^{
+    }];
+}
+-(void)delayMethod{
+    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择"];
+                    [self.familyView addSubview:selectView];
+                    [selectView addButtonAction:^(id sender) {
+                        [self.memberView.tableView reloadData];
+                    }];
+}
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
    
+}
+-(NSString *)jobnameForStatus:(NSInteger)status{
+    switch (status) {
+        case 6:
+            return @"舰长";
+            break;
+        case 5:
+            return @"副舰长";
+            break;
+        case 4:
+            return @"大副";
+            break;
+        case 3:
+            return @"二副";
+            break;
+        case 2:
+            return @"三副";
+            break;
+        case 1:
+            return @"水手长";
+            break;
+        case 0:
+            return @"水手";
+            break;
+        default:
+            break;
+    }
+    return nil;
 }
 @end

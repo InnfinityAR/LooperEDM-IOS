@@ -52,6 +52,9 @@
 -(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId;
 
 
-//删除家族
--(void)ChangeJobToSailorWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
+//删除家族成员
+-(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
+//将要删除的家族成员的字段
+@property(nonatomic,strong)NSDictionary *WillDeleteMemberDic;
+
 @end

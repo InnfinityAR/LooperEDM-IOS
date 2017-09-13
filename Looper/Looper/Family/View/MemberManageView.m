@@ -47,12 +47,13 @@
 -(NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource=[[NSMutableArray alloc]initWithArray:self.dataArr];
+         [_dataSource addObject:self.dataArr[2]];
     }
     return _dataSource;
 }
 -(NSMutableArray *)anotherData{
     if (!_anotherData) {
-        _anotherData=[[NSMutableArray alloc]init];
+        _anotherData=[[NSMutableArray alloc]initWithArray:self.dataArr];
         [_anotherData addObject:self.dataArr[1]];
     }
     return _anotherData;
@@ -121,7 +122,7 @@
     moveFamilyLB.backgroundColor=ColorRGB(84, 71, 104, 1.0);
     moveFamilyLB.textAlignment=NSTextAlignmentCenter;
     moveFamilyLB.textColor=ColorRGB(255, 255, 255, 0.7);
-    moveFamilyLB.text=@"移入家族";
+    moveFamilyLB.text=@"移入本队";
     moveFamilyLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [bkV addSubview:moveFamilyLB];
 
