@@ -4612,11 +4612,8 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
 				B22A04091F67EB6600E3EA2E /* family_job_manage.png */,
 				B22A04071F67D54300E3EA2E /* BK_family_frame.png */,
->>>>>>> c281f8b61b873751d1b90c489bafe90e0516a890
 				B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */,
 				C4278E871F62A97200BA6029 /* btn_Family_invite.png */,
 				C4278E881F62A97200BA6029 /* btn_family_invited.png */,
