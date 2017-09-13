@@ -29,7 +29,7 @@
 
 }
 @property(nonatomic,strong)UIView *tableSelectView;
-@property(nonatomic,strong)UITableView *tableView;
+
 @property(nonatomic,strong)NSMutableArray *dataArr;
 @end
 @implementation FamilyMemberView
@@ -38,6 +38,7 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
         self.dataArr=(NSMutableArray *)dataArr;
+        [self.obj setMemberView:self];
         [self initView];
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -47,7 +48,7 @@
         isSortActive=0;
         isSortSex=0;
         _isSelectCell=-1;
-
+        self.isSelectMemberToChangeJob=nil;
     }
     return self;
 }
@@ -353,6 +354,12 @@
  }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableSelectView removeFromSuperview];
+    if (self.isSelectMemberToChangeJob!=nil) {
+//在这里进行更改职位操作
+        self.isSelectMemberToChangeJob=nil;
+        NSDictionary *dataDic=self.dataArr[indexPath.row];
+        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRaverId:[dataDic objectForKey:@"raverid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
+    }else{
     if (_isSelectCell==indexPath.row) {
         _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
@@ -400,6 +407,7 @@
     [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.tableSelectView addSubview:memberInfoBtn];
     }
+    }
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag>=0&&button.tag<1000) {
@@ -416,13 +424,7 @@
         self.isSelectCell=-1;
         [self.tableView reloadData];
 #warning -在这里调用VM中的删除成员的接口
-            MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:@"请重新选择一位替换原成员暴走萝莉“三副”的位置"andBtnName:@"选择"];
-            [[self.obj familyView] addSubview:selectView];
-            [selectView addButtonAction:^(id sender) {
-#warning -在这里加入选择成员的界面
-                [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
-            }];
-            
+            [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRaverId:[dataDic objectForKey:@"raverid"]andRole:nil andOriginalRole:[dataDic objectForKey:@"role"]];
         }];
     } else if (button.tag>=2000){
          NSLog(@"%ld",button.tag);

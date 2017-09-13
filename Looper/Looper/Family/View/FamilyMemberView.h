@@ -14,4 +14,8 @@
 
 //用于判断cell是否被选中
 @property(nonatomic)NSInteger isSelectCell;
+@property(nonatomic,strong)UITableView *tableView;
+
+//当在挑选成员变更职位的时候，tableViewCell的点击事件是不一样的
+@property(nonatomic,strong)NSString *isSelectMemberToChangeJob;
 @end

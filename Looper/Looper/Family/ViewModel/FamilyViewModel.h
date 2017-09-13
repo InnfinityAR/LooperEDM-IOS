@@ -14,6 +14,7 @@
 
 #import "FamilyMessageView.h"
 
+#import "FamilyMemberView.h"
 @interface FamilyViewModel : NSObject
 
 {
@@ -30,7 +31,7 @@
 @property(nonatomic,strong)FamilyRankView *rankView;
 @property(nonatomic,strong)FamilySearchView *searchView;
 @property(nonatomic,strong)FramilyModel *familyModel;
-
+@property(nonatomic,strong)FamilyMemberView *memberView;
 
 
 
@@ -49,4 +50,8 @@
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid;
 //同意/拒绝邀请加入家族
 -(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId;
+
+
+//删除家族
+-(void)ChangeJobToSailorWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
 @end

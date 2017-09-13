@@ -19,7 +19,7 @@
 
 #import "FramilyAddInviteView.h"
 
-
+#import "MemberDeleteView.h"
 @implementation FamilyViewModel{
 
     FamilyApplyView *familyApplyV;
@@ -225,8 +225,54 @@
 }
 
 
+//变更职位
+-(void)ChangeJobToSailorWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+      [dic setObject:raverId forKey:@"raverId"];
+    if (role==nil) {
+//传空的时候是在删除家族成员，因为删除家族成员需要先将他的职位改成水手
+       [dic setObject:@"0" forKey:@"role"];
+    }else{
+     [dic setObject:role forKey:@"role"];
+    }
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateRaverMemberRights" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+           
+            if (role!=nil) {
+              [[DataHander sharedDataHander] showViewWithStr:@"更改职位成功" andTime:1 andPos:CGPointZero];
+            }else{
+             [self DeleteMemberWithUserId:userId andRaverId:raverId andOriginalRole:originalRole];
+            }
+        }
+    }fail:^{
+        
+    }];
+}
+//删除家族成员
+-(void)DeleteMemberWithUserId:(NSString *)userId andRaverId:(NSString *)raverId andOriginalRole:(NSString *)originalRole{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchRaverFamily" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:@"请重新选择一位替换原成员暴走萝莉“三副”的位置"andBtnName:@"选择"];
+            [[self.obj familyView] addSubview:selectView];
+            [selectView addButtonAction:^(id sender) {
+                [self.memberView.tableView reloadData];
+                self.memberView.isSelectMemberToChangeJob=originalRole;
+                
+#warning -在这里加入选择成员的界面
+                [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
+            }];
+        }
+    }fail:^{
+        
+    }];
+}
 
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
+   
 }
 @end
