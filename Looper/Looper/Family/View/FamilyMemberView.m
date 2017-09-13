@@ -12,15 +12,21 @@
 #import "LooperConfig.h"
 #import "UIImageView+WebCache.h"
 #import "MemberDeleteView.h"
-@interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource>
+#import "MemberManageView.h"
+#import "ChangeJobView.h"
+
+
+#import "creatPopWindowV.h"
+
+#import "DataHander.h"
+@interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
     NSInteger isSortJob;//sortBtn
     NSInteger isSortLevel;//sortBtn
     NSInteger isSortActive;//sortBtn
     NSInteger isSortSex;//sortBtn
     
-    //用于判断cell是否被选中
-    NSInteger isSelectCell;
+
 }
 @property(nonatomic,strong)UIView *tableSelectView;
 @property(nonatomic,strong)UITableView *tableView;
@@ -40,7 +46,7 @@
         isSortLevel=0;
         isSortActive=0;
         isSortSex=0;
-        isSelectCell=-1;
+        _isSelectCell=-1;
 
     }
     return self;
@@ -52,13 +58,18 @@
     headerView.userInteractionEnabled=YES;
     UIButton *inviteBtn=[LooperToolClass createBtnImageNameReal:@"familyMember_invite" andRect:CGPointMake(DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 6*DEF_Adaptation_Font*0.5) andTag:99 andSelectImage:@"familyMember_invite" andClickImage:@"familyMember_invite" andTextStr:nil andSize:CGSizeMake(60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     [headerView addSubview:inviteBtn];
-    UILabel *headerLB=[[UILabel alloc]initWithFrame:CGRectMake(90*DEF_Adaptation_Font*0.5, 0, DEF_WIDTH(self)-180*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5)];
+    UILabel *headerLB=[[UILabel alloc]initWithFrame:CGRectMake(130*DEF_Adaptation_Font*0.5, 0, DEF_WIDTH(self)-260*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5)];
     headerLB.textAlignment=NSTextAlignmentCenter;
     NSDictionary *detailDic=[[self.obj familyModel]familyDetailData];
     headerLB.text=[detailDic objectForKey:@"ravername"];
     headerLB.textColor=[UIColor whiteColor];
     headerLB.font=[UIFont boldSystemFontOfSize:18];
     [headerView addSubview:headerLB];
+    UIButton *memberManageBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 10*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(130*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
+    [memberManageBtn setTitle:@"成员管理" forState:(UIControlStateNormal)];
+    [memberManageBtn setTintColor:[UIColor whiteColor]];
+    memberManageBtn.titleLabel.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+    [headerView addSubview:memberManageBtn];
     
     UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, 68*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 62*DEF_Adaptation_Font*0.5)];
     contentView.backgroundColor=ColorRGB(84, 71, 104, 1.0);
@@ -221,6 +232,11 @@
             [self.tableView reloadData];
         }
     }
+    if (tag==103) {
+//成员管理
+        MemberManageView *manageV=[[MemberManageView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr];
+        [[self.obj familyView]addSubview:manageV];
+    }
 }
 
 -(UITableView *)tableView{
@@ -237,11 +253,14 @@
         //禁止上拉
         _tableView.alwaysBounceVertical=YES;
         _tableView.bounces=NO;
-        
         [self addSubview:_tableView];
+        UITapGestureRecognizer *singleTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickTableView:)];
+        singleTap.delegate=self;
+        [_tableView addGestureRecognizer:singleTap];
     }
     return _tableView;
 }
+
 #pragma -tableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  self.dataArr.count;
@@ -263,7 +282,15 @@
     return cell;
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
-    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_iphone_text.png"]];
+    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BK_family_frame.png"]];
+    if (indexPath.row%2==0) {
+        cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
+        cell.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
+    }else{
+        cell.contentView.backgroundColor=ColorRGB(84, 71, 104, 1.0);
+        cell.backgroundColor=ColorRGB(84, 71, 104, 1.0);
+    }
+    cell.layer.masksToBounds=YES;
     NSDictionary *dataDic=self.dataArr[indexPath.row];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
@@ -323,22 +350,15 @@
     sexIV.image=[UIImage imageNamed:@"family_Woman.png"];
     [cell.contentView addSubview:sexIV];
     }
-    if (indexPath.row%2==0) {
-        cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
-    }else{
-        cell.contentView.backgroundColor=ColorRGB(84, 71, 104, 1.0);
-        
-    }
-    cell.layer.masksToBounds=YES;
-}
+ }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableSelectView removeFromSuperview];
-    if (isSelectCell==indexPath.row) {
-        isSelectCell=-1;
+    if (_isSelectCell==indexPath.row) {
+        _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         cell.selected=NO;
     }else{
-        isSelectCell=indexPath.row;
+        _isSelectCell=indexPath.row;
     if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
        self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
     }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
@@ -383,13 +403,27 @@
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag>=0&&button.tag<1000) {
-        NSLog(@"%ld",button.tag);
+    NSDictionary *dataDic=self.dataArr[button.tag];
+        ChangeJobView *changeView=[[ChangeJobView alloc]initWithFrame:[UIScreen mainScreen].bounds and:self.obj andDataDic:dataDic];
+        [[self.obj familyView]addSubview:changeView];
     }   else if (button.tag>=1000&&button.tag<2000) {
 //删除
       NSDictionary *dataDic=self.dataArr[button.tag-1000];
         [self.tableSelectView removeFromSuperview];
-        MemberDeleteView *deleteView=[[MemberDeleteView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataDic:dataDic];
-        [[[self.obj obj]view]addSubview:deleteView];
+        MemberDeleteView   *deleteView=[[MemberDeleteView alloc]initWithContentStr:@"若移除暴走萝莉暴走萝莉的活跃值将从战队总活跃值中扣除。确定将其移除吗？"andBtnName:@"同意"];
+        [[self.obj familyView] addSubview:deleteView];
+        [deleteView addButtonAction:^(id sender) {
+        self.isSelectCell=-1;
+        [self.tableView reloadData];
+#warning -在这里调用VM中的删除成员的接口
+            MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:@"请重新选择一位替换原成员暴走萝莉“三副”的位置"andBtnName:@"选择"];
+            [[self.obj familyView] addSubview:selectView];
+            [selectView addButtonAction:^(id sender) {
+#warning -在这里加入选择成员的界面
+                [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
+            }];
+            
+        }];
     } else if (button.tag>=2000){
          NSLog(@"%ld",button.tag);
     }
@@ -454,4 +488,16 @@
     return nil;
 }
 
+//首先要在tableview中加入手势
+-(void)onClickTableView:(UITapGestureRecognizer *)tap{
+    [self.tableSelectView removeFromSuperview];
+    self.isSelectCell=-1;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UITableView class]]) {
+        return YES;
+    }
+    
+    return  NO;
+}
 @end

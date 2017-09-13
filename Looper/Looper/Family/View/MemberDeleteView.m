@@ -11,14 +11,16 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 @interface MemberDeleteView()
-@property(nonatomic,strong)NSDictionary *dataDic;
+@property(nonatomic,strong)NSString *contenStr;
+@property(nonatomic,strong)NSString *btnName;
+@property (nonatomic, strong, nullable) ButtonBlock block;  
 @end
 @implementation MemberDeleteView
 
--(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataDic:(NSDictionary*)dataDic{
-    if (self=[super initWithFrame:frame]) {
-        self.obj=(FamilyViewModel *)obj;
-        self.dataDic=dataDic;
+-(instancetype)initWithContentStr:(NSString *)contentStr andBtnName:(NSString *)btnName{
+    if (self=[super initWithFrame:[UIScreen mainScreen].bounds]) {
+        self.contenStr=contentStr;
+        self.btnName=btnName;
         [self initView];
     }
     return self;
@@ -30,8 +32,7 @@
     backIV.userInteractionEnabled=YES;
     [self addSubview:backIV];
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 412*DEF_Adaptation_Font*0.5, 124*DEF_Adaptation_Font*0.5)];
-        NSString *name=@"暴走萝莉";
-        contentLB.text=[NSString stringWithFormat:@"若移除%@,%@的活跃值将从战队总活跃值中扣除。确定将其移除吗",name,name];
+        contentLB.text=self.contenStr;
     contentLB.textColor=[UIColor whiteColor];
     CGSize lblSize3 = [contentLB.text boundingRectWithSize:CGSizeMake(412*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
     CGRect frame3=contentLB.frame;
@@ -40,6 +41,48 @@
     contentLB.numberOfLines=0;
     contentLB.font=[UIFont systemFontOfSize:16];
     [backIV addSubview:contentLB];
-//    UIButton *cancelBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(<#CGFloat x#>, <#CGFloat y#>) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:<#(CGSize)#> andTarget:<#(id)#>]
+    if (self.btnName==nil) {
+        UIButton *sureBtn=[[UIButton alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-83*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+        sureBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+        [sureBtn setTitle:@"选择" forState:(UIControlStateNormal)];
+        sureBtn.layer.cornerRadius=23*DEF_Adaptation_Font*0.5;
+        sureBtn.layer.masksToBounds=YES;
+        sureBtn.titleLabel.font=[UIFont systemFontOfSize:16];
+        [sureBtn setTintColor:[UIColor whiteColor]];
+        [sureBtn addTarget:self action:@selector(btnOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+        [backIV addSubview:sureBtn];
+    }else{
+    UIButton *cancelBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+    cancelBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+    [cancelBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+    cancelBtn.layer.cornerRadius=23*DEF_Adaptation_Font*0.5;
+    cancelBtn.layer.masksToBounds=YES;
+    cancelBtn.titleLabel.font=[UIFont systemFontOfSize:16];
+    [cancelBtn setTintColor:[UIColor whiteColor]];
+    [cancelBtn addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];
+    [backIV addSubview:cancelBtn];
+    UIButton *sureBtn=[[UIButton alloc]initWithFrame:CGRectMake(270*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+    sureBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+    [sureBtn setTitle:self.btnName forState:(UIControlStateNormal)];
+    sureBtn.layer.cornerRadius=23*DEF_Adaptation_Font*0.5;
+    sureBtn.layer.masksToBounds=YES;
+    sureBtn.titleLabel.font=[UIFont systemFontOfSize:16];
+    [sureBtn setTintColor:[UIColor whiteColor]];
+    [sureBtn addTarget:self action:@selector(btnOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [backIV addSubview:sureBtn];
+    }
+}
+-(void)addAction{
+       [self removeFromSuperview];
+}
+- (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
+    [self removeFromSuperview];
+    if (self.block) {
+        self.block(self);
+    }
+}
+//实现block回调的方法
+- (void)addButtonAction:(ButtonBlock)block {
+    self.block = block;
 }
 @end

@@ -372,31 +372,5 @@
 
 
 
-+(UIImageView *)createPointView:(CGPoint)point andContentLB:(NSString *)contentStr{
-    UIImageView *view= [[UIImageView alloc] initWithFrame:CGRectMake(point.x, point.y, 460*DEF_Adaptation_Font*0.5, 268*DEF_Adaptation_Font*0.5)];
-    view.image=[UIImage imageNamed:@"BK_family_bottom.png"];
-    view.userInteractionEnabled=YES;
-    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 412*DEF_Adaptation_Font*0.5, 124*DEF_Adaptation_Font*0.5)];
-    contentLB.text=contentStr;
-    contentLB.textColor=[UIColor whiteColor];
-    CGSize lblSize3 = [contentLB.text boundingRectWithSize:CGSizeMake(412*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
-    CGRect frame3=contentLB.frame;
-    frame3.size=lblSize3;
-    contentLB.frame=frame3;
-    contentLB.numberOfLines=0;
-    contentLB.font=[UIFont systemFontOfSize:16];
-    [view addSubview:contentLB];
-//    UIButton *cancelBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 164*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
-//    memberInfoBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
-//    [memberInfoBtn setTitle:@"查看资料" forState:(UIControlStateNormal)];
-//    memberInfoBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
-//    memberInfoBtn.layer.masksToBounds=YES;
-//    memberInfoBtn.titleLabel.font=[UIFont systemFontOfSize:14];
-//    [memberInfoBtn setTintColor:[UIColor whiteColor]];
-//    memberInfoBtn.tag=indexPath.row+2000;
-//    [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.tableSelectView addSubview:memberInfoBtn];
-    return view;
-}
 
 @end
