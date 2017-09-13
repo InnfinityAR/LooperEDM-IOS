@@ -188,7 +188,7 @@
     scrollV  =[[UIScrollView alloc] initWithFrame:CGRectMake(0, 120*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-113*DEF_Adaptation_Font*0.5)];
     scrollV.showsVerticalScrollIndicator = true;
     scrollV.delegate=self;
-    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*1.5);
+    scrollV.contentSize = CGSizeMake(DEF_SCREEN_WIDTH, [[_clubData objectForKey:@"information"] count]*410*DEF_Adaptation_Font*0.5+490*DEF_Adaptation_Font*0.5);
     
     [self addSubview:scrollV];
     scrollV.tag=100;
@@ -288,14 +288,14 @@
     
     [scrollV addSubview:selectView];
     
-    HorizontalScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,490*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*2.5)];
+    HorizontalScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,490*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,[[_clubData objectForKey:@"information"] count]*410*DEF_Adaptation_Font*0.5)];
     HorizontalScroll.showsHorizontalScrollIndicator = true;
     [HorizontalScroll setPagingEnabled:true];
     HorizontalScroll.delegate=self;
     HorizontalScroll.tag=101;
     
     [HorizontalScroll setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
-    HorizontalScroll.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*3, DEF_SCREEN_HEIGHT);
+    HorizontalScroll.contentSize = CGSizeMake(DEF_SCREEN_WIDTH*3, [[_clubData objectForKey:@"information"] count]*410*DEF_Adaptation_Font*0.5);
     
     [scrollV addSubview:HorizontalScroll];
     [self createScrollDataView];
