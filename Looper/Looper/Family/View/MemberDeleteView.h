@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^ButtonBlock) (id sender);
 @interface MemberDeleteView : UIView
--(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataDic:(NSDictionary*)dataDic;
-@property(nonatomic,strong)id obj;
+-(instancetype)initWithContentStr:(NSString *)contentStr andBtnName:(NSString *)btnName;
+//button点击事件
+- (void)addButtonAction:(ButtonBlock)block;
 @end

@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+@protocol ViewControllerBDelegate // 代理传值方法
+- (void)sendValue:(NSString *)value;
 
+@end
 @interface LooperToolClass : NSObject{
 
-
-
+    UIView *delegateView;
 
 }
-
+@property(nonatomic, weak) id<ViewControllerBDelegate> delegate;
 +(UILabel*)createLableView:(CGPoint)point andSize:(CGSize)FrameSize andText:(NSString*)lableStr andFontSize:(int)FontSize andColor:(UIColor*)color andType:(NSTextAlignment)type;
 
 +(UIButton*)createBtnImageName:(NSString*)imageName andRect:(CGPoint)point andTag:(int)tag andSelectImage:(NSString*)SelimageN andClickImage:(NSString*)clickImageN andTextStr:(NSString*)TStr andSize:(CGSize)FrameSize andTarget:(id)obj;
@@ -48,7 +50,6 @@
 +(UIView*)createFrameView:(CGPoint)point andSize:(CGSize)FrameSize andFrameWide:(int)wide andRadius:(int)Radius;
 
 
-//创建弹窗
-+(UIView *)createPointView:(CGPoint)point andContentLB:(NSString *)contentStr;
+
 
 @end
