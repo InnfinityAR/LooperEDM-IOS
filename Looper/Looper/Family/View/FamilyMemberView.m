@@ -235,8 +235,11 @@
     }
     if (tag==103) {
 //成员管理
-        MemberManageView *manageV=[[MemberManageView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr];
-        [[self.obj familyView]addSubview:manageV];
+        [_obj createFleetMangerView];
+        
+        
+//        MemberManageView *manageV=[[MemberManageView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr];
+//        [[self.obj familyView]addSubview:manageV];
     }
 }
 

@@ -20,10 +20,16 @@
 #import "FramilyAddInviteView.h"
 
 #import "MemberDeleteView.h"
+#import "FleetMangerView.h"
+
+
 @implementation FamilyViewModel{
 
     FamilyApplyView *familyApplyV;
     FamilyView *familyV;
+    FleetMangerView *fleetMangerV;
+    
+    
     NSString *ownername;
   }
 
@@ -270,6 +276,14 @@
         
     }];
 }
+
+
+-(void)createFleetMangerView{
+    
+    fleetMangerV  = [[FleetMangerView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+    [[self.obj view]addSubview:fleetMangerV];
+}
+
 
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
