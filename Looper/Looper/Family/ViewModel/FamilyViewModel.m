@@ -280,7 +280,17 @@
             [_familyModel initWithData:responseObject];
             if (type==1) {
                 [self.memberView updateData:_familyModel.familyMember];
-                self.memberView.isSelectMemberToChangeJob=info;
+//家族详情界面的更新
+                NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
+                [dataDic setObject:ownername forKey:@"ownername"];
+                NSArray *applyArr=nil;
+                if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
+                    applyArr=_familyModel.applyArray;
+                }
+                [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:_familyModel.messageArray];
+//家族排行的更新
+                 [self.rankView reloadData:_familyModel.RankingArray];
+                
                 if (info==nil) {
                       [[DataHander sharedDataHander] showViewWithStr:@"更改职位成功" andTime:1 andPos:CGPointZero];
                 }else{
@@ -293,12 +303,63 @@
     }];
 }
 -(void)delayMethod{
-    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择"];
+    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择" andType:2 andDataDic:self.WillDeleteMemberDic];
                     [self.familyView addSubview:selectView];
                     [selectView addButtonAction:^(id sender) {
-                        [self.memberView.tableView reloadData];
+                     
                     }];
 }
+
+//获取家族小组成员
+-(void)getMemberGroupWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+     [dic setObject:groupId forKey:@"groupId"];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverGroupMember" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+        
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+//获取没有小组的家族散人
+-(void)getMemberWithoutGroupWithUserId:(NSString *)userId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverMemberWithoutGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+//家族小组成员管理
+-(void)getMemberGroupManageWithUserId:(NSString *)userId andGroupId:(NSString *)groupId andTargetId:(NSString *)targetId andJoin:(NSString *)join{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:groupId forKey:@"groupId"];
+    [dic setObject:targetId forKey:@"targetId"];
+     [dic setObject:join forKey:@"join"];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaverGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
    

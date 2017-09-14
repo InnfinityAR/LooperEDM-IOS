@@ -16,8 +16,7 @@
 #import "ChangeJobView.h"
 
 
-#import "creatPopWindowV.h"
-
+#import "CreatFleetView.h"
 #import "DataHander.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
@@ -48,7 +47,6 @@
         isSortActive=0;
         isSortSex=0;
         _isSelectCell=-1;
-        self.isSelectMemberToChangeJob=nil;
     }
     return self;
 }
@@ -370,12 +368,9 @@
  }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableSelectView removeFromSuperview];
-    if (self.isSelectMemberToChangeJob!=nil) {
 //在这里进行更改职位操作
         NSDictionary *dataDic=self.dataArr[indexPath.row];
-        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
-        self.isSelectMemberToChangeJob=nil;
-    }else{
+//        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
     if (_isSelectCell==indexPath.row) {
         _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
@@ -426,7 +421,6 @@
     [self.tableSelectView addSubview:memberInfoBtn];
     }
     }
-    }
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag>=0&&button.tag<1000) {
@@ -437,7 +431,7 @@
 //删除
       NSDictionary *dataDic=self.dataArr[button.tag-1000];
         [self.tableSelectView removeFromSuperview];
-        MemberDeleteView   *deleteView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"若移除%@,%@的活跃值将从战队总活跃值中扣除。确定将其移除吗？",[dataDic objectForKey:@"nickname"],[dataDic objectForKey:@"nickname"]]andBtnName:@"同意"];
+        MemberDeleteView   *deleteView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"若移除%@,%@的活跃值将从战队总活跃值中扣除。确定将其移除吗？",[dataDic objectForKey:@"nickname"],[dataDic objectForKey:@"nickname"]]andBtnName:@"同意" andType:1 andDataDic:dataDic];
         [[self.obj familyView] addSubview:deleteView];
         [deleteView addButtonAction:^(id sender) {
         self.isSelectCell=-1;
@@ -447,7 +441,8 @@
             [self.obj setWillDeleteMemberDic:dataDic];
         }];
     } else if (button.tag>=2000){
-         NSLog(@"%ld",button.tag);
+        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr andType:1];
+        [[self.obj familyView] addSubview:fleetView];
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

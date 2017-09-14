@@ -13,14 +13,19 @@
 @interface MemberDeleteView()
 @property(nonatomic,strong)NSString *contenStr;
 @property(nonatomic,strong)NSString *btnName;
-@property (nonatomic, strong, nullable) ButtonBlock block;  
+@property (nonatomic, strong, nullable) ButtonBlock block;
+
+@property(nonatomic)NSInteger type;
+@property(nonatomic,strong)NSDictionary *dataDic;
 @end
 @implementation MemberDeleteView
 
--(instancetype)initWithContentStr:(NSString *)contentStr andBtnName:(NSString *)btnName{
+-(instancetype)initWithContentStr:(NSString *)contentStr andBtnName:(NSString *)btnName andType:(NSInteger)type andDataDic:(NSDictionary *)dataDic{
     if (self=[super initWithFrame:[UIScreen mainScreen].bounds]) {
         self.contenStr=contentStr;
         self.btnName=btnName;
+        self.type=type;
+        self.dataDic=dataDic;
         [self initView];
     }
     return self;
@@ -38,6 +43,17 @@
     CGRect frame3=contentLB.frame;
     frame3.size=lblSize3;
     contentLB.frame=frame3;
+    if (self.type==1) {
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:contentLB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(3, [[self.dataDic objectForKey:@"nickname"]length])];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+[[self.dataDic objectForKey:@"nickname"]length], [[self.dataDic objectForKey:@"nickname"]length])];
+        contentLB.attributedText= aString;
+    }else if (self.type==2){
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:contentLB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(12, [[self.dataDic objectForKey:@"nickname"]length])];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(13+[[self.dataDic objectForKey:@"nickname"]length], [self jobnameForStatus:[[self.dataDic objectForKey:@"role"]integerValue]].length)];
+        contentLB.attributedText= aString;
+    }
     contentLB.numberOfLines=0;
     contentLB.font=[UIFont systemFontOfSize:16];
     [backIV addSubview:contentLB];
@@ -84,5 +100,33 @@
 //实现block回调的方法
 - (void)addButtonAction:(ButtonBlock)block {
     self.block = block;
+}
+-(NSString *)jobnameForStatus:(NSInteger)status{
+    switch (status) {
+        case 6:
+            return @"舰长";
+            break;
+        case 5:
+            return @"副舰长";
+            break;
+        case 4:
+            return @"大副";
+            break;
+        case 3:
+            return @"二副";
+            break;
+        case 2:
+            return @"三副";
+            break;
+        case 1:
+            return @"水手长";
+            break;
+        case 0:
+            return @"水手";
+            break;
+        default:
+            break;
+    }
+    return nil;
 }
 @end

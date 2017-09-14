@@ -29,11 +29,12 @@
 		B225B99F1F3C2BF60008E5AF /* ExtractPriceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B99E1F3C2BF60008E5AF /* ExtractPriceView.m */; };
 		B22A03FB1F66817800E3EA2E /* MemberDeleteView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */; };
 		B22A03FD1F66851900E3EA2E /* BK_family_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */; };
-		B22A04001F66A4D500E3EA2E /* creatPopWindowV.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A03FF1F66A4D500E3EA2E /* creatPopWindowV.m */; };
 		B22A04031F6791CC00E3EA2E /* MemberManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A04021F6791CC00E3EA2E /* MemberManageView.m */; };
 		B22A04061F67A61C00E3EA2E /* ChangeJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A04051F67A61C00E3EA2E /* ChangeJobView.m */; };
 		B22A04081F67D54300E3EA2E /* BK_family_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A04071F67D54300E3EA2E /* BK_family_frame.png */; };
 		B22A040A1F67EB6600E3EA2E /* family_job_manage.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A04091F67EB6600E3EA2E /* family_job_manage.png */; };
+		B22A040D1F6A3E0100E3EA2E /* CreatFleetView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A040C1F6A3E0100E3EA2E /* CreatFleetView.m */; };
+		B22A04111F6A59F900E3EA2E /* Btn_CreatFleet-Agree.png in Resources */ = {isa = PBXBuildFile; fileRef = B22A040F1F6A59F900E3EA2E /* Btn_CreatFleet-Agree.png */; };
 		B22BFCB61F611DD400FD131E /* bk_liveshow_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = B22BFCB51F611DD400FD131E /* bk_liveshow_empty.png */; };
 		B22BFCB91F616F9F00FD131E /* FamilyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22BFCB81F616F9F00FD131E /* FamilyMessageView.m */; };
 		B22BFCCE1F616FC400FD131E /* agreeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B22BFCBA1F616FC400FD131E /* agreeBtn.png */; };
@@ -856,14 +857,15 @@
 		B22A03F91F66817800E3EA2E /* MemberDeleteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberDeleteView.h; sourceTree = "<group>"; };
 		B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberDeleteView.m; sourceTree = "<group>"; };
 		B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BK_family_bottom.png; sourceTree = "<group>"; };
-		B22A03FE1F66A4D500E3EA2E /* creatPopWindowV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = creatPopWindowV.h; sourceTree = "<group>"; };
-		B22A03FF1F66A4D500E3EA2E /* creatPopWindowV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = creatPopWindowV.m; sourceTree = "<group>"; };
 		B22A04011F6791CC00E3EA2E /* MemberManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberManageView.h; sourceTree = "<group>"; };
 		B22A04021F6791CC00E3EA2E /* MemberManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberManageView.m; sourceTree = "<group>"; };
 		B22A04041F67A61C00E3EA2E /* ChangeJobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeJobView.h; sourceTree = "<group>"; };
 		B22A04051F67A61C00E3EA2E /* ChangeJobView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeJobView.m; sourceTree = "<group>"; };
 		B22A04071F67D54300E3EA2E /* BK_family_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BK_family_frame.png; sourceTree = "<group>"; };
 		B22A04091F67EB6600E3EA2E /* family_job_manage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_job_manage.png; sourceTree = "<group>"; };
+		B22A040B1F6A3E0100E3EA2E /* CreatFleetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatFleetView.h; sourceTree = "<group>"; };
+		B22A040C1F6A3E0100E3EA2E /* CreatFleetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatFleetView.m; sourceTree = "<group>"; };
+		B22A040F1F6A59F900E3EA2E /* Btn_CreatFleet-Agree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Btn_CreatFleet-Agree.png"; sourceTree = "<group>"; };
 		B22BFCB51F611DD400FD131E /* bk_liveshow_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk_liveshow_empty.png; sourceTree = "<group>"; };
 		B22BFCB71F616F9F00FD131E /* FamilyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyMessageView.h; sourceTree = "<group>"; };
 		B22BFCB81F616F9F00FD131E /* FamilyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyMessageView.m; sourceTree = "<group>"; };
@@ -3445,6 +3447,8 @@
 				B22C5AB91F5D3466005C9E28 /* FamilyMemberView.m */,
 				B22A03F91F66817800E3EA2E /* MemberDeleteView.h */,
 				B22A03FA1F66817800E3EA2E /* MemberDeleteView.m */,
+				B22A040B1F6A3E0100E3EA2E /* CreatFleetView.h */,
+				B22A040C1F6A3E0100E3EA2E /* CreatFleetView.m */,
 				B22A04011F6791CC00E3EA2E /* MemberManageView.h */,
 				B22A04021F6791CC00E3EA2E /* MemberManageView.m */,
 				B22A04041F67A61C00E3EA2E /* ChangeJobView.h */,
@@ -3453,8 +3457,6 @@
 				B22C5AA61F57FA78005C9E28 /* CycleView.m */,
 				C445BAC01F5D4112007650D3 /* FramilyAddInviteView.h */,
 				C445BAC11F5D4112007650D3 /* FramilyAddInviteView.m */,
-				B22A03FE1F66A4D500E3EA2E /* creatPopWindowV.h */,
-				B22A03FF1F66A4D500E3EA2E /* creatPopWindowV.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4612,6 +4614,7 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				B22A040F1F6A59F900E3EA2E /* Btn_CreatFleet-Agree.png */,
 				B22A04091F67EB6600E3EA2E /* family_job_manage.png */,
 				B22A04071F67D54300E3EA2E /* BK_family_frame.png */,
 				B22A03FC1F66851900E3EA2E /* BK_family_bottom.png */,
@@ -4902,6 +4905,7 @@
 				C4A65C9E1E9BE0E000EAF317 /* btn_unfollowMusic.png in Resources */,
 				C40B0FEE1F0A16E6008F7C41 /* btn_activity_unfollow.png in Resources */,
 				C42E80551EC332D400D9CC43 /* loading_00030.png in Resources */,
+				B22A04111F6A59F900E3EA2E /* Btn_CreatFleet-Agree.png in Resources */,
 				B225B9761F31B1F30008E5AF /* shadow_pay_liveshow.png in Resources */,
 				C4F051191EBA54F9005DA9F1 /* btn_sendMessage.png in Resources */,
 				C44E0BF21E767BF400AC4083 /* back.png in Resources */,
@@ -5463,7 +5467,6 @@
 				C44F49651E36A2DF00540FBB /* looperChatCellViewCollectionViewCell.m in Sources */,
 				C43E76E81E091D8D004A5288 /* MainViewModel.m in Sources */,
 				C43F56A61F54052D009BE471 /* FamilyView.m in Sources */,
-				B22A04001F66A4D500E3EA2E /* creatPopWindowV.m in Sources */,
 				C4BCE7391E091E710087E6C5 /* AFURLConnectionOperation.m in Sources */,
 				C4E86FAF1F16474000D9658D /* PKShortVideoSession.m in Sources */,
 				C45DC30E1E4ADCEB0031EDCD /* AdScrollView.m in Sources */,
@@ -5517,6 +5520,7 @@
 				C4BE5ED91E4EEDD800C8DA98 /* SimpleChatViewController.m in Sources */,
 				B2C90ED81F13A16C000E127A /* LTSCalendarManager.m in Sources */,
 				C4E86F9D1F16474000D9658D /* UIImage+PKShortVideoPlayer.m in Sources */,
+				B22A040D1F6A3E0100E3EA2E /* CreatFleetView.m in Sources */,
 				C4E86FA51F16474000D9658D /* PKChatMessagePlayerView.m in Sources */,
 				C4D866111F1F9F9000A270E5 /* LiveShowView.m in Sources */,
 				B225B9871F3449640008E5AF /* TicketLogisticsView.m in Sources */,
