@@ -13,9 +13,13 @@
 @interface ChangeJobView(){
     UIView *bkV;
     UITableView *tableView;
+    NSInteger addTag;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
 
+
+@property(nonatomic,strong)NSMutableArray *labelArr;
+@property(nonatomic,strong)NSMutableArray *btnArr;
 @end
 @implementation ChangeJobView
 
@@ -23,6 +27,7 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (FamilyViewModel*)idObject;
         self.dataDic=dataDic;
+        addTag=1;
         [self createView];
         
     }
@@ -31,6 +36,18 @@
 -(void)createView{
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     [self createHudView];
+}
+-(NSMutableArray *)labelArr{
+    if (!_labelArr) {
+        _labelArr=[[NSMutableArray alloc]init];
+    }
+    return _labelArr;
+}
+-(NSMutableArray *)btnArr{
+    if (!_btnArr) {
+        _btnArr=[[NSMutableArray alloc]init];
+    }
+    return _btnArr;
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -118,7 +135,20 @@
     
     
 }
-
+-(void)creatLabelWithContent:(NSString *)content andPoint:(CGPoint)point andType:(NSInteger)type{
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(point.x, point.y, 472*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5)];
+    label.text=content;
+    label.textColor=ColorRGB(225, 226, 227, 1.0);
+    label.textAlignment=NSTextAlignmentLeft;
+    label.layer.borderWidth=1.0;
+    label.layer.borderColor=[ColorRGB(225, 226, 227, 1.0)CGColor];
+    [bkV addSubview:label];
+    label.tag=addTag++;
+    label.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickLabel:)];
+    [label addGestureRecognizer:tap];
+    UIButton *button=[LooperToolClass createBtnImageNameReal:@"CreateFleet_disagree" andRect:CGPointMake(DEF_WIDTH(label)-43*DEF_Adaptation_Font*0.5, 9*DEF_Adaptation_Font*0.5) andTag:addTag-1 andSelectImage:@"CreateFleet_agree" andClickImage:@"CreateFleet_agree" andTextStr:nil andSize:CGSizeMake(34*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5) andTarget:self];
+}
 
 -(NSString *)jobnameForStatus:(NSInteger)status{
     switch (status) {

@@ -20,6 +20,15 @@
 #import "FramilyAddInviteView.h"
 
 #import "MemberDeleteView.h"
+
+#import "CreatFleetView.h"
+
+#import "PlayerInfoView.h"
+#import "UserInfoViewController.h"
+#import "SimpleChatViewController.h"
+@interface FamilyViewModel()
+@property(nonatomic,strong)PlayerInfoView *playerInfoV;
+@end
 #import "FleetMangerView.h"
 
 
@@ -31,6 +40,7 @@
     
     
     NSString *ownername;
+    
   }
 
 @synthesize familyModel =_familyModel;
@@ -309,10 +319,15 @@
     }];
 }
 -(void)delayMethod{
+//    if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==6||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==5) {
+//        
+//    }
     MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择" andType:2 andDataDic:self.WillDeleteMemberDic];
                     [self.familyView addSubview:selectView];
                     [selectView addButtonAction:^(id sender) {
-                     
+                        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataArr:_familyModel.familyMember andType:1];
+                        fleetView.shouldChangeRole=[self.WillDeleteMemberDic objectForKey:@"role"];
+                        [[self familyView] addSubview:fleetView];
                     }];
 }
 
@@ -378,6 +393,35 @@
     [[self.obj navigationController]popViewControllerAnimated:YES];
    
 }
+
+-(void)createPlayerView:(int)PlayerId{
+    
+    [_playerInfoV removeFromSuperview];
+    
+    if(PlayerId!=[[LocalDataMangaer sharedManager].uid intValue]){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+        [dic setObject:[NSString stringWithFormat:@"%d",PlayerId] forKey:@"targetId"];
+        
+        _playerInfoV = [[PlayerInfoView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+        _playerInfoV.userInteractionEnabled=true;
+        _playerInfoV.multipleTouchEnabled=true;
+        [[_obj view] addSubview:_playerInfoV];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+                
+                
+                NSLog(@"222222222");
+                [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
+            }else{
+                
+            }
+        }fail:^{
+            
+        }];
+    }
+}
+
 -(NSString *)jobnameForStatus:(NSInteger)status{
     switch (status) {
         case 6:
@@ -405,5 +449,37 @@
             break;
     }
     return nil;
+}
+#pragma -PlayerInfoV
+-(void)removePlayerInfo{
+    [_playerInfoV removeFromSuperview];
+    
+}
+-(void)followUser:(NSString*)targetID{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:targetID forKey:@"targetId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followUser" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+//跳转到userInfo界面
+-(void)jumpToAddUserInfoVC:(NSString *)userID{
+    UserInfoViewController *userVC=[[UserInfoViewController alloc]init];
+    userVC.userID=userID;
+    [[self.obj navigationController]pushViewController:userVC animated:NO];
+}
+-(void)pushController:(NSDictionary*)dic{
+    SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
+    [simpleC chatTargetID:dic];
+    [[_obj navigationController]  pushViewController:simpleC animated:NO];
+    
 }
 @end
