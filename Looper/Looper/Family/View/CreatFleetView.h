@@ -11,4 +11,6 @@
 @interface CreatFleetView : UIView
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr andType:(NSInteger)type;
 @property(nonatomic,strong)id obj;
+
+@property(nonatomic,strong)NSString *shouldChangeRole;
 @end

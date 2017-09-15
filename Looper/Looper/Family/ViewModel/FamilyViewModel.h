@@ -36,12 +36,9 @@
 
 
 
-
 @property(nonatomic,strong)FamilyMessageView *messageView;
 -(void)getFamilyRankDataForOrderType:(NSString*)orderType;
--(void)getRaverData;
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText;
--(void)getFamilyDetailDataForRfId:(NSString*)rfId andRank:(NSString *)rankNumber;
 
 -(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic;
 -(void)getApplyFamilyDataForRfId:(NSString*)rfId;
@@ -57,4 +54,6 @@
 //将要删除的家族成员的字段
 @property(nonatomic,strong)NSDictionary *WillDeleteMemberDic;
 
+
+-(void)createPlayerView:(int)PlayerId;
 @end

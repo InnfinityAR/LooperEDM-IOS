@@ -20,25 +20,32 @@
     
     NSInteger creatType;
 }
+@property(nonatomic,strong)NSArray *dataArr;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 @property(nonatomic,strong)UITableView *tableView;
+//用来判断是否选中cell，未选中就是-1
 @property(nonatomic)NSInteger isSelectCell;
 
 
 @property(nonatomic,strong)NSMutableArray *BtnArr;
+
+//用来填写当前选择的cell的row，如果未选中就是-1，使用于cell中的button
 @property(nonatomic)NSInteger currentRow;
+
+
 @end
 @implementation CreatFleetView
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr andType:(NSInteger)type{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
-        self.dataSource=(NSMutableArray *)dataArr;
+        self.dataArr=(NSMutableArray *)dataArr;
         creatType=type;
 //传入的值1为替换职位的view 2为创建舰队的view
         [self initView];
         self.isSelectCell=-1;
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+        [self setBackView];
     }
     return self;
 }
@@ -50,6 +57,11 @@
     self.currentRow=-1;
     [self createHudView];
 }
+-(void)setBackView{
+    UIImageView *shadowV=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(bkV)-130*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkV), 30*DEF_Adaptation_Font*0.5)];
+    shadowV.image=[UIImage imageNamed:@"CreateFleet_shadow.png"];
+    [bkV addSubview:shadowV];
+}
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     
@@ -60,9 +72,13 @@
         if (isSortJob==0) {
             isSortJob=1;
             [self sortReverseArr];
+            self.currentRow=-1;
+            _isSelectCell=-1;
             [self.tableView reloadData];
         }else{
             isSortJob=0;
+            self.currentRow=-1;
+            _isSelectCell=-1;
             [self sortReverseArr];
             [self.tableView reloadData];
         }
@@ -70,17 +86,27 @@
     if (button.tag==5002) {
 //在这里添加修改职位的方法
         if (self.currentRow!=-1) {
-            
+            if (creatType==1) {
+            NSDictionary *currentDic=self.dataSource[self.currentRow];
+            [self.obj ChangeJobToSailorWithUserId:[currentDic objectForKey:@"userid"] andRole:self.shouldChangeRole andOriginalRole:nil];
+            [self removeFromSuperview];
+            }else{
+            [self removeFromSuperview];
+        NSDictionary *currentDic=self.dataSource[self.currentRow];
+#warning -在这里添加成为队长的接口
+                     }
         }
     }
     if (button.tag>=0&&button.tag<1000) {
         if (button.selected==YES) {
             button.selected=NO;
             self.currentRow=-1;
+            _isSelectCell=-1;
             [self.tableView reloadData];
         }else{
             button.selected=YES;
             self.currentRow=button.tag;
+            _isSelectCell=button.tag;
             [self.tableView reloadData];
             for (UIButton *btn in self.BtnArr) {
                 if (btn.tag!=button.tag&&btn.selected==YES) {
@@ -96,6 +122,23 @@
         _BtnArr=[[NSMutableArray alloc]init];
     }
     return _BtnArr;
+}
+-(NSMutableArray *)dataSource{
+    if (!_dataSource) {
+        if (creatType==1) {
+//变更职位
+            _dataSource=[[NSMutableArray alloc]init];
+        for (NSDictionary *dataDic in self.dataArr) {
+            if ([[dataDic objectForKey:@"role"]integerValue]!=1&&[[dataDic objectForKey:@"role"]integerValue]!=6&&[[dataDic objectForKey:@"role"]integerValue]!=5) {
+                [_dataSource addObject:dataDic];
+            }
+        }
+        }else{
+//新建舰队
+        _dataSource=[[NSMutableArray alloc]initWithArray:self.dataArr];
+        }
+    }
+    return _dataSource;
 }
 -(void)createHudView{
     
@@ -135,18 +178,18 @@
     [self createBtnLabel:CGRectMake(303*DEF_Adaptation_Font*0.5,146*DEF_Adaptation_Font*0.5,93*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) and:100 andStr:@"活跃值"];
     [self createBtnLabel:CGRectMake(395*DEF_Adaptation_Font*0.5,146*DEF_Adaptation_Font*0.5,93*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) and:102 andStr:@"性别"];
     
-    UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(bkV)-120*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkV), 120*DEF_Adaptation_Font*0.5)];
+    UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(bkV)-100*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkV), 100*DEF_Adaptation_Font*0.5)];
     bottomV.backgroundColor=ColorRGB(84, 71, 104, 1.0);
     [bkV addSubview:bottomV];
-    UIButton *inviteBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(60*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andTag:5002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(465*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *inviteBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(57*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5) andTag:5002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andTarget:self];
     if (creatType==1) {
     [inviteBtn setTitle:@"更改职位" forState:(UIControlStateNormal)];
     }else{
      [inviteBtn setTitle:@"成为队长" forState:(UIControlStateNormal)];
     }
-    inviteBtn.titleLabel.font=[UIFont systemFontOfSize:18];
+    inviteBtn.titleLabel.font=[UIFont systemFontOfSize:16];
     [inviteBtn setTintColor:[UIColor whiteColor]];
-    inviteBtn.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
+    inviteBtn.layer.cornerRadius=10*DEF_Adaptation_Font*0.5;
     inviteBtn.layer.masksToBounds=YES;
     inviteBtn.backgroundColor=ColorRGB(136, 131, 149, 1.0);
     [bottomV addSubview:inviteBtn];
@@ -167,8 +210,8 @@
     [bkV addSubview:btnName];
 }
 -(void)onClickBtn:(UITapGestureRecognizer*)tap{
-    
-    
+    self.currentRow=-1;
+    _isSelectCell=-1;
     if (tap.view.tag==101) {
         if (isSortJob==0) {
             isSortJob=1;
@@ -250,7 +293,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,182*DEF_Adaptation_Font*0.5,DEF_WIDTH(self),676*DEF_Adaptation_Font*0.5)];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,182*DEF_Adaptation_Font*0.5,DEF_WIDTH(self),696*DEF_Adaptation_Font*0.5)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         //不出现滚动条
@@ -297,13 +340,33 @@
     headImage.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
     headImage.layer.masksToBounds=YES;
     [cell.contentView addSubview:headImage];
-    
+     if (creatType==1) {
+         UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 12*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
+         headLB.textColor=[UIColor whiteColor];
+         headLB.font=[UIFont systemFontOfSize:14];
+         headLB.text=[dataDic objectForKey:@"nickname"];
+         [cell.contentView addSubview:headLB];
+         UILabel *jobLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 51*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+         jobLB.textColor=[UIColor whiteColor];
+         jobLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
+         jobLB.text=[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]];
+         [cell.contentView addSubview:jobLB];
+         jobLB.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
+         jobLB.layer.masksToBounds=YES;
+         jobLB.backgroundColor=[self jobColorForStatus:[[dataDic objectForKey:@"role"]intValue]];
+         jobLB.textAlignment=NSTextAlignmentCenter;
+         CGSize lblSize3 = [jobLB.text boundingRectWithSize:CGSizeMake(190*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
+         CGRect frame3=jobLB.frame;
+         lblSize3.width+=32*DEF_Adaptation_Font*0.5;
+         frame3.size=lblSize3;
+         jobLB.frame=frame3;
+     }else{
     UILabel *nickName=[[UILabel alloc]initWithFrame:CGRectMake(126*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
     nickName.textColor=[UIColor whiteColor];
     nickName.font=[UIFont systemFontOfSize:14];
     nickName.text=[dataDic objectForKey:@"nickname"];
     [cell.contentView addSubview:nickName];
-    
+     }
     UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(303*DEF_Adaptation_Font*0.5, 0, 93*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
     activeLB.textColor=[UIColor whiteColor];
     activeLB.font=[UIFont systemFontOfSize:14];
@@ -332,15 +395,13 @@
         sexIV.image=[UIImage imageNamed:@"family_Woman.png"];
         [cell.contentView addSubview:sexIV];
     }
-    UIButton *selectBtn=[LooperToolClass createBtnImageNameReal:@"music_unSelect.png" andRect:CGPointMake(DEF_WIDTH(bkV)-72*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5) andTag:(int)indexPath.row andSelectImage:@"Btn_CreatFleet-Agree.png" andClickImage:@"Btn_CreatFleet-Agree.png" andTextStr:nil andSize:CGSizeMake(42*DEF_Adaptation_Font*0.5, 42*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self.BtnArr addObject:selectBtn];
+    UIButton *selectBtn=[LooperToolClass createBtnImageNameReal:@"CreateFleet_disagree.png" andRect:CGPointMake(DEF_WIDTH(bkV)-66*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andTag:(int)indexPath.row andSelectImage:@"CreateFleet_agree.png" andClickImage:@"CreateFleet_agree.png" andTextStr:nil andSize:CGSizeMake(36*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5) andTarget:self];
+    self.BtnArr[indexPath.row]=selectBtn;
     [cell.contentView addSubview:selectBtn];
     if (self.currentRow==indexPath.row) {
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition: UITableViewScrollPositionNone];
         selectBtn.selected=YES;
     }
-  
-
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  92*DEF_Adaptation_Font*0.5;
@@ -348,14 +409,80 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //在这里进行更改职位操作
     NSDictionary *dataDic=self.dataSource[indexPath.row];
-    //        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
+     UIButton *selectBtn=self.BtnArr[indexPath.row];
     if (_isSelectCell==indexPath.row) {
+        self.currentRow=-1;
         _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         cell.selected=NO;
+        selectBtn.selected=NO;
     }else{
         _isSelectCell=indexPath.row;
+         self.currentRow=indexPath.row;
+        for (UIButton *button in self.BtnArr) {
+            if (button.tag!=indexPath.row) {
+                NSLog(@"tag:%ld",button.tag);
+                button.selected=NO;
+            }
+        }
+        selectBtn.selected=YES;
+        
     }
 }
-
+-(NSString *)jobnameForStatus:(NSInteger)status{
+    switch (status) {
+        case 6:
+            return @"舰长";
+            break;
+        case 5:
+            return @"副舰长";
+            break;
+        case 4:
+            return @"大副";
+            break;
+        case 3:
+            return @"二副";
+            break;
+        case 2:
+            return @"三副";
+            break;
+        case 1:
+            return @"水手长";
+            break;
+        case 0:
+            return @"水手";
+            break;
+        default:
+            break;
+    }
+    return nil;
+}
+-(UIColor *)jobColorForStatus:(NSInteger)status{
+    switch (status) {
+        case 6:
+            return ColorRGB(253, 123, 153, 1.0);
+            break;
+        case 5:
+            return ColorRGB(252, 119, 158, 1.0);
+            break;
+        case 4:
+            return ColorRGB(231, 152, 163, 1.0);
+            break;
+        case 3:
+            return ColorRGB(247, 156, 150, 1.0);
+            break;
+        case 2:
+            return ColorRGB(241, 171, 152, 1.0);
+            break;
+        case 1:
+            return ColorRGB(252, 186, 140, 1.0);
+            break;
+        case 0:
+            return ColorRGB(255, 207, 160, 1.0);
+            break;
+        default:
+            break;
+    }
+    return nil;
+}
 @end

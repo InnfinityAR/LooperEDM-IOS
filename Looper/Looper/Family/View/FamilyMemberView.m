@@ -441,8 +441,12 @@
             [self.obj setWillDeleteMemberDic:dataDic];
         }];
     } else if (button.tag>=2000){
-        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr andType:1];
-        [[self.obj familyView] addSubview:fleetView];
+        NSDictionary *dataDic=self.dataArr[button.tag-2000];
+        [self.tableSelectView removeFromSuperview];
+        [self.obj createPlayerView:[[dataDic objectForKey:@"userid"]intValue]];
+//        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr andType:2];
+//        [[self.obj familyView] addSubview:fleetView];
+
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
