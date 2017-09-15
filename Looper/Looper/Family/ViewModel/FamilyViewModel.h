@@ -57,4 +57,8 @@
 
 
 -(void)createPlayerView:(int)PlayerId;
+
+
+-(void)createFleetViewName;
+
 @end

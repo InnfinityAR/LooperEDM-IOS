@@ -20,7 +20,7 @@
 #import "FramilyAddInviteView.h"
 
 #import "MemberDeleteView.h"
-
+#import "CreateFleetNameView.h"
 #import "CreatFleetView.h"
 
 #import "PlayerInfoView.h"
@@ -37,6 +37,7 @@
     FamilyApplyView *familyApplyV;
     FamilyView *familyV;
     FleetMangerView *fleetMangerV;
+    CreateFleetNameView  *createFleetV;
     
     
     NSString *ownername;
@@ -360,6 +361,12 @@
     }fail:^{
         
     }];
+}
+
+
+-(void)createFleetViewName{
+   createFleetV =  [[CreateFleetNameView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+     [[self.obj view]addSubview:createFleetV];
 }
 
 

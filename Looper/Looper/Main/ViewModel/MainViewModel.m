@@ -608,11 +608,7 @@
     }else if(type==9008){
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
-<<<<<<< HEAD
-       // [self pushNActivityViewController];
-=======
-//        [self pushNActivityViewController];
->>>>>>> a2076b81f4e525973b9c3b3129e4956029adaf56
+
         [self createFamilyViewController];
        //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 
