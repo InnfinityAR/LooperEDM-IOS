@@ -33,6 +33,8 @@
 @property(nonatomic)NSInteger currentRow;
 
 
+@property(nonatomic,strong)UIButton *inviteBtn;
+
 @end
 @implementation CreatFleetView
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr andType:(NSInteger)type{
@@ -103,8 +105,12 @@
             self.currentRow=-1;
             _isSelectCell=-1;
             [self.tableView reloadData];
+             _inviteBtn.backgroundColor=ColorRGB(136, 131, 149, 1.0);
+               [_inviteBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         }else{
             button.selected=YES;
+            _inviteBtn.backgroundColor=[UIColor whiteColor];
+            [_inviteBtn setTitleColor:ColorRGB(255, 121, 155, 1.0) forState:(UIControlStateNormal)];
             self.currentRow=button.tag;
             _isSelectCell=button.tag;
             [self.tableView reloadData];
@@ -181,18 +187,18 @@
     UIView *bottomV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(bkV)-100*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkV), 100*DEF_Adaptation_Font*0.5)];
     bottomV.backgroundColor=ColorRGB(84, 71, 104, 1.0);
     [bkV addSubview:bottomV];
-    UIButton *inviteBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(57*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5) andTag:5002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andTarget:self];
+    self.inviteBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(57*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5) andTag:5002 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andTarget:self];
     if (creatType==1) {
-    [inviteBtn setTitle:@"更改职位" forState:(UIControlStateNormal)];
+    [_inviteBtn setTitle:@"更改职位" forState:(UIControlStateNormal)];
     }else{
-     [inviteBtn setTitle:@"成为队长" forState:(UIControlStateNormal)];
+     [_inviteBtn setTitle:@"成为队长" forState:(UIControlStateNormal)];
     }
-    inviteBtn.titleLabel.font=[UIFont systemFontOfSize:16];
-    [inviteBtn setTintColor:[UIColor whiteColor]];
-    inviteBtn.layer.cornerRadius=10*DEF_Adaptation_Font*0.5;
-    inviteBtn.layer.masksToBounds=YES;
-    inviteBtn.backgroundColor=ColorRGB(136, 131, 149, 1.0);
-    [bottomV addSubview:inviteBtn];
+    _inviteBtn.titleLabel.font=[UIFont systemFontOfSize:16];
+    [_inviteBtn setTintColor:[UIColor whiteColor]];
+    _inviteBtn.layer.cornerRadius=10*DEF_Adaptation_Font*0.5;
+    _inviteBtn.layer.masksToBounds=YES;
+    _inviteBtn.backgroundColor=ColorRGB(136, 131, 149, 1.0);
+    [bottomV addSubview:_inviteBtn];
 
 }
 -(void)createBtnLabel:(CGRect)rect and:(int)tag andStr:(NSString*)string{
@@ -326,11 +332,11 @@
             [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
         }
     }    cell.accessoryType=UITableViewCellStyleDefault;
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         NSDictionary *dataDic=_dataSource[indexPath.row];
     [self setTableViewCellView:cell andIndexPath:indexPath andDataDic:dataDic];
     cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
-    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BK_family_frame.png"]];
-     cell.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
+    cell.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
 
     return cell;
 }
@@ -406,7 +412,27 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  92*DEF_Adaptation_Font*0.5;
 }
+-(void)removeCellAllFrame{
+    
+    for (int i=0;i<[[_tableView visibleCells] count];i++){
+        
+        NSLog(@"%@",[[_tableView visibleCells] objectAtIndex:i]);
+        
+        UITableViewCell *cell =[[_tableView visibleCells] objectAtIndex:i];
+        [[cell.contentView viewWithTag:1000] removeFromSuperview];
+        
+    }
+    
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//加框（tableviewcell）
+    [self removeCellAllFrame];
+    UITableViewCell *viewCell = [tableView cellForRowAtIndexPath:indexPath];
+    UIImageView *imageIV=[[UIImageView alloc]initWithFrame:CGRectMake(2*DEF_Adaptation_Font, 2*DEF_Adaptation_Font, DEF_WIDTH(viewCell.contentView)-4*DEF_Adaptation_Font, DEF_HEIGHT(viewCell.contentView)-4*DEF_Adaptation_Font)];
+    imageIV.image=[UIImage imageNamed:@"BK_family_frame.png"];
+    imageIV.tag =1000;
+    [viewCell.contentView addSubview:imageIV];
+    
     //在这里进行更改职位操作
     NSDictionary *dataDic=self.dataSource[indexPath.row];
      UIButton *selectBtn=self.BtnArr[indexPath.row];
@@ -416,6 +442,8 @@
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         cell.selected=NO;
         selectBtn.selected=NO;
+         _inviteBtn.backgroundColor=ColorRGB(136, 131, 149, 1.0);
+            [_inviteBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     }else{
         _isSelectCell=indexPath.row;
          self.currentRow=indexPath.row;
@@ -426,7 +454,8 @@
             }
         }
         selectBtn.selected=YES;
-        
+        _inviteBtn.backgroundColor=[UIColor whiteColor];
+        [_inviteBtn setTitleColor:ColorRGB(255, 121, 155, 1.0) forState:(UIControlStateNormal)];
     }
 }
 -(NSString *)jobnameForStatus:(NSInteger)status{

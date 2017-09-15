@@ -295,12 +295,11 @@
             [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
         }
     }    cell.accessoryType=UITableViewCellStyleDefault;
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [self setTableViewCellView:cell andIndexPath:indexPath];
     return cell;
 }
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
-    cell.selectedBackgroundView =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BK_family_frame.png"]];
     if (indexPath.row%2==0) {
         cell.contentView.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
         cell.backgroundColor=[UIColor colorWithRed:85/255.0 green:76/255.0 blue:107/255.0 alpha:1.0];
@@ -369,60 +368,88 @@
     [cell.contentView addSubview:sexIV];
     }
  }
+
+
+
+-(void)removeCellAllFrame{
+
+    for (int i=0;i<[[_tableView visibleCells] count];i++){
+    
+        NSLog(@"%@",[[_tableView visibleCells] objectAtIndex:i]);
+        
+        UITableViewCell *cell =[[_tableView visibleCells] objectAtIndex:i];
+        [[cell.contentView viewWithTag:1000] removeFromSuperview];
+        
+    }
+
+}
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    [self removeCellAllFrame];
+    
+    UITableViewCell *viewCell = [tableView cellForRowAtIndexPath:indexPath];
+    UIImageView *imageIV=[[UIImageView alloc]initWithFrame:CGRectMake(2*DEF_Adaptation_Font, 2*DEF_Adaptation_Font, DEF_WIDTH(viewCell.contentView)-4*DEF_Adaptation_Font, DEF_HEIGHT(viewCell.contentView)-4*DEF_Adaptation_Font)];
+    imageIV.image=[UIImage imageNamed:@"BK_family_frame.png"];
+    imageIV.tag =1000;
+    [viewCell.contentView addSubview:imageIV];
+
+    
     [self.tableSelectView removeFromSuperview];
-//在这里进行更改职位操作
-        NSDictionary *dataDic=self.dataArr[indexPath.row];
-//        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
+    //在这里进行更改职位操作
+    NSDictionary *dataDic=self.dataArr[indexPath.row];
+    //        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
     if (_isSelectCell==indexPath.row) {
         _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         cell.selected=NO;
     }else{
         _isSelectCell=indexPath.row;
-//只有舰长和副舰长能更改职位
+        //只有舰长和副舰长能更改职位
         if ([[self.dataArr[0]objectForKey:@"role"]integerValue]>4) {
-    if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
-       self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
-    }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
-     self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
-    }
-    else{
-    self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (10+92*indexPath.row)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
-    }
-    self.tableSelectView.backgroundColor=ColorRGB(0, 0, 0, 0.4);
-    [tableView addSubview:self.tableSelectView];
-    UIButton *changeJobBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
-    changeJobBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
-    [changeJobBtn setTitle:@"变更职务" forState:(UIControlStateNormal)];
-    changeJobBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
-    changeJobBtn.layer.masksToBounds=YES;
-    changeJobBtn.titleLabel.font=[UIFont systemFontOfSize:14];
-    [changeJobBtn setTintColor:[UIColor whiteColor]];
-    changeJobBtn.tag=indexPath.row;
-    [changeJobBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tableSelectView addSubview:changeJobBtn];
-    UIButton *deleteMemberBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 94*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
-    deleteMemberBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
-    [deleteMemberBtn setTitle:@"删除成员" forState:(UIControlStateNormal)];
-    deleteMemberBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
-    deleteMemberBtn.layer.masksToBounds=YES;
-    deleteMemberBtn.titleLabel.font=[UIFont systemFontOfSize:14];
-    [deleteMemberBtn setTintColor:[UIColor whiteColor]];
-    deleteMemberBtn.tag=indexPath.row+1000;
-    [deleteMemberBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tableSelectView addSubview:deleteMemberBtn];
-    UIButton *memberInfoBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 164*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
-    memberInfoBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
-    [memberInfoBtn setTitle:@"查看资料" forState:(UIControlStateNormal)];
-    memberInfoBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
-    memberInfoBtn.layer.masksToBounds=YES;
-    memberInfoBtn.titleLabel.font=[UIFont systemFontOfSize:14];
-    [memberInfoBtn setTintColor:[UIColor whiteColor]];
-    memberInfoBtn.tag=indexPath.row+2000;
-    [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tableSelectView addSubview:memberInfoBtn];
-    }
+            if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+            }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+            }
+            else{
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (10+92*indexPath.row)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+            }
+            self.tableSelectView.backgroundColor=ColorRGB(0, 0, 0, 0.4);
+            [tableView addSubview:self.tableSelectView];
+            UIButton *changeJobBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+            changeJobBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+            [changeJobBtn setTitle:@"变更职务" forState:(UIControlStateNormal)];
+            changeJobBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+            changeJobBtn.layer.masksToBounds=YES;
+            changeJobBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+            [changeJobBtn setTintColor:[UIColor whiteColor]];
+            changeJobBtn.tag=indexPath.row;
+            [changeJobBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+            [self.tableSelectView addSubview:changeJobBtn];
+            UIButton *deleteMemberBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 94*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+            deleteMemberBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+            [deleteMemberBtn setTitle:@"删除成员" forState:(UIControlStateNormal)];
+            deleteMemberBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+            deleteMemberBtn.layer.masksToBounds=YES;
+            deleteMemberBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+            [deleteMemberBtn setTintColor:[UIColor whiteColor]];
+            deleteMemberBtn.tag=indexPath.row+1000;
+            [deleteMemberBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+            [self.tableSelectView addSubview:deleteMemberBtn];
+            UIButton *memberInfoBtn=[[UIButton alloc]initWithFrame:CGRectMake(24*DEF_Adaptation_Font*0.5, 164*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+            memberInfoBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
+            [memberInfoBtn setTitle:@"查看资料" forState:(UIControlStateNormal)];
+            memberInfoBtn.layer.cornerRadius=9*DEF_Adaptation_Font*0.5;
+            memberInfoBtn.layer.masksToBounds=YES;
+            memberInfoBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+            [memberInfoBtn setTintColor:[UIColor whiteColor]];
+            memberInfoBtn.tag=indexPath.row+2000;
+            [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+            [self.tableSelectView addSubview:memberInfoBtn];
+        }
     }
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
