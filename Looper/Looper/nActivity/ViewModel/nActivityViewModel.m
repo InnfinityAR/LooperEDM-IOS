@@ -435,7 +435,6 @@
             }else{
                 [[DataHander sharedDataHander] showViewWithStr:@"取消成功" andTime:1 andPos:CGPointZero];
 
-            
             }
             
         }else{

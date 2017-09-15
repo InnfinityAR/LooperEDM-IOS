@@ -15,4 +15,5 @@
 @property(nonatomic,strong)NSArray *logArr;
 @property(nonatomic,strong)UICollectionView *collectView;
 @property(nonatomic,strong)NSArray *applyArr;
+
 @end

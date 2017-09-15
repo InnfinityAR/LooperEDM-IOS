@@ -13,6 +13,7 @@
 #import "CycleView.h"
 #import "UIImageView+WebCache.h"
 #import "FamilyHeaderView.h"
+#import "DataHander.h"
 @interface FamilyDetailView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 {
     UILabel *logLB;
@@ -49,6 +50,7 @@
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     NSInteger tag=button.tag;
+     if (tag<=self.applyArr.count||tag>=-self.applyArr.count) {
     if (tag>0) {
         NSDictionary *dataDic=self.applyArr[button.tag-1];
         //同意
@@ -57,6 +59,9 @@
         NSDictionary *dataDic=self.applyArr[-tag-1];
         //拒绝
         [self.obj judgeJoinFamilyWithJoin:@"0" andRaverId:[dataDic objectForKey:@"raverid"] andApplyId:[dataDic objectForKey:@"applyid"] andUserId:[dataDic objectForKey:@"userid"]];
+    }
+    }else{
+      [[DataHander sharedDataHander] showViewWithStr:@"不可识别的申请信息" andTime:1 andPos:CGPointZero];
     }
 }
 -(void)initView{

@@ -16,8 +16,7 @@
 #import "ChangeJobView.h"
 
 
-#import "creatPopWindowV.h"
-
+#import "CreatFleetView.h"
 #import "DataHander.h"
 @interface FamilyMemberView()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {
@@ -48,7 +47,6 @@
         isSortActive=0;
         isSortSex=0;
         _isSelectCell=-1;
-        self.isSelectMemberToChangeJob=nil;
     }
     return self;
 }
@@ -66,12 +64,20 @@
     headerLB.textColor=[UIColor whiteColor];
     headerLB.font=[UIFont boldSystemFontOfSize:18];
     [headerView addSubview:headerLB];
+//只有水手长或者舰长能触发
+     if ([[self.dataArr[0]objectForKey:@"role"]integerValue]==1) {
     UIButton *memberManageBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 10*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(130*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
     [memberManageBtn setTitle:@"成员管理" forState:(UIControlStateNormal)];
     [memberManageBtn setTintColor:[UIColor whiteColor]];
     memberManageBtn.titleLabel.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [headerView addSubview:memberManageBtn];
-    
+     }else if ([[self.dataArr[0]objectForKey:@"role"]integerValue]==6){
+         UIButton *memberManageBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 10*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(130*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
+         [memberManageBtn setTitle:@"舰队管理" forState:(UIControlStateNormal)];
+         [memberManageBtn setTintColor:[UIColor whiteColor]];
+         memberManageBtn.titleLabel.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+         [headerView addSubview:memberManageBtn];
+     }
     UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, 68*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 62*DEF_Adaptation_Font*0.5)];
     contentView.backgroundColor=ColorRGB(84, 71, 104, 1.0);
     [self addSubview:contentView];
@@ -122,6 +128,11 @@
     sexLB.userInteractionEnabled=YES;
     [contentView addSubview:sexLB];
 
+}
+
+-(void)updateData:(NSArray *)dataArr{
+    self.dataArr=(NSMutableArray*)dataArr;
+    [self.tableView reloadData];
 }
 -(void)onClickSortLB:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==0) {
@@ -241,6 +252,9 @@
 //        MemberManageView *manageV=[[MemberManageView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr];
 //        [[self.obj familyView]addSubview:manageV];
     }
+    if (tag==104) {
+        
+    }
 }
 
 -(UITableView *)tableView{
@@ -357,18 +371,17 @@
  }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableSelectView removeFromSuperview];
-    if (self.isSelectMemberToChangeJob!=nil) {
 //在这里进行更改职位操作
-        self.isSelectMemberToChangeJob=nil;
         NSDictionary *dataDic=self.dataArr[indexPath.row];
-        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRaverId:[dataDic objectForKey:@"raverid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
-    }else{
+//        [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:self.isSelectMemberToChangeJob andOriginalRole:[dataDic objectForKey:@"role"]];
     if (_isSelectCell==indexPath.row) {
         _isSelectCell=-1;
         UITableViewCell *cell=[tableView cellForRowAtIndexPath:indexPath];
         cell.selected=NO;
     }else{
         _isSelectCell=indexPath.row;
+//只有舰长和副舰长能更改职位
+        if ([[self.dataArr[0]objectForKey:@"role"]integerValue]>4) {
     if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
        self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
     }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
@@ -421,16 +434,18 @@
 //删除
       NSDictionary *dataDic=self.dataArr[button.tag-1000];
         [self.tableSelectView removeFromSuperview];
-        MemberDeleteView   *deleteView=[[MemberDeleteView alloc]initWithContentStr:@"若移除暴走萝莉暴走萝莉的活跃值将从战队总活跃值中扣除。确定将其移除吗？"andBtnName:@"同意"];
+        MemberDeleteView   *deleteView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"若移除%@,%@的活跃值将从战队总活跃值中扣除。确定将其移除吗？",[dataDic objectForKey:@"nickname"],[dataDic objectForKey:@"nickname"]]andBtnName:@"同意" andType:1 andDataDic:dataDic];
         [[self.obj familyView] addSubview:deleteView];
         [deleteView addButtonAction:^(id sender) {
         self.isSelectCell=-1;
         [self.tableView reloadData];
 #warning -在这里调用VM中的删除成员的接口
-            [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRaverId:nil andRole:nil andOriginalRole:[dataDic objectForKey:@"role"]];
+            [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:nil andOriginalRole:[dataDic objectForKey:@"role"]];
+            [self.obj setWillDeleteMemberDic:dataDic];
         }];
     } else if (button.tag>=2000){
-         NSLog(@"%ld",button.tag);
+        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr andType:1];
+        [[self.obj familyView] addSubview:fleetView];
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
