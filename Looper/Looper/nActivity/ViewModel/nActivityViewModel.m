@@ -415,9 +415,6 @@
 }
 
 
-
-
-
 -(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

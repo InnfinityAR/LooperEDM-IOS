@@ -33,6 +33,9 @@
     if(button.tag==5000){
     
         [self removeFromSuperview];
+    }else if(button.tag==5001){
+        
+        
     }
 }
 
@@ -59,12 +62,18 @@
     headerLB.font=[UIFont boldSystemFontOfSize:18];
     [bkV addSubview:headerLB];
     
-    UIButton *closeBtn = [LooperToolClass createBtnImageName:@"btn_Family_close.png" andRect:CGPointMake(500, 10*DEF_Adaptation_Font*0.5) andTag:5000 andSelectImage:@"btn_Family_close.png" andClickImage:@"btn_Family_close.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *closeBtn = [LooperToolClass createBtnImageName:@"btn_Family_close.png" andRect:CGPointMake(500, 10) andTag:5000 andSelectImage:@"btn_Family_close.png" andClickImage:@"btn_Family_close.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
     [bkV addSubview:closeBtn];
-
-
     
     
+    UIView *line =[[UIView alloc] initWithFrame:CGRectMake(32*DEF_Adaptation_Font*0.5, 889*DEF_Adaptation_Font*0.5,521*DEF_Adaptation_Font*0.5,  1.0*DEF_Adaptation_Font*0.5)];
+    [line setBackgroundColor:[UIColor grayColor]];
+    [bkV addSubview:line];
+    
+    UIButton *createBtn = [LooperToolClass createBtnImageName:@"btn_createFleet.png" andRect:CGPointMake(221, 920) andTag:5001 andSelectImage:@"btn_createFleet.png" andClickImage:@"btn_createFleet.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
+    [bkV addSubview:createBtn];
+    
+
 }
 
 

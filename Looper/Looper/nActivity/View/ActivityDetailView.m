@@ -314,42 +314,42 @@
 
 -(void)openMap{
     
-    
-    NSString *locationStr=[[activityDic objectForKey:@"club"]objectForKey:@"clublocation"];
-    
-    //to do array
-    
-    MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
-
-    float currentLatitude=mylocation.placemark.location.coordinate.latitude;
-    
-    float currentLongitude=mylocation.placemark.location.coordinate.longitude;
-
-    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
-    
-    CLLocationCoordinate2D coordinate;
-    
-    
-    coordinate.latitude=29.182201;
-    
-    coordinate.longitude=120.600293;
-    
-    CLLocationCoordinate2D coords2 = coordinate;
-    
-    
-    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-    
-  
-    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate]];
-    
-    toLocation.name = [[activityDic objectForKey:@"data"]objectForKey:@"activityname"] ;
-    
-    NSArray *items = [NSArray arrayWithObjects:currentLocation,toLocation, nil];
-    
-    NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
-    //打开苹果自身地图应用，并呈现特定的item
-    
-    [MKMapItem openMapsWithItems:items launchOptions:options];
+//    
+//    NSString *locationStr=[[activityDic objectForKey:@"club"]objectForKey:@"clublocation"];
+//    
+//    //to do array
+//    
+//    MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
+//
+//    float currentLatitude=mylocation.placemark.location.coordinate.latitude;
+//    
+//    float currentLongitude=mylocation.placemark.location.coordinate.longitude;
+//
+//    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
+//    
+//    CLLocationCoordinate2D coordinate;
+//    
+//    
+//    coordinate.latitude=29.182201;
+//    
+//    coordinate.longitude=120.600293;
+//    
+//    CLLocationCoordinate2D coords2 = coordinate;
+//    
+//    
+//    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+//    
+//  
+//    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate]];
+//    
+//    toLocation.name = [[activityDic objectForKey:@"data"]objectForKey:@"activityname"] ;
+//    
+//    NSArray *items = [NSArray arrayWithObjects:currentLocation,toLocation, nil];
+//    
+//    NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
+//    //打开苹果自身地图应用，并呈现特定的item
+//    
+//    [MKMapItem openMapsWithItems:items launchOptions:options];
     
 }
 
