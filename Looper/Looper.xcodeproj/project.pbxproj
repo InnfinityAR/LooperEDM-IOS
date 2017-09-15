@@ -553,6 +553,7 @@
 		C484E7C81E452D15005DE67F /* FirstWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C51E452D15005DE67F /* FirstWaves.m */; };
 		C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C71E452D15005DE67F /* SecondWaves.m */; };
 		C489F0721E4722F400A0EE79 /* nLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C489F0711E4722F400A0EE79 /* nLoginView.m */; };
+		C492D9631F6A414400AF0BB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C492D9621F6A414400AF0BB6 /* MapKit.framework */; };
 		C49FA07D1E204493009111C7 /* icon_calendar_active.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0771E204493009111C7 /* icon_calendar_active.png */; };
 		C49FA07E1E204493009111C7 /* icon_calendar_click.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0781E204493009111C7 /* icon_calendar_click.png */; };
 		C49FA07F1E204493009111C7 /* icon_calendar_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0791E204493009111C7 /* icon_calendar_clock.png */; };
@@ -687,6 +688,7 @@
 		C4C724A31E2F6D71008E39D1 /* JKRBubbleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C724A01E2F6D71008E39D1 /* JKRBubbleDelegate.m */; };
 		C4C724A41E2F6D71008E39D1 /* JKRBubbleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C724A21E2F6D71008E39D1 /* JKRBubbleViewController.m */; };
 		C4C724A91E2FA8DC008E39D1 /* btn_looper_unclose.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C724A81E2FA8DC008E39D1 /* btn_looper_unclose.png */; };
+		C4C752E11F6914CD002FD42F /* FleetMangerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C752E01F6914CD002FD42F /* FleetMangerView.m */; };
 		C4C7AAB51EACAB4400D36D88 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C7AAB41EACAB4400D36D88 /* SettingViewController.m */; };
 		C4C7AAB81EACBB4B00D36D88 /* nSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C7AAB71EACBB4B00D36D88 /* nSettingView.m */; };
 		C4C7AABB1EACBB5F00D36D88 /* SettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C7AABA1EACBB5F00D36D88 /* SettingViewModel.m */; };
@@ -1652,6 +1654,7 @@
 		C484E7C71E452D15005DE67F /* SecondWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondWaves.m; sourceTree = "<group>"; };
 		C489F0701E4722F400A0EE79 /* nLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nLoginView.h; sourceTree = "<group>"; };
 		C489F0711E4722F400A0EE79 /* nLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nLoginView.m; sourceTree = "<group>"; };
+		C492D9621F6A414400AF0BB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C49FA0771E204493009111C7 /* icon_calendar_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_active.png; sourceTree = "<group>"; };
 		C49FA0781E204493009111C7 /* icon_calendar_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_click.png; sourceTree = "<group>"; };
 		C49FA0791E204493009111C7 /* icon_calendar_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_clock.png; sourceTree = "<group>"; };
@@ -1869,6 +1872,8 @@
 		C4C724A11E2F6D71008E39D1 /* JKRBubbleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRBubbleViewController.h; sourceTree = "<group>"; };
 		C4C724A21E2F6D71008E39D1 /* JKRBubbleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKRBubbleViewController.m; sourceTree = "<group>"; };
 		C4C724A81E2FA8DC008E39D1 /* btn_looper_unclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_looper_unclose.png; sourceTree = "<group>"; };
+		C4C752DF1F6914CD002FD42F /* FleetMangerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleetMangerView.h; sourceTree = "<group>"; };
+		C4C752E01F6914CD002FD42F /* FleetMangerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FleetMangerView.m; sourceTree = "<group>"; };
 		C4C7AAB31EACAB4400D36D88 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		C4C7AAB41EACAB4400D36D88 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		C4C7AAB61EACBB4B00D36D88 /* nSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nSettingView.h; sourceTree = "<group>"; };
@@ -2055,6 +2060,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C492D9631F6A414400AF0BB6 /* MapKit.framework in Frameworks */,
 				C4028D951F38817C00E821E9 /* libcrypto.a in Frameworks */,
 				C4028D961F38817C00E821E9 /* libssl.a in Frameworks */,
 				C4028C941F38605900E821E9 /* AlipaySDK.framework in Frameworks */,
@@ -2626,6 +2632,7 @@
 		C4057EE91DF544D600AA52F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C492D9621F6A414400AF0BB6 /* MapKit.framework */,
 				C4028D931F38817C00E821E9 /* libcrypto.a */,
 				C4028D941F38817C00E821E9 /* libssl.a */,
 				C4C535E41EE7DD400059BCE5 /* libresolv.tbd */,
@@ -3463,6 +3470,10 @@
 				B22C5AA61F57FA78005C9E28 /* CycleView.m */,
 				C445BAC01F5D4112007650D3 /* FramilyAddInviteView.h */,
 				C445BAC11F5D4112007650D3 /* FramilyAddInviteView.m */,
+				B22A03FE1F66A4D500E3EA2E /* creatPopWindowV.h */,
+				B22A03FF1F66A4D500E3EA2E /* creatPopWindowV.m */,
+				C4C752DF1F6914CD002FD42F /* FleetMangerView.h */,
+				C4C752E01F6914CD002FD42F /* FleetMangerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5457,6 +5468,7 @@
 				B22C5AAE1F5A9790005C9E28 /* FamilySearchView.m in Sources */,
 				C49FE4D81E2777DF0011936C /* SelectTitleView.m in Sources */,
 				C4BCE7441E091E710087E6C5 /* UIRefreshControl+AFNetworking.m in Sources */,
+				C4C752E11F6914CD002FD42F /* FleetMangerView.m in Sources */,
 				C45F674B1E8663CF00FB92A8 /* UserInfoView.m in Sources */,
 				B2A6EE891ECAF5FF004BF416 /* ActivityViewModel.m in Sources */,
 				B2A6EE811ECAEEA0004BF416 /* NSObject+MJKeyValue.m in Sources */,

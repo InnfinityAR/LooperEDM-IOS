@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "LooperToolClass.h"
 #import "DataHander.h"
+#import <MapKit/MapKit.h>
 
 
 @implementation ActivityDetailView{
@@ -311,6 +312,49 @@
      [_obj savaCalendar:[activityDic objectForKey:@"data"]];
 }
 
+-(void)openMap{
+    
+    
+    NSString *locationStr=[[activityDic objectForKey:@"club"]objectForKey:@"clublocation"];
+    
+    //to do array
+    
+    MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
+
+    float currentLatitude=mylocation.placemark.location.coordinate.latitude;
+    
+    float currentLongitude=mylocation.placemark.location.coordinate.longitude;
+
+    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
+    
+    CLLocationCoordinate2D coordinate;
+    
+    
+    coordinate.latitude=29.182201;
+    
+    coordinate.longitude=120.600293;
+    
+    CLLocationCoordinate2D coords2 = coordinate;
+    
+    
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    
+  
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate]];
+    
+    toLocation.name = [[activityDic objectForKey:@"data"]objectForKey:@"activityname"] ;
+    
+    NSArray *items = [NSArray arrayWithObjects:currentLocation,toLocation, nil];
+    
+    NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
+    //打开苹果自身地图应用，并呈现特定的item
+    
+    [MKMapItem openMapsWithItems:items launchOptions:options];
+    
+}
+
+
+
 -(void)createBkView{
     
     colorView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 363*DEF_Adaptation_Font*0.5)];
@@ -360,6 +404,13 @@
     UILabel *lableSpace = [LooperToolClass createLableView:CGPointMake(70*DEF_Adaptation_Font_x*0.5, 1255*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 25*DEF_Adaptation_Font_x*0.5) andText:@"场地名称" andFontSize:11 andColor:[UIColor colorWithRed:57/255.0 green:61/255.0 blue:71/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [lableSpace sizeToFit];
     [bkScroll addSubview:lableSpace];
+    
+    UIButton *locatonBtn = [[UIButton alloc] initWithFrame:CGRectMake(26*DEF_Adaptation_Font_x*0.5, 1165*DEF_Adaptation_Font_x*0.5, 602*DEF_Adaptation_Font*0.5, 85*DEF_Adaptation_Font*0.5)];
+    [locatonBtn addTarget:self action:@selector(openMap) forControlEvents:UIControlEventTouchDown];
+    [bkScroll addSubview:locatonBtn];
+
+    
+    
     
     UILabel *lableTicket = [LooperToolClass createLableView:CGPointMake(70*DEF_Adaptation_Font_x*0.5, 1344*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 25*DEF_Adaptation_Font_x*0.5) andText:@"售票链接" andFontSize:11 andColor:[UIColor colorWithRed:57/255.0 green:61/255.0 blue:71/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [lableTicket sizeToFit];

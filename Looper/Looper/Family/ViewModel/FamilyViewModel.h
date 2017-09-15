@@ -48,6 +48,7 @@
 //同意/拒绝邀请加入家族
 -(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId;
 
+-(void)createFleetMangerView;
 
 //删除家族成员
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
