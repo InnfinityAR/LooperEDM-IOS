@@ -314,14 +314,23 @@
                     [self performSelector:@selector(delayMethod) withObject:nil afterDelay:1.0f];
                                    }
             }
-        }
+    }
     }fail:^{
     }];
 }
 -(void)delayMethod{
-//    if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==6||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==5) {
-//        
-//    }
+    if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==0) {
+        
+    }else if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==1||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==5||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==6){
+        MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:nil andType:2 andDataDic:self.WillDeleteMemberDic];
+        [self.familyView addSubview:selectView];
+        [selectView addButtonAction:^(id sender) {
+            CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataArr:_familyModel.familyMember andType:1];
+            fleetView.shouldChangeRole=[self.WillDeleteMemberDic objectForKey:@"role"];
+            [[self familyView] addSubview:fleetView];
+        }];
+    
+    }else{
     MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择" andType:2 andDataDic:self.WillDeleteMemberDic];
                     [self.familyView addSubview:selectView];
                     [selectView addButtonAction:^(id sender) {
@@ -329,6 +338,7 @@
                         fleetView.shouldChangeRole=[self.WillDeleteMemberDic objectForKey:@"role"];
                         [[self familyView] addSubview:fleetView];
                     }];
+    }
 }
 
 //获取家族小组成员
@@ -450,6 +460,13 @@
     }
     return nil;
 }
+
+
+
+
+
+
+
 #pragma -PlayerInfoV
 -(void)removePlayerInfo{
     [_playerInfoV removeFromSuperview];

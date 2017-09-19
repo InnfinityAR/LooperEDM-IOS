@@ -457,6 +457,8 @@
     NSDictionary *dataDic=self.dataArr[button.tag];
         ChangeJobView *changeView=[[ChangeJobView alloc]initWithFrame:[UIScreen mainScreen].bounds and:self.obj andDataDic:dataDic];
         [[self.obj familyView]addSubview:changeView];
+        self.isSelectCell=-1;
+         [self.tableSelectView removeFromSuperview];
     }   else if (button.tag>=1000&&button.tag<2000) {
 //删除
       NSDictionary *dataDic=self.dataArr[button.tag-1000];
@@ -474,6 +476,7 @@
         NSDictionary *dataDic=self.dataArr[button.tag-2000];
         [self.tableSelectView removeFromSuperview];
         [self.obj createPlayerView:[[dataDic objectForKey:@"userid"]intValue]];
+        self.isSelectCell=-1;
 //        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr andType:2];
 //        [[self.obj familyView] addSubview:fleetView];
 
