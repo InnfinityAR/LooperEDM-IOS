@@ -79,6 +79,61 @@
 //    NSDictionary *dic4=[[NSDictionary alloc]initWithObjectsAndKeys:@"400",@"activepoints", @"2017-09-05 15:02:56",@"creationdate", @"300",@"exp", @"http://api2.innfinityar.com/web/data/m4.png",@"headimageurl",@"12", @"level", @"156****7660",@"nickname", @"0",@"role",@"2", @"sex",  @"92119",@"userid",nil];
 //    memberArray=@[dic1,dic2,dic3,dic4,dic1,dic2,dic3,dic4];
     _familyMember = [[NSMutableArray alloc] initWithArray:memberArray];
+    [self initManageDataForMemberArr:memberArray];
+ 
+}
+
+-(void)initManageDataForMemberArr:(NSArray *)dataArr{
+    NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]init];
+    NSMutableArray *memberDetailArr0=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr1=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr2=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr3=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr4=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr5=[[NSMutableArray alloc]init];
+    NSMutableArray *memberDetailArr6=[[NSMutableArray alloc]init];
+    for (int i=0; i<dataArr.count; i++) {
+        NSDictionary *memberDic=dataArr[i];
+        switch ([[memberDic objectForKey:@"role"]integerValue]) {
+            case 0:
+                [memberDetailArr0 addObject:memberDic];
+                break;
+            case 1:
+                [memberDetailArr1 addObject:memberDic];
+                break;
+            case 2:
+                [memberDetailArr2 addObject:memberDic];
+                break;
+            case 3:
+                [memberDetailArr3 addObject:memberDic];
+                break;
+            case 4:
+                [memberDetailArr4 addObject:memberDic];
+                break;
+            case 5:
+                [memberDetailArr5 addObject:memberDic];
+                break;
+            case 6:
+                [memberDetailArr6 addObject:memberDic];
+                break;
+            default:
+                break;
+        }
+    }
+    [dataDic setObject:memberDetailArr0 forKey:@"0"];
+     [dataDic setObject:memberDetailArr1 forKey:@"1"];
+     [dataDic setObject:memberDetailArr2 forKey:@"2"];
+     [dataDic setObject:memberDetailArr3 forKey:@"3"];
+     [dataDic setObject:memberDetailArr4 forKey:@"4"];
+     [dataDic setObject:memberDetailArr5 forKey:@"5"];
+     [dataDic setObject:memberDetailArr6 forKey:@"6"];
+
+    [self updataWithMemberManageDic:dataDic];
+}
+
+-(void)updataWithMemberManageDic:(NSDictionary*)data{
+    [_memberManageDic removeAllObjects];
+    _memberManageDic = [[NSMutableDictionary alloc] initWithDictionary:data];
 }
 
 -(void)updataWithDetail:(NSDictionary*)data{

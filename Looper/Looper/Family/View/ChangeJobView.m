@@ -43,13 +43,17 @@
 //二副>>水手长
 @property(nonatomic,strong)UIView *jobView;
 @property(nonatomic,strong)UILabel *jobLB;
+
+
+@property(nonatomic,strong)NSDictionary  *memberDic;
 @end
 
 @implementation ChangeJobView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary*)dataDic{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary*)dataDic andMemberInfo:(NSDictionary *)memberDic{
     if (self = [super initWithFrame:frame]) {
         self.obj = (FamilyViewModel*)idObject;
         self.dataDic=dataDic;
+        self.memberDic=memberDic;
         [self createView];
         
     }
@@ -133,8 +137,6 @@
             self.selectStr=label.text;
         UILabel *label1=self.labelArr[5];
         label1.text=label.text;
-        UILabel *label2=self.labelArr[6];
-        label2.text=@"  水手";
         for (UIButton *btn in self.btnArr) {
             if (btn.tag!=6) {
             btn.selected=NO;
@@ -155,8 +157,6 @@
         self.selectStr=label.text;
         UILabel *label1=self.labelArr[6];
         label1.text=label.text;
-        UILabel *label2=self.labelArr[5];
-        label2.text=@"  水手长";
         for (UIButton *btn in self.btnArr) {
             if (btn.tag!=7) {
                 btn.selected=NO;
@@ -272,15 +272,27 @@
     selectScrollV.contentSize=CGSizeMake(DEF_WIDTH(bkV),  (73*7-20)*DEF_Adaptation_Font*0.5);
     selectScrollV.showsVerticalScrollIndicator = NO;
     [bkV addSubview:selectScrollV];
+    
+    
     for (int i=0; i<5; i++) {
 //后续需要有一些改动,加入无人选就变灰效果
-    UILabel * label =[self creatLabelWithContent:[self jobnameForStatus:6-i andNumber:2] andRect:CGRectMake(55*DEF_Adaptation_Font*0.5, (i*73)*DEF_Adaptation_Font*0.5,471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andType:1 andTag:i+1];
+        NSArray *memberArr=[self.memberDic objectForKey:[NSString stringWithFormat:@"%d",6-i]];
+    UILabel * label =[self creatLabelWithContent:[self jobnameForStatus:6-i andNumber:memberArr.count] andRect:CGRectMake(55*DEF_Adaptation_Font*0.5, (i*73)*DEF_Adaptation_Font*0.5,471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andType:1 andTag:i+1];
+        if (memberArr.count==1&&i!=1) {
+            label.userInteractionEnabled=NO;
+            label.alpha=0.3;
+        }
+        if (memberArr.count==2&&i==1) {
+            label.userInteractionEnabled=NO;
+            label.alpha=0.3;
+        }
     [selectScrollV addSubview:label];
         self.labelArr[i]=label;
     }
     for (int i=5; i<7; i++) {
 //后续需要有一些改动
-    UILabel *lb= [self creatLabelWithContent:[self jobnameForStatus:6-i andNumber:2] andRect:CGRectMake(55*DEF_Adaptation_Font*0.5, ((i)*73)*DEF_Adaptation_Font*0.5,471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andType:2 andTag:i+1];
+    NSArray *memberArr=[self.memberDic objectForKey:[NSString stringWithFormat:@"%d",6-i]];
+    UILabel *lb= [self creatLabelWithContent:[self jobnameForStatus:6-i andNumber:memberArr.count] andRect:CGRectMake(55*DEF_Adaptation_Font*0.5, ((i)*73)*DEF_Adaptation_Font*0.5,471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andType:2 andTag:i+1];
         [selectScrollV addSubview:lb];
         self.labelArr[i]=lb;
     }
@@ -306,10 +318,6 @@
     label.layer.masksToBounds=YES;
     label.tag=tag;
     label.userInteractionEnabled=YES;
-    if (tag==1) {
-        label.userInteractionEnabled=NO;
-        label.alpha=0.3;
-    }
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickLabel:)];
     [label addGestureRecognizer:tap];
     if (type==1) {
@@ -381,8 +389,6 @@
         self.selectStr=label.text;
         UILabel *label1=self.labelArr[5];
         label1.text=label.text;
-        UILabel *label2=self.labelArr[6];
-        label2.text=@"  水手";
         for (UIButton *btn in self.btnArr) {
             if (btn.tag!=6) {
                 btn.selected=NO;
@@ -403,8 +409,6 @@
         self.selectStr=label.text;
         UILabel *label1=self.labelArr[6];
         label1.text=label.text;
-        UILabel *label2=self.labelArr[5];
-        label2.text=@"  水手长";
         for (UIButton *btn in self.btnArr) {
             if (btn.tag!=7) {
                 btn.selected=NO;
@@ -479,6 +483,9 @@
     job2LB.textColor=[UIColor whiteColor];
     job2LB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     job2LB.text=[self.selectStr substringFromIndex:2];
+    if (self.selectLb==5) {
+         job2LB.text=@"副舰长";
+    }
     [_jobView addSubview:job2LB];
     job2LB.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
     job2LB.layer.masksToBounds=YES;

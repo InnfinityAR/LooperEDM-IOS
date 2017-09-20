@@ -246,13 +246,14 @@
     }
     if (tag==103) {
 //成员管理
-        [_obj createFleetMangerView];
+//        [_obj createFleetMangerView];
         
-        
-//        MemberManageView *manageV=[[MemberManageView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self.obj andDataArr:self.dataArr];
-//        [[self.obj familyView]addSubview:manageV];
-    }
+        [_obj createMemberManageViewWithDataDic:self.dataArr[0]];
+        }
     if (tag==104) {
+          [_obj createFleetMangerView];
+        
+        
         
     }
 }
@@ -449,14 +450,18 @@
             memberInfoBtn.tag=indexPath.row+2000;
             [memberInfoBtn addTarget:self action:@selector(buttonOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
             [self.tableSelectView addSubview:memberInfoBtn];
+        }else{
+            NSDictionary *dataDic=self.dataArr[indexPath.row];
+            [self.tableSelectView removeFromSuperview];
+            [self.obj createPlayerView:[[dataDic objectForKey:@"userid"]intValue]];
+            self.isSelectCell=-1;
         }
     }
 }
 - (IBAction)buttonOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if (button.tag>=0&&button.tag<1000) {
     NSDictionary *dataDic=self.dataArr[button.tag];
-        ChangeJobView *changeView=[[ChangeJobView alloc]initWithFrame:[UIScreen mainScreen].bounds and:self.obj andDataDic:dataDic];
-        [[self.obj familyView]addSubview:changeView];
+        [self.obj createChangeJobViewWithDataDic:dataDic];
         self.isSelectCell=-1;
          [self.tableSelectView removeFromSuperview];
     }   else if (button.tag>=1000&&button.tag<2000) {

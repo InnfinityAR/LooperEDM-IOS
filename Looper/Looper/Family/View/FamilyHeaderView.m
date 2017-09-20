@@ -75,7 +75,7 @@
     }
     [self addSubview:SQCodeIV];
     
-    UILabel *codeLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5, 880*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UILabel *codeLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-150*DEF_Adaptation_Font*0.5, 880*DEF_Adaptation_Font*0.5, 300*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     codeLB.textColor=[UIColor whiteColor];
     codeLB.font=[UIFont systemFontOfSize:14];
     codeLB.text=@"扫一扫二维码,加入家族";

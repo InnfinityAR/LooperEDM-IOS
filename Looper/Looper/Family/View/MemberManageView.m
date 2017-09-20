@@ -18,17 +18,17 @@
     NSInteger isSortActive;//sortBtn
     NSInteger isSortSex;//sortBtn
 }
-@property(nonatomic,strong)NSArray *dataArr;
+@property(nonatomic,strong)NSDictionary *dataDic;
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSMutableArray *dataSource;//现有的成员
+
 @property(nonatomic,strong)UITableView *anotherTableView;
-@property(nonatomic,strong)NSMutableArray *anotherData;
 @end
 @implementation MemberManageView
--(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataArr:(NSArray *)dataArr{
+-(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
-        self.dataArr=dataArr;
+        self.dataDic=[self.obj currentDic];
+        [self.obj getMemberGroupWithUserId:[_dataDic objectForKey:@"userid"] andGroupId:[_dataDic objectForKey:@"groupid"]];
         [self initView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
@@ -46,17 +46,19 @@
 }
 -(NSMutableArray *)dataSource{
     if (!_dataSource) {
-        _dataSource=[[NSMutableArray alloc]initWithArray:self.dataArr];
-         [_dataSource addObject:self.dataArr[2]];
+        _dataSource=[[NSMutableArray alloc]init];
     }
     return _dataSource;
 }
 -(NSMutableArray *)anotherData{
     if (!_anotherData) {
-        _anotherData=[[NSMutableArray alloc]initWithArray:self.dataArr];
-        [_anotherData addObject:self.dataArr[1]];
+        _anotherData=[[NSMutableArray alloc]init];
     }
     return _anotherData;
+}
+-(void)reloadData{
+    [self.tableView reloadData];
+    [self.anotherTableView reloadData];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
