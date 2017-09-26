@@ -170,6 +170,7 @@
 		B2C90EDD1F13A16C000E127A /* LTSCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90ED31F13A16C000E127A /* LTSCircleView.m */; };
 		B2C90EE01F13A1DF000E127A /* CarlendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90EDF1F13A1DF000E127A /* CarlendarView.m */; };
 		B2F021151F7A4AAF00BABA13 /* CreateFleetGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */; };
+		B2F0211A1F7A6A6600BABA13 /* SelectCityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F021191F7A6A6600BABA13 /* SelectCityView.m */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C4028C941F38605900E821E9 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4028C931F38605900E821E9 /* AlipaySDK.framework */; };
@@ -1101,6 +1102,10 @@
 		B2C90EDF1F13A1DF000E127A /* CarlendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarlendarView.m; sourceTree = "<group>"; };
 		B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateFleetGroupView.m; sourceTree = "<group>"; };
 		B2F021141F7A4AAF00BABA13 /* CreateFleetGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateFleetGroupView.h; sourceTree = "<group>"; };
+		B2F021161F7A5DB000BABA13 /* liveShow_Btn_Search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liveShow_Btn_Search.png; sourceTree = "<group>"; };
+		B2F021171F7A5FFC00BABA13 /* btn_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_location.png; sourceTree = "<group>"; };
+		B2F021181F7A6A6600BABA13 /* SelectCityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCityView.h; sourceTree = "<group>"; };
+		B2F021191F7A6A6600BABA13 /* SelectCityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCityView.m; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C4028C931F38605900E821E9 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -2525,6 +2530,8 @@
 				B2A9021E1ED6A3910022C282 /* CurrentActivityTableViewCell.xib */,
 				B2A902211ED6A3A80022C282 /* CurrentActivityView.h */,
 				B2A902221ED6A3A80022C282 /* CurrentActivityView.m */,
+				B2F021181F7A6A6600BABA13 /* SelectCityView.h */,
+				B2F021191F7A6A6600BABA13 /* SelectCityView.m */,
 			);
 			name = CurrentActivityView;
 			path = ../../CurrentActivity/View;
@@ -3664,6 +3671,8 @@
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
+				B2F021171F7A5FFC00BABA13 /* btn_location.png */,
+				B2F021161F7A5DB000BABA13 /* liveShow_Btn_Search.png */,
 				B2A1E8121F2AEB48006270E3 /* btn_ticketBack.png */,
 				C413CE1E1F2B2056008B0BAF /* btn_delete_photo.png */,
 				C4796A791F1375AE00414AFD /* btn_calendar_s.png */,
@@ -5644,6 +5653,7 @@
 				B23521641F4EA344003D06CB /* SGQRCodeGenerateManager.m in Sources */,
 				C4BCE7401E091E710087E6C5 /* UIAlertView+AFNetworking.m in Sources */,
 				C4129BE51EAB3D380010A566 /* MusicPlayView.m in Sources */,
+				B2F0211A1F7A6A6600BABA13 /* SelectCityView.m in Sources */,
 				C45DAF1C1EA3405A000AB5C5 /* MusicViewCell.m in Sources */,
 				C4BE5EE71E4F1B8500C8DA98 /* SimpleChatCollectionViewCell.m in Sources */,
 				C478B36C1F1BCA780057CD05 /* selectActivityView.m in Sources */,

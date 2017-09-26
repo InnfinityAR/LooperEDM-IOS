@@ -13,6 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "nActivityViewModel.h"
 #import "CarlendarView.h"
+#import "SelectCityView.h"
 @interface CurrentActivityView()<CurrentActivityTableViewCellDelegate>
 {
     UILabel *looperName;
@@ -20,13 +21,15 @@
     UILabel *looperName3;
     UIView *lineView;
     //用于判断是否点击了历史活动的按钮
-    BOOL isHistory;
+    NSInteger isHistory;
 }
 @end
 @implementation CurrentActivityView
 //更新tableview
 -(void)reloadTableData:(NSMutableArray*)DataLoop{
     self.dataArr=DataLoop;
+  [_currentActivityArr removeAllObjects];
+  [_historyActivityArr removeAllObjects];
     [self.tableView reloadData];
 }
 -(NSMutableArray *)historyActivityArr{
@@ -51,7 +54,6 @@
   
     if (!_currentActivityArr) {
           NSMutableArray* temp=[[NSMutableArray alloc]init];
-        [_currentActivityArr removeAllObjects];
         _currentActivityArr=[[NSMutableArray alloc]init];
     
         for (int i=0; i<self.dataArr.count; i++) {
@@ -61,14 +63,11 @@
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
                 if([activity[@"recommendation"] intValue]==1){
-                
-                    [_currentActivityArr addObject:activity];
-                } else{
+
                     [temp addObject:activity];
                 }
             }
         }
-
         NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
                             ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                                 int value1 = [[obj1 objectForKey:@"starttime"] intValue];
@@ -86,22 +85,57 @@
         NSLog(@"%@",testArr);
         
         for(int i=0;i<[testArr count];i++){
-        
-            [_nearArr addObject:[testArr objectAtIndex:i]];
+            
+            [_currentActivityArr addObject:[testArr objectAtIndex:i]];
         }
-        
-        
-        // [_currentActivityArr arrayByAddingObjectsFromArray:testArr];
-  
     }
     return _currentActivityArr;
+}
+-(NSMutableArray *)nearArr{
+    if (!_nearArr) {
+        NSMutableArray* temp=[[NSMutableArray alloc]init];
+        _nearArr=[[NSMutableArray alloc]init];
+        for (int i=0; i<self.dataArr.count; i++) {
+            NSDictionary *activity=self.dataArr[i];
+            //当前时间的时间戳
+            NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+            NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+            if (timeNow<=[activity[@"starttime"]integerValue]) {
+                if([activity[@"recommendation"] intValue]==1){
+                } else{
+                    [temp addObject:activity];
+                }
+            }
+        }
+        NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
+                            ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                int value1 = [[obj1 objectForKey:@"starttime"] intValue];
+                                int value2 = [[obj2 objectForKey:@"starttime"] intValue];
+                                if (value1 > value2) {
+                                    return NSOrderedDescending;
+                                }else if (value1 == value2){
+                                    return NSOrderedSame;
+                                }else{
+                                    return NSOrderedAscending;
+                                }
+                            }];
+        
+        
+        NSLog(@"%@",testArr);
+        
+        for(int i=0;i<[testArr count];i++){
+            
+            [_nearArr addObject:[testArr objectAtIndex:i]];
+        }
+    }
+    return _nearArr;
 }
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
 #warning-如果这句话不加则没有初始化view不能触发点击事件
     if (self=[super initWithFrame:frame]) {
         self.obj=(nActivityViewModel*)obj;
         self.dataArr=myDataSource;
-        isHistory=NO;
+        isHistory=0;
         self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
         self.transform = CGAffineTransformMakeScale(0.1,0.1);
 
@@ -117,10 +151,11 @@
     if (tap.view.tag==1) {
         looperName.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
-        isHistory=NO;
+         looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        isHistory=0;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame1=lineView.frame;
-            frame1=CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            frame1=CGRectMake(179*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame1;
         }];
         [self.tableView reloadData];
@@ -128,13 +163,30 @@
     if (tap.view.tag==2) {
         looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
-        isHistory=YES;
+        looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        isHistory=1;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame2=lineView.frame;
-            frame2=CGRectMake(390*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame2;
         }];
         [self.tableView reloadData];
+    }
+    if (tap.view.tag==3) {
+        looperName3.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+        looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        isHistory=2;
+        [UIView animateWithDuration:0.1 animations:^{
+            CGRect frame2=lineView.frame;
+            frame2=CGRectMake(457*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            lineView.frame=frame2;
+        }];
+        [self.tableView reloadData];
+    }
+    if (tap.view.tag==4) {
+        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self.obj andDetailDic:nil];
+        [self addSubview:selectV];
     }
 
 }
@@ -174,12 +226,33 @@
     if (button.tag==120) {
     //搜索按钮点击
     }
+    else if(button.tag==102){
+   //分享按钮
+//        [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
+    }
 }
 
 
 -(void)initView{
-    UIButton *searchBtn = [LooperToolClass createBtnImageNameReal:@"btn_serach_select.png" andRect:CGPointMake(166*DEF_Adaptation_Font*0.5,32*DEF_Adaptation_Font*0.5) andTag:120 andSelectImage:@"btn_serach_select.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(50*DEF_Adaptation_Font*0.5,70*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:searchBtn];
+    UILabel *locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andText:@"      上海上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
+    locationLB.layer.cornerRadius=4*DEF_Adaptation_Font;
+    locationLB.layer.masksToBounds=YES;
+    locationLB.backgroundColor=ColorRGB(39, 39, 80, 0.8);
+    CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame3=locationLB.frame;
+    frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
+    locationLB.frame=frame3;
+    [self addSubview:locationLB];
+    locationLB.tag=4;
+    locationLB .userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap4 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [ locationLB addGestureRecognizer:singleTap4];
+    
+    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(15*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    locationIV.image=[UIImage imageNamed:@"icon_calendar_location"];
+    [locationLB addSubview:locationIV];
+    
     looperName = [LooperToolClass createLableView:CGPointMake(159*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"全部" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     looperName.font=[UIFont boldSystemFontOfSize:15];
     [self addSubview:looperName];
@@ -210,7 +283,7 @@
     [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
     [self addSubview:backBtn];
 
-    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(508*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(35*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *calendarBtn = [LooperToolClass createBtnImageNameReal:@"btn_calendar_s.png" andRect:CGPointMake(508*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andTag:119 andSelectImage:@"btn_calendar_s.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(35*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:calendarBtn];
     
     NSDate *now = [NSDate date];
@@ -219,9 +292,15 @@
     NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
     NSInteger day = [dateComponent day];
     
-    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(513*DEF_Adaptation_Font*0.5, 59*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:9  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(513*DEF_Adaptation_Font*0.5, 63*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:9  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:dayLabel];
-    [self setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
+    [self setBackgroundColor:[UIColor colorWithRed:25/255.0 green:26/255.0 blue:63/255.0 alpha:1.0]];
+    
+    UIButton *searchBtn = [LooperToolClass createBtnImageNameReal:@"chatlist_serach" andRect:CGPointMake(156*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andTag:120 andSelectImage:@"chatlist_serach" andClickImage:nil andTextStr:nil andSize:CGSizeMake(80*DEF_Adaptation_Font*0.5,56*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:searchBtn];
+    
+    UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:shareBtn];
 
 }
 -(UITableView *)tableView{
@@ -249,9 +328,12 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (isHistory) {
+    if (isHistory==1) {
         return self.historyActivityArr.count;
-    }else{
+    }else if (isHistory==2){
+        return self.nearArr.count;
+    }
+    else{
       return self.currentActivityArr.count;
     }
   
@@ -264,11 +346,15 @@
     //cell不能被选中
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDictionary *activity=[NSDictionary dictionary];
-        if (isHistory) {
+        if (isHistory==1) {
         activity=self.historyActivityArr[indexPath.row];
-    }else{
+    }
+        else if (isHistory==2){
+            
+            activity=self.nearArr[indexPath.row];
+        }
+        else{
        activity=self.currentActivityArr[indexPath.row];
-
     }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
     if (activity[@"location"]==[NSNull null]) {
