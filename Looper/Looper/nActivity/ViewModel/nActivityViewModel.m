@@ -143,6 +143,23 @@
 }
 
 
+-(void)searchOfflineInformation:(NSString*)serachStr{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:serachStr forKey:@"searchText"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchOfflineInformation" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 
 -(void)getNearbyOfflineInformation{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

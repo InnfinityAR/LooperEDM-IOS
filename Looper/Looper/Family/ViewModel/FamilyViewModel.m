@@ -26,13 +26,10 @@
 #import "PlayerInfoView.h"
 #import "UserInfoViewController.h"
 #import "SimpleChatViewController.h"
-<<<<<<< HEAD
 #import "CreateFleetGroupView.h"
-=======
-
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
->>>>>>> 722a72c15144b4e1aaa3d876103f10e2e2a2de9b
+
 @interface FamilyViewModel()
 @property(nonatomic,strong)PlayerInfoView *playerInfoV;
 
@@ -47,13 +44,11 @@
     FamilyView *familyV;
     FleetMangerView *fleetMangerV;
     CreateFleetNameView  *createFleetV;
-<<<<<<< HEAD
+
     CreateFleetGroupView *CreateFleetGroupV;
-    
-=======
+
     
     MemberManageView *memberManageV;
->>>>>>> 722a72c15144b4e1aaa3d876103f10e2e2a2de9b
     NSString *ownername;
     
   }
