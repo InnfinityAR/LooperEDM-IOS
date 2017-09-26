@@ -121,7 +121,7 @@
 
 //    UIImageView *FrameName=[LooperToolClass createImageViewReal:@"image_NameFrame.png" andRect:CGPointMake(95*DEF_Adaptation_Font_x*0.5,400*DEF_Adaptation_Font_x*0.5) andTag:100 andSize:CGSizeMake(452*DEF_Adaptation_Font_x*0.5, 40*DEF_Adaptation_Font*0.5) andIsRadius:false];
 //    [self addSubview:FrameName];
-    //[self initProgressVWithRate:@"100" andSum:@"160"];
+//    [self initProgressVWithRate:@"100" andSum:@"160"];
     
     titleName = [LooperToolClass createLableView:CGPointMake(95*DEF_Adaptation_Font_x*0.5, 377*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(452*DEF_Adaptation_Font_x*0.5, 42*DEF_Adaptation_Font_x*0.5) andText:[LocalDataMangaer sharedManager].NickName andFontSize:25 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [self addSubview:titleName];

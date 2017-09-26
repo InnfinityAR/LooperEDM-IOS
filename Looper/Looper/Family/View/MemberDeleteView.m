@@ -53,12 +53,17 @@
         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(12, [[self.dataDic objectForKey:@"nickname"]length])];
         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(13+[[self.dataDic objectForKey:@"nickname"]length], [self jobnameForStatus:[[self.dataDic objectForKey:@"role"]integerValue]].length)];
         contentLB.attributedText= aString;
+    }else if (self.type==3){
+        NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:contentLB.text];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(2, [[self.dataDic objectForKey:@"nickname"]length])];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(5+[[self.dataDic objectForKey:@"nickname"]length],[[self.dataDic objectForKey:@"contentStr"]length])];
+        contentLB.attributedText= aString;
     }
     contentLB.numberOfLines=0;
     contentLB.font=[UIFont systemFontOfSize:16];
     [backIV addSubview:contentLB];
     if (self.btnName==nil) {
-        UIButton *sureBtn=[[UIButton alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-83*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
+        UIButton *sureBtn=[[UIButton alloc]initWithFrame:CGRectMake(DEF_WIDTH(backIV)/2-83*DEF_Adaptation_Font*0.5, 192*DEF_Adaptation_Font*0.5, 166*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5)];
         sureBtn.backgroundColor=ColorRGB(110, 192, 225, 1.0);
         [sureBtn setTitle:@"选择" forState:(UIControlStateNormal)];
         sureBtn.layer.cornerRadius=23*DEF_Adaptation_Font*0.5;

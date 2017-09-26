@@ -218,7 +218,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
  CGFloat  scollX=ceilf(DEF_WIDTH(self));
     NSLog(@"xoffset:%f,scroll: %f ,yoffset:%f",xOffset,scollX,yOffset);
     if (yOffset==0) {
-    if (xOffset==scollX) {
+    if (xOffset<=scollX+20*DEF_Adaptation_Font*0.5&&xOffset>=scollX-20*DEF_Adaptation_Font*0.5) {
         applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         noticeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         logLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
@@ -242,7 +242,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
         } completion:^(BOOL finished) {
         }];
     }
-    if (xOffset==ceilf(DEF_WIDTH(self)*2)) {
+    if (xOffset<=ceilf(DEF_WIDTH(self)*2)&&xOffset>=ceilf(DEF_WIDTH(self)*2)-20*DEF_Adaptation_Font*0.5) {
         applyListLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
         noticeLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
         logLB.textColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.4];
@@ -254,7 +254,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
         } completion:^(BOOL finished) {
         }];
     }
-        if (xOffset>ceilf(DEF_WIDTH(self)*2)) {
+        if (xOffset>ceilf(DEF_WIDTH(self)*2)+20*DEF_Adaptation_Font*0.5) {
             [[[self.obj familyView]sc]setContentOffset:CGPointMake(DEF_SCREEN_WIDTH , 0) animated:NO];
         }
     }
@@ -463,7 +463,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90*DEF_Adaptation_Font*0.5;
+    return 110*DEF_Adaptation_Font*0.5;
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

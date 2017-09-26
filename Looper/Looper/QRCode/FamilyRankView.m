@@ -58,7 +58,7 @@
 }
 
 -(void)initView{
-    UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 10*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 62*DEF_Adaptation_Font*0.5)];
+    UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), 75*DEF_Adaptation_Font*0.5)];
     [self addSubview:headView];
     UILabel *familyLB=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 292*DEF_Adaptation_Font*0.5, DEF_HEIGHT(headView))];
     familyLB.text=@"家族";
@@ -84,6 +84,8 @@
     [headView addSubview:rankLB];
     UILabel *livenessLB=[[UILabel alloc]initWithFrame:CGRectMake(350*DEF_Adaptation_Font*0.5, 0, 116*DEF_Adaptation_Font*0.5, DEF_HEIGHT(headView))];
     livenessLB.text=@"家族活跃度";
+    livenessLB.numberOfLines=0;
+    livenessLB.textAlignment=NSTextAlignmentCenter;
     if (familyType==0) {
          livenessLB.text=@"位置";
     }

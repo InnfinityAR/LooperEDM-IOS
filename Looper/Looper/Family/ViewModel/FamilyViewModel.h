@@ -66,4 +66,17 @@
 
 
 
+
+-(void)createMemberManageViewWithDataDic:(NSDictionary *)dataDic;
+
+
+//获取家族小组成员
+-(void)getMemberGroupWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId;
+-(void)getMemberWithoutGroupWithUserId:(NSString *)userId;
+//用于储存memberManage的当前数据
+@property(nonatomic,strong)NSDictionary *currentDic;
+
+
+
+-(void)createChangeJobViewWithDataDic:(NSDictionary *)dataDic;
 @end

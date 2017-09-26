@@ -81,16 +81,19 @@
    }
 -(void)updateTitleArr{
     textLB=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-60*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    textLB.font=[UIFont systemFontOfSize:14];
     textLB.textColor=[UIColor whiteColor];
     textLB.textAlignment=NSTextAlignmentCenter;
     textLB.text=_titleArray[titleNum];
     [self addSubview:textLB];
     textLB1=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2+120*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    textLB1.font=[UIFont systemFontOfSize:14];
     textLB1.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB1.textAlignment=NSTextAlignmentCenter;
     textLB1.text=_titleArray[1];
     [self addSubview:textLB1];
     textLB2=[[UILabel alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-240*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    textLB2.font=[UIFont systemFontOfSize:14];
     textLB2.textColor=ColorRGB(255, 255, 255, 0.5);
     textLB2.textAlignment=NSTextAlignmentCenter;
     textLB2.text=_titleArray[_titleArray.count-1];

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ChangeJobView : UIView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary*)dataDic;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary*)dataDic andMemberInfo:(NSDictionary *)memberDic;
 @property(nonatomic,strong)id obj;
 @end

@@ -36,6 +36,6 @@
 -(void)updataWithData:(NSDictionary*)data;
 -(void)updataWithDetail:(NSDictionary*)data;
 
-
+@property(nonatomic,strong)NSMutableDictionary *memberManageDic;
 
 @end
