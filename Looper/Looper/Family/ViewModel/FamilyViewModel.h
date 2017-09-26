@@ -60,6 +60,11 @@
 
 
 -(void)createFleetViewName;
+-(void)createFleetGroup:(NSString*)FleetName;
+
+-(void)createRaverGroup:(NSString*)raverId andLeaderId:(NSString*)leaderId andGroupName:(NSString*)name;
+
+
 
 
 -(void)createMemberManageViewWithDataDic:(NSDictionary *)dataDic;

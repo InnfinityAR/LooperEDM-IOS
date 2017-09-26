@@ -177,10 +177,11 @@ void uncaughtExceptionHandler(NSException *exception) {
     [self initJpush:launchOptions];
     [NSThread sleepForTimeInterval:1.5];
     
-
+    NSLog(@"%@",[UIScreen mainScreen].bounds);
+    
     
     [self initUmSdk];
-    [[LocationManagerData sharedManager] getLocalationPoint];
+ //   [[LocationManagerData sharedManager] getLocalationPoint];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 

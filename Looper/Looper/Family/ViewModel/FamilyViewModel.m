@@ -26,6 +26,8 @@
 #import "PlayerInfoView.h"
 #import "UserInfoViewController.h"
 #import "SimpleChatViewController.h"
+#import "CreateFleetGroupView.h"
+
 
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
@@ -43,8 +45,12 @@
     FamilyView *familyV;
     FleetMangerView *fleetMangerV;
     CreateFleetNameView  *createFleetV;
+
+    CreateFleetGroupView *CreateFleetGroupV;
+    
     
     MemberManageView *memberManageV;
+
     NSString *ownername;
     
   }
@@ -387,13 +393,26 @@
 }
 
 
--(void)createFleetViewName{
-   createFleetV =  [[CreateFleetNameView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
-     [[self.obj view]addSubview:createFleetV];
+-(void)createFleetGroup:(NSString*)FleetName{
+    
+     [self getRaverMemberWithoutGroup:[[_familyModel familyDetailData] objectForKey:@"raverid"]];
+    
+   
+
+
 }
+
+-(void)createFleetViewName{
+    createFleetV =  [[CreateFleetNameView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+    [[self.obj view]addSubview:createFleetV];
+    
+ }
 
 
 -(void)createFleetMangerView{
+    
+    
+    
     
     fleetMangerV  = [[FleetMangerView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[self.obj view]addSubview:fleetMangerV];
@@ -430,6 +449,58 @@
     }];
 }
 
+-(void)getRaverGroup:(NSString*)raverId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+        
+            
+            
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)getRaverMemberWithoutGroup:(NSString*)raverId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverMemberWithoutGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            CreateFleetGroupV=[[CreateFleetGroupView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+            [[self.obj view]addSubview:CreateFleetGroupV];
+
+        }
+    }fail:^{
+        
+    }];
+}
+
+-(void)createRaverGroup:(NSString*)raverId andLeaderId:(NSString*)leaderId andGroupName:(NSString*)name{
+
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:leaderId forKey:@"leaderId"];
+    [dic setObject:name forKey:@"groupName"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createRaverGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
 
 -(void)popController{
     [[self.obj navigationController]popViewControllerAnimated:YES];
@@ -452,8 +523,6 @@
         [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getUserInfo" parameters:dic success:^(id responseObject){
             if([responseObject[@"status"] intValue]==0){
                 
-                
-                NSLog(@"222222222");
                 [_playerInfoV initWithlooperData:responseObject[@"data"] andisFollow:[responseObject[@"isFollow"] intValue]];
             }else{
                 

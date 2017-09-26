@@ -43,19 +43,58 @@
     }
     return _historyActivityArr;
 }
+
+
+
 -(NSMutableArray *)currentActivityArr{
+  
     if (!_currentActivityArr) {
+          NSMutableArray* temp=[[NSMutableArray alloc]init];
+        [_currentActivityArr removeAllObjects];
         _currentActivityArr=[[NSMutableArray alloc]init];
+    
         for (int i=0; i<self.dataArr.count; i++) {
             NSDictionary *activity=self.dataArr[i];
             //当前时间的时间戳
             NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
-                [_currentActivityArr addObject:activity];
+                if([activity[@"recommendation"] intValue]==1){
+                
+                    [_currentActivityArr addObject:activity];
+                } else{
+                    [temp addObject:activity];
+                }
             }
         }
+
+        NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
+                            ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                int value1 = [[obj1 objectForKey:@"starttime"] intValue];
+                                int value2 = [[obj2 objectForKey:@"starttime"] intValue];
+                                if (value1 > value2) {
+                                    return NSOrderedDescending;
+                                }else if (value1 == value2){
+                                    return NSOrderedSame;
+                                }else{
+                                    return NSOrderedAscending;
+                                }
+                            }];
+        
+        
+        NSLog(@"%@",testArr);
+        
+        for(int i=0;i<[testArr count];i++){
+        
+            [_currentActivityArr addObject:[testArr objectAtIndex:i]];
+        }
+        
+        
+        // [_currentActivityArr arrayByAddingObjectsFromArray:testArr];
+  
     }
+    
+    
     return _currentActivityArr;
 }
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
