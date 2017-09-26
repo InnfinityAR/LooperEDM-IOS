@@ -169,6 +169,7 @@
 		B2C90EDC1F13A16C000E127A /* LTSCalendarWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90ED11F13A16C000E127A /* LTSCalendarWeekView.m */; };
 		B2C90EDD1F13A16C000E127A /* LTSCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90ED31F13A16C000E127A /* LTSCircleView.m */; };
 		B2C90EE01F13A1DF000E127A /* CarlendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C90EDF1F13A1DF000E127A /* CarlendarView.m */; };
+		B2F021151F7A4AAF00BABA13 /* CreateFleetGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */; };
 		C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */; };
 		C4019E121E361E8E00E3CFFB /* bg_looper_text6p.png in Resources */ = {isa = PBXBuildFile; fileRef = C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */; };
 		C4028C941F38605900E821E9 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4028C931F38605900E821E9 /* AlipaySDK.framework */; };
@@ -1098,6 +1099,8 @@
 		B2C90ED31F13A16C000E127A /* LTSCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSCircleView.m; sourceTree = "<group>"; };
 		B2C90EDE1F13A1DF000E127A /* CarlendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarlendarView.h; sourceTree = "<group>"; };
 		B2C90EDF1F13A1DF000E127A /* CarlendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarlendarView.m; sourceTree = "<group>"; };
+		B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateFleetGroupView.m; sourceTree = "<group>"; };
+		B2F021141F7A4AAF00BABA13 /* CreateFleetGroupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateFleetGroupView.h; sourceTree = "<group>"; };
 		C4019E0F1E361DD000E3CFFB /* bg_looper_text6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6.png; sourceTree = "<group>"; };
 		C4019E111E361E8E00E3CFFB /* bg_looper_text6p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_text6p.png; sourceTree = "<group>"; };
 		C4028C931F38605900E821E9 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -2905,14 +2908,6 @@
 			path = AwesomeMenu;
 			sourceTree = "<group>";
 		};
-		C41F11C61E8109F30062D258 /* launch */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = launch;
-			path = Image/launch;
-			sourceTree = "<group>";
-		};
 		C426015F1E14FAE200BE5CE2 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -3343,7 +3338,6 @@
 			isa = PBXGroup;
 			children = (
 				C4F051211EBACA0D005DA9F1 /* Video */,
-				C41F11C61E8109F30062D258 /* launch */,
 				C43E765A1E091D8C004A5288 /* Image */,
 				C43E767F1E091D8C004A5288 /* JSON */,
 			);
@@ -3523,6 +3517,8 @@
 				C4C752E01F6914CD002FD42F /* FleetMangerView.m */,
 				C461E2371F6BE59D0048F979 /* CreateFleetNameView.h */,
 				C461E2381F6BE59D0048F979 /* CreateFleetNameView.m */,
+				B2F021141F7A4AAF00BABA13 /* CreateFleetGroupView.h */,
+				B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5623,6 +5619,7 @@
 				C4C0B6101E8A569100B32214 /* MainChatView.m in Sources */,
 				B2A902101ED6A20C0022C282 /* UserInfoViewController.m in Sources */,
 				C4EB3D661F14AE7200045EE1 /* PhotoWallCollectionViewCell.m in Sources */,
+				B2F021151F7A4AAF00BABA13 /* CreateFleetGroupView.m in Sources */,
 				C4CCFCEF1EB3CB3500114711 /* NSArray+index.m in Sources */,
 				B2C90E731F0F7223000E127A /* ActivityCollectionViewCell.m in Sources */,
 				C4BCE7431E091E710087E6C5 /* UIProgressView+AFNetworking.m in Sources */,
