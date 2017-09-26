@@ -116,6 +116,11 @@
         [_obj createSendPhotoWall];
         
         
+    }else if (button.tag==109){
+        
+    
+        
+    
     }
 
 }
@@ -168,7 +173,7 @@
     
     [nowTimeLable setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:9]];
     
-    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(43*DEF_Adaptation_Font*0.5, 316*DEF_Adaptation_Font*0.5, 554*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(43*DEF_Adaptation_Font*0.5, 325*DEF_Adaptation_Font*0.5, 554*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     line.image=[UIImage imageNamed:@"bg_now.png"];
     [view addSubview:line];
     
@@ -209,6 +214,13 @@
         [userScrollV addSubview:userImage];
     }
     [userScrollV setContentSize:CGSizeMake([[_dataSource objectForKey:@"user"] count]*96*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
+    
+    
+    UIButton* punchCardBtn = [LooperToolClass createBtnImageNameReal:@"punchCard.png" andRect:CGPointMake(267*DEF_Adaptation_Font*0.5,275*DEF_Adaptation_Font*0.5) andTag:109 andSelectImage:@"punchCard.png" andClickImage:@"punchCard.png" andTextStr:nil andSize:CGSizeMake(140*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
+    [view addSubview:punchCardBtn];
+    
+    
+    
     
 }
 

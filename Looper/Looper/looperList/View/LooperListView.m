@@ -202,7 +202,7 @@
 
     tagView = [[UIView alloc] initWithFrame:CGRectMake(0, 80*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 287*DEF_Adaptation_Font*0.5)];
     [self addSubview:tagView];
-    for (int i=0;i<[[_obj tagData] count];i++){
+    for (int i=0;i<[(NSArray*)[_obj tagData] count];i++){
         
         int num = i +1;
         int num_x = num%4;
@@ -210,7 +210,7 @@
         if(num_x==0){
             num_x=4;
         }
-        UIButton *selBtn =[LooperToolClass createBtnImageName:@"btn_looper_sel.png" andRect:CGPointMake(23+(162*(num_x-1)), 0+((num_y-1)*72)) andTag:i andSelectImage:@"btn_looper_select.png" andClickImage:nil andTextStr:[[_obj tagData]objectAtIndex:i] andSize:CGSizeZero andTarget:self];
+        UIButton *selBtn =[LooperToolClass createBtnImageName:@"btn_looper_sel.png" andRect:CGPointMake(23+(162*(num_x-1)), 0+((num_y-1)*72)) andTag:i andSelectImage:@"btn_looper_select.png" andClickImage:nil andTextStr:[(NSArray*)[_obj tagData]objectAtIndex:i] andSize:CGSizeZero andTarget:self];
         [selBtn setAlpha:0.0];
         [tagView addSubview: selBtn];
         

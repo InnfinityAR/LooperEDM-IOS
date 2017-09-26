@@ -32,6 +32,9 @@
 #import "ClubDetailView.h"
 #import "BrandDetailView.h"
 #import "UIImageView+WebCache.h"
+#import "LocationManagerData.h"
+
+
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
@@ -47,7 +50,6 @@
     NSArray *orderArray;
     TicketCiew *ticketV;
 }
-
 
 -(id)initWithController:(id)controller andOrderArr:(NSArray *)orderArr{
     if(self=[super init]){
@@ -70,8 +72,6 @@
 }
 
 -(void)setCalendarData{
-    
-    
     
     [activityDetailV setCalendar];
 
@@ -107,6 +107,7 @@
 
 
 -(void)pushController:(NSDictionary*)dic{
+    
     SimpleChatViewController *simpleC = [[SimpleChatViewController alloc] init];
     [simpleC chatTargetID:dic];
     [[_obj navigationController]  pushViewController:simpleC animated:NO];
@@ -140,6 +141,64 @@
         
     }];
 }
+
+
+
+-(void)getNearbyOfflineInformation{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"200" forKey:@"distance"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getNearbyOfflineInformation" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)getOfflineInformationByCity:(NSString*)cityName{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:cityName forKey:@"city"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationByCity" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+-(void)getOfflineInformationCity{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+  
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationCity" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+        
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
 
 
 -(void)addActivityDetailView:(NSDictionary*)ActivityDic andPhotoWall:(int)isPhoto{
@@ -414,7 +473,6 @@
     }];
 }
 
-
 -(void)followBrand:(NSString*)ID andisLike:(int)islike andType:(int)typeNum{
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -431,11 +489,9 @@
             
             }else{
                 [[DataHander sharedDataHander] showViewWithStr:@"取消成功" andTime:1 andPos:CGPointZero];
-
             }
             
         }else{
-            
             
         }
     }fail:^{
@@ -469,6 +525,9 @@
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
+    
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformation" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){

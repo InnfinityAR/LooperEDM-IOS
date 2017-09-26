@@ -467,6 +467,7 @@
 		C45489341E9E073500BB1591 /* btn_user_home.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489321E9E073500BB1591 /* btn_user_home.png */; };
 		C45489361E9E242D00BB1591 /* bg_chat_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489351E9E242D00BB1591 /* bg_chat_back.png */; };
 		C45489381E9E2EDD00BB1591 /* bg_title_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = C45489371E9E2EDD00BB1591 /* bg_title_chat.png */; };
+		C459CA8C1F729CC700DE8A97 /* punchCard.png in Resources */ = {isa = PBXBuildFile; fileRef = C459CA8B1F729CC700DE8A97 /* punchCard.png */; };
 		C45C063F1F56E32B0037ECC2 /* btn_goBack.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E8011F2899A6006270E3 /* btn_goBack.png */; };
 		C45D82011F4EC0080055DE99 /* LocationManagerData.m in Sources */ = {isa = PBXBuildFile; fileRef = C45D82001F4EC0080055DE99 /* LocationManagerData.m */; };
 		C45DAF191EA1FA9D000AB5C5 /* MusicListManage.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DAF181EA1FA9D000AB5C5 /* MusicListManage.m */; };
@@ -593,6 +594,7 @@
 		C4AE24811E1FD5D2009D5851 /* bg_looper_man.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AE247F1E1FD5D2009D5851 /* bg_looper_man.png */; };
 		C4AE24821E1FD5D2009D5851 /* bg_looper_woman.png in Resources */ = {isa = PBXBuildFile; fileRef = C4AE24801E1FD5D2009D5851 /* bg_looper_woman.png */; };
 		C4AE8C181E4822480019B8A1 /* HowToPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4AE8C171E4822480019B8A1 /* HowToPlayView.m */; };
+		C4B16BBE1F6FC23C005A2416 /* CreateFleetGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B16BBD1F6FC23C005A2416 /* CreateFleetGroupView.m */; };
 		C4B4ABB81E50799600DC000E /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B4ABB71E50799600DC000E /* WebViewController.m */; };
 		C4B4ABBF1E50882D00DC000E /* active_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B4ABBD1E50882D00DC000E /* active_back.png */; };
 		C4B4ABC01E50882D00DC000E /* active_share.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B4ABBE1E50882D00DC000E /* active_share.png */; };
@@ -1539,6 +1541,7 @@
 		C45489321E9E073500BB1591 /* btn_user_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_user_home.png; sourceTree = "<group>"; };
 		C45489351E9E242D00BB1591 /* bg_chat_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_chat_back.png; sourceTree = "<group>"; };
 		C45489371E9E2EDD00BB1591 /* bg_title_chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_title_chat.png; sourceTree = "<group>"; };
+		C459CA8B1F729CC700DE8A97 /* punchCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = punchCard.png; path = activityImage/punchCard.png; sourceTree = "<group>"; };
 		C45D81FF1F4EC0080055DE99 /* LocationManagerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerData.h; sourceTree = "<group>"; };
 		C45D82001F4EC0080055DE99 /* LocationManagerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerData.m; sourceTree = "<group>"; };
 		C45DAF171EA1FA9D000AB5C5 /* MusicListManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicListManage.h; sourceTree = "<group>"; };
@@ -1713,6 +1716,8 @@
 		C4AE24801E1FD5D2009D5851 /* bg_looper_woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_looper_woman.png; sourceTree = "<group>"; };
 		C4AE8C161E4822480019B8A1 /* HowToPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayView.h; sourceTree = "<group>"; };
 		C4AE8C171E4822480019B8A1 /* HowToPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToPlayView.m; sourceTree = "<group>"; };
+		C4B16BBC1F6FC23C005A2416 /* CreateFleetGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFleetGroupView.h; sourceTree = "<group>"; };
+		C4B16BBD1F6FC23C005A2416 /* CreateFleetGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFleetGroupView.m; sourceTree = "<group>"; };
 		C4B4ABB61E50799600DC000E /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		C4B4ABB71E50799600DC000E /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		C4B4ABBD1E50882D00DC000E /* active_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_back.png; sourceTree = "<group>"; };
@@ -2176,6 +2181,7 @@
 		B225B9711F307AF00008E5AF /* activty */ = {
 			isa = PBXGroup;
 			children = (
+				C459CA8B1F729CC700DE8A97 /* punchCard.png */,
 				B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */,
 				B2A4DA6B1F14E4050085814F /* sun.png */,
 				B22BFCE31F61702C00FD131E /* allShowBtn.jpg */,
@@ -3485,6 +3491,8 @@
 				C4C752E01F6914CD002FD42F /* FleetMangerView.m */,
 				C461E2371F6BE59D0048F979 /* CreateFleetNameView.h */,
 				C461E2381F6BE59D0048F979 /* CreateFleetNameView.m */,
+				C4B16BBC1F6FC23C005A2416 /* CreateFleetGroupView.h */,
+				C4B16BBD1F6FC23C005A2416 /* CreateFleetGroupView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5181,6 +5189,7 @@
 				B22BFCF21F61702D00FD131E /* bottomIV.png in Resources */,
 				C4A4D0C31E79204F002519F2 /* mainBack.png in Resources */,
 				C4C4B49E1E9CC6CD003E2705 /* btn_userList.png in Resources */,
+				C459CA8C1F729CC700DE8A97 /* punchCard.png in Resources */,
 				B22A04151F6B927700E3EA2E /* CreateFleet_agree.png in Resources */,
 				C43E77041E091D8D004A5288 /* icon_point.png in Resources */,
 				C42E803D1EC332D400D9CC43 /* loading_00006.png in Resources */,
@@ -5611,6 +5620,7 @@
 				C43F56A91F540549009BE471 /* FamilyViewModel.m in Sources */,
 				C43E3D221EA61F7400EA4A6E /* CreateLoopViewModel.m in Sources */,
 				C4664A331E20086E005755C6 /* GFCalendarMonth.m in Sources */,
+				C4B16BBE1F6FC23C005A2416 /* CreateFleetGroupView.m in Sources */,
 				C4BCE7BB1E0920180087E6C5 /* StartViewController.m in Sources */,
 				C4CE1C2E1E30D06E001DAFBE /* looperDetailView.m in Sources */,
 				C46E7D161EADB21700996110 /* myInfoView.m in Sources */,
@@ -5829,7 +5839,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = Looper/Looper.entitlements;
@@ -5855,7 +5865,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5887,7 +5897,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_ENTITLEMENTS = Looper/Looper.entitlements;
@@ -5912,7 +5922,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

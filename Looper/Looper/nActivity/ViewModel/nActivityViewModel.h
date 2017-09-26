@@ -52,4 +52,10 @@
 -(void)jumpToSaleTicketController:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic;
 
 -(void)removeActivityAction;
+
+-(void)getOfflineInformationCity;
+
+-(void)getOfflineInformationByCity:(NSString*)cityName;
+-(void)getNearbyOfflineInformation;
+
 @end
