@@ -74,19 +74,12 @@
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
                 if([activity[@"recommendation"] intValue]==1){
-<<<<<<< HEAD
                 
                 [_currentActivityArr addObject:activity];
             } else{
                 [temp addObject:activity];
             }
-=======
-                    
-                    [_currentActivityArr addObject:activity];
-                } else{
-                    [temp addObject:activity];
-                }
->>>>>>> 3ec8188d669de3e63866eef6b0b96fa6667b74eb
+
             }
         }
         NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
