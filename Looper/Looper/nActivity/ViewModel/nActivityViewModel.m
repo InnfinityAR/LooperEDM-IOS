@@ -151,7 +151,31 @@
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getNearbyOfflineInformation" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
+            NSArray *array=responseObject[@"data"];
+            NSMutableArray* temp=[[NSMutableArray alloc]init];
+            for (int i=0; i<array.count; i++) {
+                NSDictionary *activity=array[i];
+                //当前时间的时间戳
+                NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+                NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+                if (timeNow<=[activity[@"starttime"]integerValue]) {
+                        [temp addObject:activity];
+                }
+            }
+            NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
+                                ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                    int value1 = [[obj1 objectForKey:@"starttime"] intValue];
+                                    int value2 = [[obj2 objectForKey:@"starttime"] intValue];
+                                    if (value1 < value2) {
+                                        return NSOrderedDescending;
+                                    }else if (value1 == value2){
+                                        return NSOrderedSame;
+                                    }else{
+                                        return NSOrderedAscending;
+                                    }
+                                }];
             
+            view.nearArr=testArr;
             
         }else{
             
@@ -168,8 +192,30 @@
     [dic setObject:cityName forKey:@"city"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationByCity" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            
-            
+            NSArray *array=responseObject[@"data"];
+            NSMutableArray* temp=[[NSMutableArray alloc]init];
+            for (int i=0; i<array.count; i++) {
+                NSDictionary *activity=array[i];
+                //当前时间的时间戳
+                NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+                NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+                if (timeNow<=[activity[@"starttime"]integerValue]) {
+                    [temp addObject:activity];
+                }
+            }
+            NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
+                                ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                                    int value1 = [[obj1 objectForKey:@"starttime"] intValue];
+                                    int value2 = [[obj2 objectForKey:@"starttime"] intValue];
+                                    if (value1 < value2) {
+                                        return NSOrderedDescending;
+                                    }else if (value1 == value2){
+                                        return NSOrderedSame;
+                                    }else{
+                                        return NSOrderedAscending;
+                                    }
+                                }];
+            [view reloadTableDataWithNearArr:testArr];
         }else{
             
             
@@ -575,6 +621,7 @@
     [view removeFromSuperview];
     
     view=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self  andMyData:array];
+    [self getNearbyOfflineInformation];
     [[_obj view]addSubview:view];
 }
 

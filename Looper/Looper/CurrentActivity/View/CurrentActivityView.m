@@ -22,6 +22,7 @@
     UIView *lineView;
     //用于判断是否点击了历史活动的按钮
     NSInteger isHistory;
+    
 }
 @end
 @implementation CurrentActivityView
@@ -62,10 +63,10 @@
             NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
-                if([activity[@"recommendation"] intValue]==1){
+//                if([activity[@"recommendation"] intValue]==1){
 
                     [temp addObject:activity];
-                }
+//                }
             }
         }
         NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
@@ -91,51 +92,13 @@
     }
     return _currentActivityArr;
 }
--(NSMutableArray *)nearArr{
-    if (!_nearArr) {
-        NSMutableArray* temp=[[NSMutableArray alloc]init];
-        _nearArr=[[NSMutableArray alloc]init];
-        for (int i=0; i<self.dataArr.count; i++) {
-            NSDictionary *activity=self.dataArr[i];
-            //当前时间的时间戳
-            NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
-            NSInteger timeNow =(long)[datenow timeIntervalSince1970];
-            if (timeNow<=[activity[@"starttime"]integerValue]) {
-                if([activity[@"recommendation"] intValue]==1){
-                } else{
-                    [temp addObject:activity];
-                }
-            }
-        }
-        NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
-                            ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                                int value1 = [[obj1 objectForKey:@"starttime"] intValue];
-                                int value2 = [[obj2 objectForKey:@"starttime"] intValue];
-                                if (value1 > value2) {
-                                    return NSOrderedDescending;
-                                }else if (value1 == value2){
-                                    return NSOrderedSame;
-                                }else{
-                                    return NSOrderedAscending;
-                                }
-                            }];
-        
-        
-        NSLog(@"%@",testArr);
-        
-        for(int i=0;i<[testArr count];i++){
-            
-            [_nearArr addObject:[testArr objectAtIndex:i]];
-        }
-    }
-    return _nearArr;
-}
+
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
 #warning-如果这句话不加则没有初始化view不能触发点击事件
     if (self=[super initWithFrame:frame]) {
         self.obj=(nActivityViewModel*)obj;
         self.dataArr=myDataSource;
-        isHistory=0;
+        isHistory=1;
         self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
         self.transform = CGAffineTransformMakeScale(0.1,0.1);
 
@@ -152,7 +115,7 @@
         looperName.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
          looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
-        isHistory=0;
+        isHistory=1;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame1=lineView.frame;
             frame1=CGRectMake(179*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
@@ -164,7 +127,7 @@
         looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
-        isHistory=1;
+        isHistory=2;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame2=lineView.frame;
             frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
@@ -176,7 +139,7 @@
         looperName3.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
-        isHistory=2;
+        isHistory=0;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame2=lineView.frame;
             frame2=CGRectMake(457*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
@@ -185,7 +148,9 @@
         [self.tableView reloadData];
     }
     if (tap.view.tag==4) {
-        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self.obj andDetailDic:nil];
+        NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]init];
+        [dataDic setObject:@"上海" forKey:@"currentCity"];
+        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self andDetailDic:dataDic];
         [self addSubview:selectV];
     }
 
@@ -228,30 +193,30 @@
     }
     else if(button.tag==102){
    //分享按钮
-//        [_obj shareh5View:[_commendArray objectAtIndex:pageIndex]];
+        [_obj shareh5View:[self.dataArr objectAtIndex:0]];
     }
 }
 
 
 -(void)initView{
-    UILabel *locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andText:@"      上海上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
-    locationLB.layer.cornerRadius=4*DEF_Adaptation_Font;
-    locationLB.layer.masksToBounds=YES;
-    locationLB.backgroundColor=ColorRGB(39, 39, 80, 0.8);
-    CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
-    CGRect frame3=locationLB.frame;
+    _locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andText:@"      上海上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    _locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
+    _locationLB.layer.cornerRadius=4*DEF_Adaptation_Font;
+    _locationLB.layer.masksToBounds=YES;
+    _locationLB.backgroundColor=ColorRGB(39, 39, 80, 0.8);
+    CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame3=_locationLB.frame;
     frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
-    locationLB.frame=frame3;
-    [self addSubview:locationLB];
-    locationLB.tag=4;
-    locationLB .userInteractionEnabled=YES;
+    _locationLB.frame=frame3;
+    [self addSubview:_locationLB];
+    _locationLB.tag=4;
+    _locationLB .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap4 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
-    [ locationLB addGestureRecognizer:singleTap4];
+    [ _locationLB addGestureRecognizer:singleTap4];
     
     UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(15*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     locationIV.image=[UIImage imageNamed:@"icon_calendar_location"];
-    [locationLB addSubview:locationIV];
+    [_locationLB addSubview:locationIV];
     
     looperName = [LooperToolClass createLableView:CGPointMake(159*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"全部" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     looperName.font=[UIFont boldSystemFontOfSize:15];
@@ -328,7 +293,7 @@
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (isHistory==1) {
+    if (isHistory==0) {
         return self.historyActivityArr.count;
     }else if (isHistory==2){
         return self.nearArr.count;
@@ -346,7 +311,7 @@
     //cell不能被选中
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     NSDictionary *activity=[NSDictionary dictionary];
-        if (isHistory==1) {
+        if (isHistory==0) {
         activity=self.historyActivityArr[indexPath.row];
     }
         else if (isHistory==2){
@@ -392,14 +357,14 @@
         [cell.ticketLB setHidden:YES];
         [cell.saleBtn setHidden:YES];
        
-         if (isHistory) {
+         if (isHistory==0) {
                [cell.finishLB setHidden:NO];
          }
     }
     else{
         [cell.ticketLB setHidden:NO];
         [cell.saleBtn setHidden:NO];
-        if (isHistory) {
+        if (isHistory==0) {
 //            cell.saleBtn.layer.borderColor=[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0].CGColor;
 //            [cell.saleBtn setTitleColor:[UIColor colorWithRed:170.0/255.0 green:172.0/255.0 blue:194.0/255.0 alpha:1.0] forState:(UIControlStateNormal)];
 //            [cell.saleBtn setTitle:@"票价" forState:(UIControlStateNormal)];
@@ -460,9 +425,12 @@
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (isHistory) {
+    if (isHistory==0) {
          [self.obj addActivityDetailView:self.historyActivityArr[indexPath.row] andPhotoWall:0];
-    }else{
+    }else if (isHistory==2){
+         [self.obj addActivityDetailView:self.nearArr[indexPath.row] andPhotoWall:0];
+    }
+    else{
           [self.obj addActivityDetailView:self.currentActivityArr[indexPath.row] andPhotoWall:0];
         
     }
@@ -471,4 +439,17 @@
 
 }
 
+-(void)reloadTableDataWithCity:(NSString *)city{
+    [self.obj getOfflineInformationByCity:city];
+    
+}
+-(void)reloadTableDataWithNearArr:(NSArray *)nearArr{
+    self.nearArr=nearArr;
+    isHistory=2;
+    CGRect frame2=lineView.frame;
+    frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+    lineView.frame=frame2;
+    [self.tableView reloadData];
+    
+}
 @end
