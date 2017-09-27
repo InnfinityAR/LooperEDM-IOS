@@ -24,4 +24,7 @@
 @property(nonatomic,strong)UILabel *locationLB;
 -(void)reloadTableDataWithCity:(NSString *)city;
 -(void)reloadTableDataWithNearArr:(NSArray *)nearArr;
+
+//city
+@property(nonatomic,strong)NSArray *cityArr;
 @end

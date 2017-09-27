@@ -192,7 +192,7 @@
                                 ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                                     int value1 = [[obj1 objectForKey:@"starttime"] intValue];
                                     int value2 = [[obj2 objectForKey:@"starttime"] intValue];
-                                    if (value1 < value2) {
+                                    if (value1 > value2) {
                                         return NSOrderedDescending;
                                     }else if (value1 == value2){
                                         return NSOrderedSame;
@@ -233,7 +233,7 @@
                                 ^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                                     int value1 = [[obj1 objectForKey:@"starttime"] intValue];
                                     int value2 = [[obj2 objectForKey:@"starttime"] intValue];
-                                    if (value1 < value2) {
+                                    if (value1 > value2) {
                                         return NSOrderedDescending;
                                     }else if (value1 == value2){
                                         return NSOrderedSame;
@@ -258,8 +258,7 @@
   
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationCity" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-        
-            
+            view.cityArr=responseObject[@"data"];
         }else{
             
             
@@ -648,6 +647,7 @@
     
     view=[[CurrentActivityView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self  andMyData:array];
     [self getNearbyOfflineInformation];
+    [self getOfflineInformationCity];
     [[_obj view]addSubview:view];
 }
 
