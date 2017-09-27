@@ -15,11 +15,11 @@
 @property(nonatomic,strong)NSArray *cityArr;
 @end
 @implementation SelectCityView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic andCityArr:(NSArray *)cityArr{
     if (self=[super initWithFrame:frame]) {
         self.obj=(CurrentActivityView *)idObject;
         self.dataDic=detailDic;
-        self.cityArr=@[@"广东",@"厦门",@"杭州",@"北京",@"海南"];
+        self.cityArr=cityArr;
         [self initView];
         [self initBackView];
     }
@@ -44,16 +44,18 @@
     cityLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [self addSubview:cityLB];
     
+    UIScrollView *scrollV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 320*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-320*DEF_Adaptation_Font*0.5)];
+    [self addSubview:scrollV];
     for (int i=0; i<self.cityArr.count; i++) {
         if (i%2==0) {
-            UIButton *btn=[self creatSelectButtonWithTag:i andPoint:CGPointMake(25*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5+80*(i/2)*DEF_Adaptation_Font*0.5)andTitle:self.cityArr[i]];
-            [self addSubview:btn];
+            UIButton *btn=[self creatSelectButtonWithTag:i andPoint:CGPointMake(25*DEF_Adaptation_Font*0.5, 80*(i/2)*DEF_Adaptation_Font*0.5)andTitle:self.cityArr[i]];
+            [scrollV addSubview:btn];
         }else{
-            UIButton *btn=[self creatSelectButtonWithTag:i andPoint:CGPointMake(width+50*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5+80*(i/2)*DEF_Adaptation_Font*0.5)andTitle:self.cityArr[i]];
-            [self addSubview:btn];
+            UIButton *btn=[self creatSelectButtonWithTag:i andPoint:CGPointMake(width+50*DEF_Adaptation_Font*0.5, 80*(i/2)*DEF_Adaptation_Font*0.5)andTitle:self.cityArr[i]];
+            [scrollV addSubview:btn];
         }
     }
-    
+    scrollV.contentSize=CGSizeMake(DEF_WIDTH(self), 90*DEF_Adaptation_Font*0.5+80*((self.cityArr.count-1)/2)*DEF_Adaptation_Font*0.5);
 }
 -(UIButton *)creatSelectButtonWithTag:(int)tag andPoint:(CGPoint )point andTitle:(NSString *)title{
     CGFloat width=(DEF_WIDTH(self)-75*DEF_Adaptation_Font*0.5)/2;

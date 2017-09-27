@@ -14,6 +14,8 @@
 #import "nActivityViewModel.h"
 #import "CarlendarView.h"
 #import "SelectCityView.h"
+#import <CoreLocation/CoreLocation.h>
+#import "LocationManagerData.h"
 @interface CurrentActivityView()<CurrentActivityTableViewCellDelegate>
 {
     UILabel *looperName;
@@ -24,8 +26,16 @@
     NSInteger isHistory;
     
 }
+@property (nonatomic, strong) CLGeocoder *geoC;
 @end
 @implementation CurrentActivityView
+-(CLGeocoder *)geoC
+{
+    if (!_geoC) {
+        _geoC = [[CLGeocoder alloc] init];
+    }
+    return _geoC;
+}
 //更新tableview
 -(void)reloadTableData:(NSMutableArray*)DataLoop{
     self.dataArr=DataLoop;
@@ -63,10 +73,12 @@
             NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
-//                if([activity[@"recommendation"] intValue]==1){
-
+                if([activity[@"recommendation"] intValue]==1){
+                    
+                    [_currentActivityArr addObject:activity];
+                } else{
                     [temp addObject:activity];
-//                }
+                }
             }
         }
         NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:
@@ -105,7 +117,7 @@
                //加载懒加载
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CurrentActivityTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
         [self initView];
-        
+        [self creatLocationCity];
         [self animation];
     }
     return self;
@@ -150,7 +162,7 @@
     if (tap.view.tag==4) {
         NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]init];
         [dataDic setObject:@"上海" forKey:@"currentCity"];
-        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self andDetailDic:dataDic];
+        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self andDetailDic:dataDic andCityArr:self.cityArr];
         [self addSubview:selectV];
     }
 
@@ -299,11 +311,26 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (isHistory==0) {
+        if (self.historyActivityArr.count==0) {
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        }else{
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        }
         return self.historyActivityArr.count;
     }else if (isHistory==2){
+        if (self.nearArr.count==0) {
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        }else{
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        }
         return self.nearArr.count;
     }
     else{
+        if (self.currentActivityArr.count==0) {
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        }else{
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        }
       return self.currentActivityArr.count;
     }
   
@@ -459,5 +486,24 @@
     lineView.frame=frame2;
     [self.tableView reloadData];
     
+}
+-(void)creatLocationCity{
+    double latitude = [LocationManagerData sharedManager].LocationPoint_xy.y;
+    double longitude = [LocationManagerData sharedManager].LocationPoint_xy.x;
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    
+    // 反地理编码(经纬度---地址)
+    [self.geoC reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if(error == nil)
+        {
+            CLPlacemark *pl = [placemarks firstObject];
+            _locationLB.text=[NSString stringWithFormat:@"      %@",pl.country];
+        }else
+        {
+            NSLog(@"错误");
+        }
+    }];
+
 }
 @end
