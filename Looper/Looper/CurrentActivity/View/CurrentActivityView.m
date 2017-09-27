@@ -451,6 +451,9 @@
 -(void)reloadTableDataWithNearArr:(NSArray *)nearArr{
     self.nearArr=nearArr;
     isHistory=2;
+    looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+    looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
     CGRect frame2=lineView.frame;
     frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
     lineView.frame=frame2;
