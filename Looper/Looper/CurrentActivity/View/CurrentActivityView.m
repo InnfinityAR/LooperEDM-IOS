@@ -63,10 +63,12 @@
             NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
             NSInteger timeNow =(long)[datenow timeIntervalSince1970];
             if (timeNow<=[activity[@"starttime"]integerValue]) {
-//                if([activity[@"recommendation"] intValue]==1){
-
-                    [temp addObject:activity];
-//                }
+                if([activity[@"recommendation"] intValue]==1){
+                
+                [_currentActivityArr addObject:activity];
+            } else{
+                [temp addObject:activity];
+            }
             }
         }
         NSArray *testArr = [temp sortedArrayWithOptions:NSSortStable usingComparator:

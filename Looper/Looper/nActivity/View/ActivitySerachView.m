@@ -142,9 +142,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(indexPath.section==0){
-
-    }
+    [_obj addActivityDetailView:[activityData objectAtIndex:indexPath.row] andPhotoWall:0];
     
 }
 
@@ -191,18 +189,10 @@
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, 410*DEF_Adaptation_Font*0.5)];
     
-    [cell addSubview:bgView];
-    
-    
-   // bgView.tag = [[[[_djData objectForKey:@"information"] objectAtIndex:i] objectForKey:@"activityid"] intValue];
-    bgView.userInteractionEnabled=YES;
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createActiveView:)];
-    [bgView addGestureRecognizer:singleTap];
-    
-    
+    [cell.contentView addSubview:bgView];
+
     [self createActiveCellView:[activityData objectAtIndex:indexPath.row] andBgView:bgView];
 
-    
     
     return cell;
 }
@@ -260,7 +250,7 @@
     UILabel *timeLable = [[UILabel alloc] initWithFrame:CGRectMake(310*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     [timeLable setTextColor:[UIColor whiteColor]];
     [timeLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
-  //  timeLable.text = [data objectForKey:@"starttime"];
+    timeLable.text = [data objectForKey:@"timetag"];
     [view addSubview:timeLable];
     
     
