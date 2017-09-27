@@ -33,7 +33,7 @@
 #import "BrandDetailView.h"
 #import "UIImageView+WebCache.h"
 #import "LocationManagerData.h"
-
+#import "ActivitySerachView.h"
 
 @implementation nActivityViewModel{
 
@@ -42,6 +42,7 @@
     NSMutableArray *recommendArray;
     
     ActivityDetailView *activityDetailV;
+    ActivitySerachView *activityView;
 
     int _isPhoto;
     PlayerInfoView * _playerInfoV;
@@ -135,6 +136,31 @@
                 [[_obj view]addSubview:brandDetailV];
             }
         }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+-(void)createSerachView{
+    
+    activityView = [[ActivitySerachView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+  [[_obj view]addSubview:activityView];
+    
+    
+}
+
+-(void)searchOfflineInformation:(NSString*)serachStr{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:serachStr forKey:@"searchText"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchOfflineInformation" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            [activityView updateDataView:responseObject[@"data"]];
+        }else{
+            
             
         }
     }fail:^{

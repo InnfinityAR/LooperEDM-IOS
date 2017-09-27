@@ -260,6 +260,7 @@
 		C40F896F1E1CEA2300DABEAA /* SerachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C40F896B1E1CEA2300DABEAA /* SerachViewController.m */; };
 		C40F89741E1CF87F00DABEAA /* SerachViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C40F89731E1CF87F00DABEAA /* SerachViewModel.m */; };
 		C40F89771E1CF8A600DABEAA /* SerachView.m in Sources */ = {isa = PBXBuildFile; fileRef = C40F89761E1CF8A600DABEAA /* SerachView.m */; };
+		C4119B7B1F7A5A2C002BDED5 /* ActivitySerachView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4119B7A1F7A5A2C002BDED5 /* ActivitySerachView.m */; };
 		C4129BE51EAB3D380010A566 /* MusicPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4129BE41EAB3D380010A566 /* MusicPlayView.m */; };
 		C4129BE81EAB53350010A566 /* EditTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4129BE71EAB53350010A566 /* EditTitleView.m */; };
 		C4129BEB1EAB5FFF0010A566 /* MoveLableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4129BEA1EAB5FFF0010A566 /* MoveLableView.m */; };
@@ -1294,6 +1295,8 @@
 		C40F89731E1CF87F00DABEAA /* SerachViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerachViewModel.m; sourceTree = "<group>"; };
 		C40F89751E1CF8A600DABEAA /* SerachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerachView.h; sourceTree = "<group>"; };
 		C40F89761E1CF8A600DABEAA /* SerachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerachView.m; sourceTree = "<group>"; };
+		C4119B791F7A5A2C002BDED5 /* ActivitySerachView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivitySerachView.h; sourceTree = "<group>"; };
+		C4119B7A1F7A5A2C002BDED5 /* ActivitySerachView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivitySerachView.m; sourceTree = "<group>"; };
 		C4129BE31EAB3D380010A566 /* MusicPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayView.h; sourceTree = "<group>"; };
 		C4129BE41EAB3D380010A566 /* MusicPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayView.m; sourceTree = "<group>"; };
 		C4129BE61EAB53350010A566 /* EditTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTitleView.h; sourceTree = "<group>"; };
@@ -3634,6 +3637,8 @@
 				C42D88291F022C1200CE8F01 /* ClubDetailView.m */,
 				C42D882B1F022C4100CE8F01 /* BrandDetailView.h */,
 				C42D882C1F022C4100CE8F01 /* BrandDetailView.m */,
+				C4119B791F7A5A2C002BDED5 /* ActivitySerachView.h */,
+				C4119B7A1F7A5A2C002BDED5 /* ActivitySerachView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5649,6 +5654,7 @@
 				C446CDEA1E8531CC00921FD1 /* LoginAccountView.m in Sources */,
 				C40E25D81EB6526100BB3544 /* songSelectView.m in Sources */,
 				B22BFCB91F616F9F00FD131E /* FamilyMessageView.m in Sources */,
+				C4119B7B1F7A5A2C002BDED5 /* ActivitySerachView.m in Sources */,
 				C4AE8C181E4822480019B8A1 /* HowToPlayView.m in Sources */,
 				B23521641F4EA344003D06CB /* SGQRCodeGenerateManager.m in Sources */,
 				C4BCE7401E091E710087E6C5 /* UIAlertView+AFNetworking.m in Sources */,

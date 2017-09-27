@@ -28,6 +28,9 @@
 #import "SimpleChatViewController.h"
 #import "CreateFleetGroupView.h"
 
+#import "MemberManageView.h"
+#import "ChangeJobView.h"
+
 
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
@@ -47,8 +50,7 @@
     CreateFleetNameView  *createFleetV;
 
     CreateFleetGroupView *CreateFleetGroupV;
-    
-    
+
     MemberManageView *memberManageV;
 
     NSString *ownername;

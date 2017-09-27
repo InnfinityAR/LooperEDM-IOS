@@ -190,6 +190,11 @@
     }
     if (button.tag==120) {
     //搜索按钮点击
+        
+        [self.obj createSerachView];
+        
+        
+        
     }
     else if(button.tag==102){
    //分享按钮
