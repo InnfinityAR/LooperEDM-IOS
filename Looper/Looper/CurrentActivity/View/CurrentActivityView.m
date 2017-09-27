@@ -17,6 +17,7 @@
 {
     UILabel *looperName;
     UILabel *looperName2;
+    UILabel *looperName3;
     UIView *lineView;
     //用于判断是否点击了历史活动的按钮
     BOOL isHistory;
@@ -86,15 +87,13 @@
         
         for(int i=0;i<[testArr count];i++){
         
-            [_currentActivityArr addObject:[testArr objectAtIndex:i]];
+            [_nearArr addObject:[testArr objectAtIndex:i]];
         }
         
         
         // [_currentActivityArr arrayByAddingObjectsFromArray:testArr];
   
     }
-    
-    
     return _currentActivityArr;
 }
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andMyData:(NSArray*)myDataSource{
@@ -172,26 +171,46 @@
         CarlendarView *carlendarV=[[CarlendarView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)andData:self.dataArr andObj:self.obj];
         [self addSubview:carlendarV];
     }
+    if (button.tag==120) {
+    //搜索按钮点击
+        
+        [self.obj createSerachView];
+        
+        
+        
+    }
 }
 
 
 -(void)initView{
-    looperName = [LooperToolClass createLableView:CGPointMake(200*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"全部活动" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    UIButton *searchBtn = [LooperToolClass createBtnImageNameReal:@"btn_serach_select.png" andRect:CGPointMake(166*DEF_Adaptation_Font*0.5,32*DEF_Adaptation_Font*0.5) andTag:120 andSelectImage:@"btn_serach_select.png" andClickImage:nil andTextStr:nil andSize:CGSizeMake(50*DEF_Adaptation_Font*0.5,70*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:searchBtn];
+    looperName = [LooperToolClass createLableView:CGPointMake(159*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"全部" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     looperName.font=[UIFont boldSystemFontOfSize:15];
     [self addSubview:looperName];
     looperName.tag=1;
     looperName .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ looperName addGestureRecognizer:singleTap];
-    lineView=[[UIView alloc]initWithFrame:CGRectMake(240*DEF_Adaptation_Font*0.5, 137*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(179*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
     lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
     [self addSubview:lineView];
-    looperName2 = [LooperToolClass createLableView:CGPointMake(350*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(152*DEF_Adaptation_Font*0.5,97*DEF_Adaptation_Font*0.5) andText:@"历史活动" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    looperName2 = [LooperToolClass createLableView:CGPointMake(298*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"附近" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    looperName2.font=[UIFont boldSystemFontOfSize:15];
     [self addSubview:looperName2];
     looperName2.tag=2;
     looperName2 .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ looperName2 addGestureRecognizer:singleTap2];
+    
+    looperName3 = [LooperToolClass createLableView:CGPointMake(437*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"历史" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    looperName3.font=[UIFont boldSystemFontOfSize:15];
+    [self addSubview:looperName3];
+    looperName3.tag=3;
+    looperName3 .userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap3 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
+    [ looperName3 addGestureRecognizer:singleTap3];
+    
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(-20*DEF_Adaptation_Font*0.5,-10*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(188*DEF_Adaptation_Font*0.5,143*DEF_Adaptation_Font*0.5) andTarget:self];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"hotActivity.png"] forState:UIControlStateNormal];
     [self addSubview:backBtn];
@@ -212,7 +231,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 142*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 140*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 185*DEF_Adaptation_Font*0.5,DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT- 185*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [self addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;

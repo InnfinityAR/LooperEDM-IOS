@@ -57,5 +57,7 @@
 
 -(void)getOfflineInformationByCity:(NSString*)cityName;
 -(void)getNearbyOfflineInformation;
+-(void)searchOfflineInformation:(NSString*)serachStr;
+-(void)createSerachView;
 
 @end
