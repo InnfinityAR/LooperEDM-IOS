@@ -61,7 +61,7 @@
 
 -(void)createFleetViewName;
 -(void)createFleetGroup:(NSString*)FleetName;
-
+//创建家族小组
 -(void)createRaverGroup:(NSString*)raverId andLeaderId:(NSString*)leaderId andGroupName:(NSString*)name;
 
 

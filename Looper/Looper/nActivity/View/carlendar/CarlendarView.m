@@ -285,6 +285,17 @@
     else{
         NSDictionary *activity=self.events[indexPath.row];
         [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
+//加入城市的显示
+        cell.cityLB.text=[NSString stringWithFormat:@"  %@",[activity objectForKey:@"cname"]];
+        CGSize lblSize3 = [cell.cityLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 35*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+        CGRect frame3=cell.cityLB.frame;
+        frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
+        cell.cityLB.frame=frame3;
+        
+        CGRect frame1=cell.shadowIV.frame;
+        frame1.size.width=lblSize3.width;
+        cell.shadowIV.frame=frame1;
+        
         if (activity[@"location"]==[NSNull null]) {
             
         }
