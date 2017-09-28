@@ -217,14 +217,15 @@
 
 
 -(void)initView{
-    _locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,50*DEF_Adaptation_Font*0.5) andText:@"      上海上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    _locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
+    _locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,53*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andText:@"   上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    _locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     _locationLB.layer.cornerRadius=4*DEF_Adaptation_Font;
     _locationLB.layer.masksToBounds=YES;
     _locationLB.backgroundColor=ColorRGB(39, 39, 80, 0.8);
-    CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
     CGRect frame3=_locationLB.frame;
-    frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
+    frame3.size.width=lblSize3.width+50*DEF_Adaptation_Font*0.5;
+    frame3.origin.x=295*DEF_Adaptation_Font*0.5-lblSize3.width/2;
     _locationLB.frame=frame3;
     [self addSubview:_locationLB];
     _locationLB.tag=4;
@@ -232,12 +233,12 @@
     UITapGestureRecognizer *singleTap4 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ _locationLB addGestureRecognizer:singleTap4];
     
-    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(15*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(15*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     locationIV.image=[UIImage imageNamed:@"icon_calendar_location"];
     [_locationLB addSubview:locationIV];
     
     looperName = [LooperToolClass createLableView:CGPointMake(159*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"全部" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    looperName.font=[UIFont boldSystemFontOfSize:15];
+    looperName.font=[UIFont boldSystemFontOfSize:13];
     [self addSubview:looperName];
     looperName.tag=1;
     looperName .userInteractionEnabled=YES;
@@ -247,7 +248,7 @@
     lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
     [self addSubview:lineView];
     looperName2 = [LooperToolClass createLableView:CGPointMake(298*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"附近" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    looperName2.font=[UIFont boldSystemFontOfSize:15];
+    looperName2.font=[UIFont boldSystemFontOfSize:13];
     [self addSubview:looperName2];
     looperName2.tag=2;
     looperName2 .userInteractionEnabled=YES;
@@ -255,7 +256,7 @@
     [ looperName2 addGestureRecognizer:singleTap2];
     
     looperName3 = [LooperToolClass createLableView:CGPointMake(437*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"历史" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    looperName3.font=[UIFont boldSystemFontOfSize:15];
+    looperName3.font=[UIFont boldSystemFontOfSize:13];
     [self addSubview:looperName3];
     looperName3.tag=3;
     looperName3 .userInteractionEnabled=YES;
@@ -294,7 +295,7 @@
         _tableView.delegate = self;
         //禁止上拉
         
-        [_tableView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
+        [_tableView setBackgroundColor:[UIColor colorWithRed:25/255.0 green:26/255.0 blue:63/255.0 alpha:1.0]];
         _tableView.alwaysBounceVertical=NO;
         _tableView.bounces=NO;
         //设置分割线
@@ -355,13 +356,31 @@
        activity=self.currentActivityArr[indexPath.row];
     }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
+    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  10*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
+    label3.text=[NSString stringWithFormat:@"  %@",[activity objectForKey:@"cname"]];
+    label3.textColor=[UIColor whiteColor];
+    label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
+    CGSize lblSize3 = [label3.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 35*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame3=label3.frame;
+    frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
+    label3.frame=frame3;
+    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, frame3.size.width, 35*DEF_Adaptation_Font*0.5)];
+    label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
+    label3.layer.cornerRadius=12;
+    label3.layer.masksToBounds=YES;
+    label3.font=[UIFont systemFontOfSize:12];
+    label3.textAlignment=NSTextAlignmentCenter;
+    [cell.headImage addSubview:label3];
+    [cell.headImage addSubview:label3Shadow];
+    
+    
     if (activity[@"location"]==[NSNull null]) {
     }
-    else if ([activity[@"location"] isEqualToString:@""]){
+    else if ([activity[@"place"] isEqualToString:@""]){
         cell.addressLB.text=activity[@"city"];
     }
     else{
-     cell.addressLB.text=activity[@"location"];
+     cell.addressLB.text=activity[@"place"];
     }
     if (activity[@"activityname"]==[NSNull null]) {
         
@@ -427,6 +446,7 @@
     return cell;
     
 }
+
 - (void)testBtn:(UIButton *)btn{
 //      NSDictionary *activity=self.currentActivityArr[btn.tag];
 //    NSString *ticketURL= [activity objectForKey:@"ticketurl"];
@@ -499,7 +519,7 @@
         if(error == nil)
         {
             CLPlacemark *pl = [placemarks firstObject];
-            _locationLB.text=[NSString stringWithFormat:@"      %@",pl.country];
+            _locationLB.text=[NSString stringWithFormat:@"   %@",pl.country];
         }else
         {
             NSLog(@"错误");
