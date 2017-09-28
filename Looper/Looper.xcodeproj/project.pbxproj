@@ -839,6 +839,8 @@
 		C4F59A7B1EB3782C0088C815 /* btn_select.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F59A791EB3782C0088C815 /* btn_select.png */; };
 		C4F59A7C1EB3782C0088C815 /* btn_unSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F59A7A1EB3782C0088C815 /* btn_unSelect.png */; };
 		C4F6B9B51F422A0500C9F43D /* order.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F6B9B41F422A0500C9F43D /* order.png */; };
+		C4F6C7E21F7B9DBF00A6BCCC /* btn_joinActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F6C7E01F7B9DBF00A6BCCC /* btn_joinActivity.png */; };
+		C4F6C7E41F7BB0B000A6BCCC /* btn_JoinedActivity_1.png in Resources */ = {isa = PBXBuildFile; fileRef = C4F6C7E31F7BB0B000A6BCCC /* btn_JoinedActivity_1.png */; };
 		C4FE98501E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FE984F1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -2093,6 +2095,8 @@
 		C4F59A791EB3782C0088C815 /* btn_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_select.png; sourceTree = "<group>"; };
 		C4F59A7A1EB3782C0088C815 /* btn_unSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_unSelect.png; sourceTree = "<group>"; };
 		C4F6B9B41F422A0500C9F43D /* order.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = order.png; sourceTree = "<group>"; };
+		C4F6C7E01F7B9DBF00A6BCCC /* btn_joinActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_joinActivity.png; sourceTree = "<group>"; };
+		C4F6C7E31F7BB0B000A6BCCC /* btn_JoinedActivity_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_JoinedActivity_1.png; sourceTree = "<group>"; };
 		C4FE984E1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = looperlistCellCollectionViewCell.h; sourceTree = "<group>"; };
 		C4FE984F1E976D3B00C5B6EE /* looperlistCellCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = looperlistCellCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3676,6 +3680,8 @@
 		C460ED111ED4485F00AE6A90 /* nActivity */ = {
 			isa = PBXGroup;
 			children = (
+				C4F6C7E31F7BB0B000A6BCCC /* btn_JoinedActivity_1.png */,
+				C4F6C7E01F7B9DBF00A6BCCC /* btn_joinActivity.png */,
 				B2F021171F7A5FFC00BABA13 /* btn_location.png */,
 				B2F021161F7A5DB000BABA13 /* liveShow_Btn_Search.png */,
 				B2A1E8121F2AEB48006270E3 /* btn_ticketBack.png */,
@@ -5256,6 +5262,7 @@
 				C4C4B4951E9C73D2003E2705 /* previous.png in Resources */,
 				C4E86F6F1F163C0A00D9658D /* selLocation.png in Resources */,
 				C4278E891F62A97200BA6029 /* btn_Family_invite.png in Resources */,
+				C4F6C7E21F7B9DBF00A6BCCC /* btn_joinActivity.png in Resources */,
 				B22BFCF71F61702D00FD131E /* commendYes2.png in Resources */,
 				B22C5A991F5533C1005C9E28 /* wechat.png in Resources */,
 				C4E86F651F161E3800D9658D /* sendActive.png in Resources */,
@@ -5288,6 +5295,7 @@
 				B2A6EEA71ECD3498004BF416 /* ActivityCell.xib in Resources */,
 				C448BB461F0787B6006E9344 /* btn_Photo.png in Resources */,
 				C44E0BEF1E76787600AC4083 /* bk_moon.png in Resources */,
+				C4F6C7E41F7BB0B000A6BCCC /* btn_JoinedActivity_1.png in Resources */,
 				C46A69311EB38C0200FCD5EB /* select_musiclibrary.png in Resources */,
 				C4AE24741E1FA123009D5851 /* icon_looper_follow.png in Resources */,
 				C4BE23D31E52F23400971A60 /* sprite_house_bk.png in Resources */,

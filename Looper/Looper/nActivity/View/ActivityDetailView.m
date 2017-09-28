@@ -33,6 +33,7 @@
     KYGooeyMenu *gooeyMenu;
     
     UIButton *ownerFollowBtn;
+    UIButton *joinBtn;
     
     UIView *colorView;
     
@@ -366,25 +367,25 @@
     [bkScroll addSubview:writeView];
     
     
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font*0.5, 943*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
-    [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[[activityDic objectForKey:@"owner"]objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    headView.layer.cornerRadius = 62*DEF_Adaptation_Font_x*0.5/2;
-    headView.layer.masksToBounds = YES;
+//    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font*0.5, 943*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5, 62*DEF_Adaptation_Font*0.5)];
+//    [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[[activityDic objectForKey:@"owner"]objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//
+//    }];
+//    headView.layer.cornerRadius = 62*DEF_Adaptation_Font_x*0.5/2;
+//    headView.layer.masksToBounds = YES;
+//
+//
+//    headView.userInteractionEnabled=YES;
+//    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickHead)];
+//    [headView addGestureRecognizer:singleTap];
+//
+//    [bkScroll addSubview:headView];
     
+//    UILabel *ownerName = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 978*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"owner"]objectForKey:@"nickname"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+//    [bkScroll addSubview:ownerName];
     
-    headView.userInteractionEnabled=YES;
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickHead)];
-    [headView addGestureRecognizer:singleTap];
-    
-    [bkScroll addSubview:headView];
-    
-    UILabel *ownerName = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 978*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"owner"]objectForKey:@"nickname"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
-    [bkScroll addSubview:ownerName];
-    
-    UILabel *ownerLable = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 939*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:@"发起人" andFontSize:12 andColor:[UIColor colorWithRed:145/255.0 green:185/255.0 blue:197/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
-    [bkScroll addSubview:ownerLable];
+//    UILabel *ownerLable = [LooperToolClass createLableView:CGPointMake(125*DEF_Adaptation_Font_x*0.5, 939*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(290*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:@"发起人" andFontSize:12 andColor:[UIColor colorWithRed:145/255.0 green:185/255.0 blue:197/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
+//    [bkScroll addSubview:ownerLable];
 
     
     UILabel *activityName = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 723*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 90*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"data"]objectForKey:@"activityname"] andFontSize:17 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
@@ -460,14 +461,12 @@
     [bkScroll addSubview:brandStr];
     
     
-    UILabel *title = [LooperToolClass createLableView:CGPointMake(222*DEF_Adaptation_Font_x*0.5, 848*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 46*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"data"]objectForKey:@"tag"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel *title = [LooperToolClass createLableView:CGPointMake(20*DEF_Adaptation_Font_x*0.5, 670*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 46*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"data"]objectForKey:@"tag"] andFontSize:12 andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     
-    [title setBackgroundColor:[UIColor colorWithRed:25/255.0 green:196/255.0 blue:193/255.0 alpha:1.0]];
+    [title setBackgroundColor:[UIColor colorWithRed:45/255.0 green:59/255.0 blue:91/255.0 alpha:1.0]];
     [bkScroll addSubview:title];
     
-    
     if([[activityDic objectForKey:@"dj"] count]>0){
-    
     
         UILabel *DjStr = [LooperToolClass createLableView:CGPointMake(42*DEF_Adaptation_Font_x*0.5, 1540*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(196*DEF_Adaptation_Font_x*0.5, 37*DEF_Adaptation_Font_x*0.5) andText:@"参与艺人" andFontSize:13 andColor:[UIColor colorWithRed:38/255.0 green:40/255.0 blue:47/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         
@@ -498,6 +497,14 @@
     title.layer.cornerRadius =  46*DEF_Adaptation_Font_x*0.5/2;
     title.layer.masksToBounds = YES;
     
+
+
+    joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@" buy_ticket.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    [bkScroll addSubview:joinBtn];
+    
+    [joinBtn setSelected:true];
+
+    
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1163*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"locaton1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1253*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"home.png"];
@@ -512,9 +519,6 @@
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 1489*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 2*DEF_Adaptation_Font*0.5) andImageStr:@"activity_line.png"];
     
     
-  
-    
-    
     [self createImage:CGRectMake(590*DEF_Adaptation_Font*0.5, 1070*DEF_Adaptation_Font*0.5, 37*DEF_Adaptation_Font*0.5, 39*DEF_Adaptation_Font*0.5) andImageStr:@"tirp.png"];
     [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1258*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
     [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1345*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
@@ -525,14 +529,15 @@
     [self createActivityBtn];
     isShowBtn=0;
     
-    ownerFollowBtn = [LooperToolClass createBtnImageNameReal:@"ownerFollow.png" andRect:CGPointMake(475*DEF_Adaptation_Font*0.5,936*DEF_Adaptation_Font*0.5) andTag:1009 andSelectImage:@"owenFollowed.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(144*DEF_Adaptation_Font*0.5,63*DEF_Adaptation_Font*0.5) andTarget:self];
-    [bkScroll addSubview:ownerFollowBtn];
+//    ownerFollowBtn = [LooperToolClass createBtnImageNameReal:@"ownerFollow.png" andRect:CGPointMake(475*DEF_Adaptation_Font*0.5,936*DEF_Adaptation_Font*0.5) andTag:1009 andSelectImage:@"owenFollowed.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(144*DEF_Adaptation_Font*0.5,63*DEF_Adaptation_Font*0.5) andTarget:self];
+//    [bkScroll addSubview:ownerFollowBtn];
+//
+//    if([[[activityDic objectForKey:@"owner"] objectForKey:@"isfollowowner"] intValue]==0){
+//        [ownerFollowBtn setSelected:false];
+//    }else{
     
-    if([[[activityDic objectForKey:@"owner"] objectForKey:@"isfollowowner"] intValue]==0){
-        [ownerFollowBtn setSelected:false];
-    }else{
-        [ownerFollowBtn setSelected:true];
-    }
+//        [ownerFollowBtn setSelected:true];
+//    }
     
     [self createDjView];
 }
@@ -756,6 +761,15 @@
          [[DataHander sharedDataHander] showViewWithStr:@"成功关注" andTime:1 andPos:CGPointZero];
             [ownerFollowBtn setSelected:true];
         }
+    }else if(button.tag==1010){
+        //添加关注
+        
+        if([joinBtn isSelected]==true){
+            [joinBtn setSelected:true];
+        }else{
+            [joinBtn setSelected:true];
+        }
+       
     }
 }
 
