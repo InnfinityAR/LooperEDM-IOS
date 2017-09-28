@@ -60,4 +60,5 @@
 -(void)searchOfflineInformation:(NSString*)serachStr;
 -(void)createSerachView;
 
+-(void)shareAllH5View;
 @end

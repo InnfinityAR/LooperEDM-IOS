@@ -211,7 +211,7 @@
     }
     else if(button.tag==102){
    //分享按钮
-        [_obj shareh5View:[self.dataArr objectAtIndex:0]];
+        [_obj shareAllH5View];
     }
 }
 

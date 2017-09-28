@@ -505,6 +505,9 @@
     [joinBtn setSelected:true];
 
     
+     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
+    
+    
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1163*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"locaton1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1253*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"home.png"];

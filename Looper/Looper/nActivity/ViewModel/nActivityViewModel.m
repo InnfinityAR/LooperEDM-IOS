@@ -407,6 +407,45 @@
     }
 }
 
+-(void)shareAllH5View{
+    
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRadius;
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        //创建分享消息对象
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+        //创建网页内容对象
+        // NSString* thumbURL =[webDic objectForKey:@"photo"];
+        NSString* thumbURL = @"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg";
+        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"【LOOPER】全国RAVE活动汇总" descr:@"你想知道的所有活动信息，在这里都能找到！"  thumImage:thumbURL];
+        //设置网页地址
+        shareObject.webpageUrl =  @"http://info.looper.pro";
+        
+        //分享消息对象设置分享内容对象
+        messageObject.shareObject = shareObject;
+        
+        //调用分享接口
+        [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+            if (error) {
+                UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            }else{
+                if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                    UMSocialShareResponse *resp = data;
+                    //分享结果消息
+                    UMSocialLogInfo(@"response message is %@",resp.message);
+                    //第三方原始返回的数据
+                    UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                    
+                }else{
+                    UMSocialLogInfo(@"response data is %@",data);
+                }
+            }
+        }];
+    }];
+}
+
+
+
 -(void)shareh5View:(NSDictionary*)webDic{
 
         [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
@@ -419,7 +458,7 @@
              NSString* thumbURL = @"https://looper.blob.core.chinacloudapi.cn/images/looperlogo_dark.jpg";
             UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle: [webDic objectForKey:@"activityname"] descr:@"惊不惊喜？意不意外？别说了！来组团蹦一波吧！！"  thumImage:thumbURL];
             //设置网页地址
-            shareObject.webpageUrl = [webDic objectForKey:@"htmlurl"];
+            shareObject.webpageUrl =  [NSString stringWithFormat:@"http://info.looper.pro/actinfo.html?activityid=%@",[webDic objectForKey:@"activityid"]];
             
             //分享消息对象设置分享内容对象
             messageObject.shareObject = shareObject;
