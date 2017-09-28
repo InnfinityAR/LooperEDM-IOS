@@ -21,5 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *edmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *saleBtn;
 @property (weak, nonatomic) IBOutlet UILabel *finishLB;
+
+@property(nonatomic,strong)UILabel *cityLB;
+@property(nonatomic,strong)UIImageView *shadowIV;
 @property (nonatomic, weak)id <CurrentActivityTableViewCellDelegate> activityDelegate;
 @end
