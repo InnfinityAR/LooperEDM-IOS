@@ -341,6 +341,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     CurrentActivityTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
     cell.accessoryType=UITableViewCellStyleDefault;
     //cell不能被选中
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -356,22 +357,17 @@
        activity=self.currentActivityArr[indexPath.row];
     }
     [cell.headImage sd_setImageWithURL:[NSURL URLWithString:activity[@"photo"]]];
-    UILabel *label3=[[UILabel alloc]initWithFrame:CGRectMake(-12,  10*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
-    label3.text=[NSString stringWithFormat:@"  %@",[activity objectForKey:@"cname"]];
-    label3.textColor=[UIColor whiteColor];
-    label3.backgroundColor=[UIColor colorWithRed:109/255.0 green:216/255.0 blue:116/255.0 alpha:1.0];
-    CGSize lblSize3 = [label3.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 35*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
-    CGRect frame3=label3.frame;
+   
+    cell.cityLB.text=[NSString stringWithFormat:@"  %@",[activity objectForKey:@"cname"]];
+  
+    CGSize lblSize3 = [cell.cityLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 35*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame3=cell.cityLB.frame;
     frame3.size.width=lblSize3.width+30*DEF_Adaptation_Font*0.5;
-    label3.frame=frame3;
-    UIImageView *label3Shadow=[[UIImageView alloc]initWithFrame:CGRectMake(0,  10*DEF_Adaptation_Font*0.5, frame3.size.width, 35*DEF_Adaptation_Font*0.5)];
-    label3Shadow.image=[UIImage imageNamed:@"cityShadow.png"];
-    label3.layer.cornerRadius=12;
-    label3.layer.masksToBounds=YES;
-    label3.font=[UIFont systemFontOfSize:12];
-    label3.textAlignment=NSTextAlignmentCenter;
-    [cell.headImage addSubview:label3];
-    [cell.headImage addSubview:label3Shadow];
+    cell.cityLB.frame=frame3;
+   
+    CGRect frame1=cell.shadowIV.frame;
+    frame1.size.width=lblSize3.width;
+    cell.shadowIV.frame=frame1;
     
     
     if (activity[@"location"]==[NSNull null]) {
