@@ -27,7 +27,8 @@
     return self;
 }
 -(void)initView{
-    self.backgroundColor=ColorRGB(25, 24, 62, 1.0);
+    //self.backgroundColor=ColorRGB(25, 24, 62, 1.0);
+    [self setBackgroundColor:[UIColor colorWithRed:37/255.0 green:36/255.0 blue:42/255.0 alpha:1.0]];
     UILabel *currentLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 110*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     currentLB.text=@"当前城市";
     currentLB.textColor=ColorRGB(255, 255, 255, 0.8);
