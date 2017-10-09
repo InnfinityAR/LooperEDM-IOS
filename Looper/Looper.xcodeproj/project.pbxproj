@@ -288,6 +288,7 @@
 		C426015E1E14F91A00BE5CE2 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C426015D1E14F91A00BE5CE2 /* SettingView.m */; };
 		C426016E1E150EAC00BE5CE2 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = C426016D1E150EAC00BE5CE2 /* AccountView.m */; };
 		C42601711E150EBE00BE5CE2 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C42601701E150EBE00BE5CE2 /* MessageView.m */; };
+		C426E09C1F7D0570004AA9FF /* btn_myFoot.png in Resources */ = {isa = PBXBuildFile; fileRef = C426E09B1F7D0570004AA9FF /* btn_myFoot.png */; };
 		C4278E891F62A97200BA6029 /* btn_Family_invite.png in Resources */ = {isa = PBXBuildFile; fileRef = C4278E871F62A97200BA6029 /* btn_Family_invite.png */; };
 		C4278E8A1F62A97200BA6029 /* btn_family_invited.png in Resources */ = {isa = PBXBuildFile; fileRef = C4278E881F62A97200BA6029 /* btn_family_invited.png */; };
 		C42838DB1E03F02100929093 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C42838261E03F02100929093 /* AppDelegate.m */; };
@@ -1336,6 +1337,7 @@
 		C426016D1E150EAC00BE5CE2 /* AccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountView.m; sourceTree = "<group>"; };
 		C426016F1E150EBE00BE5CE2 /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
 		C42601701E150EBE00BE5CE2 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
+		C426E09B1F7D0570004AA9FF /* btn_myFoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_myFoot.png; sourceTree = "<group>"; };
 		C4278E871F62A97200BA6029 /* btn_Family_invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Family_invite.png; sourceTree = "<group>"; };
 		C4278E881F62A97200BA6029 /* btn_family_invited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_family_invited.png; sourceTree = "<group>"; };
 		C42838251E03F02100929093 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Looper/AppDelegate.h; sourceTree = "<group>"; };
@@ -4754,6 +4756,7 @@
 		C4DA322C1E8B7DBB00CD8305 /* accoutInfo */ = {
 			isa = PBXGroup;
 			children = (
+				C426E09B1F7D0570004AA9FF /* btn_myFoot.png */,
 				C4D77C2E1EE524A700A3D097 /* btn_liveShow.png */,
 				C4F2C2081EAF03A100BB10CA /* btn_fans.png */,
 				C4F2C2091EAF03A100BB10CA /* btn_follow1.png */,
@@ -5207,6 +5210,7 @@
 				C43E77091E091D8D004A5288 /* img_disk.png in Resources */,
 				C404A7D81EBF84D3000B9E1D /* sendCode.png in Resources */,
 				C42E80601EC332D400D9CC43 /* loading_00041.png in Resources */,
+				C426E09C1F7D0570004AA9FF /* btn_myFoot.png in Resources */,
 				C44F49601E369E5300540FBB /* btn_looper_all.png in Resources */,
 				C4DD32471EB8A671008CA240 /* upload_pic.png in Resources */,
 				C4DA32351E8B7DBB00CD8305 /* bk_InfoBgFrame.png in Resources */,
@@ -5928,7 +5932,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5985,7 +5989,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

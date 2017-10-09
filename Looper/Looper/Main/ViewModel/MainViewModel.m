@@ -664,7 +664,12 @@
 
         liveShowV = [[LiveShowView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self and:[[_mainData objectForKey:@"data" ]objectForKey:@"OfflineActivity"]];
         [[_obj view] addSubview:liveShowV];
-    } else if(type==ActivityShareBtnTag){
+    }else if (type==8009){
+        [self getMyFootPrint];
+        
+        
+        
+    }else if(type==ActivityShareBtnTag){
         
         [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
         [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRadius;
@@ -699,6 +704,24 @@
             }];
         }];
     }
+}
+
+-(void)getMyFootPrint{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyFootPrint" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            NSLog(@"%@",responseObject);
+            
+            
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+    
 }
 
 

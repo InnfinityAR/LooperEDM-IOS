@@ -13,6 +13,7 @@
 #import "LooperToolClass.h"
 #import "DataHander.h"
 #import <MapKit/MapKit.h>
+#import "LocalDataMangaer.h"
 
 
 @implementation ActivityDetailView{
@@ -198,10 +199,6 @@
          [webV setFrame:CGRectMake(0,1600*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
     }
   
-    
-    
-   
-    
     [self createLoopView:webV.scrollView.contentSize.height];
 }
 
@@ -210,14 +207,10 @@
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
-
-
-
+    
+    
 
 }
-
-
-
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     
@@ -499,14 +492,19 @@
     
 
 
-    joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@" buy_ticket.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@"btn_JoinedActivity_1.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [bkScroll addSubview:joinBtn];
     
-    [joinBtn setSelected:true];
+        if([[[activityDic objectForKey:@"data"] objectForKey:@"newjoincount"] intValue]==0){
+            [joinBtn setSelected:false];
+        }else{
+    
+            [joinBtn setSelected:true];
+        }
+    
 
     
-     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
-    
+    [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
     
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1163*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"locaton1.png"];
@@ -765,12 +763,15 @@
             [ownerFollowBtn setSelected:true];
         }
     }else if(button.tag==1010){
-        //添加关注
-        
+
         if([joinBtn isSelected]==true){
-            [joinBtn setSelected:true];
+            [joinBtn setSelected:false];
+            [_obj addInformationToJoin:[LocalDataMangaer sharedManager].uid andActivityId:[[activityDic objectForKey:@"data"] objectForKey:@"activityid"] andLike:0];
+            
         }else{
             [joinBtn setSelected:true];
+            [_obj addInformationToJoin:[LocalDataMangaer sharedManager].uid andActivityId:[[activityDic objectForKey:@"data"] objectForKey:@"activityid"] andLike:1];
+          
         }
        
     }

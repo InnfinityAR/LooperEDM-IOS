@@ -181,7 +181,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     
     [self initUmSdk];
- //   [[LocationManagerData sharedManager] getLocalationPoint];
+    [[LocationManagerData sharedManager] getLocalationPoint];
     
     BOOL isHasData =  [[LocalDataMangaer sharedManager] isHasUserData];
 

@@ -219,8 +219,7 @@
     UIButton* punchCardBtn = [LooperToolClass createBtnImageNameReal:@"punchCard.png" andRect:CGPointMake(267*DEF_Adaptation_Font*0.5,275*DEF_Adaptation_Font*0.5) andTag:109 andSelectImage:@"punchCard.png" andClickImage:@"punchCard.png" andTextStr:nil andSize:CGSizeMake(140*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
     [view addSubview:punchCardBtn];
     
-    
-    
+
     
 }
 

@@ -84,7 +84,7 @@
 -(void)createPlayerView:(int)PlayerId;
 -(void)getMyOrderFromHttp;
 
-
+-(void)getMyFootPrint;
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
 
 @property(nonatomic,strong)NSArray *kuaidiArr;

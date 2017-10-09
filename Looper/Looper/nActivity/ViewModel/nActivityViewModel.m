@@ -78,6 +78,26 @@
 
 }
 
+-(void)addInformationToJoin:(NSString*)userId andActivityId:(NSString*)activityID andLike:(int)isLike{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:activityID forKey:@"activityId"];
+    [dic setObject:[NSString stringWithFormat:@"%d",isLike] forKey:@"like"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"addInformationToJoin" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 -(void)savaCalendar:(NSDictionary*)dic{
     
     if([[dic objectForKey:@"issave"] intValue]==0){

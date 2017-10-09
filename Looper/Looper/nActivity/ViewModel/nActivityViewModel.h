@@ -15,6 +15,8 @@
         
 }
 @property (nonatomic )id obj;
+-(void)addInformationToJoin:(NSString*)userId andActivityId:(NSString*)activityID andLike:(int)isLike;
+
 -(id)initWithController:(id)controller andOrderArr:(NSArray *)orderArr;
 
 -(void)popController;
