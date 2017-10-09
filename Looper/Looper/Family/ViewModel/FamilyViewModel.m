@@ -236,16 +236,24 @@
 
 //搜索家族
 -(void)searchRaverFamilyDataForSearchText:(NSString*)searchText{
+      if([self isBlankString:searchText]==false){
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:searchText forKey:@"searchText"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchRaverFamily" parameters:dic  success:^(id responseObject) {
         
         if([responseObject[@"status"] intValue]==0){
             [self.searchView initSearchData:responseObject[@"data"]];
+            NSArray *userArray=responseObject[@"data"];
+            if([userArray count]==0){
+                [[DataHander sharedDataHander] showViewWithStr:@"找不到用户" andTime:1 andPos:CGPointZero];
+            }
         }
     }fail:^{
         
     }];
+      }else{
+           [[DataHander sharedDataHander] showViewWithStr:@"写点东西再来搜吧" andTime:1 andPos:CGPointZero];
+      }
 }
 //家族申请弹窗
 -(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic{
@@ -601,5 +609,17 @@
     [simpleC chatTargetID:dic];
     [[_obj navigationController]  pushViewController:simpleC animated:NO];
     
+}
+- (BOOL) isBlankString:(NSString *)string {
+    if (string == nil || string == NULL) {
+        return YES;
+    }
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        return YES;
+    }
+    return NO;
 }
 @end

@@ -202,7 +202,10 @@
                                 }];
             
             view.nearArr=testArr;
-            
+            //城市默认为上海
+            if (testArr.count==0) {
+                [self getOfflineInformationByCity:@"上海"];
+            }
         }else{
             
             
@@ -258,7 +261,8 @@
   
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationCity" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            view.cityArr=responseObject[@"data"];
+            NSArray *dataArr=responseObject[@"data"];
+            view.cityArr=dataArr;
         }else{
             
             
