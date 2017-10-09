@@ -37,6 +37,9 @@
     }else if(button.tag==5001){
         
     }
+    if (button.tag==5002) {
+        [self.obj createRaverGroup:@"raverid" andLeaderId:@"leaderid" andGroupName:@"groupname"];
+    }
 }
 
 

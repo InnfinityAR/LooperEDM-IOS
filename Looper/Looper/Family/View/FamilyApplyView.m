@@ -39,7 +39,7 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
     if(button.tag==100){
-        
+        [_locationManager stopUpdatingLocation];
         [self removeFromSuperview];
     }
     if (button.tag==101) {
@@ -128,6 +128,23 @@
     [_locationManager startUpdatingLocation];//开始定位之后会不断的执行代理方法更新位置会比较费电所以建议获取完位置即时关闭更新位置服务
     //初始化地理编码器
     _geocoder = [[CLGeocoder alloc] init];
+    [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:5.0];
+}
+-(void)delayMethod{
+    locationLB.text=@"手动输入(可点击)";
+    CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGRect frame3=locationLB.frame;
+    frame3.size=lblSize3;
+    frame3.origin.x=DEF_WIDTH(contentView)/2-lblSize3.width/2;
+    locationLB.frame=frame3;
+    locationLB.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickLocation:)];
+    [locationLB addGestureRecognizer:tap];
+    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_X(locationLB)-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5,  18*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+    locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
+    [contentView addSubview:locationIV];
+[indicator stopAnimating];
+    
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     
@@ -182,6 +199,8 @@
 -(void)ClickLocation:(UITapGestureRecognizer *)tap{
     FamilyApplyFetailView *familyApplyV=[[FamilyApplyFetailView alloc]initWithFrame:self.bounds andObj:self.obj andDataDic:self.dataDic];
     [[self.obj familyView] addSubview:familyApplyV];
+     [indicator stopAnimating];
+     [_locationManager stopUpdatingLocation];
     [self removeFromSuperview];
 }
 

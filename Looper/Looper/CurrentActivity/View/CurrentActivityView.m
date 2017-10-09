@@ -19,7 +19,6 @@
 @interface CurrentActivityView()<CurrentActivityTableViewCellDelegate>
 {
     UILabel *looperName;
-    UILabel *looperName2;
     UILabel *looperName3;
     UIView *lineView;
     //用于判断是否点击了历史活动的按钮
@@ -27,6 +26,7 @@
     
 }
 @property (nonatomic, strong) CLGeocoder *geoC;
+@property(nonatomic,strong)NSMutableDictionary *detailDic;
 @end
 @implementation CurrentActivityView
 -(CLGeocoder *)geoC
@@ -59,7 +59,13 @@
     return _historyActivityArr;
 }
 
-
+-(NSMutableDictionary *)detailDic{
+    if (!_detailDic) {
+        _detailDic=[[NSMutableDictionary alloc]init];
+      [_detailDic setObject:@"上海" forKey:@"currentCity"];
+    }
+    return _detailDic;
+}
 
 -(NSMutableArray *)currentActivityArr{
   
@@ -114,7 +120,6 @@
         isHistory=1;
         self.frame = CGRectMake( 480*DEF_Adaptation_Font*0.5, 1013*DEF_Adaptation_Font*0.5, 0, 0);
         self.transform = CGAffineTransformMakeScale(0.1,0.1);
-
                //加载懒加载
         [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CurrentActivityTableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
         [self initView];
@@ -125,8 +130,9 @@
 }
 -(void)onClickView:(UITapGestureRecognizer *)tap{
     if (tap.view.tag==1) {
+        _locationLB.tag=2;
         looperName.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-        looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        _locationLB.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
          looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         isHistory=1;
         [UIView animateWithDuration:0.1 animations:^{
@@ -136,34 +142,34 @@
         }];
         [self.tableView reloadData];
     }
-    if (tap.view.tag==2) {
-        looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+  else  if (tap.view.tag==2) {
+          _locationLB.tag=4;
+        _locationLB.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         isHistory=2;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame2=lineView.frame;
-            frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            frame2=CGRectMake(320*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame2;
         }];
         [self.tableView reloadData];
     }
-    if (tap.view.tag==3) {
+  else  if (tap.view.tag==3) {
+          _locationLB.tag=2;
         looperName3.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-        looperName2.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
+        _locationLB.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
         isHistory=0;
         [UIView animateWithDuration:0.1 animations:^{
             CGRect frame2=lineView.frame;
-            frame2=CGRectMake(457*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+            frame2=CGRectMake(378*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB), 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
             lineView.frame=frame2;
         }];
         [self.tableView reloadData];
     }
-    if (tap.view.tag==4) {
-        NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]init];
-        [dataDic setObject:@"上海" forKey:@"currentCity"];
-        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self andDetailDic:dataDic andCityArr:self.cityArr];
+ else   if (tap.view.tag==4) {
+        SelectCityView *selectV=[[SelectCityView alloc]initWithFrame:self.bounds and:self andDetailDic:self.detailDic andCityArr:self.cityArr];
         [self addSubview:selectV];
     }
 
@@ -217,23 +223,19 @@
 
 
 -(void)initView{
-    _locationLB=[LooperToolClass createLableView:CGPointMake(260*DEF_Adaptation_Font*0.5,53*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andText:@"   上海" andFontSize:15 andColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    _locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
-    _locationLB.layer.cornerRadius=4*DEF_Adaptation_Font;
-    _locationLB.layer.masksToBounds=YES;
-    _locationLB.backgroundColor=ColorRGB(39, 39, 80, 0.8);
-    CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 40*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
+    _locationLB= [LooperToolClass createLableView:CGPointMake(298*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"上海" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    _locationLB.font=[UIFont boldSystemFontOfSize:13];
+    _locationLB.textAlignment=NSTextAlignmentRight;
+    CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
     CGRect frame3=_locationLB.frame;
-    frame3.size.width=lblSize3.width+50*DEF_Adaptation_Font*0.5;
-    frame3.origin.x=295*DEF_Adaptation_Font*0.5-lblSize3.width/2;
+    frame3.size.width=lblSize3.width+26*DEF_Adaptation_Font*0.5;
     _locationLB.frame=frame3;
     [self addSubview:_locationLB];
     _locationLB.tag=4;
     _locationLB .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap4 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ _locationLB addGestureRecognizer:singleTap4];
-    
-    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(15*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 6*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     locationIV.image=[UIImage imageNamed:@"icon_calendar_location"];
     [_locationLB addSubview:locationIV];
     
@@ -244,18 +246,11 @@
     looperName .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ looperName addGestureRecognizer:singleTap];
-    lineView=[[UIView alloc]initWithFrame:CGRectMake(179*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(320*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
     lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
     [self addSubview:lineView];
-    looperName2 = [LooperToolClass createLableView:CGPointMake(298*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"附近" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
-    looperName2.font=[UIFont boldSystemFontOfSize:13];
-    [self addSubview:looperName2];
-    looperName2.tag=2;
-    looperName2 .userInteractionEnabled=YES;
-    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
-    [ looperName2 addGestureRecognizer:singleTap2];
     
-    looperName3 = [LooperToolClass createLableView:CGPointMake(437*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"历史" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
+    looperName3 = [LooperToolClass createLableView:CGPointMake(358*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB),137*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(90*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5) andText:@"历史" andFontSize:10 andColor:[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     looperName3.font=[UIFont boldSystemFontOfSize:13];
     [self addSubview:looperName3];
     looperName3.tag=3;
@@ -494,12 +489,13 @@
 }
 -(void)reloadTableDataWithNearArr:(NSArray *)nearArr{
     self.nearArr=nearArr;
+      _locationLB.tag=4;
     isHistory=2;
-    looperName2.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+    _locationLB.textColor=[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
     looperName.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
     looperName3.textColor=[UIColor colorWithRed:176/255.0 green:174/255.0 blue:187/255.0 alpha:1.0];
     CGRect frame2=lineView.frame;
-    frame2=CGRectMake(318*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
+    frame2=CGRectMake(320*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5);
     lineView.frame=frame2;
     [self.tableView reloadData];
     
@@ -516,6 +512,7 @@
         {
             CLPlacemark *pl = [placemarks firstObject];
             _locationLB.text=[NSString stringWithFormat:@"   %@",pl.country];
+              [self.detailDic setObject:pl.country forKey:@"currentCity"];
         }else
         {
             NSLog(@"错误");

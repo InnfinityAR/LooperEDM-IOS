@@ -13,8 +13,8 @@
 #import "LooperToolClass.h"
 @interface FamilySearchView()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSArray *searchDatas;
+@property(nonatomic,strong)UISearchBar *searchBar;
 @end
 
 @implementation FamilySearchView
@@ -29,13 +29,11 @@
     
 }
 -(void)initView{
-    self.searchController.hidesNavigationBarDuringPresentation = NO;
-    // 将searchBar赋值给tableView的tableHeaderView
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    self.searchController.searchBar.delegate = self;
+    [self addSubview:self.searchBar];
+     [self setBackgroundColor:[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0]];
     [self.tableView setHidden:NO];
     [self.tableView reloadData];
-    
+    [self initBackView];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -43,34 +41,50 @@
        
         [self removeFromSuperview];
     }
+    if (button.tag==101) {
+        [self.obj searchRaverFamilyDataForSearchText:self.searchBar.text];
+    }
 }
 
 -(void)initBackView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
+    UIButton *serachBtn = [LooperToolClass createBtnImageName:@"btn_serach_select.png" andRect:CGPointMake(553, 36) andTag:101 andSelectImage:@"btn_serach_select.png" andClickImage:@"btn_serach_select.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
+    [self addSubview:serachBtn];
 }
 -(void)initSearchData:(NSArray*)searchData{
     self.searchDatas=searchData;
     [self.tableView reloadData];
 }
--(UISearchController *)searchController{
-    if (!_searchController) {
-        _searchController=[[UISearchController alloc]initWithSearchResultsController:nil];
-        // 设置结果更新代理
-        _searchController.searchResultsUpdater = self;
-        // 因为在当前控制器展示结果, 所以不需要这个透明视图
-        _searchController.dimsBackgroundDuringPresentation = NO;
-        UITextField *txfSearchField = [_searchController.searchBar valueForKey:@"_searchField"];
-        txfSearchField.placeholder=@"search(ID/city/familyName)";
-        txfSearchField.backgroundColor=[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0];
-        txfSearchField.textColor=[UIColor whiteColor];
+
+-(UISearchBar *)searchBar{
+    if (!_searchBar) {
+        _searchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(106 * DEF_Adaptation_Font*0.5, 60 * DEF_Adaptation_Font*0.5, 477*0.5*DEF_Adaptation_Font, 50 * DEF_Adaptation_Font*0.5)];
+        
+        _searchBar.delegate = self;
+        [_searchBar setBackgroundColor:[UIColor clearColor]];
+        [[[_searchBar.subviews objectAtIndex:0].subviews objectAtIndex:0] removeFromSuperview];
+        _searchBar.autocorrectionType = UITextAutocorrectionTypeDefault;
+        _searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _searchBar.barStyle = UIBarStyleBlack;
+        _searchBar.placeholder = @"搜索Loop、用户";
+        [_searchBar becomeFirstResponder];
+        
+        [self addSubview:_searchBar];
+        UITextField *txfSearchField = [_searchBar valueForKey:@"_searchField"];
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
         [txfSearchField setLeftViewMode:UITextFieldViewModeNever];
+        [txfSearchField setRightViewMode:UITextFieldViewModeNever];
+        [txfSearchField setBackground:[UIImage imageNamed:@"searchbar_bgImg.png"]];
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        txfSearchField.layer.borderColor = [UIColor clearColor].CGColor;
+        txfSearchField.clearButtonMode=UITextFieldViewModeNever;
     }
-    return _searchController;
+    return  _searchBar;
 }
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 110*DEF_Adaptation_Font*0.5) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = NO;
@@ -168,57 +182,19 @@
     
 }
 
-#pragma mark - UISearchResultsUpdating
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    
-    //用于判断字符是否存在于字符串当中
-    //        if ([str.lowercaseString rangeOfString:inputStr.lowercaseString].location != NSNotFound) {
-}
 
 #pragma mark - UISearchBarDelegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    
-    return YES;
-}
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    
-    CGRect barFrame = CGRectMake(0, 0, self.frame.size.width, 64);
-    // 移动到屏幕上方
-    barFrame.origin.y = - 64;
-    
-    
-    // 调整tableView的frame为全屏
-    CGRect tableFrame = self.tableView.frame;
-    tableFrame.origin.y = 20;
-    tableFrame.size.height = self.frame.size.height -20;
-    self.tableView.frame = tableFrame;
-    [UIView animateWithDuration:0.4 animations:^{
-        
-        [self layoutIfNeeded];
-        [self.tableView layoutIfNeeded];
-    }];
-}
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    return YES;
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    // 调整tableView的frame为全屏
-    CGRect tableFrame = self.tableView.frame;
-    tableFrame.origin.y = 64;
-    tableFrame.size.height = self.frame.size.height - 64;
-    
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.tableView.frame = tableFrame;
-    }];
-    [[self.obj obj]navigationController].navigationBar.hidden = YES;
-    [self.tableView setHidden:YES];
-    [self removeFromSuperview];
-}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     [self.obj searchRaverFamilyDataForSearchText:searchText];
 }
-
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    [_obj searchRaverFamilyDataForSearchText:searchBar.text];
+    [self endEditing:true];
+    
+    
+    
+}
 @end

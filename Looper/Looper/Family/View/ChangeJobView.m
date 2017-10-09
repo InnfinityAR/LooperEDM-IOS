@@ -293,6 +293,10 @@
 //后续需要有一些改动
     NSArray *memberArr=[self.memberDic objectForKey:[NSString stringWithFormat:@"%d",6-i]];
     UILabel *lb= [self creatLabelWithContent:[self jobnameForStatus:6-i andNumber:memberArr.count] andRect:CGRectMake(55*DEF_Adaptation_Font*0.5, ((i)*73)*DEF_Adaptation_Font*0.5,471*DEF_Adaptation_Font*0.5, 53*DEF_Adaptation_Font*0.5) andType:2 andTag:i+1];
+        if (memberArr.count==50&&i==5) {
+            lb.userInteractionEnabled=NO;
+            lb.alpha=0.3;
+        }
         [selectScrollV addSubview:lb];
         self.labelArr[i]=lb;
     }

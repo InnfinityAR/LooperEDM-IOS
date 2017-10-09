@@ -354,7 +354,7 @@
     NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
     NSInteger day = [dateComponent day];
     
-    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(516*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:10  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
+    UILabel* dayLabel = [LooperToolClass createLableView:CGPointMake(516*DEF_Adaptation_Font*0.5, 61*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(25*DEF_Adaptation_Font*0.5, 18*DEF_Adaptation_Font*0.5) andText:[NSString stringWithFormat:@"%ld",day] andFontSize:9  andColor:[UIColor whiteColor] andType:NSTextAlignmentCenter];
     [self addSubview:dayLabel];
     
     tripBtn = [LooperToolClass createBtnImageNameReal:@"un_trip.png" andRect:CGPointMake(349*DEF_Adaptation_Font*0.5,991*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:@"trip.png" andClickImage:@"trip.png" andTextStr:nil andSize:CGSizeMake(78*DEF_Adaptation_Font*0.5,72*DEF_Adaptation_Font*0.5) andTarget:self];

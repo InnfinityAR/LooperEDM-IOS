@@ -129,6 +129,33 @@
     [_locationManager startUpdatingLocation];//开始定位之后会不断的执行代理方法更新位置会比较费电所以建议获取完位置即时关闭更新位置服务
     //初始化地理编码器
     _geocoder = [[CLGeocoder alloc] init];
+    [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:5.0];
+}
+-(void)delayMethod{
+    locationLB.text=@"  点击手动输入";
+    CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGRect frame3=locationLB.frame;
+    frame3.size.width=lblSize3.width+50*DEF_Adaptation_Font*0.5;
+    frame3.size.height=lblSize3.height+5*DEF_Adaptation_Font*0.5;
+    frame3.origin.x=DEF_WIDTH(contentView)/2-lblSize3.width/2;
+    locationLB.frame=frame3;
+    locationLB.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickLocation:)];
+    [locationLB addGestureRecognizer:tap];
+    locationLB.layer.borderWidth=1;
+    locationLB.layer.borderColor=[ColorRGB(255, 255, 255, 0.6)CGColor];
+    locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
+    CGRect frame=locationIV.frame;
+    frame=CGRectMake(DEF_X(locationLB)-40*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5,  18*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+    locationIV.frame=frame;
+    
+    
+    CGRect frame1=locationBtn.frame;
+    frame1.origin.x=DEF_WIDTH(locationLB)-30*DEF_Adaptation_Font*0.5;
+    locationBtn.frame=frame1;
+    [locationLB addSubview:locationBtn];
+  [indicator stopAnimating];
+    
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     
@@ -173,9 +200,9 @@
             locationLB.frame=frame3;
             locationLB.userInteractionEnabled=YES;
             UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickLocation:)];
+            [locationLB addGestureRecognizer:tap];
             locationLB.layer.borderWidth=1;
             locationLB.layer.borderColor=[ColorRGB(255, 255, 255, 0.6)CGColor];
-            [locationLB addGestureRecognizer:tap];
             locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
             CGRect frame=locationIV.frame;
             frame=CGRectMake(DEF_X(locationLB)-40*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5,  18*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
