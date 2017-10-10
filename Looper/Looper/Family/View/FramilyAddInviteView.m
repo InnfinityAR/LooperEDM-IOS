@@ -71,8 +71,9 @@
    
     if(button.tag==closeBtnTag){
         [self removeFromSuperview];
-    }else{
-    
+    }else if(button.tag>=inviteBtnTag){
+        NSDictionary *dataDic=_dataSource[button.tag- inviteBtnTag];
+        [self.obj inviteMemberToFamilyWithRaverId:[dataDic objectForKey:@"raverid"] andTargetId:[dataDic objectForKey:@"userid"] andUserId:[dataDic objectForKey:@"userid"]];
         
     }
 }
@@ -251,7 +252,7 @@ if (tap.view.tag==102) {
     }
     
     
-    UIButton *inviteBtn = [LooperToolClass createBtnImageName:@"btn_Family_invite.png" andRect:CGPointMake(475, 31) andTag:inviteBtnTag andSelectImage:@"btn_family_invited.png" andClickImage:@"btn_Family_invite.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *inviteBtn = [LooperToolClass createBtnImageName:@"btn_Family_invite.png" andRect:CGPointMake(475, 31) andTag:(int)inviteBtnTag+indexPath.row andSelectImage:@"btn_family_invited.png" andClickImage:@"btn_Family_invite.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
     [cell.contentView addSubview:inviteBtn];
 
     

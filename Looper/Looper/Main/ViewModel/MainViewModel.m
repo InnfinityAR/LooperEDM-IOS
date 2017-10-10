@@ -396,7 +396,9 @@
             [[LocalDataMangaer sharedManager] setData];
             [[RongCloudManger sharedManager] initRongCloudSDK];
             [[RongCloudManger sharedManager]loginRCSdk];
-
+            [self.expDic setObject:responseObject[@"data"][@"User"][@"level"] forKey:@"level"];
+            [self.expDic setObject:responseObject[@"data"][@"User"][@"nextlevel"] forKey:@"nextlevel"];
+            [self.expDic setObject:responseObject[@"data"][@"User"][@"exp"] forKey:@"exp"];
         }else{
             
         }
@@ -404,7 +406,12 @@
         
     }];
 }
-
+-(NSMutableDictionary *)expDic{
+    if (!_expDic) {
+        _expDic=[[NSMutableDictionary alloc]init];
+    }
+    return _expDic;
+}
 -(void)createLoopView:(NSMutableArray*)array{
     _createLoopV = [[CreateLoopView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andArray:array];
     [[_obj view] addSubview:_createLoopV];

@@ -26,6 +26,9 @@
     UIImageView *locationIV;
     
     UIButton *locationBtn;
+    
+    //如果定位没有执行
+    BOOL isLocation;
 
 }
 @property (nonatomic, strong) UIView *DQbackgroundView;
@@ -41,6 +44,7 @@
         self.dataDic=dataDic;
         self.areasView = [DQAreasView new];
         self.areasView.delegate = self;
+        isLocation=NO;
         [self initView];
         [self initBackView];
     }
@@ -132,6 +136,7 @@
     [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:5.0];
 }
 -(void)delayMethod{
+    if (isLocation==NO) {
     locationLB.text=@"  点击手动输入";
     CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=locationLB.frame;
@@ -155,10 +160,11 @@
     locationBtn.frame=frame1;
     [locationLB addSubview:locationBtn];
   [indicator stopAnimating];
+    }
     
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
-    
+    isLocation=YES;
     NSLog(@"%lu",(unsigned long)locations.count);
     CLLocation * location = locations.lastObject;
     // 纬度
