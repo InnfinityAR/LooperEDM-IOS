@@ -449,7 +449,7 @@
     [brandBtn addTarget:self action:@selector(addbrandView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:brandBtn];
 #warning-在这里加入多个主办方
-    UILabel *brandStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1430*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"host"] objectForKey:@"hostname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
+    UILabel *brandStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1430*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"host"]objectAtIndex:0] objectForKey:@"hostname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
     [brandStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
     [bkScroll addSubview:brandStr];
     
@@ -544,22 +544,22 @@
 }
 
 -(void)SpaceView{
-    if ([activityDic objectForKey:@"club"]==nil||[activityDic objectForKey:@"club"]==[NSNull null]) {
+    if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
         
     }else{
-        [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
+        [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
     }
 }
 
 
 -(void)addbrandView{
-    if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
+    if ([[activityDic objectForKey:@"host"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"host"] objectAtIndex:0]==[NSNull null]) {
         
     }else{
-        if ([[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==nil||[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==[NSNull null]) {
+        if ([[[activityDic objectForKey:@"host"] objectAtIndex:0]objectForKey:@"hostid"]==nil||[[[activityDic objectForKey:@"host"]objectAtIndex:0] objectForKey:@"hostid"]==[NSNull null]) {
             [[DataHander sharedDataHander]showViewWithStr:@"还没有主办方" andTime:1 andPos:CGPointZero];
         }else{
-        [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+        [_obj getDataById:@"4" andId:[[[activityDic objectForKey:@"host"] objectAtIndex:0]objectForKey:@"hostid"]];
         }
     }
 }

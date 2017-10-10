@@ -23,9 +23,11 @@
 
     NSMutableDictionary *_dataSource;
     
-    
+    UIButton* punchCardBtn;
       
     UIButton *sendPhoto;
+    
+
 
 }
 
@@ -118,12 +120,29 @@
         
     }else if (button.tag==109){
         
-    
-        
-    
+        if([punchCardBtn isSelected]==true){
+            
+        }else{
+           // activityid
+            [_obj punchTheClock:[[_dataSource objectForKey:@"activity"] objectForKey:@"activityid"] ];
+            //[_obj punchTheClock:@"218"];
+            
+        }
     }
 
 }
+
+
+-(void)updatePunch:(int)num{
+    if(num==1){
+        [punchCardBtn setSelected:true];
+        
+    }else{
+        [punchCardBtn setSelected:false];
+        
+    }
+}
+
 
 
 -(void)createHeaderView:(UIView*)view{
@@ -216,25 +235,25 @@
     [userScrollV setContentSize:CGSizeMake([[_dataSource objectForKey:@"user"] count]*96*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
     
     
-    UIButton* punchCardBtn = [LooperToolClass createBtnImageNameReal:@"punchCard.png" andRect:CGPointMake(267*DEF_Adaptation_Font*0.5,275*DEF_Adaptation_Font*0.5) andTag:109 andSelectImage:@"punchCard.png" andClickImage:@"punchCard.png" andTextStr:nil andSize:CGSizeMake(140*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
+    punchCardBtn = [LooperToolClass createBtnImageNameReal:@"punchCard.png" andRect:CGPointMake(267*DEF_Adaptation_Font*0.5,275*DEF_Adaptation_Font*0.5) andTag:109 andSelectImage:@"enpunchCard.png" andClickImage:@"punchCard.png" andTextStr:nil andSize:CGSizeMake(140*DEF_Adaptation_Font*0.5,35*DEF_Adaptation_Font*0.5) andTarget:self];
     [view addSubview:punchCardBtn];
     
-
+    if([[_dataSource objectForKey:@"ispunch"] intValue]==1){
+        
+        [punchCardBtn setSelected:true];
+        
+    }
+    
+    
     
 }
-
 
 -(void)clickUserBtn:(UITapGestureRecognizer *)tap{
-
-
+    
     NSLog(@"%d",tap.view.tag);
-    
-    
     [_obj createPlayerView:tap.view.tag];
-
-
+    
 }
-
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {

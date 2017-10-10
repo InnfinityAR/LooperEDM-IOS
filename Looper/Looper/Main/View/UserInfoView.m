@@ -53,6 +53,7 @@
     [titleName setText:[LocalDataMangaer sharedManager].NickName];
     
     
+    
     [followNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"followcount"]]];
     [fanNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"fanscount"]]];
     

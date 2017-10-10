@@ -31,6 +31,7 @@
 -(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
 -(void)createPlayerView:(int )PlayerId;
 -(void)removePlayerInfo;
+-(void)punchTheClock:(NSString*)activityId;
 
 -(void)setSendPhotoV;
 -(void)LocalPhoto;

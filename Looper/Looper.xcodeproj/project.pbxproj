@@ -184,6 +184,8 @@
 		C4028CAE1F387B1800E821E9 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = C4028CA91F387B1800E821E9 /* RSADataVerifier.m */; };
 		C4028D951F38817C00E821E9 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4028D931F38817C00E821E9 /* libcrypto.a */; };
 		C4028D961F38817C00E821E9 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4028D941F38817C00E821E9 /* libssl.a */; };
+		C404203A1F8B808F0013E12F /* punchCard.png in Resources */ = {isa = PBXBuildFile; fileRef = C40420391F8B808E0013E12F /* punchCard.png */; };
+		C404203C1F8B92480013E12F /* enpunchCard.png in Resources */ = {isa = PBXBuildFile; fileRef = C404203B1F8B92480013E12F /* enpunchCard.png */; };
 		C404A7B81EBEF5AE000B9E1D /* movelineV1.png in Resources */ = {isa = PBXBuildFile; fileRef = C404A7B71EBEF5AE000B9E1D /* movelineV1.png */; };
 		C404A7BB1EBF093A000B9E1D /* UICollectionViewLeftAlignedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C404A7BA1EBF093A000B9E1D /* UICollectionViewLeftAlignedLayout.m */; };
 		C404A7C11EBF10B6000B9E1D /* AoiroSoraLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C404A7C01EBF10B6000B9E1D /* AoiroSoraLayout.m */; };
@@ -1208,6 +1210,8 @@
 		C4028D921F3880C500E821E9 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		C4028D931F38817C00E821E9 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = Looper/3rdFrameWork/aliSdk/libcrypto.a; sourceTree = "<group>"; };
 		C4028D941F38817C00E821E9 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = Looper/3rdFrameWork/aliSdk/libssl.a; sourceTree = "<group>"; };
+		C40420391F8B808E0013E12F /* punchCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = punchCard.png; path = Looper/Resource/Image/activityImage/punchCard.png; sourceTree = SOURCE_ROOT; };
+		C404203B1F8B92480013E12F /* enpunchCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = enpunchCard.png; path = Looper/Resource/Image/activityImage/enpunchCard.png; sourceTree = SOURCE_ROOT; };
 		C404A7B61EBDE3B5000B9E1D /* Looper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Looper.entitlements; path = Looper/Looper.entitlements; sourceTree = "<group>"; };
 		C404A7B71EBEF5AE000B9E1D /* movelineV1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movelineV1.png; sourceTree = "<group>"; };
 		C404A7B91EBF093A000B9E1D /* UICollectionViewLeftAlignedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLeftAlignedLayout.h; sourceTree = "<group>"; };
@@ -4799,6 +4803,8 @@
 		C4E86F5D1F160E9700D9658D /* PhotoWall */ = {
 			isa = PBXGroup;
 			children = (
+				C404203B1F8B92480013E12F /* enpunchCard.png */,
+				C40420391F8B808E0013E12F /* punchCard.png */,
 				C40A80EC1F2728BE00067916 /* btn_PhotoClose.png */,
 				C40A80ED1F2728BE00067916 /* btn_photoLib.png */,
 				C40A80EE1F2728BE00067916 /* btn_photoVideo.png */,
@@ -5043,6 +5049,7 @@
 				B22BFCF11F61702D00FD131E /* allShowBtn.jpg in Resources */,
 				C46E7D301EADF37600996110 /* btn_next.png in Resources */,
 				C4E86F6D1F163C0A00D9658D /* btn_sendPhoto.png in Resources */,
+				C404203A1F8B808F0013E12F /* punchCard.png in Resources */,
 				C40A80F11F2728BE00067916 /* btn_photoVideo.png in Resources */,
 				C42E80461EC332D400D9CC43 /* loading_00015.png in Resources */,
 				C49FA0811E204493009111C7 /* icon_calendar_line.png in Resources */,
@@ -5324,6 +5331,7 @@
 				C41DDCDF1E7A5F3E00873CBF /* bk_4.png in Resources */,
 				B22C5AA01F57EB9E005C9E28 /* family_header_bottom.png in Resources */,
 				C4DE360C1F2F065A00AF2B06 /* btn_Xwomen.png in Resources */,
+				C404203C1F8B92480013E12F /* enpunchCard.png in Resources */,
 				C43E76F41E091D8D004A5288 /* btn-pop.png in Resources */,
 				C42E806B1EC332D400D9CC43 /* loading_00052.png in Resources */,
 				B225B97B1F31DED20008E5AF /* selectPrice.png in Resources */,

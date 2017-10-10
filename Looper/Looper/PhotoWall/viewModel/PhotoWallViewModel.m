@@ -25,6 +25,7 @@
 #import "PlayerInfoView.h"
 #import "SimpleChatViewController.h"
 #import "UserInfoViewController.h"
+#import "LocationManagerData.h"
 
 
 @implementation PhotoWallViewModel{
@@ -65,6 +66,9 @@
     
    
 }
+
+
+
 
 
 
@@ -328,6 +332,30 @@
     }];
 }
 
+
+
+-(void)punchTheClock:(NSString*)activityId{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:activityId forKey:@"activityId"];
+    [dic setObject:@"1" forKey:@"distance"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
+    [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"punchTheClock" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+             [[DataHander sharedDataHander] showViewWithStr:@"打卡成功" andTime:1 andPos:CGPointZero];
+             [PhotoWallV updatePunch:1];
+        }else{
+             
+             [[DataHander sharedDataHander] showViewWithStr:@"打卡不成功" andTime:1 andPos:CGPointZero];
+             [PhotoWallV updatePunch:0];
+        }
+    }fail:^{
+        
+    }];
+
+}
 
 
 -(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike{
