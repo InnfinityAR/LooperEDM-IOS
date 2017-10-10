@@ -23,4 +23,5 @@
 //用于Loop的commitTableView
 -(void)pushControllerToUser:(NSDictionary*)dic;
 -(void)JumpLooperView:(NSDictionary*)loopData;
+
 @end

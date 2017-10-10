@@ -13,6 +13,7 @@
 #import "LooperToolClass.h"
 #import "DataHander.h"
 #import <MapKit/MapKit.h>
+#import "LocalDataMangaer.h"
 
 
 @implementation ActivityDetailView{
@@ -198,10 +199,6 @@
          [webV setFrame:CGRectMake(0,1600*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
     }
   
-    
-    
-   
-    
     [self createLoopView:webV.scrollView.contentSize.height];
 }
 
@@ -210,14 +207,10 @@
 
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
-
-
-
+    
+    
 
 }
-
-
-
 
 -(void)onClickImage:(UITapGestureRecognizer *)tap{
     
@@ -456,7 +449,7 @@
     [brandBtn addTarget:self action:@selector(addbrandView) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:brandBtn];
 #warning-在这里加入多个主办方
-    UILabel *brandStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1430*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[activityDic objectForKey:@"host"] objectForKey:@"hostname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
+    UILabel *brandStr = [LooperToolClass createLableView:CGPointMake(181*DEF_Adaptation_Font_x*0.5, 1430*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(406*DEF_Adaptation_Font_x*0.5, 26*DEF_Adaptation_Font_x*0.5) andText:[[[activityDic objectForKey:@"host"]objectAtIndex:0] objectForKey:@"hostname"] andFontSize:14 andColor:[UIColor colorWithRed:97/255.0 green:101/255.0 blue:114/255.0 alpha:1.0] andType:NSTextAlignmentRight];
     [brandStr setFont:[UIFont fontWithName:@"PingFangSC-Light" size:13]];
     [bkScroll addSubview:brandStr];
     
@@ -499,11 +492,19 @@
     
 
 
-    joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@" buy_ticket.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
+    joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@"btn_JoinedActivity_1.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [bkScroll addSubview:joinBtn];
     
-    [joinBtn setSelected:true];
+        if([[[activityDic objectForKey:@"data"] objectForKey:@"newjoincount"] intValue]==0){
+            [joinBtn setSelected:false];
+        }else{
+    
+            [joinBtn setSelected:true];
+        }
+    
 
+    
+    [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
     
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1163*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"locaton1.png"];
@@ -543,22 +544,22 @@
 }
 
 -(void)SpaceView{
-    if ([activityDic objectForKey:@"club"]==nil||[activityDic objectForKey:@"club"]==[NSNull null]) {
+    if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
         
     }else{
-        [_obj getDataById:@"2" andId:[[activityDic objectForKey:@"club"] objectForKey:@"clubid"]];
+        [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
     }
 }
 
 
 -(void)addbrandView{
-    if ([activityDic objectForKey:@"host"]==nil||[activityDic objectForKey:@"host"]==[NSNull null]) {
+    if ([[activityDic objectForKey:@"host"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"host"] objectAtIndex:0]==[NSNull null]) {
         
     }else{
-        if ([[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==nil||[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]==[NSNull null]) {
+        if ([[[activityDic objectForKey:@"host"] objectAtIndex:0]objectForKey:@"hostid"]==nil||[[[activityDic objectForKey:@"host"]objectAtIndex:0] objectForKey:@"hostid"]==[NSNull null]) {
             [[DataHander sharedDataHander]showViewWithStr:@"还没有主办方" andTime:1 andPos:CGPointZero];
         }else{
-        [_obj getDataById:@"4" andId:[[activityDic objectForKey:@"host"] objectForKey:@"hostid"]];
+        [_obj getDataById:@"4" andId:[[[activityDic objectForKey:@"host"] objectAtIndex:0]objectForKey:@"hostid"]];
         }
     }
 }
@@ -762,12 +763,15 @@
             [ownerFollowBtn setSelected:true];
         }
     }else if(button.tag==1010){
-        //添加关注
-        
+
         if([joinBtn isSelected]==true){
-            [joinBtn setSelected:true];
+            [joinBtn setSelected:false];
+            [_obj addInformationToJoin:[LocalDataMangaer sharedManager].uid andActivityId:[[activityDic objectForKey:@"data"] objectForKey:@"activityid"] andLike:0];
+            
         }else{
             [joinBtn setSelected:true];
+            [_obj addInformationToJoin:[LocalDataMangaer sharedManager].uid andActivityId:[[activityDic objectForKey:@"data"] objectForKey:@"activityid"] andLike:1];
+          
         }
        
     }

@@ -59,6 +59,7 @@
     [titleName setText:[LocalDataMangaer sharedManager].NickName];
     
     
+    
     [followNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"followcount"]]];
     [fanNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"fanscount"]]];
     
@@ -82,7 +83,6 @@
 
 
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-     
     [_obj MainChatEvent:button.tag];
 }
 
@@ -148,7 +148,10 @@
     UIButton *liveShowBtn =[LooperToolClass createBtnImageName:@"btn_liveShow.png" andRect:CGPointMake(180, 671) andTag:8007 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: liveShowBtn];
     
-    UIButton *ticketDetailBtn =[LooperToolClass createBtnImageName:@"btn_MyList.png" andRect:CGPointMake(180, 810) andTag:8008 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *footprintBtn =[LooperToolClass createBtnImageName:@"btn_myFoot.png" andRect:CGPointMake(180, 811) andTag:8009 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
+    [self addSubview:footprintBtn];
+    
+    UIButton *ticketDetailBtn =[LooperToolClass createBtnImageName:@"btn_MyList.png" andRect:CGPointMake(180, 950) andTag:8008 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: ticketDetailBtn];
     
     

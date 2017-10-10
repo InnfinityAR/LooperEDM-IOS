@@ -26,4 +26,6 @@
 
 -(void)reloadData:(NSDictionary*)dataSource;
 
+-(void)updatePunch:(int)num;
+
 @end

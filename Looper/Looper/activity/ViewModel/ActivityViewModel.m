@@ -123,17 +123,21 @@
     
 }
 
-
-
 -(NSInteger)rowNumber{
     
     return self.dataArr.count;
 }
+
+
 -(void)getMoreDataCompletionHandle:(CompletionHandle)completionHandle{
    
 //    [self pustDataForSomeString:(NSString *)string];
     
 }
+
+
+
+
 
 -(void)thumbActivityMessageLike:(NSNumber*)like andUserId:(NSString*)userId andReplyID:(NSString*)replyID MessageID:(NSInteger)messageID andIndex:(NSInteger)index andIsReplyView:(BOOL)isReplyV{
     self.isReplyV=isReplyV;

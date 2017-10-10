@@ -32,6 +32,9 @@
         self.obj=(UserInfoViewController *)controller;
         self.VMNumber=1;
         [self initView];
+        
+        
+        
     }
     return self;
 }
@@ -193,6 +196,10 @@
     }];
     
 }
+
+
+
+
 //加载mainData数据
 -(void)requestMainData:(NSInteger)type{
     
