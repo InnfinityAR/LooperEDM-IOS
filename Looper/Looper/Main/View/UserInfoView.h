@@ -19,5 +19,6 @@
 
 -(void)updataView:(NSDictionary*)data;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource;
-
+//更新进度条
+-(void)updataProgressVWithExp:(NSString*)rate andNextlevel:(NSString*)sum andLevel:(NSString *)level;
 @end
