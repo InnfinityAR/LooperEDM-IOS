@@ -22,6 +22,8 @@
     UILabel *locationLB;
     
     UIActivityIndicatorView *indicator;
+//如果定位没有执行
+    BOOL isLocation;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
 @end
@@ -33,6 +35,7 @@
         self.dataDic=dataDic;
         [self initView];
         [self initBackView];
+        isLocation=NO;
     }
     return self;
 }
@@ -131,6 +134,7 @@
     [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:5.0];
 }
 -(void)delayMethod{
+    if (isLocation==NO) {
     locationLB.text=@"手动输入(可点击)";
     CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=locationLB.frame;
@@ -144,10 +148,10 @@
     locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
     [contentView addSubview:locationIV];
 [indicator stopAnimating];
-    
+    }
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
-    
+    isLocation=YES;
     NSLog(@"%lu",(unsigned long)locations.count);
     CLLocation * location = locations.lastObject;
     // 纬度

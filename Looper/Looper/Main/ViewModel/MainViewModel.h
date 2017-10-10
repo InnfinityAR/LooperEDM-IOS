@@ -89,5 +89,5 @@
 
 @property(nonatomic,strong)NSArray *kuaidiArr;
 
-
+@property(nonatomic,strong)NSMutableDictionary *expDic;
 @end

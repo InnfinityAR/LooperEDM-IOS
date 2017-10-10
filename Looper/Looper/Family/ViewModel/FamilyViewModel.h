@@ -47,6 +47,8 @@
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid;
 //同意/拒绝邀请加入家族
 -(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId;
+//邀请加入家族
+-(void)inviteMemberToFamilyWithRaverId:(NSString *)raverId andTargetId:(NSString *)targetId andUserId:(NSString *)userId;
 
 -(void)createFleetMangerView;
 

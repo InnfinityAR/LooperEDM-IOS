@@ -93,6 +93,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [_familyModel initWithData:responseObject];
+            ownername=responseObject[@"ownername"];
             if (orderType==nil) {
 //第一次加载     注：以后退出家族时传入的orderType也应该是nil，用来判断
                 if (_familyModel.familyDetailData==nil) {
@@ -105,7 +106,6 @@
                     [self.familyView updateSC];
                 }
                 [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
-                ownername=responseObject[@"ownername"];
                 if (_familyModel.familyDetailData==nil){
                 [self.familyView initFamilyMessageWithDataArr:_familyModel.InviteArray];
                 [self.familyView initFamilyListWithDataArr:_familyModel.recommendArray];
@@ -135,7 +135,10 @@
                   [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                     [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
                     NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
-                    [dataDic setObject:ownername forKey:@"ownername"];
+                    if (ownername==nil||[ownername isEqual:[NSNull null]]) {
+                    }else{
+                        [dataDic setObject:ownername forKey:@"ownername"];
+                    }
                     NSArray *applyArr=nil;
                     if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
                         applyArr=_familyModel.applyArray;
@@ -173,7 +176,23 @@
         
     }];
 }
-
+-(void)inviteMemberToFamilyWithRaverId:(NSString *)raverId andTargetId:(NSString *)targetId andUserId:(NSString *)userId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+//邀请人
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"fromId"];
+//被邀请人
+    [dic setObject:userId forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"inviteUser" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+           [[DataHander sharedDataHander] showViewWithStr:@"已邀请" andTime:1 andPos:CGPointZero];
+        }
+    }fail:^{
+        
+    }];
+    
+    
+}
 //同意/拒绝邀请加入家族
 -(void)judgeInviteJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andinviteId:(NSString*)inviteId{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
