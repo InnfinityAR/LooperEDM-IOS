@@ -26,8 +26,9 @@
     UIImageView *manFrame;
     UILabel *followNum;
     UILabel *fanNum;
-
-
+//进度条
+    UIView *progressV1;
+    UILabel *levelNumLB;
 }
 
 @synthesize obj = _obj;
@@ -83,7 +84,6 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
      
     [_obj MainChatEvent:button.tag];
-
 }
 
 
@@ -101,10 +101,10 @@
     progressV.layer.cornerRadius=20*DEF_Adaptation_Font*0.5;
     progressV.layer.masksToBounds=YES;
     [self addSubview:progressV];
-    UIView *progressV1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue], 40*DEF_Adaptation_Font*0.5)];
+    progressV1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue], 40*DEF_Adaptation_Font*0.5)];
     progressV1.backgroundColor=ColorRGB(107, 104, 221, 1.0);
     [progressV addSubview:progressV1];
-    UILabel *levelNumLB=[[UILabel alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 390*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    levelNumLB=[[UILabel alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 390*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     levelNumLB.textColor=ColorRGB(107, 104, 221, 1.0);
     levelNumLB.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
     levelNumLB.layer.masksToBounds=YES;
@@ -115,7 +115,12 @@
     [self addSubview:levelNumLB];
 
 }
-
+-(void)updataProgressVWithExp:(NSString*)rate andNextlevel:(NSString*)sum andLevel:(NSString *)level{
+    CGRect frame=progressV1.frame;
+    frame.size.width= (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue];
+    progressV1.frame=frame;
+    levelNumLB.text=[NSString stringWithFormat:@"Lv%@",level];
+}
 -(void)initUI{
     UIButton *back =[LooperToolClass createBtnImageName:@"btn_infoBack.png" andRect:CGPointMake(1, 34) andTag:mainAccountBackTag andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: back];
