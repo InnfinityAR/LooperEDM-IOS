@@ -101,7 +101,7 @@
                     [self.familyView updateTitleArr];
                     [self.familyView updateSC];
                 }else{
-                    self.familyView.titleArray=@[@"家族详情",@"家族排行",@"家族成员"];
+                    self.familyView.titleArray=@[@"家族详情",@"家族排行",@"家族成员",@"家族圈"];
                     [self.familyView updateTitleArr];
                     [self.familyView updateSC];
                 }
@@ -121,7 +121,7 @@
                         applyArr=_familyModel.applyArray;
                     }
                     [self.familyView initFamilyDetailWithDataDic:[dataDic copy] andApplyArr:applyArr andLogArr:_familyModel.messageArray];
-                     
+                    [self getRaverFootPrintData];
                 }
             }else{
 //排行筛选
@@ -152,6 +152,19 @@
     }
      
      ];
+}
+-(void)getRaverFootPrintData{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFootPrint" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [self.familyView initFamilyCircleWithDataSource:nil andDataArr:responseObject[@"data"]];
+        }
+    }fail:^{
+        
+    }];
+    
+    
 }
 //同意/拒绝申请家族
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid{

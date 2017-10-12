@@ -98,9 +98,7 @@
         }];
     }
     cycleView=[[CycleView alloc]initWithFrame:CGRectMake(211*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5)];
-    [cycleView.imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    [cycleView.imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]]];
     cycleView.imageV.userInteractionEnabled=YES;
     cycleView.imageV.tag=5;
     UITapGestureRecognizer *singleTap5 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];

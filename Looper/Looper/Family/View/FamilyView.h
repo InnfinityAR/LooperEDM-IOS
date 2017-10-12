@@ -35,4 +35,5 @@
                                          andApplyArr:(NSArray *)applyArr
                                              andLogArr:(NSArray *)logArr;
 -(void)initFamilyMemberWithDataArr:(NSArray *)dataArr;
+-(void)initFamilyCircleWithDataSource:(NSArray *)dataSource andDataArr:(NSArray *)dataArr;
 @end

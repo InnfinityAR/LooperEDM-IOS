@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B22171231EF778FA00B3CBC3 /* ActivityBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */; };
 		B22171301EFBDD0B00B3CBC3 /* LFWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */; };
+		B22569BB1F8DC737005FEA57 /* FamilyCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */; };
 		B225B96A1F3055A60008E5AF /* SaleTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B9691F3055A60008E5AF /* SaleTicketController.m */; };
 		B225B96D1F30568C0008E5AF /* SaleTicketViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B96C1F30568C0008E5AF /* SaleTicketViewModel.m */; };
 		B225B9701F3075300008E5AF /* SaleTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B96F1F3075300008E5AF /* SaleTicketView.m */; };
@@ -853,6 +854,8 @@
 		B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityBarrageView.m; sourceTree = "<group>"; };
 		B221712E1EFBDD0B00B3CBC3 /* LFWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFWaterfallLayout.h; sourceTree = "<group>"; };
 		B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFWaterfallLayout.m; sourceTree = "<group>"; };
+		B22569B91F8DC737005FEA57 /* FamilyCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyCircleView.h; sourceTree = "<group>"; };
+		B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyCircleView.m; sourceTree = "<group>"; };
 		B225B9681F3055A60008E5AF /* SaleTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleTicketController.h; sourceTree = "<group>"; };
 		B225B9691F3055A60008E5AF /* SaleTicketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaleTicketController.m; sourceTree = "<group>"; };
 		B225B96B1F30568C0008E5AF /* SaleTicketViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleTicketViewModel.h; sourceTree = "<group>"; };
@@ -3539,6 +3542,8 @@
 				C461E2381F6BE59D0048F979 /* CreateFleetNameView.m */,
 				B2F021141F7A4AAF00BABA13 /* CreateFleetGroupView.h */,
 				B2F021131F7A4AAF00BABA13 /* CreateFleetGroupView.m */,
+				B22569B91F8DC737005FEA57 /* FamilyCircleView.h */,
+				B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5512,6 +5517,7 @@
 				C46E7D331EAE0ED500996110 /* opinionView.m in Sources */,
 				C4E86FAC1F16474000D9658D /* PKRecordShortVideoViewController.m in Sources */,
 				C45DF3E61EF23D7F00AA64C6 /* KKClickEffectImageView.m in Sources */,
+				B22569BB1F8DC737005FEA57 /* FamilyCircleView.m in Sources */,
 				B23521401F482880003D06CB /* SDWebImageCompat.m in Sources */,
 				C4BCE74D1E091E710087E6C5 /* PullingRefreshTableView.m in Sources */,
 				B235216D1F4EC8C3003D06CB /* ScanQRCode.m in Sources */,

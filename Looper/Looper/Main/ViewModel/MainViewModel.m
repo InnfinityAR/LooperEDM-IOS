@@ -616,9 +616,9 @@
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
         
-        [self pushNActivityViewController];
+//        [self pushNActivityViewController];
 
-       // [self createFamilyViewController];
+        [self createFamilyViewController];
        //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 
 //      [self pushLooperListController];

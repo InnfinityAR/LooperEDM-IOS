@@ -56,7 +56,7 @@ NSMutableArray *mArray;
         [mArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
             UIView *view = (UIView*)obj;
-            view.layer.cornerRadius = 10;
+            view.layer.cornerRadius = 12;
             view.clipsToBounds = YES;
             
         }];
