@@ -231,7 +231,7 @@
     frame3.size.width=lblSize3.width+26*DEF_Adaptation_Font*0.5;
     _locationLB.frame=frame3;
     [self addSubview:_locationLB];
-    _locationLB.tag=4;
+    _locationLB.tag=2;
     _locationLB .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap4 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ _locationLB addGestureRecognizer:singleTap4];
@@ -246,7 +246,7 @@
     looperName .userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
     [ looperName addGestureRecognizer:singleTap];
-    lineView=[[UIView alloc]initWithFrame:CGRectMake(320*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
+    lineView=[[UIView alloc]initWithFrame:CGRectMake(179*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, 3*DEF_Adaptation_Font*0.5)];
     lineView.backgroundColor=[UIColor colorWithRed:109/255.0 green:106/255.0 blue:226/255.0 alpha:1.0];
     [self addSubview:lineView];
     
@@ -503,16 +503,16 @@
 -(void)creatLocationCity{
     double latitude = [LocationManagerData sharedManager].LocationPoint_xy.y;
     double longitude = [LocationManagerData sharedManager].LocationPoint_xy.x;
-    
+
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    
+
     // 反地理编码(经纬度---地址)
     [self.geoC reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(error == nil)
         {
             CLPlacemark *pl = [placemarks firstObject];
-            _locationLB.text=[NSString stringWithFormat:@"   %@",pl.country];
-              [self.detailDic setObject:pl.country forKey:@"currentCity"];
+            _locationLB.text=[NSString stringWithFormat:@"   %@",[pl.locality substringToIndex:pl.locality.length-1]];
+              [self.detailDic setObject:[pl.locality substringToIndex:pl.locality.length-1] forKey:@"currentCity"];
         }else
         {
             NSLog(@"错误");
