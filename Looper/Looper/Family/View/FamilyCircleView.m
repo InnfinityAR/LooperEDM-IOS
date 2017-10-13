@@ -22,6 +22,7 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSArray *dataArr;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSMutableDictionary *heightForCollectDic;
 @end
 @implementation FamilyCircleView
 -(instancetype)initWithFrame:(CGRect)frame
@@ -31,11 +32,22 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)idObject;
         self.dataSource=dataSource;
-        self.dataSource=@[@{@"content":@"我在这里你们在哪；我不在这里，你们想去吗"}];
+        self.dataSource=@[@{@"content":@"我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪"},@{@"content":@"你再不去我就先去了"}]}];
         self.dataArr=dataArr;
         [self initView];
     }
     return self;
+}
+-(NSMutableDictionary *)heightForCollectDic{
+    if (!_heightForCollectDic) {
+        _heightForCollectDic=[[NSMutableDictionary alloc]init];
+        for (int i=0; i<self.dataSource.count; i++) {
+            NSDictionary *dic=self.dataSource[i];
+            CGSize lblSize3 = [[dic objectForKey:@"content"] boundingRectWithSize:CGSizeMake(MAXFLOAT, 30*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            
+        }
+    }
+    return _heightForCollectDic;
 }
 -(void)initView{
    [self setBackgroundColor:[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0]];
@@ -163,7 +175,6 @@
 
 // 每个分区多少个item
 - (NSInteger )collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
     return self.dataSource.count;
 }
 
