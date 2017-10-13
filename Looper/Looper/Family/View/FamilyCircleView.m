@@ -31,6 +31,7 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)idObject;
         self.dataSource=dataSource;
+        self.dataSource=@[@{@"content":@"我在这里你们在哪；我不在这里，你们想去吗"}];
         self.dataArr=dataArr;
         [self initView];
     }
