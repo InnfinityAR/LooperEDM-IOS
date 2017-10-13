@@ -505,7 +505,12 @@
     double longitude = [LocationManagerData sharedManager].LocationPoint_xy.x;
 
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-
+    // 保存 Device 的现语言 (英语 法语 ，，，)
+    NSMutableArray *userDefaultLanguages = [[NSUserDefaults standardUserDefaults]
+                                            objectForKey:@"AppleLanguages"];
+    // 强制 成 简体中文
+    [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:@"zh-hans",nil]
+                                              forKey:@"AppleLanguages"];
     // 反地理编码(经纬度---地址)
     [self.geoC reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(error == nil)
@@ -518,6 +523,9 @@
             NSLog(@"错误");
         }
     }];
-
+    // 还原Device 的语言  
+    [[NSUserDefaults
+      standardUserDefaults] setObject:userDefaultLanguages
+     forKey:@"AppleLanguages"];
 }
 @end
