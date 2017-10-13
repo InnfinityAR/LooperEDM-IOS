@@ -34,6 +34,8 @@
 #import "UIImageView+WebCache.h"
 #import "LocationManagerData.h"
 #import "ActivitySerachView.h"
+#import "PhotoWallViewController.h"
+
 
 @implementation nActivityViewModel{
 
@@ -95,6 +97,17 @@
     }fail:^{
         
     }];
+}
+
+
+-(void)jumpToPhotoWall:(NSString*)activityID{
+    
+  
+    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
+    [photoWallVC initWithActivityID:activityID];
+    [[_obj navigationController]pushViewController:photoWallVC animated:NO];
+    
+    
 }
 
 

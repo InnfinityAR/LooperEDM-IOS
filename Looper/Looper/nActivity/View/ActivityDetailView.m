@@ -98,6 +98,10 @@
     UIButton *shareBtn = [LooperToolClass createBtnImageNameReal:@"btn_share.png" andRect:CGPointMake(566*DEF_Adaptation_Font*0.5,40*DEF_Adaptation_Font*0.5) andTag:102 andSelectImage:@"btn_share.png" andClickImage:@"btn_share.png" andTextStr:nil andSize:CGSizeMake(64*DEF_Adaptation_Font*0.5,68*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:shareBtn];
     
+    UIButton * toPhotoWallBtn = [LooperToolClass createBtnImageNameReal:@"photoWall.png" andRect:CGPointMake(520*DEF_Adaptation_Font*0.5,140*DEF_Adaptation_Font*0.5) andTag:1019 andSelectImage:@"photoWall.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(100*DEF_Adaptation_Font*0.5,100*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:toPhotoWallBtn];
+    
+    
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(68*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5, 408*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     titleLabel.text =[[activityDic objectForKey:@"data"]objectForKey:@"activityname"];
     [titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
@@ -308,43 +312,43 @@
 
 -(void)openMap{
     
-//    
-//    NSString *locationStr=[[activityDic objectForKey:@"club"]objectForKey:@"clublocation"];
-//    
-//    //to do array
-//    
-//    MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
-//
-//    float currentLatitude=mylocation.placemark.location.coordinate.latitude;
-//    
-//    float currentLongitude=mylocation.placemark.location.coordinate.longitude;
-//
-//    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
-//    
-//    CLLocationCoordinate2D coordinate;
-//    
-//    
-//    coordinate.latitude=29.182201;
-//    
-//    coordinate.longitude=120.600293;
-//    
-//    CLLocationCoordinate2D coords2 = coordinate;
-//    
-//    
-//    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
-//    
-//  
-//    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate]];
-//    
-//    toLocation.name = [[activityDic objectForKey:@"data"]objectForKey:@"activityname"] ;
-//    
-//    NSArray *items = [NSArray arrayWithObjects:currentLocation,toLocation, nil];
-//    
-//    NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
-//    //打开苹果自身地图应用，并呈现特定的item
-//    
-//    [MKMapItem openMapsWithItems:items launchOptions:options];
     
+    float latitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"latitude"] floatValue];
+    float longitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"longitude"] floatValue];
+    
+    //to do array
+    
+    MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
+
+    float currentLatitude=mylocation.placemark.location.coordinate.latitude;
+    
+    float currentLongitude=mylocation.placemark.location.coordinate.longitude;
+
+    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake(currentLatitude,currentLongitude);
+    
+    CLLocationCoordinate2D coordinate;
+    
+    
+    coordinate.latitude=latitude;
+    
+    coordinate.longitude=longitude;
+    
+    CLLocationCoordinate2D coords2 = coordinate;
+    
+    
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    
+  
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate]];
+    
+    toLocation.name = [[activityDic objectForKey:@"data"]objectForKey:@"activityname"] ;
+    
+    NSArray *items = [NSArray arrayWithObjects:currentLocation,toLocation, nil];
+    
+    NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
+    //打开苹果自身地图应用，并呈现特定的item
+    
+    [MKMapItem openMapsWithItems:items launchOptions:options];
 }
 
 
@@ -502,7 +506,9 @@
             [joinBtn setSelected:true];
         }
     
-
+ 
+    
+    
     
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
     
@@ -815,6 +821,10 @@
           
         }
        
+    }else if(button.tag==1019){
+        
+        [_obj jumpToPhotoWall:[[activityDic objectForKey:@"data"] objectForKey:@"activityid"]];
+        
     }
 }
 

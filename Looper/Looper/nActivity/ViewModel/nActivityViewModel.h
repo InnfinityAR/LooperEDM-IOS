@@ -63,4 +63,7 @@
 -(void)createSerachView;
 
 -(void)shareAllH5View;
+
+-(void)jumpToPhotoWall:(NSString*)activityID;
+
 @end
