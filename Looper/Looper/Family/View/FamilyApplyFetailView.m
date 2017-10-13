@@ -191,11 +191,13 @@
             frame3.size=lblSize3;
             frame3.origin.x=DEF_WIDTH(contentView)/2-lblSize3.width/2;
             locationLB.frame=frame3;
-            
             CGRect frame=locationIV.frame;
             frame=CGRectMake(DEF_X(locationLB)-40*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5,  18*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
             locationIV.frame=frame;
             locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
+            locationLB.userInteractionEnabled=YES;
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickLocation:)];
+            [locationLB addGestureRecognizer:tap];
         }else{
             locationLB.text=@"  点击手动输入";
             CGSize lblSize3 = [locationLB.text boundingRectWithSize:CGSizeMake(474*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;

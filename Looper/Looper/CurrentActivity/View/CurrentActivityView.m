@@ -484,6 +484,9 @@
 }
 
 -(void)reloadTableDataWithCity:(NSString *)city{
+    CGRect frame2=looperName3.frame;
+    frame2.origin.x=358*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB);
+    looperName3.frame=frame2;
     [self.obj getOfflineInformationByCity:city];
     
 }
@@ -505,19 +508,36 @@
     double longitude = [LocationManagerData sharedManager].LocationPoint_xy.x;
 
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-
+    // 保存 Device 的现语言 (英语 法语 ，，，)
+    NSMutableArray *userDefaultLanguages = [[NSUserDefaults standardUserDefaults]
+                                            objectForKey:@"AppleLanguages"];
+    // 强制 成 简体中文
+    [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:@"zh-hans",nil]
+                                              forKey:@"AppleLanguages"];
     // 反地理编码(经纬度---地址)
     [self.geoC reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(error == nil)
         {
             CLPlacemark *pl = [placemarks firstObject];
             _locationLB.text=[NSString stringWithFormat:@"   %@",[pl.locality substringToIndex:pl.locality.length-1]];
+            CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            CGRect frame3=_locationLB.frame;
+            frame3.size.width=lblSize3.width+6*DEF_Adaptation_Font*0.5;
+            _locationLB.frame=frame3;
+            
+            CGRect frame2=looperName3.frame;
+            frame2.origin.x=358*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB);
+            looperName3.frame=frame2;
+            
               [self.detailDic setObject:[pl.locality substringToIndex:pl.locality.length-1] forKey:@"currentCity"];
         }else
         {
             NSLog(@"错误");
         }
     }];
-
+    // 还原Device 的语言  
+    [[NSUserDefaults
+      standardUserDefaults] setObject:userDefaultLanguages
+     forKey:@"AppleLanguages"];
 }
 @end
