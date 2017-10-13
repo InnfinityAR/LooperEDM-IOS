@@ -534,10 +534,11 @@
         {
             NSLog(@"错误");
         }
+        // 还原Device 的语言
+        [[NSUserDefaults
+          standardUserDefaults] setObject:userDefaultLanguages
+         forKey:@"AppleLanguages"];
     }];
-    // 还原Device 的语言  
-    [[NSUserDefaults
-      standardUserDefaults] setObject:userDefaultLanguages
-     forKey:@"AppleLanguages"];
+    
 }
 @end
