@@ -526,6 +526,36 @@
     [self createImage:CGRectMake(597*DEF_Adaptation_Font*0.5, 1431*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5) andImageStr:@"buy_ticket.png"];
     
     
+    UIScrollView *userScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(34*DEF_Adaptation_Font*0.5, 945*DEF_Adaptation_Font*0.5, 554*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
+    userScrollV.showsVerticalScrollIndicator = NO;
+    userScrollV.showsHorizontalScrollIndicator = NO;
+    [bkScroll addSubview:userScrollV];
+    userScrollV.userInteractionEnabled=true;
+    
+    
+    for (int i=0;i<[[activityDic objectForKey:@"joineduser"] count];i++){
+        
+        UIImageView *userImage = [[UIImageView alloc] initWithFrame:CGRectMake(0+(i*96*DEF_Adaptation_Font*0.5),0, 76*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
+        [userImage sd_setImageWithURL:[[NSURL alloc] initWithString:[[[activityDic objectForKey:@"joineduser"]objectAtIndex:i] objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        userImage.tag= [[[[activityDic objectForKey:@"joineduser"] objectAtIndex:i] objectForKey:@"userid"] intValue];
+        
+        userImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
+        [userImage addGestureRecognizer:singleTap];
+        
+        
+        userImage.layer.cornerRadius = 76*DEF_Adaptation_Font_x*0.5/2;
+        userImage.layer.masksToBounds = YES;
+        
+        
+        
+        [userScrollV addSubview:userImage];
+    }
+    [userScrollV setContentSize:CGSizeMake([[activityDic objectForKey:@"joineduser"] count]*96*DEF_Adaptation_Font*0.5, 76*DEF_Adaptation_Font*0.5)];
+    
+    
     
     [self createActivityBtn];
     isShowBtn=0;
@@ -541,6 +571,17 @@
 //    }
     
     [self createDjView];
+}
+
+-(void)clickUserBtn:(UITapGestureRecognizer *)tap{
+    
+    NSLog(@"%d",tap.view.tag);
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:[NSString stringWithFormat:@"%d",tap.view.tag] forKey:@"userid"];
+    
+    [_obj createPlayerView:dic];
+    
 }
 
 -(void)SpaceView{
