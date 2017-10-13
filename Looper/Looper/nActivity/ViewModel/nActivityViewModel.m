@@ -687,8 +687,8 @@
                 [allActivityArray addObject:dic];
             }
             [self createActivityView];
-        }else{
             
+        }else{
             
         }
     }fail:^{

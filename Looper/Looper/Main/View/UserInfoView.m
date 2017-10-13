@@ -58,7 +58,7 @@
 
     [titleName setText:[LocalDataMangaer sharedManager].NickName];
     
-    
+    [self updataProgressVWithExp:[_myData objectForKey:@"exp"] andNextlevel:[_myData objectForKey:@"nextlevel"] andLevel:[_myData objectForKey:@"level"]];
     
     [followNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"followcount"]]];
     [fanNum setText:[NSString stringWithFormat:@"%@",[_myData objectForKey:@"fanscount"]]];
@@ -116,10 +116,15 @@
 
 }
 -(void)updataProgressVWithExp:(NSString*)rate andNextlevel:(NSString*)sum andLevel:(NSString *)level{
-    CGRect frame=progressV1.frame;
-    frame.size.width= (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue];
-    progressV1.frame=frame;
-    levelNumLB.text=[NSString stringWithFormat:@"Lv%@",level];
+    
+    if (progressV1!=nil) {
+        CGRect frame=progressV1.frame;
+        frame.size.width= (452*DEF_Adaptation_Font_x*0.5)*[rate intValue]/[sum intValue];
+        progressV1.frame=frame;
+        levelNumLB.text=[NSString stringWithFormat:@"Lv%@",level];
+    }
+    
+    
 }
 -(void)initUI{
     UIButton *back =[LooperToolClass createBtnImageName:@"btn_infoBack.png" andRect:CGPointMake(1, 34) andTag:mainAccountBackTag andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
