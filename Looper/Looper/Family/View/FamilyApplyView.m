@@ -61,8 +61,7 @@
     contentView.image=[UIImage imageNamed:@"family_apply_back.png"];
     [self addSubview:contentView];
     UIImageView*headView=[[UIImageView alloc]initWithFrame:CGRectMake(234*DEF_Adaptation_Font*0.5, 217*DEF_Adaptation_Font*0.5, 167*DEF_Adaptation_Font*0.5, 167*DEF_Adaptation_Font*0.5)];
-    [headView sd_setImageWithURL:[NSURL URLWithString:self.dataDic[@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    [headView sd_setImageWithURL:[NSURL URLWithString:self.dataDic[@"images"]] placeholderImage:[UIImage imageNamed:@"btn_home.png"]options:SDWebImageRetryFailed];
     headView.layer.cornerRadius=83*DEF_Adaptation_Font*0.5;
     headView.layer.masksToBounds=YES;
     headView.layer.borderColor=[ColorRGB(193, 158, 252, 1.0)CGColor];

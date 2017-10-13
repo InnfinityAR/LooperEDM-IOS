@@ -122,8 +122,7 @@
 -(void)setTableViewCellView:(UITableViewCell *)cell andIndexPath:(NSIndexPath*)indexPath{
     NSDictionary *dataDic=self.searchDatas[indexPath.row];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(11*DEF_Adaptation_Font, 17*DEF_Adaptation_Font, 28*DEF_Adaptation_Font, 28*DEF_Adaptation_Font)];
-    [headIV sd_setImageWithURL:[NSURL URLWithString:dataDic[@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    [headIV sd_setImageWithURL:[NSURL URLWithString:dataDic[@"images"]] placeholderImage:[UIImage imageNamed:@"btn_home.png"]options:SDWebImageRetryFailed];
     headIV.layer.cornerRadius=14*DEF_Adaptation_Font;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];

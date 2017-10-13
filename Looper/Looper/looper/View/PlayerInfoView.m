@@ -146,9 +146,7 @@
     imageHead.layer.cornerRadius =135*DEF_Adaptation_Font*0.5*0.5;
     imageHead.layer.masksToBounds = YES;
     
-    [imageHead sd_setImageWithURL:[[NSURL alloc] initWithString:[looperData objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
+    [imageHead sd_setImageWithURL:[[NSURL alloc] initWithString:[looperData objectForKey:@"headimageurl"]] placeholderImage:[UIImage imageNamed:@"btn_looper.png"]options:SDWebImageRetryFailed];
     [self addSubview:imageHead];
     
 

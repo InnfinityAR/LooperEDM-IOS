@@ -81,4 +81,6 @@
 
 
 -(void)createChangeJobViewWithDataDic:(NSDictionary *)dataDic;
+
+
 @end

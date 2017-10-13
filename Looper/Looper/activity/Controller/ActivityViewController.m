@@ -54,7 +54,7 @@
     
     [[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
     
-    [[SDImageCache sharedImageCache] clearDisk];
+//    [[SDImageCache sharedImageCache] clearDisk];
     
 }
 

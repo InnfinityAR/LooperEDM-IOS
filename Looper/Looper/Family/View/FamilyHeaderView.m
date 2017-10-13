@@ -33,8 +33,7 @@
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self)/2-130*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5)];
     imageView.layer.cornerRadius=130*DEF_Adaptation_Font*0.5;
     imageView.layer.masksToBounds=YES;
-    [imageView sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]] placeholderImage:[UIImage imageNamed:@"btn_home.png"]options:SDWebImageRetryFailed];
     [self addSubview:imageView];
     UILabel *nameLB=[[UILabel alloc]initWithFrame:CGRectMake(20, 350*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-40, 40*DEF_Adaptation_Font*0.5)];
     nameLB.textAlignment=NSTextAlignmentCenter;
@@ -70,8 +69,7 @@
     if ([self.dataDic objectForKey:@"raverqrcodeurl"]==[NSNull null]) {
         SQCodeIV.image=[UIImage imageNamed:@"familydetail_code.png"];
     }else{
-        [SQCodeIV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"raverqrcodeurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        }];
+        [SQCodeIV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"raverqrcodeurl"]] placeholderImage:nil options:SDWebImageRetryFailed];
     }
     [self addSubview:SQCodeIV];
     

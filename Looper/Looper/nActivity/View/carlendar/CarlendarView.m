@@ -353,6 +353,9 @@
                     [cell.saleBtn setHidden:YES];
                     [cell.finishLB setHidden:NO];
                     [cell.ticketLB setHidden:YES];
+                    
+                }else{
+//                    NSLog(@"endTime %@ timeNow %ld",activity[@"endtime"],timeNow);
                 }
 
             }

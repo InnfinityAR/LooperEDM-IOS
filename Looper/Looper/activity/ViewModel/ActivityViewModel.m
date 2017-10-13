@@ -7,7 +7,6 @@
 //
 
 #import "ActivityViewModel.h"
-#import "activityModel.h"
 #import "ActivityViewController.h"
 
 #import "sendMessageActivityView.h"

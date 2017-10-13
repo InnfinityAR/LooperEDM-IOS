@@ -19,6 +19,8 @@
 #import "LocalDataMangaer.h"
 #import "FamilyMemberView.h"
 #import "FamilyDetailView.h"
+
+#import"FamilyCircleView.h"
 @interface FamilyView()
 
 @end
@@ -31,6 +33,7 @@
     FamilyMemberView *memberView;
     FamilyDetailView *detailView;
     
+    FamilyCircleView *circleView;
     //用于页面切换
     //    UIView *contentView;
 //    UIScrollView *_sc;
@@ -183,6 +186,13 @@
     [_sc addSubview:memberView];
     [_sc make3Dscrollview];
 
+}
+-(void)initFamilyCircleWithDataSource:(NSArray *)dataSource andDataArr:(NSArray *)dataArr{
+    [circleView removeFromSuperview];
+    circleView=[[FamilyCircleView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5+640*3*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) and:self.obj andDataSource:dataSource andDataArr:dataArr];
+    [_sc addSubview:circleView];
+    [_sc make3Dscrollview];
+    
 }
 -(void)initSCView{
     _sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5,117*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 976*DEF_Adaptation_Font*0.5)];
