@@ -177,6 +177,9 @@
             frame3.size=lblSize3;
             frame3.origin.x=DEF_WIDTH(contentView)/2-lblSize3.width/2;
             locationLB.frame=frame3;
+            locationLB.userInteractionEnabled=YES;
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickLocation:)];
+            [locationLB addGestureRecognizer:tap];
             UIImageView *locationIV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_X(locationLB)-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5,  18*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
             locationIV.image=[UIImage imageNamed:@"icon_calendar_location.png"];
             [contentView addSubview:locationIV];

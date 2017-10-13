@@ -484,6 +484,9 @@
 }
 
 -(void)reloadTableDataWithCity:(NSString *)city{
+    CGRect frame2=looperName3.frame;
+    frame2.origin.x=358*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB);
+    looperName3.frame=frame2;
     [self.obj getOfflineInformationByCity:city];
     
 }
@@ -517,6 +520,15 @@
         {
             CLPlacemark *pl = [placemarks firstObject];
             _locationLB.text=[NSString stringWithFormat:@"   %@",[pl.locality substringToIndex:pl.locality.length-1]];
+            CGSize lblSize3 = [_locationLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 30*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            CGRect frame3=_locationLB.frame;
+            frame3.size.width=lblSize3.width+6*DEF_Adaptation_Font*0.5;
+            _locationLB.frame=frame3;
+            
+            CGRect frame2=looperName3.frame;
+            frame2.origin.x=358*DEF_Adaptation_Font*0.5+DEF_WIDTH(_locationLB);
+            looperName3.frame=frame2;
+            
               [self.detailDic setObject:[pl.locality substringToIndex:pl.locality.length-1] forKey:@"currentCity"];
         }else
         {
