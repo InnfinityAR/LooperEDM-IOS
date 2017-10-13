@@ -269,16 +269,17 @@
         UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5,200*DEF_Adaptation_Font*0.5, itemH)];
         NSURL * URL = [NSURL URLWithString:url];
 //加入默认本地图片
-        [imageView sd_setImageWithURL:URL placeholderImage:[UIImage imageNamed:@""]];
+        [imageView sd_setImageWithURL:URL placeholderImage:[UIImage imageNamed:@""]options:SDWebImageRetryFailed];
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        BOOL existBool = [manager diskImageExistsForURL:URL];//判断是否有缓存
-        UIImage * image;
-        if (existBool) {
-            image = [[manager imageCache] imageFromDiskCacheForKey:URL.absoluteString];
+   __block  UIImage * image;
+    [manager diskImageExistsForURL:URL completion:^(BOOL isInCache) {
+        if (isInCache) {
+             image = [[manager imageCache] imageFromDiskCacheForKey:URL.absoluteString];
         }else{
             NSData *data = [NSData dataWithContentsOfURL:URL];
             image = [UIImage imageWithData:data];
         }
+    }];//判断是否有缓存
     if (image==nil) {
 //加入默认本地图片
           image=[UIImage imageNamed:@""];

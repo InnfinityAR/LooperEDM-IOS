@@ -781,8 +781,7 @@
     UIButton *button= [LooperToolClass createBtnImageNameReal:@"writeBuddle.png" andRect:CGPointMake(0, 0) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(DEF_WIDTH(self)/2-10, DEF_WIDTH(self)/2-10) andTarget:self];
     [cell.contentView addSubview:button];
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-    [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:[LocalDataMangaer sharedManager].HeadImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:[LocalDataMangaer sharedManager].HeadImageUrl]];
     imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
     imageView.layer.masksToBounds=YES;
     [cell.contentView addSubview:imageView];
@@ -844,7 +843,7 @@
 
 //不管是否cell有图片都会使用的view
 -(void)AllUseViewForCellIfHaveImage:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
-    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]];
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]placeholderImage:nil options:SDWebImageRetryFailed];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     cell.userImageView.tag=indexPath.row;
     [cell.userImageView addGestureRecognizer:singleTap];
@@ -896,7 +895,7 @@
     UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, (DEF_WIDTH(self)/2-10), 130*DEF_Adaptation_Font*0.5)];
     NSString *string=[imageDic objectForKey:@"messagePicture"];
     NSArray *array = [string componentsSeparatedByString:@";"];
-    [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:array[0]]placeholderImage:nil options:SDWebImageRetryFailed];
     imageV.contentMode =  UIViewContentModeScaleAspectFill;
     imageV.clipsToBounds  = YES;
     imageV.userInteractionEnabled=YES;
@@ -1114,7 +1113,7 @@
         UIImageView * imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0,DEF_WIDTH(self), DEF_HEIGHT(self))];
         imageView.contentMode=1;
         imageView.clipsToBounds=YES;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageNameArray[i]]placeholderImage:nil options:SDWebImageRetryFailed];
         [self.viewArr addObject:imageView];
     }
     NSArray <UIView *> * views = self.viewArr;

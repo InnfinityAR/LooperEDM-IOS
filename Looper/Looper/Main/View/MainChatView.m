@@ -242,9 +242,7 @@
     if(selectIndexNum==1){
 
         UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(31*0.5*DEF_Adaptation_Font,10*0.5*DEF_Adaptation_Font, 111*0.5*DEF_Adaptation_Font, 111*0.5*DEF_Adaptation_Font)];
-        [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[loopArray objectAtIndex:indexPath.row] objectForKey:@"loopcover"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
+        [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[[loopArray objectAtIndex:indexPath.row] objectForKey:@"loopcover"]] placeholderImage:[UIImage imageNamed:@"btn_looper.png"]options:SDWebImageRetryFailed];
         loopHead.layer.cornerRadius =12*DEF_Adaptation_Font*0.5;
         loopHead.layer.masksToBounds = YES;
         [cell.contentView addSubview:loopHead];
@@ -276,9 +274,7 @@
         [[RongCloudManger sharedManager] getUserData:session.targetId success:^(id responseObject){
         
             UIImageView *loopHead = [[UIImageView alloc] initWithFrame:CGRectMake(20*0.5*DEF_Adaptation_Font,16*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font, 74*0.5*DEF_Adaptation_Font)];
-            [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[responseObject objectForKey:@"headimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-            }];
+            [loopHead sd_setImageWithURL:[[NSURL alloc] initWithString:[responseObject objectForKey:@"headimageurl"]] placeholderImage:[UIImage imageNamed:@"btn_looper.png"]options:SDWebImageRetryFailed];
             loopHead.layer.cornerRadius =74*DEF_Adaptation_Font*0.5*0.5;
             loopHead.layer.masksToBounds = YES;
             [cell.contentView addSubview:loopHead];

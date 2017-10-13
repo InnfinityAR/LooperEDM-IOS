@@ -311,7 +311,7 @@
     cell.layer.masksToBounds=YES;
     NSDictionary *dataDic=self.dataArr[indexPath.row];
     UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]]];
+    [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]] placeholderImage:[UIImage imageNamed:@"btn_looper.png"]options:SDWebImageRetryFailed];
     headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];

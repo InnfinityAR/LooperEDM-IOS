@@ -93,12 +93,10 @@
     if ([self.dataDic objectForKey:@"raverqrcodeurl"]==[NSNull null]) {
     SQCodeIV.image=[UIImage imageNamed:@"familydetail_code.png"];
     }else{
-        [SQCodeIV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"raverqrcodeurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
+        [SQCodeIV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"raverqrcodeurl"]]placeholderImage:nil options:SDWebImageRetryFailed];
     }
     cycleView=[[CycleView alloc]initWithFrame:CGRectMake(211*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5, 168*DEF_Adaptation_Font*0.5)];
-    [cycleView.imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]]];
+    [cycleView.imageV sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]]placeholderImage:[UIImage imageNamed:@"btn_home.png"]options:SDWebImageRetryFailed];
     cycleView.imageV.userInteractionEnabled=YES;
     cycleView.imageV.tag=5;
     UITapGestureRecognizer *singleTap5 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickView:)];
