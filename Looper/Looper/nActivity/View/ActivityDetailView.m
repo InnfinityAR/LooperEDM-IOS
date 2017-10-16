@@ -144,7 +144,7 @@
     webV = [[WKWebView alloc] initWithFrame:CGRectMake(0, 200*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[[activityDic objectForKey:@"data"]objectForKey:@"htmlurl"]]];
     
-
+   // [webV setBackgroundColor:[UIColor redColor]];
 
     webV.navigationDelegate=self;
 
@@ -183,27 +183,21 @@
     
     NSLog(@"%f",webView.scrollView.contentSize.height);
     
-    
     [self performSelector:@selector(reloadView) withObject:nil afterDelay:0.1];
 
 }
 
-
 -(void)reloadView{
-
-     [[DataHander sharedDataHander] hideDlg];
-    
-    
-    
+    [[DataHander sharedDataHander] hideDlg];
     if([[activityDic objectForKey:@"dj"] count]>0){
-        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+2020*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
-          [webV setFrame:CGRectMake(0,2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+2070*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
+          [webV setFrame:CGRectMake(0,2070*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
     }else{
-        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+1600*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
-         [webV setFrame:CGRectMake(0,1600*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
+        bkScroll.contentSize= CGSizeMake(DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height+1650*DEF_Adaptation_Font*0.5+100*DEF_Adaptation_Font*0.5);
+         [webV setFrame:CGRectMake(0,1650*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH,webV.scrollView.contentSize.height)];
     }
   
-    [self createLoopView:webV.scrollView.contentSize.height];
+   //[self createLoopView:webV.scrollView.contentSize.height];
 }
 
 
@@ -231,7 +225,7 @@
         if(isHeight ==false){
             
             
-            UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,scrollHeight+2020*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 100*DEF_Adaptation_Font*0.5)];
+            UIView *writeView1 = [[UIView alloc] initWithFrame:CGRectMake(0,scrollHeight+2070*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 100*DEF_Adaptation_Font*0.5)];
             [writeView1 setBackgroundColor:[UIColor whiteColor]];
             [bkScroll addSubview:writeView1];
             
@@ -312,6 +306,9 @@
 
 -(void)openMap{
     
+    if([[activityDic objectForKey:@"club"] count]!=0){
+    
+    
     
     float latitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"latitude"] floatValue];
     float longitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"longitude"] floatValue];
@@ -349,9 +346,8 @@
     //打开苹果自身地图应用，并呈现特定的item
     
     [MKMapItem openMapsWithItems:items launchOptions:options];
+    }
 }
-
-
 
 -(void)createBkView{
     
@@ -359,7 +355,7 @@
     [colorView setBackgroundColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:72/255.0 alpha:1.0]];
     [bkScroll addSubview:colorView];
     
-    UIView *writeView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5+363*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-150*DEF_Adaptation_Font*0.5)];
+    UIView *writeView = [[UIView alloc] initWithFrame:CGRectMake(0,684*DEF_Adaptation_Font*0.5+363*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT-100*DEF_Adaptation_Font*0.5)];
     [writeView setBackgroundColor:[UIColor whiteColor]];
     [bkScroll addSubview:writeView];
     
@@ -407,9 +403,6 @@
     [locatonBtn addTarget:self action:@selector(openMap) forControlEvents:UIControlEventTouchDown];
     [bkScroll addSubview:locatonBtn];
 
-    
-    
-    
     UILabel *lableTicket = [LooperToolClass createLableView:CGPointMake(70*DEF_Adaptation_Font_x*0.5, 1344*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(565*DEF_Adaptation_Font_x*0.5, 25*DEF_Adaptation_Font_x*0.5) andText:@"售票链接" andFontSize:11 andColor:[UIColor colorWithRed:57/255.0 green:61/255.0 blue:71/255.0 alpha:1.0] andType:NSTextAlignmentCenter];
     [lableTicket sizeToFit];
     [bkScroll addSubview:lableTicket];
@@ -493,8 +486,6 @@
     
     title.layer.cornerRadius =  46*DEF_Adaptation_Font_x*0.5/2;
     title.layer.masksToBounds = YES;
-    
-
 
     joinBtn = [LooperToolClass createBtnImageNameReal:@"btn_joinActivity.png" andRect:CGPointMake(222*DEF_Adaptation_Font*0.5,840*DEF_Adaptation_Font*0.5) andTag:1010 andSelectImage:@"btn_JoinedActivity_1.png"andClickImage:nil andTextStr:nil andSize:CGSizeMake(196*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [bkScroll addSubview:joinBtn];
@@ -505,11 +496,7 @@
     
             [joinBtn setSelected:true];
         }
-    
- 
-    
-    
-    
+
     [self createImage:CGRectMake(34*DEF_Adaptation_Font*0.5, 906*DEF_Adaptation_Font*0.5, 572*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5) andImageStr:@"line_activity_join.png"];
     
     [self createImage:CGRectMake(30*DEF_Adaptation_Font*0.5, 1077*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5) andImageStr:@"time1.png"];
@@ -591,15 +578,21 @@
 }
 
 -(void)SpaceView{
-    if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
+    if([[activityDic objectForKey:@"club"] count]!=0){
         
-    }else{
-        [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
+        if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
+            
+        }else{
+            [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
+        }
     }
 }
 
 
 -(void)addbrandView{
+    
+       if([[activityDic objectForKey:@"host"] count]!=0){
+    
     if ([[activityDic objectForKey:@"host"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"host"] objectAtIndex:0]==[NSNull null]) {
         
     }else{
@@ -609,6 +602,8 @@
         [_obj getDataById:@"4" andId:[[[activityDic objectForKey:@"host"] objectAtIndex:0]objectForKey:@"hostid"]];
         }
     }
+           
+       }
 }
 
 
@@ -679,7 +674,10 @@
   
     [self createBkView];
     [self createHudView];
-      [self createWebView];
+    
+   // [self performSelector:@selector(createWebView) withObject:nil afterDelay:0.5];
+    
+    [self createWebView];
 }
 
 -(void)closeTouchView{
