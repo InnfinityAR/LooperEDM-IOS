@@ -389,7 +389,7 @@ CGFloat xOffset=scrollView.contentOffset.x;
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self),20*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), DEF_HEIGHT(scrollV)-20*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(DEF_WIDTH(self),5*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), DEF_HEIGHT(scrollV)-5*DEF_Adaptation_Font*0.5)style:UITableViewStylePlain];
         [scrollV addSubview:_tableView];
         _tableView.dataSource = self;
         _tableView.delegate = self;
