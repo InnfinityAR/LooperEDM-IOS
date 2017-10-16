@@ -2410,7 +2410,6 @@
 			isa = PBXGroup;
 			children = (
 				B2A6EE551ECAD7FF004BF416 /* Controller */,
-				B2A6EE561ECAD7FF004BF416 /* Model */,
 				B2A6EE571ECAD7FF004BF416 /* View */,
 				B2A6EE581ECAD7FF004BF416 /* ViewModel */,
 			);
@@ -2425,13 +2424,6 @@
 				B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		B2A6EE561ECAD7FF004BF416 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B2A6EE571ECAD7FF004BF416 /* View */ = {
