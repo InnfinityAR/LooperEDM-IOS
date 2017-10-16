@@ -435,7 +435,7 @@ if (range.location>=99) {
     if ([textField.text isEqualToString:@""]) {
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你发不了空评论" andTime:1 andPos:CGPointZero];
     }
-    if (textField.text.length>=99) {
+    if (textField.text.length>100) {
         [[DataHander sharedDataHander] showViewWithStr:@"地球人你发评论超过100字了" andTime:1 andPos:CGPointZero];
     }
     [self endEditing:YES];
