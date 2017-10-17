@@ -430,7 +430,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
-            landmarkName = "-judgeInviteJoinFamilyWithJoin:andRaverId:andinviteId:"
+            landmarkName = "-getRaverFootPrintData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -510,7 +510,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "362"
             endingLineNumber = "362"
-            landmarkName = "-delayMethod"
+            landmarkName = "-updateFamilyModelWithType:andInfo:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -526,7 +526,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "413"
             endingLineNumber = "413"
-            landmarkName = "-createFleetGroup:"
+            landmarkName = "-delayMethod"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1049,7 +1049,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/PhotoWall/view/PhotoWallView.m"
-            timestampString = "529584634.602452"
+            timestampString = "529836941.655697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "238"

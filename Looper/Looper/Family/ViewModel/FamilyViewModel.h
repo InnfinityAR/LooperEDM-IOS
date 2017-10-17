@@ -82,5 +82,8 @@
 
 -(void)createChangeJobViewWithDataDic:(NSDictionary *)dataDic;
 
+-(void)getMemberFootPrint:(int)page andPageSize:(int)size;
+
+
 
 @end

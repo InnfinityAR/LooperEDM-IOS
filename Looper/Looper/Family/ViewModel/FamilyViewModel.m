@@ -70,6 +70,26 @@
     
 }
 
+-(void)getMemberFootPrint:(int)page andPageSize:(int)size{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    
+    [dic setObject:[NSString stringWithFormat:@"%d",size] forKey:@"pageSize"];
+    [dic setObject:[NSString stringWithFormat:@"%d",page] forKey:@"page"];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMemberFootPrint" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+          
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
 -(void)requestData{
     
     _familyModel  = [[FramilyModel alloc] init];
