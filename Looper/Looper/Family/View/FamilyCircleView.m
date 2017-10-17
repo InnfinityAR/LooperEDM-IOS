@@ -32,7 +32,7 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)idObject;
         self.dataSource=dataSource;
-        self.dataSource=@[@{@"content":@"我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪"},@{@"content":@"你再不去我就先去了"}]}];
+        self.dataSource=@[@{@"content":@"111我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪"},@{@"content":@"你再不去我就先去了"}]},@{@"content":@"222我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪.我在这里你们在哪；我不在这里，你们想去吗"},@{@"content":@"你再不去我就先去了.我在这里你们在哪；我不在这里，你们想去吗.我在这里你们在哪；我不在这里，你们想去吗"}]},@{@"content":@"333我",@"array":@[@{@"content":@"你去哪"},@{@"content":@"你再"}]},@{@"content":@"444我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去"}]}];
         self.dataArr=dataArr;
         [self initView];
     }
@@ -43,8 +43,13 @@
         _heightForCollectDic=[[NSMutableDictionary alloc]init];
         for (int i=0; i<self.dataSource.count; i++) {
             NSDictionary *dic=self.dataSource[i];
-            CGSize lblSize3 = [[dic objectForKey:@"content"] boundingRectWithSize:CGSizeMake(MAXFLOAT, 30*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
-            
+            CGSize lblSize3 = [[dic objectForKey:@"content"] boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+            CGFloat height=150*DEF_Adaptation_Font*0.5+lblSize3.height;
+            for (NSDictionary *dataDic in [dic objectForKey:@"array"]) {
+               CGSize lblSize2 = [[dataDic objectForKey:@"content"] boundingRectWithSize:CGSizeMake(350*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]} context:nil].size;
+                height+=lblSize2.height+50*DEF_Adaptation_Font*0.5;
+            }
+            [_heightForCollectDic setObject:@(height) forKey:@(i)];
         }
     }
     return _heightForCollectDic;
@@ -163,8 +168,7 @@
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGSize cellSize = CGSizeMake(DEF_WIDTH(self)-14, (DEF_WIDTH(self)));
-    
+    CGSize cellSize = CGSizeMake(DEF_WIDTH(self)-14, [[self.heightForCollectDic objectForKey:@(indexPath.row)]floatValue]);
     return cellSize;
 }
 // 返回分区数
@@ -185,7 +189,7 @@
     }
     // 取出每个item所需要的数据
 //    NSDictionary *dic = [self.dataSource objectAtIndex:indexPath.item];
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 14, DEF_WIDTH(self)-14,(DEF_WIDTH(self)-14))];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 14, DEF_WIDTH(self)-14,[[self.heightForCollectDic objectForKey:@(indexPath.row)]floatValue])];
     imageView.contentMode=UIViewContentModeScaleAspectFill;
     imageView.layer.cornerRadius=5.0;
     imageView.layer.masksToBounds=YES;

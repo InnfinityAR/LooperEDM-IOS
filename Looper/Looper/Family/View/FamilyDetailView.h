@@ -16,4 +16,7 @@
 @property(nonatomic,strong)UICollectionView *collectView;
 @property(nonatomic,strong)NSArray *applyArr;
 
+
+@property(nonatomic,strong)NSArray *liveshowArr;
+
 @end
