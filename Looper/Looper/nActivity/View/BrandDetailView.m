@@ -396,9 +396,9 @@
     timeLable.text = [data objectForKey:@"starttime"];
     [view addSubview:timeLable];
     
-    UILabel *locationLable = [[UILabel alloc] initWithFrame:CGRectMake(310*DEF_Adaptation_Font*0.5, 242*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, 65*DEF_Adaptation_Font*0.5)];
+    UILabel *locationLable = [[UILabel alloc] initWithFrame:CGRectMake(310*DEF_Adaptation_Font*0.5, 242*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, 55*DEF_Adaptation_Font*0.5)];
     [locationLable setTextColor:[UIColor whiteColor]];
-    locationLable.numberOfLines=0;
+    locationLable.numberOfLines=2;
     [locationLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
     locationLable.text = [data objectForKey:@"location"];
     [locationLable sizeToFit];
@@ -410,19 +410,19 @@
     CGSize dateStringSize = [dateString sizeWithFont:dateFont
                                    constrainedToSize:maximumSize
                                        lineBreakMode:NSLineBreakByWordWrapping];
-    CGRect dateFrame = CGRectMake(310*DEF_Adaptation_Font*0.5, 242*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, dateStringSize.height);
+    CGRect dateFrame = CGRectMake(310*DEF_Adaptation_Font*0.5, 235*DEF_Adaptation_Font*0.5, 294*DEF_Adaptation_Font*0.5, dateStringSize.height);
     locationLable.frame = dateFrame;
     
     if([data[@"ticketurl"] isEqualToString:@""]==true){
         
-        UIImageView *icon_price=[LooperToolClass createImageView:@"icon_price.png" andRect:CGPointMake(278, 308) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        UIImageView *icon_price=[LooperToolClass createImageView:@"icon_price.png" andRect:CGPointMake(278, 318) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [view addSubview:icon_price];
     }else{
-        UIImageView *icon_ticket=[LooperToolClass createImageView:@"icon_ticket.png" andRect:CGPointMake(278, 308) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
+        UIImageView *icon_ticket=[LooperToolClass createImageView:@"icon_ticket.png" andRect:CGPointMake(278, 318) andTag:100 andSize:CGSizeMake(69*DEF_Adaptation_Font_x*0.5, 32*DEF_Adaptation_Font*0.5) andIsRadius:false];
         [view addSubview:icon_ticket];
     }
     
-    UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(368*DEF_Adaptation_Font*0.5, 308*DEF_Adaptation_Font*0.5, 235*DEF_Adaptation_Font*0.5, 32*DEF_Adaptation_Font*0.5)];
+    UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(368*DEF_Adaptation_Font*0.5, 318*DEF_Adaptation_Font*0.5, 235*DEF_Adaptation_Font*0.5, 32*DEF_Adaptation_Font*0.5)];
     [priceLable setTextColor:[UIColor colorWithRed:191/255.0 green:252/255.0 blue:255/255.0 alpha:1.0]];
     [priceLable setFont:[UIFont fontWithName:@"PingFangSC-Light" size:14]];
     priceLable.text = [data objectForKey:@"price"];
@@ -434,7 +434,6 @@
     [view addSubview:line];
     
 }
-
 
 
 -(int)getContentLength:(NSString*)contentStr{

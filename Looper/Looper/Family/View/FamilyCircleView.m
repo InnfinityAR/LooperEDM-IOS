@@ -32,12 +32,12 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)idObject;
         self.dataSource=dataSource;
-        self.dataSource=@[@{@"content":@"111我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪"},@{@"content":@"你再不去我就先去了"}]},@{@"content":@"222我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去哪我就去哪.我在这里你们在哪；我不在这里，你们想去吗"},@{@"content":@"你再不去我就先去了.我在这里你们在哪；我不在这里，你们想去吗.我在这里你们在哪；我不在这里，你们想去吗"}]},@{@"content":@"333我",@"array":@[@{@"content":@"你去哪"},@{@"content":@"你再"}]},@{@"content":@"444我在这里你们在哪；我不在这里，你们想去吗",@"array":@[@{@"content":@"你去"}]}];
         self.dataArr=dataArr;
         [self initView];
     }
     return self;
 }
+//用于计算每个collectionV的高度
 -(NSMutableDictionary *)heightForCollectDic{
     if (!_heightForCollectDic) {
         _heightForCollectDic=[[NSMutableDictionary alloc]init];
