@@ -342,12 +342,10 @@
     headView.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUserBtn:)];
     [headView addGestureRecognizer:singleTap];
-
     
     headView.layer.cornerRadius = 68*DEF_Adaptation_Font_x*0.5/2;
     headView.layer.masksToBounds = YES;
     [cell.contentView addSubview:headView];
-    
     
     UILabel *userName = [LooperToolClass createLableView:CGPointMake(119*DEF_Adaptation_Font_x*0.5, 10*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 30*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"username"] andFontSize:14 andColor:[UIColor colorWithRed:35/255.0 green:208/255.0 blue:215/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
     [cell.contentView addSubview:userName];
@@ -379,7 +377,6 @@
     [formatter1 setDateStyle:NSDateFormatterMediumStyle];
     [formatter1 setTimeStyle:NSDateFormatterShortStyle];
     [formatter1 setDateFormat:@"MM-dd"];
-    
     // 毫秒值转化为秒
     NSDate* date1 = [NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"creationdate"] doubleValue]];
     NSString* dateString1 = [formatter1 stringFromDate:date1];
