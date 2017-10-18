@@ -246,6 +246,8 @@
     NSDictionary *dataDic=[[NSDictionary alloc]initWithDictionary:self.dataArr[indexPath.row]];
     UIImageView *bgIV=[[UIImageView alloc]initWithFrame:CGRectMake(8*DEF_Adaptation_Font*0.5, 46*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-16*DEF_Adaptation_Font*0.5, 290*DEF_Adaptation_Font*0.5)];
     [bgIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"photo"]]];
+    bgIV.contentMode=UIViewContentModeScaleAspectFill;
+    bgIV.clipsToBounds=YES;
     bgIV.layer.cornerRadius=5*DEF_Adaptation_Font*0.5;
     bgIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:bgIV];
@@ -272,9 +274,11 @@
     timeLB.font=[UIFont systemFontOfSize:18];
     [bgIV addSubview:timeLB];
 //设置自适应图片
-    UIImageView *imageV=[self WidthImageViewWithString:@"http://loyalty.a2storm.cn/assets/logo-eb5daa11ecf3c928938a72492f281cef3e3b7ee5ab746eaf96ed71d900e3af29.png"];
-//     UIImageView *imageV=[self WidthImageViewWithString:[dataDic objectForKey:@"brandlogo"]];
+//    UIImageView *imageV=[self WidthImageViewWithString:@"http://loyalty.a2storm.cn/assets/logo-eb5daa11ecf3c928938a72492f281cef3e3b7ee5ab746eaf96ed71d900e3af29.png"];
+    if ([dataDic objectForKey:@"brandlogo"]!=[NSNull null]) {
+     UIImageView *imageV=[self WidthImageViewWithString:[dataDic objectForKey:@"brandlogo"]];
     [cell.contentView addSubview:imageV];
+    }
     return cell;
     
 }

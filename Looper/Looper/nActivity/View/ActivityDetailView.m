@@ -308,11 +308,13 @@
     
     if([[activityDic objectForKey:@"club"] count]!=0){
     
-    
-    
-    float latitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"latitude"] floatValue];
-    float longitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"longitude"] floatValue];
-    
+        float latitude=0;
+        float longitude=0;
+        if ([[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"latitude"]==[NSNull null]||[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"longitude"]==[NSNull null]) {
+        }else{
+     latitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"latitude"] floatValue];
+    longitude=[[[[activityDic objectForKey:@"club"]objectAtIndex:0]objectForKey:@"longitude"] floatValue];
+        }
     //to do array
     
     MKMapItem *mylocation = [MKMapItem mapItemForCurrentLocation];
@@ -344,8 +346,11 @@
     
     NSDictionary *options = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
     //打开苹果自身地图应用，并呈现特定的item
-    
+        if (latitude!=0&&longitude!=0) {
     [MKMapItem openMapsWithItems:items launchOptions:options];
+        }else{
+             [[DataHander sharedDataHander] showViewWithStr:@"暂时查不到您查询的地址" andTime:1 andPos:CGPointZero];
+        }
     }
 }
 

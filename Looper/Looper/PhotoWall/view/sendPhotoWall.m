@@ -227,11 +227,18 @@
         }else{
             if(videoStr!=nil)
             {
+                if ([textview.text isEqualToString:@"说说 现场如何"]||[textview.text isEqualToString:@""]) {
+                  [[DataHander sharedDataHander] showViewWithStr:@"亲,你啥都没说哦" andTime:1 andPos:CGPointZero];
+                }else{
                 [_obj createImageBoardText:textview.text and:nil andVideoPath:videoStr andVideoImage:videoImg.image];
+                }
             }
             if([_photoArray count]>0){
-            
+                if ([textview.text isEqualToString:@"说说 现场如何"]||[textview.text isEqualToString:@""]) {
+                    [[DataHander sharedDataHander] showViewWithStr:@"亲,你啥都没说哦" andTime:1 andPos:CGPointZero];
+                }else{
                 [_obj createImageBoardText:textview.text and:_photoArray andVideoPath:nil andVideoImage:nil];
+                }
             }
         }
     }else if(button.tag == 900){
