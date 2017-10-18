@@ -84,6 +84,6 @@
 
 -(void)getMemberFootPrint:(int)page andPageSize:(int)size;
 
-
+-(void)createPhotoWallController:(NSString*)activityId;
 
 @end

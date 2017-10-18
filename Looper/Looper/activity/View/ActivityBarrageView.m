@@ -843,7 +843,7 @@
 
 //不管是否cell有图片都会使用的view
 -(void)AllUseViewForCellIfHaveImage:(ActivityCollectionViewCell *)cell andIndexpath:(NSIndexPath *)indexPath andImageDic:(NSDictionary*)imageDic{
-    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]placeholderImage:nil options:SDWebImageRetryFailed];
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:[imageDic objectForKey:@"userimage"]]placeholderImage:[UIImage imageNamed:@"btn_looper.png"] options:SDWebImageRetryFailed];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     cell.userImageView.tag=indexPath.row;
     [cell.userImageView addGestureRecognizer:singleTap];

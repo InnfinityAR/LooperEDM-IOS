@@ -248,48 +248,82 @@
     [bgIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"photo"]]];
     bgIV.contentMode=UIViewContentModeScaleAspectFill;
     bgIV.clipsToBounds=YES;
-    bgIV.layer.cornerRadius=5*DEF_Adaptation_Font*0.5;
+    bgIV.layer.cornerRadius=10*DEF_Adaptation_Font*0.5;
     bgIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:bgIV];
     cell.contentView.backgroundColor=ColorRGB(84, 77, 107, 1.0);
     UIView *bkView=[[UIView alloc]initWithFrame:CGRectMake(0,0, DEF_WIDTH(self)-16*DEF_Adaptation_Font*0.5, 290*DEF_Adaptation_Font*0.5)];
-    bkView.backgroundColor=ColorRGB(0, 0, 0, 0.1);
+    bkView.backgroundColor=ColorRGB(0, 0, 0, 0.2);
     [bgIV addSubview:bkView];
-    UIView *bottomV1=[[UIView alloc]initWithFrame:CGRectMake(70*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkView)-100*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-    bottomV1.backgroundColor=[self viewColorWithRow:indexPath.row];
-    [bgIV addSubview:bottomV1];
-    UIView *bottomV2=[[UIView alloc]initWithFrame:CGRectMake(50*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkView)-100*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
-    bottomV2.backgroundColor=ColorRGB(0, 0, 0, 0.3);
-    [bgIV addSubview:bottomV2];
-       UILabel  *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(5*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkView)-10*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+       UILabel  *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 90*DEF_Adaptation_Font*0.5, DEF_WIDTH(bgIV)-40*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.textAlignment=NSTextAlignmentCenter;
     contentLB.text=[dataDic objectForKey:@"activityname"];
-    contentLB.font=[UIFont boldSystemFontOfSize:22];
+    contentLB.font=[UIFont boldSystemFontOfSize:24];
+    //添加阴影效果
+//    contentLB.shadowColor = [UIColor blackColor];
+//    contentLB.shadowOffset = CGSizeMake(1, 1);
+    NSShadow *shadow1=[[NSShadow  alloc]init];
+    shadow1.shadowBlurRadius = 10.0;
+    shadow1.shadowColor = [UIColor blackColor];
+    contentLB.attributedText = [[NSAttributedString alloc] initWithString:contentLB.text attributes:@{NSShadowAttributeName: shadow1}];
     [bgIV addSubview:contentLB];
-    UILabel  *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(50*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, DEF_WIDTH(bkView)-100*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
+    
+    UILabel  *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(50*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(bgIV)-100*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     timeLB.textColor=[UIColor whiteColor];
     timeLB.textAlignment=NSTextAlignmentCenter;
-    timeLB.text=[[dataDic objectForKey:@"timetag"]substringToIndex:10];
+    if ([dataDic objectForKey:@"timetag"]!=nil&&[dataDic objectForKey:@"timetag"]!=[NSNull null]) {
+    NSString *time=[self changeDateFormatterWithString:[dataDic objectForKey:@"timetag"]];
+    if (time!=nil) {
+        timeLB.text=[time substringToIndex:11];
+    }else{
+        time=[self changeDateFormatterWithString:[NSString stringWithFormat:@"%@ 21:00:00",[[dataDic objectForKey:@"timetag"]substringToIndex:10]]];
+         if (time!=nil) {
+        timeLB.text=[time substringToIndex:11];
+         }
+    }
     timeLB.font=[UIFont systemFontOfSize:18];
+    //添加阴影效果
+    if (time!=nil) {
+    NSShadow *shadow=[[NSShadow  alloc]init];
+    shadow.shadowBlurRadius = 10.0;
+    shadow.shadowColor = [UIColor blackColor];
+    timeLB.attributedText = [[NSAttributedString alloc] initWithString:timeLB.text attributes:@{NSShadowAttributeName: shadow}];
     [bgIV addSubview:timeLB];
+    }
+    }
 //设置自适应图片
-//    UIImageView *imageV=[self WidthImageViewWithString:@"http://loyalty.a2storm.cn/assets/logo-eb5daa11ecf3c928938a72492f281cef3e3b7ee5ab746eaf96ed71d900e3af29.png"];
-    if ([dataDic objectForKey:@"brandlogo"]!=[NSNull null]) {
+    if ([dataDic objectForKey:@"brandlogo"]!=[NSNull null]&&![[dataDic objectForKey:@"brandlogo"]isEqualToString:@""]) {
      UIImageView *imageV=[self WidthImageViewWithString:[dataDic objectForKey:@"brandlogo"]];
     [cell.contentView addSubview:imageV];
+    }else{
+        UIImage *image=[UIImage imageNamed:@"product_logo.png"];
+          UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(-80*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5,image.size.width / image.size.height * 80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+        imageV.image=image;
+        [cell.contentView addSubview:imageV];
     }
     return cell;
     
+}
+-(NSString *)changeDateFormatterWithString:(NSString *)string{
+    // 日期格式化类
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    // 设置日期格式(为了转换成功)
+    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    // NSString * -> NSDate *
+    NSDate *date = [fmt dateFromString:string];
+     fmt.dateFormat = @"yyyy年MM月dd号 HH:mm:ss";
+    NSString *dateStr=[fmt stringFromDate:date];
+    return dateStr;
 }
 -(UIImageView *)WidthImageViewWithString:(NSString *)url{
     __block CGFloat itemW = 0;
     __block CGFloat itemH = 70*DEF_Adaptation_Font*0.5;
         
-        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(40*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5,200*DEF_Adaptation_Font*0.5, itemH)];
+        UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5,200*DEF_Adaptation_Font*0.5, itemH)];
         NSURL * URL = [NSURL URLWithString:url];
 //加入默认本地图片
-        [imageView sd_setImageWithURL:URL placeholderImage:[UIImage imageNamed:@""]options:SDWebImageRetryFailed];
+        [imageView sd_setImageWithURL:URL placeholderImage:[UIImage imageNamed:@"product_logo.png"]options:SDWebImageRetryFailed];
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
    __block  UIImage * image;
     [manager diskImageExistsForURL:URL completion:^(BOOL isInCache) {
@@ -302,7 +336,7 @@
     }];//判断是否有缓存
     if (image==nil) {
 //加入默认本地图片
-          image=[UIImage imageNamed:@""];
+          image=[UIImage imageNamed:@"product_logo.png"];
     }
         //根据image的比例来设置高度
             itemW = image.size.width / image.size.height * itemH;
@@ -320,14 +354,34 @@
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    NSDictionary *dic=self.dataArr[indexPath.row];
+    NSDictionary *dic=self.dataArr[indexPath.row];
+    NSString *activityID=[dic objectForKey:@"activityid"];
+    [_obj createPhotoWallController:activityID];
 }
--(UIColor *)viewColorWithRow:(NSInteger)row{
-    if (row%3==0) {
-        return ColorRGB(223, 100, 92, 1.0);
-    }else if(row%3==1){
-        return ColorRGB(118, 183, 249, 1.0);
+//求最大公约数
+-(NSInteger)judgeTwoNumberWithA:(NSInteger)a andB:(NSInteger)b{
+    NSInteger max=a>b?a:b;
+    NSInteger min=a<b?a:b;
+    if (max==0) {
+        return 0;
+    }else{
+        return (max%min==0)?min:([self judgeTwoNumberWithA:min andB:(max%min)]);
     }
-    return ColorRGB(126, 128, 230, 1.0);
+}
+/**
+ *  递归设置传入的UIView内所有UILabel的文字颜色
+ *
+ *  @param view 要设置的UIView
+ */
+- (void)setupTextColor:(UIView *)view
+{
+    for (UIView *subView in view.subviews) {
+        if ([subView isKindOfClass:[UILabel class]]) {// 如果子控件是UILabel,则设置文字颜色
+            UILabel *label = (UILabel*)subView;
+            label.textColor = [UIColor redColor];
+        } else { // 如果子控件不是UILabel,则调用自身继续遍历子控件
+            [self setupTextColor:subView];
+        }
+    }
 }
 @end
