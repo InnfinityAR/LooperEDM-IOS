@@ -15,6 +15,7 @@
 #import "FamilyMessageView.h"
 
 #import "FamilyMemberView.h"
+#import "FamilyDetailView.h"
 @interface FamilyViewModel : NSObject
 
 {
@@ -32,9 +33,9 @@
 @property(nonatomic,strong)FamilySearchView *searchView;
 @property(nonatomic,strong)FramilyModel *familyModel;
 @property(nonatomic,strong)FamilyMemberView *memberView;
-
-
-
+//为了传入家族详情打卡
+@property(nonatomic,strong)FamilyDetailView *detailView;
+@property(nonatomic,strong)NSArray *familyFootArr;
 
 @property(nonatomic,strong)FamilyMessageView *messageView;
 -(void)getFamilyRankDataForOrderType:(NSString*)orderType;
@@ -85,5 +86,7 @@
 -(void)getMemberFootPrint:(int)page andPageSize:(int)size;
 
 -(void)createPhotoWallController:(NSString*)activityId;
+
+-(void)getRaverFootPrintData;
 
 @end

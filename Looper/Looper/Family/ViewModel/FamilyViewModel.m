@@ -38,7 +38,6 @@
 @interface FamilyViewModel()
 @property(nonatomic,strong)PlayerInfoView *playerInfoV;
 
-
 @end
 #import "FleetMangerView.h"
 
@@ -180,6 +179,8 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFootPrint" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [self.familyView initFamilyCircleWithDataSource:nil andDataArr:responseObject[@"data"]];
+            self.familyFootArr=responseObject[@"data"];
+            [self.detailView updateLiveShowViewWithArr:self.familyFootArr];
         }
     }fail:^{
         

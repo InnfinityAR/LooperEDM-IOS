@@ -23,6 +23,18 @@
     //用于界面的轻扫切换
     UIScrollView *scrollV;
     CycleView *cycleView;
+    
+    
+    UILabel *titleLB;
+    UILabel *titleLB2;
+    UILabel *integralLB;
+    UILabel *integralLB2;
+    UILabel *numberLB;
+    UILabel *numberLB2;
+    UILabel *activeLB;
+    UILabel *activeLB2;
+    UIScrollView *liveShowSV;
+    UIView *detailV;
 }
 
 @property(nonatomic,strong)NSDictionary *dataDic;
@@ -32,9 +44,10 @@
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary *)dataDic andRankNumber:(NSString *)rankNumber{
     if (self=[super initWithFrame:frame]) {
         self.obj=(FamilyViewModel *)obj;
+        self.liveshowArr=[self.obj familyFootArr];
+        [self.obj setDetailView:self];
         self.dataDic=dataDic;
         self.rankNumber=rankNumber;
-        self.liveshowArr=@[@1,@2,@3,@4];
         [self initView];
         [self setBackView];
         [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -67,9 +80,114 @@
 }
 
 -(void)clickLiveShow:(UITapGestureRecognizer *)tap{
-
+    NSInteger tag=tap.view.tag;
+    if (tag>=0) {
+        NSDictionary *dataDic=self.liveshowArr[tag];
+        [self.obj createPhotoWallController:[dataDic objectForKey:@"activityid"]];
+    }
     
     
+}
+-(void)updateLiveShowViewWithArr:(NSArray *)arr{
+    self.liveshowArr=arr;
+    if (self.liveshowArr.count>0) {
+        CGRect frame1=titleLB.frame;
+       frame1= CGRectMake(64*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        titleLB.frame=frame1;
+        CGRect frame2=titleLB2.frame;
+        frame2= CGRectMake(140*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        titleLB2.frame=frame2;
+        
+        CGRect frame3=integralLB.frame;
+        frame3=CGRectMake(64*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        integralLB.frame=frame3;
+        CGRect frame4=integralLB2.frame;
+        frame4= CGRectMake(140*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        integralLB2.frame=frame4;
+        
+        CGRect frame5=numberLB.frame;
+        frame5=CGRectMake(340*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        numberLB.frame=frame5;
+        CGRect frame6=numberLB2.frame;
+        frame6= CGRectMake(430*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        numberLB2.frame=frame6;
+        
+        CGRect frame7=activeLB.frame;
+        frame7=CGRectMake(340*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        activeLB.frame=frame7;
+        CGRect frame8=activeLB2.frame;
+        frame8= CGRectMake(430*DEF_Adaptation_Font*0.5, 320*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5);
+        activeLB2.frame=frame8;
+        
+        [liveShowSV removeFromSuperview];
+           liveShowSV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 380*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 140*DEF_Adaptation_Font*0.5)];
+            liveShowSV.contentSize=CGSizeMake(270*DEF_Adaptation_Font*0.5*self.liveshowArr.count+20*DEF_Adaptation_Font*0.5, 140*DEF_Adaptation_Font*0.5);
+            liveShowSV.showsHorizontalScrollIndicator = FALSE;
+            liveShowSV.delegate=self;
+            liveShowSV.tag=101;
+            liveShowSV.bounces=NO;
+            [self addSubview:liveShowSV];
+            for (int i=0; i<self.liveshowArr.count; i++) {
+                NSDictionary *dataDic=self.liveshowArr[i];
+                UIImageView *liveshowIV=[[UIImageView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5*(i+1)+250*DEF_Adaptation_Font*0.5*i, 10*DEF_Adaptation_Font*0.5, 250*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5)];
+                [liveshowIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"orgphoto"]] placeholderImage:nil options:(SDWebImageRetryFailed)];
+                liveshowIV.contentMode=UIViewContentModeScaleAspectFill;
+                liveshowIV.clipsToBounds=YES;
+                [liveShowSV addSubview:liveshowIV];
+                liveshowIV.tag=i;
+                liveshowIV.userInteractionEnabled=YES;
+                UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickLiveShow:)];
+                [liveshowIV addGestureRecognizer:tap];
+                liveshowIV.layer.cornerRadius=10.0*DEF_Adaptation_Font*0.5;
+                liveshowIV.layer.masksToBounds=YES;
+                UIImageView *shadowIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(liveshowIV), DEF_HEIGHT(liveshowIV))];
+                shadowIV.image=[UIImage imageNamed:@"familyDetail_liveshow.png"];
+                [liveshowIV addSubview:shadowIV];
+                UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV)-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
+                contentLB.text=[dataDic objectForKey:@"activityname"];
+//Arial-ItalicMT   ArialRoundedMTBold  HiraKakuProN-W6
+                contentLB.font=[UIFont fontWithName:@"HiraKakuProN-W3" size:12];
+                contentLB.textColor=[UIColor whiteColor];
+                contentLB.textAlignment=NSTextAlignmentCenter;
+                contentLB.numberOfLines=2;
+//加阴影
+                NSShadow *shadow1=[[NSShadow  alloc]init];
+                shadow1.shadowBlurRadius = 10.0;
+                shadow1.shadowColor = [UIColor blackColor];
+                contentLB.attributedText = [[NSAttributedString alloc] initWithString:contentLB.text attributes:@{NSShadowAttributeName: shadow1}];
+                
+                [liveshowIV addSubview:contentLB];
+                NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+                NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+               
+              UILabel *finishLB=[[UILabel alloc]initWithFrame:CGRectMake(0, 100*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV), 20*DEF_Adaptation_Font*0.5)];
+                finishLB.alpha=0.8;
+                finishLB.backgroundColor=ColorRGB(52, 52, 52, 1.0);
+                finishLB.textAlignment=NSTextAlignmentCenter;
+                finishLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
+                [liveshowIV addSubview:finishLB];
+                        if (timeNow>[dataDic[@"endtime"]integerValue]) {
+                            finishLB.text=@"已结束";
+                            finishLB.textColor=[UIColor whiteColor];
+                        }else{
+                            finishLB.text=@"进行中";
+                            finishLB.textColor=ColorRGB(226, 195, 112, 1.0);
+                        }
+            }
+        CGRect frame=detailV.frame;
+        frame=CGRectMake(0, 500*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-500*DEF_Adaptation_Font*0.5);
+        detailV.frame=frame;
+        
+        CGRect frame9=scrollV.frame;
+        frame9.size.height=DEF_HEIGHT(self)-593*DEF_Adaptation_Font*0.5;
+        scrollV.frame=frame9;
+        CGRect frame10=self.tableView.frame;
+        frame10.size.height=DEF_HEIGHT(scrollV)-5*DEF_Adaptation_Font*0.5;
+        self.tableView.frame=frame10;
+        CGRect frame11=self.collectView.frame;
+        frame11.size.height=DEF_HEIGHT(scrollV)-5*DEF_Adaptation_Font*0.5;
+        self.collectView.frame=frame11;
+    }
 }
 -(void)initView{
     UIImageView *headView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), 96*DEF_Adaptation_Font*0.5)];
@@ -114,14 +232,6 @@
     [cycleView drawProgress:[[self.dataDic objectForKey:@"raverexp"]floatValue]/16000];
     [self addSubview:cycleView];
     
-    UILabel *titleLB=nil;
-    UILabel *titleLB2=nil;
-    UILabel *integralLB=nil;
-    UILabel *integralLB2=nil;
-    UILabel *numberLB=nil;
-    UILabel *numberLB2=nil;
-    UILabel *activeLB=nil;
-    UILabel *activeLB2=nil;
     if (self.liveshowArr.count>0) {
         titleLB=[[UILabel alloc]initWithFrame:CGRectMake(64*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
          titleLB2=[[UILabel alloc]initWithFrame:CGRectMake(140*DEF_Adaptation_Font*0.5, 260*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
@@ -181,48 +291,62 @@
     [self addSubview:activeLB2];
     
 //填写liveshow内容
-#warning -LiveShowData
-
     if (self.liveshowArr.count>0) {
-    UIScrollView *liveShowSV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 380*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 140*DEF_Adaptation_Font*0.5)];
+    liveShowSV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 380*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 140*DEF_Adaptation_Font*0.5)];
     liveShowSV.contentSize=CGSizeMake(270*DEF_Adaptation_Font*0.5*self.liveshowArr.count+20*DEF_Adaptation_Font*0.5, 140*DEF_Adaptation_Font*0.5);
     liveShowSV.showsHorizontalScrollIndicator = FALSE;
         liveShowSV.delegate=self;
         liveShowSV.tag=101;
         liveShowSV.bounces=NO;
     [self addSubview:liveShowSV];
-    for (int i=0; i<self.liveshowArr.count; i++) {
-        UIImageView *liveshowIV=[[UIImageView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5*(i+1)+250*DEF_Adaptation_Font*0.5*i, 0, 250*DEF_Adaptation_Font*0.5, 140*DEF_Adaptation_Font*0.5)];
-        liveshowIV.image=[UIImage imageNamed:@"bk_home1.png"];
-        [liveShowSV addSubview:liveshowIV];
-        liveshowIV.tag=i;
-        liveshowIV.userInteractionEnabled=YES;
-        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickLiveShow:)];
-        [liveshowIV addGestureRecognizer:tap];
-        liveshowIV.layer.cornerRadius=20.0*DEF_Adaptation_Font*0.5;
-        liveshowIV.layer.masksToBounds=YES;
-        
-        UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV)-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
-        contentLB.shadowColor = [UIColor grayColor];
-        //阴影偏移  x，y为正表示向右下偏移
-        contentLB.shadowOffset = CGSizeMake(0.5, 0.5);
-        contentLB.text=@"2017百威风暴电音节广东站";
-        contentLB.font=[UIFont systemFontOfSize:12];
-        contentLB.textColor=[UIColor whiteColor];
-        contentLB.textAlignment=NSTextAlignmentCenter;
-        contentLB.numberOfLines=2;
-        [liveshowIV addSubview:contentLB];
-        NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
-        NSInteger timeNow =(long)[datenow timeIntervalSince1970];
-//        if (timeNow>[dic[@"endtime"]integerValue]) {
-            UIImageView *finishView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 100*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV), 40*DEF_Adaptation_Font*0.5)];
-            finishView.image=[UIImage imageNamed:@"btn_finishEnd.png"];
-            [liveshowIV addSubview:finishView];
-//        }
-    }
+        for (int i=0; i<self.liveshowArr.count; i++) {
+            NSDictionary *dataDic=self.liveshowArr[i];
+            UIImageView *liveshowIV=[[UIImageView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5*(i+1)+250*DEF_Adaptation_Font*0.5*i, 10*DEF_Adaptation_Font*0.5, 250*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5)];
+            [liveshowIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"orgphoto"]] placeholderImage:nil options:(SDWebImageRetryFailed)];
+            liveshowIV.contentMode=UIViewContentModeScaleAspectFill;
+            liveshowIV.clipsToBounds=YES;
+            [liveShowSV addSubview:liveshowIV];
+            liveshowIV.tag=i;
+            liveshowIV.userInteractionEnabled=YES;
+            UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickLiveShow:)];
+            [liveshowIV addGestureRecognizer:tap];
+            liveshowIV.layer.cornerRadius=10.0*DEF_Adaptation_Font*0.5;
+            liveshowIV.layer.masksToBounds=YES;
+            UIImageView *shadowIV=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(liveshowIV), DEF_HEIGHT(liveshowIV))];
+            shadowIV.image=[UIImage imageNamed:@"familyDetail_liveshow.png"];
+            [liveshowIV addSubview:shadowIV];
+            UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, 0*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV)-40*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
+            contentLB.text=[dataDic objectForKey:@"activityname"];
+            contentLB.font=[UIFont systemFontOfSize:12];
+            contentLB.textColor=[UIColor whiteColor];
+            contentLB.textAlignment=NSTextAlignmentCenter;
+            contentLB.numberOfLines=2;
+            //加阴影
+            NSShadow *shadow1=[[NSShadow  alloc]init];
+            shadow1.shadowBlurRadius = 10.0;
+            shadow1.shadowColor = [UIColor blackColor];
+            contentLB.attributedText = [[NSAttributedString alloc] initWithString:contentLB.text attributes:@{NSShadowAttributeName: shadow1}];
+            
+            [liveshowIV addSubview:contentLB];
+            NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+            NSInteger timeNow =(long)[datenow timeIntervalSince1970];
+            
+            UILabel *finishLB=[[UILabel alloc]initWithFrame:CGRectMake(0, 100*DEF_Adaptation_Font*0.5, DEF_WIDTH(liveshowIV), 20*DEF_Adaptation_Font*0.5)];
+            finishLB.alpha=0.8;
+            finishLB.backgroundColor=ColorRGB(52, 52, 52, 1.0);
+            finishLB.textAlignment=NSTextAlignmentCenter;
+            finishLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
+            [liveshowIV addSubview:finishLB];
+            if (timeNow>[dataDic[@"endtime"]integerValue]) {
+                finishLB.text=@"已结束";
+                finishLB.textColor=[UIColor whiteColor];
+            }else{
+                finishLB.text=@"进行中";
+                finishLB.textColor=ColorRGB(226, 195, 112, 1.0);
+            }
+        }
     }
     
-    UIView *detailV=nil;
     if (self.liveshowArr.count>0) {
     detailV=[[UIView alloc]initWithFrame:CGRectMake(0, 500*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self)-500*DEF_Adaptation_Font*0.5)];
     }else{

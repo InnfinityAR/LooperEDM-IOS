@@ -272,19 +272,12 @@
     UILabel  *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(50*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5, DEF_WIDTH(bgIV)-100*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     timeLB.textColor=[UIColor whiteColor];
     timeLB.textAlignment=NSTextAlignmentCenter;
-    if ([dataDic objectForKey:@"timetag"]!=nil&&[dataDic objectForKey:@"timetag"]!=[NSNull null]) {
-    NSString *time=[self changeDateFormatterWithString:[dataDic objectForKey:@"timetag"]];
+    if ([dataDic objectForKey:@"starttime"]!=nil&&[dataDic objectForKey:@"starttime"]!=[NSNull null]) {
+    NSString *time=[self timestampSwitchTime:[[dataDic objectForKey:@"starttime"]intValue]];
     if (time!=nil) {
         timeLB.text=[time substringToIndex:11];
-    }else{
-        time=[self changeDateFormatterWithString:[NSString stringWithFormat:@"%@ 21:00:00",[[dataDic objectForKey:@"timetag"]substringToIndex:10]]];
-         if (time!=nil) {
-        timeLB.text=[time substringToIndex:11];
-         }
-    }
     timeLB.font=[UIFont systemFontOfSize:18];
     //添加阴影效果
-    if (time!=nil) {
     NSShadow *shadow=[[NSShadow  alloc]init];
     shadow.shadowBlurRadius = 10.0;
     shadow.shadowColor = [UIColor blackColor];
@@ -303,6 +296,18 @@
         [cell.contentView addSubview:imageV];
     }
     return cell;
+    
+}
+-(NSString *)timestampSwitchTime:(NSInteger)timestamp{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"yyyy年MM月dd号 HH:mm:ss"]; // （@"YYYY-MM-dd hh:mm:ss"）----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    [formatter setTimeZone:timeZone];
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+    return confromTimespStr;
     
 }
 -(NSString *)changeDateFormatterWithString:(NSString *)string{

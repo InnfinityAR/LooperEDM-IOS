@@ -18,5 +18,5 @@
 
 
 @property(nonatomic,strong)NSArray *liveshowArr;
-
+-(void)updateLiveShowViewWithArr:(NSArray *)arr;
 @end
