@@ -384,10 +384,12 @@
     NSString *dateTime=nil;
     if ([[starttime substringFromIndex:8]integerValue]==[[endtime substringFromIndex:8]integerValue]) {
         dateTime=starttime;
-        cell.timeLB.text=dateTime;
+//        cell.timeLB.text=dateTime;
+        cell.timeLB.text=[activity objectForKey:@"timetag"];
     }
     else{
-    cell.timeLB.text=[NSString stringWithFormat:@"%@~%@",starttime,[endtime substringFromIndex:5]];
+//    cell.timeLB.text=[NSString stringWithFormat:@"%@~%@",starttime,[endtime substringFromIndex:5]];
+         cell.timeLB.text=[activity objectForKey:@"timetag"];
     }
        cell.ticketLB.text=[NSString stringWithFormat:@"%@",activity[@"price"]];
     if (activity[@"price"]==[NSNull null]) {

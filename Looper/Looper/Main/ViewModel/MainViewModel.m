@@ -393,6 +393,9 @@
             [LocalDataMangaer sharedManager].NickName =responseObject[@"data"][@"User"][@"nickname"];
             [LocalDataMangaer sharedManager].sex =responseObject[@"data"][@"User"][@"sex"];
             [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
+            if (responseObject[@"data"][@"raverid"]!=[NSNull null]&&responseObject[@"data"][@"raverid"]!=nil) {
+                [LocalDataMangaer sharedManager].raverid=responseObject[@"data"][@"raverid"];
+            }
             [[LocalDataMangaer sharedManager] setData];
             [[RongCloudManger sharedManager] initRongCloudSDK];
             [[RongCloudManger sharedManager]loginRCSdk];

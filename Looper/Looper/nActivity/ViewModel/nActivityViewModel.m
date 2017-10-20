@@ -36,7 +36,7 @@
 #import "ActivitySerachView.h"
 #import "PhotoWallViewController.h"
 
-
+#import "FamilyOfficialView.h"
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
@@ -169,13 +169,26 @@
                 [[_obj view]addSubview:brandDetailV];
             }
         }else{
-            
+           
         }
     }fail:^{
         
     }];
 }
-
+//家族官方数据
+-(void)getFamilyOfficial{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].raverid forKey:@"raverId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverHomePage" parameters:dic success:^(id responseObject){
+        if ([responseObject[@"status"]integerValue]==0) {
+            FamilyOfficialView *officialView=[[FamilyOfficialView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self andDataDic:responseObject[@"data"] andFootprint:responseObject[@"footprint"] andAlbumn:responseObject[@"albumn"] andRole:[LocalDataMangaer sharedManager].role];
+              [[_obj view]addSubview:officialView];
+        }
+    }fail:^{
+        
+    }];
+}
 
 -(void)createSerachView{
     

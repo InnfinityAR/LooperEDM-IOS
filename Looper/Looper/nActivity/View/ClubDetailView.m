@@ -167,7 +167,7 @@
        // if(scrollView.contentOffset.y>0 &&scrollView.contentOffset.y<71){
             
             followBtn.frame=CGRectMake(followBtn.frame.origin.x, followBtn.frame.origin.y+(yOffset-ScrollNum_y), followBtn.frame.size.width, followBtn.frame.size.height);
-            
+        
        // }
         
         if (offset.y < 0) {

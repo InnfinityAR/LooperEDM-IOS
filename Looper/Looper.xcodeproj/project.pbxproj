@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B22171231EF778FA00B3CBC3 /* ActivityBarrageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */; };
 		B22171301EFBDD0B00B3CBC3 /* LFWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */; };
+		B22403E81F99B1CB001D425E /* FamilyOfficialView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22403E71F99B1CB001D425E /* FamilyOfficialView.m */; };
 		B22569BB1F8DC737005FEA57 /* FamilyCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */; };
 		B225B96A1F3055A60008E5AF /* SaleTicketController.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B9691F3055A60008E5AF /* SaleTicketController.m */; };
 		B225B96D1F30568C0008E5AF /* SaleTicketViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B225B96C1F30568C0008E5AF /* SaleTicketViewModel.m */; };
@@ -845,6 +846,8 @@
 		B22403E31F987385001D425E /* familyDetail_liveshow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = familyDetail_liveshow.png; sourceTree = "<group>"; };
 		B22403E41F98753C001D425E /* family_liveshow_finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_liveshow_finish.png; sourceTree = "<group>"; };
 		B22403E51F98753C001D425E /* family_liveshow_being.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_liveshow_being.png; sourceTree = "<group>"; };
+		B22403E61F99B1CB001D425E /* FamilyOfficialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyOfficialView.h; sourceTree = "<group>"; };
+		B22403E71F99B1CB001D425E /* FamilyOfficialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyOfficialView.m; sourceTree = "<group>"; };
 		B22569B91F8DC737005FEA57 /* FamilyCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyCircleView.h; sourceTree = "<group>"; };
 		B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyCircleView.m; sourceTree = "<group>"; };
 		B225B9681F3055A60008E5AF /* SaleTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleTicketController.h; sourceTree = "<group>"; };
@@ -3577,6 +3580,8 @@
 				C42D88291F022C1200CE8F01 /* ClubDetailView.m */,
 				C42D882B1F022C4100CE8F01 /* BrandDetailView.h */,
 				C42D882C1F022C4100CE8F01 /* BrandDetailView.m */,
+				B22403E61F99B1CB001D425E /* FamilyOfficialView.h */,
+				B22403E71F99B1CB001D425E /* FamilyOfficialView.m */,
 				C4119B791F7A5A2C002BDED5 /* ActivitySerachView.h */,
 				C4119B7A1F7A5A2C002BDED5 /* ActivitySerachView.m */,
 			);
@@ -5604,6 +5609,7 @@
 				C4119B7B1F7A5A2C002BDED5 /* ActivitySerachView.m in Sources */,
 				C4AE8C181E4822480019B8A1 /* HowToPlayView.m in Sources */,
 				B23521641F4EA344003D06CB /* SGQRCodeGenerateManager.m in Sources */,
+				B22403E81F99B1CB001D425E /* FamilyOfficialView.m in Sources */,
 				C4BCE7401E091E710087E6C5 /* UIAlertView+AFNetworking.m in Sources */,
 				C4129BE51EAB3D380010A566 /* MusicPlayView.m in Sources */,
 				B229F24D1F90690700375702 /* NSData+ImageContentType.m in Sources */,
