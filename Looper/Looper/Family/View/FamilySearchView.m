@@ -67,7 +67,7 @@
         _searchBar.autocorrectionType = UITextAutocorrectionTypeDefault;
         _searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchBar.barStyle = UIBarStyleBlack;
-        _searchBar.placeholder = @"搜索Loop、用户";
+        _searchBar.placeholder = @"搜索family(姓名，id，城市)";
         [_searchBar becomeFirstResponder];
         
         [self addSubview:_searchBar];

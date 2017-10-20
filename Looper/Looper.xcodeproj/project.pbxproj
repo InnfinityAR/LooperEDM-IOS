@@ -842,6 +842,9 @@
 		B22171221EF778FA00B3CBC3 /* ActivityBarrageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityBarrageView.m; sourceTree = "<group>"; };
 		B221712E1EFBDD0B00B3CBC3 /* LFWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFWaterfallLayout.h; sourceTree = "<group>"; };
 		B221712F1EFBDD0B00B3CBC3 /* LFWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFWaterfallLayout.m; sourceTree = "<group>"; };
+		B22403E31F987385001D425E /* familyDetail_liveshow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = familyDetail_liveshow.png; sourceTree = "<group>"; };
+		B22403E41F98753C001D425E /* family_liveshow_finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_liveshow_finish.png; sourceTree = "<group>"; };
+		B22403E51F98753C001D425E /* family_liveshow_being.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = family_liveshow_being.png; sourceTree = "<group>"; };
 		B22569B91F8DC737005FEA57 /* FamilyCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FamilyCircleView.h; sourceTree = "<group>"; };
 		B22569BA1F8DC737005FEA57 /* FamilyCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FamilyCircleView.m; sourceTree = "<group>"; };
 		B225B9681F3055A60008E5AF /* SaleTicketController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaleTicketController.h; sourceTree = "<group>"; };
@@ -4632,6 +4635,9 @@
 		C4CF01E71F554DA300315F57 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				B22403E51F98753C001D425E /* family_liveshow_being.png */,
+				B22403E41F98753C001D425E /* family_liveshow_finish.png */,
+				B22403E31F987385001D425E /* familyDetail_liveshow.png */,
 				B22A041A1F70E61700E3EA2E /* btn_family_selectJob.png */,
 				B22A04181F70E60E00E3EA2E /* family_changeJob_IV.png */,
 				C461E23C1F6BEFD80048F979 /* btn_family_commit.png */,

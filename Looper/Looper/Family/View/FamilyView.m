@@ -172,6 +172,7 @@
 -(void)initFamilyDetailWithDataDic:(NSDictionary *)dataDic andApplyArr:(NSArray *)applyArr andLogArr:(NSArray *)logArr{
     [detailView removeFromSuperview];
     detailView=[[FamilyDetailView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 0, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObject:self.obj andDataDic:dataDic andRankNumber:@"1"];
+    
     if (applyArr!=nil) {
         [detailView setApplyArr:applyArr];
     }
