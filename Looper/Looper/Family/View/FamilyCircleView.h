@@ -12,7 +12,14 @@
 @property(nonatomic)id obj;
 
 -(instancetype)initWithFrame:(CGRect)frame
-                                                and:(id)idObject
-                         andDataSource:(NSArray *)dataSource
-                                 andDataArr:(NSArray *)dataArr;
+                         and:(id)idObject
+               andDataSource:(NSArray *)dataSource
+                 andDataArr:(NSArray *)dataArr;
+
+-(void)updataFootMark:(NSArray*)DataArray;
+
+
+
+
+
 @end

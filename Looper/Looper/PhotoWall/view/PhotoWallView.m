@@ -530,7 +530,8 @@
         [self createCellView:indexPath andCell:cell];
         return cell;
     }else{
-        [self createCellView:indexPath andCell:cell];
+        [self createCellView:indexPath andCell:cell]
+        ;
         return cell;
     }
 }
@@ -545,10 +546,7 @@
     [self addSubview:sendPhoto];
     
     sendPhoto.hidden=true;
-
 }
-
-
 
 
 -(void)initView:(NSDictionary*)dic{
