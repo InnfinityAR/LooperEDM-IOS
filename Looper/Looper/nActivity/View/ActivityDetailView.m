@@ -588,7 +588,8 @@
         if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
             
         }else{
-            [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
+           [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
+//             [_obj getFamilyOfficial];
         }
     }
 }

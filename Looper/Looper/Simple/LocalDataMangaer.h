@@ -20,7 +20,7 @@
     NSString *age;
     NSArray *rouletteArr;
     NSString *raverid;
-    
+    NSString *role;
     
     NSDictionary *localUserData;
     
@@ -40,7 +40,7 @@
 @property(nonatomic,strong)NSDictionary *localUserData;
 @property(nonatomic,strong)NSArray *rouletteArr;
 @property(nonatomic,strong)NSString *raverid;
-
+@property(nonatomic,strong)NSString *role;
 
 @property(nonatomic)int loginType;
 

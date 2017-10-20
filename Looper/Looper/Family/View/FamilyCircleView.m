@@ -275,7 +275,8 @@
     if ([dataDic objectForKey:@"starttime"]!=nil&&[dataDic objectForKey:@"starttime"]!=[NSNull null]) {
     NSString *time=[self timestampSwitchTime:[[dataDic objectForKey:@"starttime"]intValue]];
     if (time!=nil) {
-        timeLB.text=[time substringToIndex:11];
+//        timeLB.text=[time substringToIndex:11];
+        timeLB.text=[dataDic objectForKey:@"timetag"];
     timeLB.font=[UIFont systemFontOfSize:18];
     //添加阴影效果
     NSShadow *shadow=[[NSShadow  alloc]init];

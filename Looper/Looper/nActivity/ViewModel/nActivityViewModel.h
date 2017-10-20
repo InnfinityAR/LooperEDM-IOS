@@ -66,4 +66,7 @@
 
 -(void)jumpToPhotoWall:(NSString*)activityID;
 
+
+
+-(void)getFamilyOfficial;
 @end
