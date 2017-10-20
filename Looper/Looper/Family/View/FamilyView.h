@@ -36,4 +36,7 @@
                                              andLogArr:(NSArray *)logArr;
 -(void)initFamilyMemberWithDataArr:(NSArray *)dataArr;
 -(void)initFamilyCircleWithDataSource:(NSArray *)dataSource andDataArr:(NSArray *)dataArr;
+
+-(void)reloadViewCircleView:(NSArray*)array;
+
 @end

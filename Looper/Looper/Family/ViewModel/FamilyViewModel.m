@@ -30,7 +30,7 @@
 
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
-
+#import "PlayVideoView.h"
 
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
@@ -81,13 +81,49 @@
 
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMemberFootPrint" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-          
+         
+            [self.familyView reloadViewCircleView:responseObject[@"data"]];
+            
+            
             
         }
     }fail:^{
         
     }];
 }
+
+-(void)playNetWorkVideo:(NSString*)videoUrl{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    PlayVideoView *playVideoV  = [[PlayVideoView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andUrlStr:videoUrl];
+    [[_obj view] addSubview:playVideoV];
+    
+}
+
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike{
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:boardId forKey:@"boardId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:[NSString stringWithFormat:@"%d",isLike] forKey:@"like"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbBoardMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+          //  [self getImageBoard:_activityId];
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+
+
 
 
 -(void)requestData{
@@ -104,18 +140,18 @@
     if (orderType==nil) {
         [dic setObject:@"1" forKey:@"orderType"];
     }else{
-    [dic setObject:orderType forKey:@"orderType"];
+        [dic setObject:orderType forKey:@"orderType"];
     }
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.x) forKey:@"longitude"];
     [dic setObject:@([LocationManagerData sharedManager].LocationPoint_xy.y) forKey:@"latitude"];
-
+    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFamlily" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [_familyModel initWithData:responseObject];
             ownername=responseObject[@"ownername"];
             if (orderType==nil) {
-//第一次加载     注：以后退出家族时传入的orderType也应该是nil，用来判断
+                //第一次加载     注：以后退出家族时传入的orderType也应该是nil，用来判断
                 if (_familyModel.familyDetailData==nil) {
                     self.familyView.titleArray=@[@"家族列表",@"家族排行",@"家族消息"];
                     [self.familyView updateTitleArr];
@@ -127,14 +163,14 @@
                 }
                 [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                 if (_familyModel.familyDetailData==nil){
-                [self.familyView initFamilyMessageWithDataArr:_familyModel.InviteArray];
-                [self.familyView initFamilyListWithDataArr:_familyModel.recommendArray];
+                    [self.familyView initFamilyMessageWithDataArr:_familyModel.InviteArray];
+                    [self.familyView initFamilyListWithDataArr:_familyModel.recommendArray];
                 }else{
                     [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
                     NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
                     if (ownername==nil||[ownername isEqual:[NSNull null]]) {
                     }else{
-                    [dataDic setObject:ownername forKey:@"ownername"];
+                        [dataDic setObject:ownername forKey:@"ownername"];
                     }
                     NSArray *applyArr=nil;
                     if ([[_familyModel.familyMember.firstObject objectForKey:@"role"]intValue]>1) {
@@ -144,15 +180,15 @@
                     [self getRaverFootPrintData];
                 }
             }else{
-//排行筛选
+                //排行筛选
                 [_familyModel updataWithData:responseObject];
                 [self.rankView reloadData:_familyModel.RankingArray];
                 if (_familyModel.familyDetailData==nil) {
-//拒绝邀请就重新加载界面
-                [self.messageView reloadData:_familyModel.InviteArray];
+                    //拒绝邀请就重新加载界面
+                    [self.messageView reloadData:_familyModel.InviteArray];
                 }else{
-//同意邀请就直接跳转界面
-                  [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
+                    //同意邀请就直接跳转界面
+                    [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                     [self.familyView initFamilyMemberWithDataArr:_familyModel.familyMember];
                     NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]initWithDictionary:_familyModel.familyDetailData];
                     if (ownername==nil||[ownername isEqual:[NSNull null]]) {
@@ -179,14 +215,16 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverFootPrint" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             [self.familyView initFamilyCircleWithDataSource:nil andDataArr:responseObject[@"data"]];
+ 
+            [self getMemberFootPrint:1 andPageSize:100];
+            
             self.familyFootArr=responseObject[@"data"];
             [self.detailView updateLiveShowViewWithArr:self.familyFootArr];
         }
     }fail:^{
         
     }];
-    
-    
+
 }
 //同意/拒绝申请家族
 -(void)judgeJoinFamilyWithJoin:(NSString *)join andRaverId:(NSString *)raverId andApplyId:(NSString*)applyId andUserId:(NSString *)userid{

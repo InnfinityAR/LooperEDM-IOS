@@ -53,6 +53,8 @@
 
 -(void)createFleetMangerView;
 
+-(void)playNetWorkVideo:(NSString*)videoUrl;
+
 //删除家族成员
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
 //将要删除的家族成员的字段
@@ -60,6 +62,7 @@
 
 
 -(void)createPlayerView:(int)PlayerId;
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
 
 
 -(void)createFleetViewName;
