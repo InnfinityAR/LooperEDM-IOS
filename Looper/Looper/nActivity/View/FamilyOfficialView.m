@@ -223,8 +223,6 @@
     }
     
     [self createHorizontalScroll];
-    
-    
 }
 -(void)createHorizontalScroll{
     
