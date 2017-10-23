@@ -714,9 +714,12 @@
     }
     return NO;
 }
+
 -(void)createPhotoWallController:(NSString*)activityId{
     PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
     [photoWallVC initWithActivityID:activityId];
     [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
 }
+
+
 @end
