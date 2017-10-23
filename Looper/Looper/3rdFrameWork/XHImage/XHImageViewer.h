@@ -15,13 +15,13 @@
 
 
 - (void)imageViewer:(XHImageViewer *)imageViewer  finishWithSelectedView:(NSArray*)ImageArray;
-
+-(void)giveSelectedView:(NSInteger)index;
 @end
 
 @interface XHImageViewer : UIView
 
 @property (nonatomic, weak) id<XHImageViewerDelegate> delegate;
 @property (nonatomic, assign) CGFloat backgroundScale;
-
 - (void)showWithImageViews:(NSArray*)views selectedView:(UIImageView*)selectedView andType:(int)type;
+
 @end

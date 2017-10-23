@@ -11,4 +11,7 @@
 @interface FamilyOfficialView : UIView<XHImageViewerDelegate>
 @property(nonatomic,strong)id obj;
 -(instancetype)initWithFrame:(CGRect)frame andObj:(id)obj andDataDic:(NSDictionary *)dataDic andFootprint:(NSArray *)footprint andAlbumn:(NSArray *)albumn andRole:(NSString *)role;
+-(void)ImageFileSave:(UIImage*)imageFile;
+-(void)updateCollectViewData:(NSArray *)dataArr;
+-(void)changeHeaderViewWIthImage:(UIImage *)image;
 @end

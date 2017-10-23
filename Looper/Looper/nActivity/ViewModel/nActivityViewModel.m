@@ -37,6 +37,9 @@
 #import "PhotoWallViewController.h"
 
 #import "FamilyOfficialView.h"
+
+#import "Base64Class.h"
+#import "LooperToolClass.h"
 @implementation nActivityViewModel{
 
     NSMutableArray *allActivityArray;
@@ -52,6 +55,7 @@
     CurrentActivityView *view;
     NSArray *orderArray;
     TicketCiew *ticketV;
+    NSInteger updatePhotoTag;
 }
 
 -(id)initWithController:(id)controller andOrderArr:(NSArray *)orderArr{
@@ -175,20 +179,7 @@
         
     }];
 }
-//家族官方数据
--(void)getFamilyOfficial{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].raverid forKey:@"raverId"];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverHomePage" parameters:dic success:^(id responseObject){
-        if ([responseObject[@"status"]integerValue]==0) {
-            FamilyOfficialView *officialView=[[FamilyOfficialView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self andDataDic:responseObject[@"data"] andFootprint:responseObject[@"footprint"] andAlbumn:responseObject[@"albumn"] andRole:[LocalDataMangaer sharedManager].role];
-              [[_obj view]addSubview:officialView];
-        }
-    }fail:^{
-        
-    }];
-}
+
 
 -(void)createSerachView{
     
@@ -748,6 +739,175 @@
 -(void)removeActivityAction{
     if (ticketV!=nil) {
     [ticketV removeActivityAction];
+    }
+}
+#pragma-----------------------------------------------------------------familyOfficial
+//家族官方数据
+-(void)getFamilyOfficialWithRaverId:(NSString *)raverId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if (raverId!=nil&&[raverId isEqual:[NSNull null]]) {
+          [dic setObject:raverId forKey:@"raverId"];
+    }else{
+    [dic setObject:[LocalDataMangaer sharedManager].raverid forKey:@"raverId"];
+    }
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverHomePage" parameters:dic success:^(id responseObject){
+        if ([responseObject[@"status"]integerValue]==0) {
+            FamilyOfficialView *officialView=[[FamilyOfficialView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) andObj:self andDataDic:responseObject[@"data"] andFootprint:responseObject[@"footprint"] andAlbumn:responseObject[@"albumn"] andRole:[LocalDataMangaer sharedManager].role];
+            [[_obj view]addSubview:officialView];
+        }
+    }fail:^{
+        
+    }];
+}
+//家族官网
+-(void)createPhotoWallController:(NSString*)activityId{
+    PhotoWallViewController *photoWallVC=[[PhotoWallViewController alloc]init];
+    [photoWallVC initWithActivityID:activityId];
+    [[self.obj navigationController]pushViewController:photoWallVC animated:NO];
+}
+-(void)followFamliyWithisLike:(int)islike andRaverId:(NSString *)raverId{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:[NSString stringWithFormat:@"%d",islike] forKey:@"like"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"followRaver" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            if(islike==1){
+                [[DataHander sharedDataHander] showViewWithStr:@"关注成功" andTime:1 andPos:CGPointZero];
+            }else{
+                [[DataHander sharedDataHander] showViewWithStr:@"取消成功" andTime:1 andPos:CGPointZero];
+            }
+        }else{
+        }
+    }fail:^{
+    }];
+}
+-(void)uploadFamilyAlbumnWithImages:(NSArray *)images andRaverId:(NSString *)raverId{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    if (images!=nil&&images.count>0) {
+//base64
+        if(images!=nil){
+            NSMutableArray *imageDataArray= [[NSMutableArray alloc] initWithCapacity:50];
+            for (int i=0;i<[images count];i++){
+                NSLog(@"%@",[images objectAtIndex:i]);
+                UIImage *imagePhoto2 = [images objectAtIndex:i];
+                NSData *imageDataP2 = UIImageJPEGRepresentation(imagePhoto2,0.1);
+                [imageDataArray addObject:[Base64Class encodeBase64Data:imageDataP2]];
+            }
+            [dic setObject:imageDataArray forKey:@"images"];
+        }
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"uploadRaverAlbumn" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            [self updateFamilyOfficialWithRaverId:raverId];
+        }else{
+          [[DataHander sharedDataHander] showViewWithStr:@"图片上传失败" andTime:1 andPos:CGPointZero];
+        }
+    }fail:^{
+    }];
+    }else{
+       [[DataHander sharedDataHander] showViewWithStr:@"图片上传失败" andTime:1 andPos:CGPointZero];
+    }
+}
+//更新家族官方数据
+-(void)updateFamilyOfficialWithRaverId:(NSString *)raverId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverHomePage" parameters:dic success:^(id responseObject){
+        if ([responseObject[@"status"]integerValue]==0) {
+            [self.officialView updateCollectViewData:responseObject[@"albumn"]];
+        }
+    }fail:^{
+        
+    }];
+}
+-(void)deleteFamilyAlbumnWithImageId:(NSString *)imageid RaverId:(NSString *)raverId andUserId:(NSString *)userId{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:imageid forKey:@"imageId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"deleteRaverImage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+                [[DataHander sharedDataHander] showViewWithStr:@"删除成功" andTime:1 andPos:CGPointZero];
+                [self updateFamilyOfficialWithRaverId:raverId];
+        }else{
+        }
+    }fail:^{
+    }];
+}
+
+#pragma updatePhoto
+-(void)LocalPhotoWithTag:(NSInteger)tag
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    updatePhotoTag=tag;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    picker.allowsEditing = YES;
+    [_obj presentModalViewController:picker animated:YES];
+}
+
+
+-(void)takePhotoWithTag:(NSInteger)tag
+{
+    updatePhotoTag=tag;
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        //设置拍照后的图片可被编辑
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [_obj presentModalViewController:picker animated:YES];
+    }else
+    {
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* MyImage = [[UIImage alloc]init];
+        
+        UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+        //NSData *imageData = UIImagePNGRepresentation(image);
+        
+        MyImage=[LooperToolClass set_imageWithImage:image ToPoint:CGPointMake(0, 0)  scaledToSize:CGSizeMake(image.size.width, image.size.height)];
+        NSData * data = [LooperToolClass set_ImageData_UIImageJPEGRepresentationWithImage:MyImage CGFloat_compressionQuality:0.5];
+        
+        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setTimeZone:[NSTimeZone systemTimeZone]];
+        [formatter setDateFormat:@"yyyyMMddHHmmss"];
+        NSString* dateString = [formatter stringFromDate:[NSDate date]];
+        dateString = [NSString stringWithFormat:@"%@.png",dateString];
+        NSString* filePath = [[NSString alloc]initWithFormat:@"%@/%@",DocumentsPath,dateString];
+        [fileManager removeItemAtPath:filePath error:nil];
+        
+        [fileManager createFileAtPath:filePath contents:data attributes:nil];
+        if (updatePhotoTag==1) {
+        [_officialView ImageFileSave:[UIImage imageNamed:filePath]];
+        }else if(updatePhotoTag==2){
+#pragma-修改familyOfficialV头视图,同时向涛哥返回数据
+            [_officialView changeHeaderViewWIthImage:[UIImage imageNamed:filePath]];
+        }
+        [picker dismissViewControllerAnimated:YES completion:^(void){}];
     }
 }
 @end

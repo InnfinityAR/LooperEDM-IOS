@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "ActivityDetailView.h"
 #import "DJDetailView.h"
-@interface nActivityViewModel : NSObject
+#import "FamilyOfficialView.h"
+@interface nActivityViewModel : NSObject<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     id obj;
         
 }
+@property(nonatomic,strong)FamilyOfficialView *officialView;
 @property (nonatomic )id obj;
 -(void)addInformationToJoin:(NSString*)userId andActivityId:(NSString*)activityID andLike:(int)isLike;
 
@@ -68,5 +70,12 @@
 
 
 
--(void)getFamilyOfficial;
+-(void)getFamilyOfficialWithRaverId:(NSString *)raverId;
+-(void)createPhotoWallController:(NSString*)activityId;
+-(void)followFamliyWithisLike:(int)islike andRaverId:(NSString *)raverId;
+//上传，删除家族照片
+-(void)uploadFamilyAlbumnWithImages:(NSArray *)images andRaverId:(NSString *)raverId;
+-(void)deleteFamilyAlbumnWithImageId:(NSString *)imageid RaverId:(NSString *)raverId andUserId:(NSString *)userId;
+-(void)LocalPhotoWithTag:(NSInteger)tag;
+-(void)takePhotoWithTag:(NSInteger)tag;
 @end

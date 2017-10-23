@@ -67,6 +67,24 @@
         
         }
     }
+    
+    if (button.tag == 103) {
+        [self   popWithAnimate];
+    }
+    if (button.tag == 104) {
+        for (int i=0;i<[[_scrollView subviews]count];i++){
+            [[[_scrollView subviews] objectAtIndex:i] removeFromSuperview];
+        }
+        [_scrollView removeFromSuperview];
+        [tempArray removeObjectAtIndex:(_scrollView.contentOffset.x / _scrollView.frame.size.width)];
+        if([tempArray count]==0){
+            [self removeFromSuperview];
+            [self dismissWithAnimate];
+        }else{
+            [self showWithImageViews:tempArray selectedView:[tempArray objectAtIndex:0] andType:2];
+        }
+        [self.delegate giveSelectedView:(_scrollView.contentOffset.x / _scrollView.frame.size.width)];
+    }
 }
 
 
@@ -78,6 +96,15 @@
     UIButton *delBtn = [LooperToolClass createBtnImageNameReal:@"btn_delete_photo.png" andRect:CGPointMake(534*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5)andTag:102 andSelectImage:@"btn_delete_photo.png" andClickImage:@"btn_delete_photo.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5)  andTarget:self];
     [self addSubview:delBtn];
 
+}
+-(void)createHudView2{
+    
+    UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:103 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
+    [self addSubview:backBtn];
+    
+    UIButton *delBtn = [LooperToolClass createBtnImageNameReal:@"btn_delete_photo.png" andRect:CGPointMake(534*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5)andTag:104  andSelectImage:@"btn_delete_photo.png" andClickImage:@"btn_delete_photo.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5)  andTarget:self];
+    [self addSubview:delBtn];
+    
 }
 
 
@@ -118,6 +145,7 @@
         if(![selectedView isKindOfClass:[UIImageView class]] || ![_imgViews containsObject:selectedView]){
             selectedView = _imgViews[0];
         }
+        
         [self showWithSelectedView:selectedView];
     }
     if(type==1){
@@ -126,6 +154,9 @@
     }else if(type==0){
         UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
         [self addSubview:backBtn];
+    }else if (type==2){
+        [self createHudView2];
+        
     }
 }
 
@@ -236,6 +267,58 @@
     }
 }
 
+-(void)popWithAnimate{
+    UIView *currentView = [self currentView];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    
+    CGRect rct = currentView.frame;
+    currentView.transform = CGAffineTransformIdentity;
+    currentView.frame = [window convertRect:rct fromView:currentView.superview];
+    [window addSubview:currentView];
+    
+    
+    _scrollView.alpha = 0;
+    window.rootViewController.view.transform =  CGAffineTransformIdentity;
+    
+    XHViewState *state = [XHViewState viewStateForView:currentView];
+    currentView.frame = [window convertRect:state.frame fromView:state.superview];
+    currentView.transform = state.transform;
+    
+    
+    currentView.transform = CGAffineTransformIdentity;
+    currentView.frame = state.frame;
+    currentView.transform = state.transform;
+    [state.superview addSubview:currentView];
+    
+    for(UIView *view in _imgViews){
+        XHViewState *_state = [XHViewState viewStateForView:view];
+        view.userInteractionEnabled = _state.userInteratctionEnabled;
+    }
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         _scrollView.alpha = 0;
+                         window.rootViewController.view.transform =  CGAffineTransformIdentity;
+                         
+                         XHViewState *state = [XHViewState viewStateForView:currentView];
+                         currentView.frame = [window convertRect:state.frame fromView:state.superview];
+                         currentView.transform = state.transform;
+                     }
+                     completion:^(BOOL finished) {
+                         XHViewState *state = [XHViewState viewStateForView:currentView];
+                         currentView.transform = CGAffineTransformIdentity;
+                         currentView.frame = state.frame;
+                         currentView.transform = state.transform;
+                         [state.superview addSubview:currentView];
+                         
+                         for(UIView *view in _imgViews){
+                             XHViewState *_state = [XHViewState viewStateForView:view];
+                             view.userInteractionEnabled = _state.userInteratctionEnabled;
+                         }
+                         
+                         [self removeFromSuperview];
+                     }];
+     
+}
 - (void)dismissWithAnimate {
     UIView *currentView = [self currentView];
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
