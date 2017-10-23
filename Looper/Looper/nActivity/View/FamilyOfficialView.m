@@ -36,6 +36,7 @@
     
     UIView *selectV;
     
+    UIImageView *updateIV;
      XHImageViewer *imageViewer;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
@@ -65,7 +66,7 @@
         [self.obj setOfficialView:self];
         self.dataDic=dataDic;
         self.role=role;
-//        self.role=@"5";
+        self.role=@"5";
         self.footprint=footprint;
         self.albumn=albumn;
         [self initView];
@@ -92,6 +93,7 @@
 }
 -(void)changeHeaderViewWIthImage:(UIImage *)image{
     headImageView.image=image;
+    
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==101){
@@ -345,11 +347,12 @@
     [self.albumnCollectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 //只有副族长以上有资格
     if ([_role integerValue]>=5) {
-    UIImageView *updateIV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_SCREEN_WIDTH-110*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT-200*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+    updateIV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_SCREEN_WIDTH-110*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT-200*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
     updateIV.image=[UIImage imageNamed:@"btn_add.png"];
     [self addSubview:updateIV];
     updateIV.userInteractionEnabled=YES;
     updateIV.tag=2;
+    [updateIV setHidden:YES];
     UITapGestureRecognizer *tap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickUpdateBtn:)];
     [updateIV addGestureRecognizer:tap1];
     }
@@ -453,6 +456,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat yOffset  = scrollView.contentOffset.y;
+     CGFloat xOffset=scrollView.contentOffset.x;
+    xOffset=ceilf(xOffset);
+    CGFloat  scollX=ceilf(DEF_WIDTH(self));
     if(scrollView.tag==100){
         CGPoint offset = scrollView.contentOffset;
         
@@ -476,6 +482,19 @@
         }
         ScrollNum_y =yOffset;
     }
+    
+    if (yOffset==0) {
+        if (xOffset<=scollX+20*DEF_Adaptation_Font*0.5&&xOffset>=scollX-20*DEF_Adaptation_Font*0.5) {
+            [updateIV setHidden:NO];
+        }
+        if (xOffset>0&&xOffset<20*DEF_Adaptation_Font*0.5){
+            [updateIV setHidden:YES];
+        }
+        if (xOffset<=ceilf(DEF_WIDTH(self)*2)&&xOffset>=ceilf(DEF_WIDTH(self)*2)-20*DEF_Adaptation_Font*0.5) {
+           [updateIV setHidden:YES];
+        }
+    }
+    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

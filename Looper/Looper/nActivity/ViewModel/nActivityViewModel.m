@@ -906,6 +906,7 @@
         }else if(updatePhotoTag==2){
 #pragma-修改familyOfficialV头视图,同时向涛哥返回数据
             [_officialView changeHeaderViewWIthImage:[UIImage imageNamed:filePath]];
+             [[DataHander sharedDataHander] showViewWithStr:@"封面修改成功" andTime:1 andPos:CGPointZero];
         }
         [picker dismissViewControllerAnimated:YES completion:^(void){}];
     }
