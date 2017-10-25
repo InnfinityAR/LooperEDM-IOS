@@ -110,6 +110,7 @@
 }
 
 -(void)createMeteor{
+//流星效果
     UIImage *meteor = [UIImage imageNamed:@"meteor.png"];
     CGAffineTransform endAngle = CGAffineTransformMakeRotation(315 * (M_PI /180.0f));
     

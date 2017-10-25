@@ -89,12 +89,14 @@
 
 
 -(void)createHudView{
-
+    UIView *backgroundV=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), 140*DEF_Adaptation_Font*0.5)];
+    backgroundV.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [self addSubview:backgroundV];
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,30*DEF_Adaptation_Font*0.5) andTag:101 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
-    [self addSubview:backBtn];
+    [backgroundV addSubview:backBtn];
     
     UIButton *delBtn = [LooperToolClass createBtnImageNameReal:@"btn_delete_photo.png" andRect:CGPointMake(534*DEF_Adaptation_Font*0.5,30*DEF_Adaptation_Font*0.5)andTag:102 andSelectImage:@"btn_delete_photo.png" andClickImage:@"btn_delete_photo.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5)  andTarget:self];
-    [self addSubview:delBtn];
+    [backgroundV addSubview:delBtn];
 
 }
 -(void)createHudView2{

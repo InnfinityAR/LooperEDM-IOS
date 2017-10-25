@@ -38,6 +38,8 @@
     
     UIImageView *updateIV;
      XHImageViewer *imageViewer;
+    
+    BOOL isJudgeFamilyAlbumn;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
 @property(nonatomic,strong)NSString *role;
@@ -66,7 +68,6 @@
         [self.obj setOfficialView:self];
         self.dataDic=dataDic;
         self.role=role;
-        self.role=@"5";
         self.footprint=footprint;
         self.albumn=albumn;
         [self initView];
@@ -86,14 +87,14 @@
     [self.updateAlbumnArr removeAllObjects];
 }
 -(void)ImageFileSave:(UIImage*)imageFile{
-#warning-在这里加入展示要上传的图片
+#warning-在这里加入展示要上传的图片进行多张上传
     
     [self.updateAlbumnArr addObject:imageFile];
     [self.obj uploadFamilyAlbumnWithImages:self.updateAlbumnArr andRaverId:[self.dataDic objectForKey:@"raverid"]];
 }
 -(void)changeHeaderViewWIthImage:(UIImage *)image{
     headImageView.image=image;
-    
+    [self.obj updateRaverImageWithRaverId:[self.dataDic objectForKey:@"raverid"] andImage:image];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==101){
@@ -172,6 +173,8 @@
 }
 -(void)createImageViewHud{
     headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, 490*DEF_Adaptation_Font*0.5)];
+    headImageView.contentMode=UIViewContentModeScaleAspectFill;
+    headImageView.clipsToBounds=YES;
     [headImageView sd_setImageWithURL:[NSURL URLWithString:[self.dataDic objectForKey:@"images"]]placeholderImage:nil options:SDWebImageRetryFailed];
     [self addSubview:headImageView];
     
@@ -596,6 +599,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (isJudgeFamilyAlbumn) {
+     //当从相册开始选择的时候
+        [self initEnsureRaverImageWithIndex:indexPath.row];
+    }else{
     //相册跳转
     [_imageViews removeAllObjects];
     NSInteger tag = indexPath.row;
@@ -625,7 +632,16 @@
             [imageViewer showWithImageViews:_imageViews selectedView:(UIImageView*)[_imageViews objectAtIndex:tag] andType:0];
         }
     }
+    }
 }
+#pragma -确认从家族相册选择的图片成为封面
+-(void)initEnsureRaverImageWithIndex:(NSInteger )index{
+    NSDictionary *dic = [self.albumn objectAtIndex:index];
+    [headImageView sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"imageurl"]] placeholderImage:nil options:SDWebImageRetryFailed];
+    isJudgeFamilyAlbumn=NO;
+     [self.obj updateRaverImageWithRaverId:[self.dataDic objectForKey:@"raverid"] andImage: [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:[dic objectForKey:@"imageurl"]]];
+}
+
 #pragma HXViewer
 - (void)imageViewer:(XHImageViewer *)imageViewer  willDismissWithSelectedView:(UIImageView*)selectedView{
 }
@@ -690,7 +706,7 @@
     }
     //从家族相册选择
     if (tag==4) {
-        
+        isJudgeFamilyAlbumn=YES;
     }
     
 }

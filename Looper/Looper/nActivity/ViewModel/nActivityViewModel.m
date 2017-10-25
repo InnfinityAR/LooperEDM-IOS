@@ -911,4 +911,25 @@
         [picker dismissViewControllerAnimated:YES completion:^(void){}];
     }
 }
+-(void)updateRaverImageWithRaverId:(NSString *)raverId andImage:(UIImage *)image{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:raverId forKey:@"raverId"];
+        //base64
+        if(image!=nil){
+            NSData *imageDataP2 = UIImageJPEGRepresentation(image,0.1);
+            NSString *path=[Base64Class encodeBase64Data:imageDataP2];
+            [dic setObject:path forKey:@"image"];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateRaverImage" parameters:dic success:^(id responseObject){
+            if([responseObject[@"status"] intValue]==0){
+               
+            }else{
+                [[DataHander sharedDataHander] showViewWithStr:@"更换封面失败" andTime:1 andPos:CGPointZero];
+            }
+        }fail:^{
+        }];
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"更换封面失败" andTime:1 andPos:CGPointZero];
+    }
+    
+}
 @end
