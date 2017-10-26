@@ -120,6 +120,9 @@
 		B235216D1F4EC8C3003D06CB /* ScanQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = B235216C1F4EC8C3003D06CB /* ScanQRCode.m */; };
 		B23521701F4ED364003D06CB /* GenerateQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B235216F1F4ED364003D06CB /* GenerateQRCodeView.m */; };
 		B23521731F4EE93F003D06CB /* FamilyRankView.m in Sources */ = {isa = PBXBuildFile; fileRef = B23521721F4EE93F003D06CB /* FamilyRankView.m */; };
+		B23759531FA1A8570000A59D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B23759521FA1A8560000A59D /* video.mp4 */; };
+		B23759561FA1AA490000A59D /* btn_weichat_new.png in Resources */ = {isa = PBXBuildFile; fileRef = B23759541FA1AA480000A59D /* btn_weichat_new.png */; };
+		B23759571FA1AA490000A59D /* btn_login_new.png in Resources */ = {isa = PBXBuildFile; fileRef = B23759551FA1AA480000A59D /* btn_login_new.png */; };
 		B2A1E7E71F1CDFCD006270E3 /* cityShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */; };
 		B2A1E7EA1F21F96F006270E3 /* barrageReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */; };
 		B2A1E7FD1F25DF8E006270E3 /* praiseNO.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A1E7FB1F25DF8E006270E3 /* praiseNO.png */; };
@@ -1012,6 +1015,9 @@
 		B235216F1F4ED364003D06CB /* GenerateQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateQRCodeView.m; sourceTree = "<group>"; };
 		B23521711F4EE93F003D06CB /* FamilyRankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FamilyRankView.h; path = ../../QRCode/FamilyRankView.h; sourceTree = "<group>"; };
 		B23521721F4EE93F003D06CB /* FamilyRankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FamilyRankView.m; path = ../../QRCode/FamilyRankView.m; sourceTree = "<group>"; };
+		B23759521FA1A8560000A59D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		B23759541FA1AA480000A59D /* btn_weichat_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_weichat_new.png; sourceTree = "<group>"; };
+		B23759551FA1AA480000A59D /* btn_login_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login_new.png; sourceTree = "<group>"; };
 		B2A1E7E61F1CDFCD006270E3 /* cityShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cityShadow.png; path = ../../activity/View/cityShadow.png; sourceTree = "<group>"; };
 		B2A1E7E81F21F96F006270E3 /* barrageReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = barrageReplyView.h; sourceTree = "<group>"; };
 		B2A1E7E91F21F96F006270E3 /* barrageReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = barrageReplyView.m; sourceTree = "<group>"; };
@@ -4620,6 +4626,8 @@
 		C4CE8C0B1E75813E00193E5C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				B23759551FA1AA480000A59D /* btn_login_new.png */,
+				B23759541FA1AA480000A59D /* btn_weichat_new.png */,
 				C404A7D71EBF84D3000B9E1D /* sendCode.png */,
 				C414C38A1EB843F000D6B224 /* btn_login.png */,
 				C446CDED1E85463700921FD1 /* bg_textFiled.png */,
@@ -4862,6 +4870,7 @@
 		C4F051211EBACA0D005DA9F1 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				B23759521FA1A8560000A59D /* video.mp4 */,
 				C4050A381F1C8C8D00BE3419 /* 720.mp4 */,
 			);
 			path = Video;
@@ -5144,6 +5153,7 @@
 				C46E7D391EAE130A00996110 /* icon_upPic.png in Resources */,
 				C40B0FEA1F0A0561008F7C41 /* icon_club.png in Resources */,
 				C4F290031EB0F70C00EEB15E /* reUpLoadPic.png in Resources */,
+				B23759531FA1A8570000A59D /* video.mp4 in Resources */,
 				C42E7FFD1EC326BC00D9CC43 /* icon_looper_followA1.png in Resources */,
 				C45E2D801EF8F16700BD03E3 /* send_picture.png in Resources */,
 				C42E7FF51EC3050D00D9CC43 /* ownerFollow.png in Resources */,
@@ -5216,6 +5226,7 @@
 				C4F6C7E21F7B9DBF00A6BCCC /* btn_joinActivity.png in Resources */,
 				B22BFCF71F61702D00FD131E /* commendYes2.png in Resources */,
 				B22C5A991F5533C1005C9E28 /* wechat.png in Resources */,
+				B23759561FA1AA490000A59D /* btn_weichat_new.png in Resources */,
 				C4E86F651F161E3800D9658D /* sendActive.png in Resources */,
 				C460ED101ED417E500AE6A90 /* 3.json in Resources */,
 				C404A7C71EBF5DD6000B9E1D /* hand.png in Resources */,
@@ -5336,6 +5347,7 @@
 				C4ABAAB71E34C623000B46E2 /* icon_start_like.png in Resources */,
 				C46454FD1ED023FC003588FF /* 640-2.png in Resources */,
 				C4019E101E361DD000E3CFFB /* bg_looper_text6.png in Resources */,
+				B23759571FA1AA490000A59D /* btn_login_new.png in Resources */,
 				B22BFCDD1F616FC400FD131E /* familyRank_top7.png in Resources */,
 				B2A4DA6C1F14E4050085814F /* sun.png in Resources */,
 				C40B0FF81F0A5440008F7C41 /* top_shadow.png in Resources */,
@@ -5868,7 +5880,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5925,7 +5937,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

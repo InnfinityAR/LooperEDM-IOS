@@ -11,13 +11,16 @@
 #import "LoginViewModel.h"
 #import "LooperToolClass.h"
 #import "DataHander.h"
+#import <MediaPlayer/MediaPlayer.h>
 
+@interface LoginAccountView()<UITextFieldDelegate>
+@end
 @implementation LoginAccountView{
     UITextField *phoneText;
     UITextField *codeText;
     
     UIButton *sendBtn;
-
+    UIButton *joinBtn;
     
     NSTimer *downTimer;
     UILabel *downNum;
@@ -34,23 +37,39 @@
     if (self = [super initWithFrame:frame]) {
         self.obj = (LoginViewModel*)idObject;
         [self initView];
-        
+//        self.backgroundColor=ColorRGB(0, 0, 0, 1.0);
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
         
     }
     return self;
 }
-
-
 -(void)initView{
-      
+    UIImage *image=[UIImage imageNamed:@"product_logo.png"];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(-60*DEF_Adaptation_Font*0.5, 95*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*80*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5)];
+    imageV.image=image;
+    [self addSubview:imageV];
+    [self createLB:@"手机号" andPoint:CGPointMake(106*DEF_Adaptation_Font*0.5, 180*DEF_Adaptation_Font*0.5)];
+     [self createLB:@"验证码" andPoint:CGPointMake(106*DEF_Adaptation_Font*0.5, 330*DEF_Adaptation_Font*0.5)];
+    phoneText=[self createTextField:@"" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 240, 428, 50) andTag:100];
+    [phoneText becomeFirstResponder];
+    codeText=[self createTextField:@"" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 390, 428, 50) andTag:101];
+    joinBtn=[[UIButton alloc]initWithFrame:CGRectMake(115*DEF_Adaptation_Font*0.5, 545*DEF_Adaptation_Font*0.5, 410*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font*0.5)];
+    [joinBtn addTarget:self action:@selector(buttonDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    joinBtn.tag=joinBtnTag;
+    [joinBtn setTitle:@"进入星球" forState:(UIControlStateNormal)];
+    joinBtn.titleLabel.textAlignment=NSTextAlignmentCenter;
+    joinBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+    [joinBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    joinBtn.layer.cornerRadius=28*DEF_Adaptation_Font*0.5;
+    joinBtn.layer.masksToBounds=YES;
+    joinBtn.layer.borderColor=[ColorRGB(255, 255, 255, 0.6) CGColor];
+    joinBtn.layer.borderWidth=0.6;
+    [joinBtn setTitleColor:ColorRGB(116, 126, 177, 1.0) forState:(UIControlStateSelected)];
+    [self addSubview:joinBtn];
+//    joinBtn=[self createBtnImageName:@"btn_loginV.png" andRect:CGPointMake(115, 545) andTag:joinBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
+    [self createBtnImageName:@"btn_looper_back.png" andRect:CGPointMake(10, 40) andTag:backBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     
-    phoneText=[self createTextField:@"手机号" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 240, 428, 50) andTag:100];
-    codeText=[self createTextField:@"验证码" andImg:@"bg_textFiled.png" andRect:CGRectMake(106, 390, 300, 50) andTag:100];
-    [self createBtnImageName:@"btn_loginV.png" andRect:CGPointMake(115, 545) andTag:joinBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
-    [self createBtnImageName:@"btn_looper_back.png" andRect:CGPointMake(40, 40) andTag:backBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
-    
-    sendBtn = [self createBtnImageName:@"sendCode.png" andRect:CGPointMake(403,386) andTag:sendBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
+    sendBtn = [self createBtnImageName:@"sendCode.png" andRect:CGPointMake(403,380) andTag:sendBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     
     
     
@@ -60,7 +79,14 @@
 
     
 }
-
+-(UILabel *)createLB:(NSString *)text andPoint:(CGPoint)point{
+    UILabel *phoneLB=[[UILabel alloc]initWithFrame:CGRectMake(point.x, point.y, 300*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
+    phoneLB.text=text;
+    phoneLB.textColor=[UIColor whiteColor];
+    phoneLB.font=[UIFont systemFontOfSize:12*DEF_Adaptation_Font];
+    [self addSubview:phoneLB];
+    return phoneLB;
+}
 -(void)downTimer{
     downTime  =  downTime - 1;
     downNum.text = [NSString stringWithFormat: @"%d秒后可重发",downTime];
@@ -71,8 +97,6 @@
     }
     
 }
-
-
 
 - (IBAction)buttonDrag:(UIButton *)button withEvent:(UIEvent *)event{
     [_obj requestData:button.tag andIphone:phoneText.text andCode:codeText.text];
@@ -146,14 +170,14 @@
     bgView.userInteractionEnabled = YES;
     [self addSubview:bgView];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(5*DEF_Adaptation_Font,0*DEF_Adaptation_Font,  rect.size.width*DEF_Adaptation_Font*0.5, rect.size.height*DEF_Adaptation_Font*0.5)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(-2*DEF_Adaptation_Font,0*DEF_Adaptation_Font,  rect.size.width*DEF_Adaptation_Font*0.5, rect.size.height*DEF_Adaptation_Font*0.5)];
     [textField setPlaceholder:string];
     textField.keyboardType = UIKeyboardTypeNumberPad;
     [textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [textField setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     textField.tag =num;
     textField.textColor = [UIColor whiteColor];
-    textField.font =[UIFont fontWithName:looperFont size:12*DEF_Adaptation_Font];
+    textField.font =[UIFont fontWithName:looperFont size:13*DEF_Adaptation_Font];
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
     textField.delegate = self;
@@ -202,8 +226,46 @@
     return btn;
 }
 
-
-
+#pragma -UITextfieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSLog(@"textField:%@ \n range:%ld \n string:%@",textField.text,range.length,string);
+    if (textField.tag==101) {
+    NSInteger num=0;
+    if (range.length==0) {
+        num=range.location+1;
+    }
+ else   if (range.length==1) {
+        num=range.location;
+    }
+    if (num==6) {
+        if([[self securityForTelephone:phoneText.text]intValue]){
+            [joinBtn setSelected:YES];
+            joinBtn.backgroundColor=[UIColor whiteColor];
+        }else{
+              [joinBtn setSelected:NO];
+            joinBtn.backgroundColor=[UIColor clearColor];
+        }
+    }else{
+        [joinBtn setSelected:NO];
+        joinBtn.backgroundColor=[UIColor clearColor];
+    }
+    }else if (textField.tag==100){
+//手机号输入
+        if ([self securityForTelephone:[NSString stringWithFormat:@"%@%@",textField.text,string]]) {
+            if (codeText.text.length==6) {
+                [joinBtn setSelected:YES];
+                joinBtn.backgroundColor=[UIColor whiteColor];
+            }else{
+                [joinBtn setSelected:NO];
+                joinBtn.backgroundColor=[UIColor clearColor];
+            }
+        }else{
+            [joinBtn setSelected:NO];
+            joinBtn.backgroundColor=[UIColor clearColor];
+        }
+    }
+    return YES;
+}
 
 
 @end
