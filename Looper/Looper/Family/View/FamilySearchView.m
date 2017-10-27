@@ -11,7 +11,11 @@
 #import "UIImageView+WebCache.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
+#import "FamilyRankView.h"
 @interface FamilySearchView()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
+{
+    FamilyRankView *rankView;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *searchDatas;
 @property(nonatomic,strong)UISearchBar *searchBar;
@@ -29,11 +33,13 @@
     
 }
 -(void)initView{
-    [self addSubview:self.searchBar];
-     [self setBackgroundColor:[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0]];
-    [self.tableView setHidden:NO];
-    [self.tableView reloadData];
+     [self setBackgroundColor:[UIColor colorWithRed:86/255.0 green:77/255.0 blue:109/255.0 alpha:1.0]];
+//    [self.tableView setHidden:NO];
+//    [self.tableView reloadData];
     [self initBackView];
+     [self addSubview:self.searchBar];
+    rankView=[[FamilyRankView alloc]initWithFrame:CGRectMake(0, 130*DEF_Adaptation_Font*0.5, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 130*DEF_Adaptation_Font*0.5)andObject:self.obj andDataArr:self.searchDatas andType:0];
+    [self addSubview:rankView];
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     
@@ -49,17 +55,24 @@
 -(void)initBackView{
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"btn_looper_back.png" andRect:CGPointMake(0,50*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:@"btn_looper_back.png" andClickImage:@"btn_looper_back.png" andTextStr:nil andSize:CGSizeMake(106*DEF_Adaptation_Font*0.5,84*DEF_Adaptation_Font*0.5) andTarget:self];
     [self addSubview:backBtn];
-    UIButton *serachBtn = [LooperToolClass createBtnImageName:@"btn_serach_select.png" andRect:CGPointMake(553, 36) andTag:101 andSelectImage:@"btn_serach_select.png" andClickImage:@"btn_serach_select.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
+    UIButton *serachBtn = [LooperToolClass createBtnImageName:@"chatlist_serach.png" andRect:CGPointMake(503, 46) andTag:101 andSelectImage:@"chatlist_serach.png" andClickImage:@"chatlist_serach.png" andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview:serachBtn];
+//    UIImageView *line = [LooperToolClass createImageView:@"bg_serach_line.png" andRect:CGPointMake(66, 120) andTag:100 andSize:CGSizeMake(519, 1) andIsRadius:false];
+//     [self addSubview:line];
+    UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 115*DEF_Adaptation_Font*0.5, 519*DEF_Adaptation_Font*0.5, 1.0*DEF_Adaptation_Font*0.5)];
+    lineV.backgroundColor=[UIColor whiteColor];
+    [self addSubview:lineV];
+   
 }
 -(void)initSearchData:(NSArray*)searchData{
     self.searchDatas=searchData;
-    [self.tableView reloadData];
+    [rankView reloadData:searchData];
+//    [self.tableView reloadData];
 }
 
 -(UISearchBar *)searchBar{
     if (!_searchBar) {
-        _searchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(106 * DEF_Adaptation_Font*0.5, 60 * DEF_Adaptation_Font*0.5, 477*0.5*DEF_Adaptation_Font, 50 * DEF_Adaptation_Font*0.5)];
+        _searchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(76 * DEF_Adaptation_Font*0.5, 60 * DEF_Adaptation_Font*0.5, 477*0.5*DEF_Adaptation_Font, 50 * DEF_Adaptation_Font*0.5)];
         
         _searchBar.delegate = self;
         [_searchBar setBackgroundColor:[UIColor clearColor]];
@@ -82,9 +95,21 @@
     }
     return  _searchBar;
 }
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    //    [self.obj searchRaverFamilyDataForSearchText:searchText];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    
+    [_obj searchRaverFamilyDataForSearchText:searchBar.text];
+    [self endEditing:true];
+}
+#pragma -UITableView,在这里没用到
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 110*DEF_Adaptation_Font*0.5, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 110*DEF_Adaptation_Font*0.5) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130*DEF_Adaptation_Font*0.5, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 130*DEF_Adaptation_Font*0.5) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = NO;
@@ -180,20 +205,7 @@
     
     
 }
-
-
-#pragma mark - UISearchBarDelegate
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.obj searchRaverFamilyDataForSearchText:searchText];
-}
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    
-    [_obj searchRaverFamilyDataForSearchText:searchBar.text];
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self endEditing:true];
-    
-    
-    
 }
 @end

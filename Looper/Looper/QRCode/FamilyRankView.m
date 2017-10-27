@@ -39,7 +39,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,75*DEF_Adaptation_Font*0.5,DEF_WIDTH(self),DEF_HEIGHT(self)-90*DEF_Adaptation_Font*0.5)];
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,75*DEF_Adaptation_Font*0.5,DEF_WIDTH(self),DEF_HEIGHT(self)-75*DEF_Adaptation_Font*0.5)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         //不出现滚动条
@@ -53,10 +53,19 @@
         _tableView.bounces=NO;
         
         [self addSubview:_tableView];
+        
+        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+        tap1.cancelsTouchesInView = NO;
+        [_tableView addGestureRecognizer:tap1];
     }
     return _tableView;
 }
-
+-(void)viewTapped:(UITapGestureRecognizer*)tap1
+{
+    if ([self.obj searchView]!=nil) {
+   [ [self.obj searchView] endEditing:YES];
+    }
+}
 -(void)initView{
     UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), 75*DEF_Adaptation_Font*0.5)];
     [self addSubview:headView];
@@ -86,11 +95,12 @@
     livenessLB.text=@"家族活跃度";
     livenessLB.numberOfLines=0;
     livenessLB.textAlignment=NSTextAlignmentCenter;
-    if (familyType==0) {
-         livenessLB.text=@"位置";
-    }
     livenessLB.userInteractionEnabled=YES;
     livenessLB.tag=3;
+    if (familyType==0) {
+        livenessLB.text=@"位置";
+        livenessLB.tag=5;
+    }
     UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickActivityLB:)];
     [livenessLB addGestureRecognizer:singleTap2];
     [self addSubview:livenessLB];
@@ -137,8 +147,8 @@
 }
 -(void)setBackView{
     [self setBackgroundColor:[UIColor colorWithRed:83/255.0 green:71/255.0 blue:104/255.0 alpha:1.0]];
-    self.layer.cornerRadius=12.0*DEF_Adaptation_Font;
-    self.layer.masksToBounds=YES;
+//    self.layer.cornerRadius=12.0*DEF_Adaptation_Font;
+//    self.layer.masksToBounds=YES;
 }
 
 #pragma -tableViewDelegate
@@ -232,8 +242,12 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
   NSDictionary *dataDic=self.dataArr[indexPath.row];
+    if (familyType==1) {
     if ([self.obj familyModel].familyDetailData==nil||[[self.obj familyModel].familyDetailData isEqual:[NSNull null]]) {
     [self.obj getFamilyApplyDataWithDataDic:dataDic];
+    }
+    }else{
+        [self.obj getFamilyApplyDataWithDataDic:dataDic];
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

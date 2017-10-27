@@ -194,7 +194,7 @@
 }
 -(void)addNSTimer
 {
-    timer=[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+    timer=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
     //添加到runloop中
     [[NSRunLoop mainRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
 }
