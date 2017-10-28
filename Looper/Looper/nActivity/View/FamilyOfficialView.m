@@ -65,7 +65,7 @@
         [self.obj setOfficialView:self];
         self.dataDic=dataDic;
         self.role=role;
-//        self.role=@"5";
+       // self.role=@"5";
         self.footprint=footprint;
         self.albumn=albumn;
         [self initView];

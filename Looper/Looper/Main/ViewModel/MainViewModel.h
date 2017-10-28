@@ -83,9 +83,12 @@
 -(void)createActivityView:(NSString*)activityId;
 -(void)createPlayerView:(int)PlayerId;
 -(void)getMyOrderFromHttp;
-
+-(void)playNetWorkVideo:(NSString*)videoUrl;
 -(void)getMyFootPrint;
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
+-(void)sendImageBoardMessage:(NSString*)boardId andMessageText:(NSString*)message;
+
+
 
 @property(nonatomic,strong)NSArray *kuaidiArr;
 

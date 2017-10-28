@@ -45,7 +45,7 @@
     contentLB.frame=frame3;
     if (self.type==1) {
         NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:contentLB.text];
-        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(3, [[self.dataDic objectForKey:@"nickname"]length])];
+        [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(3, [[self.dataDic objectForKey:@"="]length])];
         [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(95, 242, 255, 1.0)range:NSMakeRange(4+[[self.dataDic objectForKey:@"nickname"]length], [[self.dataDic objectForKey:@"nickname"]length])];
         contentLB.attributedText= aString;
     }else if (self.type==2){

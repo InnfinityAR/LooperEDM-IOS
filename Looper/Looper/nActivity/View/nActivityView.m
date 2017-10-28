@@ -148,7 +148,7 @@
     tagStr.layer.cornerRadius = 28*DEF_Adaptation_Font*0.5/2;
     tagStr.layer.masksToBounds = YES;
     
-    UILabel* followStr = [LooperToolClass createLableView:CGPointMake(0*DEF_Adaptation_Font_x*0.5, 114*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(139*DEF_Adaptation_Font_x*0.5, 41*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"   %@人 参加",[[_commendArray objectAtIndex:index]objectForKey:@"followcount"]] andFontSize:10 andColor:[UIColor colorWithRed:146/255.0 green:177/255.0 blue:178/255.0 alpha:0.9] andType:NSTextAlignmentLeft];
+    UILabel* followStr = [LooperToolClass createLableView:CGPointMake(0*DEF_Adaptation_Font_x*0.5, 114*DEF_Adaptation_Font_x*0.5+45*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(139*DEF_Adaptation_Font_x*0.5, 41*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"   %@人 参加",[[_commendArray objectAtIndex:index]objectForKey:@"newjoincount"]] andFontSize:10 andColor:[UIColor colorWithRed:146/255.0 green:177/255.0 blue:178/255.0 alpha:0.9] andType:NSTextAlignmentLeft];
     [bannerView addSubview:followStr];
     [followStr setBackgroundColor:[UIColor blackColor]];
     
@@ -225,7 +225,6 @@
     [backImageV sd_setImageWithURL:[[NSURL alloc] initWithString:[[_commendArray objectAtIndex:page]objectForKey:@"photo"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
 }
-
 
 
 - (CGSize)sizeForPageInFlowView:(NewPagedFlowView *)flowView {

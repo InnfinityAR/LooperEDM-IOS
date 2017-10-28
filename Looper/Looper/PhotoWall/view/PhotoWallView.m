@@ -318,7 +318,6 @@
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     
-    
     return UIEdgeInsetsMake(0,0, 2, 2);
 }
 
@@ -326,7 +325,6 @@
 {
     return [[_dataSource objectForKey:@"data"] count];
 }
-
 
 -(void)createCellView:(NSIndexPath *)indexPath andCell:(UICollectionViewCell*)cell{
 
@@ -394,7 +392,6 @@
                 
         }];
         }
-        
         videoImg.layer.cornerRadius = 10 *DEF_Adaptation_Font_x*0.5;
         videoImg.layer.masksToBounds = YES;
 
@@ -416,7 +413,6 @@
             
             [commend setSelected:true];
         }
-        
         
         UILabel *personNum = [LooperToolClass createLableView:CGPointMake(180*DEF_Adaptation_Font*0.5,(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+629*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+16*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(56*DEF_Adaptation_Font_x*0.5, 17*DEF_Adaptation_Font_x*0.5) andText:[NSString stringWithFormat:@"%@ 人",[dic objectForKey:@"thumbcount"]] andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
         
@@ -507,8 +503,6 @@
 
             break;
         }
-    
-    
     }
 }
 

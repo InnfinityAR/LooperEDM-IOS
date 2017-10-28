@@ -128,8 +128,6 @@
     [[self view].layer addSublayer:playerLayer];
     [_player play];
     
-    
-
 }
 
 

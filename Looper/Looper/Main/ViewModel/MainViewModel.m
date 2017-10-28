@@ -27,6 +27,7 @@
 
 #import "Base64Class.h"
 #import "RongCloudManger.h"
+#import "MeFootPrintView.h"
 
 #import "nMainView.h"
 #import "DataHander.h"
@@ -50,6 +51,7 @@
 
 #import "AliManagerData.h"
 #import "TicketDetailView.h"
+#import "PlayVideoView.h"
 
 #import "ExtractPriceViewController.h"
 
@@ -680,6 +682,8 @@
         
         
         
+        
+        
     }else if(type==ActivityShareBtnTag){
         
         [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
@@ -717,6 +721,8 @@
     }
 }
 
+
+
 -(void)getMyFootPrint{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
@@ -725,7 +731,12 @@
             NSLog(@"%@",responseObject);
             
             
+            MeFootPrintView *meFootPrint =[[MeFootPrintView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+            [[_obj view] addSubview:meFootPrint];
             
+            
+            [meFootPrint updataCollectionData:responseObject[@"data"]];
+
         }else{
             
         }
@@ -734,6 +745,14 @@
     }];
     
 }
+
+-(void)playNetWorkVideo:(NSString*)videoUrl{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    PlayVideoView *playVideoV  = [[PlayVideoView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andUrlStr:videoUrl];
+    [[_obj view] addSubview:playVideoV];
+    
+}
+
 
 
 -(void)requestCreateLoop:(NSDictionary*)dicData{
@@ -869,6 +888,32 @@
     
     
 }
+
+
+
+-(void)sendImageBoardMessage:(NSString*)boardId andMessageText:(NSString*)message{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+     [dic setObject:boardId forKey:@"boardId"];
+     [dic setObject:message forKey:@"messageText"];
+
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"sendImageBoardMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+           
+            
+        }else{
+            
+        }
+    }fail:^{
+        
+    }];
+    
+    
+}
+
+
+
+
 
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu{
 //    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
