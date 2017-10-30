@@ -22,7 +22,8 @@
 
     NSMutableArray *serachArray;
     NSMutableArray *userArray;
-
+    NSMutableArray *MusicArray;
+NSMutableArray *AlbumnArray;
 }
 
 @synthesize obj = _obj;
@@ -41,7 +42,7 @@
 -(void)updateData{
 
     if(_SerachV!=nil){
-        [_SerachV reloadTableData:serachArray andUserArray:userArray];
+        [_SerachV reloadTableData:serachArray andUserArray:userArray andMusicArr:MusicArray andAlbumnArr:AlbumnArray];
     }
 }
 
@@ -83,10 +84,11 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchLoop" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
-            //serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
+            serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
             userArray = [responseObject[@"data"] objectForKey:@"User"];
-
-            [_SerachV reloadTableData:serachArray andUserArray:userArray];
+            MusicArray = [responseObject[@"data"] objectForKey:@"Music"];
+             AlbumnArray = [responseObject[@"data"] objectForKey:@"Albumn"];
+            [_SerachV reloadTableData:serachArray andUserArray:userArray andMusicArr:MusicArray andAlbumnArr:AlbumnArray];
             
             if([userArray count]==0){
                 [[DataHander sharedDataHander] showViewWithStr:@"找不到用户" andTime:1 andPos:CGPointZero];

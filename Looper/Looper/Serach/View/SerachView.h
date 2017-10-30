@@ -22,6 +22,6 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 
 
--(void)reloadTableData:(NSMutableArray*)DataLoop andUserArray:(NSMutableArray*)DataUser;
+-(void)reloadTableData:(NSMutableArray*)DataLoop andUserArray:(NSMutableArray*)DataUser andMusicArr:(NSMutableArray *)musicArr andAlbumnArr:(NSMutableArray *)albumnArr;
 
 @end

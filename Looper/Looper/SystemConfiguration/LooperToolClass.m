@@ -67,9 +67,7 @@
         
         
         if(imagePath!=[NSNull null]){
-            [imageV sd_setImageWithURL:[[NSURL alloc] initWithString:imagePath] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-            }];
+            [imageV sd_setImageWithURL:[[NSURL alloc] initWithString:imagePath] placeholderImage:nil options:SDWebImageRetryFailed];
         }
         
          [viewV addSubview:imageV];
