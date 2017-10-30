@@ -588,8 +588,8 @@
         if ([[activityDic objectForKey:@"club"] objectAtIndex:0]==nil||[[activityDic objectForKey:@"club"] objectAtIndex:0]==[NSNull null]) {
             
         }else{
-//           [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
-             [_obj getFamilyOfficialWithRaverId:nil];
+           [_obj getDataById:@"2" andId:[[[activityDic objectForKey:@"club"]objectAtIndex:0] objectForKey:@"clubid"]];
+//             [_obj getFamilyOfficialWithRaverId:nil];
         }
     }
 }
@@ -786,6 +786,9 @@
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
         [self removeFromSuperview];
+        if (_isFromSearchView) {
+            [self.obj popController];
+        }
 
     }else if(button.tag==102){
         [_obj shareh5View:activityDic[@"data"]];

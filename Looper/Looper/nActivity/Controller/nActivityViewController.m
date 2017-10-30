@@ -23,6 +23,12 @@
     }
     return self;
 }
+-(instancetype)initWithActivityDic:(NSDictionary *)dataDic andType:(NSInteger)type{
+    if (self=[super init]) {
+        _activityVm = [[nActivityViewModel alloc] initWithController:self andActivityDic:dataDic andType:type];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

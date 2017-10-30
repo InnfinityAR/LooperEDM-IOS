@@ -18,9 +18,12 @@
     
 }
 @property(nonatomic)id obj;
-
+//判断是否直接来自搜索，如果是，返回的时候需要直接释放controller
+@property(nonatomic) BOOL isFromSearchView;
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDetailDic:(NSDictionary*)detailDic andActivityDic:(NSDictionary *)ActivityDic;
 -(void)setCalendar;
+
+
 
 @end

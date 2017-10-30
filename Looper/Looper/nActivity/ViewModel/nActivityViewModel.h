@@ -80,4 +80,6 @@
 -(void)LocalPhotoWithTag:(NSInteger)tag;
 -(void)takePhotoWithTag:(NSInteger)tag;
 -(void)updateRaverImageWithRaverId:(NSString *)raverid andImage:(UIImage *)image;
+
+-(id)initWithController:(id)controller andActivityDic:(NSDictionary *)dataDic andType:(NSInteger)type;
 @end

@@ -67,7 +67,9 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag==101){
         [self removeFromSuperview];
-    
+        if (_isFromSearchView) {
+            [self.obj popController];
+        }
     }else if(button.tag==102){
         [_obj shareh5View:nil];
     }else if(button.tag==104){
