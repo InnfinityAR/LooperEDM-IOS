@@ -13,6 +13,8 @@
 #import "PhotoWallCollectionViewCell.h"
 #import "LocalDataMangaer.h"
 #import "UIImageView+WebCache.h"
+#import "DataHander.h"
+
 
 @implementation MeFootPrintView{
     
@@ -44,6 +46,8 @@
     if(button.tag==101){
         
         [self removeFromSuperview];
+        
+        [_obj removeMeFootView];
     }
 }
 
@@ -61,7 +65,10 @@
     UIButton *back =[LooperToolClass createBtnImageName:@"btn_infoBack.png" andRect:CGPointMake(1, 34) andTag:101 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeZero andTarget:self];
     [self addSubview: back];
     
-  textFieldComment=[self createTextField:@"" andImg:@"login_x_line.png" andRect:CGRectMake(116*DEF_Adaptation_Font*0.5, 885*DEF_Adaptation_Font*0.5, 476*DEF_Adaptation_Font*0.5, 68*DEF_Adaptation_Font*0.5) andTag:1001];
+  textFieldComment=[self createTextField:@"" andImg:@"login_x_line.png" andRect:CGRectMake(0*DEF_Adaptation_Font*0.5, 885*DEF_Adaptation_Font*0.5, DEF_SCREEN_WIDTH, 68*DEF_Adaptation_Font*0.5) andTag:1001];
+    
+    
+    
     
 }
 
@@ -85,7 +92,6 @@
     [colloectionView setBackgroundColor:[UIColor clearColor]];
     colloectionView.tag = 200;
     [self addSubview:colloectionView];
-
 }
 
 
@@ -394,14 +400,21 @@
 
 -(UITextField*)createTextField:(NSString*)string andImg:(NSString*)image andRect:(CGRect)rect andTag:(int)num{
     
-    bgView = [[UIImageView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
-    bgView.image = [UIImage imageNamed:image];
+    bgView = [[UIView alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
     bgView.userInteractionEnabled = YES;
     bgView.tag=num;
+    
+    [bgView setBackgroundColor:[UIColor colorWithRed:30/255.0 green:30/255.0 blue:59/255.0 alpha:1.0]];
+
+    
     [self addSubview:bgView];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(3,0,  rect.size.width, rect.size.height)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(32*DEF_Adaptation_Font*0.5,8*DEF_Adaptation_Font*0.5,  576*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
     [textField setPlaceholder:string];
+    textField.layer.borderColor= [UIColor grayColor].CGColor;
+    
+    textField.layer.borderWidth= 1.0f;
+    
     [textField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [textField setValue:[UIFont boldSystemFontOfSize:16] forKeyPath:@"_placeholderLabel.font"];
     textField.tag =num;
@@ -409,9 +422,16 @@
     textField.font =[UIFont fontWithName:looperFont size:12*DEF_Adaptation_Font];
     textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     
+    textField.layer.cornerRadius = 5 *DEF_Adaptation_Font_x*0.5;
+    textField.layer.masksToBounds = YES;
+    
+    
+    
     textField.returnKeyType = UIReturnKeyDone;
     textField.delegate = self;
     [bgView  addSubview:textField];
+    
+    [bgView setHidden:true];
     
     return textField;
 }
@@ -426,8 +446,6 @@
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    
-
     
     return YES;
 }
@@ -455,11 +473,16 @@
     
     if(textField.text.length!=0){
     
-    [_obj sendImageBoardMessage:[NSString stringWithFormat:@"%d",selectTextTag] andMessageText:textFieldComment.text];
+        [_obj sendImageBoardMessage:[NSString stringWithFormat:@"%d",selectTextTag] andMessageText:textFieldComment.text];
 
-    textFieldComment.text = @"";
-    
-    [self endEditing:true];
+        textFieldComment.text = @"";
+        [self endEditing:true];
+   
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"不能发表空的言论" andTime:2 andPos:CGPointZero];
+        
+         [self endEditing:true];
+        
     }
     
     return YES;

@@ -84,6 +84,9 @@
     
     
     PlayerInfoView *_playerInfoV;
+    
+    MeFootPrintView *meFootPrint;
+    
 //award
   NSArray * rouletteArr;
 }
@@ -732,11 +735,15 @@
             NSLog(@"%@",responseObject);
             
             
-            MeFootPrintView *meFootPrint =[[MeFootPrintView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
-            [[_obj view] addSubview:meFootPrint];
-            
-            
-            [meFootPrint updataCollectionData:responseObject[@"data"]];
+            if(meFootPrint==nil){
+                meFootPrint =[[MeFootPrintView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+                [[_obj view] addSubview:meFootPrint];
+                [meFootPrint updataCollectionData:responseObject[@"data"]];
+                
+            }else{
+                
+                [meFootPrint updataCollectionData:responseObject[@"data"]];
+            }
 
         }else{
             
@@ -902,12 +909,22 @@
         if([responseObject[@"status"] intValue]==0){
            
             
+            [self getMyFootPrint];
+            
         }else{
             
         }
     }fail:^{
         
     }];
+    
+    
+}
+
+-(void)removeMeFootView{
+    
+    
+    meFootPrint = nil;
     
     
 }

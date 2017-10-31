@@ -88,6 +88,8 @@
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
 -(void)sendImageBoardMessage:(NSString*)boardId andMessageText:(NSString*)message;
 
+-(void)removeMeFootView;
+
 
 
 @property(nonatomic,strong)NSArray *kuaidiArr;
