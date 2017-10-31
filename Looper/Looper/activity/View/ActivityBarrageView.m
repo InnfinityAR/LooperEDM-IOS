@@ -502,8 +502,7 @@
        
     UIImageView *imageView =[[UIImageView alloc]initWithFrame:CGRectMake(5*DEF_Adaptation_Font*0.5, 5*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5)];
     if (self.userImageArr.count) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.userImageArr[count]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        }];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.userImageArr[count]] placeholderImage:nil options:SDWebImageRetryFailed];
     }
     imageView.layer.cornerRadius =20*DEF_Adaptation_Font*0.5;
     imageView.layer.masksToBounds=YES;

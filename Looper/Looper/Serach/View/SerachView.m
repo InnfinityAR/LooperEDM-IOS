@@ -135,11 +135,11 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     // 这个偏移量是相对于scrollview的content frame原点的相对对标
     CGFloat deltaX = button.center.x - DEF_WIDTH(self) / 2;
     // 设置偏移量，记住这段算法
-    if (deltaX < 0)
-    {
-        // 最左边
-        deltaX = 0;
-    }
+//    if (deltaX < 0)
+//    {
+//        // 最左边
+//        deltaX = 0;
+//    }
     CGFloat maxDeltaX = _titleScrollView.contentSize.width - DEF_WIDTH(self);
 //    if (deltaX > maxDeltaX)
 //    {
@@ -284,7 +284,16 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     tableView.separatorStyle = NO;
     [tableView setBackgroundColor:[UIColor clearColor]];
     [view addSubview:tableView];
+//点击空白处释放第一响应者
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [tableView addGestureRecognizer:tap1];
+
     [self.tableViews addObject:tableView];
+}
+-(void)viewTapped:(UITapGestureRecognizer*)tap1
+{
+        [self endEditing:YES];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -350,7 +359,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
         UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(154*DEF_Adaptation_Font_x*0.5, 35*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(334*DEF_Adaptation_Font_x*0.5, 38*DEF_Adaptation_Font_x*0.5) andText:[[userArray objectAtIndex:indexPath.row] objectForKey:@"nickname"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [cell.contentView addSubview:titleNum];
     }else if([self judgeTableViewCount:tableView]==2){
-        UIView *tempBg = [LooperToolClass createViewAndRect:CGPointMake(66*DEF_Adaptation_Font_x*0.5,20*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(88*DEF_Adaptation_Font_x*0.5, 88*DEF_Adaptation_Font*0.5) andIsRadius:true andImageName:[[DJArray objectAtIndex:indexPath.row] objectForKey:@"images"]];
+        UIView *tempBg = [LooperToolClass createViewAndRect:CGPointMake(66*DEF_Adaptation_Font_x*0.5,20*DEF_Adaptation_Font*0.5) andTag:100 andSize:CGSizeMake(88*DEF_Adaptation_Font_x*0.5, 88*DEF_Adaptation_Font*0.5) andIsRadius:true andImageName:[[DJArray objectAtIndex:indexPath.row] objectForKey:@"avatar"]];
         [cell.contentView addSubview:tempBg];
         UILabel *titleNum = [LooperToolClass createLableView:CGPointMake(154*DEF_Adaptation_Font_x*0.5, 35*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(334*DEF_Adaptation_Font_x*0.5, 38*DEF_Adaptation_Font_x*0.5) andText:[[DJArray objectAtIndex:indexPath.row] objectForKey:@"djname"] andFontSize:13 andColor:[UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0] andType:NSTextAlignmentLeft];
         [cell.contentView addSubview:titleNum];
@@ -552,11 +561,12 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     mySeatchBar.autocorrectionType = UITextAutocorrectionTypeDefault;
     mySeatchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mySeatchBar.barStyle = UIBarStyleBlack;
-    mySeatchBar.placeholder = @"搜索用户,艺人,活动以及家族";
+    mySeatchBar.placeholder = @"全局搜索";
     [mySeatchBar becomeFirstResponder];
     [self addSubview:mySeatchBar];
     
     UITextField *txfSearchField = [mySeatchBar valueForKey:@"_searchField"];
+    txfSearchField.font=[UIFont systemFontOfSize:14*DEF_Adaptation_Font];
     [txfSearchField setBackgroundColor:[UIColor clearColor]];
     [txfSearchField setLeftViewMode:UITextFieldViewModeNever];
     [txfSearchField setRightViewMode:UITextFieldViewModeNever];

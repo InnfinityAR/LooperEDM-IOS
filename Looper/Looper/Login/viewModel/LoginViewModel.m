@@ -110,9 +110,7 @@
         [LocalDataMangaer sharedManager].sex = responseObject[@"data"][@"sex"];
         [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
         [[LocalDataMangaer sharedManager] setData];
-        
         [self loginSucceed];
-        [loginV removeMPVideo];
     }else{
         //手机号或验证码错误
         [[DataHander sharedDataHander] showViewWithStr:@"手机号或验证码错误" andTime:2 andPos:CGPointZero ];

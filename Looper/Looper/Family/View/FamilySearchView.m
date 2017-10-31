@@ -106,7 +106,7 @@
     [_obj searchRaverFamilyDataForSearchText:searchBar.text];
     [self endEditing:true];
 }
-#pragma -UITableView,在这里没用到
+#pragma -UITableView,在这里没用到，直接使用了familyRankView
 - (UITableView *)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130*DEF_Adaptation_Font*0.5, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - 130*DEF_Adaptation_Font*0.5) style:UITableViewStylePlain];

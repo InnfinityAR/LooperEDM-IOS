@@ -19,6 +19,5 @@
 
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 -(void)removeAllView;
--(void)removeMPVideo;
 @property(nonatomic,strong)UIView *firstLoginView;
 @end
