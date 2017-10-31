@@ -204,7 +204,7 @@
 }
 -(void)ClickLocation:(UITapGestureRecognizer *)tap{
     FamilyApplyFetailView *familyApplyV=[[FamilyApplyFetailView alloc]initWithFrame:self.bounds andObj:self.obj andDataDic:self.dataDic];
-    [[self.obj familyView] addSubview:familyApplyV];
+    [[[self.obj obj]view] addSubview:familyApplyV];
      [indicator stopAnimating];
      [_locationManager stopUpdatingLocation];
     [self removeFromSuperview];

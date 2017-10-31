@@ -143,9 +143,13 @@ NSMutableArray *RaverArray;
 }
 //家族申请弹窗
 -(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic{
+    if ([LocalDataMangaer sharedManager].raverid==nil||[[LocalDataMangaer sharedManager].raverid isEqual:[NSNull null]]) {
     FamilyApplyView *applyView=[[FamilyApplyView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataDic:dataDic];
     familyApplyV=applyView;
     [[self.obj view]addSubview:applyView];
+    }else{
+        [[DataHander sharedDataHander] showViewWithStr:@"亲你已经在家族中了哦" andTime:1 andPos:CGPointZero];
+    }
 }
 //申请家族
 -(void)getApplyFamilyDataForRfId:(NSString*)rfId{

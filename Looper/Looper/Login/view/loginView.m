@@ -68,9 +68,9 @@
     
     [motionManager stopAccelerometerUpdates];
     [motionManager stopGyroUpdates];
-
-
-
+    [self.player stop];
+    [self.player.view removeFromSuperview];
+    self.player=nil;
 }
 
 
@@ -305,11 +305,6 @@
    AppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
     appDelegate.player=self.player;
     
-}
--(void)removeMPVideo{
-    [self.player stop];
-    [self.player.view removeFromSuperview];
-    self.player=nil;
 }
 
 -(void)createImage:(NSString*)imageName andRect:(CGPoint)rect andTag:(int)tag{

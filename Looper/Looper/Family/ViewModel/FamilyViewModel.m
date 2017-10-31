@@ -276,7 +276,7 @@
     [dic setObject:raverId forKey:@"raverId"];
     [dic setObject:inviteId forKey:@"inviteId"];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaver" parameters:dic  success:^(id responseObject) {
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isAcceptInvite" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
                 [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
