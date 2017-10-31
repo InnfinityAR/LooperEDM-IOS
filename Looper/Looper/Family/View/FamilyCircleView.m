@@ -226,7 +226,6 @@
     
     NSDictionary *dic = [[NSDictionary alloc] initWithDictionary:[_dataSource objectAtIndex:indexPath.row]];
     
-    
     if([dic objectForKey:@"boardvideo"]!=[NSNull null]){
         
         UILabel *boardText = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:[dic objectForKey:@"boardtext"] andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];

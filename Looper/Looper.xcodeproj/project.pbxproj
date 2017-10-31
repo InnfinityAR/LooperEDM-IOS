@@ -208,6 +208,7 @@
 		C4057F361DF5776900AA52F9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057F351DF5776900AA52F9 /* libsqlite3.0.tbd */; };
 		C4057F381DF5777100AA52F9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057F371DF5777100AA52F9 /* libz.tbd */; };
 		C4057F3A1DF5777B00AA52F9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4057F391DF5777B00AA52F9 /* CoreData.framework */; };
+		C40653B91FA0A12F00D9036C /* btn_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = C40653B81FA0A12F00D9036C /* btn_comment.png */; };
 		C407B0DB1E4C99100067801F /* LooperScorllLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C407B0DA1E4C99100067801F /* LooperScorllLayer.m */; };
 		C408068B1F1869620084BC6E /* PlayVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C408068A1F1869620084BC6E /* PlayVideoView.m */; };
 		C408068D1F1884050084BC6E /* timeFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = C408068C1F1884050084BC6E /* timeFrame.png */; };
@@ -261,6 +262,7 @@
 		C4129BED1EAB69B10010A566 /* btn_commit_loop.png in Resources */ = {isa = PBXBuildFile; fileRef = C4129BEC1EAB69B10010A566 /* btn_commit_loop.png */; };
 		C413CE1F1F2B2056008B0BAF /* btn_delete_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = C413CE1E1F2B2056008B0BAF /* btn_delete_photo.png */; };
 		C414C38B1EB843F000D6B224 /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = C414C38A1EB843F000D6B224 /* btn_login.png */; };
+		C4157E3D1F9F25F200B2E1A7 /* bg_setting_up.png in Resources */ = {isa = PBXBuildFile; fileRef = C4157E3C1F9F25F100B2E1A7 /* bg_setting_up.png */; };
 		C4174FC21F00D6ED00901671 /* icon_ticket2.png in Resources */ = {isa = PBXBuildFile; fileRef = C4174FC11F00D6ED00901671 /* icon_ticket2.png */; };
 		C4174FC51F00DC4A00901671 /* locaton1.png in Resources */ = {isa = PBXBuildFile; fileRef = C4174FC31F00DC4A00901671 /* locaton1.png */; };
 		C4174FC61F00DC4A00901671 /* time1.png in Resources */ = {isa = PBXBuildFile; fileRef = C4174FC41F00DC4A00901671 /* time1.png */; };
@@ -565,6 +567,7 @@
 		C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C71E452D15005DE67F /* SecondWaves.m */; };
 		C489F0721E4722F400A0EE79 /* nLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C489F0711E4722F400A0EE79 /* nLoginView.m */; };
 		C492D9631F6A414400AF0BB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C492D9621F6A414400AF0BB6 /* MapKit.framework */; };
+		C493D2901F9E077900A74F2F /* MeFootPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = C493D28F1F9E077900A74F2F /* MeFootPrintView.m */; };
 		C49FA07D1E204493009111C7 /* icon_calendar_active.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0771E204493009111C7 /* icon_calendar_active.png */; };
 		C49FA07E1E204493009111C7 /* icon_calendar_click.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0781E204493009111C7 /* icon_calendar_click.png */; };
 		C49FA07F1E204493009111C7 /* icon_calendar_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0791E204493009111C7 /* icon_calendar_clock.png */; };
@@ -1224,6 +1227,7 @@
 		C4057F351DF5776900AA52F9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		C4057F371DF5777100AA52F9 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C4057F391DF5777B00AA52F9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C40653B81FA0A12F00D9036C /* btn_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_comment.png; sourceTree = "<group>"; };
 		C407B0D91E4C99100067801F /* LooperScorllLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LooperScorllLayer.h; sourceTree = "<group>"; };
 		C407B0DA1E4C99100067801F /* LooperScorllLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LooperScorllLayer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C40806891F1869620084BC6E /* PlayVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayVideoView.h; sourceTree = "<group>"; };
@@ -1291,6 +1295,7 @@
 		C4129BEC1EAB69B10010A566 /* btn_commit_loop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_commit_loop.png; sourceTree = "<group>"; };
 		C413CE1E1F2B2056008B0BAF /* btn_delete_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_delete_photo.png; sourceTree = "<group>"; };
 		C414C38A1EB843F000D6B224 /* btn_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login.png; sourceTree = "<group>"; };
+		C4157E3C1F9F25F100B2E1A7 /* bg_setting_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_setting_up.png; sourceTree = "<group>"; };
 		C4174FC11F00D6ED00901671 /* icon_ticket2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ticket2.png; sourceTree = "<group>"; };
 		C4174FC31F00DC4A00901671 /* locaton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locaton1.png; sourceTree = "<group>"; };
 		C4174FC41F00DC4A00901671 /* time1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time1.png; sourceTree = "<group>"; };
@@ -1683,6 +1688,8 @@
 		C489F0701E4722F400A0EE79 /* nLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nLoginView.h; sourceTree = "<group>"; };
 		C489F0711E4722F400A0EE79 /* nLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nLoginView.m; sourceTree = "<group>"; };
 		C492D9621F6A414400AF0BB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C493D28E1F9E077900A74F2F /* MeFootPrintView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeFootPrintView.h; sourceTree = "<group>"; };
+		C493D28F1F9E077900A74F2F /* MeFootPrintView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeFootPrintView.m; sourceTree = "<group>"; };
 		C49FA0771E204493009111C7 /* icon_calendar_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_active.png; sourceTree = "<group>"; };
 		C49FA0781E204493009111C7 /* icon_calendar_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_click.png; sourceTree = "<group>"; };
 		C49FA0791E204493009111C7 /* icon_calendar_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_clock.png; sourceTree = "<group>"; };
@@ -2870,6 +2877,7 @@
 		C426015F1E14FAE200BE5CE2 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				C4157E3C1F9F25F100B2E1A7 /* bg_setting_up.png */,
 				C4DE36091F2F065A00AF2B06 /* btn_Xman.png */,
 				C4DE360A1F2F065A00AF2B06 /* btn_Xwomen.png */,
 				B2A1E80A1F29FCE7006270E3 /* btn_play.png */,
@@ -3278,6 +3286,8 @@
 				C46E7D3D1EAE235600996110 /* commonTableView.m */,
 				C4D8660F1F1F9F9000A270E5 /* LiveShowView.h */,
 				C4D866101F1F9F9000A270E5 /* LiveShowView.m */,
+				C493D28E1F9E077900A74F2F /* MeFootPrintView.h */,
+				C493D28F1F9E077900A74F2F /* MeFootPrintView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4749,6 +4759,7 @@
 		C4E86F5D1F160E9700D9658D /* PhotoWall */ = {
 			isa = PBXGroup;
 			children = (
+				C40653B81FA0A12F00D9036C /* btn_comment.png */,
 				C404203B1F8B92480013E12F /* enpunchCard.png */,
 				C40420391F8B808E0013E12F /* punchCard.png */,
 				C40A80EC1F2728BE00067916 /* btn_PhotoClose.png */,
@@ -5072,6 +5083,7 @@
 				C4DF01101ED94AC8002447EE /* masking.png in Resources */,
 				C404A7D01EBF6D78000B9E1D /* loop_2.png in Resources */,
 				B22BFCF31F61702D00FD131E /* commendNO.png in Resources */,
+				C40653B91FA0A12F00D9036C /* btn_comment.png in Resources */,
 				B2A1E8131F2AEB48006270E3 /* btn_ticketBack.png in Resources */,
 				C42E80411EC332D400D9CC43 /* loading_00010.png in Resources */,
 				C448BB451F0787B6006E9344 /* btn_Detail.png in Resources */,
@@ -5209,6 +5221,7 @@
 				C42E804A1EC332D400D9CC43 /* loading_00019.png in Resources */,
 				C4DA32361E8B7DBB00CD8305 /* btn_infoBack.png in Resources */,
 				C46E7D0E1EADA92900996110 /* btn_myInfo.png in Resources */,
+				C4157E3D1F9F25F200B2E1A7 /* bg_setting_up.png in Resources */,
 				C4E86FA41F16474000D9658D /* PK_Play@2x.png in Resources */,
 				C40B0FF41F0A4363008F7C41 /* icon_ticket.png in Resources */,
 				C4E86F621F160E9700D9658D /* head_circle.png in Resources */,
@@ -5717,6 +5730,7 @@
 				C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */,
 				B225B96D1F30568C0008E5AF /* SaleTicketViewModel.m in Sources */,
 				C4C0ECD01F250B4500140E5A /* NSString+XHMD5.m in Sources */,
+				C493D2901F9E077900A74F2F /* MeFootPrintView.m in Sources */,
 				C4AE247B1E1FB8E2009D5851 /* DBSphereView.m in Sources */,
 				C42D882D1F022C4100CE8F01 /* BrandDetailView.m in Sources */,
 				B2C00FE21F0B8AF500E369B6 /* YWCarouseView.m in Sources */,
@@ -5880,7 +5894,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5937,7 +5951,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Looper";
 				INFOPLIST_FILE = Looper/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
