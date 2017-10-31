@@ -16,13 +16,17 @@
 #import "MainViewController.h"
 #import "SimpleChatViewController.h"
 
-
+#import "nActivityViewController.h"
+#import "FamilyApplyView.h"
+#import "LocalDataMangaer.h"
 @implementation SerachViewModel{
 
 
-    NSMutableArray *serachArray;
+    NSMutableArray *ActivityArray;
     NSMutableArray *userArray;
-
+    NSMutableArray *DJArray;
+NSMutableArray *RaverArray;
+    FamilyApplyView   *familyApplyV;
 }
 
 @synthesize obj = _obj;
@@ -41,7 +45,7 @@
 -(void)updateData{
 
     if(_SerachV!=nil){
-        [_SerachV reloadTableData:serachArray andUserArray:userArray];
+        [_SerachV reloadTableData:ActivityArray andUserArray:userArray andMusicArr:DJArray andAlbumnArr:RaverArray];
     }
 }
 
@@ -79,14 +83,14 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:setachStr forKey:@"name"];
     
-    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"searchLoop" parameters:dic  success:^(id responseObject) {
 
         if([responseObject[@"status"] intValue]==0){
-            //serachArray = [responseObject[@"data"] objectForKey:@"Loop"];
+            ActivityArray = [responseObject[@"data"] objectForKey:@"Activity"];
             userArray = [responseObject[@"data"] objectForKey:@"User"];
-
-            [_SerachV reloadTableData:serachArray andUserArray:userArray];
+            DJArray = [responseObject[@"data"] objectForKey:@"DJ"];
+             RaverArray = [responseObject[@"data"] objectForKey:@"Raver"];
+            [_SerachV reloadTableData:ActivityArray andUserArray:userArray andMusicArr:DJArray andAlbumnArr:RaverArray];
             
             if([userArray count]==0){
                 [[DataHander sharedDataHander] showViewWithStr:@"找不到用户" andTime:1 andPos:CGPointZero];
@@ -132,8 +136,32 @@
     
 }
 
-
-
+-(void)jumpToNActivityViewControllerWithActivityId:(NSDictionary *)activityDic andType:(NSInteger)type{
+    nActivityViewController *nactivityVC=[[nActivityViewController alloc]initWithActivityDic:activityDic andType:type];
+      [[_obj navigationController] pushViewController:nactivityVC animated:NO];
+    
+}
+//家族申请弹窗
+-(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic{
+    FamilyApplyView *applyView=[[FamilyApplyView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataDic:dataDic];
+    familyApplyV=applyView;
+    [[self.obj view]addSubview:applyView];
+}
+//申请家族
+-(void)getApplyFamilyDataForRfId:(NSString*)rfId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:rfId forKey:@"rfId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"applyFamily" parameters:dic  success:^(id responseObject) {
+        
+        if([responseObject[@"status"] intValue]==0){
+            [familyApplyV removeFromSuperview];
+            [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:1 andPos:CGPointZero];
+        }
+    }fail:^{
+        
+    }];
+}
 @end
 
 

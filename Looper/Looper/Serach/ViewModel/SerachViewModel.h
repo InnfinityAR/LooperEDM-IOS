@@ -20,7 +20,7 @@
 
 
 -(id)initWithController:(id)controller;
--(void)updateData;
+//-(void)updateData;
 -(void)serachStr:(NSString*)setachStr;
 -(void)popController;
 -(void)movelooperPos:(NSDictionary *)loopData;
@@ -29,4 +29,7 @@
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)SerachView *SerachV;
 
+-(void)jumpToNActivityViewControllerWithActivityId:(NSDictionary *)activityDic andType:(NSInteger)type;
+-(void)getFamilyApplyDataWithDataDic:(NSDictionary *)dataDic;
+-(void)getApplyFamilyDataForRfId:(NSString*)rfId;
 @end

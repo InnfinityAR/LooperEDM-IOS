@@ -245,6 +245,8 @@
     if (familyType==1) {
     if ([self.obj familyModel].familyDetailData==nil||[[self.obj familyModel].familyDetailData isEqual:[NSNull null]]) {
     [self.obj getFamilyApplyDataWithDataDic:dataDic];
+    }else{
+        
     }
     }else{
         [self.obj getFamilyApplyDataWithDataDic:dataDic];

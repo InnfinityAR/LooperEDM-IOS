@@ -20,4 +20,5 @@
 @property(nonatomic,strong)NSArray *orderArr;
 -(void)jumpToActivityId:(NSString*)activityId;
 
+-(instancetype)initWithActivityDic:(NSDictionary *)dataDic andType:(NSInteger)type;
 @end

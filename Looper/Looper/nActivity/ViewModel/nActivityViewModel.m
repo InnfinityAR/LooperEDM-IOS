@@ -932,4 +932,45 @@
     }
     
 }
+#pragma -SearchView
+-(id)initWithController:(id)controller andActivityDic:(NSDictionary *)dataDic andType:(NSInteger)type{
+    if(self=[super init]){
+        self.obj = (nActivityViewController*)controller;
+        if (type==1) {
+        [self jumpToActivityDetailView:dataDic];
+        }else if(type==2){
+            [self jumpToDJViewWithDJId:[dataDic objectForKey:@"djid"]];
+        }
+    }
+    return  self;
+}
+-(void)jumpToActivityDetailView:(NSDictionary*)ActivityDic{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[ActivityDic objectForKey:@"activityid"] forKey:@"activityId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getOfflineInformationDetial" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            activityDetailV =[[ActivityDetailView alloc]initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDetailDic:responseObject andActivityDic:ActivityDic];
+            activityDetailV.isFromSearchView=YES;
+            [[_obj view] addSubview:activityDetailV];
+        }else{
+        }
+    }fail:^{
+    }];
+}
+-(void)jumpToDJViewWithDJId:(NSString*)ID{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"1" forKey:@"type"];
+    [dic setObject:ID forKey:@"id"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getDjById" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+                DJDetailView *djDetailV = [[DJDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)and:self and:responseObject];
+            djDetailV.isFromSearchView=YES;
+                [[_obj view]addSubview:djDetailV];
+        }
+    }fail:^{
+    }];
+}
+
 @end

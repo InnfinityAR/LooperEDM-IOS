@@ -18,4 +18,6 @@
 }
 @property(nonatomic)id obj;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject and:(NSDictionary*)djData;
+//判断是否直接来自搜索，如果是，返回的时候需要直接释放controller
+@property(nonatomic) BOOL isFromSearchView;
 @end

@@ -67,10 +67,11 @@
 -(void)shareAllH5View;
 
 -(void)jumpToPhotoWall:(NSString*)activityID;
-
-
-
+//家族官方数据
 -(void)getFamilyOfficialWithRaverId:(NSString *)raverId;
+
+
+
 -(void)createPhotoWallController:(NSString*)activityId;
 -(void)followFamliyWithisLike:(int)islike andRaverId:(NSString *)raverId;
 //上传，删除家族照片
@@ -79,4 +80,6 @@
 -(void)LocalPhotoWithTag:(NSInteger)tag;
 -(void)takePhotoWithTag:(NSInteger)tag;
 -(void)updateRaverImageWithRaverId:(NSString *)raverid andImage:(UIImage *)image;
+
+-(id)initWithController:(id)controller andActivityDic:(NSDictionary *)dataDic andType:(NSInteger)type;
 @end
