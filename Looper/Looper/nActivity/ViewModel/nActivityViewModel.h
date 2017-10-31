@@ -78,4 +78,5 @@
 -(void)deleteFamilyAlbumnWithImageId:(NSString *)imageid RaverId:(NSString *)raverId andUserId:(NSString *)userId;
 -(void)LocalPhotoWithTag:(NSInteger)tag;
 -(void)takePhotoWithTag:(NSInteger)tag;
+-(void)updateRaverImageWithRaverId:(NSString *)raverid andImage:(UIImage *)image;
 @end

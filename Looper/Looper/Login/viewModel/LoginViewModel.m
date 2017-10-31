@@ -111,7 +111,8 @@
         [LocalDataMangaer sharedManager].NickName = responseObject[@"data"][@"nickname"];
         [[LocalDataMangaer sharedManager] setData];
         
-        [self loginSucceed];    
+        [self loginSucceed];
+        [loginV removeMPVideo];
     }else{
         //手机号或验证码错误
         [[DataHander sharedDataHander] showViewWithStr:@"手机号或验证码错误" andTime:2 andPos:CGPointZero ];
@@ -227,26 +228,28 @@
     }else if(DataType ==LoginBtnTag){
         [self login:iphoneNum andCode:codeNum];
     }else if(DataType ==AccountBtnTag){
-        
+        //毛玻璃效果
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 
-        _effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _effectView.frame = CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT);
-        [[_obj view] addSubview:_effectView];
-        _effectView.alpha = 0.0f;
-        
-        _bkView =[[UIView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
-        [_bkView setBackgroundColor:[UIColor colorWithRed:11.0/255.0 green:11.0/255.0 blue:14/255.0 alpha:1.0]];
-        [_bkView setAlpha:0];
-        [[_obj view] addSubview:_bkView];
+//        _effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        _effectView.frame = CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT);
+//        [[_obj view] addSubview:_effectView];
+//        _effectView.alpha = 0.0f;
+//        
+//        _bkView =[[UIView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+//        [_bkView setBackgroundColor:[UIColor colorWithRed:11.0/255.0 green:11.0/255.0 blue:14/255.0 alpha:1.0]];
+//        [_bkView setAlpha:0];
+//        [[_obj view] addSubview:_bkView];
         _accountV = [[LoginAccountView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
        [[_obj view] addSubview:_accountV];
        _accountV.transform = CGAffineTransformScale(_accountV.transform,0.01,1.0);
         [UIView animateWithDuration:0.5 animations:^{
-             _effectView.alpha = 0.9f;
+            _effectView.alpha = 0.9f;
             _loginV.transform = CGAffineTransformScale(_loginV.transform,1.1,1.1);
             [_bkView setAlpha:0.72f];
             _accountV.transform = CGAffineTransformScale(_accountV.transform,100,1.0);
+        } completion:^(BOOL finished) {
+             _loginV.firstLoginView.transform = CGAffineTransformScale(_loginV.transform,0.001,0.001);
         }];
     }else if(DataType ==joinBtnTag){
         if (codeNum.length==6) {
@@ -262,12 +265,13 @@
     }else if(DataType ==backBtnTag){
         [UIView animateWithDuration:0.5 animations:^{
             _loginV.transform = CGAffineTransformScale(_loginV.transform,1/1.1,1/1.1);
+            _loginV.firstLoginView.transform=CGAffineTransformScale(_loginV.firstLoginView.transform,1000/1.1,1000/1.1);
             [_bkView setAlpha:0.0f];
             [_accountV removeFromSuperview];
              _effectView.alpha = 0.0f;
         }];
     }
-
+    [_loginV.firstLoginView setHidden:NO];
 }
 
 

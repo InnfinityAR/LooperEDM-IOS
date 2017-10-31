@@ -161,7 +161,7 @@
     
     AVPlayer*_player=[AVPlayer playerWithURL:[[NSURL alloc] initWithString:videoFile]];
     AVPlayerLayer*playerLayer=[AVPlayerLayer playerLayerWithPlayer:_player];
-    
+
     playerLayer.frame = CGRectMake(0, 0,DEF_SCREEN_WIDTH,DEF_SCREEN_HEIGHT);
     [self.layer addSublayer:playerLayer];
     [_player play];

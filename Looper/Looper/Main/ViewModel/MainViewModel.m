@@ -397,6 +397,7 @@
             [LocalDataMangaer sharedManager].age =responseObject[@"data"][@"User"][@"age"];
             if (responseObject[@"data"][@"raverid"]!=[NSNull null]&&responseObject[@"data"][@"raverid"]!=nil) {
                 [LocalDataMangaer sharedManager].raverid=responseObject[@"data"][@"raverid"];
+                 [LocalDataMangaer sharedManager].role=responseObject[@"data"][@"role"];
             }
             [[LocalDataMangaer sharedManager] setData];
             [[RongCloudManger sharedManager] initRongCloudSDK];

@@ -14,7 +14,7 @@
 #endif
 #import <AdSupport/AdSupport.h>
 
-
+#import <MediaPlayer/MediaPlayer.h>
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, JPUSHRegisterDelegate>
@@ -23,6 +23,6 @@
 @property(nonatomic,strong)NSThread *thread;
 @property(nonatomic,strong)NSTimer *timer;
 @property (nonatomic) int allowRotation;
-
+@property(nonatomic,strong)MPMoviePlayerController *player;
 @end
 

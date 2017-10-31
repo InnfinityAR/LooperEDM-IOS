@@ -129,7 +129,7 @@
 -(void)requestData{
     
     _familyModel  = [[FramilyModel alloc] init];
-    
+    [familyV removeFromSuperview];
     familyV = [[FamilyView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
     [[_obj view] addSubview:familyV];
 
@@ -160,6 +160,9 @@
                     self.familyView.titleArray=@[@"家族详情",@"家族排行",@"家族成员",@"家族圈"];
                     [self.familyView updateTitleArr];
                     [self.familyView updateSC];
+                }
+                if (_messageView!=nil) {
+                     [_messageView removeFromSuperview];
                 }
                 [self.familyView initFamilyRankWithDataArr:_familyModel.RankingArray];
                 if (_familyModel.familyDetailData==nil){
@@ -277,7 +280,8 @@
         if([responseObject[@"status"] intValue]==0){
             if ([join intValue]==1) {
                 [[DataHander sharedDataHander] showViewWithStr:@"已同意" andTime:1 andPos:CGPointZero];
-                 [self getFamilyRankDataForOrderType:@"1"];
+                 [self getFamilyRankDataForOrderType:nil];
+               
             }else{
                 [[DataHander sharedDataHander] showViewWithStr:@"已拒绝" andTime:1 andPos:CGPointZero];
                 [self getFamilyRankDataForOrderType:@"1"];

@@ -29,6 +29,8 @@
     
     //如果定位没有执行
     BOOL isLocation;
+    
+    UITextView *textView;
 
 }
 @property (nonatomic, strong) UIView *DQbackgroundView;
@@ -92,7 +94,7 @@
     [contentView addSubview:indicator];
     [indicator startAnimating];
     
-    UITextView *textView=[[UITextView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(locationLB)+40*DEF_Adaptation_Font*0.5, DEF_WIDTH(contentView)-40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5)];
+    textView=[[UITextView alloc]initWithFrame:CGRectMake(20*DEF_Adaptation_Font*0.5, DEF_HEIGHT(locationLB)+40*DEF_Adaptation_Font*0.5, DEF_WIDTH(contentView)-40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5)];
     textView.textColor=ColorRGB(255, 255, 255, 0.6);
     textView.font=[UIFont systemFontOfSize:13];
     textView.text=@"(选填)请输入有效信息方便加入小分队";
@@ -253,5 +255,9 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView;{
     textView.text=@"";
     textView.textColor=[UIColor whiteColor];
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [textView resignFirstResponder];
+    
 }
 @end

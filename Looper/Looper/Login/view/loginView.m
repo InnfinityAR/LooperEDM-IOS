@@ -13,8 +13,13 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UMSocialNetwork/UMSocialNetwork.h>
 #import <UShareUI/UShareUI.h>
-
-
+#import <MediaPlayer/MediaPlayer.h>
+#import "AppDelegate.h"
+@interface loginView()<UIScrollViewDelegate>
+@property (nonatomic, strong) NSURL *url;
+/** 视频播放器 */
+@property (nonatomic, strong) MPMoviePlayerController *player;
+@end
 @implementation loginView{
 
     CMMotionManager *motionManager;
@@ -35,13 +40,15 @@
     
     NSTimer *updataTimer;
     
-    
 
 
     int updataNum;
     
     int countNum;
-
+    NSArray *contentArr;
+    UIPageControl *pageControl;
+    NSTimer *timer;
+    UIScrollView *contentScroll;
 }
 @synthesize obj = _obj;
 
@@ -49,15 +56,13 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.obj = (LoginViewModel*)idObject;
+        contentArr=@[@{@"content":@"欢迎",@"detail":@"Looper--中国电音资讯社交平台\nIn the BestWay Sure！\nU R not alone"},@{@"content":@"风暴电音",@"detail":@"临、兵、闘、者"},@{@"content":@"Looper",@"detail":@"You are not alone"},@{@"content":@"Test",@"detail":@"这是一段很长很长的数据，也不知道要说些啥，先看看效果"}];
         [self initView];
-        
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
         
     }
     return self;
 }
-
-
 
 -(void)removeAllView{
     
@@ -89,14 +94,13 @@
 
 -(void)initView{
     self.userInteractionEnabled= YES;
-    
     updataNum = rand()%50;
     countNum = 0;
     [self initMotion];
-    [self createBackGround];
-    [self createTextView];
+//    [self createBackGround];
+    [self initLoginView];
     
-    updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updataView) userInfo:nil repeats:YES];
+//    updataTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updataView) userInfo:nil repeats:YES];
 }
 
 
@@ -110,6 +114,7 @@
 }
 
 -(void)createMeteor{
+//流星效果
     UIImage *meteor = [UIImage imageNamed:@"meteor.png"];
     CGAffineTransform endAngle = CGAffineTransformMakeRotation(315 * (M_PI /180.0f));
     
@@ -136,15 +141,175 @@
         }];
     }];
 }
-
-
--(void)createTextView{
-    [self createBtnImageName:@"btn_login.png" andRect:CGPointMake(115,1003) andTag:AccountBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
-    
+#pragma ------------------------------------------------------------------------------------------------------------------------------------------------
+-(void)initLoginView{
+    [self setupVideoPlayer];
+    _firstLoginView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self))];
+    [self addSubview:_firstLoginView];
+    UIImage *image1=[UIImage imageNamed:@"product_logo.png"];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5, DEF_WIDTH(self),DEF_WIDTH(self)/image1.size.width*image1.size.height)];
+    imageView.image=image1;
+    [_firstLoginView addSubview:imageView];
+    [self createBtnImageName:@"btn_login_new.png" andRect:CGRectMake(88, 961, 0, 102) andTag:AccountBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     if([[UMSocialManager defaultManager]isInstall:UMSocialPlatformType_WechatSession]==true){
-        [self createBtnImageName:@"btn_loginWechat.png" andRect:CGPointMake(115, 911) andTag:WECHATBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
+        [self createBtnImageName:@"btn_weichat_new.png" andRect:CGRectMake(103, 871, 0, 67) andTag:WECHATBtnTag andSelectImage:nil andClickImage:nil andTextStr:nil];
     }
-    [self createImage:@"LOGO.png" andRect:CGPointMake(355, 242)andTag:900];
+//Looper介绍
+    contentScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 450*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 300*DEF_Adaptation_Font*0.5)];
+    contentScroll.pagingEnabled=YES;
+    contentScroll.delegate=self;
+    contentScroll.showsHorizontalScrollIndicator=NO;
+//注：总共创建了count+2个scrollWidth，用于循环滑动。例：012345六个视图，其中只取了1234
+     [contentScroll setContentOffset:CGPointMake(DEF_WIDTH(self), 0) animated:NO];
+    contentScroll.contentSize=CGSizeMake(DEF_WIDTH(self)*(contentArr.count+2), 300*DEF_Adaptation_Font*0.5);
+    [_firstLoginView addSubview:contentScroll];
+    [self creatScrollContentView:contentScroll];
+    
+//服务条款
+    UILabel *serverLB=[[UILabel alloc]initWithFrame:CGRectMake(0, DEF_HEIGHT(self)-60*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), 50*DEF_Adaptation_Font*0.5)];
+    serverLB.text=@"登录即代表阅读并同意服务条款";
+    serverLB.textColor=[UIColor whiteColor];
+    serverLB.font=[UIFont systemFontOfSize:10*DEF_Adaptation_Font];
+    CGSize lblSize3 = [serverLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 50*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10*DEF_Adaptation_Font]} context:nil].size;
+    CGRect frame3=serverLB.frame;
+    frame3.size=lblSize3;
+    frame3.origin.x=DEF_WIDTH(self)/2-lblSize3.width/2;
+    serverLB.frame=frame3;
+    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc]initWithString:serverLB.text];
+    [aString addAttribute:NSForegroundColorAttributeName value:ColorRGB(105, 123, 213, 1.0)range:NSMakeRange(serverLB.text.length-4, 4)];
+    serverLB.attributedText= aString;
+    [_firstLoginView addSubview:serverLB];
+    UIButton *serverBtn=[[UIButton alloc]initWithFrame:CGRectMake(DEF_WIDTH(serverLB)+DEF_X(serverLB)-60*DEF_Adaptation_Font*0.5, DEF_HEIGHT(self)-60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
+    [serverBtn addTarget:self action:@selector(buttonDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    serverBtn.tag=101;
+    [_firstLoginView addSubview:serverBtn];
+    pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake(270*DEF_Adaptation_Font*0.5, 650*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
+    pageControl.numberOfPages = contentArr.count;//指定页面个数
+    pageControl.currentPage=0;
+    //添加委托方法，当点击小白点就执行此方法
+    pageControl.pageIndicatorTintColor = ColorRGB(255, 255, 255, 0.3);// 设置非选中页的圆点颜色
+    pageControl.currentPageIndicatorTintColor =  ColorRGB(255, 255, 255, 1.0); // 设置选中页的圆点颜色
+    [_firstLoginView addSubview:pageControl];
+    [self addNSTimer];
+}
+-(void)addNSTimer
+{
+    timer=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+    //添加到runloop中
+    [[NSRunLoop mainRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
+}
+-(void)nextPage{
+    int page = (int)pageControl.currentPage;
+         if (page == contentArr.count-1) {
+                 page = 0;
+     }else{
+         page++;
+                     }
+     //  滚动scrollview
+     CGFloat x =(page+1) * DEF_WIDTH(self);
+     contentScroll.contentOffset = CGPointMake(x, 0);
+    pageControl.currentPage=page;
+}
+-(void)creatScrollContentView:(UIScrollView *)scrollView{
+    for (int i=1; i<contentArr.count+1; i++) {
+    NSDictionary *dataDic=contentArr[i-1];
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(i*DEF_WIDTH(self), 0, DEF_WIDTH(self), 300*DEF_Adaptation_Font*0.5)];
+        [scrollView addSubview:view];
+    UILabel *welcomeLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 10*DEF_Adaptation_Font*0.5, 440*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
+    welcomeLB.text=[dataDic objectForKey:@"content"];
+    welcomeLB.textAlignment=NSTextAlignmentCenter;
+    welcomeLB.font=[UIFont boldSystemFontOfSize:16*DEF_Adaptation_Font];
+    welcomeLB.textColor=[UIColor whiteColor];
+//添加阴影
+        NSShadow *shadow1=[[NSShadow  alloc]init];
+        shadow1.shadowBlurRadius = 10.0;
+        shadow1.shadowColor = [UIColor blackColor];
+        welcomeLB.attributedText = [[NSAttributedString alloc] initWithString:welcomeLB.text attributes:@{NSShadowAttributeName: shadow1}];
+    [view addSubview:welcomeLB];
+    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 80*DEF_Adaptation_Font*0.5, 440*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
+        contentLB.text=[dataDic objectForKey:@"detail"];
+        contentLB.numberOfLines=3;
+        contentLB.font=[UIFont systemFontOfSize:14*DEF_Adaptation_Font];
+        contentLB.textColor=ColorRGB(255, 255, 255, 0.5);
+        CGSize lblSize3 = [contentLB.text boundingRectWithSize:CGSizeMake(440*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14*DEF_Adaptation_Font]} context:nil].size;
+        CGRect frame3=contentLB.frame;
+        frame3.size=lblSize3;
+        frame3.origin.x=320*DEF_Adaptation_Font*0.5-lblSize3.width/2;
+        contentLB.frame=frame3;
+        contentLB.textAlignment=NSTextAlignmentCenter;
+        [view addSubview:contentLB];
+    }
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int page = scrollView.contentOffset.x / scrollView.frame.size.width;
+    // 设置页码
+    pageControl.currentPage = page-1;
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat xOffset  = scrollView.contentOffset.x;
+    CGFloat scrollX=[scrollView.panGestureRecognizer translationInView:self].x;
+    NSLog(@"yOffset===%f,panPoint===%f",xOffset,scrollX);
+    if (xOffset==DEF_WIDTH(self)*(contentArr.count+1)&&scrollX<0) {
+        [scrollView setContentOffset:CGPointMake(DEF_WIDTH(self), 0) animated:NO];
+    }
+    else   if (xOffset==0&&scrollX>0) {
+        [scrollView setContentOffset:CGPointMake(DEF_WIDTH(self)*(contentArr.count), 0) animated:NO];
+    }
+     [self startTimer];
+}
+-(void)startTimer
+{
+    if(timer == nil){
+        [self addNSTimer];
+    }
+}
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    [self colseTimer];
+}
+-(void)colseTimer
+{
+    if (timer) {
+        [timer invalidate];
+        timer = nil;
+    }
+}
+/**
+ 设置视频播放
+ */
+- (void)setupVideoPlayer
+{
+    // 创建url
+    self.url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"]];
+    // 创建播放器
+    self.player = [[MPMoviePlayerController alloc] initWithContentURL:self.url];
+    // 添加到根视图
+    [self addSubview:self.player.view];
+    // 应该自动播放
+    self.player.shouldAutoplay = YES;
+    // 播放控制 : 不控制
+    [self.player setControlStyle:(MPMovieControlStyleNone)];
+    // 循环播放
+    self.player.repeatMode = MPMovieRepeatModeOne;
+    // 大小
+    [self.player.view setFrame:self.bounds];
+    // 缩放模式, 宽度或高度最小的那个等于屏幕宽或高
+    self.player.scalingMode = MPMovieScalingModeAspectFill;
+    // 透明
+    self.player.view.alpha = 0;
+    [UIView animateWithDuration:3 animations:^{
+        self.player.view.alpha = 0.5;
+        [self.player prepareToPlay];
+    }];
+    self.player.allowsAirPlay=YES;
+   AppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    appDelegate.player=self.player;
+    
+}
+-(void)removeMPVideo{
+    [self.player stop];
+    [self.player.view removeFromSuperview];
+    self.player=nil;
 }
 
 -(void)createImage:(NSString*)imageName andRect:(CGPoint)rect andTag:(int)tag{
@@ -199,7 +364,6 @@
 }
 
 -(IBAction)buttonDrag:(UIButton *)button withEvent:(UIEvent *)event {
-
     if(button.tag==107){
         [self setBtnStatus];
         [button setSelected:true];
@@ -218,7 +382,12 @@
     else if(button.tag ==105){
         [self.obj requestData:button.tag andIphone:phoneNum.text andCode:code.text];
 
-    }else {
+    }
+    else if (button.tag==101){
+//服务条款点击
+        
+    }
+    else {
          [self.obj requestData:(int)button.tag andIphone:phoneNum.text andCode:nil];
     }
 }
@@ -229,7 +398,7 @@
 }
 
 
--(UIButton*)createBtnImageName:(NSString*)imageName andRect:(CGPoint)point andTag:(int)tag andSelectImage:(NSString*)SelimageN andClickImage:(NSString*)clickImageN andTextStr:(NSString*)TStr{
+-(UIButton*)createBtnImageName:(NSString*)imageName andRect:(CGRect)frame andTag:(int)tag andSelectImage:(NSString*)SelimageN andClickImage:(NSString*)clickImageN andTextStr:(NSString*)TStr{
     
     UIImage *image = [UIImage imageNamed:imageName];
     UIImage *selImage;
@@ -241,7 +410,7 @@
         clickImage = [UIImage imageNamed:clickImageN];
     }
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(point.x*DEF_Adaptation_Font*0.5, point.y*DEF_Adaptation_Font*0.5, image.size.width*0.3*DEF_Adaptation_Font, image.size.height*0.3*DEF_Adaptation_Font)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(frame.origin.x*DEF_Adaptation_Font*0.5, frame.origin.y*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*frame.size.height*0.5*DEF_Adaptation_Font, frame.size.height*0.5*DEF_Adaptation_Font)];
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:selImage forState:UIControlStateSelected];
     [btn setImage:clickImage forState:UIControlStateHighlighted];
@@ -265,7 +434,7 @@
         [btn setSelected:true];
     }
 
-    [self addSubview:btn];
+    [_firstLoginView addSubview:btn];
     
     return btn;
 }
@@ -419,6 +588,5 @@
     
 
 }
-
 
 @end

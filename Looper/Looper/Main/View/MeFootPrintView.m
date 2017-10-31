@@ -155,7 +155,7 @@
 
 -(float)getLableHeight:(NSString*)lableStr{
     
-    UILabel *Text = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(478*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:lableStr andFontSize:14 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+    UILabel *Text = [LooperToolClass createLableView:CGPointMake(137*DEF_Adaptation_Font_x*0.5, 54*DEF_Adaptation_Font_x*0.5) andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, 180*DEF_Adaptation_Font_x*0.5) andText:lableStr andFontSize:10 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
     Text.numberOfLines=0;
     [Text sizeToFit];
     
@@ -178,7 +178,7 @@
         for (int i=0;i<[[dic objectForKey:@"message"] count];i++){
             NSDictionary *indexDic = [[dic objectForKey:@"message"] objectAtIndex:i];
             num_y = num_y+[self getLableHeight:[indexDic objectForKey:@"messagecontent"]];
-            num_y = num_y+45*DEF_Adaptation_Font*0.5;
+            num_y = num_y+53*DEF_Adaptation_Font*0.5;
 
         }
         NSLog(@"%f",num_y);
@@ -251,6 +251,10 @@
     
     [cell.contentView addSubview:dayText];
     
+    
+    float num_lasy_y = 0;
+    
+    
     if([dic objectForKey:@"boardvideo"]!=[NSNull null]){
         
         UIImageView *videoImg = [[UIImageView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5, 415*DEF_Adaptation_Font*0.5,629*DEF_Adaptation_Font*0.5)];
@@ -290,6 +294,9 @@
         
       [commentBtn addTarget:obj action:@selector(commentOnClick:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     
+        num_lasy_y  = (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+629*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+58*DEF_Adaptation_Font*0.5;
+        
+        
     }else{
         
         UIScrollView *ImageView = [[UIScrollView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5, (boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5, 520*DEF_Adaptation_Font*0.5, 330*DEF_Adaptation_Font*0.5)];
@@ -345,14 +352,40 @@
         
         [cell.contentView addSubview:commentBtn];
         
+        num_lasy_y  =(boardText.frame.origin.y+boardText.frame.size.height)+37*DEF_Adaptation_Font*0.5+330*DEF_Adaptation_Font*0.5+20*DEF_Adaptation_Font*0.5+58*DEF_Adaptation_Font*0.5;
+        
     }
     
-    
-    
-    
-    
-    
-    
+    for (int i=0;i<[[dic objectForKey:@"message"] count];i++){
+        NSDictionary *indexDic = [[dic objectForKey:@"message"] objectAtIndex:i];
+        float num_y =[self getLableHeight:[indexDic objectForKey:@"messagecontent"]];
+        
+        UIView *view  = [[UIView alloc] initWithFrame:CGRectMake(119*DEF_Adaptation_Font*0.5,num_lasy_y,501*DEF_Adaptation_Font*0.5,num_y+50*DEF_Adaptation_Font*0.5)];
+         [cell.contentView addSubview:view];
+        [view setBackgroundColor:[UIColor colorWithRed:38/255.0 green:35/255.0 blue:68/255.0 alpha:1.0 ]];
+        
+        num_lasy_y=num_lasy_y+num_y+50*DEF_Adaptation_Font*0.5+3*DEF_Adaptation_Font*0.5;
+        
+        
+        UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(12*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5)];
+        [headView sd_setImageWithURL:[[NSURL alloc] initWithString:[indexDic objectForKey:@"userimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        headView.layer.cornerRadius = 52*DEF_Adaptation_Font_x*0.5/2;
+        headView.layer.masksToBounds = YES;
+        [view addSubview:headView];
+        
+        UILabel *nickName = [LooperToolClass createLableView:CGPointMake(75*DEF_Adaptation_Font*0.5,12*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(216*DEF_Adaptation_Font_x*0.5, 19*DEF_Adaptation_Font_x*0.5) andText:[indexDic objectForKey:@"username"] andFontSize:10 andColor:[UIColor colorWithRed:43/255.0 green:207/255.0 blue:214/255.0 alpha:0.7] andType:NSTextAlignmentLeft];
+
+        [view addSubview:nickName];
+        
+        UILabel *commentText = [LooperToolClass createLableView:CGPointMake(75*DEF_Adaptation_Font*0.5,48*DEF_Adaptation_Font*0.5) andSize:CGSizeMake(418*DEF_Adaptation_Font_x*0.5, num_y*DEF_Adaptation_Font_x*0.5) andText:[indexDic objectForKey:@"messagecontent"] andFontSize:10 andColor:[UIColor whiteColor] andType:NSTextAlignmentLeft];
+         commentText.numberOfLines=0;
+        [commentText sizeToFit];
+
+        [view addSubview:commentText];
+       
+    }
     
     
     
@@ -420,11 +453,14 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
+    if(textField.text.length!=0){
+    
     [_obj sendImageBoardMessage:[NSString stringWithFormat:@"%d",selectTextTag] andMessageText:textFieldComment.text];
 
     textFieldComment.text = @"";
     
     [self endEditing:true];
+    }
     
     return YES;
 }
