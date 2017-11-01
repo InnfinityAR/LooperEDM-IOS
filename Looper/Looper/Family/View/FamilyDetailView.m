@@ -229,7 +229,7 @@
     cycleView.backgroundColor=[UIColor grayColor];
     cycleView.layer.cornerRadius=DEF_WIDTH(cycleView)/2;
     cycleView.layer.masksToBounds=YES;
-    [cycleView drawProgress:[[self.dataDic objectForKey:@"raverexp"]floatValue]/16000];
+    [cycleView drawProgress:[[self.dataDic objectForKey:@"raverexp"]floatValue]/[[self.dataDic objectForKey:@"nextlevel"]floatValue]];
     [self addSubview:cycleView];
     
     if (self.liveshowArr.count>0) {

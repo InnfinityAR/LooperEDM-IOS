@@ -304,6 +304,8 @@
         if([responseObject[@"status"] intValue]==0){
             [familyApplyV removeFromSuperview];
             [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:1 andPos:CGPointZero];
+        }else{
+            [[DataHander sharedDataHander] showViewWithStr:@"你已申请过家族，不能重复申请" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
@@ -501,7 +503,7 @@
 
 -(void)createFleetGroup:(NSString*)FleetName{
     
-     [self getRaverMemberWithoutGroup:[[_familyModel familyDetailData] objectForKey:@"raverid"]];
+     [self getRaverMemberWithoutGroup:[[_familyModel familyDetailData] objectForKey:@"raverid"] andGroupName:FleetName];
     
    
 
@@ -573,16 +575,17 @@
 }
 
 
--(void)getRaverMemberWithoutGroup:(NSString*)raverId{
+-(void)getRaverMemberWithoutGroup:(NSString*)raverId andGroupName:(NSString *)groupName{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:raverId forKey:@"raverId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverMemberWithoutGroup" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            CreateFleetGroupV=[[CreateFleetGroupView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+            if (groupName!=nil) {
+            CreateFleetGroupV=[[CreateFleetGroupView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDataArr:responseObject[@"data"]];
+                CreateFleetGroupV.groupName=groupName;
             [[self.obj view]addSubview:CreateFleetGroupV];
-
+            }
         }
     }fail:^{
         
@@ -598,10 +601,10 @@
     [dic setObject:name forKey:@"groupName"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createRaverGroup" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            
-            
-            
+          [[DataHander sharedDataHander] showViewWithStr:@"创建舰队成功" andTime:1 andPos:CGPointZero];
+            [createFleetV removeFromSuperview];
+            [CreateFleetGroupV removeFromSuperview];
+#warning-刷新舰队管理界面
         }
     }fail:^{
         

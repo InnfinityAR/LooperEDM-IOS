@@ -18,5 +18,6 @@
 }
 @property(nonatomic)id obj;
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataArr:(NSArray *)dataArr;
+@property(nonatomic,strong)NSString  *groupName;
 @end
