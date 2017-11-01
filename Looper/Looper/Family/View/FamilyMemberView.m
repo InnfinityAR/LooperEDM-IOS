@@ -71,7 +71,7 @@
     [memberManageBtn setTintColor:[UIColor whiteColor]];
     memberManageBtn.titleLabel.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [headerView addSubview:memberManageBtn];
-     }else if ([[self.dataArr[0]objectForKey:@"role"]integerValue]==6){
+     }else if ([[self.dataArr[0]objectForKey:@"role"]integerValue]>=5){
          UIButton *memberManageBtn=[LooperToolClass createBtnImageNameReal:nil andRect:CGPointMake(0, 10*DEF_Adaptation_Font*0.5) andTag:104 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(130*DEF_Adaptation_Font*0.5, 58*DEF_Adaptation_Font*0.5) andTarget:self];
          [memberManageBtn setTitle:@"舰队管理" forState:(UIControlStateNormal)];
          [memberManageBtn setTintColor:[UIColor whiteColor]];
