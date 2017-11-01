@@ -392,9 +392,6 @@
         [view addSubview:commentText];
        
     }
-    
-    
-    
 }
 
 
@@ -524,8 +521,6 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
     
     
 }
