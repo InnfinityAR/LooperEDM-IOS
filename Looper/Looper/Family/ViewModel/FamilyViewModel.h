@@ -51,7 +51,7 @@
 //邀请加入家族
 -(void)inviteMemberToFamilyWithRaverId:(NSString *)raverId andTargetId:(NSString *)targetId andUserId:(NSString *)userId;
 
--(void)createFleetMangerView;
+-(void)createFleetMangerViewWithUserId:(NSString *)userid andRaverId:(NSString *)raverid andType:(NSInteger)type;
 
 -(void)playNetWorkVideo:(NSString*)videoUrl;
 
@@ -92,4 +92,10 @@
 
 -(void)getRaverFootPrintData;
 
+
+//将小组成员移出为散人0 加入小组1
+-(void)moveMemberGroupWithTargetId:(NSString *)TargetId andRaverId:(NSString *)raverId andGroupId:(NSString *)groupId andJoin:(NSString *)join;
+
+
+-(void)createGroupMemberWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId;
 @end

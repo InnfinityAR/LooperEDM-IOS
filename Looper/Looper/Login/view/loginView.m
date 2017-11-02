@@ -280,7 +280,7 @@
 - (void)setupVideoPlayer
 {
     // 创建url
-    self.url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"720" ofType:@"mp4"]];
+    self.url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"]];
     // 创建播放器
     self.player = [[MPMoviePlayerController alloc] initWithContentURL:self.url];
     // 添加到根视图
