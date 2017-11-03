@@ -476,8 +476,7 @@
         self.isSelectCell=-1;
         [self.tableView reloadData];
 #warning -在这里调用VM中的删除成员的接口
-            [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:nil andOriginalRole:[dataDic objectForKey:@"role"]];
-            [self.obj setWillDeleteMemberDic:dataDic];
+            [self.obj delayMethodWithOriginUser:dataDic];
         }];
     } else if (button.tag>=2000){
         NSDictionary *dataDic=self.dataArr[button.tag-2000];

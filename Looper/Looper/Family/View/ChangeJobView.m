@@ -11,6 +11,7 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "MemberDeleteView.h"
+#import "DataHander.h"
 #import "UIImageView+WebCache.h"
 @interface ChangeJobView()<UIScrollViewDelegate>
 {
@@ -178,8 +179,22 @@
         MemberDeleteView   *changeMemberV=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"确定%@成为“%@”",[self.dataDic objectForKey:@"nickname"],self.selectStr] andBtnName:@"确定" andType:3 andDataDic:dataDic];
         [[[self obj] familyView] addSubview:changeMemberV];
         [changeMemberV addButtonAction:^(id sender) {
+            if ([[self.dataDic objectForKey:@"role"]integerValue]==1) {
+        //当他是水手长的时候
+                if (self.selectLb==1) {
+                [[DataHander sharedDataHander] showViewWithStr:@"特殊职位不能随意更改" andTime:1 andPos:CGPointZero];
+                }else{
+                [self.obj delayChangeJobWithOriginUser:dataDic andView:self andWillChangeRole:[NSString stringWithFormat:@"%ld",self.selectLb]];
+                }
+            }
+            else if(self.selectLb==1){
+#warning -在这里添加更改职位改为水手长的情况，需要选择组的界面
+            }
+            else{
             [self.obj ChangeJobToSailorWithUserId:[self.dataDic objectForKey:@"userid"] andRole:[NSString stringWithFormat:@"%ld",self.selectLb] andOriginalRole:nil];
-            [self removeFromSuperview];
+                [self removeFromSuperview];
+        }
+            
         }];
           }
     }

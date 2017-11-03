@@ -57,8 +57,6 @@
 
 //删除家族成员
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
-//将要删除的家族成员的字段
-@property(nonatomic,strong)NSDictionary *WillDeleteMemberDic;
 
 
 -(void)createPlayerView:(int)PlayerId;
@@ -98,4 +96,16 @@
 
 
 -(void)createGroupMemberWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId;
+
+#pragma -familyMemberManage
+-(void)delayMethodWithOriginUser:(NSDictionary *)originUserDic;
+@property(nonatomic,strong)NSDictionary *originUserDic;
+-(void)ChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role  andGroupId:(NSString *)groupid;
+
+
+
+#pragma -变更职位（当originRole为1）
+-(void)delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role;
+-(void)delayChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role andGroupId:(NSString *)groupid;
+@property(nonatomic,strong)NSString *WillChangeRole;
 @end
