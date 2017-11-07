@@ -161,6 +161,8 @@ NSMutableArray *RaverArray;
         if([responseObject[@"status"] intValue]==0){
             [familyApplyV removeFromSuperview];
             [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:1 andPos:CGPointZero];
+        }else{
+            [[DataHander sharedDataHander] showViewWithStr:@"你已申请过家族，不能重复申请" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         

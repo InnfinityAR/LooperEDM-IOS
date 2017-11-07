@@ -18,5 +18,6 @@
 }
 @property(nonatomic)id obj;
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataArr:(NSMutableArray *)dataArr;
+-(void)ReloadTableViewWithDataArr:(NSMutableArray *)dataArr;
 @end

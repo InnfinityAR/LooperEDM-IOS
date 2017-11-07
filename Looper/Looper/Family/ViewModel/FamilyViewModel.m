@@ -35,6 +35,7 @@
 #import "MemberManageView.h"
 #import "ChangeJobView.h"
 #import "PhotoWallViewController.h"
+#import "GroupMemberView.h"
 @interface FamilyViewModel()
 @property(nonatomic,strong)PlayerInfoView *playerInfoV;
 
@@ -52,7 +53,8 @@
     CreateFleetGroupView *CreateFleetGroupV;
 
     MemberManageView *memberManageV;
-
+    
+       GroupMemberView  *groupMemberView;
     NSString *ownername;
     
   }
@@ -304,6 +306,8 @@
         if([responseObject[@"status"] intValue]==0){
             [familyApplyV removeFromSuperview];
             [[DataHander sharedDataHander] showViewWithStr:@"申请提交成功，请等待通知" andTime:1 andPos:CGPointZero];
+        }else{
+            [[DataHander sharedDataHander] showViewWithStr:@"你已申请过家族，不能重复申请" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
@@ -358,7 +362,6 @@
     [[self.obj view]addSubview:applyView];
 }
 
-
 //变更职位
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
@@ -370,6 +373,9 @@
     }else{
      [dic setObject:role forKey:@"role"];
     }
+    if (_isgroupid!=nil) {
+        [dic  setObject:_isgroupid forKey:@"groupId"];
+    }
     if ([originalRole integerValue]==0&&role==nil) {
          [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
     }else{
@@ -377,7 +383,10 @@
         if([responseObject[@"status"] intValue]==0){
            
             if (role!=nil) {
+#pragma-如果在这里要修改groupid
                 [self updateFamilyModelWithType:1 andInfo:nil];
+                
+                _isgroupid=nil;
             }else{
 //传空的时候是在删除家族成员，因为删除家族成员需要先将他的职位改成水手
              [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
@@ -388,8 +397,45 @@
     }];
     }
 }
+
+#pragma -变更职位（当originRole为1）
+-(void) delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role{
+    self.originUserDic=originUserDic;
+    self.WillChangeRole=role;
+    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.originUserDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.originUserDic objectForKey:@"role"]intValue]]] andBtnName:nil andType:2 andDataDic:self.originUserDic];
+    [self.familyView addSubview:selectView];
+    [selectView addButtonAction:^(id sender) {
+        CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataArr:_familyModel.familyMember andType:1];
+        [fleetView setChangeJobWhenRoleIsOne:YES];
+        fleetView.shouldChangeRole=self.originUserDic;
+        [[self familyView] addSubview:fleetView];
+        [view removeFromSuperview];
+    }];
+}
+//变更职位（role为1）
+-(void)delayChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role andGroupId:(NSString *)groupid{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    if (groupid!=nil) {
+        [dic setObject:groupid forKey:@"groupId"];
+    }
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [dic setObject:role forKey:@"role"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateRaverMemberRights" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [self ChangeJobToSailorWithUserId:[self.originUserDic objectForKey:@"userid"] andRole:self.WillChangeRole andOriginalRole:nil];
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+
 //删除家族成员
 -(void)DeleteMemberWithUserId:(NSString *)userId  andOriginalRole:(NSString *)originalRole{
+//当originalRole是nil用于更改职位，不然时删除成员
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:userId forKey:@"userId"];
     [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
@@ -429,35 +475,58 @@
                       [[DataHander sharedDataHander] showViewWithStr:@"更改职位成功" andTime:1 andPos:CGPointZero];
                 }else{
                   [[DataHander sharedDataHander] showViewWithStr:@"成员已移除成功" andTime:1 andPos:CGPointZero];
-                    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:1.0f];
+//                    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:1.0f];
                                    }
             }
     }
     }fail:^{
     }];
 }
--(void)delayMethod{
-    if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==0) {
+-(void)delayMethodWithOriginUser:(NSDictionary *)originUserDic{
+    self.originUserDic=originUserDic;
+    if ([[self.originUserDic objectForKey:@"role"]integerValue]==0) {
+        [self DeleteMemberWithUserId:[originUserDic objectForKey:@"userid"] andOriginalRole:@"0"];
         
-    }else if ([[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==1||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==5||[[self.WillDeleteMemberDic objectForKey:@"role"]integerValue]==6){
-        MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:nil andType:2 andDataDic:self.WillDeleteMemberDic];
+    }else if ([[self.originUserDic objectForKey:@"role"]integerValue]==1||[[self.originUserDic objectForKey:@"role"]integerValue]==5||[[self.originUserDic objectForKey:@"role"]integerValue]==6){
+        MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.originUserDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.originUserDic objectForKey:@"role"]intValue]]] andBtnName:nil andType:2 andDataDic:self.originUserDic];
         [self.familyView addSubview:selectView];
         [selectView addButtonAction:^(id sender) {
             CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataArr:_familyModel.familyMember andType:1];
-            fleetView.shouldChangeRole=[self.WillDeleteMemberDic objectForKey:@"role"];
+            fleetView.shouldChangeRole=self.originUserDic;
             [[self familyView] addSubview:fleetView];
         }];
     
     }else{
-    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.WillDeleteMemberDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.WillDeleteMemberDic objectForKey:@"role"]intValue]]] andBtnName:@"选择" andType:2 andDataDic:self.WillDeleteMemberDic];
+    MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.originUserDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.originUserDic objectForKey:@"role"]intValue]]] andBtnName:@"选择" andType:2 andDataDic:self.originUserDic];
                     [self.familyView addSubview:selectView];
                     [selectView addButtonAction:^(id sender) {
                         CreatFleetView *fleetView=[[CreatFleetView alloc]initWithFrame:[UIScreen mainScreen].bounds andObj:self andDataArr:_familyModel.familyMember andType:1];
-                        fleetView.shouldChangeRole=[self.WillDeleteMemberDic objectForKey:@"role"];
+                        fleetView.shouldChangeRole=self.originUserDic;
                         [[self familyView] addSubview:fleetView];
                     }];
     }
 }
+//删除时用的变更职位
+-(void)ChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role andGroupId:(NSString *)groupid{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    if (groupid!=nil) {
+        [dic setObject:groupid forKey:@"groupId"];
+    }
+        [dic setObject:role forKey:@"role"];
+        [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateRaverMemberRights" parameters:dic  success:^(id responseObject) {
+            if([responseObject[@"status"] intValue]==0){
+//            [self updateFamilyModelWithType:1 andInfo:nil];
+            [self ChangeJobToSailorWithUserId:[self.originUserDic objectForKey:@"userid"] andRole:nil andOriginalRole:[self.originUserDic objectForKey:@"role"]];
+            }else{
+              [[DataHander sharedDataHander] showViewWithStr:@"移除失败，账号不正常" andTime:1 andPos:CGPointZero];
+            }
+        }fail:^{
+            
+        }];
+}
+
 
 //获取家族小组成员
 -(void)getMemberGroupWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId{
@@ -468,12 +537,15 @@
     }
     [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverGroupMember" parameters:dic  success:^(id responseObject) {
+        NSMutableArray *dataArr=[[NSMutableArray alloc]initWithArray:responseObject[@"data"]];
         if([responseObject[@"status"] intValue]==0){
             if (self.currentDic!=nil) {
-                [memberManageV setDataSource:responseObject[@"data"]];
+                [memberManageV setDataSource:dataArr];
                 [self getMemberWithoutGroupWithUserId:userId];
             }
-            
+        }else{
+            [memberManageV setDataSource:dataArr];
+            [self getMemberWithoutGroupWithUserId:userId];
         }
     }fail:^{
         
@@ -497,11 +569,31 @@
         
     }];
 }
-
+//将小组成员移出为散人0 加入小组1
+-(void)moveMemberGroupWithTargetId:(NSString *)TargetId andRaverId:(NSString *)raverId andGroupId:(NSString *)groupId andJoin:(NSString *)join{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:TargetId forKey:@"targetId"];
+    [dic setObject:raverId forKey:@"raverId"];
+    [dic setObject:groupId forKey:@"groupId"];
+     [dic setObject:join forKey:@"join"];
+     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"isJoinRaverGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [self getMemberGroupWithUserId:[LocalDataMangaer sharedManager].uid andGroupId:groupId];
+            if ([join integerValue]==0) {
+               [[DataHander sharedDataHander] showViewWithStr:@"移除成功" andTime:1 andPos:CGPointZero];
+            }else{
+                 [[DataHander sharedDataHander] showViewWithStr:@"加入成功" andTime:1 andPos:CGPointZero];
+            }
+        }
+    }fail:^{
+        
+    }];
+}
 
 -(void)createFleetGroup:(NSString*)FleetName{
     
-     [self getRaverMemberWithoutGroup:[[_familyModel familyDetailData] objectForKey:@"raverid"]];
+     [self getRaverMemberWithoutGroup:[[_familyModel familyDetailData] objectForKey:@"raverid"] andGroupName:FleetName];
     
    
 
@@ -514,16 +606,6 @@
     
  }
 
-
--(void)createFleetMangerView{
-    
-    
-    
-    
-    fleetMangerV  = [[FleetMangerView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
-    [[self.obj view]addSubview:fleetMangerV];
-    
-}
 
 -(void)createMemberManageViewWithDataDic:(NSDictionary *)dataDic{
     self.currentDic=dataDic;
@@ -573,16 +655,17 @@
 }
 
 
--(void)getRaverMemberWithoutGroup:(NSString*)raverId{
+-(void)getRaverMemberWithoutGroup:(NSString*)raverId andGroupName:(NSString *)groupName{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:raverId forKey:@"raverId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverMemberWithoutGroup" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            CreateFleetGroupV=[[CreateFleetGroupView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+            if (groupName!=nil) {
+            CreateFleetGroupV=[[CreateFleetGroupView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDataArr:responseObject[@"data"]];
+                CreateFleetGroupV.groupName=groupName;
             [[self.obj view]addSubview:CreateFleetGroupV];
-
+            }
         }
     }fail:^{
         
@@ -598,10 +681,13 @@
     [dic setObject:name forKey:@"groupName"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createRaverGroup" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
-            
-            
-            
+          [[DataHander sharedDataHander] showViewWithStr:@"创建舰队成功" andTime:1 andPos:CGPointZero];
+            [createFleetV removeFromSuperview];
+            [CreateFleetGroupV removeFromSuperview];
+#warning-刷新舰队管理界面
+            [self createFleetMangerViewWithUserId:[LocalDataMangaer sharedManager].uid andRaverId:raverId andType:1];
+        }else{
+         [[DataHander sharedDataHander] showViewWithStr:@"创建失败，也许你已经在舰队里面了亲" andTime:1 andPos:CGPointZero];
         }
     }fail:^{
         
@@ -668,8 +754,47 @@
     return nil;
 }
 
-
-
+//舰队获取
+-(void)createFleetMangerViewWithUserId:(NSString *)userid andRaverId:(NSString *)raverid andType:(NSInteger)type{
+    //当type为1时更新数据而不是创建界面
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userid forKey:@"userId"];
+    if (raverid==nil) {
+        [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    }else{
+        [dic setObject:raverid forKey:@"raverId"];
+    }
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            NSMutableArray *dataArr=[[NSMutableArray alloc]initWithArray:responseObject[@"data"]];
+            if (type==0) {
+                fleetMangerV  = [[FleetMangerView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andDataArr:dataArr];
+                [[self.obj view]addSubview:fleetMangerV];
+            }else{
+                [fleetMangerV ReloadTableViewWithDataArr:dataArr];
+            }
+        }
+    }fail:^{
+    }];
+}
+//获取家族小组成员
+-(void)createGroupMemberWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    if (groupId!=nil) {
+        [dic setObject:groupId forKey:@"groupId"];
+    }
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getRaverGroupMember" parameters:dic  success:^(id responseObject) {
+        NSMutableArray *dataArr=[[NSMutableArray alloc]initWithArray:responseObject[@"data"]];
+        if([responseObject[@"status"] intValue]==0){
+            groupMemberView=[[GroupMemberView alloc]initWithFrame:[self.obj view].bounds andObj:self andDataArr:dataArr];
+            [[self.obj view]addSubview:groupMemberView];
+        }
+    }fail:^{
+        
+    }];
+}
 
 
 

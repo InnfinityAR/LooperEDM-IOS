@@ -194,6 +194,7 @@
             for (int j=1; j<i; j++) {
                 if ([self.dataArr[i]objectForKey:type]==nil||[self.dataArr[i]objectForKey:type]==[NSNull null]) {
                 }else{
+                    NSLog(@"%ld,%ld",[[self.dataArr[i]objectForKey:type]integerValue],[[self.dataArr[j]objectForKey:type]integerValue]);
                 if ([[self.dataArr[i]objectForKey:type]integerValue]<[[self.dataArr[j]objectForKey:type]integerValue]) {
                     NSDictionary *dic=self.dataArr[i];
                     _dataArr[i]=_dataArr[j];
@@ -251,7 +252,8 @@
         [_obj createMemberManageViewWithDataDic:self.dataArr[0]];
         }
     if (tag==104) {
-          [_obj createFleetMangerView];
+        NSDictionary *dataDic=self.dataArr[0];
+          [_obj createFleetMangerViewWithUserId:[dataDic objectForKey:@"userid"] andRaverId:[dataDic objectForKey:@"raverid"]andType:0];
         
         
         
@@ -310,32 +312,32 @@
     }
     cell.layer.masksToBounds=YES;
     NSDictionary *dataDic=self.dataArr[indexPath.row];
-    UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 16*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UIImageView *headIV=[[UIImageView alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5)];
     [headIV sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"headimageurl"]] placeholderImage:[UIImage imageNamed:@"btn_looper.png"]options:SDWebImageRetryFailed];
-    headIV.layer.cornerRadius=30*DEF_Adaptation_Font*0.5;
+    headIV.layer.cornerRadius=35*DEF_Adaptation_Font*0.5;
     headIV.layer.masksToBounds=YES;
     [cell.contentView addSubview:headIV];
-    UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 12*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
+    UILabel *headLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5)];
     headLB.textColor=[UIColor whiteColor];
     headLB.font=[UIFont systemFontOfSize:14];
     headLB.text=[dataDic objectForKey:@"nickname"];
     [cell.contentView addSubview:headLB];
-    UILabel *jobLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 51*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+    UILabel *jobLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     jobLB.textColor=[UIColor whiteColor];
     jobLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
     jobLB.text=[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]];
     [cell.contentView addSubview:jobLB];
-    jobLB.layer.cornerRadius=12*DEF_Adaptation_Font*0.5;
+    jobLB.layer.cornerRadius=16*DEF_Adaptation_Font*0.5;
     jobLB.layer.masksToBounds=YES;
     jobLB.backgroundColor=[self jobColorForStatus:[[dataDic objectForKey:@"role"]intValue]];
     jobLB.textAlignment=NSTextAlignmentCenter;
-    CGSize lblSize3 = [jobLB.text boundingRectWithSize:CGSizeMake(190*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
+    CGSize lblSize3 = [jobLB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 25*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:12.f]} context:nil].size;
     CGRect frame3=jobLB.frame;
     lblSize3.width+=32*DEF_Adaptation_Font*0.5;
     frame3.size=lblSize3;
     jobLB.frame=frame3;
     
-    UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(290*DEF_Adaptation_Font*0.5, 0, 80*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
+    UILabel *levelLB=[[UILabel alloc]initWithFrame:CGRectMake(290*DEF_Adaptation_Font*0.5, 0, 80*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.5)];
     levelLB.textColor=[UIColor whiteColor];
     levelLB.font=[UIFont systemFontOfSize:14];
     if ([dataDic objectForKey:@"level"]==[NSNull null]) {
@@ -345,7 +347,7 @@
     }
     levelLB.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:levelLB];
-    UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(370*DEF_Adaptation_Font*0.5, 0, 120*DEF_Adaptation_Font*0.5, 92*DEF_Adaptation_Font*0.5)];
+    UILabel *activeLB=[[UILabel alloc]initWithFrame:CGRectMake(370*DEF_Adaptation_Font*0.5, 0, 120*DEF_Adaptation_Font*0.5, 104*DEF_Adaptation_Font*0.5)];
     activeLB.textColor=[UIColor whiteColor];
     activeLB.font=[UIFont systemFontOfSize:14];
     if ([dataDic objectForKey:@"activepoints"]==[NSNull null]) {
@@ -356,15 +358,15 @@
      activeLB.textAlignment=NSTextAlignmentCenter;
     [cell.contentView addSubview:activeLB];
     if ([[dataDic objectForKey:@"sex"]intValue]==1) {
-        UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 33*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
         sexIV.image=[UIImage imageNamed:@"family_man.png"];
         [cell.contentView addSubview:sexIV];
     }else if([[dataDic objectForKey:@"sex"]intValue]==0){
-    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(510*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(510*DEF_Adaptation_Font*0.5, 42*DEF_Adaptation_Font*0.5, 41*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     sexIV.image=[UIImage imageNamed:@"familyMember_person.png"];
         [cell.contentView addSubview:sexIV];
     }else{
-    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
+    UIImageView *sexIV=[[UIImageView alloc]initWithFrame:CGRectMake(520*DEF_Adaptation_Font*0.5, 35*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
     sexIV.image=[UIImage imageNamed:@"family_Woman.png"];
     [cell.contentView addSubview:sexIV];
     }
@@ -411,12 +413,12 @@
         //只有舰长和副舰长能更改职位
         if ([[self.dataArr[0]objectForKey:@"role"]integerValue]>4) {
             if (indexPath.row>6&&indexPath.row==self.dataArr.count-1) {
-                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (104*(indexPath.row-1)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
             }else if(indexPath.row>6&&indexPath.row==self.dataArr.count-2){
-                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (92*(indexPath.row)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (104*(indexPath.row)-40)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
             }
             else{
-                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (10+92*indexPath.row)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
+                self.tableSelectView=[[UIView alloc]initWithFrame:CGRectMake(225*DEF_Adaptation_Font*0.5, (10+104*indexPath.row)*DEF_Adaptation_Font*0.5, 214*DEF_Adaptation_Font*0.5, 228*DEF_Adaptation_Font*0.5)];
             }
             self.tableSelectView.backgroundColor=ColorRGB(0, 0, 0, 0.4);
             [tableView addSubview:self.tableSelectView];
@@ -474,8 +476,7 @@
         self.isSelectCell=-1;
         [self.tableView reloadData];
 #warning -在这里调用VM中的删除成员的接口
-            [self.obj ChangeJobToSailorWithUserId:[dataDic objectForKey:@"userid"] andRole:nil andOriginalRole:[dataDic objectForKey:@"role"]];
-            [self.obj setWillDeleteMemberDic:dataDic];
+            [self.obj delayMethodWithOriginUser:dataDic];
         }];
     } else if (button.tag>=2000){
         NSDictionary *dataDic=self.dataArr[button.tag-2000];
@@ -488,7 +489,7 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return  92*DEF_Adaptation_Font*0.5;
+    return  104*DEF_Adaptation_Font*0.5;
 }
 -(NSString *)jobnameForStatus:(NSInteger)status{
     switch (status) {

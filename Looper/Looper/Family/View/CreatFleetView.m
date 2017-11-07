@@ -90,7 +90,13 @@
         if (self.currentRow!=-1) {
             if (creatType==1) {
             NSDictionary *currentDic=self.dataSource[self.currentRow];
-            [self.obj ChangeJobToSailorWithUserId:[currentDic objectForKey:@"userid"] andRole:self.shouldChangeRole andOriginalRole:nil];
+                if (_changeJobWhenRoleIsOne) {
+//当修改职位是水手长的时候
+                    [self.obj delayChangeJobWithUserId:[currentDic objectForKey:@"userid"] andRole:[self.shouldChangeRole objectForKey:@"role"] andGroupId:[self.shouldChangeRole objectForKey:@"groupid"]];
+                }else{
+            [self.obj ChangeJobWithUserId:[currentDic objectForKey:@"userid"] andRole:[self.shouldChangeRole objectForKey:@"role"] andGroupId:[self.shouldChangeRole objectForKey:@"groupid"]];
+                }
+//            [self.obj ChangeJobToSailorWithUserId:[currentDic objectForKey:@"userid"] andRole:self.shouldChangeRole andOriginalRole:nil];
             [self removeFromSuperview];
             }else{
             [self removeFromSuperview];
@@ -135,7 +141,8 @@
 //变更职位
             _dataSource=[[NSMutableArray alloc]init];
         for (NSDictionary *dataDic in self.dataArr) {
-            if ([[dataDic objectForKey:@"role"]integerValue]!=1&&[[dataDic objectForKey:@"role"]integerValue]!=6&&[[dataDic objectForKey:@"role"]integerValue]!=5) {
+//            if ([[dataDic objectForKey:@"role"]integerValue]!=1&&[[dataDic objectForKey:@"role"]integerValue]!=6&&[[dataDic objectForKey:@"role"]integerValue]!=5) {
+          if ([[dataDic objectForKey:@"role"]integerValue]==0) {
                 [_dataSource addObject:dataDic];
             }
         }

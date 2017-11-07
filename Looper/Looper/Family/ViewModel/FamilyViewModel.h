@@ -51,15 +51,14 @@
 //邀请加入家族
 -(void)inviteMemberToFamilyWithRaverId:(NSString *)raverId andTargetId:(NSString *)targetId andUserId:(NSString *)userId;
 
--(void)createFleetMangerView;
+-(void)createFleetMangerViewWithUserId:(NSString *)userid andRaverId:(NSString *)raverid andType:(NSInteger)type;
 
 -(void)playNetWorkVideo:(NSString*)videoUrl;
 
 //删除家族成员
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
-//将要删除的家族成员的字段
-@property(nonatomic,strong)NSDictionary *WillDeleteMemberDic;
-
+//判断是否具有groupid
+@property(nonatomic,strong)NSString *isgroupid;
 
 -(void)createPlayerView:(int)PlayerId;
 -(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
@@ -92,4 +91,22 @@
 
 -(void)getRaverFootPrintData;
 
+
+//将小组成员移出为散人0 加入小组1
+-(void)moveMemberGroupWithTargetId:(NSString *)TargetId andRaverId:(NSString *)raverId andGroupId:(NSString *)groupId andJoin:(NSString *)join;
+
+
+-(void)createGroupMemberWithUserId:(NSString *)userId  andGroupId:(NSString *)groupId;
+
+#pragma -familyMemberManage
+-(void)delayMethodWithOriginUser:(NSDictionary *)originUserDic;
+@property(nonatomic,strong)NSDictionary *originUserDic;
+-(void)ChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role  andGroupId:(NSString *)groupid;
+
+
+
+#pragma -变更职位（当originRole为1）
+-(void)delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role;
+-(void)delayChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role andGroupId:(NSString *)groupid;
+@property(nonatomic,strong)NSString *WillChangeRole;
 @end
