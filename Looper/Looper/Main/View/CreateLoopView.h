@@ -21,4 +21,5 @@
 -(void)removeLayer:(int)tag;
 -(void)updataHeadView:(NSString*)imageV;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andArray:(NSMutableArray*)data;
+
 @end

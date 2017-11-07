@@ -761,8 +761,6 @@
     
 }
 
-
-
 -(void)requestCreateLoop:(NSDictionary*)dicData{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
     [dic setObject:[dicData objectForKey:@"loopName"] forKey:@"name"];
@@ -897,6 +895,26 @@
     
 }
 
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike{
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:boardId forKey:@"boardId"];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [dic setObject:[NSString stringWithFormat:@"%d",isLike] forKey:@"like"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"thumbBoardMessage" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            
+            //  [self getImageBoard:_activityId];
+            
+        }else{
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
 
 
 -(void)sendImageBoardMessage:(NSString*)boardId andMessageText:(NSString*)message{
