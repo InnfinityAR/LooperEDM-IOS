@@ -87,10 +87,11 @@
 -(void)getMyFootPrint;
 -(void)getKuaiDi100FromHttp:(NSString *)com andNu:(NSString *)nu;
 -(void)sendImageBoardMessage:(NSString*)boardId andMessageText:(NSString*)message;
-
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
 -(void)removeMeFootView;
 
 
+-(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;
 
 @property(nonatomic,strong)NSArray *kuaidiArr;
 

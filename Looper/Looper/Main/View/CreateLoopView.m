@@ -314,9 +314,7 @@
     textField.delegate = self;
     textField.textAlignment = UITextAlignmentRight;
     return textField;
-    
 }
-
 
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
@@ -324,9 +322,7 @@
     
     
     
-  
 }
-
 
 - (BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     

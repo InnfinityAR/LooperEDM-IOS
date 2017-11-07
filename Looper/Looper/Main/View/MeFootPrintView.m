@@ -481,7 +481,6 @@
          [self endEditing:true];
         
     }
-    
     return YES;
 }
 
@@ -500,10 +499,10 @@
     
     if([button isSelected]==true){
         [button setSelected:false];
-       //[_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:0];
+       [_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:0];
     }else{
         [button setSelected:true];
-        //[_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:1];
+        [_obj thumbBoardMessage:[NSString stringWithFormat:@"%ld",(long)button.tag] andLike:1];
     }
 }
 
@@ -521,6 +520,8 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
     
     
 }
