@@ -373,6 +373,9 @@
     }else{
      [dic setObject:role forKey:@"role"];
     }
+    if (_isgroupid!=nil) {
+        [dic  setObject:_isgroupid forKey:@"groupId"];
+    }
     if ([originalRole integerValue]==0&&role==nil) {
          [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
     }else{
@@ -382,6 +385,8 @@
             if (role!=nil) {
 #pragma-如果在这里要修改groupid
                 [self updateFamilyModelWithType:1 andInfo:nil];
+                
+                _isgroupid=nil;
             }else{
 //传空的时候是在删除家族成员，因为删除家族成员需要先将他的职位改成水手
              [self DeleteMemberWithUserId:userId  andOriginalRole:originalRole];
@@ -394,7 +399,7 @@
 }
 
 #pragma -变更职位（当originRole为1）
--(void)delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role{
+-(void) delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role{
     self.originUserDic=originUserDic;
     self.WillChangeRole=role;
     MemberDeleteView   *selectView=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"请重新选择一位替换原成员%@“%@”的位置",[self.originUserDic objectForKey:@"nickname"],[self jobnameForStatus:[[self.originUserDic objectForKey:@"role"]intValue]]] andBtnName:nil andType:2 andDataDic:self.originUserDic];

@@ -57,7 +57,8 @@
 
 //删除家族成员
 -(void)ChangeJobToSailorWithUserId:(NSString *)userId andRole:(NSString *)role andOriginalRole:(NSString *)originalRole;
-
+//判断是否具有groupid
+@property(nonatomic,strong)NSString *isgroupid;
 
 -(void)createPlayerView:(int)PlayerId;
 -(void)thumbBoardMessage:(NSString*)boardId andLike:(int)isLike;

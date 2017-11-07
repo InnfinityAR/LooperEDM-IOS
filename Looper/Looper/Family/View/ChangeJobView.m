@@ -47,6 +47,8 @@
 
 
 @property(nonatomic,strong)NSDictionary  *memberDic;
+//家族小组
+@property(nonatomic,strong)NSMutableArray *groupArr;
 @end
 
 @implementation ChangeJobView
@@ -82,9 +84,20 @@
     }
     return _label2Arr;
 }
-
+-(NSMutableArray *)groupArr{
+    if (!_groupArr) {
+        _groupArr=[[NSMutableArray alloc]init];
+        NSArray *dataArr=self.memberDic[@"1"];
+        for (NSDictionary *dataDic in dataArr) {
+            if ([[dataDic objectForKey:@"groupid"]integerValue]!=0) {
+                [_groupArr addObject:dataDic];
+            }
+        }
+    }
+    return _groupArr;
+}
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    
+    NSInteger groupid=button.tag;
     
     if(button.tag==5001){
         [self removeFromSuperview];
@@ -179,18 +192,26 @@
         MemberDeleteView   *changeMemberV=[[MemberDeleteView alloc]initWithContentStr:[NSString stringWithFormat:@"确定%@成为“%@”",[self.dataDic objectForKey:@"nickname"],self.selectStr] andBtnName:@"确定" andType:3 andDataDic:dataDic];
         [[[self obj] familyView] addSubview:changeMemberV];
         [changeMemberV addButtonAction:^(id sender) {
-            if ([[self.dataDic objectForKey:@"role"]integerValue]==1) {
+            if ([[self.dataDic objectForKey:@"role"]integerValue]==1||[[self.dataDic objectForKey:@"role"]integerValue]==6) {
         //当他是水手长的时候
-                if (self.selectLb==1) {
+                if (self.selectLb==1||self.selectLb==6) {
                 [[DataHander sharedDataHander] showViewWithStr:@"特殊职位不能随意更改" andTime:1 andPos:CGPointZero];
                 }else{
                 [self.obj delayChangeJobWithOriginUser:dataDic andView:self andWillChangeRole:[NSString stringWithFormat:@"%ld",self.selectLb]];
                 }
             }
-            else if(self.selectLb==1){
-#warning -在这里添加更改职位改为水手长的情况，需要选择组的界面
-            }
             else{
+#warning -当这个组不存在的时候该怎么办？推荐它重新为其命名并且创建组？
+                if (self.selectLb==0||self.selectLb==1) {
+//如果选择了水手长或者水手，需要传groupid
+                    if (self.groupArr.count!=0) {
+                    if (groupid>=100&&groupid<100+self.groupArr.count) {
+                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",self.groupArr[groupid-100]]];
+                    }else if (groupid>=200&&groupid<200+self.groupArr.count) {
+                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",self.groupArr[groupid-200]]];
+                    }
+                    }
+                }
             [self.obj ChangeJobToSailorWithUserId:[self.dataDic objectForKey:@"userid"] andRole:[NSString stringWithFormat:@"%ld",self.selectLb] andOriginalRole:nil];
                 [self removeFromSuperview];
         }
@@ -463,10 +484,16 @@
         //后续需要有一些改动,加入无人选就变灰效果
         if (type==1) {
     UILabel *label= [self creatLabelWithContent:[NSString stringWithFormat:@"  %d队水手长",i+1] andRect:CGRectMake(43*DEF_Adaptation_Font*0.5, (i*76)*DEF_Adaptation_Font*0.5,556*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font*0.5) andType:1 andTag:i+100];
+            if (i<self.groupArr.count) {
+                label.text=[NSString stringWithFormat:@"  %@_水手长",[self.groupArr[i]objectForKey:@"groupname"]];
+            }
         [scrollV addSubview:label];
             self.label2Arr[i]=label;
         }else{
             UILabel *label= [self creatLabelWithContent:[NSString stringWithFormat:@"  %d队水手",i+1] andRect:CGRectMake(43*DEF_Adaptation_Font*0.5, (i*76)*DEF_Adaptation_Font*0.5,556*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font*0.5) andType:1 andTag:i+200];
+            if (i<self.groupArr.count) {
+                label.text=[NSString stringWithFormat:@"  %@_水手",[self.groupArr[i]objectForKey:@"groupname"]];
+            }
             [scrollV addSubview:label];
             self.label2Arr[i]=label;
         }

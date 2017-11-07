@@ -219,6 +219,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    
  
    return YES;
 }
