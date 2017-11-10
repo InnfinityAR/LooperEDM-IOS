@@ -54,7 +54,7 @@
 
     MemberManageView *memberManageV;
     
-       GroupMemberView  *groupMemberView;
+   GroupMemberView  *groupMemberView;
     NSString *ownername;
     
   }

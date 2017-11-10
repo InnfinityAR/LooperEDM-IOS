@@ -782,6 +782,10 @@
 		C4DF01161ED957F0002447EE /* ticket.png in Resources */ = {isa = PBXBuildFile; fileRef = C4DF01141ED957F0002447EE /* ticket.png */; };
 		C4E4635A1F909C6C00F4D5DB /* photoWall.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E463591F909C6C00F4D5DB /* photoWall.png */; };
 		C4E782531F616E2800310D01 /* btn_Family_close.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E782521F616E2800310D01 /* btn_Family_close.png */; };
+		C4E7BC601FB19FF900DFF117 /* btn_attendance.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BC5F1FB19FF800DFF117 /* btn_attendance.png */; };
+		C4E7BC671FB1A99900DFF117 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BC661FB1A99900DFF117 /* MallViewController.m */; };
+		C4E7BC6A1FB1CD7C00DFF117 /* MallViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BC691FB1CD7C00DFF117 /* MallViewModel.m */; };
+		C4E7BC6D1FB1CDE700DFF117 /* MallMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BC6C1FB1CDE700DFF117 /* MallMainView.m */; };
 		C4E86F611F160E9700D9658D /* bg_now.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F5E1F160E9700D9658D /* bg_now.png */; };
 		C4E86F621F160E9700D9658D /* head_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F5F1F160E9700D9658D /* head_circle.png */; };
 		C4E86F631F160E9700D9658D /* moveDetail.png in Resources */ = {isa = PBXBuildFile; fileRef = C4E86F601F160E9700D9658D /* moveDetail.png */; };
@@ -2009,6 +2013,13 @@
 		C4DF01141ED957F0002447EE /* ticket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticket.png; sourceTree = "<group>"; };
 		C4E463591F909C6C00F4D5DB /* photoWall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoWall.png; sourceTree = "<group>"; };
 		C4E782521F616E2800310D01 /* btn_Family_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_Family_close.png; sourceTree = "<group>"; };
+		C4E7BC5F1FB19FF800DFF117 /* btn_attendance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_attendance.png; sourceTree = "<group>"; };
+		C4E7BC651FB1A99900DFF117 /* MallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallViewController.h; sourceTree = "<group>"; };
+		C4E7BC661FB1A99900DFF117 /* MallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallViewController.m; sourceTree = "<group>"; };
+		C4E7BC681FB1CD7C00DFF117 /* MallViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallViewModel.h; sourceTree = "<group>"; };
+		C4E7BC691FB1CD7C00DFF117 /* MallViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallViewModel.m; sourceTree = "<group>"; };
+		C4E7BC6B1FB1CDE700DFF117 /* MallMainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallMainView.h; sourceTree = "<group>"; };
+		C4E7BC6C1FB1CDE700DFF117 /* MallMainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallMainView.m; sourceTree = "<group>"; };
 		C4E86F5E1F160E9700D9658D /* bg_now.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_now.png; sourceTree = "<group>"; };
 		C4E86F5F1F160E9700D9658D /* head_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head_circle.png; sourceTree = "<group>"; };
 		C4E86F601F160E9700D9658D /* moveDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moveDetail.png; sourceTree = "<group>"; };
@@ -3318,6 +3329,7 @@
 		C43E765A1E091D8C004A5288 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				C4E7BC5E1FB19FF800DFF117 /* mall */,
 				B22C5AA81F580C82005C9E28 /* SaleTicket */,
 				C4CF01E71F554DA300315F57 /* Family */,
 				B225B9711F307AF00008E5AF /* activty */,
@@ -4031,6 +4043,7 @@
 		C4B8AAC11DF16CFC0004C8C4 = {
 			isa = PBXGroup;
 			children = (
+				C4E7BC611FB1A97400DFF117 /* Mall */,
 				C43F569C1F53FDEB009BE471 /* Family */,
 				B235214D1F4E9916003D06CB /* QRCode */,
 				B225B9931F3C281E0008E5AF /* ExtractPrize */,
@@ -4761,6 +4774,52 @@
 			path = Base64;
 			sourceTree = "<group>";
 		};
+		C4E7BC5E1FB19FF800DFF117 /* mall */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7BC5F1FB19FF800DFF117 /* btn_attendance.png */,
+			);
+			path = mall;
+			sourceTree = "<group>";
+		};
+		C4E7BC611FB1A97400DFF117 /* Mall */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7BC621FB1A97400DFF117 /* ViewModel */,
+				C4E7BC631FB1A97400DFF117 /* Controller */,
+				C4E7BC641FB1A97400DFF117 /* View */,
+			);
+			name = Mall;
+			path = Looper/Mall;
+			sourceTree = "<group>";
+		};
+		C4E7BC621FB1A97400DFF117 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7BC681FB1CD7C00DFF117 /* MallViewModel.h */,
+				C4E7BC691FB1CD7C00DFF117 /* MallViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4E7BC631FB1A97400DFF117 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7BC651FB1A99900DFF117 /* MallViewController.h */,
+				C4E7BC661FB1A99900DFF117 /* MallViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C4E7BC641FB1A97400DFF117 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7BC6B1FB1CDE700DFF117 /* MallMainView.h */,
+				C4E7BC6C1FB1CDE700DFF117 /* MallMainView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C4E86F5D1F160E9700D9658D /* PhotoWall */ = {
 			isa = PBXGroup;
 			children = (
@@ -5020,6 +5079,7 @@
 				C40B0FE81F0A055A008F7C41 /* icon_brand_lable.png in Resources */,
 				C4654E061E79702A00D910F2 /* icon_Side.png in Resources */,
 				C42838DC1E03F02100929093 /* LaunchScreen.storyboard in Resources */,
+				C4E7BC601FB19FF900DFF117 /* btn_attendance.png in Resources */,
 				C4E86F701F163C0B00D9658D /* text_input.png in Resources */,
 				C43286FC1E36B66E00FA4DD8 /* btn_unzan.png in Resources */,
 				C42E7FF41EC3050D00D9CC43 /* owenFollowed.png in Resources */,
@@ -5469,6 +5529,7 @@
 				C4A4D0BD1E79192A002519F2 /* nMainView.m in Sources */,
 				B225B9741F31913F0008E5AF /* TicketPayView.m in Sources */,
 				C40F896F1E1CEA2300DABEAA /* SerachViewController.m in Sources */,
+				C4E7BC671FB1A99900DFF117 /* MallViewController.m in Sources */,
 				C4BCE7491E091E710087E6C5 /* UIImage+RTTint.m in Sources */,
 				C4E86FA71F16474000D9658D /* PKFullScreenPlayerView.m in Sources */,
 				B225B9901F35A8CE0008E5AF /* AttenceTimelineCell.m in Sources */,
@@ -5593,6 +5654,7 @@
 				C4E86FA01F16474000D9658D /* GPUImageFramebuffer.m in Sources */,
 				C4BCE7351E091E710087E6C5 /* AFHTTPRequestOperationManager.m in Sources */,
 				C43BB00F1EAA25B300937973 /* looperListFlowLayout.m in Sources */,
+				C4E7BC6A1FB1CD7C00DFF117 /* MallViewModel.m in Sources */,
 				C4E86FAE1F16474000D9658D /* PKShortVideoRecorder.m in Sources */,
 				C4DDB53F1E290076005E3909 /* GTMBase64.m in Sources */,
 				B2C90ED71F13A16C000E127A /* LTSCalendarDayView.m in Sources */,
@@ -5720,6 +5782,7 @@
 				B229F2531F90690700375702 /* SDWebImageManager.m in Sources */,
 				C4E86FA81F16474000D9658D /* PKFullScreenPlayerViewController.m in Sources */,
 				C461E2391F6BE59D0048F979 /* CreateFleetNameView.m in Sources */,
+				C4E7BC6D1FB1CDE700DFF117 /* MallMainView.m in Sources */,
 				C4796A781F1361E100414AFD /* PhotoWallView.m in Sources */,
 				C4E86FA61F16474000D9658D /* PKColorConversion.m in Sources */,
 				C43437611EF11D6B00739040 /* KYGooeyMenu.m in Sources */,
