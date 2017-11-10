@@ -204,8 +204,8 @@
     [self addSubview:activeBtn];
     isActiveUp = true;
 #warning-在这里添加抽奖按钮
-//    UIButton *extractBtn = [LooperToolClass createBtnImageName:@"order.png" andRect:CGPointMake(26, 900) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(79, 97)  andTarget:self];
-//    [self addSubview:extractBtn];
+    UIButton *attendanceBtn = [LooperToolClass createBtnImageName:@"btn_attendance.png" andRect:CGPointMake(14, 948) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(104, 98)  andTarget:self];
+    [self addSubview:attendanceBtn];
 
     
     UIImage *bg2 = [UIImage imageNamed:@"bk_2.png"];

@@ -41,6 +41,7 @@
 #import "ActivityViewController.h"
 #import "nActivityViewController.h"
 #import "FamilyViewController.h"
+#import "MallViewController.h"
 
 #import "PlayerInfoView.h"
 #import "HowToPlayView.h"
@@ -614,8 +615,12 @@
 
 -(void)hudOnClick:(int)type{
     if (type==55000) {
-        ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
-        [[_obj navigationController]  pushViewController:extractVC animated:YES];
+        
+        MallViewController *mallVc = [[MallViewController alloc] init];
+        [[_obj navigationController]  pushViewController:mallVc animated:YES];
+        
+       // ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
+       // [[_obj navigationController]  pushViewController:extractVC animated:YES];
     }
     if(type==LopperBtnTag){
         [self pushNActivityViewController];

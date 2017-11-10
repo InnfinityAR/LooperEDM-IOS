@@ -26,7 +26,7 @@
     [[self.obj navigationController]popViewControllerAnimated:YES];
 }
 -(void)creatDetailView{
-    detailV=[[ShoppingDetailView alloc]initWithFrame:[self.obj view].bounds andObject:self];
+    detailV=[[ShoppingDetailView alloc]initWithFrame:[self.obj view].bounds andObject:self ];
     [[self.obj view]addSubview:detailV];
 }
 @end
