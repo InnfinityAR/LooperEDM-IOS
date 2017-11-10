@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingPhotoView.h"
-#import "ShoppingViewModel.h"
+#import "MallViewModel.h"
 #import "LooperToolClass.h"
 #import "LooperConfig.h"
 #import "SlidingScrolleview.h"
@@ -18,7 +18,7 @@
 @implementation ShoppingPhotoView
 -(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andPhotoArr:(NSArray *)photoNameArr andIntex:(NSInteger)index{
     if (self=[super initWithFrame:frame]) {
-        self.obj=(ShoppingViewModel *)obj;
+        self.obj=(MallViewModel *)obj;
         self.photoArr=photoNameArr;
         self.index=index;
         [self initView];
