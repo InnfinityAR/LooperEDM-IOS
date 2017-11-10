@@ -19,4 +19,11 @@
 -(void)createPropDetailView:(NSDictionary*)DetailData;
 
 @property (nonatomic )id obj;
+
+-(void)popViewController;
+
+
+
+-(void)requestDataCode:(NSString*)mobileNum;
+-(void)checkVerificationCodeForvCode:(NSString *)vCode ProductId:(int)productId andresultid:(int)resultId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber  andclientName:(NSString *)clientName andPrice:(NSInteger)price;
 @end

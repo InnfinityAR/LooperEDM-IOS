@@ -75,7 +75,7 @@
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andDataDic:(NSDictionary *)dataDic orderDic:(NSDictionary *)orderDic{
     
     if (self = [super initWithFrame:frame]) {
-        self.obj = (SaleTicketViewModel*)idObject;
+//        self.obj = (SaleTicketViewModel*)idObject;
         payNumber=1;
         self.currentTimeY=0;
         self.dataDic=dataDic;
