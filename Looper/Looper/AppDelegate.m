@@ -194,8 +194,8 @@ void uncaughtExceptionHandler(NSException *exception) {
         [self.window makeKeyAndVisible];
 
     }else{
-        MainViewController *start = [MainViewController alloc];
-//        ShoppingViewController *start=[ShoppingViewController alloc];
+//        MainViewController *start = [MainViewController alloc];
+        ShoppingViewController *start=[ShoppingViewController alloc];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
         nav.delegate = self;
         nav.navigationBar.hidden = YES;
