@@ -15,6 +15,7 @@
 #import <UShareUI/UShareUI.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "AppDelegate.h"
+
 @interface loginView()<UIScrollViewDelegate>
 @property (nonatomic, strong) NSURL *url;
 /** 视频播放器 */
@@ -380,7 +381,7 @@
     }
     else if (button.tag==101){
 //服务条款点击
-        
+        [self.obj creatLoginServiceV:self];
     }
     else {
          [self.obj requestData:(int)button.tag andIphone:phoneNum.text andCode:nil];

@@ -477,10 +477,10 @@
     contentLb.textColor=[UIColor whiteColor];
     [selectView addSubview:contentLb];
     UIScrollView *scrollV=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 60*DEF_Adaptation_Font*0.5, DEF_WIDTH(selectView), 346*DEF_Adaptation_Font*0.5)];
-    scrollV.contentSize=CGSizeMake(DEF_WIDTH(selectView),  (76*50-20)*DEF_Adaptation_Font*0.5);
+    scrollV.contentSize=CGSizeMake(DEF_WIDTH(selectView),  (76*self.groupArr.count-20)*DEF_Adaptation_Font*0.5);
     scrollV.showsVerticalScrollIndicator = NO;
     [selectView addSubview:scrollV];
-    for (int i=0; i<50; i++) {
+    for (int i=0; i<self.groupArr.count; i++) {
         //后续需要有一些改动,加入无人选就变灰效果
         if (type==1) {
     UILabel *label= [self creatLabelWithContent:[NSString stringWithFormat:@"  %d队水手长",i+1] andRect:CGRectMake(43*DEF_Adaptation_Font*0.5, (i*76)*DEF_Adaptation_Font*0.5,556*DEF_Adaptation_Font*0.5, 56*DEF_Adaptation_Font*0.5) andType:1 andTag:i+100];

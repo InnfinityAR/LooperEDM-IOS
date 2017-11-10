@@ -136,6 +136,14 @@
 		B2A1E8191F2B3E86006270E3 /* UITextField+LooperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A1E8181F2B3E86006270E3 /* UITextField+LooperTextField.m */; };
 		B2A4DA6C1F14E4050085814F /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6B1F14E4050085814F /* sun.png */; };
 		B2A4DA6E1F15F6830085814F /* AcitivitySeg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */; };
+		B2A62FFA1FB1AA05000F8899 /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A62FF91FB1AA04000F8899 /* ShoppingViewController.m */; };
+		B2A62FFD1FB1AA28000F8899 /* ShoppingDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A62FFC1FB1AA28000F8899 /* ShoppingDetailView.m */; };
+		B2A630001FB1AA4D000F8899 /* ShoppingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A62FFF1FB1AA4D000F8899 /* ShoppingViewModel.m */; };
+		B2A630031FB1C0A0000F8899 /* LoginServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A630021FB1C0A0000F8899 /* LoginServiceView.m */; };
+		B2A630071FB1C338000F8899 /* LooperService.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B2A630061FB1C338000F8899 /* LooperService.rtf */; };
+		B2A6300D1FB2CDF5000F8899 /* SlidingScrolleview.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6300C1FB2CDF5000F8899 /* SlidingScrolleview.m */; };
+		B2A630161FB2F407000F8899 /* store_intergral.png in Resources */ = {isa = PBXBuildFile; fileRef = B2A630151FB2F407000F8899 /* store_intergral.png */; };
+		B2A630191FB447E0000F8899 /* ShoppingPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A630181FB447E0000F8899 /* ShoppingPhotoView.m */; };
 		B2A6EE5E1ECAE015004BF416 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */; };
 		B2A6EE891ECAF5FF004BF416 /* ActivityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE881ECAF5FF004BF416 /* ActivityViewModel.m */; };
 		B2A6EE9D1ECC4EBF004BF416 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */; };
@@ -1043,6 +1051,20 @@
 		B2A1E8181F2B3E86006270E3 /* UITextField+LooperTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+LooperTextField.m"; sourceTree = "<group>"; };
 		B2A4DA6B1F14E4050085814F /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = ../../activity/View/sun.png; sourceTree = "<group>"; };
 		B2A4DA6D1F15F6830085814F /* AcitivitySeg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AcitivitySeg.png; path = ../../activity/View/AcitivitySeg.png; sourceTree = "<group>"; };
+		B2A62FF81FB1AA04000F8899 /* ShoppingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
+		B2A62FF91FB1AA04000F8899 /* ShoppingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
+		B2A62FFB1FB1AA28000F8899 /* ShoppingDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingDetailView.h; sourceTree = "<group>"; };
+		B2A62FFC1FB1AA28000F8899 /* ShoppingDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingDetailView.m; sourceTree = "<group>"; };
+		B2A62FFE1FB1AA4D000F8899 /* ShoppingViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingViewModel.h; sourceTree = "<group>"; };
+		B2A62FFF1FB1AA4D000F8899 /* ShoppingViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewModel.m; sourceTree = "<group>"; };
+		B2A630011FB1C0A0000F8899 /* LoginServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginServiceView.h; sourceTree = "<group>"; };
+		B2A630021FB1C0A0000F8899 /* LoginServiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginServiceView.m; sourceTree = "<group>"; };
+		B2A630061FB1C338000F8899 /* LooperService.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = LooperService.rtf; path = Looper/LooperService.rtf; sourceTree = SOURCE_ROOT; };
+		B2A6300B1FB2CDF5000F8899 /* SlidingScrolleview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlidingScrolleview.h; sourceTree = "<group>"; };
+		B2A6300C1FB2CDF5000F8899 /* SlidingScrolleview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlidingScrolleview.m; sourceTree = "<group>"; };
+		B2A630151FB2F407000F8899 /* store_intergral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = store_intergral.png; path = Image/store_intergral.png; sourceTree = "<group>"; };
+		B2A630171FB447E0000F8899 /* ShoppingPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingPhotoView.h; sourceTree = "<group>"; };
+		B2A630181FB447E0000F8899 /* ShoppingPhotoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingPhotoView.m; sourceTree = "<group>"; };
 		B2A6EE5C1ECAE015004BF416 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B2A6EE871ECAF5FF004BF416 /* ActivityViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewModel.h; sourceTree = "<group>"; };
@@ -2439,6 +2461,48 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		B2A62FF41FB1A9D4000F8899 /* ShoppingStore */ = {
+			isa = PBXGroup;
+			children = (
+				B2A62FF51FB1A9D4000F8899 /* Controller */,
+				B2A62FF61FB1A9D4000F8899 /* View */,
+				B2A62FF71FB1A9D4000F8899 /* ViewModel */,
+			);
+			name = ShoppingStore;
+			path = Looper/ShoppingStore;
+			sourceTree = "<group>";
+		};
+		B2A62FF51FB1A9D4000F8899 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B2A62FF81FB1AA04000F8899 /* ShoppingViewController.h */,
+				B2A62FF91FB1AA04000F8899 /* ShoppingViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B2A62FF61FB1A9D4000F8899 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B2A62FFB1FB1AA28000F8899 /* ShoppingDetailView.h */,
+				B2A62FFC1FB1AA28000F8899 /* ShoppingDetailView.m */,
+				B2A630171FB447E0000F8899 /* ShoppingPhotoView.h */,
+				B2A630181FB447E0000F8899 /* ShoppingPhotoView.m */,
+				B2A6300B1FB2CDF5000F8899 /* SlidingScrolleview.h */,
+				B2A6300C1FB2CDF5000F8899 /* SlidingScrolleview.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B2A62FF71FB1A9D4000F8899 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B2A62FFE1FB1AA4D000F8899 /* ShoppingViewModel.h */,
+				B2A62FFF1FB1AA4D000F8899 /* ShoppingViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B2A6EE541ECAD7FF004BF416 /* activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -3318,6 +3382,8 @@
 		C43E76591E091D8C004A5288 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				B2A630151FB2F407000F8899 /* store_intergral.png */,
+				B2A630061FB1C338000F8899 /* LooperService.rtf */,
 				C4F051211EBACA0D005DA9F1 /* Video */,
 				C43E765A1E091D8C004A5288 /* Image */,
 				C43E767F1E091D8C004A5288 /* JSON */,
@@ -4043,7 +4109,11 @@
 		C4B8AAC11DF16CFC0004C8C4 = {
 			isa = PBXGroup;
 			children = (
+
 				C4E7BC611FB1A97400DFF117 /* Mall */,
+
+				B2A62FF41FB1A9D4000F8899 /* ShoppingStore */,
+
 				C43F569C1F53FDEB009BE471 /* Family */,
 				B235214D1F4E9916003D06CB /* QRCode */,
 				B225B9931F3C281E0008E5AF /* ExtractPrize */,
@@ -4364,6 +4434,8 @@
 			children = (
 				C4BCE6D61E091E710087E6C5 /* loginView.h */,
 				C4BCE6D71E091E710087E6C5 /* loginView.m */,
+				B2A630011FB1C0A0000F8899 /* LoginServiceView.h */,
+				B2A630021FB1C0A0000F8899 /* LoginServiceView.m */,
 				C489F0701E4722F400A0EE79 /* nLoginView.h */,
 				C489F0711E4722F400A0EE79 /* nLoginView.m */,
 				C446CDE81E8531CC00921FD1 /* LoginAccountView.h */,
@@ -5094,6 +5166,7 @@
 				C4E4635A1F909C6C00F4D5DB /* photoWall.png in Resources */,
 				C43E76EA1E091D8D004A5288 /* bg_iphone_code.png in Resources */,
 				B22A04191F70E60E00E3EA2E /* family_changeJob_IV.png in Resources */,
+				B2A630161FB2F407000F8899 /* store_intergral.png in Resources */,
 				C43E3D171EA607D500EA4A6E /* createLoopbtn.png in Resources */,
 				C46A692D1EB38C0200FCD5EB /* 分割线-@3x.png in Resources */,
 				C4174FC51F00DC4A00901671 /* locaton1.png in Resources */,
@@ -5138,6 +5211,7 @@
 				C42B47D41ED55C1C00AE4399 /* time.png in Resources */,
 				B22BFCD11F616FC400FD131E /* family_header_BG.png in Resources */,
 				C4BD2B271E462DD400B8FB9F /* unfollowSucceed.png in Resources */,
+				B2A630071FB1C338000F8899 /* LooperService.rtf in Resources */,
 				C42585081EA7530D00EDD928 /* btn_upload_pic.png in Resources */,
 				C461E2361F6BDCE10048F979 /* btn_createFleet.png in Resources */,
 				C461E23E1F6BEFD80048F979 /* btn_family_commit.png in Resources */,
@@ -5552,6 +5626,7 @@
 				C4DDB53A1E28DA13005E3909 /* RongCloudManger.m in Sources */,
 				C468F8C91E0D191B0044EB5C /* HomeView.m in Sources */,
 				B23521611F4EA344003D06CB /* UIImage+SGHelper.m in Sources */,
+				B2A6300D1FB2CDF5000F8899 /* SlidingScrolleview.m in Sources */,
 				C4664A341E20086E005755C6 /* GFCalendarScrollView.m in Sources */,
 				C4BCE7BC1E0920180087E6C5 /* SelectView.m in Sources */,
 				C4028CAB1F387B1800E821E9 /* NSDataEx.m in Sources */,
@@ -5596,6 +5671,7 @@
 				C45F674B1E8663CF00FB92A8 /* UserInfoView.m in Sources */,
 				B2A6EE891ECAF5FF004BF416 /* ActivityViewModel.m in Sources */,
 				C4BCE7BD1E0920180087E6C5 /* StartView.m in Sources */,
+				B2A62FFA1FB1AA05000F8899 /* ShoppingViewController.m in Sources */,
 				C4312BC71E1257CC00C6380B /* meView.m in Sources */,
 				C4796A711F13615B00414AFD /* PhotoWallViewController.m in Sources */,
 				C4BCE73E1E091E710087E6C5 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -5673,6 +5749,7 @@
 				C425850B1EA76E4000EDD928 /* EditPictureView.m in Sources */,
 				C4CCFCEC1EB3B7B500114711 /* MessageViewModel.m in Sources */,
 				C408068B1F1869620084BC6E /* PlayVideoView.m in Sources */,
+				B2A630001FB1AA4D000F8899 /* ShoppingViewModel.m in Sources */,
 				C4BCE7461E091E710087E6C5 /* DataHander.m in Sources */,
 				C43E3D251EA61FEB00EA4A6E /* nCreateLoopView.m in Sources */,
 				C4C0B6101E8A569100B32214 /* MainChatView.m in Sources */,
@@ -5750,6 +5827,7 @@
 				C4CCFCE61EB3B78F00114711 /* messageViewController.m in Sources */,
 				C43437601EF11D6B00739040 /* Cross.m in Sources */,
 				C468F8C61E0D190D0044EB5C /* HomeViewModel.m in Sources */,
+				B2A630191FB447E0000F8899 /* ShoppingPhotoView.m in Sources */,
 				B229F25A1F90690700375702 /* UIImageView+WebCache.m in Sources */,
 				C4BCE73A1E091E710087E6C5 /* AFURLRequestSerialization.m in Sources */,
 				C4796A751F1361A100414AFD /* PhotoWallViewModel.m in Sources */,
@@ -5760,6 +5838,7 @@
 				C42B47DA1ED6A2F900AE4399 /* NewPagedFlowView.m in Sources */,
 				B2C90EE01F13A1DF000E127A /* CarlendarView.m in Sources */,
 				B229F2521F90690700375702 /* SDWebImageDownloaderOperation.m in Sources */,
+				B2A62FFD1FB1AA28000F8899 /* ShoppingDetailView.m in Sources */,
 				C40F89771E1CF8A600DABEAA /* SerachView.m in Sources */,
 				C4DDB5421E2900BA005E3909 /* Base64Class.m in Sources */,
 				B23521671F4EA344003D06CB /* SGQRCodeScanningView.m in Sources */,
@@ -5802,6 +5881,7 @@
 				C493D2901F9E077900A74F2F /* MeFootPrintView.m in Sources */,
 				C4AE247B1E1FB8E2009D5851 /* DBSphereView.m in Sources */,
 				C42D882D1F022C4100CE8F01 /* BrandDetailView.m in Sources */,
+				B2A630031FB1C0A0000F8899 /* LoginServiceView.m in Sources */,
 				B2C00FE21F0B8AF500E369B6 /* YWCarouseView.m in Sources */,
 				B22A04031F6791CC00E3EA2E /* MemberManageView.m in Sources */,
 				C43E76E71E091D8D004A5288 /* SelectLooperView.m in Sources */,

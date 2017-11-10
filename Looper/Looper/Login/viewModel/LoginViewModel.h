@@ -46,4 +46,6 @@
 @property(nonatomic)LoginAccountView *accountV;
 @property(nonatomic)UIVisualEffectView *effectView;
 @property(nonatomic)UIView *bkView;
+-(void)creatLoginServiceV:(UIView *)superV;
+
 @end

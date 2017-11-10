@@ -22,7 +22,7 @@
 #import "nMainView.h"
 #import <CoreImage/CoreImage.h>
 #import <Accelerate/Accelerate.h>
-
+#import "LoginServiceView.h"
 @implementation LoginViewModel
 
 @synthesize loginV = _loginV;
@@ -272,7 +272,10 @@
     [_loginV.firstLoginView setHidden:NO];
 }
 
-
+-(void)creatLoginServiceV:(UIView *)superV{
+    LoginServiceView *serviceV=[[LoginServiceView alloc]initWithFrame:superV.bounds and:self];
+    [superV addSubview:serviceV];
+}
 
 
 
