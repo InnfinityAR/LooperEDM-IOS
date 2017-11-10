@@ -48,6 +48,7 @@
 #import "FamilyDetailView.h"
 
 #import"FamilyMemberView.h"
+#import "ShoppingViewController.h"
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 
@@ -193,7 +194,8 @@ void uncaughtExceptionHandler(NSException *exception) {
         [self.window makeKeyAndVisible];
 
     }else{
-        MainViewController *start = [MainViewController alloc];
+//        MainViewController *start = [MainViewController alloc];
+        ShoppingViewController *start=[ShoppingViewController alloc];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
         nav.delegate = self;
         nav.navigationBar.hidden = YES;
@@ -204,9 +206,9 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 //    UIViewController *start = [UIViewController alloc];
 //    [start.view addSubview:[[FamilyMemberView alloc]initWithFrame:CGRectMake(29*DEF_Adaptation_Font*0.5, 117*DEF_Adaptation_Font*0.5, 582*DEF_Adaptation_Font*0.5, 976*DEF_Adaptation_Font*0.5) andObj:nil andDataArr:nil]];
-////    [ScanQRCode initScanQRWithCurrentView: start.view];
-////    [ScanQRCode initGenerateWithCurrentView:start.view andUrl:nil andImage:nil];
-  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
+//    [ScanQRCode initScanQRWithCurrentView: start.view];
+//    [ScanQRCode initGenerateWithCurrentView:start.view andUrl:nil andImage:nil];
+//  UIImageView *imageV=  [ScanQRCode initWithFrame:CGRectMake(0, 0, 50, 50) andUrl:nil andImage:nil];
 ////    [start.view addSubview:imageV];
 //    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:start];
 //    nav.delegate = self;
