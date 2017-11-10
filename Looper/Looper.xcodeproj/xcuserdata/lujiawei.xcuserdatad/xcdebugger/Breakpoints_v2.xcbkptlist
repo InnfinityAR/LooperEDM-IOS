@@ -1358,7 +1358,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
             endingLineNumber = "38"
-            landmarkName = "-getCommodityData"
+            landmarkName = "-createPropDetailView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

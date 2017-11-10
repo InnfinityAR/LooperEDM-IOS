@@ -16,5 +16,7 @@
 
 -(id)initWithController:(id)controller;
 
+-(void)createPropDetailView:(NSDictionary*)DetailData;
+
 @property (nonatomic )id obj;
 @end

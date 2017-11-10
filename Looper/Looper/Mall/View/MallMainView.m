@@ -32,6 +32,9 @@
 -(void)updateDataView:(NSDictionary*)sourceData{
     
     MallData = sourceData;
+
+    
+    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:1]];
     
 }
 
@@ -46,7 +49,7 @@
 
 -(void)initView{
     
-    
+   
     
     
     

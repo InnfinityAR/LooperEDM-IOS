@@ -33,6 +33,20 @@
 }
 
 
+-(void)createPropDetailView:(NSDictionary*)DetailData{
+    
+    
+        
+    
+    
+    
+    
+    
+    
+}
+
+
+
 -(void)getCommodityData{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
