@@ -1353,11 +1353,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/View/MallMainView.m"
-            timestampString = "532197484.084258"
+            timestampString = "532197601.661384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215">
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-initView"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

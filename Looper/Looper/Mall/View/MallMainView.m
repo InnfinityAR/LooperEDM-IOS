@@ -48,7 +48,7 @@
     
     MallData = sourceData;
     
- 
+
     
     [self createHudView];
     
@@ -67,6 +67,7 @@
     
     [self addScrollViewTitle];
     
+
 }
 
 -(void)addScrollViewTitle{

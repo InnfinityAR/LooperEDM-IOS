@@ -8,6 +8,7 @@
 
 #import "SlidingScrolleview.h"
 #import "LooperConfig.h"
+#import "UIImageView+WebCache.h"
 @interface SlidingScrolleview ()<UIScrollViewDelegate>
 {
     /**
@@ -85,7 +86,8 @@
          imageview.contentMode=UIViewContentModeScaleAspectFit;
         }
         imageview.userInteractionEnabled = YES;
-        imageview.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:[tempArray objectAtIndex:i] ofType:@"png"]];
+//        imageview.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:[tempArray objectAtIndex:i] ofType:@"png"]];
+        [imageview sd_setImageWithURL:[NSURL URLWithString:[tempArray objectAtIndex:i]] placeholderImage:nil options:(SDWebImageRetryFailed)];
         imageview.tag = 10 + i;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageviewClick:)];
@@ -100,8 +102,9 @@
     pageControl.numberOfPages = imageNumber-2;
     pageControl.currentPageIndicatorTintColor=ColorRGB(104, 185, 185, 1.0);
     pageControl.pageIndicatorTintColor=[UIColor whiteColor];
+      if (imageNumber>3) {
     [self addSubview:pageControl];
-    
+      }
     self.scrollview.contentSize = CGSizeMake(self.frame.size.width * imageNumber, self.frame.size.height);
     [self.scrollview setContentOffset:CGPointMake(self.frame.size.width, 0) animated:NO];
     [self startTimer];

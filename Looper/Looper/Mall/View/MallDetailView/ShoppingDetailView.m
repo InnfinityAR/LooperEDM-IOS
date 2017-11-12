@@ -26,7 +26,7 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(MallViewModel *)obj;
         self.dataDic=dataDic;
-        photoArr=@[@"icon_weibo",@"icon_qq"];
+        photoArr=@[[dataDic objectForKey:@"commodityimageurl"]];
         [self initView];
     }
     return self;
@@ -73,12 +73,12 @@
     detailV.backgroundColor=ColorRGB(39, 39, 72, 1.0);
     [scrollV addSubview:detailV];
     UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5, 575*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
-    titleLB.text=@"BOSE蓝牙音箱";
+    titleLB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"commodityname"]];
     titleLB.font=[UIFont boldSystemFontOfSize:18];
     titleLB.textColor=[UIColor whiteColor];
     [detailV addSubview:titleLB];
     UILabel *integralLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 575*DEF_Adaptation_Font*0.5, 28*DEF_Adaptation_Font*0.5)];
-    integralLB.text=@"我的积分：50积分";
+    integralLB.text=[NSString stringWithFormat:@"我的积分：%@积分",[self.dataDic objectForKey:@"credit"]];
     integralLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     integralLB.textColor=[UIColor whiteColor];
     [detailV addSubview:integralLB];
@@ -89,7 +89,7 @@
     UIView *titleV1=[self createTitleViewWithPoint:CGPointMake(0, 237*DEF_Adaptation_Font*0.5) andTitle:@"商品详情"];
     [detailV addSubview:titleV1];
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(32*DEF_Adaptation_Font*0.5, 292*DEF_Adaptation_Font*0.5, 576*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
-    contentLB.text=@"这里是一段介绍这里是一段介绍这里是一段介绍这里是一段介绍这里是一段介绍这里是一段介绍";
+    contentLB.text=[self.dataDic objectForKey:@"subhead"];
     contentLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
@@ -161,7 +161,7 @@
     intergralIV.image=[UIImage imageNamed:@"store_intergral"];
     [intergralBtn addSubview:intergralIV];
     UILabel *LB=[[UILabel alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 8*DEF_Adaptation_Font*0.5, 125*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
-    LB.text=@"50积分";
+    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];;
     LB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     LB.textColor=ColorRGB(170, 170, 178, 1.0);
     [intergralBtn addSubview:LB];
@@ -184,7 +184,7 @@
     intergralIV.image=[UIImage imageNamed:@"store_intergral"];
     [intergralBtn addSubview:intergralIV];
     UILabel *LB=[[UILabel alloc]initWithFrame:CGRectMake(65*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5, 125*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
-    LB.text=@"50积分";
+    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];;
     LB.textColor=ColorRGB(136,130,248, 1.0);
     LB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     [intergralBtn addSubview:LB];

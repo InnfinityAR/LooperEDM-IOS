@@ -74,7 +74,7 @@
     contentLB.frame=frame;
     [contentScrol addSubview:contentLB];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 124*DEF_Adaptation_Font*0.5)];
     if([self.orderDic objectForKey:@"commodityimageurl"]!=nil) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:[self.orderDic objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
@@ -101,7 +101,7 @@
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
 //    if ([[self.orderDic objectForKey:@"isPrice" ]intValue]>0) {
-        timeLB.text=@"2017-12-3";
+        timeLB.text=[self.orderDic objectForKey:@"creationdate"];
 //    }else{
 //        timeLB.text=[self setSelecttime];
 //    }
@@ -118,7 +118,7 @@
     [contentScrol addSubview:priceLV];
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+12*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    priceLB.text=[NSString stringWithFormat:@"%ld   ×%ld",[[self.orderDic objectForKey:@"price" ]intValue]/self.payNumber,self.payNumber];
+    priceLB.text=[NSString stringWithFormat:@"%ld积分   ×%ld",[[self.orderDic objectForKey:@"credit" ]intValue]/self.payNumber,self.payNumber];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
@@ -129,7 +129,7 @@
     
     UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+15*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     sumPriceLB.font=[UIFont systemFontOfSize:14];
-    sumPriceLB.text=[NSString stringWithFormat:@"共计:%@",[self.orderDic objectForKey:@"price" ]];
+    sumPriceLB.text=[NSString stringWithFormat:@"共计:%@",[self.orderDic objectForKey:@"credit" ]];
     sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
     sumPriceLB.textAlignment=NSTextAlignmentRight;
     [contentScrol addSubview:sumPriceLB];
@@ -221,14 +221,14 @@
     payWayLB.textColor=ColorRGB(223, 219, 234, 1.0);
     payWayLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:payWayLB];
-    UIImageView *payIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payWayLB)+60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    payIV.image=[UIImage imageNamed:@"image_pay.png"];
-    payIV.layer.cornerRadius=3.0;
-    payIV.clipsToBounds=YES;
-    [contentScrol addSubview:payIV];
-    UILabel *payLB=[[UILabel alloc]initWithFrame:CGRectMake(132*DEF_Adaptation_Font*0.5, DEF_Y(payIV)+20*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+//    UIImageView *payIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payWayLB)+60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+//    payIV.image=[UIImage imageNamed:@"image_pay.png"];
+//    payIV.layer.cornerRadius=3.0;
+//    payIV.clipsToBounds=YES;
+//    [contentScrol addSubview:payIV];
+    UILabel *payLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payWayLB)+80*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     payLB.font=[UIFont systemFontOfSize:14];
-    payLB.text=@"支付宝";
+    payLB.text=@"积分支付";
     payLB.textColor=[UIColor whiteColor];
     payLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:payLB];
@@ -238,7 +238,7 @@
     [payEnsureBtn setSelected:YES];
     self.paySureBtn=payEnsureBtn;
     
-    UILabel *payTicketLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payIV)+102*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    UILabel *payTicketLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payLB)+82*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     payTicketLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
     payTicketLB.text=@"购票须知";
     payTicketLB.textColor=ColorRGB(223, 219, 234, 1.0);
@@ -258,7 +258,7 @@
     [contentScrol addSubview:payTicketDetailLB];
     contentScrol.contentSize=CGSizeMake(DEF_WIDTH(self), DEF_Y(payTicketDetailLB)+280*DEF_Adaptation_Font*0.5);
     if ([[self.orderDic objectForKey:@"price" ]integerValue]>0) {
-        self.payBtn=[self creatButton:[NSString stringWithFormat:@"确认购票 ￥ %@",[self.orderDic objectForKey:@"price" ]] andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
+        self.payBtn=[self creatButton:[NSString stringWithFormat:@"确认支付"] andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
     }else{
         self.payBtn=[self creatButton:@"确认购票" andCGRect:CGRectMake(0, DEF_HEIGHT(self)-86*DEF_Adaptation_Font*0.5,DEF_WIDTH(self), 86*DEF_Adaptation_Font*0.5) andTag:105];
     }
