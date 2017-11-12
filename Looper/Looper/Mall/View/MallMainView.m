@@ -10,12 +10,14 @@
 #import "MallViewModel.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
+#import "UIImageView+WebCache.h"
 
 @implementation MallMainView{
     
     
     NSDictionary *MallData;
     UIScrollView *mallScrollV;
+    UIScrollView *recommendScrollV;
     
 }
 
@@ -54,6 +56,8 @@
     mallScrollV.showsHorizontalScrollIndicator = NO;
     [self addSubview:mallScrollV];
     
+    [mallScrollV setContentSize:CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*3)];
+    
     
     [self addScrollViewTitle];
     
@@ -89,22 +93,63 @@
 }
 
 -(void)addPropToScrollView{
-    NSArray *propData  = [MallData objectForKey:@"data"];
+
+    
+    
+    recommendScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(25*DEF_Adaptation_Font*0.5,235*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
+    recommendScrollV.showsVerticalScrollIndicator = NO;
+    recommendScrollV.showsHorizontalScrollIndicator = NO;
+    [self addSubview:recommendScrollV];
+   
+    
+    NSArray *recommendArray =[MallData objectForKey:@"banner"];
+    
+    for(int i=0;[recommendArray count];i++){
+        NSDictionary *propData = [recommendArray objectAtIndex:i];
+        
+        UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5+(i*recommendScrollV.frame.size.width),0*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
+        [propImage sd_setImageWithURL:[NSURL URLWithString:[propData objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        [recommendScrollV addSubview:propImage];
+        
+    }
+     [recommendScrollV setContentSize:CGSizeMake(recommendScrollV.frame.size.width*[recommendArray count],  314*DEF_Adaptation_Font*0.5)];
+    
+   NSArray *propData  = [MallData objectForKey:@"data"];
+
     for(int i =0;i<[propData count];i++){
         
         NSLog(@"%@",[propData objectAtIndex:i]);
+        NSDictionary *propIndexData = [propData objectAtIndex:i];
+
+        UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(21*DEF_Adaptation_Font*0.5,547*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5)];
+        [propImage sd_setImageWithURL:[NSURL URLWithString:[propIndexData objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+        [mallScrollV addSubview:propImage];
         
+        UILabel *titleName=[[UILabel alloc]initWithFrame:CGRectMake(propImage.frame.origin.x , propImage.frame.origin.y+propImage.frame.size.height+5*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 31*DEF_Adaptation_Font*0.5)];
+        titleName.font=[UIFont systemFontOfSize:14];
+        titleName.textColor=[UIColor whiteColor];
+        titleName.text=[propIndexData objectForKey:@"commodityname"];
+        [mallScrollV addSubview:titleName];
         
+        UIImageView *integrate_icon = [LooperToolClass createImageView:@"icon_integrate_mid.png" andRect:CGPointMake(46, 145) andTag:100 andSize:CGSizeMake(17, 17) andIsRadius:false];
+        [mallScrollV addSubview:integrate_icon];
+        [integrate_icon setFrame:CGRectMake(propImage.frame.origin.x, titleName.frame.origin.y+titleName.frame.size.height+5*DEF_Adaptation_Font*0.5, integrate_icon.frame.size.width, integrate_icon.frame.size.height)];
         
+        UILabel *integrateNum=[[UILabel alloc]initWithFrame:CGRectMake(integrate_icon.frame.origin.x+integrate_icon.frame.size.width+10*DEF_Adaptation_Font*0.5, integrate_icon.frame.origin.y, 280*DEF_Adaptation_Font*0.5, 17*DEF_Adaptation_Font*0.5)];
+        integrateNum.font=[UIFont systemFontOfSize:13];
+        integrateNum.textColor=[UIColor colorWithRed:136/255.0 green:131/255.0 blue:250/255.0 alpha:1.0];
+        integrateNum.text=[propIndexData objectForKey:@"credit"];
+        [mallScrollV addSubview:integrateNum];
         
     }
     
 }
 
-
-
-
--(void)createHudView{
+-(void)createHudView{ 
     
    
     
