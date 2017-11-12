@@ -18,7 +18,7 @@
     
     
     NSMutableDictionary *mallData;
-    
+    MallMainView *mallMainV;
     
 }
 
@@ -32,11 +32,20 @@
     
 }
 
+-(void)popViewMallController{
+    
+    
+    [mallMainV removeFromSuperview];
+    [[_obj navigationController]  popViewControllerAnimated:true];
+    
+    
+}
+
 
 -(void)createPropDetailView:(NSDictionary*)DetailData{
     
     
-        
+    
     
     
     
@@ -59,7 +68,7 @@
             
             mallData = [[NSMutableDictionary alloc] initWithDictionary:responseObject];
             
-            MallMainView *mallMainV = [[MallMainView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+           
             
             [mallMainV updateDataView:mallData];
         }
@@ -72,7 +81,8 @@
 -(void)requestData{
     
     mallData = [[NSMutableDictionary alloc] initWithCapacity:50];
-    
+    mallMainV = [[MallMainView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self];
+    [[_obj view] addSubview:mallMainV];
     [self getCommodityData];
 }
 
