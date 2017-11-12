@@ -18,6 +18,9 @@
 
 -(void)createPropDetailView:(NSDictionary*)DetailData;
 
+-(void)popViewMallController;
+
+
 @property (nonatomic )id obj;
 
 -(void)popViewController;
