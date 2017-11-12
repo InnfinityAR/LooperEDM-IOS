@@ -1198,7 +1198,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "581"
             endingLineNumber = "581"
-            landmarkName = "-SpaceView"
+            landmarkName = "-clickUserBtn:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1353,11 +1353,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/View/MallMainView.m"
-            timestampString = "532194025.516695"
+            timestampString = "532197484.084258"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176">
+            startingLineNumber = "215"
+            endingLineNumber = "215">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
