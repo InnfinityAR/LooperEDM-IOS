@@ -40,9 +40,11 @@
     
     MallData = sourceData;
     
-    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:1]];
+   // [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:1]];
     
     [self createHudView];
+    
+    [self addPropToScrollView];
 }
 
 -(void)createScrollView{
@@ -54,6 +56,8 @@
     
     
     [self addScrollViewTitle];
+    
+    
     
 }
 
@@ -82,8 +86,22 @@
     UIButton *checkInBtn = [LooperToolClass createBtnImageNameReal:@"btn_checkin.png" andRect:CGPointMake(457*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andTag:201 andSelectImage:@"btn_checkin.png" andClickImage:@"btn_checkin.png" andTextStr:nil andSize:CGSizeMake(137*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [mallScrollV addSubview:checkInBtn];
     
+}
+
+-(void)addPropToScrollView{
+    NSArray *propData  = [MallData objectForKey:@"data"];
+    for(int i =0;i<[propData count];i++){
+        
+        NSLog(@"%@",[propData objectAtIndex:i]);
+        
+        
+        
+        
+    }
     
 }
+
+
 
 
 -(void)createHudView{

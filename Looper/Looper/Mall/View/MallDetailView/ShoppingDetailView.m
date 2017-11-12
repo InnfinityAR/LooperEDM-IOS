@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingDetailView.h"
-#import "ShoppingViewModel.h"
+#import "MallViewModel.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "SlidingScrolleview.h"
@@ -18,11 +18,13 @@
     UIScrollView *scrollV;
     NSArray *photoArr;
 }
+@property(nonatomic,strong)NSDictionary *dataDic;
 @end
 @implementation ShoppingDetailView
--(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj{
+-(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary*)dataDic{
     if (self=[super initWithFrame:frame]) {
-        self.obj=(ShoppingViewModel *)obj;
+        self.obj=(MallViewModel *)obj;
+        self.dataDic=dataDic;
         photoArr=@[@"icon_weibo",@"icon_qq"];
         [self initView];
     }

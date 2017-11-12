@@ -12,13 +12,14 @@
 #import "LocalDataMangaer.h"
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
-
+#import "ShoppingDetailView.h"
 
 @implementation MallViewModel{
     
     
     NSMutableDictionary *mallData;
     MallMainView *mallMainV;
+    ShoppingDetailView *detailV;
     
 }
 
@@ -43,15 +44,9 @@
 
 
 -(void)createPropDetailView:(NSDictionary*)DetailData{
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    detailV=[[ShoppingDetailView alloc]initWithFrame:[self.obj view].bounds andObject:self andDataDic:DetailData];
+    [[self.obj view]addSubview:detailV];
+
 }
 
 

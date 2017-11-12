@@ -48,7 +48,6 @@
 #import "FamilyDetailView.h"
 
 #import"FamilyMemberView.h"
-#import "ShoppingViewController.h"
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 

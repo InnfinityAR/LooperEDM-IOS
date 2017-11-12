@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ShoppingDetailView : UIView
--(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj;
+-(instancetype)initWithFrame:(CGRect)frame andObject:(id)obj andDataDic:(NSDictionary*)dataDic;
 @property(nonatomic,strong)id obj;
 @end
