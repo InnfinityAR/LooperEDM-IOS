@@ -34,7 +34,7 @@
     MallData = sourceData;
 
     
-    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:1]];
+    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:0]];
     
 }
 
