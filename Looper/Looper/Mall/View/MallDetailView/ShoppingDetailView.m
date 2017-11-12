@@ -12,6 +12,7 @@
 #import "LooperToolClass.h"
 #import "SlidingScrolleview.h"
 #import "ShoppingPhotoView.h"
+#import "MallPayView.h"
 #define ScrollY 0
 @interface ShoppingDetailView()<UIScrollViewDelegate,SlidingScrolleviewDelegate>
 {
@@ -37,6 +38,12 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag ==100){
         [self removeFromSuperview];
+    }
+    if (button.tag==101) {
+        if (1) {
+        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
+        [self addSubview:payView];
+        }
     }
 }
 
@@ -76,8 +83,8 @@
     integralLB.textColor=[UIColor whiteColor];
     [detailV addSubview:integralLB];
 //积分按钮
-    [self creatIntergralBtn:detailV];
-//    [self creatIntergralBtnIfEnough:detailV];
+//    [self creatIntergralBtn:detailV];
+    [self creatIntergralBtnIfEnough:detailV];
 
     UIView *titleV1=[self createTitleViewWithPoint:CGPointMake(0, 237*DEF_Adaptation_Font*0.5) andTitle:@"商品详情"];
     [detailV addSubview:titleV1];
@@ -186,6 +193,8 @@
     NSInteger tag=tap.view.tag;
     if (tag==100) {
 //点击积分按钮
+        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
+        [self addSubview:payView];
     }if (tag==101) {
 //商品参数
     }if (tag==102) {

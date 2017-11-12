@@ -142,6 +142,7 @@
 		B2A630211FB59807000F8899 /* ShoppingDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6301B1FB59806000F8899 /* ShoppingDetailView.m */; };
 		B2A630221FB59807000F8899 /* ShoppingPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6301D1FB59806000F8899 /* ShoppingPhotoView.m */; };
 		B2A630231FB59807000F8899 /* SlidingScrolleview.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6301E1FB59806000F8899 /* SlidingScrolleview.m */; };
+		B2A630261FB5A28E000F8899 /* MallPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A630251FB5A28E000F8899 /* MallPayView.m */; };
 		B2A6EE5E1ECAE015004BF416 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */; };
 		B2A6EE891ECAF5FF004BF416 /* ActivityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE881ECAF5FF004BF416 /* ActivityViewModel.m */; };
 		B2A6EE9D1ECC4EBF004BF416 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */; };
@@ -1064,6 +1065,8 @@
 		B2A6301E1FB59806000F8899 /* SlidingScrolleview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingScrolleview.m; sourceTree = "<group>"; };
 		B2A6301F1FB59806000F8899 /* SlidingScrolleview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingScrolleview.h; sourceTree = "<group>"; };
 		B2A630201FB59807000F8899 /* ShoppingPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingPhotoView.h; sourceTree = "<group>"; };
+		B2A630241FB5A28E000F8899 /* MallPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallPayView.h; sourceTree = "<group>"; };
+		B2A630251FB5A28E000F8899 /* MallPayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallPayView.m; sourceTree = "<group>"; };
 		B2A6EE5C1ECAE015004BF416 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B2A6EE871ECAF5FF004BF416 /* ActivityViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewModel.h; sourceTree = "<group>"; };
@@ -2474,6 +2477,8 @@
 				B2A6301D1FB59806000F8899 /* ShoppingPhotoView.m */,
 				B2A6301F1FB59806000F8899 /* SlidingScrolleview.h */,
 				B2A6301E1FB59806000F8899 /* SlidingScrolleview.m */,
+				B2A630241FB5A28E000F8899 /* MallPayView.h */,
+				B2A630251FB5A28E000F8899 /* MallPayView.m */,
 			);
 			path = MallDetailView;
 			sourceTree = "<group>";
@@ -5701,6 +5706,7 @@
 				B23521651F4EA344003D06CB /* SGQRCodeHelperTool.m in Sources */,
 				C42FBFA51E0A6C5000628A78 /* AWCollectionViewDialLayout.m in Sources */,
 				C4028CAC1F387B1800E821E9 /* openssl_wrapper.m in Sources */,
+				B2A630261FB5A28E000F8899 /* MallPayView.m in Sources */,
 				B229FD8C1F74E177000071BB /* DQCanCerEnsureView.m in Sources */,
 				B2A902291ED824750022C282 /* TicketCiew.m in Sources */,
 				C4BCE7411E091E710087E6C5 /* UIButton+AFNetworking.m in Sources */,
