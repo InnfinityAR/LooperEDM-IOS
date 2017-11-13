@@ -78,15 +78,14 @@
     
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"dailyCheckIn" parameters:dic  success:^(id responseObject) {
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"dailyCheckin" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-
+            
                   [[DataHander sharedDataHander] showViewWithStr:@"签到成功" andTime:1 andPos:CGPointZero];
-            
-            
         }
     }fail:^{
         
+        NSLog(@"2222222");
     }];
 }
 
@@ -117,6 +116,11 @@
             [mallMainV updateDataView:mallData];
         }
     }fail:^{
+        
+        
+        
+        NSLog(@"2222222");
+        
         
     }];
 }
