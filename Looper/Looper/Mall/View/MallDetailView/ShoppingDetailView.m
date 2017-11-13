@@ -26,7 +26,8 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(MallViewModel *)obj;
         self.dataDic=dataDic;
-        photoArr=@[[dataDic objectForKey:@"commodityimageurl"]];
+        NSString *dataStr=[dataDic objectForKey:@"commodityimageurl"];
+        photoArr = [dataStr componentsSeparatedByString:@","];
         [self initView];
     }
     return self;
@@ -41,8 +42,7 @@
     }
     if (button.tag==101) {
         if (1) {
-        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
-        [self addSubview:payView];
+            [self.obj createMallPayViewWithDataDic:self.dataDic];
         }
     }
 }
@@ -193,8 +193,7 @@
     NSInteger tag=tap.view.tag;
     if (tag==100) {
 //点击积分按钮
-        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
-        [self addSubview:payView];
+        [self.obj createMallPayViewWithDataDic:self.dataDic];
     }if (tag==101) {
 //商品参数
     }if (tag==102) {

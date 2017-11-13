@@ -19,12 +19,14 @@
 #import "LocalDataMangaer.h"
 #import "DataHander.h"
 #import "AliManagerData.h"
+#import "MallPayView.h"
 @implementation MallViewModel{
     
     
     NSMutableDictionary *mallData;
     MallMainView *mallMainV;
     ShoppingDetailView *detailV;
+    MallPayView *mallPayV;
     
 }
 
@@ -129,6 +131,15 @@
 }
 
 
+
+
+
+-(void)createMallPayViewWithDataDic:(NSDictionary *)dataDic{
+    mallPayV=[[MallPayView alloc]initWithFrame:[self.obj view].bounds and:self andPayNumber:1 andOrderDic:dataDic andTime:nil];
+    [[_obj view] addSubview:mallPayV];
+}
+
+
 //发送验证码
 -(void)requestDataCode:(NSString*)mobileNum{
     
@@ -180,13 +191,15 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSDictionary *dataDic=responseObject[@"data"];
-            if ([[dataDic objectForKey:@"price"]intValue]>0) {
+//            if ([[dataDic objectForKey:@"price"]intValue]>0) {
 #warning-跳转到支付宝界面
 //                [self getMyOrderFromHttp];
-                [AliManagerData doAlipayPay:responseObject[@"data"]];
-            }else{
+//                [AliManagerData doAlipayPay:responseObject[@"data"]];
+//            }else{
                 [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
-            }
+            [mallPayV removeFromSuperview];
+             [[DataHander sharedDataHander] showViewWithStr:@"支付成功" andTime:1 andPos:CGPointZero];
+//            }
         }else{
             [[DataHander sharedDataHander] showViewWithStr:@"您填写的地址信息错误" andTime:1 andPos:CGPointZero];
         }

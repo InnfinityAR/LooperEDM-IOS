@@ -367,8 +367,8 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
         [self setTableViewCellView:cell andIndexPath:indexPath];
     }
     if (indexPath.row!=0) {
-        UIView *backV=[[UIView alloc]initWithFrame:CGRectMake(150*DEF_Adaptation_Font*0.5, 0, DEF_WIDTH(self)-150*DEF_Adaptation_Font*0.5, 0.8*DEF_Adaptation_Font*0.5)];
-        backV.backgroundColor=[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:0.8];
+        UIView *backV=[[UIView alloc]initWithFrame:CGRectMake(150*DEF_Adaptation_Font*0.5, 1*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-160*DEF_Adaptation_Font*0.5, 0.8*DEF_Adaptation_Font*0.5)];
+        backV.backgroundColor=[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:0.4];
         [cell.contentView addSubview:backV];
     }
     return cell;
@@ -551,7 +551,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     //    UIImageView *line = [LooperToolClass createImageView:@"bg_serach_line.png" andRect:CGPointMake(66, 120) andTag:100 andSize:CGSizeMake(519, 1) andIsRadius:false];
     //     [self addSubview:line];
     UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 115*DEF_Adaptation_Font*0.5, 519*DEF_Adaptation_Font*0.5, 1.0*DEF_Adaptation_Font*0.5)];
-    lineV.backgroundColor=[UIColor whiteColor];
+    lineV.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8];
     [self addSubview:lineV];
     
     mySeatchBar =[[UISearchBar alloc]initWithFrame:CGRectMake(76 * DEF_Adaptation_Font*0.5, 60 * DEF_Adaptation_Font*0.5, 477*0.5*DEF_Adaptation_Font, 50 * DEF_Adaptation_Font*0.5)];

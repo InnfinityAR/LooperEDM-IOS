@@ -108,7 +108,7 @@
     
     NSArray *recommendArray =[MallData objectForKey:@"banner"];
     
-    for(int i=0;[recommendArray count];i++){
+    for(int i=0;i<[recommendArray count];i++){
         NSDictionary *propData = [recommendArray objectAtIndex:i];
         
         UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5+(i*recommendScrollV.frame.size.width),0*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
@@ -181,7 +181,7 @@
         NSDictionary *propIndexData = [propData objectAtIndex:i];
         if([[propIndexData objectForKey:@"commodityid"] intValue]==tap.view.tag){
             
-               [_obj createPropDetailView:propIndexData];
+               [_obj createPropDetailView:[propData objectAtIndex:i]];
             break;
         }
     }
