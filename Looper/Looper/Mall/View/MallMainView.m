@@ -42,7 +42,7 @@
     
     MallData = sourceData;
     
-//    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:0]];
+    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:0]];
     
     [self createHudView];
     
