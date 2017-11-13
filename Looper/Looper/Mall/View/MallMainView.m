@@ -101,19 +101,22 @@
 
     
     
-    recommendScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(25*DEF_Adaptation_Font*0.5,235*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
+    recommendScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(25*DEF_Adaptation_Font*0.5,220*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
     recommendScrollV.showsVerticalScrollIndicator = NO;
     recommendScrollV.showsHorizontalScrollIndicator = NO;
-    [self addSubview:recommendScrollV];
+    [mallScrollV addSubview:recommendScrollV];
    
     
     NSArray *recommendArray =[MallData objectForKey:@"banner"];
     
-    for(int i=0;[recommendArray count];i++){
+    for(int i=0;i<[recommendArray count];i++){
         NSDictionary *propData = [recommendArray objectAtIndex:i];
         
         UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5+(i*recommendScrollV.frame.size.width),0*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
-        [propImage sd_setImageWithURL:[NSURL URLWithString:[propData objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSArray *array = [[propData objectForKey:@"commodityimageurl"] componentsSeparatedByString:@","]; //字符串按照【分隔成数组
+        NSLog(@"array=%@=",array); //结果是
+        
+        [propImage sd_setImageWithURL:[NSURL URLWithString:[array objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
         
@@ -132,11 +135,20 @@
 
     for(int i =0;i<[propData count];i++){
         
+       int  num_x = i%2;
+        
+        int num_y = floorf( i/2);
+        
+        
         NSLog(@"%@",[propData objectAtIndex:i]);
         NSDictionary *propIndexData = [propData objectAtIndex:i];
 
-        UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(21*DEF_Adaptation_Font*0.5,547*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5)];
-        [propImage sd_setImageWithURL:[NSURL URLWithString:[propIndexData objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        UIImageView *propImage=[[UIImageView alloc]initWithFrame:CGRectMake(21*DEF_Adaptation_Font*0.5+(num_x*305*DEF_Adaptation_Font*0.5),547*DEF_Adaptation_Font*0.5+num_y*370*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5, 284*DEF_Adaptation_Font*0.5)];
+        
+        NSArray *array = [[propIndexData objectForKey:@"commodityimageurl"] componentsSeparatedByString:@","]; //字符串按照【分隔成数组
+        NSLog(@"array=%@=",array); //结果是
+        
+        [propImage sd_setImageWithURL:[NSURL URLWithString:[array objectAtIndex:0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
         [mallScrollV addSubview:propImage];
@@ -171,7 +183,6 @@
     
 }
 
-
 -(void)onClickPropImage:(UITapGestureRecognizer *)tap{
 
     NSLog(@"%ld",tap.view.tag);
@@ -181,11 +192,22 @@
     for(int i=0;i<[propData count];i++){
         NSDictionary *propIndexData = [propData objectAtIndex:i];
         if([[propIndexData objectForKey:@"commodityid"] intValue]==tap.view.tag){
-            
                [_obj createPropDetailView:propIndexData];
             break;
         }
     }
+    
+    NSArray *BannerPropData  = [MallData objectForKey:@"banner"];
+    
+    for(int i=0;i<[BannerPropData count];i++){
+        NSDictionary *propIndexData = [BannerPropData objectAtIndex:i];
+        if([[propIndexData objectForKey:@"commodityid"] intValue]==tap.view.tag){
+            [_obj createPropDetailView:propIndexData];
+            break;
+        }
+    }
+    
+    
 }
 
 
