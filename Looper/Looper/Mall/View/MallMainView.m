@@ -35,6 +35,12 @@
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
     if(button.tag ==100){
         [_obj popViewMallController];
+    }else if(button.tag==201){
+        
+        [_obj dailyCheckIn];
+    }else if(button.tag==200){
+        
+        [_obj getCreditHistory];
     }
 }
 
@@ -42,8 +48,7 @@
     
     MallData = sourceData;
     
-    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:0]];
-    
+//    [_obj createPropDetailView:[[sourceData objectForKey:@"data"] objectAtIndex:0]];
     [self createHudView];
     
     [self addPropToScrollView];
@@ -61,10 +66,7 @@
     
     [self addScrollViewTitle];
     
-    
-//    [_obj createPropDetailView:[[MallData objectForKey:@"data"] objectAtIndex:0]];
 
-    
 }
 
 -(void)addScrollViewTitle{
@@ -113,7 +115,14 @@
         [propImage sd_setImageWithURL:[NSURL URLWithString:[propData objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
+        
+        propImage.tag = [[propData objectForKey:@"commodityid"] intValue];
         [recommendScrollV addSubview:propImage];
+        
+        propImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPropImage:)];
+        [propImage addGestureRecognizer:singleTap];
+        
         
     }
      [recommendScrollV setContentSize:CGSizeMake(recommendScrollV.frame.size.width*[recommendArray count],  314*DEF_Adaptation_Font*0.5)];
@@ -131,6 +140,12 @@
         }];
         [mallScrollV addSubview:propImage];
         
+        propImage.tag = [[propIndexData objectForKey:@"commodityid"] intValue];
+        
+        propImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickPropImage:)];
+        [propImage addGestureRecognizer:singleTap];
+        
         UILabel *titleName=[[UILabel alloc]initWithFrame:CGRectMake(propImage.frame.origin.x , propImage.frame.origin.y+propImage.frame.size.height+5*DEF_Adaptation_Font*0.5, 280*DEF_Adaptation_Font*0.5, 31*DEF_Adaptation_Font*0.5)];
         titleName.font=[UIFont systemFontOfSize:14];
         titleName.textColor=[UIColor whiteColor];
@@ -147,9 +162,31 @@
         integrateNum.text=[propIndexData objectForKey:@"credit"];
         [mallScrollV addSubview:integrateNum];
         
+        
+        
+        
+        
     }
     
 }
+
+
+-(void)onClickPropImage:(UITapGestureRecognizer *)tap{
+
+    NSLog(@"%ld",tap.view.tag);
+    
+   NSArray *propData  = [MallData objectForKey:@"data"];
+    
+    for(int i=0;i<[propData count];i++){
+        NSDictionary *propIndexData = [propData objectAtIndex:i];
+        if([[propIndexData objectForKey:@"commodityid"] intValue]==tap.view.tag){
+            
+               [_obj createPropDetailView:propIndexData];
+            break;
+        }
+    }
+}
+
 
 -(void)createHudView{ 
     

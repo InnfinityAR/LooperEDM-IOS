@@ -579,6 +579,7 @@
 		C484E7C81E452D15005DE67F /* FirstWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C51E452D15005DE67F /* FirstWaves.m */; };
 		C484E7C91E452D15005DE67F /* SecondWaves.m in Sources */ = {isa = PBXBuildFile; fileRef = C484E7C71E452D15005DE67F /* SecondWaves.m */; };
 		C489F0721E4722F400A0EE79 /* nLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C489F0711E4722F400A0EE79 /* nLoginView.m */; };
+		C4903EF51FB8A8C90068C631 /* integrateDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4903EF41FB8A8C90068C631 /* integrateDetailView.m */; };
 		C492D9631F6A414400AF0BB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C492D9621F6A414400AF0BB6 /* MapKit.framework */; };
 		C493D2901F9E077900A74F2F /* MeFootPrintView.m in Sources */ = {isa = PBXBuildFile; fileRef = C493D28F1F9E077900A74F2F /* MeFootPrintView.m */; };
 		C49FA07D1E204493009111C7 /* icon_calendar_active.png in Resources */ = {isa = PBXBuildFile; fileRef = C49FA0771E204493009111C7 /* icon_calendar_active.png */; };
@@ -1723,6 +1724,8 @@
 		C484E7C71E452D15005DE67F /* SecondWaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondWaves.m; sourceTree = "<group>"; };
 		C489F0701E4722F400A0EE79 /* nLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nLoginView.h; sourceTree = "<group>"; };
 		C489F0711E4722F400A0EE79 /* nLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = nLoginView.m; sourceTree = "<group>"; };
+		C4903EF31FB8A8C90068C631 /* integrateDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = integrateDetailView.h; sourceTree = "<group>"; };
+		C4903EF41FB8A8C90068C631 /* integrateDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = integrateDetailView.m; sourceTree = "<group>"; };
 		C492D9621F6A414400AF0BB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C493D28E1F9E077900A74F2F /* MeFootPrintView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeFootPrintView.h; sourceTree = "<group>"; };
 		C493D28F1F9E077900A74F2F /* MeFootPrintView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeFootPrintView.m; sourceTree = "<group>"; };
@@ -4870,6 +4873,8 @@
 				B2A6301A1FB59707000F8899 /* MallDetailView */,
 				C4E7BC6B1FB1CDE700DFF117 /* MallMainView.h */,
 				C4E7BC6C1FB1CDE700DFF117 /* MallMainView.m */,
+				C4903EF31FB8A8C90068C631 /* integrateDetailView.h */,
+				C4903EF41FB8A8C90068C631 /* integrateDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5720,6 +5725,7 @@
 				C4E7BC6A1FB1CD7C00DFF117 /* MallViewModel.m in Sources */,
 				C4E86FAE1F16474000D9658D /* PKShortVideoRecorder.m in Sources */,
 				C4DDB53F1E290076005E3909 /* GTMBase64.m in Sources */,
+				C4903EF51FB8A8C90068C631 /* integrateDetailView.m in Sources */,
 				B2C90ED71F13A16C000E127A /* LTSCalendarDayView.m in Sources */,
 				C4C0ECD21F250B4500140E5A /* UIImageView+XHURLDownload.m in Sources */,
 				C4D854111E8E0AF40059E824 /* TouchScrollView.m in Sources */,

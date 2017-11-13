@@ -20,6 +20,9 @@
 
 -(void)popViewMallController;
 
+-(void)dailyCheckIn;
+
+-(void)getCreditHistory;
 
 @property (nonatomic )id obj;
 

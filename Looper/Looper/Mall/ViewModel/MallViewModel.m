@@ -13,8 +13,9 @@
 #import "LooperConfig.h"
 #import "AFNetworkTool.h"
 #import "ShoppingDetailView.h"
+#import "DataHander.h"
 
-
+#import "integrateDetailView.h"
 #import "LocalDataMangaer.h"
 #import "DataHander.h"
 #import "AliManagerData.h"
@@ -45,6 +46,48 @@
     
     
 }
+
+
+-(void)getCreditHistory{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getCreditHistory" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            
+            integrateDetailView *integrateView =[[integrateDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)  and:nil];
+              [[self.obj view]addSubview:integrateView];
+
+           
+        }
+    }fail:^{
+        
+    }];
+}
+
+
+
+
+-(void)dailyCheckIn{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"dailyCheckIn" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+
+                  [[DataHander sharedDataHander] showViewWithStr:@"签到成功" andTime:1 andPos:CGPointZero];
+            
+            
+        }
+    }fail:^{
+        
+    }];
+}
+
 
 
 -(void)createPropDetailView:(NSDictionary*)DetailData{
