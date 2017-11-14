@@ -325,7 +325,14 @@
     UILabel *jobLB=[[UILabel alloc]initWithFrame:CGRectMake(100*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5, 190*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     jobLB.textColor=[UIColor whiteColor];
     jobLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:12.f];
-    jobLB.text=[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]];
+    if ([dataDic objectForKey:@"groupname"]==[NSNull null]||[dataDic objectForKey:@"groupname"]==nil) {
+       jobLB.text=[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]];
+    }else if([[dataDic objectForKey:@"groupname"]length]<=2){
+       jobLB.text=[NSString stringWithFormat:@"%@_%@",[dataDic objectForKey:@"groupname"],[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]]];
+    }else{
+         jobLB.text=[NSString stringWithFormat:@"%@..%@",[[dataDic objectForKey:@"groupname"]substringToIndex:2],[self jobnameForStatus:[[dataDic objectForKey:@"role"]intValue]]];
+    }
+   
     [cell.contentView addSubview:jobLB];
     jobLB.layer.cornerRadius=16*DEF_Adaptation_Font*0.5;
     jobLB.layer.masksToBounds=YES;

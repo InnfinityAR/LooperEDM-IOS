@@ -143,6 +143,7 @@
 		B2A630221FB59807000F8899 /* ShoppingPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6301D1FB59806000F8899 /* ShoppingPhotoView.m */; };
 		B2A630231FB59807000F8899 /* SlidingScrolleview.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6301E1FB59806000F8899 /* SlidingScrolleview.m */; };
 		B2A630261FB5A28E000F8899 /* MallPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A630251FB5A28E000F8899 /* MallPayView.m */; };
+		B2A630291FB98034000F8899 /* ShoppingArgumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A630281FB98034000F8899 /* ShoppingArgumentView.m */; };
 		B2A6EE5E1ECAE015004BF416 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */; };
 		B2A6EE891ECAF5FF004BF416 /* ActivityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE881ECAF5FF004BF416 /* ActivityViewModel.m */; };
 		B2A6EE9D1ECC4EBF004BF416 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A6EE9C1ECC4EBF004BF416 /* ActivityView.m */; };
@@ -1068,6 +1069,8 @@
 		B2A630201FB59807000F8899 /* ShoppingPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingPhotoView.h; sourceTree = "<group>"; };
 		B2A630241FB5A28E000F8899 /* MallPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallPayView.h; sourceTree = "<group>"; };
 		B2A630251FB5A28E000F8899 /* MallPayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallPayView.m; sourceTree = "<group>"; };
+		B2A630271FB98034000F8899 /* ShoppingArgumentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingArgumentView.h; sourceTree = "<group>"; };
+		B2A630281FB98034000F8899 /* ShoppingArgumentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingArgumentView.m; sourceTree = "<group>"; };
 		B2A6EE5C1ECAE015004BF416 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
 		B2A6EE5D1ECAE015004BF416 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		B2A6EE871ECAF5FF004BF416 /* ActivityViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewModel.h; sourceTree = "<group>"; };
@@ -2476,6 +2479,8 @@
 			children = (
 				B2A6301C1FB59806000F8899 /* ShoppingDetailView.h */,
 				B2A6301B1FB59806000F8899 /* ShoppingDetailView.m */,
+				B2A630271FB98034000F8899 /* ShoppingArgumentView.h */,
+				B2A630281FB98034000F8899 /* ShoppingArgumentView.m */,
 				B2A630201FB59807000F8899 /* ShoppingPhotoView.h */,
 				B2A6301D1FB59806000F8899 /* ShoppingPhotoView.m */,
 				B2A6301F1FB59806000F8899 /* SlidingScrolleview.h */,
@@ -5667,6 +5672,7 @@
 				C4796A711F13615B00414AFD /* PhotoWallViewController.m in Sources */,
 				C4BCE73E1E091E710087E6C5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				C4664A361E20086E005755C6 /* NSDate+GFCalendar.m in Sources */,
+				B2A630291FB98034000F8899 /* ShoppingArgumentView.m in Sources */,
 				C4BE5EDA1E4EEDD800C8DA98 /* SimpleChatViewModel.m in Sources */,
 				C43E3D1F1EA6170C00EA4A6E /* CreateLoopController.m in Sources */,
 				C404A7DB1EBF8E9B000B9E1D /* RotateNavigationController.m in Sources */,

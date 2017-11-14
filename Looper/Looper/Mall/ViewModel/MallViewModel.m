@@ -20,6 +20,7 @@
 #import "DataHander.h"
 #import "AliManagerData.h"
 #import "MallPayView.h"
+#import "ShoppingArgumentView.h"
 @implementation MallViewModel{
     
     
@@ -27,7 +28,7 @@
     MallMainView *mallMainV;
     ShoppingDetailView *detailV;
     MallPayView *mallPayV;
-    
+    ShoppingArgumentView *argumentV;
 }
 
 -(id)initWithController:(id)controller{
@@ -142,8 +143,10 @@
     mallPayV=[[MallPayView alloc]initWithFrame:[self.obj view].bounds and:self andPayNumber:1 andOrderDic:dataDic andTime:nil];
     [[_obj view] addSubview:mallPayV];
 }
-
-
+-(void)createShoppingArgumentVWithDataDic:(NSDictionary *)dataDic{
+    argumentV=[[ShoppingArgumentView alloc]initWithFrame:[self.obj view].bounds andObject:self andDataDic:dataDic];
+    [[_obj view]addSubview:argumentV];
+}
 //发送验证码
 -(void)requestDataCode:(NSString*)mobileNum{
     
