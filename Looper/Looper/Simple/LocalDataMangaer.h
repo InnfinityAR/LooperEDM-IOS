@@ -21,6 +21,7 @@
     NSArray *rouletteArr;
     NSString *raverid;
     NSString *role;
+    NSString *creditNum;
     
     NSDictionary *localUserData;
     
@@ -41,6 +42,7 @@
 @property(nonatomic,strong)NSArray *rouletteArr;
 @property(nonatomic,strong)NSString *raverid;
 @property(nonatomic,strong)NSString *role;
+@property(nonatomic,strong)NSString *creditNum;
 
 @property(nonatomic)int loginType;
 

@@ -11,6 +11,7 @@
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
 #import "UIImageView+WebCache.h"
+#import "LocalDataMangaer.h"
 
 @implementation MallMainView{
     
@@ -82,7 +83,7 @@
     UILabel *integrateLable=[[UILabel alloc]initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 330*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     integrateLable.font=[UIFont systemFontOfSize:14];
     integrateLable.textColor=[UIColor colorWithRed:138/255.0 green:137/255.0 blue:247/255.0 alpha:1.0];
-    integrateLable.text=@"100积分";
+    integrateLable.text=[NSString stringWithFormat:@"%@积分",[LocalDataMangaer sharedManager].creditNum];
     [integrateLable sizeToFit];
     [mallScrollV addSubview:integrateLable];
     
@@ -201,8 +202,7 @@
             break;
         }
     }
-    
-    
+
 }
 
 
