@@ -13,11 +13,13 @@
 #import "SlidingScrolleview.h"
 #import "ShoppingPhotoView.h"
 #import "MallPayView.h"
+#import "UIImageView+WebCache.h"
 #define ScrollY 0
 @interface ShoppingDetailView()<UIScrollViewDelegate,SlidingScrolleviewDelegate>
 {
     UIScrollView *scrollV;
     NSArray *photoArr;
+    UIView *detailV;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
 @end
@@ -69,7 +71,7 @@
     [self addSubview:buyBtn];
 }
 -(void)creatScrollView{
-    UIView *detailV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(self)- ScrollY, DEF_WIDTH(self), 400*DEF_Adaptation_Font*0.5)];
+    detailV=[[UIView alloc]initWithFrame:CGRectMake(0, DEF_WIDTH(self)- ScrollY, DEF_WIDTH(self), 400*DEF_Adaptation_Font*0.5)];
     detailV.backgroundColor=ColorRGB(39, 39, 72, 1.0);
     [scrollV addSubview:detailV];
     UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5, 575*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
@@ -100,11 +102,11 @@
     [detailV addSubview:contentLB];
 //加入图片
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, DEF_Y(contentLB)+lblSize2.height+40*DEF_Adaptation_Font*0.5, DEF_WIDTH(self), DEF_HEIGHT(self))];
-    imageView.image=[UIImage imageNamed:@"640-2.png"];
-    imageView.contentMode=UIViewContentModeScaleAspectFill;
-    imageView.clipsToBounds=YES;
+//    [imageView sd_setImageWithURL:[NSURL URLWithString:[_dataDic objectForKey:@"commoditydes"]] placeholderImage:nil options:(SDWebImageRetryFailed)];
+   imageView=[self WidthImageViewWithString:[_dataDic objectForKey:@"commoditydes"] andUIImageV:imageView];
     [detailV addSubview:imageView];
-    
+}
+-(void)createImageBottomVWithImageV:(UIImageView *)imageView{
     UIView *argumentBtn=[[UIView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+10*DEF_Adaptation_Font*0.5, 640*DEF_Adaptation_Font*0.5, 110*DEF_Adaptation_Font*0.5)];
     argumentBtn.tag=101;
     UITapGestureRecognizer *tap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickIntergralBtn:)];
@@ -116,7 +118,7 @@
     lineView.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
     [argumentBtn addSubview:lineView];
     UIImage *image=[UIImage imageNamed:@"icon_checkDetail.png"];
-    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(argumentBtn)-image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5-40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(argumentBtn)-image.size.width/image.size.height*20*DEF_Adaptation_Font*0.5-40*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*20*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     imageV.image=image;
     [argumentBtn addSubview:imageV];
     
@@ -130,17 +132,42 @@
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(53*DEF_Adaptation_Font*0.5, 77*DEF_Adaptation_Font*0.5, 580*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
     if ([_dataDic objectForKey:@"deliveryarea"]==[NSNull null]||[_dataDic objectForKey:@"deliveryarea"]==nil) {
     }else{
-    locationLB.text=[_dataDic objectForKey:@"deliveryarea"];
+        locationLB.text=[_dataDic objectForKey:@"deliveryarea"];
     }
     locationLB.font=[UIFont boldSystemFontOfSize:16];
     locationLB.textColor=ColorRGB(179, 188, 215, 1.0);
     [locationBtn addSubview:locationLB];
-    
-    
     CGRect detailFrame=detailV.frame;
     detailFrame.size.height=DEF_Y(locationBtn)+DEF_HEIGHT(locationBtn);
     detailV.frame=detailFrame;
     scrollV.contentSize=CGSizeMake(DEF_WIDTH(self), DEF_HEIGHT(detailV)+DEF_WIDTH(self)- ScrollY);
+}
+-(UIImageView *)WidthImageViewWithString:(NSString *)url andUIImageV:(UIImageView *)imageView{
+    __block CGFloat itemW = DEF_WIDTH(self);
+    __block CGFloat itemH = 0;
+    
+    NSURL * URL = [NSURL URLWithString:url];
+    //加入默认本地图片
+    [imageView sd_setImageWithURL:URL placeholderImage:nil options:SDWebImageRetryFailed];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    __block  UIImage * image;
+    [manager diskImageExistsForURL:URL completion:^(BOOL isInCache) {
+        if (isInCache) {
+            image = [[manager imageCache] imageFromDiskCacheForKey:URL.absoluteString];
+        }else{
+            NSData *data = [NSData dataWithContentsOfURL:URL];
+            image = [UIImage imageWithData:data];
+        }
+        //根据image的比例来设置高度
+        itemH = image.size.height / image.size.width * itemW;
+        CGRect logoFrame=imageView.frame;
+        if (image!=nil) {
+            logoFrame.size.height= itemH;
+        }
+        imageView.frame=logoFrame;
+        [self createImageBottomVWithImageV:imageView];
+    }];//判断是否有缓存
+    return imageView;
 }
 
 -(UIView *)createTitleViewWithPoint:(CGPoint)point andTitle:(NSString *)title{
