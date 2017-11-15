@@ -10,6 +10,7 @@
 #import "MallViewModel.h"
 #import "LooperConfig.h"
 #import "LooperToolClass.h"
+#import "LocalDataMangaer.h"-
 
 @implementation integrateDetailView
 
@@ -29,7 +30,6 @@
         [self removeFromSuperview];
     }
 }
-
 
 
 -(void)initView{
@@ -57,7 +57,8 @@
     UILabel *integrateNum=[[UILabel alloc]initWithFrame:CGRectMake(269*DEF_Adaptation_Font*0.5, 173*DEF_Adaptation_Font*0.5, 169*DEF_Adaptation_Font*0.5, 52*DEF_Adaptation_Font*0.5)];
     integrateNum.font=[UIFont systemFontOfSize:16];
     integrateNum.textColor=[UIColor whiteColor];
-    integrateNum.text=@"100积分";
+    integrateNum.text=[NSString stringWithFormat:@"%@积分",[LocalDataMangaer sharedManager].creditNum];
+
     integrateNum.textColor=[UIColor colorWithRed:136/255.0 green:131/255.0 blue:250/255.0 alpha:1.0];
     [self addSubview:integrateNum];
     

@@ -201,11 +201,8 @@
             [mallMainV updateDataView:mallData];
         }
     }fail:^{
-        
-        
-        
+    
         NSLog(@"2222222");
-        
         
     }];
 }
@@ -218,9 +215,6 @@
     [[_obj view] addSubview:mallMainV];
     [self getCommodityData];
 }
-
-
-
 
 
 -(void)createMallPayViewWithDataDic:(NSDictionary *)dataDic{
