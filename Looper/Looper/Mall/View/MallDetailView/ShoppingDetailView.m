@@ -89,7 +89,7 @@
     UIView *titleV1=[self createTitleViewWithPoint:CGPointMake(0, 237*DEF_Adaptation_Font*0.5) andTitle:@"商品详情"];
     [detailV addSubview:titleV1];
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(32*DEF_Adaptation_Font*0.5, 292*DEF_Adaptation_Font*0.5, 576*DEF_Adaptation_Font*0.5, 100*DEF_Adaptation_Font*0.5)];
-    contentLB.text=[self.dataDic objectForKey:@"subhead"];
+    contentLB.text=[self.dataDic objectForKey:@"commoditydestext "];
     contentLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     contentLB.textColor=[UIColor whiteColor];
     contentLB.numberOfLines=0;
@@ -115,6 +115,10 @@
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(31*DEF_Adaptation_Font*0.5, 109*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-62*DEF_Adaptation_Font*0.5, 1.0*DEF_Adaptation_Font*0.5)];
     lineView.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
     [argumentBtn addSubview:lineView];
+    UIImage *image=[UIImage imageNamed:@"icon_checkDetail.png"];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(argumentBtn)-image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5-40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    imageV.image=image;
+    [argumentBtn addSubview:imageV];
     
     UIView *locationBtn=[[UIView alloc]initWithFrame:CGRectMake(0*DEF_Adaptation_Font*0.5, DEF_Y(argumentBtn)+DEF_HEIGHT(argumentBtn)+10*DEF_Adaptation_Font*0.5, 640*DEF_Adaptation_Font*0.5, 150*DEF_Adaptation_Font*0.5)];
     locationBtn.tag=102;
@@ -124,7 +128,10 @@
     UIView *titleV3=[self createTitleViewWithPoint:CGPointMake(0,32*DEF_Adaptation_Font*0.5) andTitle:@"配送范围"];
     [locationBtn addSubview:titleV3];
     UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(53*DEF_Adaptation_Font*0.5, 77*DEF_Adaptation_Font*0.5, 580*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5)];
-    locationLB.text=@"中国大陆地区";
+    if ([_dataDic objectForKey:@"deliveryarea"]==[NSNull null]||[_dataDic objectForKey:@"deliveryarea"]==nil) {
+    }else{
+    locationLB.text=[_dataDic objectForKey:@"deliveryarea"];
+    }
     locationLB.font=[UIFont boldSystemFontOfSize:16];
     locationLB.textColor=ColorRGB(179, 188, 215, 1.0);
     [locationBtn addSubview:locationLB];
@@ -135,7 +142,6 @@
     detailV.frame=detailFrame;
     scrollV.contentSize=CGSizeMake(DEF_WIDTH(self), DEF_HEIGHT(detailV)+DEF_WIDTH(self)- ScrollY);
 }
-
 
 -(UIView *)createTitleViewWithPoint:(CGPoint)point andTitle:(NSString *)title{
     UIView *titleV=[[UIView alloc]initWithFrame:CGRectMake(point.x, point.y, DEF_WIDTH(self), 25*DEF_Adaptation_Font*0.5)];

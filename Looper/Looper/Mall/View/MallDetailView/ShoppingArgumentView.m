@@ -38,12 +38,12 @@
     argumentLB.font=[UIFont boldSystemFontOfSize:20];
     [contentV addSubview:argumentLB];
     
-    UIButton *backBtn=[LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(DEF_WIDTH(self)-170*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(150*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
+    UIButton *backBtn=[LooperToolClass createBtnImageNameReal:@"allShowBtn.jpg" andRect:CGPointMake(DEF_WIDTH(self)-170*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5) andTag:100 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(160*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5) andTarget:self];
     [contentV addSubview:backBtn];
-    [self createTableViewCellWithTitle:@"商品名称" andContent:[_dataDic objectForKey:@"commodityname"] andIndex:0];
-    [self createTableViewCellWithTitle:@"品牌" andContent:@"黑马" andIndex:1];
-    [self createTableViewCellWithTitle:@"尺寸" andContent:@"60*40*50" andIndex:2];
-    [self createTableViewCellWithTitle:@"颜色" andContent:@"银色" andIndex:3];
+    [self createTableViewCellWithTitle:@"商品名称" andContent:[_dataDic objectForKey:@"subhead"] andIndex:0];
+    [self createTableViewCellWithTitle:@"品牌" andContent:[_dataDic objectForKey:@"commoditybrand"] andIndex:1];
+    [self createTableViewCellWithTitle:@"尺寸" andContent:[_dataDic objectForKey:@"commoditysize"] andIndex:2];
+    [self createTableViewCellWithTitle:@"颜色" andContent:[_dataDic objectForKey:@"commoditycolour"] andIndex:3];
     
 }
 -(void)createTableViewCellWithTitle:(NSString *)title  andContent:(NSString *)content andIndex:(NSInteger)index{
@@ -53,7 +53,10 @@
     nameLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [contentV addSubview:nameLB];
     UILabel *nameLB2=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5+60*index, 400*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    if (content==nil||[content isEqual:[NSNull null]]) {
+    }else{
     nameLB2.text=content;
+    }
     nameLB2.textColor=[UIColor whiteColor];
     nameLB2.font=[UIFont systemFontOfSize:14];
     [contentV addSubview:nameLB2];
