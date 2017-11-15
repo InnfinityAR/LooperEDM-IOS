@@ -26,7 +26,8 @@
     if (self=[super initWithFrame:frame]) {
         self.obj=(MallViewModel *)obj;
         self.dataDic=dataDic;
-        photoArr=@[[dataDic objectForKey:@"commodityimageurl"]];
+        NSString *dataStr=[dataDic objectForKey:@"commodityimageurl"];
+        photoArr = [dataStr componentsSeparatedByString:@","];
         [self initView];
     }
     return self;
@@ -41,8 +42,7 @@
     }
     if (button.tag==101) {
         if (1) {
-        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
-        [self addSubview:payView];
+            [self.obj createMallPayViewWithDataDic:self.dataDic];
         }
     }
 }
@@ -73,7 +73,7 @@
     detailV.backgroundColor=ColorRGB(39, 39, 72, 1.0);
     [scrollV addSubview:detailV];
     UILabel *titleLB=[[UILabel alloc]initWithFrame:CGRectMake(30*DEF_Adaptation_Font*0.5, 22*DEF_Adaptation_Font*0.5, 575*DEF_Adaptation_Font*0.5, 36*DEF_Adaptation_Font*0.5)];
-    titleLB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"commodityname"]];
+    titleLB.text=[NSString stringWithFormat:@"%@",[_dataDic objectForKey:@"commodityname"]];
     titleLB.font=[UIFont boldSystemFontOfSize:18];
     titleLB.textColor=[UIColor whiteColor];
     [detailV addSubview:titleLB];
@@ -161,11 +161,18 @@
     intergralIV.image=[UIImage imageNamed:@"store_intergral"];
     [intergralBtn addSubview:intergralIV];
     UILabel *LB=[[UILabel alloc]initWithFrame:CGRectMake(60*DEF_Adaptation_Font*0.5, 8*DEF_Adaptation_Font*0.5, 125*DEF_Adaptation_Font*0.5, 26*DEF_Adaptation_Font*0.5)];
-    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];;
+    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];
+    CGSize lblSize2 = [LB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 26*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame2=LB.frame;
+    frame2.size=lblSize2;
+    LB.frame=frame2;
     LB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     LB.textColor=ColorRGB(170, 170, 178, 1.0);
     [intergralBtn addSubview:LB];
-    UILabel *LB2=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, 165*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5)];
+    CGRect frame=intergralBtn.frame;
+    frame.size.width=DEF_X(LB)+DEF_WIDTH(LB)+10*DEF_Adaptation_Font*0.5;
+    intergralBtn.frame=frame;
+    UILabel *LB2=[[UILabel alloc]initWithFrame:CGRectMake(10*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5, DEF_WIDTH(intergralIV)-20*DEF_Adaptation_Font*0.5, 34*DEF_Adaptation_Font*0.5)];
     LB2.text=@"积分不足";
     LB2.textAlignment=NSTextAlignmentCenter;
     LB2.font=[UIFont fontWithName:@"STHeitiTC-Light" size:10.f];
@@ -184,19 +191,29 @@
     intergralIV.image=[UIImage imageNamed:@"store_intergral"];
     [intergralBtn addSubview:intergralIV];
     UILabel *LB=[[UILabel alloc]initWithFrame:CGRectMake(65*DEF_Adaptation_Font*0.5, 15*DEF_Adaptation_Font*0.5, 125*DEF_Adaptation_Font*0.5, 38*DEF_Adaptation_Font*0.5)];
-    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];;
+    LB.text=[NSString stringWithFormat:@"%@积分",[_dataDic objectForKey:@"credit"]];
+    CGSize lblSize2 = [LB.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 26*DEF_Adaptation_Font*0.5) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame2=LB.frame;
+    frame2.size=lblSize2;
+    LB.frame=frame2;
     LB.textColor=ColorRGB(136,130,248, 1.0);
     LB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     [intergralBtn addSubview:LB];
+    CGRect frame=intergralBtn.frame;
+    frame.size.width=DEF_X(LB)+DEF_WIDTH(LB)+10*DEF_Adaptation_Font*0.5;
+    if (frame.size.width<185*DEF_Adaptation_Font*0.5) {
+        frame.size.width=185*DEF_Adaptation_Font*0.5;
+    }
+    intergralBtn.frame=frame;
 }
 -(void)clickIntergralBtn:(UITapGestureRecognizer *)tap{
     NSInteger tag=tap.view.tag;
     if (tag==100) {
 //点击积分按钮
-        MallPayView *payView=[[MallPayView alloc]initWithFrame:self.bounds and:self.obj andPayNumber:1 andOrderDic:self.dataDic andTime:nil];
-        [self addSubview:payView];
+        [self.obj createMallPayViewWithDataDic:self.dataDic];
     }if (tag==101) {
 //商品参数
+        [self.obj createShoppingArgumentVWithDataDic:self.dataDic];
     }if (tag==102) {
 //配送范围
     }

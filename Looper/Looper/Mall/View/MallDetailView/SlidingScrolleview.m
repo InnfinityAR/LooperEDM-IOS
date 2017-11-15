@@ -63,6 +63,7 @@
     scrollview.scrollsToTop = NO;
     scrollview.userInteractionEnabled = YES;
     self.scrollview = scrollview;
+     self.scrollview.scrollEnabled=NO;
     [self addSubview:scrollview];
     
     //深拷贝imageview上的控件
@@ -104,6 +105,7 @@
     pageControl.pageIndicatorTintColor=[UIColor whiteColor];
       if (imageNumber>3) {
     [self addSubview:pageControl];
+      self.scrollview.scrollEnabled=YES;
       }
     self.scrollview.contentSize = CGSizeMake(self.frame.size.width * imageNumber, self.frame.size.height);
     [self.scrollview setContentOffset:CGPointMake(self.frame.size.width, 0) animated:NO];

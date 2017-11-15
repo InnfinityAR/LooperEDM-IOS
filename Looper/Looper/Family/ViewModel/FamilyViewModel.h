@@ -106,6 +106,7 @@
 
 
 #pragma -变更职位（当originRole为1）
+-(void)changeGroupIdWithUserId:(NSString *)userId andGroupId:(NSString *)groupId;
 -(void)delayChangeJobWithOriginUser:(NSDictionary *)originUserDic andView:(UIView *)view andWillChangeRole:(NSString *)role;
 -(void)delayChangeJobWithUserId:(NSString *)userId andRole:(NSString *)role andGroupId:(NSString *)groupid;
 @property(nonatomic,strong)NSString *WillChangeRole;

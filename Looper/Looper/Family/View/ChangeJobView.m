@@ -22,6 +22,9 @@
     UIScrollView *selectScrollV;
 //弹窗
     UIView *selectView;
+    
+//用来记录groupid
+    NSInteger groupid;
 }
 @property(nonatomic,strong)NSDictionary *dataDic;
 
@@ -93,11 +96,17 @@
                 [_groupArr addObject:dataDic];
             }
         }
+//去除重复
+//        NSMutableDictionary *dic = [[NSMutableDictionary alloc]initWithCapacity:0];
+//        for(NSString *str in _groupArr)
+//        {
+//            [dic setValue:str forKey:str];
+//        }
+//        NSLog(@"%@",[dic allKeys]);
     }
     return _groupArr;
 }
 - (IBAction)btnOnClick:(UIButton *)button withEvent:(UIEvent *)event{
-    NSInteger groupid=button.tag;
     
     if(button.tag==5001){
         [self removeFromSuperview];
@@ -146,6 +155,7 @@
     }
     
     if (button.tag>=100&&button.tag<=150) {
+        groupid=button.tag;
             self.selectLb=1;
             UILabel *label=self.label2Arr[button.tag-100];
             self.selectStr=label.text;
@@ -166,6 +176,7 @@
 
     }
     if (button.tag>=200&&button.tag<=250) {
+        groupid=button.tag;
         self.selectLb=0;
         UILabel *label=self.label2Arr[button.tag-200];
         self.selectStr=label.text;
@@ -206,13 +217,18 @@
 //如果选择了水手长或者水手，需要传groupid
                     if (self.groupArr.count!=0) {
                     if (groupid>=100&&groupid<100+self.groupArr.count) {
-                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",self.groupArr[groupid-100]]];
+                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",[self.groupArr[groupid-100]objectForKey:@"groupid"]]];
                     }else if (groupid>=200&&groupid<200+self.groupArr.count) {
-                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",self.groupArr[groupid-200]]];
+                        [self.obj setIsgroupid:[NSString stringWithFormat:@"%@",[self.groupArr[groupid-200]objectForKey:@"groupid"]]];
                     }
                     }
                 }
+                if (groupid>=200&&groupid<200+self.groupArr.count) {
+//如果是换成员使用另一个接口
+                    [self.obj changeGroupIdWithUserId:[self.dataDic objectForKey:@"userid"] andGroupId:[self.groupArr[groupid-200]objectForKey:@"groupid"]];
+                }else{
             [self.obj ChangeJobToSailorWithUserId:[self.dataDic objectForKey:@"userid"] andRole:[NSString stringWithFormat:@"%ld",self.selectLb] andOriginalRole:nil];
+                }
                 [self removeFromSuperview];
         }
             
@@ -424,6 +440,7 @@
     
     
     if (tag>=100&&tag<=150) {
+        groupid=tag;
         self.selectLb=1;
         UILabel *label=self.label2Arr[tag-100];
         self.selectStr=label.text;
@@ -444,6 +461,7 @@
         [self.jobLB setHidden:YES];
     }
     if (tag>=200&&tag<=250) {
+        groupid=tag;
         self.selectLb=0;
         UILabel *label=self.label2Arr[tag-200];
         self.selectStr=label.text;

@@ -429,7 +429,23 @@
         
     }];
 }
-
+-(void)changeGroupIdWithUserId:(NSString *)userId andGroupId:(NSString *)groupId{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
+    [dic setObject:userId forKey:@"userId"];
+    if (groupId!=nil) {
+        [dic setObject:groupId forKey:@"groupId"];
+    }
+    [dic setObject:[_familyModel.familyDetailData objectForKey:@"raverid"] forKey:@"raverId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"updateUserGroup" parameters:dic  success:^(id responseObject) {
+        if([responseObject[@"status"] intValue]==0){
+            [self updateFamilyModelWithType:1 andInfo:nil];
+            _isgroupid=nil;
+        }
+    }fail:^{
+        
+    }];
+    
+}
 
 
 
@@ -686,6 +702,7 @@
             [CreateFleetGroupV removeFromSuperview];
 #warning-刷新舰队管理界面
             [self createFleetMangerViewWithUserId:[LocalDataMangaer sharedManager].uid andRaverId:raverId andType:1];
+            [self getFamilyRankDataForOrderType:@"1"];
         }else{
          [[DataHander sharedDataHander] showViewWithStr:@"创建失败，也许你已经在舰队里面了亲" andTime:1 andPos:CGPointZero];
         }

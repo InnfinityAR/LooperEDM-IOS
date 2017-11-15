@@ -74,7 +74,7 @@
     contentLB.frame=frame;
     [contentScrol addSubview:contentLB];
     
-    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 124*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
     if([self.orderDic objectForKey:@"commodityimageurl"]!=nil) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:[self.orderDic objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
