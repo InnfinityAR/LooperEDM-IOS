@@ -76,39 +76,22 @@
     
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+22*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
     if([self.orderDic objectForKey:@"commodityimageurl"]!=nil) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[self.orderDic objectForKey:@"commodityimageurl"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSString *dataStr=[self.orderDic objectForKey:@"commodityimageurl"];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[dataStr componentsSeparatedByString:@","][0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
     }
     [contentScrol addSubview:imageView];
     
-    UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
-    locationLV.image=[UIImage imageNamed:@"locaton.png"];
-    [contentScrol addSubview:locationLV];
-    UILabel *locationLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+0*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    locationLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    locationLB.text=@"上海／浦东";
-    CGSize lblSize2 = [locationLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
-    CGRect frame2=locationLB.frame;
-    frame2.size=lblSize2;
-    locationLB.frame=frame2;
-    locationLB.numberOfLines=0;
-    locationLB.textColor=ColorRGB(223, 219, 234, 1.0);
-    [contentScrol addSubview:locationLB];
-    
-    UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+    UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+0*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-//    if ([[self.orderDic objectForKey:@"isPrice" ]intValue]>0) {
-        timeLB.text=[self.orderDic objectForKey:@"creationdate"];
-//    }else{
-//        timeLB.text=[self setSelecttime];
-//    }
-    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
-    CGRect frame1=timeLB.frame;
-    frame1.size=lblSize1;
-    timeLB.frame=frame1;
+    timeLB.text=[self.orderDic objectForKey:@"creationdate"];
+    CGSize lblSize2 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+    CGRect frame2=timeLB.frame;
+    frame2.size=lblSize2;
+    timeLB.frame=frame2;
     timeLB.numberOfLines=0;
     timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [contentScrol addSubview:timeLB];

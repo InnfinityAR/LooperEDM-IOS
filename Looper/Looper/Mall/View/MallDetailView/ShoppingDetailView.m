@@ -14,6 +14,7 @@
 #import "ShoppingPhotoView.h"
 #import "MallPayView.h"
 #import "UIImageView+WebCache.h"
+#import "LocalDataMangaer.h"
 #define ScrollY 0
 @interface ShoppingDetailView()<UIScrollViewDelegate,SlidingScrolleviewDelegate>
 {
@@ -85,6 +86,7 @@
     integralLB.textColor=[UIColor whiteColor];
     [detailV addSubview:integralLB];
 //积分按钮
+    NSLog(@"%@",[LocalDataMangaer sharedManager].localUserData);
 //    [self creatIntergralBtn:detailV];
     [self creatIntergralBtnIfEnough:detailV];
 
