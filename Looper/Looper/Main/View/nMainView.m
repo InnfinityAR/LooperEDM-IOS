@@ -204,7 +204,7 @@
     [self addSubview:activeBtn];
     isActiveUp = true;
 #warning-在这里添加抽奖按钮
-    UIButton *attendanceBtn = [LooperToolClass createBtnImageName:@"btn_attendance.png" andRect:CGPointMake(14, 948) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(104, 98)  andTarget:self];
+    UIButton *attendanceBtn = [LooperToolClass createBtnImageName:@"btn_attendance.png" andRect:CGPointMake(14, 948) andTag:55000 andSelectImage:nil andClickImage:nil andTextStr:nil andSize:CGSizeMake(104*DEF_Adaptation_Font*0.5, 98*DEF_Adaptation_Font*0.5)  andTarget:self];
     [self addSubview:attendanceBtn];
 
     

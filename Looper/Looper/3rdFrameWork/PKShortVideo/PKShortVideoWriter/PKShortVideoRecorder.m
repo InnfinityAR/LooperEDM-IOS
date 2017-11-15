@@ -333,7 +333,7 @@ typedef NS_ENUM( NSInteger, PKRecordingStatus ) {
     AVCaptureSession *captureSession = [AVCaptureSession new];
     
     if (self.outputSize.width > 360 || self.outputSize.width/self.outputSize.height > 4/3) {
-        captureSession.sessionPreset = AVCaptureSessionPreset1280x720;//720 x 1280
+        captureSession.sessionPreset = AVCaptureSessionPresetMedium;//720 x 1280
     } else {
         captureSession.sessionPreset = AVCaptureSessionPresetMedium;//360 x 480 小视频一般不会超过此尺寸
     }

@@ -61,8 +61,6 @@
     mallScrollV.showsHorizontalScrollIndicator = NO;
     [self addSubview:mallScrollV];
     
-    [mallScrollV setContentSize:CGSizeMake(DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT*3)];
-    
     
     [self addScrollViewTitle];
     
@@ -98,8 +96,6 @@
 
 -(void)addPropToScrollView{
 
-    
-    
     recommendScrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(25*DEF_Adaptation_Font*0.5,220*DEF_Adaptation_Font*0.5, 590*DEF_Adaptation_Font*0.5, 314*DEF_Adaptation_Font*0.5)];
     recommendScrollV.showsVerticalScrollIndicator = NO;
     recommendScrollV.showsHorizontalScrollIndicator = NO;
@@ -173,12 +169,12 @@
         integrateNum.textColor=[UIColor colorWithRed:136/255.0 green:131/255.0 blue:250/255.0 alpha:1.0];
         integrateNum.text=[propIndexData objectForKey:@"credit"];
         [mallScrollV addSubview:integrateNum];
-        
-        
-        
-        
-        
     }
+    
+    float num_y = floorf([propData count]/2.0);
+    
+     [mallScrollV setContentSize:CGSizeMake(DEF_SCREEN_WIDTH,534*DEF_Adaptation_Font*0.5 +(num_y+2)*305*DEF_Adaptation_Font*0.5)];
+    
     
 }
 

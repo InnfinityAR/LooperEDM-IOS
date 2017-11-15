@@ -14,21 +14,36 @@
 #import "AFNetworkTool.h"
 #import "ShoppingDetailView.h"
 #import "DataHander.h"
+#import "LooperConfig.h"
 
+#import "LooperToolClass.h"
 #import "integrateDetailView.h"
 #import "LocalDataMangaer.h"
 #import "DataHander.h"
 #import "AliManagerData.h"
+#import "UIImageView+WebCache.h"
+#import <AVFoundation/AVFoundation.h>
+
 #import "MallPayView.h"
 #import "ShoppingArgumentView.h"
+
 @implementation MallViewModel{
     
     
     NSMutableDictionary *mallData;
     MallMainView *mallMainV;
     ShoppingDetailView *detailV;
+
+    AVPlayer*_player;
+    AVPlayerLayer* playerLayer;
+    
+    
+    UIView *backV;
+    
+
     MallPayView *mallPayV;
     ShoppingArgumentView *argumentV;
+
 }
 
 -(id)initWithController:(id)controller{
@@ -71,6 +86,16 @@
 }
 
 
+-(void)onClickBackV{
+    
+    
+    [_player pause];
+    [_player setRate:0];
+    [backV removeFromSuperview];
+   
+    
+}
+
 
 
 -(void)dailyCheckIn{
@@ -81,8 +106,67 @@
     
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"dailyCheckin" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
+         
+            if([[responseObject objectForKey:@"popups"] isKindOfClass:[NSString class]]){
+                
+                
+                [[DataHander sharedDataHander] showViewWithStr:[responseObject objectForKey:@"popups"] andTime:1 andPos:CGPointZero];
+                
+            }else{
             
-                  [[DataHander sharedDataHander] showViewWithStr:@"签到成功" andTime:1 andPos:CGPointZero];
+            NSDictionary *popupsData = [responseObject objectForKey:@"popups"];
+            
+            if([[popupsData objectForKey:@"type"] intValue]==0){
+                
+                 [[DataHander sharedDataHander] showViewWithStr:[popupsData objectForKey:@"content"] andTime:1 andPos:CGPointZero];
+                
+            }else if([[popupsData objectForKey:@"type"] intValue]==1){
+                
+                backV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+                [[_obj view] addSubview:backV];
+                [backV setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+                
+                backV.userInteractionEnabled=true;
+                UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickBackV)];
+                [backV addGestureRecognizer:singleTap];
+                
+                UIImageView *messageImage=[[UIImageView alloc]initWithFrame:CGRectMake(12*DEF_Adaptation_Font*0.5,220*DEF_Adaptation_Font*0.5, 616*DEF_Adaptation_Font*0.5, 486*DEF_Adaptation_Font*0.5)];
+                
+                messageImage.layer.cornerRadius = 8*DEF_Adaptation_Font*0.5;
+                messageImage.layer.masksToBounds = YES;
+                
+                
+                [messageImage sd_setImageWithURL:[popupsData objectForKey:@"url"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    
+                }];
+                [backV addSubview:messageImage];
+                
+                
+            }else if([[popupsData objectForKey:@"type"] intValue]==2){
+                
+                backV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)];
+                [[_obj view] addSubview:backV];
+                [backV setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+                
+                backV.userInteractionEnabled=true;
+                UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickBackV)];
+                [backV addGestureRecognizer:singleTap];
+                
+                
+                NSURL *url = [[NSURL alloc] initWithString:[popupsData objectForKey:@"url"]];
+               _player=[AVPlayer playerWithURL:url];
+               playerLayer=[AVPlayerLayer playerLayerWithPlayer:_player];
+                
+                playerLayer.frame = CGRectMake(12*DEF_Adaptation_Font*0.5,220*DEF_Adaptation_Font*0.5, 616*DEF_Adaptation_Font*0.5, 486*DEF_Adaptation_Font*0.5);
+                [backV.layer addSublayer:playerLayer];
+                [_player play];
+                playerLayer.cornerRadius = 8*DEF_Adaptation_Font*0.5;
+                playerLayer.masksToBounds = YES;
+
+            }
+                
+            }
+
         }
     }fail:^{
         
