@@ -1353,11 +1353,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/ViewModel/MallViewModel.m"
-            timestampString = "532244613.427922"
+            timestampString = "532352181.383235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-getCommodityData"
             landmarkType = "7">
          </BreakpointContent>
@@ -1369,11 +1369,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/ViewModel/MallViewModel.m"
-            timestampString = "532244613.428011"
+            timestampString = "532352181.383313"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-dailyCheckIn"
             landmarkType = "7">
          </BreakpointContent>
@@ -1385,11 +1385,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/ViewModel/MallViewModel.m"
-            timestampString = "532244613.428062"
+            timestampString = "532352181.383396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "-dailyCheckIn"
             landmarkType = "7">
          </BreakpointContent>
