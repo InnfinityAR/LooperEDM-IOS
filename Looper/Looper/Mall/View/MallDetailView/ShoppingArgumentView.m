@@ -52,7 +52,8 @@
     nameLB.textColor=[UIColor whiteColor];
     nameLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     [contentV addSubview:nameLB];
-    UILabel *nameLB2=[[UILabel alloc]initWithFrame:CGRectMake(200*DEF_Adaptation_Font*0.5, 160*DEF_Adaptation_Font*0.5+60*index, 400*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UILabel *nameLB2=[[UILabel alloc]initWithFrame:CGRectMake(180*DEF_Adaptation_Font*0.5, 140*DEF_Adaptation_Font*0.5+60*index, 420*DEF_Adaptation_Font*0.5, 70*DEF_Adaptation_Font*0.5)];
+    nameLB2.numberOfLines=2;
     if (content==nil||[content isEqual:[NSNull null]]) {
     }else{
     nameLB2.text=content;

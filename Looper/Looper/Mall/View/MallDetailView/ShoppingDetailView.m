@@ -116,7 +116,7 @@
     lineView.backgroundColor=[UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
     [argumentBtn addSubview:lineView];
     UIImage *image=[UIImage imageNamed:@"icon_checkDetail.png"];
-    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(argumentBtn)-image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5-40*DEF_Adaptation_Font*0.5, 40*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*30*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    UIImageView *imageV=[[UIImageView alloc]initWithFrame:CGRectMake(DEF_WIDTH(argumentBtn)-image.size.width/image.size.height*20*DEF_Adaptation_Font*0.5-40*DEF_Adaptation_Font*0.5, 50*DEF_Adaptation_Font*0.5, image.size.width/image.size.height*20*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     imageV.image=image;
     [argumentBtn addSubview:imageV];
     
