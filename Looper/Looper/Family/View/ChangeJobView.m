@@ -223,7 +223,12 @@
                     }
                     }
                 }
+                if (groupid>=200&&groupid<200+self.groupArr.count) {
+//如果是换成员使用另一个接口
+                    [self.obj changeGroupIdWithUserId:[self.dataDic objectForKey:@"userid"] andGroupId:[self.groupArr[groupid-200]objectForKey:@"groupid"]];
+                }else{
             [self.obj ChangeJobToSailorWithUserId:[self.dataDic objectForKey:@"userid"] andRole:[NSString stringWithFormat:@"%ld",self.selectLb] andOriginalRole:nil];
+                }
                 [self removeFromSuperview];
         }
             
