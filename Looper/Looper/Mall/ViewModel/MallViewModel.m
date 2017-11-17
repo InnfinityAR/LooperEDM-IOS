@@ -26,7 +26,7 @@
 
 #import "MallPayView.h"
 #import "ShoppingArgumentView.h"
-
+#import "TicketLogisticsView.h"
 @implementation MallViewModel{
     
     
@@ -39,7 +39,6 @@
     
     
     UIView *backV;
-    
 
     MallPayView *mallPayV;
     ShoppingArgumentView *argumentV;
@@ -58,27 +57,20 @@
 
 -(void)popViewMallController{
     
-    
     [mallMainV removeFromSuperview];
     [[_obj navigationController]  popViewControllerAnimated:true];
     
-    
 }
-
 
 -(void)getCreditHistory{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getCreditHistory" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
             integrateDetailView *integrateView =[[integrateDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)  and:nil];
+            [integrateView updateDataView:responseObject[@"data"]];
               [[self.obj view]addSubview:integrateView];
-
-           
         }
     }fail:^{
         
@@ -88,15 +80,11 @@
 
 -(void)onClickBackV{
     
-    
     [_player pause];
     [_player setRate:0];
     [backV removeFromSuperview];
-   
-    
+
 }
-
-
 
 -(void)dailyCheckIn{
     
@@ -282,7 +270,7 @@
             NSDictionary *dataDic=responseObject[@"data"];
 //            if ([[dataDic objectForKey:@"price"]intValue]>0) {
 #warning-跳转到支付宝界面
-//                [self getMyOrderFromHttp];
+//               [self getMyOrderFromHttp];
 //                [AliManagerData doAlipayPay:responseObject[@"data"]];
 //            }else{
                 [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
@@ -305,7 +293,7 @@
     [dic setObject:@(1) forKey:@"status"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"changeOrderStatus" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-//            [self getMyOrderFromHttp];
+            [self getMyOrderFromHttp];
             
         }else{
             
@@ -314,7 +302,20 @@
         
     }];
 }
-
+-(void)getMyOrderFromHttp{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
+    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
+        if([responseObject[@"status"] intValue]==0){
+            NSArray *orderArr=(NSArray*)responseObject[@"data"];
+            TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]];
+            [ticketView setTicketVC:self.obj];
+            [[self.obj view] addSubview:ticketView];
+        }else{
+        }
+    }fail:^{
+    }];
+}
 
 -(void)popViewController{
       [[self.obj navigationController]popViewControllerAnimated:YES];

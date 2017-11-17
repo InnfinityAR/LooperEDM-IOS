@@ -18,6 +18,8 @@
 }
 @property(nonatomic)id obj;
 
+
+-(void)updateDataView:(NSArray*)arrayData;
 -(instancetype)initWithFrame:(CGRect)frame and:(id)idObject;
 
 @end
