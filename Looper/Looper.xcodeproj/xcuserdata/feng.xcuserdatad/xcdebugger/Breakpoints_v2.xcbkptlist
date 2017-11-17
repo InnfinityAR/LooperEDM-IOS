@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "530771415.003024"
+            timestampString = "532603088.164053"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "593"
@@ -522,13 +522,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "530771415.003243"
+            timestampString = "532603088.164144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "766"
             endingLineNumber = "766"
-            landmarkName = "MainViewModel"
-            landmarkType = "3">
+            landmarkName = "-playNetWorkVideo:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -714,12 +714,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-                  timestampString = "532590932.851327"
+                  timestampString = "532601316.224368"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "94"
                   endingLineNumber = "94"
-                  offsetFromSymbolStart = "702">
+                  offsetFromSymbolStart = "756">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -729,12 +729,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/ViewModel/SaleTicketViewModel.m"
-                  timestampString = "532590932.853252"
+                  timestampString = "532601316.225792"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "95"
                   endingLineNumber = "95"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -794,12 +794,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/View/SaleTicketView.m"
-                  timestampString = "532590932.869487"
+                  timestampString = "532601316.234555"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "1014">
+                  offsetFromSymbolStart = "680">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -809,12 +809,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/SaleTicket/View/SaleTicketView.m"
-                  timestampString = "532590932.871973"
+                  timestampString = "532601316.235994"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "91"
                   endingLineNumber = "91"
-                  offsetFromSymbolStart = "128">
+                  offsetFromSymbolStart = "132">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -842,12 +842,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/ExtractPrize/viewModel/ExtractPriceViewModel.m"
-                  timestampString = "532590932.878082"
+                  timestampString = "532601316.239203"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "65"
                   endingLineNumber = "65"
-                  offsetFromSymbolStart = "1850">
+                  offsetFromSymbolStart = "1812">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -857,12 +857,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/ExtractPrize/viewModel/ExtractPriceViewModel.m"
-                  timestampString = "532590932.879852"
+                  timestampString = "532601316.24063"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "65"
                   endingLineNumber = "65"
-                  offsetFromSymbolStart = "1874">
+                  offsetFromSymbolStart = "1844">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -970,12 +970,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "530771415.0037"
+            timestampString = "532603088.164438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "849"
             endingLineNumber = "849"
-            landmarkName = "-initView"
+            landmarkName = "-moveLoopPos:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -986,12 +986,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Main/ViewModel/MainViewModel.m"
-            timestampString = "530771415.003753"
+            timestampString = "532603088.164488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "845"
             endingLineNumber = "845"
-            landmarkName = "-initView"
+            landmarkName = "-moveLoopPos:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1226,12 +1226,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/PhotoWall/viewModel/PhotoWallViewModel.m"
-                  timestampString = "532590932.953111"
+                  timestampString = "532601316.290397"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "368"
                   endingLineNumber = "368"
-                  offsetFromSymbolStart = "467">
+                  offsetFromSymbolStart = "488">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1241,12 +1241,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/PhotoWall/viewModel/PhotoWallViewModel.m"
-                  timestampString = "532590932.956122"
+                  timestampString = "532601316.291761"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "369"
                   endingLineNumber = "369"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1322,12 +1322,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "532590932.962458"
+                  timestampString = "532601316.294989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "405"
                   endingLineNumber = "405"
-                  offsetFromSymbolStart = "308">
+                  offsetFromSymbolStart = "396">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1337,12 +1337,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/activity/ViewModel/ActivityViewModel.m"
-                  timestampString = "532590932.964839"
+                  timestampString = "532601316.29641"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "407"
                   endingLineNumber = "407"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1610,12 +1610,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/nActivity/ViewModel/nActivityViewModel.m"
-                  timestampString = "532590932.986641"
+                  timestampString = "532601316.30894"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "834"
                   endingLineNumber = "834"
-                  offsetFromSymbolStart = "233">
+                  offsetFromSymbolStart = "296">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1625,12 +1625,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/nActivity/ViewModel/nActivityViewModel.m"
-                  timestampString = "532590932.990082"
+                  timestampString = "532601316.310981"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "835"
                   endingLineNumber = "835"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2106,12 +2106,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.061219"
+                  timestampString = "532601316.356271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "534"
                   endingLineNumber = "534"
-                  offsetFromSymbolStart = "426">
+                  offsetFromSymbolStart = "516">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2121,12 +2121,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.063328"
+                  timestampString = "532601316.357646"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "535"
                   endingLineNumber = "535"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2154,12 +2154,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.069722"
+                  timestampString = "532601316.361905"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "424"
                   endingLineNumber = "424"
-                  offsetFromSymbolStart = "426">
+                  offsetFromSymbolStart = "516">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2169,12 +2169,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.073029"
+                  timestampString = "532601316.363491"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "425"
                   endingLineNumber = "425"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2378,12 +2378,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.097972"
+                  timestampString = "532601316.380849"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "382"
                   endingLineNumber = "382"
-                  offsetFromSymbolStart = "597">
+                  offsetFromSymbolStart = "688">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2393,12 +2393,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.099762"
+                  timestampString = "532601316.382234"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "383"
                   endingLineNumber = "383"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2426,12 +2426,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.105535"
+                  timestampString = "532601316.385369"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "474"
                   endingLineNumber = "474"
-                  offsetFromSymbolStart = "693">
+                  offsetFromSymbolStart = "772">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2441,12 +2441,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.108585"
+                  timestampString = "532601316.386782"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "475"
                   endingLineNumber = "475"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "68">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2490,12 +2490,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.119365"
+                  timestampString = "532601316.392544"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "439"
                   endingLineNumber = "439"
-                  offsetFromSymbolStart = "362">
+                  offsetFromSymbolStart = "440">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2505,12 +2505,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Family/ViewModel/FamilyViewModel.m"
-                  timestampString = "532590933.121955"
+                  timestampString = "532601316.393901"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "440"
                   endingLineNumber = "440"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2554,12 +2554,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.131751"
+                  timestampString = "532601316.399617"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "321"
                   endingLineNumber = "321"
-                  offsetFromSymbolStart = "1052">
+                  offsetFromSymbolStart = "844">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2569,12 +2569,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.133796"
+                  timestampString = "532601316.401023"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "321"
                   endingLineNumber = "321"
-                  offsetFromSymbolStart = "1078">
+                  offsetFromSymbolStart = "868">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2602,12 +2602,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.138969"
+                  timestampString = "532601316.404513"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "323"
                   endingLineNumber = "323"
-                  offsetFromSymbolStart = "1096">
+                  offsetFromSymbolStart = "884">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2617,12 +2617,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.14178"
+                  timestampString = "532601316.406098"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "323"
                   endingLineNumber = "323"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2632,12 +2632,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.143814"
+                  timestampString = "532601316.407956"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "323"
                   endingLineNumber = "323"
-                  offsetFromSymbolStart = "29">
+                  offsetFromSymbolStart = "36">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2647,7 +2647,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.14595"
+                  timestampString = "532601316.409609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "324"
@@ -2680,12 +2680,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.151476"
+                  timestampString = "532601316.44158"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
                   endingLineNumber = "308"
-                  offsetFromSymbolStart = "162">
+                  offsetFromSymbolStart = "176">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2695,12 +2695,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.153589"
+                  timestampString = "532601316.443214"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
                   endingLineNumber = "308"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2710,12 +2710,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.156865"
+                  timestampString = "532601316.446989"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
                   endingLineNumber = "308"
-                  offsetFromSymbolStart = "29">
+                  offsetFromSymbolStart = "36">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2725,7 +2725,7 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.159166"
+                  timestampString = "532601316.449363"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "310"
@@ -2774,12 +2774,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.169669"
+                  timestampString = "532601316.465135"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "301"
                   endingLineNumber = "301"
-                  offsetFromSymbolStart = "702">
+                  offsetFromSymbolStart = "756">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2789,12 +2789,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.172674"
+                  timestampString = "532601316.46715"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "302"
                   endingLineNumber = "302"
-                  offsetFromSymbolStart = "51">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2838,12 +2838,12 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.182121"
+                  timestampString = "532601316.473042"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "275"
                   endingLineNumber = "275"
-                  offsetFromSymbolStart = "919">
+                  offsetFromSymbolStart = "936">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -2853,12 +2853,76 @@
                   moduleName = "Looper"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/ViewModel/MallViewModel.m"
-                  timestampString = "532590933.183633"
+                  timestampString = "532601316.474442"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "276"
                   endingLineNumber = "276"
-                  offsetFromSymbolStart = "54">
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/Mall/View/MallDetailView/ShoppingDetailView.m"
+            timestampString = "532603088.165474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-creatIntergralBtn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Looper/Mall/View/MallDetailView/ShoppingDetailView.m"
+            timestampString = "532603088.165841"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-WidthImageViewWithString:andUIImageV:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ShoppingDetailView WidthImageViewWithString:andUIImageV:]"
+                  moduleName = "Looper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/View/MallDetailView/ShoppingDetailView.m"
+                  timestampString = "532601316.477906"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__59-[ShoppingDetailView WidthImageViewWithString:andUIImageV:]_block_invoke"
+                  moduleName = "Looper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/feng/Documents/LooperEDM-IOS5.0/Looper/Looper/Mall/View/MallDetailView/ShoppingDetailView.m"
+                  timestampString = "532601316.480324"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "175"
+                  endingLineNumber = "175"
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2870,12 +2934,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Looper/Mall/View/MallDetailView/ShoppingDetailView.m"
-            timestampString = "532590932.562286"
+            timestampString = "532603088.166142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-creatScrollView"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-judgeIntegralIsEnoughWithCredit:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
