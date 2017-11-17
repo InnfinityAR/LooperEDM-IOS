@@ -167,10 +167,14 @@
                 
             }
 
+        }else{
+            
+             [[DataHander sharedDataHander] showViewWithStr:@"签到失败" andTime:1 andPos:CGPointZero];
+            
         }
     }fail:^{
         
-        NSLog(@"2222222");
+       
     }];
 }
 
