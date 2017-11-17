@@ -265,8 +265,7 @@
 -(void)createOrderForProductId:(int)productId andresultid:(int)resultId andClientAddress:(NSString*)clientAddress andclientMobile:(NSString *)clientMobile anddelivery:(NSString *)delivery anddeliveryCode:(NSString *)deliveryCode andPayNumber:(NSInteger)payNumber andclientName:(NSString *)clientName andPrice:(NSInteger)price{
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:@(productId) forKey:@"productId"];
-    [dic setObject:@(resultId) forKey:@"resultId"];
+    [dic setObject:@(productId) forKey:@"commodityId"];
     [dic setObject:clientAddress forKey:@"clientAddress"];
     [dic setObject:clientMobile forKey:@"clientMobile"];
     [dic setObject:delivery  forKey:@"delivery"];

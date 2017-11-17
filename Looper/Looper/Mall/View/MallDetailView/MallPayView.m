@@ -379,7 +379,7 @@
     if (tag==105) {
         if ([self judgeIsEnsurePayBtn]) {
             //sendPayUserInfo
-            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"productid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultId"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
+            [self.viewModel checkVerificationCodeForvCode:self.codeField.text ProductId:[[self.orderDic objectForKey:@"commodityid"]intValue] andresultid:[[self.orderDic objectForKey:@"resultId"]intValue] andClientAddress:self.addressV.text andclientMobile:self.phoneField.text anddelivery:@"" anddeliveryCode:@"" andPayNumber:self.payNumber andclientName:self.nameField.text andPrice: [[self.orderDic objectForKey:@"price"]intValue]];
         }
     }
     if (tag==101) {
