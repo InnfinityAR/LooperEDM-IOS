@@ -39,7 +39,6 @@
     
     
     UIView *backV;
-    
 
     MallPayView *mallPayV;
     ShoppingArgumentView *argumentV;
@@ -58,27 +57,20 @@
 
 -(void)popViewMallController{
     
-    
     [mallMainV removeFromSuperview];
     [[_obj navigationController]  popViewControllerAnimated:true];
     
-    
 }
-
 
 -(void)getCreditHistory{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:50];
-    
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getCreditHistory" parameters:dic  success:^(id responseObject) {
         if([responseObject[@"status"] intValue]==0){
-            
             integrateDetailView *integrateView =[[integrateDetailView alloc] initWithFrame:CGRectMake(0, 0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT)  and:nil];
+            [integrateView updateDataView:responseObject[@"data"]];
               [[self.obj view]addSubview:integrateView];
-
-           
         }
     }fail:^{
         
@@ -88,15 +80,11 @@
 
 -(void)onClickBackV{
     
-    
     [_player pause];
     [_player setRate:0];
     [backV removeFromSuperview];
-   
-    
+
 }
-
-
 
 -(void)dailyCheckIn{
     
@@ -167,10 +155,14 @@
                 
             }
 
+        }else{
+            
+             [[DataHander sharedDataHander] showViewWithStr:@"签到失败" andTime:1 andPos:CGPointZero];
+            
         }
     }fail:^{
         
-        NSLog(@"2222222");
+       
     }];
 }
 
