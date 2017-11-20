@@ -272,7 +272,7 @@
 //               [self getMyOrderFromHttp];
 //                [AliManagerData doAlipayPay:responseObject[@"data"]];
 //            }else{
-                [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"productid"]];
+                [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"commodityid"]];
             [mallPayV removeFromSuperview];
              [[DataHander sharedDataHander] showViewWithStr:@"支付成功" andTime:1 andPos:CGPointZero];
 //            }
@@ -288,7 +288,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [dic setObject:@([orderId intValue]) forKey:@"orderId"];
-    [dic setObject:@([productId intValue]) forKey:@"productId"];
+    [dic setObject:@([productId intValue]) forKey:@"commodityId"];
     [dic setObject:@(1) forKey:@"status"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"changeOrderStatus" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
@@ -307,9 +307,11 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSArray *orderArr=(NSArray*)responseObject[@"data"];
+            if (orderArr.count!=0) {
             TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]];
             [ticketView setTicketVC:self.obj];
             [[self.obj view] addSubview:ticketView];
+            }
         }else{
         }
     }fail:^{

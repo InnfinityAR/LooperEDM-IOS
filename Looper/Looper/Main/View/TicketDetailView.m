@@ -14,6 +14,7 @@
 #import "TicketLogisticsView.h"
 #import "AliManagerData.h"
 @interface TicketDetailView()<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic)NSInteger type;
 @property(nonatomic,strong)NSArray *myData;
 @property(nonatomic,strong)UITableView *tableView;
 @end
@@ -33,10 +34,11 @@
     }
     return    _tableView;
 }
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSArray*)myDataSource{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSArray*)myDataSource andType:(NSInteger)type{
     if (self = [super initWithFrame:frame]) {
         self.obj = (MainViewModel*)idObject;
         self.myData = myDataSource;
+        self.type=type;
         [self initView];
     }
     return self;
@@ -117,9 +119,74 @@
     cell.backgroundColor=[UIColor clearColor];
     cell.accessoryType=UITableViewCellStyleDefault;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if (self.type==1) {
+        [self creatTableViewCell:cell andIndex:indexPath andDataDic:dataDic];
+    }else{
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5)];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        }];
+            NSString *dataStr=[dataDic objectForKey:@"commodityimageurl"];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[dataStr componentsSeparatedByString:@","][0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+    [cell.contentView addSubview:imageView];
+    
+    UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    contentLB.text=[dataDic objectForKey:@"commodityname"];
+    contentLB.textColor=[UIColor whiteColor];
+    contentLB.numberOfLines=0;
+    contentLB.font=[UIFont systemFontOfSize:18];
+    CGSize lblSize = [contentLB.text boundingRectWithSize:CGSizeMake(380*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]} context:nil].size;
+    CGRect frame=contentLB.frame;
+    frame.size.height=lblSize.height;
+    contentLB.frame=frame;
+    [cell.contentView addSubview:contentLB];
+    
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
+    timeLB.text=[self setSelecttime:dataDic];
+    CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame1=timeLB.frame;
+    frame1.size=lblSize1;
+    timeLB.frame=frame1;
+    timeLB.numberOfLines=1;
+    timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
+    [cell.contentView addSubview:timeLB];
+    
+    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
+    priceLB.text= [NSString stringWithFormat:@"积分:%d   ×%@    共计%d元",[[dataDic objectForKey:@"credit"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"],[[dataDic objectForKey:@"credit"]intValue]];
+    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
+    CGRect frame3=priceLB.frame;
+    frame3.size=lblSize3;
+    priceLB.frame=frame3;
+    priceLB.numberOfLines=0;
+    priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
+    [cell.contentView addSubview:priceLB];
+    
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==1) {
+        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        paySuccessLB.font=[UIFont systemFontOfSize:14];
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
+        paySuccessLB.textColor=ColorRGB(181, 252, 255, 1.0);
+        paySuccessLB.textAlignment=NSTextAlignmentLeft;
+        [cell.contentView addSubview:paySuccessLB];
+    }else if([[dataDic objectForKey:@"orderstatus"]intValue]==0){
+        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
+        [cell.contentView addSubview:payBtn];
+    }else{
+        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        paySuccessLB.font=[UIFont systemFontOfSize:14];
+        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
+        paySuccessLB.textColor=ColorRGB(255, 106, 148, 1.0);
+        paySuccessLB.textAlignment=NSTextAlignmentLeft;
+        [cell.contentView addSubview:paySuccessLB];
+    }
+    }
+    return cell;
+    
+}
+-(void)creatTableViewCell:(UITableViewCell *)cell andIndex:(NSIndexPath *)indexPath andDataDic:(NSDictionary *)dataDic{
+    UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5)];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[dataDic objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
     [cell.contentView addSubview:imageView];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
@@ -181,8 +248,6 @@
         [cell.contentView addSubview:paySuccessLB];
     }
 
-    return cell;
-    
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
