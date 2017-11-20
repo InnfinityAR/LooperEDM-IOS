@@ -141,7 +141,7 @@
     
     UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 110*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
-    timeLB.text=[self setSelecttime:dataDic];
+    timeLB.text=[dataDic objectForKey:@"creationdate"];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame1=timeLB.frame;
     frame1.size=lblSize1;

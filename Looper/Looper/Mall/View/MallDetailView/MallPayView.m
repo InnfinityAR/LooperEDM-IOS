@@ -124,7 +124,7 @@
     
     UILabel *deliveryLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(lineIV)+40*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     deliveryLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    deliveryLB.text=@"实体票配送";
+    deliveryLB.text=@"商品配送";
     deliveryLB.textColor=ColorRGB(223, 219, 234, 1.0);
     deliveryLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:deliveryLB];
@@ -221,16 +221,16 @@
     [payEnsureBtn setSelected:YES];
     self.paySureBtn=payEnsureBtn;
     
-    UILabel *payTicketLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payLB)+82*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
+    UILabel *payTicketLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payLB)+82*DEF_Adaptation_Font*0.5, 200*DEF_Adaptation_Font*0.5, 20*DEF_Adaptation_Font*0.5)];
     payTicketLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    payTicketLB.text=@"购票须知";
+    payTicketLB.text=@"积分购买须知";
     payTicketLB.textColor=ColorRGB(223, 219, 234, 1.0);
     payTicketLB.textAlignment=NSTextAlignmentLeft;
     [contentScrol addSubview:payTicketLB];
     
     UILabel *payTicketDetailLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(payTicketLB)+42*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 222*DEF_Adaptation_Font*0.5)];
     payTicketDetailLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
-    payTicketDetailLB.text=@" 1  购票成功后不可退票。\n 2  中奖后商品保留时间为：3天！ 3天后中奖但未付款成功或提交信息的小伙伴将视为放弃。奖品将回归抽奖平台，等待其他幸运的用户抽中。\n 3  购买成功后可以在首页下滑“我的订单”查看购买的票品。";
+    payTicketDetailLB.text=@" 1  购买成功后不可退货。\n 2  购买成功后可以在首页下滑“我的订单”查看购买的商品。";
     payTicketDetailLB.numberOfLines=0;
     payTicketDetailLB.textColor=ColorRGB(223, 219, 234, 1.0);
     CGSize lblSize5 = [payTicketDetailLB.text boundingRectWithSize:CGSizeMake(568*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:14.f]} context:nil].size;
