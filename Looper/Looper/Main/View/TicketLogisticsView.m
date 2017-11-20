@@ -176,6 +176,7 @@
     
     UILabel *tradingCardLB=[[UILabel alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(deliveryLB)+65*DEF_Adaptation_Font*0.5, 568*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
     tradingCardLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:14.f];
+    NSLog(@"%@",[_myData objectForKey:@"commoditynumber"]);
     tradingCardLB.text=@"交易单号：2828282828";
     tradingCardLB.textColor=[UIColor whiteColor];
     tradingCardLB.textAlignment=NSTextAlignmentLeft;
