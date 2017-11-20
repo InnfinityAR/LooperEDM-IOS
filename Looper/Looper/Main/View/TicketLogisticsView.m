@@ -132,7 +132,7 @@
         [contentScrol addSubview:timeLV];
       UILabel * timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
         timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-        timeLB.text=[self setSelecttime:self.myData];
+        timeLB.text=[_myData objectForKey:@"creationdate"];
         CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
         CGRect frame1=timeLB.frame;
         frame1.size=lblSize1;
