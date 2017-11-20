@@ -888,9 +888,16 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
+            if ([responseObject[@"data"]count]!=0) {
             self.orderArr=responseObject[@"data"];
-            TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr];
+            TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr andType:1];
             [[_obj view] addSubview:ticketDetailV];
+            }
+            if ([responseObject[@"commodity"]count]!=0) {
+                self.orderArr=responseObject[@"commodity"];
+                TicketDetailView *ticketDetailV = [[TicketDetailView alloc] initWithFrame:CGRectMake(0,0, DEF_SCREEN_WIDTH, DEF_SCREEN_HEIGHT) and:self andMyData:self.orderArr andType:2];
+                [[_obj view] addSubview:ticketDetailV];
+            }
         }else{
             
         }

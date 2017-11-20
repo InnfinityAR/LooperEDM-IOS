@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TicketDetailView : UIView
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSArray*)myDataSource;
+//type为1,orderArr ; type为2 ,commodityArr
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSArray*)myDataSource andType:(NSInteger)type;
 @property(nonatomic,strong)id obj;
 @end
