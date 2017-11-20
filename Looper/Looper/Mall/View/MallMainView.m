@@ -45,6 +45,14 @@
     }
 }
 
+-(void)toHistoryView{
+    
+     [_obj getCreditHistory];
+    
+    
+}
+
+
 -(void)updateDataView:(NSDictionary*)sourceData{
     
     MallData = sourceData;
@@ -64,8 +72,6 @@
     
     
     [self addScrollViewTitle];
-    
-
 }
 
 -(void)addScrollViewTitle{
@@ -79,7 +85,6 @@
     UIImageView *integrate_icon = [LooperToolClass createImageView:@"icon_integrate_min.png" andRect:CGPointMake(46, 145) andTag:100 andSize:CGSizeMake(24, 27) andIsRadius:false];
     [mallScrollV addSubview:integrate_icon];
     
-    
     UILabel *integrateLable=[[UILabel alloc]initWithFrame:CGRectMake(85*DEF_Adaptation_Font*0.5, 144*DEF_Adaptation_Font*0.5, 330*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
     integrateLable.font=[UIFont systemFontOfSize:14];
     integrateLable.textColor=[UIColor colorWithRed:138/255.0 green:137/255.0 blue:247/255.0 alpha:1.0];
@@ -89,6 +94,14 @@
     
     UIButton *backBtn = [LooperToolClass createBtnImageNameReal:@"icon_checkDetail.png" andRect:CGPointMake(integrateLable.frame.origin.x+integrateLable.frame.size.width+10*DEF_Adaptation_Font*0.5,150*DEF_Adaptation_Font*0.5) andTag:200 andSelectImage:@"icon_checkDetail.png" andClickImage:@"icon_checkDetail.png" andTextStr:nil andSize:CGSizeMake(10*DEF_Adaptation_Font*0.5,19*DEF_Adaptation_Font*0.5) andTarget:self];
     [mallScrollV addSubview:backBtn];
+    
+    UIView *btnHistory = [[UIView alloc] initWithFrame:CGRectMake(46*DEF_Adaptation_Font*0.5, 145*DEF_Adaptation_Font*0.5, 130*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5)];
+    [mallScrollV addSubview:btnHistory];
+    btnHistory.tag =200;
+    btnHistory.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toHistoryView)];
+    [btnHistory addGestureRecognizer:singleTap];
+    
     
     UIButton *checkInBtn = [LooperToolClass createBtnImageNameReal:@"btn_checkin.png" andRect:CGPointMake(457*DEF_Adaptation_Font*0.5,137*DEF_Adaptation_Font*0.5) andTag:201 andSelectImage:@"btn_checkin.png" andClickImage:@"btn_checkin.png" andTextStr:nil andSize:CGSizeMake(137*DEF_Adaptation_Font*0.5,46*DEF_Adaptation_Font*0.5) andTarget:self];
     [mallScrollV addSubview:checkInBtn];
