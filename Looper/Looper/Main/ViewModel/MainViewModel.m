@@ -976,6 +976,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 设置请求格式
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //com    string    是    需要查询的快递公司编号     no    string    是    需要查询的订单号
     NSString* url =[NSString stringWithFormat:@"http://api.kuaidi100.com/api?id=29833628d495d7a5&com=%@&nu=%@&show=0&muti=1&order=desc",com,nu];
 //   NSString *url= @"http://api.kuaidi100.com/api?id=29833628d495d7a5&show=0&muti=1&order=desc";
     [manager POST:url parameters:nil constructingBodyWithBlock:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
