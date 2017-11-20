@@ -139,7 +139,7 @@
     contentLB.frame=frame;
     [cell.contentView addSubview:contentLB];
     
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 120*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 110*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
     timeLB.text=[self setSelecttime:dataDic];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
@@ -152,7 +152,7 @@
     
     UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 400*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:15.f];
-    priceLB.text= [NSString stringWithFormat:@"积分:%d   ×%@    共计%d元",[[dataDic objectForKey:@"credit"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"],[[dataDic objectForKey:@"credit"]intValue]];
+    priceLB.text= [NSString stringWithFormat:@"积分:%d   ×%@    共计%d积分",[[dataDic objectForKey:@"credit"]intValue]/[[dataDic objectForKey:@"number"]intValue],[dataDic objectForKey:@"number"],[[dataDic objectForKey:@"credit"]intValue]];
     CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(400*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:15.f]} context:nil].size;
     CGRect frame3=priceLB.frame;
     frame3.size=lblSize3;
@@ -161,21 +161,11 @@
     priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [cell.contentView addSubview:priceLB];
     
-    if ([[dataDic objectForKey:@"orderstatus"]intValue]==1) {
+    if ([[dataDic objectForKey:@"orderstatus"]intValue]==0) {
         UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
         paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
+        paySuccessLB.text=@"已支付";
         paySuccessLB.textColor=ColorRGB(181, 252, 255, 1.0);
-        paySuccessLB.textAlignment=NSTextAlignmentLeft;
-        [cell.contentView addSubview:paySuccessLB];
-    }else if([[dataDic objectForKey:@"orderstatus"]intValue]==0){
-        UIButton *payBtn=[self publishButton:[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]] andCGPoint:CGPointMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5) andTag:100+indexPath.row];
-        [cell.contentView addSubview:payBtn];
-    }else{
-        UILabel *paySuccessLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, DEF_Y(priceLB)+DEF_HEIGHT(priceLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-        paySuccessLB.font=[UIFont systemFontOfSize:14];
-        paySuccessLB.text=[self orderstatusForCount:[[dataDic objectForKey:@"orderstatus"]integerValue]];
-        paySuccessLB.textColor=ColorRGB(255, 106, 148, 1.0);
         paySuccessLB.textAlignment=NSTextAlignmentLeft;
         [cell.contentView addSubview:paySuccessLB];
     }
@@ -251,16 +241,24 @@
 }
 //设置自动适配行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.type==2) {
+        return 300*DEF_Adaptation_Font*0.5;
+    }
     return 360*DEF_Adaptation_Font*0.5;
 }
 //用于传值
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dataDic=self.myData[indexPath.row];
+    if (self.type==1) {
     if ([[dataDic objectForKey:@"orderstatus"]intValue]==2) {
        [AliManagerData doAlipayPay:_myData[indexPath.row]];
     }else{
-    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]];
+    TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]andType:1];
     [self addSubview:ticketView];
+    }
+    }else{
+        TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH(self), DEF_HEIGHT(self)) and:self.obj andMyData:self.myData[indexPath.row]andType:2];
+        [self addSubview:ticketView];
     }
 }
 -(UIButton *)publishButton:(NSString *)str andCGPoint:(CGPoint)point andTag:(NSInteger)tag{

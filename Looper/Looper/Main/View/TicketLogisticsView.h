@@ -14,7 +14,7 @@
 #define ShowLabWidth (320*DEF_Adaptation_Font - DotViewCentX - 20*DEF_Adaptation_Font)
 #define ShowLabFont [UIFont systemFontOfSize:15]
 @interface TicketLogisticsView : UIView<UITableViewDelegate,UITableViewDataSource>
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource;
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource andType:(NSInteger)type;
 @property(nonatomic,strong)id obj;
 @property(nonatomic,strong)NSDictionary *myData;
 @property(nonatomic,strong)NSArray *kuaidiArr;

@@ -16,11 +16,11 @@
 @property(nonatomic,strong)UIScrollView *contentScroll;
 
 @property(nonatomic,strong)UITableView *logiDetailView;
-
+@property(nonatomic)NSInteger type;
 @end
 @implementation TicketLogisticsView
 
--(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource{
+-(instancetype)initWithFrame:(CGRect)frame and:(id)idObject andMyData:(NSDictionary*)myDataSource andType:(NSInteger)type{
     if (self = [super initWithFrame:frame]) {
         self.obj = (MainViewModel*)idObject;
 //从历史订单过来，self.obj才不是空的
@@ -28,6 +28,7 @@
             [self.obj setTickLoginV:self];
             [self.obj getKuaiDi100FromHttp:nil andNu:nil];
         }
+        self.type=type;
         self.myData = myDataSource;
         [self initView];
     }
@@ -66,10 +67,17 @@
     [contentScrol addSubview:contentLB];
     
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, lblSize.height+35*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5, 84*DEF_Adaptation_Font*0.5)];
+    if (self.type==2) {
+    NSString *dataStr=[self.myData objectForKey:@"commodityimageurl"];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:[dataStr componentsSeparatedByString:@","][0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
+    }else{
     [imageView sd_setImageWithURL:[NSURL URLWithString:[self.myData objectForKey:@"productimage"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
+    }
     [contentScrol addSubview:imageView];
     
+    if (self.type==1) {
     UIImageView *locationLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     locationLV.image=[UIImage imageNamed:@"locaton.png"];
     [contentScrol addSubview:locationLV];
@@ -87,7 +95,7 @@
     UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
     timeLV.image=[UIImage imageNamed:@"time.png"];
     [contentScrol addSubview:timeLV];
-    UILabel *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+  UILabel  *timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(locationLB)+DEF_HEIGHT(locationLB)+17*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
     timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
     timeLB.text=[self setSelecttime:self.myData];
     CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
@@ -97,27 +105,63 @@
     timeLB.numberOfLines=0;
     timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
     [contentScrol addSubview:timeLB];
-    
-    UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
-    priceLV.image=[UIImage imageNamed:@"ticket.png"];
-    [contentScrol addSubview:priceLV];
-    UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+17*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
-    priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
-    priceLB.text=[NSString stringWithFormat:@"票价:%d   ×%@",[[_myData objectForKey:@"price"]intValue]/[[_myData objectForKey:@"number"]intValue],[_myData objectForKey:@"number"]];
-    CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
-    CGRect frame3=priceLB.frame;
-    frame3.size=lblSize3;
-    priceLB.frame=frame3;
-    priceLB.numberOfLines=0;
-    priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
-    [contentScrol addSubview:priceLB];
-    
-    UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
-    sumPriceLB.font=[UIFont systemFontOfSize:14];
-    sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[_myData objectForKey:@"price"]intValue]];
-    sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
-    sumPriceLB.textAlignment=NSTextAlignmentRight;
-    [contentScrol addSubview:sumPriceLB];
+        
+        UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        priceLV.image=[UIImage imageNamed:@"ticket.png"];
+        [contentScrol addSubview:priceLV];
+        UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+17*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+        priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+        priceLB.text=[NSString stringWithFormat:@"票价:%d   ×%@",[[_myData objectForKey:@"price"]intValue]/[[_myData objectForKey:@"number"]intValue],[_myData objectForKey:@"number"]];
+        CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+        CGRect frame3=priceLB.frame;
+        frame3.size=lblSize3;
+        priceLB.frame=frame3;
+        priceLB.numberOfLines=0;
+        priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
+        [contentScrol addSubview:priceLB];
+        
+        UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        sumPriceLB.font=[UIFont systemFontOfSize:14];
+        sumPriceLB.text=[NSString stringWithFormat:@"共计%d元",[[_myData objectForKey:@"price"]intValue]];
+        sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
+        sumPriceLB.textAlignment=NSTextAlignmentRight;
+        [contentScrol addSubview:sumPriceLB];
+    }else if(self.type==2){
+        UIImageView *timeLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        timeLV.image=[UIImage imageNamed:@"time.png"];
+        [contentScrol addSubview:timeLV];
+      UILabel * timeLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+3*DEF_Adaptation_Font*0.5, 422*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+        timeLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+        timeLB.text=[self setSelecttime:self.myData];
+        CGSize lblSize1 = [timeLB.text boundingRectWithSize:CGSizeMake(422*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+        CGRect frame1=timeLB.frame;
+        frame1.size=lblSize1;
+        timeLB.frame=frame1;
+        timeLB.numberOfLines=0;
+        timeLB.textColor=ColorRGB(223, 219, 234, 1.0);
+        [contentScrol addSubview:timeLB];
+        
+        UIImageView *priceLV=[[UIImageView alloc]initWithFrame:CGRectMake(145*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5, 25*DEF_Adaptation_Font*0.5)];
+        priceLV.image=[UIImage imageNamed:@"ticket.png"];
+        [contentScrol addSubview:priceLV];
+        UILabel *priceLB=[[UILabel alloc]initWithFrame:CGRectMake(177*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+17*DEF_Adaptation_Font*0.5, 271*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
+        priceLB.font=[UIFont fontWithName:@"STHeitiTC-Light" size:13.f];
+        priceLB.text=[NSString stringWithFormat:@"积分:%d   ×%@",[[_myData objectForKey:@"credit"]intValue]/[[_myData objectForKey:@"number"]intValue],[_myData objectForKey:@"number"]];
+        CGSize lblSize3 = [priceLB.text boundingRectWithSize:CGSizeMake(271*DEF_Adaptation_Font*0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont fontWithName:@"STHeitiTC-Light" size:13.f]} context:nil].size;
+        CGRect frame3=priceLB.frame;
+        frame3.size=lblSize3;
+        priceLB.frame=frame3;
+        priceLB.numberOfLines=0;
+        priceLB.textColor=ColorRGB(223, 219, 234, 1.0);
+        [contentScrol addSubview:priceLB];
+        
+        UILabel *sumPriceLB=[[UILabel alloc]initWithFrame:CGRectMake(450*DEF_Adaptation_Font*0.5, DEF_Y(timeLB)+DEF_HEIGHT(timeLB)+20*DEF_Adaptation_Font*0.5, 156*DEF_Adaptation_Font*0.5, 24*DEF_Adaptation_Font*0.5)];
+        sumPriceLB.font=[UIFont systemFontOfSize:14];
+        sumPriceLB.text=[NSString stringWithFormat:@"共计%d积分",[[_myData objectForKey:@"credit"]intValue]];
+        sumPriceLB.textColor=ColorRGB(245, 244, 247, 1.0);
+        sumPriceLB.textAlignment=NSTextAlignmentRight;
+        [contentScrol addSubview:sumPriceLB];
+    }
     
     UIImageView *lineIV=[[UIImageView alloc]initWithFrame:CGRectMake(36*DEF_Adaptation_Font*0.5, DEF_Y(imageView)+DEF_HEIGHT(imageView)+60*DEF_Adaptation_Font*0.5, DEF_WIDTH(self)-72*DEF_Adaptation_Font*0.5, 1)];
     lineIV.image=[UIImage imageNamed:@"cutoffLine.png"];

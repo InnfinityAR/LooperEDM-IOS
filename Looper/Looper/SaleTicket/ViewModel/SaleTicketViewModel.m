@@ -144,7 +144,7 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSArray *orderArr=(NSArray*)responseObject[@"data"];
-            TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]];
+            TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]andType:1];
             [ticketView setTicketVC:self.obj];
             [[self.obj view] addSubview:ticketView];
             

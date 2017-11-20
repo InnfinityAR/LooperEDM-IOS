@@ -267,35 +267,11 @@
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"createOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
             NSDictionary *dataDic=responseObject[@"data"];
-//            if ([[dataDic objectForKey:@"price"]intValue]>0) {
-#warning-跳转到支付宝界面
-//               [self getMyOrderFromHttp];
-//                [AliManagerData doAlipayPay:responseObject[@"data"]];
-//            }else{
-                [self changeOrderStatusForOrderId:[dataDic objectForKey:@"orderid"] ProductId:[dataDic objectForKey:@"commodityid"]];
+             [self getMyOrderFromHttp];
             [mallPayV removeFromSuperview];
              [[DataHander sharedDataHander] showViewWithStr:@"支付成功" andTime:1 andPos:CGPointZero];
-//            }
         }else{
             [[DataHander sharedDataHander] showViewWithStr:@"您填写的地址信息错误" andTime:1 andPos:CGPointZero];
-        }
-    }fail:^{
-        
-    }];
-}
-//改变创建订单的状态
--(void)changeOrderStatusForOrderId:(NSString *)orderId ProductId:(NSString*)productId{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
-    [dic setObject:@([orderId intValue]) forKey:@"orderId"];
-    [dic setObject:@([productId intValue]) forKey:@"commodityId"];
-    [dic setObject:@(1) forKey:@"status"];
-    [AFNetworkTool Clarnece_Post_JSONWithUrl:@"changeOrderStatus" parameters:dic success:^(id responseObject){
-        if([responseObject[@"status"] intValue]==0){
-            [self getMyOrderFromHttp];
-            
-        }else{
-            
         }
     }fail:^{
         
@@ -306,9 +282,9 @@
     [dic setObject:[LocalDataMangaer sharedManager].uid forKey:@"userId"];
     [AFNetworkTool Clarnece_Post_JSONWithUrl:@"getMyOrder" parameters:dic success:^(id responseObject){
         if([responseObject[@"status"] intValue]==0){
-            NSArray *orderArr=(NSArray*)responseObject[@"data"];
+            NSArray *orderArr=(NSArray*)responseObject[@"commodity"];
             if (orderArr.count!=0) {
-            TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]];
+            TicketLogisticsView *ticketView=[[TicketLogisticsView alloc]initWithFrame:CGRectMake(0, 0, DEF_WIDTH([self.obj view]) , DEF_HEIGHT([self.obj view])) and:nil andMyData:orderArr[orderArr.count-1]andType:2];
             [ticketView setTicketVC:self.obj];
             [[self.obj view] addSubview:ticketView];
             }
