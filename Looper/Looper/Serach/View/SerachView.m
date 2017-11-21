@@ -19,6 +19,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
 {
     UIScrollView *_titleScrollView;    // 标题栏
     NSArray *titleArray;
+    NSMutableArray *btnArr;
     UIScrollView *_contentScrollview;  // 内容区
     UIView *_buttonCircle;               // 标题小横线
     NSInteger _pageCount;              // 分页数
@@ -72,6 +73,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     titleArray = @[@"活动", @"用户", @"艺人", @"家族"];
     _pageCount = titleArray.count;
     _titleScrollView.contentSize = CGSizeMake(kButtonWidth * _pageCount+DEF_WIDTH(self)/2-kButtonWidth/2, 40*DEF_Adaptation_Font*0.5);
+    btnArr=[[NSMutableArray alloc]init];
     for (int i = 0; i < _pageCount; i++)
     {
         UIButton *titleBtn = [[UIButton alloc] initWithFrame:CGRectMake(kButtonWidth * i+DEF_WIDTH(self)/2-kButtonWidth/2, 0, kButtonWidth, 40*DEF_Adaptation_Font*0.5)];
@@ -81,6 +83,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
         [titleBtn addTarget:self action:@selector(titleButtonClicked:) forControlEvents:UIControlEventTouchDown];
         titleBtn.tag = 1000 + i; // button做标记，方便后面索引，为了不出冲突，就把这个数值设得大一些
         [_titleScrollView addSubview:titleBtn];
+        [btnArr addObject:titleBtn];
     };
 }
 - (void)createButtonCricle
@@ -128,6 +131,12 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
     // 带动画切换到对应的内容,会触发scrollViewDidScroll
     NSInteger pageIndex = sender.tag - 1000;
     [_contentScrollview setContentOffset:CGPointMake(DEF_WIDTH(self) * pageIndex, 0) animated:NO];
+    for (UIButton *btn in btnArr) {
+        if (![btn.titleLabel.text isEqualToString:sender.titleLabel.text]) {
+            NSLog(@"title:%@,sender:%@",btn.titleLabel.text,sender.titleLabel.text);
+             btn.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }
+    }
 }
 #pragma mark - 标题按钮和横线居中偏移
 - (void)settleTitleButton:(UIButton *)button
@@ -193,6 +202,7 @@ static const CGFloat kButtonWidth =70; // 导航按钮宽度
         NSInteger titleIndex = scrollView.contentOffset.x / DEF_WIDTH(self);
         // title居中
         [self settleTitleButton:[_titleScrollView viewWithTag:1000 + titleIndex]];
+     
     }
 }
 
