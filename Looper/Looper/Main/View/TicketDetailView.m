@@ -124,8 +124,7 @@
     }else{
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(41*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5, 162*DEF_Adaptation_Font*0.5)];
             NSString *dataStr=[dataDic objectForKey:@"commodityimageurl"];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[dataStr componentsSeparatedByString:@","][0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            }];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[dataStr componentsSeparatedByString:@","][0]] placeholderImage:nil options:(SDWebImageRetryFailed)];
     [cell.contentView addSubview:imageView];
     
     UILabel *contentLB=[[UILabel alloc]initWithFrame:CGRectMake(237*DEF_Adaptation_Font*0.5, 30*DEF_Adaptation_Font*0.5, 380*DEF_Adaptation_Font*0.5, 60*DEF_Adaptation_Font*0.5)];
