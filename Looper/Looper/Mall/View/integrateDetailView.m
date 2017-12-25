@@ -69,6 +69,8 @@
 
         [mallScrollV addSubview:timeName];
         
+
+        
         NSString* timeStr =[[arrayData objectAtIndex:i] objectForKey:@"creationdate"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateStyle:NSDateFormatterMediumStyle];

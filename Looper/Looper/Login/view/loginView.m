@@ -372,7 +372,7 @@
         [self updateBtnLableText:LoginBtnTag and:@"注册"];
     }else if(button.tag==201){
         
-    
+        
     
     }
     else if(button.tag ==105){
@@ -514,8 +514,6 @@
     NSLog(@"%.2f__%.2f__%.2f",acceleration.x,acceleration.y,acceleration.z);
 }
 
-
-
 -(void)createBackGround{
 
     UIImage *bkImage = [UIImage imageNamed:@"bk_login.png"];
@@ -530,7 +528,6 @@
     [bkMid setImage:bkMidImage];
     [self addSubview:bkMid];
 
-    
     UIImage *backImage = [UIImage imageNamed:@"back.png"];
     backV = [[UIImageView alloc] initWithFrame:CGRectMake(-1350*DEF_Adaptation_Font*0.3,0,backImage.size.width*DEF_Adaptation_Font*0.3, backImage.size.height*DEF_Adaptation_Font*0.3)];
     [backV setImage:backImage];
@@ -545,9 +542,7 @@
     bk1 = [[UIImageView alloc] initWithFrame:CGRectMake(-38*DEF_Adaptation_Font*0.5, DEF_SCREEN_HEIGHT-bkFrontBk.size.height*DEF_Adaptation_Font*0.3,bkFrontBk.size.width*DEF_Adaptation_Font*0.3, bkFrontBk.size.height*DEF_Adaptation_Font*0.3)];
     [bk1 setImage:bkFrontBk];
     [self addSubview:bk1];
-    
 
-    
    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewTapped)];
     tap.cancelsTouchesInView = NO; //(这步很重要,保证其他的UIControl能够正常接受到消息)

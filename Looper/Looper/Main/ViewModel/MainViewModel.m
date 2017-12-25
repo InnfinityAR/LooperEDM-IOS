@@ -617,8 +617,8 @@
 -(void)hudOnClick:(int)type{
     if (type==55000) {
         
-        MallViewController *mallVc = [[MallViewController alloc] init];
-        [[_obj navigationController]  pushViewController:mallVc animated:YES];
+      //  MallViewController *mallVc = [[MallViewController alloc] init];
+     //   [[_obj navigationController]  pushViewController:mallVc animated:YES];
         
        // ExtractPriceViewController *extractVC=[[ExtractPriceViewController alloc]init];
        // [[_obj navigationController]  pushViewController:extractVC animated:YES];
@@ -631,10 +631,10 @@
        [self pushActivityViewController];
     }else if(type==ActiveBtnTag){
    
-//        [self pushNActivityViewController];
+        [self pushNActivityViewController];
 
 
-        [self createFamilyViewController];
+      //  [self createFamilyViewController];
        //[[DataHander sharedDataHander] showViewWithStr:@"coming soon" andTime:1 andPos:CGPointZero];
 
 //      [self pushLooperListController];
