@@ -57,9 +57,7 @@
     if([_sourceDic objectForKey:@"message"]!=nil){
         [self updateWithMessageData:[_sourceDic objectForKey:@"message"]];
     }
-    
 }
-
 
 -(void)updateWithMessageData:(NSArray*)messageData{
     [_messageArray removeAllObjects];
